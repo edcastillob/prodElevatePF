@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { Input } from 'reactstrap';
 import axios from 'axios';
+import loadingImg from '../../../assets/loading.png'
 
 
 export const UploadImg = ({onImageUpload}) => {
@@ -59,7 +60,7 @@ const uploadImages = async (event) => {
         multiple
       />
       
-      {loading ? (<h3>updload img...</h3>) : ''}      
+      {loading ? <img src={loadingImg} /> : ''}      
       {images?.map(img => (<img key={img} src={img} style={{width:'300px'}}/>))}
     </div>
   );
