@@ -9,12 +9,12 @@ import { ProductDetail } from './components/Product/productDetail/productDetail'
 function App() {
   return (
     <>
+      <NavBar/>        
       <div>         
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/detail/:id" element={<ProductDetail />} />
         </Routes>
-      <NavBar/>        
         <Cart/> 
       </div>
     </>
