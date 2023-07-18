@@ -27,7 +27,9 @@ function reducer(state = initialState, actions) {
       };
 
     case GET_PRODUCT_DETAIL:
-    
+        
+      console.log(actions.payload)  
+      // const filteredProduct = filterProduct.filter((prod) => prod.id === actions.payload);
       return {
         ...state,
         productDetail: actions.payload,

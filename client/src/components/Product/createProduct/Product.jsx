@@ -11,7 +11,7 @@ export const Product = () => {
     salePrice: "",
     minimumStock: "",
     provider: [],
-    images: [],
+   
   });
   const [myProvider, setMyProvider] = useState([]);
 

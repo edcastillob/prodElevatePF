@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { UploadImg } from "../../Product/uploadImg/UploadImg";
+
 import axios from 'axios';
 
 export const CreateUser = () => {
@@ -10,6 +12,7 @@ export const CreateUser = () => {
     address: '',
     password: '',
     role: '',
+    images: [],
   });
 
   const handleInputChange = (event) => {
@@ -41,13 +44,20 @@ export const CreateUser = () => {
         address: '',
         password: '',
         role: '',
+        images: [],
       });
     } catch (error) {
       console.error(error);
     }
   };
 
-
+  const handleImageUpload = (imageUrl) => {
+    setUserData((userData) => ({
+      ...userData,
+      images: imageUrl,
+    }));
+  };
+  
     //-----------------------------------------------------------------------------
     const role = [
         { id: 1, name: "ADMIN", description: "Administrador del Sistema" },
@@ -143,7 +153,8 @@ export const CreateUser = () => {
             </option>
           ))}
         </select>
-
+        <UploadImg onImageUpload={handleImageUpload} />
+        <br />
         <button type="submit" className="btn btn-primary">Create</button>
       </form>
     </div>
