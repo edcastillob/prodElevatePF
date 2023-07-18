@@ -1,8 +1,9 @@
-import { GET_PRODUCT_NAME, SHOW_PRODUCTS } from "../actions/types";
+import { GET_PRODUCT_DETAIL, GET_PRODUCT_NAME, SHOW_PRODUCTS } from "../actions/types";
 
 const initialState = {
   products: [],
   productsFiltered: [],
+  productDetail:[],
 };
 
 function reducer(state = initialState, actions) {
@@ -11,6 +12,7 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         products: actions.payload,
+        productDetail: [...actions.payload]
       };
 
     case GET_PRODUCT_NAME:
@@ -22,6 +24,13 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         productsFiltered: filteredProducts,
+      };
+
+    case GET_PRODUCT_DETAIL:
+    
+      return {
+        ...state,
+        productDetail: actions.payload,
       };
 
     default:
