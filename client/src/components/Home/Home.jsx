@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import {CardProduct} from '../Product/cardProduct/cardProduct';
+import {CardProduct} from '../Product/cardProduct/CardProduct';
 import style from "../moduleCss/CardsProduct.module.css";
 import { showProducts } from '../../redux/actions/actions';
 import {SearchBar} from '../Product/searchBar/SearchBar';
@@ -32,11 +32,12 @@ export const Home = () => {
      {(productsFiltered.length) 
      ? 
      <div><Link to="/" onClick={() => { navigate.push('/'); dispatch(showProducts()); }}>🏠</Link></div> : ''}
-
+   
     <SearchBar />  
       {optionProducts?.map((product) => (
         <CardProduct
           key={product.id}
+          id={product.id}
           image={product.image}
           title={product.title}
           price={product.price}
