@@ -1,4 +1,10 @@
-import './App.css'
+import './App.css';
+import { NavBar } from './components/NavBar/NavBar';
+import { Cart } from './components/Cart/Cart'
+
+
+
+
 
 import { Routes, Route } from 'react-router-dom';
 // import { UploadImg } from './components/Product/uploadImg/UploadImg'
@@ -15,7 +21,12 @@ import { Home } from './components/Home/Home';
 function App() {
   return (
     <>
+      <NavBar/>
       <div>
+
+        {/* <h1>Desarrollo prodElevate</h1> */}
+        <Cart/>
+
 
         <h1>Desarrollo prodElevate</h1>
       <Routes>
@@ -24,10 +35,7 @@ function App() {
           <Route exact path="/" element={<Home />}/>
         
       </Routes>
-
-
       </div>
-     
     </>
   )
 }
