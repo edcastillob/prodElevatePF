@@ -1,0 +1,30 @@
+.divSearchBar{
+    /* border: 1px solid white; */
+    position: relative;
+    padding-left: 2rem;
+    right: 50px;
+    margin-left: 10rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    display: flex;
+    flex-direction: row;
+}
+
+input{
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+button{
+    background: none;
+    position: relative;
+    right: 32px;
+    border: none;
+    color: #000924;
+}
+
+
+.searchInput{
+    width: 300px;
+}
