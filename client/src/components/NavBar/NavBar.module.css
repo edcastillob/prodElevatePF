@@ -1,0 +1,45 @@
+.navContainer{
+    background-color: #000924;
+    position: relative;
+    color: white;
+    /* border: 1px solid blue; */
+    display: flex;
+    justify-content: space-evenly;
+    width: 100vw;
+    height: 10vh;
+}
+
+.divLogo{
+    /* border: 1px solid white; */
+    display: flex;
+    position: relative;
+    right: 130px;
+    
+    
+}
+
+.divLogo img{
+    margin-top: -1.1rem;
+    width: 100px;
+    height: 100px;
+}
+
+.items{
+    /* border: 1px solid white; */
+    position: relative;
+    left: 120px;
+    padding-top: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: end;
+}
+
+h2{
+    cursor: pointer;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.8);
+        transition: .5s;
+    }
+}
