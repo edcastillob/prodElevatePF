@@ -52,16 +52,18 @@
     /* border: 3px solid black; */
     position: relative;
     height: 70vh;
-    width: 100%; /* O ajusta el porcentaje que desees */
-    max-width: 100%; /* Establece un ancho máximo para pantallas grandes */
-    margin: 0 auto; /* Centra horizontalmente el carrusel */
+    width: 100%; 
+    max-width: 100%; 
+    margin: 0 auto; /* Centrar horizontalmente el carrusel */
   }
 
 .sliderItem {
+    /* border: 3px solid black; */
     position: relative;
-    text-align: center;
     left: 5px;
-    width: 100%; /* Centra la imagen en cada slide */
+    text-align: center;
+    width: 100%; /* Centrar la imagen en cada slide */
+    height: auto;
   }
 
 /*----------BUTTON CTA---------------*/
