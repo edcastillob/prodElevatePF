@@ -5,8 +5,7 @@ import { useDispatch } from "react-redux";
 
 export const Product = () => {
   const dispatch = useDispatch();
-  const [product, setProduct] = useState({
-    isActive: false,
+  const [product, setProduct] = useState({    
     category: "",
     name: "",
     description: "",
@@ -16,7 +15,7 @@ export const Product = () => {
     provider: [],
    
   });
-  const [myProvider, setMyProvider] = useState([]);
+  
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   const handleChange = (event) => {
@@ -26,22 +25,6 @@ export const Product = () => {
       [event.target.name]: event.target.value,
     });
   };
-
-  const handleChangeCheckBox = (event) => {
-    event.preventDefault();
-    setProduct({ ...product, isActive: event.target.checked });
-  };
-
-  // const handleProviderSelect = (event) => {
-  //   const selectedProviderId = parseInt(event.target.value);
-  //   if (!myProvider.includes(selectedProviderId)) {
-  //     setMyProvider([...myProvider, selectedProviderId]);
-  //     setProduct((prevProduct) => ({
-  //       ...prevProduct,
-  //       provider: [...prevProduct.provider, selectedProviderId],
-  //     }));
-  //   }
-  // };
   
   const handleProviderSelect = (event) => {
     const selectedProviderId = parseInt(event.target.value);
@@ -58,48 +41,7 @@ export const Product = () => {
     { id: 2, name: "software", description: "Programa de computación" },
   ];
   //-----------------------------------------------------------------------------
-  const provider = [
-    {
-      id: 1,
-      name: "Edwar",
-      identification: "0241561564561sdsd4564",
-      address: "Venezuela",
-      phoneNumber: "04145994073",
-      phoneNumberCompany: "02545553712",
-    },
-    {
-      id: 2,
-      name: "Marcela",
-      identification: "0241561564561sdsd4564",
-      address: "Colombia",
-      phoneNumber: "041255569874",
-      phoneNumberCompany: "02545559074",
-    },
-  ];
-
-  // const handleImageUpload = (imageUrls) => {    
-  //   setProduct((imgProduct) => ({
-  //     ...imgProduct,
-  //     images: [...imgProduct.images, ...imageUrls],
-  //   }));
-  // };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault(); 
-  //   console.log(product)  
-  //   dispatch(addProduct(product));
-  //   alert("Exito");
-  //   setProduct({
-  //     isActive: false,
-  //     category: "",
-  //     name: "",
-  //     description: "",
-  //     purchasePrice: "",
-  //     salePrice: "",
-  //     minimumStock: "",
-  //     provider: [],
-  //   })
-  // };
-
+ 
   const handleImageUpload = (imageUrls) => {
     setProduct((imgProduct) => ({
       ...imgProduct,
@@ -109,12 +51,10 @@ export const Product = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(product);
+    event.preventDefault();   
     dispatch(addProduct(product));
     alert("Exito");
     setProduct({
-      isActive: false,
       category: "",
       name: "",
       description: "",
@@ -132,17 +72,7 @@ export const Product = () => {
       <h1>add product</h1>
       <hr />
       <form onSubmit={ handleSubmit }>
-        <label htmlFor="isActive">active</label>
-        <input
-          className="form-check-input mt-10"
-          type="checkbox"
-          name="isActive"
-          id="isActive"
-          value={product.isActive}
-          onChange={handleChangeCheckBox}
-        />
-        <br />
-
+       
         {/* Categoria de Producto */}
         <label htmlFor="category">category product</label>
         <select
@@ -221,40 +151,7 @@ export const Product = () => {
           value={product.minimumStock}
           onChange={handleChange}
         />
-
-        {/* Proveedor*/}
-        {/* <label htmlFor="provider">Provider Product</label>
-        <select
-          className="form-select form-select-sm"
-          name="provider"
-          id="provider"
-          
-          value={product.provider}
-          onChange={handleProviderSelect}
-        >
-          <option value="">  -- select provider --</option>
-          {provider?.sort().map((prov) => (
-            <option key={prov.id} value={prov.id}>
-              {prov.name}
-            </option>
-          ))}
-        </select>
-
-        <div>
-          {product.provider?.map((provId) => {
-            const selectedProvider = provider.find(
-              (prov) => prov.id === provId
-            );
-            return (
-              <ul className="list-group " key={provId}>
-                {selectedProvider ? (<li className="list-group-item">{selectedProvider.name}</li>) 
-                : ("")}
-              </ul>
-            );
-          })}
-        </div> */}
-
-
+  
 <div className="container-sm">
       {/* ... */}
       <select
@@ -286,38 +183,6 @@ export const Product = () => {
       </div>
       {/* ... */}
     </div>
-
-
-
-{/* <div className="container-sm">
-     
-      <select
-        className="form-select form-select-sm"
-        name="provider"
-        id="provider"
-        value=""
-        onChange={handleProviderSelect}
-      >
-        <option value="">-- select provider --</option>
-        {provider?.map((prov) => (
-          <option key={prov.id} value={prov.id}>
-            {prov.name}
-          </option>
-        ))}
-      </select>
-
-      <div>
-        {product.provider?.map((selectedProvider) => (
-          <ul className="list-group" key={selectedProvider.id}>
-            <li className="list-group-item" key={selectedProvider.id}>
-              {selectedProvider.name}
-            </li>
-          </ul>
-        ))}
-      </div>
-     
-    </div> */}
-
 
         <UploadImg onImageUpload={handleImageUpload} />
 

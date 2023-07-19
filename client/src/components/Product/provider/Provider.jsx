@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { addProvider } from '../../../redux/actions/actions';
+import { useDispatch } from 'react-redux';
 
 export const Provider = () => {
+  const dispatch = useDispatch();
     const [provider, setProvider] = useState({
-        isActive: false,
         name: '',
+        email: '',
         address:'',
-        phoneNumber:'',
-        phoneNumberCompany:'',
+        cellPhone:'',
+        companyPhone:'',
         identification: '',
     });
 
@@ -17,11 +20,20 @@ export const Provider = () => {
           [event.target.name]: event.target.value,
         });
     }
-
-    const handleChangeCheckBox = (event) => {
-        event.preventDefault();       
-        setProvider({...provider, isActive : event.target.checked});
-      }
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    console.log(provider)  
+    dispatch(addProvider(provider));
+    alert("Exito");
+    setProvider({
+        name: '',
+        email: '',
+        address:'',
+        cellPhone:'',
+        companyPhone:'',
+        identification: '',
+    });
+  }
   return (
     <div>
         
@@ -29,18 +41,8 @@ export const Provider = () => {
 
         <h1>provider</h1>      
         <hr />
-        <form>
-        
-        <label htmlFor="isActive">active</label>
-        <input
-        className='form-check-input mt-10'
-        type="checkbox"
-        name='isActive'
-        id='isActive'
-        value={provider.isActive}
-        onChange={handleChangeCheckBox}
-        />
-        <br />
+        <form onSubmit={ handleSubmit }>        
+       
         
         {/* Nombre de proveedor */}
         <label htmlFor="name">Provider: </label>        
@@ -63,6 +65,16 @@ export const Provider = () => {
          onChange={handleChange}
        />
 
+       {/* email  de proveedor */}
+       <label htmlFor="email">email: </label>        
+         <input
+         className='form-control'
+         type="email"
+         name="email"
+         value={provider.email}
+         onChange={handleChange}
+       />
+
        {/* direccion de proveedor */}
        <label htmlFor="name">address: </label>             
         <input
@@ -78,8 +90,8 @@ export const Provider = () => {
         <input
         className='form-control'
         type="text"
-        name="phoneNumber"
-        value={provider.phoneNumber}
+        name="cellPhone"
+        value={provider.cellPhone}
         onChange={handleChange}
       />
        
@@ -88,8 +100,8 @@ export const Provider = () => {
         <input
         className='form-control'
         type="text"
-        name="phoneNumberCompany"
-        value={provider.phoneNumberCompany}
+        name="companyPhone"
+        value={provider.companyPhone}
         onChange={handleChange}
       />
         <br />

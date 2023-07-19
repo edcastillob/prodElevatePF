@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addCategory } from '../../../redux/actions/actions';
 
 export const Category = () => {
-    const [category, setCategory] = useState({
-        isActive: false,
+  const dispatch = useDispatch();
+    const [category, setCategory] = useState({        
         name: '',
         description:'',
     });    
@@ -15,10 +17,20 @@ export const Category = () => {
         });
     }
 
-    const handleChangeCheckBox = (event) => {
-        event.preventDefault();       
-        setCategory({...category, isActive : event.target.checked});
-      }
+    // const handleChangeCheckBox = (event) => {
+    //     event.preventDefault();       
+    //     setCategory({...category, isActive : event.target.checked});
+    //   }
+    const handleSubmit = (event) => {
+      event.preventDefault();  
+      console.log(category) 
+      dispatch(addCategory(category));
+      alert("Exito");
+      setCategory({
+        name: '',
+        description:'',
+      });
+    }
   return (
     <div>
         
@@ -26,9 +38,9 @@ export const Category = () => {
 
         <h1>Category</h1>      
         <hr />
-        <form>
+        <form onSubmit={ handleSubmit }>
         
-        <label htmlFor="isActive">active</label>
+        {/* <label htmlFor="isActive">active</label>
         <input
         className='form-check-input mt-10'
         type="checkbox"
@@ -37,7 +49,7 @@ export const Category = () => {
         value={category.isActive}
         onChange={handleChangeCheckBox}
         />
-        <br />
+        <br /> */}
 
         
         
