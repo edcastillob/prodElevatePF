@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import {CardProduct} from '../Product/cardProduct/CardProduct';
-import style from "../moduleCss/CardsProduct.module.css";
 import { showProducts } from '../../redux/actions/actions';
-import {SearchBar} from '../Product/searchBar/SearchBar';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useNavigate  } from "react-router-dom";
+import styles from './Home.module.css'
 
 
 export const Home = () => {
@@ -28,12 +27,11 @@ export const Home = () => {
   }, [productsFiltered, products]);
   
   return (
-    <div className={style.cards}>
+    <div className={styles.cards}>
      {(productsFiltered.length) 
      ? 
-     <div><Link to="/" onClick={() => { navigate.push('/'); dispatch(showProducts()); }}>🏠</Link></div> : ''}
+     <div><NavLink to="/home" style={{textDecoration: "none"}} onClick={() => { navigate.push('/home'); dispatch(showProducts()); }}> <h3>&#8592;</h3> </NavLink></div> : ''}
    
-    <SearchBar />  
       {optionProducts?.map((product) => (
         <CardProduct
           key={product.id}

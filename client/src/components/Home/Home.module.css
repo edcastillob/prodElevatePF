@@ -1,0 +1,17 @@
+
+
+Link{
+    text-decoration: none;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Espacio entre las cards */
+    justify-content: center; /* Centra las cards horizontalmente */
+} 
+
+h3{
+    color: black;
+    text-decoration: none;
+}

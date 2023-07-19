@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { NavBar } from './components/NavBar/NavBar';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Home } from './components/Home/Home';
-import { ProductDetail } from './components/Product/productDetail/productDetail';
+import { ProductDetail } from './components/Product/productDetail/ProductDetail';
 import { Landing } from './components/Landing/Landing';
 
 function App() {
