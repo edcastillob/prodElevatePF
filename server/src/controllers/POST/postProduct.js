@@ -1,14 +1,14 @@
-const { Product, Provider } = require("../db");
+const { Product, Provider } = require("../../db");
 
 async function postProduct(req, res) {   
     try {
-        const { name, category, description, images, provider, isActive } = req.body;
-        let { purchasePrice, salePrice, stock, minimumStock } = req.body;
+        const { name, category, description, images, provider } = req.body;
+        let { purchasePrice, salePrice, stock, minimunStock } = req.body;
         if (!name || !category || !description || !purchasePrice || !salePrice || !images || !provider) {
             return res.status(401).send("Missing Data");
         } 
-        purchasePrice ? purchasePrice = parseInt(purchasePrice) : purchasePrice = 0;
-        salePrice ? salePrice = parseInt(salePrice) : salePrice = 0;
+        purchasePrice ? purchasePrice = parseFloat(purchasePrice) : purchasePrice = 0;
+        salePrice ? salePrice = parseFloat(salePrice) : salePrice = 0;
         stock ? stock = parseInt(stock) : stock = 0;
         minimumStock ? minimumStock = parseInt(minimumStock) : minimumStock = 0;
 
@@ -23,7 +23,6 @@ async function postProduct(req, res) {
             images,
             stock,
             minStock,
-            isActive,
             categoryId
         });
 

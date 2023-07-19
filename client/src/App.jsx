@@ -1,13 +1,10 @@
-import "./App.css";
-import { useState, useEffect } from "react";
-import { NavBar } from "./components/NavBar/NavBar";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { Home } from "./components/Home/Home";
-import { ProductDetail } from "./components/Product/productDetail/productDetail";
-// import { Product } from "./components/Product/createProduct/Product";
-// import { Category } from "./components/Product/category/Category";
-// import { Provider } from "./components/Product/provider/Provider";
-import { Landing } from "./components/Landing/Landing";
+import './App.css';
+import { useState, useEffect } from 'react';
+import { NavBar } from './components/NavBar/NavBar';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { Home } from './components/Home/Home';
+import { ProductDetail } from './components/Product/productDetail/ProductDetail';
+import { Landing } from './components/Landing/Landing';
 
 function App() {
   const location = useLocation();

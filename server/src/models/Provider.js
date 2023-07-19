@@ -22,14 +22,14 @@ module.exports = (sequelize) => {
         allowNull: false,
         isEmail: true
     },
-    cellPhone: {
+    numPhone: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    companyPhone: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
+    // companyPhone: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true
+    // },
     address: {
         type: DataTypes.STRING,
         allowNull: false

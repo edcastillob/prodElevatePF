@@ -1,32 +1,24 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('sale', {
+  sequelize.define('role', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
-    }, 
-    total: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
     },
-    currencyType: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    saleType: {
+    description: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    status: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    date: {
-        type: DataTypes.DATEONLY,
-        allowNull: false
-    },
+    // status: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true
+    // },
   }, { timestamps: false });
 };
