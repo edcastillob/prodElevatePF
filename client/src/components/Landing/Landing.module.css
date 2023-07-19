@@ -1,0 +1,89 @@
+.divContainer{
+    /* border: 1px solid black; */
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.divLeft{
+    /* border: 1px solid blue; */
+    overflow-x: hidden;
+    background-color: #000924;
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.divRight{
+    /* border: 1px solid red; */
+    width: 50vw;
+    height: 100vh;
+}
+
+.title{
+    color: white;
+    margin-top: 50px;
+}
+
+
+
+/*----------BUTTON CTA---------------*/
+
+.startButton{
+    outline: none;
+    cursor: pointer;
+    border: none;
+    padding: 0.9rem 2rem;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+    font-size: 17px;
+    border-radius: 500px;
+    overflow: hidden;
+    background: #1eb777;
+    color: ghostwhite; 
+}
+
+.startButton span{
+    position: relative;
+    z-index: 10;
+    transition: color 0.4s;
+}
+
+.startButton:hover span{
+    color: white;
+}
+
+.startButton::before,
+.startButton::after {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ z-index: 0;
+}
+
+.startButton::before {
+    content: "";
+    background: #000924;
+    width: 120%;
+    left: -10%;
+    transform: skew(30deg);
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+   }
+
+.startButton:hover::before {
+    transform: translate3d(100%, 0, 0);
+   }
+
