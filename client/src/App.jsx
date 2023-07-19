@@ -10,8 +10,8 @@ function App() {
   const location = useLocation();
   const [showNavBar, setShowNavBar] = useState(true);
 
-  useEffect(() => {    
-    setShowNavBar(location.pathname !== '/');
+  useEffect(() => {
+    setShowNavBar(location.pathname !== "/");
   }, [location]);
 
   return (
@@ -20,6 +20,7 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/" element={<Landing />} />
+          {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/detail/:id" element={<ProductDetail />} />
         </Routes>

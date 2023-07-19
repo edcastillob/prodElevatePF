@@ -1,32 +1,28 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCategory } from '../../../redux/actions/actions';
+import { addrole } from '../../../redux/actions/actions'; 
 
-export const Category = () => {
+export const Role = () => {
   const dispatch = useDispatch();
-    const [category, setCategory] = useState({        
+    const [role, setRole] = useState({        
         name: '',
         description:'',
     });    
 
     const handleChange = (event) => {
         event.preventDefault();
-        setCategory({
-          ...category,
+        setRole({
+          ...role,
           [event.target.name]: event.target.value,
         });
     }
 
-    // const handleChangeCheckBox = (event) => {
-    //     event.preventDefault();       
-    //     setCategory({...category, isActive : event.target.checked});
-    //   }
     const handleSubmit = (event) => {
       event.preventDefault();  
-      console.log(category) 
-      dispatch(addCategory(category));
+      console.log(role) 
+      dispatch(addrole(role));
       alert("Exito");
-      setCategory({
+      setRole({
         name: '',
         description:'',
       });
@@ -36,22 +32,9 @@ export const Category = () => {
         
         <div className='container-sm'>
 
-        <h1>Category</h1>      
+        <h1>role</h1>      
         <hr />
         <form onSubmit={ handleSubmit }>
-        
-        {/* <label htmlFor="isActive">active</label>
-        <input
-        className='form-check-input mt-10'
-        type="checkbox"
-        name='isActive'
-        id='isActive'
-        value={category.isActive}
-        onChange={handleChangeCheckBox}
-        />
-        <br /> */}
-
-        
         
         {/* Nombre de categoria */}
         <label htmlFor="name">Name: </label>        
@@ -60,7 +43,7 @@ export const Category = () => {
         type="text"
         name="name"
         placeholder=" enter name "
-        value={category.name}
+        value={role.name}
         onChange={handleChange}
       />
 
@@ -70,7 +53,7 @@ export const Category = () => {
         className='form-control'
         type="textarea"
         name="description"
-        value={category.description}
+        value={role.description}
         onChange={handleChange}
       />
         <br />
