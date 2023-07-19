@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('category', {
+  sequelize.define('role', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -16,9 +16,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
     },
-    isActive: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
-    },
+    // status: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true
+    // },
   }, { timestamps: false });
 };
