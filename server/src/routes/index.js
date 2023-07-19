@@ -17,6 +17,7 @@ const { getAllProviders } = require("../controllers/GET/getAllProviders");
 
 const router = Router();
 
+
 router.get('/', function(req, res) {
     res.send('Backend prodElevate');
 });
@@ -51,6 +52,7 @@ router.post('/user', postUser);
 router.put('/user/:id', putUser);
 
 router.get('/product', getAllProducts);
+
 router.post('/product', postProduct);
 router.put('/product/:id', putProduct);
 
