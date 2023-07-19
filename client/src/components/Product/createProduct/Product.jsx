@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { UploadImg } from "../uploadImg/UploadImg";
+import { addProduct } from "../../../redux/actions/actions";
+import { useDispatch } from "react-redux";
 
 export const Product = () => {
+  const dispatch = useDispatch();
   const [product, setProduct] = useState({
     isActive: false,
     category: "",
@@ -14,6 +17,7 @@ export const Product = () => {
    
   });
   const [myProvider, setMyProvider] = useState([]);
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -28,17 +32,26 @@ export const Product = () => {
     setProduct({ ...product, isActive: event.target.checked });
   };
 
+  // const handleProviderSelect = (event) => {
+  //   const selectedProviderId = parseInt(event.target.value);
+  //   if (!myProvider.includes(selectedProviderId)) {
+  //     setMyProvider([...myProvider, selectedProviderId]);
+  //     setProduct((prevProduct) => ({
+  //       ...prevProduct,
+  //       provider: [...prevProduct.provider, selectedProviderId],
+  //     }));
+  //   }
+  // };
+  
   const handleProviderSelect = (event) => {
     const selectedProviderId = parseInt(event.target.value);
-    if (!myProvider.includes(selectedProviderId)) {
-      setMyProvider([...myProvider, selectedProviderId]);
+    if (!product.provider.includes(selectedProviderId)) {
       setProduct((prevProduct) => ({
         ...prevProduct,
         provider: [...prevProduct.provider, selectedProviderId],
       }));
     }
   };
-
   //-----------------------------------------------------------------------------
   const category = [
     { id: 1, name: "hardware", description: "Perifericos fisicos" },
@@ -64,18 +77,61 @@ export const Product = () => {
     },
   ];
 
+  // const handleImageUpload = (imageUrls) => {    
+  //   setProduct((imgProduct) => ({
+  //     ...imgProduct,
+  //     images: [...imgProduct.images, ...imageUrls],
+  //   }));
+  // };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault(); 
+  //   console.log(product)  
+  //   dispatch(addProduct(product));
+  //   alert("Exito");
+  //   setProduct({
+  //     isActive: false,
+  //     category: "",
+  //     name: "",
+  //     description: "",
+  //     purchasePrice: "",
+  //     salePrice: "",
+  //     minimumStock: "",
+  //     provider: [],
+  //   })
+  // };
+
   const handleImageUpload = (imageUrls) => {
     setProduct((imgProduct) => ({
       ...imgProduct,
-      images: [...imgProduct.images, ...imageUrls],
+      images: [...(imgProduct.images || []), ...imageUrls],
     }));
+    setIsImageUploaded(true);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(product);
+    dispatch(addProduct(product));
+    alert("Exito");
+    setProduct({
+      isActive: false,
+      category: "",
+      name: "",
+      description: "",
+      purchasePrice: "",
+      salePrice: "",
+      minimumStock: "",
+      provider: [],
+      images: [],
+    });
+    setIsImageUploaded(false); // Reiniciar isImageUploaded a false después de enviar el formulario
   };
 
   return (
     <div className="container-sm">
       <h1>add product</h1>
       <hr />
-      <form>
+      <form onSubmit={ handleSubmit }>
         <label htmlFor="isActive">active</label>
         <input
           className="form-check-input mt-10"
@@ -167,7 +223,7 @@ export const Product = () => {
         />
 
         {/* Proveedor*/}
-        <label htmlFor="provider">Provider Product</label>
+        {/* <label htmlFor="provider">Provider Product</label>
         <select
           className="form-select form-select-sm"
           name="provider"
@@ -196,7 +252,71 @@ export const Product = () => {
               </ul>
             );
           })}
-        </div>
+        </div> */}
+
+
+<div className="container-sm">
+      {/* ... */}
+      <select
+        className="form-select form-select-sm"
+        name="provider"
+        id="provider"
+        value=""
+        onChange={handleProviderSelect}
+      >
+        <option value="">-- select provider --</option>
+        {provider?.map((prov) => (
+          <option key={prov.id} value={prov.id}>
+            {prov.name}
+          </option>
+        ))}
+      </select>
+
+      <div>
+        {product.provider?.map((provId) => {
+          const selectedProvider = provider.find((prov) => prov.id === provId);
+          return (
+            <ul className="list-group" key={`provider_${provId}`}>
+              <li className="list-group-item" key={`provider_item_${provId}`}>
+                {selectedProvider.name}
+              </li>
+            </ul>
+          );
+        })}
+      </div>
+      {/* ... */}
+    </div>
+
+
+
+{/* <div className="container-sm">
+     
+      <select
+        className="form-select form-select-sm"
+        name="provider"
+        id="provider"
+        value=""
+        onChange={handleProviderSelect}
+      >
+        <option value="">-- select provider --</option>
+        {provider?.map((prov) => (
+          <option key={prov.id} value={prov.id}>
+            {prov.name}
+          </option>
+        ))}
+      </select>
+
+      <div>
+        {product.provider?.map((selectedProvider) => (
+          <ul className="list-group" key={selectedProvider.id}>
+            <li className="list-group-item" key={selectedProvider.id}>
+              {selectedProvider.name}
+            </li>
+          </ul>
+        ))}
+      </div>
+     
+    </div> */}
 
 
         <UploadImg onImageUpload={handleImageUpload} />
