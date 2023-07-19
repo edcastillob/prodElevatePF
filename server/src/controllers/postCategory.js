@@ -1,6 +1,6 @@
 const { Category } = require("../db");
 
-async function postCategory(req, res) {
+async function postCategory(req, res) {   
     try {
         const { name, description, isActive } = req.body;
         if (!name || !description) {

@@ -1,7 +1,6 @@
 const { Product, Provider } = require("../db");
 
-async function postProduct(req, res) {
-    console.log(req.body)
+async function postProduct(req, res) {   
     try {
         const { name, category, description, images, provider, isActive } = req.body;
         let { purchasePrice, salePrice, stock, minimumStock } = req.body;
@@ -13,9 +12,7 @@ async function postProduct(req, res) {
         stock ? stock = parseInt(stock) : stock = 0;
         minimumStock ? minimumStock = parseInt(minimumStock) : minimumStock = 0;
 
-        let minStock = minimumStock;        
-        console.log('Aquí en min: ', minStock);
-
+        let minStock = minimumStock;  
         let categoryId = parseInt(category);
 
         const product = await Product.create({

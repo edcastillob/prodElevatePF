@@ -1,9 +1,9 @@
 const { Provider } = require("../db");
 
-async function postProvider(req, res) {
+async function postProvider(req, res) {    
     try {
         const { name, identification, email, cellPhone, companyPhone, address, isActive } = req.body;
-        if (!name || !identification || !email || !cellPhone || !companyPhone || !address) {
+        if (!name || !identification || !email || !cellPhone ||  !address) {
             return res.status(401).send("Missing Data");
         };
 
