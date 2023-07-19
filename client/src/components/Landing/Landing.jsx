@@ -10,13 +10,14 @@ import feature3 from '../../assets/feature 3.png'
 
 export const Landing = () => {
     const sliderSettings = {
-        dots: false,
+        dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
+        arrows: false,
       };
 
 
@@ -27,6 +28,7 @@ export const Landing = () => {
                 <h3 className={styles.title}>Online Sales And Administration System</h3>
             </div>
             <div className={styles.divRight}>
+            <div className={styles.sliderContainer}>
                 <Slider {...sliderSettings}>
                     <div className={styles.sliderItem}>
                         <img src={feature1} alt="Feature 1" />
@@ -38,7 +40,8 @@ export const Landing = () => {
                         <img src={feature2} alt="Feature 2" />
                     </div>
                 </Slider>
-                <div style={{marginTop: "30px"}}>
+                </div>    
+                <div className={styles.divButton}>
             <NavLink to="/home">
                 <button className={styles.startButton}> 
                     <span>Let's Start</span>
