@@ -1,3 +1,9 @@
 export const SHOW_PRODUCTS = 'SHOW_PRODUCTS';
 export const GET_PRODUCT_NAME = 'GET_PRODUCT_NAME';
 export const GET_PRODUCT_DETAIL = 'GET_PRODUCT_DETAIL';
+export const VALIDATION_USER = 'VALIDATION_USER';
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const GET_CATEGORY = 'GET_CATEGORY';
+export const ADD_PROVIDER = 'ADD_PROVIDER';
+export const ADD_ROLE = 'ADD_ROLE';

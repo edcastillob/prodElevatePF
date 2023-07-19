@@ -22,6 +22,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         isEmail: true
     },
+    image: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false
+    }, 
     numPhone: {
         type: DataTypes.STRING,
         allowNull: false
@@ -34,13 +38,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
     },
-    role: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        defaultValue: true
     },
   }, { timestamps: false });
 };

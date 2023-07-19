@@ -1,16 +1,15 @@
-const { Category } = require("../db");
+const { Category } = require("../../db");
 
-async function postCategory(req, res) {
+async function postCategory(req, res) {   
     try {
-        const { name, description, isActive } = req.body;
+        const { name, description } = req.body;
         if (!name || !description) {
             return res.status(401).send("Missing Data");
         };
 
         const newCategory = await Category.create({
             name,
-            description,
-            isActive
+            description
         });
         
         return res.status(201).json(newCategory);
