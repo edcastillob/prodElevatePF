@@ -22,8 +22,14 @@
 
 .divRight{
     /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     width: 50vw;
     height: 100vh;
+    background-color: #f2f2f2;
+    
 }
 
 .title{
@@ -31,7 +37,34 @@
     margin-top: 50px;
 }
 
+.divButton{
+    /* border: 3px solid black; */
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+/*___________CARRUSEL_____________*/
+
+.sliderContainer {
+    /* border: 3px solid black; */
+    position: relative;
+    height: 70vh;
+    width: 100%; 
+    max-width: 100%; 
+    margin: 0 auto; /* Centrar horizontalmente el carrusel */
+  }
+
+.sliderItem {
+    /* border: 3px solid black; */
+    position: relative;
+    left: 5px;
+    text-align: center;
+    width: 100%; /* Centrar la imagen en cada slide */
+    height: auto;
+  }
 
 /*----------BUTTON CTA---------------*/
 
