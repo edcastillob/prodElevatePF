@@ -49,6 +49,9 @@ User.belongsTo(Role);
 User.hasMany(Sale);
 Sale.belongsTo(User);
 
+User.belongsToMany(Product, { through: "Favorites" });
+Product.belongsToMany(User, { through: "Favorites" });
+
 Sale.belongsToMany(Product, { through: "DetailSale" });
 Product.belongsToMany(Sale, { through: "DetailSale" });
 

@@ -50,7 +50,9 @@ export const Landing = () => {
             </NavLink>
                 </div>
             </div>
+
         </div>
   )
 }
+
 
