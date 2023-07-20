@@ -8,8 +8,7 @@ export const Provider = () => {
         name: '',
         email: '',
         address:'',
-        cellPhone:'',
-        companyPhone:'',
+        numPhone:'',
         identification: '',
     });
 
@@ -29,8 +28,7 @@ export const Provider = () => {
         name: '',
         email: '',
         address:'',
-        cellPhone:'',
-        companyPhone:'',
+        numPhone:'',
         identification: '',
     });
   }
@@ -90,20 +88,12 @@ export const Provider = () => {
         <input
         className='form-control'
         type="text"
-        name="cellPhone"
-        value={provider.cellPhone}
+        name="numPhone"
+        value={provider.numPhone}
         onChange={handleChange}
       />
        
-       {/* numero empresa telef de proveedor */}
-       <label htmlFor="name">Number Phone company: </label>             
-        <input
-        className='form-control'
-        type="text"
-        name="companyPhone"
-        value={provider.companyPhone}
-        onChange={handleChange}
-      />
+       
         <br />
 
         <button className='btn btn-primary'>submit</button> 

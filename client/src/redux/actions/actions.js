@@ -1,58 +1,52 @@
-import { SHOW_PRODUCTS, GET_PRODUCT_NAME, GET_PRODUCT_DETAIL, ADD_PRODUCT, ADD_CATEGORY, ADD_PROVIDER, GET_CATEGORY, ADD_ROLE } from "./types";
+import {
+  SHOW_PRODUCTS,
+  GET_PRODUCT_NAME,
+  GET_PRODUCT_DETAIL,
+  ADD_PRODUCT,
+  ADD_CATEGORY,
+  ADD_PROVIDER,
+  GET_CATEGORY,
+  ADD_ROLE,
+  ADD_USER,
+  GET_PROVIDER,
+  LOGIN,
+} from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
-const FAKE = 'https://fakestoreapi.com/products';
+const FAKE = "https://fakestoreapi.com/products";
 
-
-export const showProducts = () => { 
-
-    try {
-        return async(dispatch) => {
-            axios.get(FAKE)
-            .then(response => {                
-            if(!response.data) throw Error('¡The product does not exist!');
-            return dispatch({ type: SHOW_PRODUCTS, payload: response.data})
-      })
-        }
-    } catch (error) {
-        throw new Error(error.message);
-    }
-}   
-
-export const getProductName = (name) => {
-    return ({ type: GET_PRODUCT_NAME,  payload: name})
+export const showProducts = () => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(`${ENDPOINT}product`);
+      console.log(data);
+      return dispatch({ type: SHOW_PRODUCTS, payload: data });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
+export const getProductName = (name) => {
+  return { type: GET_PRODUCT_NAME, payload: name };
+};
 
 export const getProductDetail = (id) => {
-    return (dispatch) => {
-      return new Promise((resolve, reject) => {
-        axios.get(`${ENDPOINTTTT}/${id}`)
-          .then((response) => {
-            dispatch({ type: GET_PRODUCT_DETAIL, payload: response.data });
-            resolve();
-          })
-          .catch((error) => {           
-            throw new Error('Error fetching product details.'); // Lanza una nueva excepción
-          });
-      });
-    };
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}productid/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          dispatch({ type: GET_PRODUCT_DETAIL, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching product details."); // Lanza una nueva excepción
+        });
+    });
   };
-  
-
-//   const validationUser = async (userData) => {
-//     try {
-//        const { email, password } = userData;      
-//        const URL = 'http://localhost:3001/user/login/';
-//        const {data} = await axios(URL + `?email=${email}&password=${password}`)
-//        const { access } = data;     
-//        setAccess(access);
-//        if(!access) throw Error()
-//        access && navigate('/home');
-//     } catch (error) {
-//        alert('Revise sus credenciales de acceso' )
-//     }
-//  }
+};
 
 export const addProduct = (product) => {
   return async (dispatch) => {
@@ -76,20 +70,18 @@ export const addCategory = (category) => {
   };
 };
 
-export const getCategory = () => { 
-
+export const getCategory = () => {
   try {
-      return async(dispatch) => {
-          await axios.get(`${ENDPOINT}category`, category)
-          .then(response => {                
-          if(!response.data) throw Error('¡The category does not exist!');
-          return dispatch({ type: GET_CATEGORY, payload: response.data})
-    })
-      }
+    return async (dispatch) => {
+      await axios.get(`${ENDPOINT}category`).then((response) => {
+        if (!response.data) throw Error("¡The category does not exist!");
+        return dispatch({ type: GET_CATEGORY, payload: response.data });
+      });
+    };
   } catch (error) {
-      throw new Error(error.message);
+    throw new Error(error.message);
   }
-}
+};
 
 export const addProvider = (provider) => {
   return async (dispatch) => {
@@ -111,4 +103,42 @@ export const addRole = (role) => {
       return error.message;
     }
   };
+};
+
+export const addUser = (user) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(`${ENDPOINT}user`, user);
+      return dispatch({ type: ADD_USER, payload: user });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
+
+export const getProvider = () => {
+  try {
+    return async (dispatch) => {
+      await axios.get(`${ENDPOINT}provider`).then((response) => {
+        if (!response.data) throw Error("¡The provider does not exist!");
+        return dispatch({ type: GET_PROVIDER, payload: response.data });
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const login = () => {
+  try {
+    return async (dispatch) => {
+      await axios.get(`${ENDPOINT}login`).then((response) => {
+        console.log(response.data);
+        if (!response.data) throw Error("¡The user does not exist!");
+        return dispatch({ type: LOGIN, payload: response.data });
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };

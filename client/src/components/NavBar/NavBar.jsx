@@ -3,6 +3,10 @@ import styles from "./NavBar.module.css"
 import { SearchBar } from "../SearchBar/SearchBar";
 import logo from "../../assets/logo_2.png"
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
+=======
+Link
+>>>>>>> c4238e1a16db0af9bad94741f587f6acff29669c
 
 
 
@@ -22,6 +26,12 @@ export const NavBar = () => {
         <Link to="/producto" className={styles.optionItem}>Producto</Link>
         <Link to="/usuario" className={styles.optionItem}>Usuario</Link>
         </div>
+        <Link to="/categoria">Categoria</Link>
+        <Link to="/rol">Roles</Link>
+        <Link to="/proveedor">Proveedor</Link>
+        <Link to="/producto">Producto</Link>
+        <Link to="/usuario">Usuario</Link>
+        <Link to="/login">Login</Link>
         <SearchBar/>
         <div className={styles.items}>
         <h2><ion-icon name="cart"></ion-icon></h2>

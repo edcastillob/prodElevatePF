@@ -2,12 +2,14 @@ const { User } = require("../../db");
 
 async function postUser(req, res) {
     try {
-        const { name, identification, email, images, numPhone, address, password, role } = req.body;
-        if (!name || !identification || !email || !images || !numPhone || !address || !password || !role) {
+        
+       
+        console.log(req.body)
+        const { name, identification, email, images, numPhone, address, password } = req.body;
+        if (!name || !identification || !email || !images || !numPhone || !address || !password ) {
             return res.status(401).send("Missing Data");
         };
-        const image = images;
-        const roleId = parseInt(role);
+        const image = images;        
 
         const newUser = await User.create({
             name,
@@ -16,8 +18,8 @@ async function postUser(req, res) {
             image,
             numPhone,
             address,
-            password,
-            roleId
+            password
+           
         });
 
         return res.status(201).json(newUser);
