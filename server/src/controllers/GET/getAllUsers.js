@@ -10,8 +10,7 @@ async function getAllUsers(req, res) {
                 'email', 
                 'image', 
                 'numPhone',
-                'address', 
-                'password',
+                'address',
                 'isActive'
             ],
         });

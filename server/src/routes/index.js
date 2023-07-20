@@ -2,6 +2,7 @@ const passport = require("passport")
 const { Router } = require("express");
 const { isAuthenticated } = require("../middleware/isAuthenticated");
 const { getAllProducts } = require("../controllers/GET/getAllProducts")
+const { getProductId } = require("../controllers/GET/getProductId")
 const { postProduct } = require("../controllers/POST/postProduct");
 const { postCategory } = require("../controllers/POST/postCategory");
 const { postProvider } = require("../controllers/POST/postProvider");
@@ -52,6 +53,7 @@ router.post('/user', postUser);
 router.put('/user/:id', putUser);
 
 router.get('/product', getAllProducts);
+router.get('/productid/:id', getProductId);
 
 router.post('/product', postProduct);
 router.put('/product/:id', putProduct);

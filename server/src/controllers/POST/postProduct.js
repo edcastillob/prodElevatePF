@@ -2,8 +2,9 @@ const { Product, Provider } = require("../../db");
 
 async function postProduct(req, res) {   
     try {
+        console.log(req.body)
         const { name, category, description, images, provider } = req.body;
-        let { purchasePrice, salePrice, stock, minimunStock } = req.body;
+        let { purchasePrice, salePrice, stock, minimumStock } = req.body;
         if (!name || !category || !description || !purchasePrice || !salePrice || !images || !provider) {
             return res.status(401).send("Missing Data");
         } 
