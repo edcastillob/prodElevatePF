@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addrole } from '../../../redux/actions/actions'; 
+import { addRole } from '../../../redux/actions/actions'; 
 
 export const Role = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export const Role = () => {
     const handleSubmit = (event) => {
       event.preventDefault();  
       console.log(role) 
-      dispatch(addrole(role));
+      dispatch(addRole(role));
       alert("Exito");
       setRole({
         name: '',

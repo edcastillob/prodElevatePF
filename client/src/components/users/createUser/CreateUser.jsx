@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { UploadImg } from "../../Product/uploadImg/UploadImg";
+import styles from './CreateUser.module.css';
+import prueba from '../../../assets/prueba.jpg';
+import logo from '../../../assets/logo_2.png'
 
 import axios from 'axios';
 
@@ -67,11 +70,23 @@ export const CreateUser = () => {
       //-----------------------------------------------------------------------------
 
   return (
-    <div className="container">
-      <h1>Create User</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Name:</label>
+    <div className={styles.container}>
+      <div className={styles.divLeft}>
+        <div className={styles.divContent}>
+        <img src={logo} alt="logo" />
+        <h3 className={styles.title}>Online Sales And Administration System</h3>
+        <h4 className={styles.subtitle}>The best tool to see your business grow</h4>
+        </div>
+        <div className={styles.divImg}>
+        <img src={prueba} alt="img-prueba" />
+        </div>
+      </div>
+      <div className={styles.divRight}>
+      <h3>Create User</h3>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+        <div className={styles.divTwoItems}>
+        <div className={styles.divContainer}>
+          <label className={styles.labelContainer}>Name:</label>
           <input
             type="text"
             name="name"
@@ -81,8 +96,8 @@ export const CreateUser = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Identification:</label>
+        <div className={styles.divContainer}>
+          <label className={styles.labelContainer}>Identification:</label>
           <input
             type="text"
             name="identification"
@@ -92,8 +107,10 @@ export const CreateUser = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Email:</label>
+        </div>
+        <div className={styles.divTwoItems}>
+        <div className={styles.divContainer}>
+          <label className={styles.labelContainer}>Email:</label>
           <input
             type="email"
             name="email"
@@ -103,8 +120,8 @@ export const CreateUser = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Phone Number:</label>
+        <div className={styles.divContainer}>
+          <label className={styles.labelContainer}>Phone Number:</label>
           <input
             type="text"
             name="numPhone"
@@ -114,30 +131,34 @@ export const CreateUser = () => {
             required
           />
         </div>
-        <div className="mb-3">
+        </div>
+        <div className={styles.divOneItem}>
+        <div className={styles.divContainer}>
           <label className="form-label">Address:</label>
           <input
             type="text"
             name="address"
             value={userData.address}
             onChange={handleInputChange}
-            className="form-control"
+            className={styles.inputItem}
             required
           />
         </div>
-        <div className="mb-3">
+        </div>
+        <div className={styles.divOneItem}>
+        <div className={styles.divContainer}>
           <label className="form-label">Password:</label>
           <input
             type="password"
             name="password"
             value={userData.password}
             onChange={handleInputChange}
-            className="form-control"
+            className={styles.inputItem}
             required
           />
         </div>       
-
-         
+        </div>
+        <div className={styles.divOneItem}>
          <label htmlFor="category">Role:</label>
         <select
           className="form-select form-select-sm"
@@ -153,10 +174,14 @@ export const CreateUser = () => {
             </option>
           ))}
         </select>
+        </div>
         <UploadImg onImageUpload={handleImageUpload} />
         <br />
         <button type="submit" className="btn btn-primary">Create</button>
       </form>
+
+      </div>
+      
     </div>
   );
 };

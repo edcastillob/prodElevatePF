@@ -43,7 +43,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProductDetail } from '../../../redux/actions/actions';
-// import { Card, CardImg, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle, CardText } from 'reactstrap';
 import loadingImg from '../../../assets/loading.png'
 
 export const ProductDetail = () => {
