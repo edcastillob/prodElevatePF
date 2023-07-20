@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UploadImg } from "../uploadImg/UploadImg";
-import { addProduct } from "../../../redux/actions/actions";
-import { useDispatch } from "react-redux";
+import { addProduct, getCategory, getProvider } from "../../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Product = () => {
   const dispatch = useDispatch();
+  const category = useSelector((state) => state.category);
+  const provider = useSelector((state) => state.provider);
+  useEffect(() => {
+    dispatch(getCategory()); 
+    dispatch(getProvider()); 
+  }, []);
+
+  const sortedCategories = [...category].sort((a, b) =>
+  a.name.localeCompare(b.name));
+
+  const sortedproviders = [...provider].sort((a, b) =>
+  a.name.localeCompare(b.name));
+
   const [product, setProduct] = useState({    
     category: "",
     name: "",
@@ -13,8 +26,9 @@ export const Product = () => {
     salePrice: "",
     minimumStock: "",
     provider: [],
-   
+    images: [],
   });
+
   
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
@@ -35,12 +49,7 @@ export const Product = () => {
       }));
     }
   };
-  //-----------------------------------------------------------------------------
-  const category = [
-    { id: 1, name: "hardware", description: "Perifericos fisicos" },
-    { id: 2, name: "software", description: "Programa de computación" },
-  ];
-  //-----------------------------------------------------------------------------
+
  
   const handleImageUpload = (imageUrls) => {
     setProduct((imgProduct) => ({
@@ -51,7 +60,8 @@ export const Product = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();   
+    event.preventDefault();  
+    console.log(product) 
     dispatch(addProduct(product));
     alert("Exito");
     setProduct({
@@ -64,7 +74,8 @@ export const Product = () => {
       provider: [],
       images: [],
     });
-    setIsImageUploaded(false); // Reiniciar isImageUploaded a false después de enviar el formulario
+    // Reiniciar isImageUploaded a false después de enviar el formulario
+    setIsImageUploaded(false);
   };
 
   return (
@@ -82,8 +93,8 @@ export const Product = () => {
           value={product.category}
           onChange={handleChange}
         >
-          <option value="">  -- select category --</option>
-          {category?.sort().map((catg) => (
+          <option value="">-- select category --</option>
+          {sortedCategories.map((catg) => (
             <option key={catg.id} value={catg.id}>
               {catg.name}
             </option>
@@ -162,7 +173,7 @@ export const Product = () => {
         onChange={handleProviderSelect}
       >
         <option value="">-- select provider --</option>
-        {provider?.map((prov) => (
+        {sortedproviders?.map((prov) => (
           <option key={prov.id} value={prov.id}>
             {prov.name}
           </option>
@@ -184,7 +195,12 @@ export const Product = () => {
       {/* ... */}
     </div>
 
-        <UploadImg onImageUpload={handleImageUpload} />
+        {/* <UploadImg onImageUpload={handleImageUpload} /> */}
+        <UploadImg 
+          onImageUpload={handleImageUpload} 
+          uploadedImages={product.images}
+          clearUploadedImages={() => setUserData((product) => ({ ...product, images: [] }))}
+        />
 
         <br />
         <button className="btn btn-primary">submit</button>

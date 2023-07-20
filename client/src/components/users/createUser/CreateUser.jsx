@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { UploadImg } from "../../Product/uploadImg/UploadImg";
 
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../../../redux/actions/actions';
 
 export const CreateUser = () => {
+  const dispatch = useDispatch();
+ 
+let cleanImg = [];
   const [userData, setUserData] = useState({
     name: '',
     identification: '',
@@ -11,9 +16,10 @@ export const CreateUser = () => {
     numPhone: '',
     address: '',
     password: '',
-    role: '',
     images: [],
   });
+  
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -23,48 +29,38 @@ export const CreateUser = () => {
     }));
   };
 
-  const handleChangeRole = (event) => {
-    event.preventDefault();
-    setUserData({
-      ...userData,
-      [event.target.name]: event.target.value,
-    });
-  };
+ 
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post('/api/users', userData);
-      console.log(response.data); 
-      setUserData({
-        name: '',
-        identification: '',
-        email: '',
-        numPhone: '',
-        address: '',
-        password: '',
-        role: '',
-        images: [],
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const handleSubmit = (event) => {
+    event.preventDefault();  
+    console.log(userData) 
+    dispatch(addUser(userData));
+    alert("Exito");
+    setUserData({
+      name: '',
+      identification: '',
+      email: '',
+      numPhone: '',
+      address: '',
+      password: '',
+      images: cleanImg,
+    });
+  }
+
+  
+  
 
   const handleImageUpload = (imageUrl) => {
     setUserData((userData) => ({
       ...userData,
       images: imageUrl,
     }));
-  };
   
-    //-----------------------------------------------------------------------------
-    const role = [
-        { id: 1, name: "ADMIN", description: "Administrador del Sistema" },
-        { id: 2, name: "client", description: "Cliente" },
-        { id: 3, name: "vendedor", description: "Usuario final" },
-      ];
-      //-----------------------------------------------------------------------------
+  };
+
+ 
+  
+
 
   return (
     <div className="container">
@@ -137,26 +133,20 @@ export const CreateUser = () => {
           />
         </div>       
 
-         
-         <label htmlFor="category">Role:</label>
-        <select
-          className="form-select form-select-sm"
-          name="role"
-          id="role"
-          value={userData.role}
-          onChange={handleChangeRole}
-        >
-          <option value="">  -- select role --</option>
-          {role?.sort().map((rol) => (
-            <option key={rol.id} value={rol.id}>
-              {rol.name}
-            </option>
-          ))}
-        </select>
-        <UploadImg onImageUpload={handleImageUpload} />
+        {/* <UploadImg onImageUpload={handleImageUpload} /> */}
+       
+        <UploadImg 
+          onImageUpload={handleImageUpload} 
+          uploadedImages={userData.images}
+          clearUploadedImages={() => setUserData((userData) => ({ ...userData, images: [] }))}
+        />
+       
+
         <br />
         <button type="submit" className="btn btn-primary">Create</button>
       </form>
     </div>
   );
 };
+
+

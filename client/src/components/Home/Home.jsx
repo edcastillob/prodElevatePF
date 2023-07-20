@@ -7,13 +7,8 @@ import { useNavigate  } from "react-router-dom";
 import styles from './Home.module.css'
 
 
-export const Home = () => {
-  //-----------------------------------------------------------------------------
-  const category = [
-    { id: 1, name: "hardware", description: "Perifericos fisicos" },
-    { id: 2, name: "software", description: "Programa de computación" },
-  ];
-  //---------------------------------------
+export const Home = () => { 
+  
   const dispatch = useDispatch();
   const navigate = useNavigate ();
   useEffect(() => {dispatch(showProducts())}, []);
@@ -36,10 +31,9 @@ export const Home = () => {
         <CardProduct
           key={product.id}
           id={product.id}
-          image={product.image}
-          title={product.title}
-          price={product.price}
-          category={product.category}
+          image={product.images}
+          name={product.name}
+          salePrice={product.salePrice}          
         />
       ))}
     </div>

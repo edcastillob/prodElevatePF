@@ -1,6 +1,11 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../redux/actions/actions'; 
+
 
 export const Login = () => {
+  const dispatch = useDispatch();
+
   const [userData, setUserData] = useState({
     user: '',
     password: '',
@@ -14,10 +19,15 @@ export const Login = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();    
-    
-  };
+    const handleSubmit = (event) => {
+      event.preventDefault();  
+      console.log(userData) 
+      dispatch(login(userData));      
+      // setUserData({
+      //   name: '',
+      //   description:'',
+      // });
+    }
 
   return (
     <div className="container">
