@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import {CardProduct} from '../Product/cardProduct/CardProduct';
 import { showProducts } from '../../redux/actions/actions';
+import { CardProduct } from '../Product/cardProduct/cardProduct';
 import { NavLink } from "react-router-dom";
 import { useNavigate  } from "react-router-dom";
 import styles from './Home.module.css'

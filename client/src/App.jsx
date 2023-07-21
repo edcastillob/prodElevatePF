@@ -8,9 +8,10 @@ import { Landing } from './components/Landing/Landing';
 import { Category } from './components/Product/category/Category';
 import { Product } from './components/Product/createProduct/Product';
 import { Provider } from './components/Product/provider/Provider';
-import { Role } from './components/Product/role/Role';
+import { Role } from './components/users/role/Role';
 import { CreateUser } from './components/users/createUser/CreateUser';
 import { Footer } from './components/Footer/Footer';
+import { Configuration } from './components/Configuration/Configuration';
 
 function App() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function App() {
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
+          <Route path="/settings" element={<Configuration />} />
         </Routes>
         <Footer />
       </div>
