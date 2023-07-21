@@ -31,8 +31,12 @@ const { getProviderId } = require("../controllers/GET/getProviderId");
 
 const router = Router();
 
-router.get("/", function (req, res) {
-  res.send("Backend prodElevate");
+const mailerRoutes = require('./mailerRoutes')
+
+router.use('/notification', mailerRoutes);
+
+router.get('/', function(req, res) {
+    res.send('Backend prodElevate');
 });
 
 // Ruta login
