@@ -15,9 +15,11 @@ const { putProvider } = require("../controllers/PUT/putProvider");
 const { getAllUsers } = require("../controllers/GET/getAllUsers");
 const { getAllCategories } = require("../controllers/GET/getAllCategories");
 const { getAllProviders } = require("../controllers/GET/getAllProviders");
+const mailerRoutes = require('./mailerRoutes')
 
 const router = Router();
 
+router.use('/notification', mailerRoutes);
 
 router.get('/', function(req, res) {
     res.send('Backend prodElevate');
