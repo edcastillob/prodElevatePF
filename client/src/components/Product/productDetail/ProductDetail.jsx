@@ -105,7 +105,7 @@ export const ProductDetail = () => {
           <p className={styles.descriptionItem}>{description} </p>
           <h6>Category: {category} </h6>
           <h4>Price ${salePrice} </h4>
-          <button className={styles.buttonCart}>Add to Cart<ion-icon name="cart"></ion-icon></button>
+          <button className={styles.buttonCart}>Add to Cart</button>
         </div>
         </div>
       )}

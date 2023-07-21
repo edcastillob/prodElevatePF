@@ -42,7 +42,18 @@
 .buttonCart{
     border: 1px solid gray;
     box-shadow: 1px 2px #e9e9e9;
+    background-color: #000924;
+    color: #e9e9e9;
+    padding: 0.6rem;
+    font-weight: 500;
     border-radius: 10px;
     position: relative;
     left: 0.01rem;
+    transition: .3s;
+    &:hover{
+        background-color: #e9e9e9;
+        color: #000924;
+        transition: .5s;
+
+    }
 }

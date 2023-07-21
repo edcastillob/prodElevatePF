@@ -4,7 +4,7 @@
     padding-top: 0.5rem;
     border-radius: 10px;
     width: 20vw;
-    height: 60vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,8 @@
 .divImg{
     /* border: 1px solid black; */
     width: 90%;
-    height: 60%;
+    min-height: 60%;
+    max-height: 70%;
     background-color: #e9e9e9;
     display: flex;
     justify-content: center;
@@ -23,17 +24,19 @@
 
 .link{
     /* border: 1px solid black; */
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    min-height: 50%;
+    max-height: 50%;
+    background-color: #e9e9e9;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-decoration: none;
 }
 
 .img{
     width: 90%;
-    height: auto;
+    min-height: 60%;
+    max-height: 80%;
     filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.3));
 }
 
@@ -42,12 +45,13 @@
     position: relative;
     margin-top: 0.5rem;
     padding: 1rem;
+    padding-top: 1rem;
     width: 100%;
     height: 40%;
     display: flex;
     flex-direction: column;
     align-items: start;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .title{
@@ -70,7 +74,19 @@
 .buttonCart{
     border: 1px solid gray;
     box-shadow: 1px 2px #e9e9e9;
+    background-color: #000924;
+    color: #fff;
+    padding: 0.5rem;
+    font-weight: 400;
     border-radius: 10px;
     position: relative;
     left: 0.01rem;
+    margin-bottom: 1rem;
+    transition: .3s;
+    &:hover{
+        background-color: #e9e9e9;
+        color: #000924;
+        transition: .5s;
+
+    }
 }
