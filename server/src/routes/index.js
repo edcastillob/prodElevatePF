@@ -17,7 +17,6 @@ const { getAllProviders } = require("../controllers/GET/getAllProviders");
 
 const router = Router();
 
-
 router.get('/', function(req, res) {
     res.send('Backend prodElevate');
 });
@@ -29,20 +28,23 @@ router.get('/login', (req, res) => {
 
 router.post(
     '/login', 
-    passport.authenticate('local', { failureRedirect: '/login'}), 
-    (req, res) => {
-        res.redirect('/');
-});
+    passport.authenticate('local', { 
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }
+));
 
 // Ruta Logout
-router.get('logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+router.get('/logout', function(req, res, next) {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
 });
 
 // Ruta protegida
 router.get('/profile', isAuthenticated, (req, res) => {
-    res.render('profile', { user: req.user });
+    res.send('profile');
 });
 
 router.post('/role', postRole);
