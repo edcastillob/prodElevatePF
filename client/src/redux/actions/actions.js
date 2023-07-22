@@ -132,9 +132,9 @@ export const getProvider = () => {
 export const login = () => {
   try {
     return async (dispatch) => {
-      await axios.get(`${ENDPOINT}login`).then((response) => {
-        console.log(response.data);
+      await axios.post(`${ENDPOINT}login`).then((response) => {
         if (!response.data) throw Error("¡The user does not exist!");
+        console.log(response.data);
         return dispatch({ type: LOGIN, payload: response.data });
       });
     };

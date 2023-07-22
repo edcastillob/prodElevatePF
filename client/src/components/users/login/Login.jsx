@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../redux/actions/actions'; 
+import { handleGoogleSignIn } from "../Firebase/GoogleLogin.js";
+// import { userCredential } from './firebase/autentication.js'; // Asumiendo que exportas la función desde el archivo
+// import '../Firebase/autentication';
 
 
 export const Login = () => {
@@ -21,7 +24,7 @@ export const Login = () => {
 
     const handleSubmit = (event) => {
       event.preventDefault();  
-      console.log(userData) 
+      console.log("desde submit: ", userData) 
       dispatch(login(userData));      
       // setUserData({
       //   name: '',
@@ -72,6 +75,7 @@ export const Login = () => {
           <a href="/forgot-password" className="ms-3">Forgot your password</a>
         </div>
       </form>
+      <button type="button" onClick={handleGoogleSignIn} className="btn btn-info">Google</button>
     </div>
   );
 };

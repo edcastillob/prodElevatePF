@@ -2,14 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProductName } from "../../../redux/actions/actions";
 
-
 export const SearchBar = () => {
-    
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
   const handleChange = ({ target }) => {
-    const { value } = target;  
+    const { value } = target;
     setName(value);
   };
 
@@ -28,10 +26,7 @@ export const SearchBar = () => {
         onChange={handleChange}
       />
 
-      <button
-        type="submit"
-        onClick={handleClick}
-      >
+      <button type="submit" onClick={handleClick}>
         search product
       </button>
     </div>

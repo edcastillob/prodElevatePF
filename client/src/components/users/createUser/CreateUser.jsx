@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { UploadImg } from "../../Product/uploadImg/UploadImg";
-
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { addUser } from '../../../redux/actions/actions';
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../redux/actions/actions";
 
 export const CreateUser = () => {
   const dispatch = useDispatch();
- 
-let cleanImg = [];
+
+  let cleanImg = [];
   const [userData, setUserData] = useState({
-    name: '',
-    identification: '',
-    email: '',
-    numPhone: '',
-    address: '',
-    password: '',
+    name: "",
+    identification: "",
+    email: "",
+    numPhone: "",
+    address: "",
+    password: "",
     images: [],
   });
-  
-  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -29,38 +25,28 @@ let cleanImg = [];
     }));
   };
 
- 
-
   const handleSubmit = (event) => {
-    event.preventDefault();  
-    console.log(userData) 
+    event.preventDefault();
+    console.log(userData);
     dispatch(addUser(userData));
     alert("Exito");
     setUserData({
-      name: '',
-      identification: '',
-      email: '',
-      numPhone: '',
-      address: '',
-      password: '',
+      name: "",
+      identification: "",
+      email: "",
+      numPhone: "",
+      address: "",
+      password: "",
       images: cleanImg,
     });
-  }
-
-  
-  
+  };
 
   const handleImageUpload = (imageUrl) => {
     setUserData((userData) => ({
       ...userData,
       images: imageUrl,
     }));
-  
   };
-
- 
-  
-
 
   return (
     <div className="container">
@@ -131,22 +117,23 @@ let cleanImg = [];
             className="form-control"
             required
           />
-        </div>       
+        </div>
 
         {/* <UploadImg onImageUpload={handleImageUpload} /> */}
-       
-        <UploadImg 
-          onImageUpload={handleImageUpload} 
+
+        <UploadImg
+          onImageUpload={handleImageUpload}
           uploadedImages={userData.images}
-          clearUploadedImages={() => setUserData((userData) => ({ ...userData, images: [] }))}
+          clearUploadedImages={() =>
+            setUserData((userData) => ({ ...userData, images: [] }))
+          }
         />
-       
 
         <br />
-        <button type="submit" className="btn btn-primary">Create</button>
+        <button type="submit" className="btn btn-primary">
+          Create
+        </button>
       </form>
     </div>
   );
 };
-
-

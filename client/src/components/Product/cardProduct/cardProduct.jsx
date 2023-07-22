@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 
 export const CardProduct = ({ id, name, category, image, salePrice }) => {
- 
   return (
     <div className="col-sm-6 col-md-4 col-lg-3">
       <div className="card" style={{ width: "220px" }}>
