@@ -49,7 +49,7 @@ export const NavBar = ({ user, handleSignIn }) => {
           <ion-icon name="person"></ion-icon>
         </h2>
       {user ? user.displayName : null }  
-      {userLogin ? userLogin[0].User.email : null}
+      {/* {userLogin ? userLogin[0].User.email : null} */}
       {userLogin ? userLogin.email : null }  
 
         {user ? (
