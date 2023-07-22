@@ -30,32 +30,37 @@ export const NavBar = ({ user, handleSignIn }) => {
           <ion-icon name="cart"></ion-icon>
         </h2>
         <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
-
         <h2>
           <ion-icon name="person"></ion-icon>
-        </h2></Link>
+        </h2>
+        </Link>
         <Link to="/settings" style={{ textDecoration: "none", color: "white" }}>
           <h2>
             <ion-icon name="settings"></ion-icon>
           </h2>
         </Link>
+        {userLogin ? userLogin.email : null }  
+        {user ? user.displayName : null }  
+        {user ? (
+        <p onClick={handleLogoutClick}>Logout</p>
+      ) : null}
+        {/* <h2 onClick={handleLogoutClick}>
+          <ion-icon name="person"></ion-icon>
+        </h2> */}
       </div>
-      <SearchBar />
+
+
+      {/* <SearchBar />
       <div className={styles.items}>
         <h2>
           <ion-icon name="cart"></ion-icon>
         </h2>
-        <h2 onClick={handleLogoutClick}>
-          <ion-icon name="person"></ion-icon>
-        </h2>
-      {user ? user.displayName : null }  
       {/* {userLogin ? userLogin[0].User.email : null} */}
-      {userLogin ? userLogin.email : null }  
 
-        {user ? (
+        {/* {user ? (
         <p onClick={handleLogoutClick}>Logout</p>
-      ) : null}
-      </div>
+      ) : null} */}
+      {/* </div> */} 
     </div>
   );
 };

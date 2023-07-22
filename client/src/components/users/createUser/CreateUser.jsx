@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import React, { useState, useRef } from 'react';
 import { UploadImg } from "../../Product/uploadImg/UploadImg";
 import styles from './CreateUser.module.css';
 import prueba from '../../../assets/prueba.jpg';

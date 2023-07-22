@@ -10,6 +10,8 @@ import { Product } from './components/Product/createProduct/Product';
 import { Provider } from './components/Product/provider/Provider';
 import { Role } from './components/users/role/Role';
 import { CreateUser } from './components/users/createUser/CreateUser';
+import {Configuration} from './components/Configuration/Configuration'
+import {Footer} from './components/Footer/Footer'
 import { Login } from './components/users/login/Login';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 // Importa 'auth' desde firebase.js
@@ -61,6 +63,7 @@ function App() {
           <Route exact path="/producto" element={<Product />} />
           <Route exact path="/proveedor" element={<Provider />} />
           <Route exact path="/rol" element={<Role />} />
+          <Route exact path="/login" element={<Login />} />
           <Route exact path="/usuario" element={<CreateUser />} />
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
