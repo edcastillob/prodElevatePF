@@ -10,7 +10,8 @@ import { Product } from './components/Product/createProduct/Product';
 import { Provider } from './components/Product/provider/Provider';
 import { Role } from './components/users/role/Role';
 import { CreateUser } from './components/users/createUser/CreateUser';
-import { Login } from './components/users/login/Login';
+import { Footer } from './components/Footer/Footer';
+import { Configuration } from './components/Configuration/Configuration';
 
 function App() {
   const location = useLocation();
@@ -31,11 +32,12 @@ function App() {
           <Route exact path="/proveedor" element={<Provider />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/usuario" element={<CreateUser />} />
-          <Route exact path="/login" element={<Login />} />
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
+          <Route path="/settings" element={<Configuration />} />
         </Routes>
+        <Footer />
       </div>
     </>
   );

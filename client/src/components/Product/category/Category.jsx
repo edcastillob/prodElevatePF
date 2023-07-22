@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCategory } from '../../../redux/actions/actions';
+import styles from './Category.module.css'
 
 export const Category = () => {
   const dispatch = useDispatch();
@@ -34,11 +35,11 @@ export const Category = () => {
   return (
     <div>
         
-        <div className='container-sm'>
-
-        <h1>Category</h1>      
+        <div className={styles.container}>
+        <ion-icon name="arrow-round-back"></ion-icon>
+        <h2 className={styles.mainTitle}>Create New Category</h2>      
         <hr />
-        <form onSubmit={ handleSubmit }>
+        <form onSubmit={ handleSubmit } className={styles.formContainer}>
         
         {/* <label htmlFor="isActive">active</label>
         <input
@@ -56,27 +57,24 @@ export const Category = () => {
         {/* Nombre de categoria */}
         <label htmlFor="name">Name: </label>        
         <input
-        className='form-control'
         type="text"
         name="name"
-        placeholder=" enter name "
+        placeholder="Enter Category Name... "
         value={category.name}
         onChange={handleChange}
       />
 
        {/* Descripcion de categoria */}
        <label htmlFor="name">Description: </label>             
-        <input
-        className='form-control'
+        <textarea
         type="textarea"
         name="description"
+        placeholder='Category Description...'
         value={category.description}
         onChange={handleChange}
       />
         <br />
-
-        
-        <button className='btn btn-primary'>submit</button> 
+        <button className={styles.btn}>Create Category</button> 
         </form>
     </div>
     </div>
