@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { UploadImg } from "../../Product/uploadImg/UploadImg";
 import styles from './CreateUser.module.css';
 import prueba from '../../../assets/prueba.jpg';
@@ -8,8 +9,10 @@ import google from '../../../assets/google.png';
 import validate from './validation'
 
 // import axios from 'axios';
+// import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../../../redux/actions/actions';
+
 
 
 export const CreateUser = () => {
@@ -21,12 +24,12 @@ export const CreateUser = () => {
 
 let cleanImg = [];
   const [userData, setUserData] = useState({
-    name: '',
-    identification: '',
-    email: '',
-    numPhone: '',
-    address: '',
-    password: '',
+    name: "",
+    identification: "",
+    email: "",
+    numPhone: "",
+    address: "",
+    password: "",
     images: [],
   });
 
@@ -47,8 +50,6 @@ let cleanImg = [];
     }))
   };
 
- 
-
   const handleSubmit = (event) => {
     event.preventDefault(); 
     if (Object.keys(errors).length > 0) {
@@ -61,32 +62,33 @@ let cleanImg = [];
     dispatch(addUser(userData));
     alert("Exito");
     setUserData({
-      name: '',
-      identification: '',
-      email: '',
-      numPhone: '',
-      address: '',
-      password: '',
+      name: "",
+      identification: "",
+      email: "",
+      numPhone: "",
+      address: "",
+      password: "",
       images: cleanImg,
     });
-  }
-
-  
-  
+  };
 
   const handleImageUpload = (imageUrl) => {
     setUserData((userData) => ({
       ...userData,
       images: imageUrl,
     }));
-  
   };
 
- 
-  
-
-
   return (
+    <div className={styles.container}>
+      <div className={styles.divLeft}>
+        <div className={styles.divContent}>
+        <img src={logo} alt="logo" />
+        <h3 className={styles.title}>Online Sales And Administration System</h3>
+        <h4 className={styles.subtitle}>The best tool to see your business grow</h4>
+        </div>
+        <div className={styles.divImg}>
+        <img src={prueba} alt="img-prueba" />
     <div className={styles.container}>
       <div className={styles.divLeft}>
         <div className={styles.divContent}>
@@ -205,5 +207,3 @@ let cleanImg = [];
     </div>
   );
 };
-
-

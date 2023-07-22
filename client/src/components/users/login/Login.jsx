@@ -1,13 +1,28 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch , useSelector} from 'react-redux';
 import { login } from '../../../redux/actions/actions'; 
+import { handleGoogleSignIn } from "../Firebase/GoogleLogin.js";
+import { useNavigate } from "react-router-dom";
+
+
+// import { userCredential } from './firebase/autentication.js'; // Asumiendo que exportas la función desde el archivo
+// import '../Firebase/autentication';
 
 
 export const Login = () => {
+  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  
+  useEffect(() => {
+    if (user.length !== 0) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
 
   const [userData, setUserData] = useState({
-    user: '',
+    username: '',
     password: '',
   });
 
@@ -21,17 +36,20 @@ export const Login = () => {
 
     const handleSubmit = (event) => {
       event.preventDefault();  
-      console.log(userData) 
+      console.log("desde submit: ", userData) 
       dispatch(login(userData));      
       // setUserData({
-      //   name: '',
-      //   description:'',
+      //   username: '',
+      //   password:'',
       // });
     }
 
+
+
   return (
     <div className="container">
-      <h1>Login</h1>
+      <h1>Login</h1>  
+      
       <form onSubmit={handleSubmit}>
 
         <div className="mb-3">
@@ -41,9 +59,9 @@ export const Login = () => {
           <input
             type="text"
             className="form-control"
-            id="user"
-            name="user"
-            value={userData.user}
+            id="username"
+            name="username"
+            value={userData.username}
             onChange={handleInputChange}
           />
         </div>
@@ -72,6 +90,7 @@ export const Login = () => {
           <a href="/forgot-password" className="ms-3">Forgot your password</a>
         </div>
       </form>
+      <button type="button" onClick={handleGoogleSignIn} className="btn btn-info">Google</button>
     </div>
   );
 };

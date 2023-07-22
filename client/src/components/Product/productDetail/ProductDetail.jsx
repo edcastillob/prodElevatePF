@@ -64,30 +64,34 @@ import styles from './ProductDetail.module.css'
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
-  useEffect(() => {dispatch(getCategory())}, [])
+  useEffect(() => {
+    dispatch(getCategory());
+  }, []);
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const { id } = params;
 
   const productDetail = useSelector((state) => state.productDetail);
   const selectedCategory = useSelector((state) => state.category);
-  
+
   useEffect(() => {
     Promise.all([dispatch(getProductDetail(id))])
-    .then(() => {
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.log(error);
-      setLoading(false);
-    });
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, [dispatch, id]);
-  
+
   const { images, categoryId, salePrice, description, name } = productDetail;
-  console.log(selectedCategory)
-  console.log(productDetail)
+  console.log(selectedCategory);
+  console.log(productDetail);
   // Buscar la categoría correspondiente al categoryId
-  const category = selectedCategory.find((cat) => cat.id === categoryId)?.name || 'Unknown Category';
+  const category =
+    selectedCategory.find((cat) => cat.id === categoryId)?.name ||
+    "Unknown Category";
 
   return (
     <div style={{padding:'1rem'}}>

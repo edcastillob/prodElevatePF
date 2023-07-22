@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { UploadImg } from "../uploadImg/UploadImg";
-import { addProduct, getCategory, getProvider } from "../../../redux/actions/actions";
+import {
+  addProduct,
+  getCategory,
+  getProvider,
+} from "../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Product = () => {
@@ -8,17 +12,19 @@ export const Product = () => {
   const category = useSelector((state) => state.category);
   const provider = useSelector((state) => state.provider);
   useEffect(() => {
-    dispatch(getCategory()); 
-    dispatch(getProvider()); 
+    dispatch(getCategory());
+    dispatch(getProvider());
   }, []);
 
   const sortedCategories = [...category].sort((a, b) =>
-  a.name.localeCompare(b.name));
+    a.name.localeCompare(b.name)
+  );
 
   const sortedproviders = [...provider].sort((a, b) =>
-  a.name.localeCompare(b.name));
+    a.name.localeCompare(b.name)
+  );
 
-  const [product, setProduct] = useState({    
+  const [product, setProduct] = useState({
     category: "",
     name: "",
     description: "",
@@ -29,7 +35,6 @@ export const Product = () => {
     images: [],
   });
 
-  
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   const handleChange = (event) => {
@@ -39,7 +44,7 @@ export const Product = () => {
       [event.target.name]: event.target.value,
     });
   };
-  
+
   const handleProviderSelect = (event) => {
     const selectedProviderId = parseInt(event.target.value);
     if (!product.provider.includes(selectedProviderId)) {
@@ -50,7 +55,6 @@ export const Product = () => {
     }
   };
 
- 
   const handleImageUpload = (imageUrls) => {
     setProduct((imgProduct) => ({
       ...imgProduct,
@@ -60,8 +64,8 @@ export const Product = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();  
-    console.log(product) 
+    event.preventDefault();
+    console.log(product);
     dispatch(addProduct(product));
     alert("Exito");
     setProduct({
@@ -82,8 +86,7 @@ export const Product = () => {
     <div className="container-sm">
       <h1>add product</h1>
       <hr />
-      <form onSubmit={ handleSubmit }>
-       
+      <form onSubmit={handleSubmit}>
         {/* Categoria de Producto */}
         <label htmlFor="category">category product</label>
         <select
@@ -125,15 +128,15 @@ export const Product = () => {
         {/* precio de compra de Producto */}
         <label htmlFor="purchasePrice">purchase price</label>
         <div className="input-group">
-        <input
-          className="form-control"
-          type="text"
-          name="purchasePrice"
-          placeholder="-- purchase price --"
-          value={product.purchasePrice}
-          onChange={handleChange}
-        />
-        <span className="input-group-text">$</span>
+          <input
+            className="form-control"
+            type="text"
+            name="purchasePrice"
+            placeholder="-- purchase price --"
+            value={product.purchasePrice}
+            onChange={handleChange}
+          />
+          <span className="input-group-text">$</span>
           <span className="input-group-text">0.00</span>
         </div>
 
@@ -162,44 +165,51 @@ export const Product = () => {
           value={product.minimumStock}
           onChange={handleChange}
         />
-  
-<div className="container-sm">
-      {/* ... */}
-      <select
-        className="form-select form-select-sm"
-        name="provider"
-        id="provider"
-        value=""
-        onChange={handleProviderSelect}
-      >
-        <option value="">-- select provider --</option>
-        {sortedproviders?.map((prov) => (
-          <option key={prov.id} value={prov.id}>
-            {prov.name}
-          </option>
-        ))}
-      </select>
 
-      <div>
-        {product.provider?.map((provId) => {
-          const selectedProvider = provider.find((prov) => prov.id === provId);
-          return (
-            <ul className="list-group" key={`provider_${provId}`}>
-              <li className="list-group-item" key={`provider_item_${provId}`}>
-                {selectedProvider.name}
-              </li>
-            </ul>
-          );
-        })}
-      </div>
-      {/* ... */}
-    </div>
+        <div className="container-sm">
+          {/* ... */}
+          <select
+            className="form-select form-select-sm"
+            name="provider"
+            id="provider"
+            value=""
+            onChange={handleProviderSelect}
+          >
+            <option value="">-- select provider --</option>
+            {sortedproviders?.map((prov) => (
+              <option key={prov.id} value={prov.id}>
+                {prov.name}
+              </option>
+            ))}
+          </select>
+
+          <div>
+            {product.provider?.map((provId) => {
+              const selectedProvider = provider.find(
+                (prov) => prov.id === provId
+              );
+              return (
+                <ul className="list-group" key={`provider_${provId}`}>
+                  <li
+                    className="list-group-item"
+                    key={`provider_item_${provId}`}
+                  >
+                    {selectedProvider.name}
+                  </li>
+                </ul>
+              );
+            })}
+          </div>
+          {/* ... */}
+        </div>
 
         {/* <UploadImg onImageUpload={handleImageUpload} /> */}
-        <UploadImg 
-          onImageUpload={handleImageUpload} 
+        <UploadImg
+          onImageUpload={handleImageUpload}
           uploadedImages={product.images}
-          clearUploadedImages={() => setUserData((product) => ({ ...product, images: [] }))}
+          clearUploadedImages={() =>
+            setUserData((product) => ({ ...product, images: [] }))
+          }
         />
 
         <br />

@@ -5,33 +5,33 @@ import styles from './Category.module.css'
 
 export const Category = () => {
   const dispatch = useDispatch();
-    const [category, setCategory] = useState({        
-        name: '',
-        description:'',
-    });    
+  const [category, setCategory] = useState({
+    name: "",
+    description: "",
+  });
 
-    const handleChange = (event) => {
-        event.preventDefault();
-        setCategory({
-          ...category,
-          [event.target.name]: event.target.value,
-        });
-    }
+  const handleChange = (event) => {
+    event.preventDefault();
+    setCategory({
+      ...category,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-    // const handleChangeCheckBox = (event) => {
-    //     event.preventDefault();       
-    //     setCategory({...category, isActive : event.target.checked});
-    //   }
-    const handleSubmit = (event) => {
-      event.preventDefault();  
-      console.log(category) 
-      dispatch(addCategory(category));
-      alert("Exito");
-      setCategory({
-        name: '',
-        description:'',
-      });
-    }
+  // const handleChangeCheckBox = (event) => {
+  //     event.preventDefault();
+  //     setCategory({...category, isActive : event.target.checked});
+  //   }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(category);
+    dispatch(addCategory(category));
+    alert("Exito");
+    setCategory({
+      name: "",
+      description: "",
+    });
+  };
   return (
     <div>
         
@@ -76,7 +76,7 @@ export const Category = () => {
         <br />
         <button className={styles.btn}>Create Category</button> 
         </form>
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
