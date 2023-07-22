@@ -24,9 +24,9 @@ export const NavBar = () => {
         <Link to="/login">Login</Link>
         <SearchBar/>
         <div className={styles.items}>
-        <h2><ion-icon name="cart"></ion-icon></h2>
+        <Link to='/cart'><ion-icon name= 'cart'></ion-icon></Link>
         <h2><ion-icon name="person"></ion-icon></h2>
         </div>
         </div>
     )
-}
+}    

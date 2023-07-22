@@ -11,6 +11,7 @@ import { Provider } from './components/Product/provider/Provider';
 import { Role } from './components/users/role/Role';
 import { CreateUser } from './components/users/createUser/CreateUser';
 import { Login } from './components/users/login/Login';
+import {Cart} from './components/Cart/Cart';
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/usuario" element={<CreateUser />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/cart" element={<Cart/>} />
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />

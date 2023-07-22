@@ -17,3 +17,8 @@ export const LOGIN = 'LOGIN';
 export const ADD_USER = 'ADD_USER';
 export const ADD_ROLE = 'ADD_ROLE';
 export const VALIDATION_USER = 'VALIDATION_USER';
+// Cart
+export const ADD_CART = 'ADD_CART';
+export const UPDATE_CART = 'UPDATE_CART';
+export const DELETE_CART = 'DELETE_CART';
+export const UPDATE_CART_STATE = 'UPDATE_CART_STATE';

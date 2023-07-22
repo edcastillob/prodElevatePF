@@ -10,11 +10,14 @@ import {
   ADD_USER,
   GET_PROVIDER,
   LOGIN,
+  ADD_CART,
+  UPDATE_CART,
+  DELETE_CART,
+  UPDATE_CART_STATE,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
-const FAKE = "https://fakestoreapi.com/products";
-
+import { updateStoredCart } from "../../components/Cart/cartUtils";
 export const showProducts = () => {
   try {
     return async (dispatch) => {
@@ -42,7 +45,7 @@ export const getProductDetail = (id) => {
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching product details."); // Lanza una nueva excepción
+          throw new Error("Error fetching product details.");
         });
     });
   };
@@ -74,7 +77,7 @@ export const getCategory = () => {
   try {
     return async (dispatch) => {
       await axios.get(`${ENDPOINT}category`).then((response) => {
-        if (!response.data) throw Error("¡The category does not exist!");
+        if (!response.data) throw Error("The category does not exist!");
         return dispatch({ type: GET_CATEGORY, payload: response.data });
       });
     };
@@ -120,7 +123,7 @@ export const getProvider = () => {
   try {
     return async (dispatch) => {
       await axios.get(`${ENDPOINT}provider`).then((response) => {
-        if (!response.data) throw Error("¡The provider does not exist!");
+        if (!response.data) throw Error("The provider does not exist!");
         return dispatch({ type: GET_PROVIDER, payload: response.data });
       });
     };
@@ -134,11 +137,57 @@ export const login = () => {
     return async (dispatch) => {
       await axios.get(`${ENDPOINT}login`).then((response) => {
         console.log(response.data);
-        if (!response.data) throw Error("¡The user does not exist!");
+        if (!response.data) throw Error("The user does not exist!");
         return dispatch({ type: LOGIN, payload: response.data });
       });
     };
   } catch (error) {
     throw new Error(error.message);
   }
+};
+
+export const addCart = (product) => (dispatch, getState) => {
+  const cart = getState().cart;
+  const existingProduct = cart.find((item) => item.id === product.id);
+
+  if (existingProduct) {
+    // Si el producto ya está en el carrito, actualizamos la cantidad
+    const updatedCart = cart.map((item) =>
+      item.id === product.id ? { ...item, quantity: item.quantity + product.quantity } : item
+    );
+    dispatch(updateCartState(updatedCart));
+  } else {
+    // Si el producto no está en el carrito, lo agregamos
+    dispatch({
+      type: ADD_CART,
+      payload: product,
+    });
+  }
+
+  // Guardar el carrito en localStorage utilizando la función updateStoredCart
+  updateStoredCart(cart);
+};
+
+export const updateCart = (id, quantity, price, subtotalitem) => {
+  return {
+    type: UPDATE_CART,
+    payload: {
+      id,
+      quantity,
+      price,
+      subtotalitem,
+    },
+  };
+};
+export const updateCartState = (cart) => {
+  return {
+    type: UPDATE_CART_STATE,
+    payload: cart,
+  };
+};
+export const deleteCart = (productId) => {
+  return {
+    type: 'DELETE_CART',
+    payload: productId,
+  };
 };
