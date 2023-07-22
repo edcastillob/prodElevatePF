@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300&display=swap');
+
 .container{
     /* border: 3px solid black; */
     width: 100vw;
@@ -49,10 +51,12 @@
     width: 75%;
     height: auto;
 }
+  /*----------- DIV DERECHO -----------*/
 
 .divRight{
-    border: 3px solid black;
+    /* border: 3px solid black; */
     width: 50%;
+    padding: 1rem;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -60,90 +64,43 @@
     align-items: center;
 }
 
-.formContainer{
-    /* border: 1px solid black; */
-    width: 65%;
-    height: 85vh;
-    background-color: rgb(236, 236, 236);
-    padding: 0;
-    border-radius: 5%;
-}
-
-.divContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.divTwoItems{
-    /* border: 1px solid black; */
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    padding: 0.9rem;
-    
-}
-
-.labelContainer{
-    text-align: start;
-}
-
-.divOneItem{
-    /* border: 1px solid black; */
-    padding: 0;
-}
-
-.inputItem{
-    width: 60%;
-}
-
-
-
-/* FORM  */ 
+/* FORM __________________________________________ */ 
 .form {
-    max-width: 430px;
+  
+    /* border: 1px solid #c0c8d6; */
+    margin-top: -2rem;
+    max-width: 65%;
     width: 100%;
-    padding: 30px;
+    padding: 2rem;
     border-radius: 6px;
     background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
+
+ 
   
-  header {
-    font-size: 28px;
-    font-weight: 600;
-    color: #232836;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form input,
+  /*----------- BUTTON CREATE -----------*/
   .form button {
     height: 50px;
-    width: 100%;
-    border: none;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 6px;
-    padding: 0 15px;
-    margin-top: 20px;
-  }
-  
-  .form input {
-    border: 1px solid #cacaca;
-    outline: none;
-  }
-  
-  .form button {
+    width: 80%;
     color: #fff;
     background-color: #0171d3;
     cursor: pointer;
+    left: 0.3rem;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 10px;
+    padding: 0 1rem;
   }
   
   .form button:hover {
     background-color: #016dcb;
   }
   
+   /* ------------ALREADY HAVE AN ACCOUNT----------- */
   .form-link {
     text-align: center;
     margin-top: 10px;
@@ -152,70 +109,34 @@
     color: #232836;
   }
   
+   /* ------------LOGIN OPTION----------- */
   .form-link a {
     color: #0171d3;
     text-decoration: none;
   }
   
+  /* ------------ESPACIO ENTRE INPUTS----------- */
   .field {
     position: relative;
-    height: 50px;
+    height: 55px;
     width: 100%;
     margin-top: 20px;
     border-radius: 6px;
   }
   
+  /* ------------INPUTS----------- */
   .input-field input {
-    height: 100%;
-    width: 100%;
-    border: none;
+    height: 8vh;
+    width: 25vw;
     font-size: 16px;
     font-weight: 400;
     border-radius: 6px;
     outline: none;
-    padding: 0 15px;
+    padding: 1rem;
     border: 1px solid #cacaca;
   }
-  
-  .button-field {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .button-field button {
-    color: #fff;
-    background-color: #0171d3;
-    cursor: pointer;
-  }
-  
-  .facebook {
-    color: #fff;
-    background-color: #4267b2;
-  }
-  
-  .facebook .facebook-icon {
-    height: 28px;
-    width: 28px;
-    color: #0171d3;
-    font-size: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-  }
-  
-  .google {
-    border: 1px solid #cacaca;
-  }
-  
-  .google span {
-    font-weight: 500;
-    opacity: 0.6;
-    color: #232836;
-  }
-  
+
+  /* ------------LINE "OR"----------- */
   .line {
     position: relative;
     height: 1px;
@@ -234,12 +155,31 @@
     color: #8b8b8b;
     padding: 0 15px;
   }
-  
-  .google-img {
-    height: 20px;
-    width: 20px;
-    object-fit: cover;
+
+  /* ------------CONTINUE WITH GOOGLE BUTTON----------- */
+  .social{
+    border: 1px solid #cccc;
+    width: 20vw;
+    height: 8vh;
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 0 #cccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
+
+  .social span{
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #000;
+  }
+
+  .social img{
+    height: 22px;
+    width: 22px;
+  }
+
   
   @media screen and (max-width: 400px) {
     .form {
