@@ -13,7 +13,7 @@ import {
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
-const FAKE = "https://fakestoreapi.com/products";
+
 
 export const showProducts = () => {
   try {
@@ -129,12 +129,12 @@ export const getProvider = () => {
   }
 };
 
-export const login = () => {
+export const login = (userData) => {
   try {
     return async (dispatch) => {
-      await axios.post(`${ENDPOINT}login`).then((response) => {
+      await axios.post(`${ENDPOINT}login`, userData).then((response) => {
         if (!response.data) throw Error("¡The user does not exist!");
-        console.log(response.data);
+        
         return dispatch({ type: LOGIN, payload: response.data });
       });
     };

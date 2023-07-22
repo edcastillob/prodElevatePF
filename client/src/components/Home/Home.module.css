@@ -5,6 +5,9 @@ Link{
 }
 
 .cards{
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem;
     display: flex;
     flex-wrap: wrap;
     gap: 30px; /* Espacio entre las cards */

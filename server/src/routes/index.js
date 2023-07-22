@@ -18,32 +18,54 @@ const { getAllProviders } = require("../controllers/GET/getAllProviders");
 
 const router = Router();
 
-
 router.get('/', function(req, res) {
     res.send('Backend prodElevate');
 });
 
-// Ruta login
-router.get('/login', (req, res) => {
-    res.render('login');
-});
+
 
 router.post(
     '/login', 
-    passport.authenticate('local', { failureRedirect: '/login'}), 
+    passport.authenticate('local'), 
     (req, res) => {
-        res.redirect('/');
-});
+        const { name, identification, numPhone, address, image, email } = req.user.dataValues; 
+        res.send({
+            User: {
+                name,
+                identification,
+                numPhone,
+                address,
+                image,
+                email
+            }
+        });      
+    }
+);
+router.use('/login', (err, req, res, next) => {
+    res.status(401).send({ message: 'Inicio de sesión fallido. Verifica tus credenciales.' });
+  });
 
 // Ruta Logout
-router.get('logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+router.get('/logout', function(req, res, next) {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
 });
 
 // Ruta protegida
 router.get('/profile', isAuthenticated, (req, res) => {
-    res.render('profile', { user: req.user });
+    const { name, identification, numPhone, address, image, isActive } = req.user;
+    res.send({
+        User: {
+            name,
+            identification,
+            numPhone,
+            address,
+            image,
+            isActive
+        }
+    });
 });
 
 router.post('/role', postRole);

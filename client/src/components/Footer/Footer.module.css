@@ -1,0 +1,33 @@
+.footerContainer{
+    background-color: #000924;
+    padding: 1rem;
+    width: 100vw;
+    height: 10vh;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.divLeft{
+    /* border: 1px solid white; */
+    width: 30%;
+    
+}
+
+.divRight{
+    /* border: 1px solid white; */
+    width: 40%;
+    gap: 1.5rem;
+    display: flex;
+}
+
+.divRight p{
+    color: #fff;
+    transition: .3s;
+    &:hover{
+        opacity: 0.7;
+        transition: .5s;
+    }
+}
