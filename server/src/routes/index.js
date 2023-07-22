@@ -22,17 +22,26 @@ router.get('/', function(req, res) {
 });
 
 // Ruta login
-router.get('/login', (req, res) => {
-    res.render('login');
-});
+// router.get('/login', (req, res) => {
+//     res.render('login');
+// });
 
 router.post(
     '/login', 
-    passport.authenticate('local', { 
-        successRedirect: '/',
-        failureRedirect: '/login'
+    passport.authenticate('local'), 
+    (req, res) => {
+        const { name, identification, numPhone, address, image } = req.user.dataValues; 
+        res.send({
+            User: {
+                name,
+                identification,
+                numPhone,
+                address,
+                image
+            }
+        });
     }
-));
+);
 
 // Ruta Logout
 router.get('/logout', function(req, res, next) {
@@ -44,7 +53,17 @@ router.get('/logout', function(req, res, next) {
 
 // Ruta protegida
 router.get('/profile', isAuthenticated, (req, res) => {
-    res.send('profile');
+    const { name, identification, numPhone, address, image, isActive } = req.user;
+    res.send({
+        User: {
+            name,
+            identification,
+            numPhone,
+            address,
+            image,
+            isActive
+        }
+    });
 });
 
 router.post('/role', postRole);
