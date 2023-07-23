@@ -1,56 +1,83 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from './Landing.module.css';
-import logo from '../../assets/logo.png';
-import Slider from "react-slick";
+import logo from '../../assets/logo_2.png';
+import check from '../../assets/check.png';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import feature1 from '../../assets/feature 1.png'
-import feature2 from '../../assets/feature 2.png'
-import feature3 from '../../assets/feature 3.png'
+import Slider from "react-slick";
+import adidas from '../../assets/adidas.png';
+import puma from '../../assets/puma.png';
+import apple from '../../assets/apple.png';
+import samsung from '../../assets/samsung.png';
+import ml from '../../assets/ml.png';
+
+
+
 
 export const Landing = () => {
-    const sliderSettings = {
+    const carouselSettings = {
         dots: true,
         infinite: true,
-        speed: 500,
-        slidesToShow: 1,
+        speed: 600,
+        slidesToShow: 3, // Número de imágenes a mostrar por slide
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
         arrows: false,
-
       };
-
+    
+    const companyLogos = [adidas, puma, apple, samsung, ml]
 
   return (
-        <div className={styles.divContainer}>
-            <div className={styles.divLeft}>
-                <img src={logo} alt="ProdElevate" />
-                <h3 className={styles.title}>Online Sales And Administration System</h3>
-            </div>
-            <div className={styles.divRight}>
-            <div className={styles.sliderContainer}>
-                <Slider {...sliderSettings}>
-                    <div className={styles.sliderItem}>
-                        <img src={feature1} alt="Feature 1" />
-                    </div>
-                    <div className={styles.sliderItem}>
-                        <img src={feature3} alt="Feature 3" />
-                    </div>
-                    <div className={styles.sliderItem}>
-                        <img src={feature2} alt="Feature 2" />
-                    </div>
-                </Slider>
-                </div>    
-                <div className={styles.divButton}>
-            <NavLink to="/home">
-                <button className={styles.startButton}> 
-                    <span>Let's Start</span>
-                </button>
-            </NavLink>
+        <div className={styles.container}>
+            <div className={styles.navbar}>
+                <div className={styles.logo}>
+                    <img src={logo} alt="ProdElevate" />
+                </div>
+                <div className={styles.options}>
+                <p className={styles.language}>Language</p>     
+            <Link to='/usuario' className={styles.signUp}>
+                <p>Sign Up</p>
+            </Link>   
                 </div>
             </div>
 
+            <div className={styles.content}>
+                <div className={styles.divLeft}>
+                    <h1 className={styles.title}>Welcome to ProdElevate</h1>
+                    <h4 style={{color:'#cacaca', fontFamily: 'Poppins'}}>It's time to...</h4>
+                    <div className={styles.item}>
+                        <img src={check} alt="check" />
+                        <p className={styles.description}>Take full control of your business</p>
+                    </div>
+                    <div className={styles.item}>
+                        <img src={check} alt="check" />
+                        <p className={styles.description}>Control and manage your finances and inventory</p>
+                    </div>
+                    <div className={styles.item}>
+                        <img src={check} alt="check" />
+                        <p className={styles.description} style={{marginTop:'1rem'}}>Increase your sales and accelerate your business growth with our powerful management tool</p>
+                    </div>
+                    <Link to='/home' className={styles.button}>
+                    <div ><span>Get Started</span></div>
+                    </Link>
+                    
+                </div>
+                <div className={styles.reel}>
+                    <h4 className={styles.titleReel}>This companies trust us</h4>
+                    <div className={styles.companies}>
+                    <Slider {...carouselSettings}>
+                        {companyLogos.map((logo, index) => (
+                            <div className={styles.companie} key={index}>
+                            <img src={logo} alt={`Company Logo ${index + 1}`} />
+                            </div>
+                            ))}
+                    </Slider>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
   )
 }

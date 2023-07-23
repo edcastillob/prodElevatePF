@@ -6,6 +6,7 @@ import {
   getProvider,
 } from "../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
+import styles from "./Product.module.css";
 
 export const Product = () => {
   const dispatch = useDispatch();
@@ -83,20 +84,21 @@ export const Product = () => {
   };
 
   return (
-    <div className="container-sm">
-      <h1>add product</h1>
+    <div className={styles.container}>
+      <div className={styles.divLeft}>
       <hr />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h5 style={{fontFamily:'Poppins'}}>New product</h5>
         {/* Categoria de Producto */}
-        <label htmlFor="category">category product</label>
+        <div className="d-flex justify-content-around">
         <select
-          className="form-select form-select-sm"
+          className="form-select form-select-sm mb-3 w-50 d-start"
           name="category"
           id="category"
           value={product.category}
           onChange={handleChange}
         >
-          <option value="">-- select category --</option>
+          <option value="">-- Category --</option>
           {sortedCategories.map((catg) => (
             <option key={catg.id} value={catg.id}>
               {catg.name}
@@ -105,77 +107,83 @@ export const Product = () => {
         </select>
 
         {/* Nombre de Producto */}
-        <label htmlFor="name">name: </label>
+        
         <input
-          className="form-control"
+          className="form-control mb-3 w-50 d-end"
           type="text"
           name="name"
-          placeholder=" enter name "
+          placeholder= "Product Name"
           value={product.name}
           onChange={handleChange}
         />
+        </div>
+        
 
         {/* Descripcion de Producto */}
-        <label htmlFor="name">description: </label>
+        
         <input
-          className="form-control"
+          className="form-control mb-3"
           type="textarea"
           name="description"
+          placeholder="Description"
           value={product.description}
           onChange={handleChange}
         />
 
-        {/* precio de compra de Producto */}
-        <label htmlFor="purchasePrice">purchase price</label>
+        <div className="d-flex g-3">
+            {/* precio de compra de Producto */}
+        
         <div className="input-group">
           <input
-            className="form-control"
+            className="form-control mb-3 w-25"
             type="text"
             name="purchasePrice"
-            placeholder="-- purchase price --"
+            placeholder="-- Purchase price --"
             value={product.purchasePrice}
             onChange={handleChange}
           />
-          <span className="input-group-text">$</span>
-          <span className="input-group-text">0.00</span>
+          <span className="input-group-text mb-3">$</span>
+          {/* <span className="input-group-text mb-3">0.00</span> */}
         </div>
 
         {/* precio de venta de Producto */}
-        <label htmlFor="purchasePrice">sale price</label>
+        
         <div className="input-group">
           <input
-            className="form-control"
+            className="form-control mb-3 w-25"
             type="text"
             name="salePrice"
-            placeholder="-- sale price --"
+            placeholder="-- Sale price --"
             value={product.salePrice}
             onChange={handleChange}
           />
-          <span className="input-group-text">$</span>
-          <span className="input-group-text">0.00</span>
+          <span className="input-group-text mb-3">$</span>
+          {/* <span className="input-group-text mb-3">0.00</span> */}
         </div>
 
+        </div>
+        
+
         {/* stock minimo de Producto */}
-        <label htmlFor="minimumStock">Stock minimum</label>
         <input
-          className="form-control"
+          className="form-control mb-3"
           type="minimumStock"
           name="minimumStock"
-          placeholder="-- enter minimum stock --"
+          placeholder="-- Minimum stock --"
           value={product.minimumStock}
           onChange={handleChange}
         />
 
-        <div className="container-sm">
+        <div className="container-m">
           {/* ... */}
           <select
-            className="form-select form-select-sm"
+            className="form-select form-select-sm mb-3 w-100"
             name="provider"
             id="provider"
             value=""
             onChange={handleProviderSelect}
           >
-            <option value="">-- select provider --</option>
+            <option value="">-- Select provider --</option>
             {sortedproviders?.map((prov) => (
               <option key={prov.id} value={prov.id}>
                 {prov.name}
@@ -203,18 +211,23 @@ export const Product = () => {
           {/* ... */}
         </div>
 
-        {/* <UploadImg onImageUpload={handleImageUpload} /> */}
-        <UploadImg
-          onImageUpload={handleImageUpload}
-          uploadedImages={product.images}
-          clearUploadedImages={() =>
-            setUserData((product) => ({ ...product, images: [] }))
-          }
-        />
-
         <br />
-        <button className="btn btn-primary">submit</button>
+        <button className={styles.create}>Create</button>
       </form>
+
+      </div>
+      <div className={styles.divRight}>
+        
+        {/* <UploadImg onImageUpload={handleImageUpload} /> */}
+      <UploadImg
+        onImageUpload={handleImageUpload}
+        uploadedImages={product.images}
+        clearUploadedImages={() =>
+          setUserData((product) => ({ ...product, images: [] }))
+        }
+      />
+          
+      </div>
     </div>
   );
 };
