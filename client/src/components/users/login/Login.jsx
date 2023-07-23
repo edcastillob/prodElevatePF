@@ -102,6 +102,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../redux/actions/actions'; 
 import { handleGoogleSignIn } from "../Firebase/GoogleLogin.js";
 import { useNavigate } from "react-router-dom";
+import styles from "./Login.module.css";
+import google from "../../../assets/google.png"
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -151,50 +153,51 @@ export const Login = () => {
   }
 
   return (
-    <div className="container">
-      <h1>Login</h1>  
+    <div className={styles.container}>
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <h4 style={{fontFamily:'Poppins', fontWeight: '600'}}>Login</h4>  
 
-        <div className="mb-3">
-          <label htmlFor="user" className="form-label">
-            User
-          </label>
+        <div className="mb-2 p-2">
           <input
             type="text"
             className="form-control"
             id="username"
             name="username"
+            placeholder='Email'
             value={userData.username}
             onChange={handleInputChange}
           />
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
+        <div className="mb-2 p-2">
           <input
             type="password"
             className="form-control"
             id="password"
             name="password"
+            placeholder='Password'
             value={userData.password}
             onChange={handleInputChange}
           />
         </div>
+          <a href="/forgot-password" className={styles.link}>Forgot your password</a>
 
-        <div className="mb-3">
-
-          <button type="submit" className="btn btn-primary">
-            Submit
+        <div className={styles.options}>
+          <button type="submit" className={styles.submitButton}>
+            Login
           </button>
 
-          <a href="/signup" className="ms-3">Sign Up</a>
-          <a href="/forgot-password" className="ms-3">Forgot your password</a>
+          <span className={styles.link}>Don't have an account? <a href="/usuario" className={styles.link}>Sign Up</a></span>
+        </div>
+        <div className={styles.google}>
+          <div className={styles.line}></div>
+          <button type="button" onClick={handleGoogleSignIn} className={styles.googleButton}>
+            <img src={google} alt="Google" />
+            Google
+            </button>
         </div>
       </form>
-      <button type="button" onClick={handleGoogleSignIn} className="btn btn-info">Google</button>
     </div>
   );
 };

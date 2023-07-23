@@ -10,10 +10,8 @@
   "author": "GITHUB: edcastillob, Pvargas90, Davidoar15, luisnavedag, yonathanbaez25, veraluciamendoza ",
   "license": "ISC",
   "dependencies": {
-    "@babel/preset-env": "^7.22.9",
-    "@babel/preset-react": "^7.22.5",
-    "@babel/register": "^7.22.5",
     "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
     "cloudinary": "^1.37.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -30,8 +28,6 @@
     "passport-local": "^1.0.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "sequelize": "^6.31.1",
     "socket.io": "^4.7.1"
   }

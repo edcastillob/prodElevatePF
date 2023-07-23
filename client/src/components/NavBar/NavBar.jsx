@@ -1,74 +1,3 @@
-// import React from "react";
-// import styles from "./NavBar.module.css";
-// import { SearchBar } from "../SearchBar/SearchBar";
-// import logo from "../../assets/logo_2.png";
-// import { Link, useNavigate } from "react-router-dom";
-// import { logoutUser } from "../users/Firebase/logout.js";
-// import { useSelector } from "react-redux";
-
-// export const NavBar = ({ user, handleSignIn }) => {
-//   const navigate = useNavigate();
-//   const userLogin = useSelector((state) => state.user);
-//   // console.log(userLogin);
-//   // console.log(userLogin.user.name);
-//   const handleLogoutClick = () => {
-//     logoutUser();
-//     navigate("/login"); // Redirige al login después de cerrar sesión
-//   };
-
-//   return (
-//     <div className={`p-0 m-0 ${styles.navContainer}`}>
-//       <div className={styles.divLogo}>
-//         <Link to="/home">
-//           <img className="img-fluid" src={logo} alt="img-logo" />
-//         </Link>
-//       </div>
-
-//       <SearchBar />
-//       <div className={styles.items}>
-//         <h2>
-//           <ion-icon name="cart"></ion-icon>
-//         </h2>
-//         <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
-//           <h2>
-//             <ion-icon name="person"></ion-icon>
-//           </h2>
-//         </Link>
-//         <Link to="/settings" style={{ textDecoration: "none", color: "white" }}>
-//           <h2>
-//             <ion-icon name="settings"></ion-icon>
-//           </h2>
-//         </Link>
-//       </div>
-
-//       <div className={styles.items}>
-//         <h2>
-//           <ion-icon name="cart"></ion-icon>
-//         </h2>
-//         <h2 onClick={handleLogoutClick}>
-//           <ion-icon name="person"></ion-icon>
-//         </h2>
-//         {user ? user.displayName : null}
-
-//          {/* Renderiza la imagen solo si userLogin contiene información
-//          {userLogin && userLogin.user.image && userLogin.user.image.length > 0 ? (
-//           <img src={userLogin.user.image[0]} alt="User Avatar" />
-//         ) : null} */}
-//         {/* Renderizar la imagen del usuario si existe */}
-//         {userLogin && userLogin.user && userLogin.user.image && userLogin.user.image.length > 0 && (
-//             <img src={userLogin.user.image[0]} alt="User Avatar" />
-//           )}
-
-          
-
-//         {user ? <p onClick={handleLogoutClick}>Logout</p> : null}
-//       </div>
-//     </div>
-//   );
-// };
-
-
-
 import React, { useEffect } from "react";
 import styles from "./NavBar.module.css";
 import { SearchBar } from "../SearchBar/SearchBar";
@@ -76,6 +5,7 @@ import logo from "../../assets/logo_2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../users/Firebase/logout.js";
 import { useSelector } from "react-redux";
+import userImg from "../.././assets/user.png"
 import { useDispatch } from "react-redux";
 
 export const NavBar = ({ user, handleSignIn }) => {
@@ -103,6 +33,15 @@ export const NavBar = ({ user, handleSignIn }) => {
   
   }, [dispatch, navigate, user]);
  
+
+
+
+  // const userProve = {
+  //   name: "Luis Naveda",
+  //   email: "luisnaveda10@gmail.com",
+  //   images: userImg,
+  // }
+
   
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
@@ -111,22 +50,24 @@ export const NavBar = ({ user, handleSignIn }) => {
           <img className="img-fluid" src={logo} alt="img-logo" />
         </Link>
       </div>
-
+      <div className={styles.divSearch}>
       <SearchBar />
+      </div>
       <div className={styles.items}>
-        <h2>
+        <h2 className={styles.icon}>
           <ion-icon name="cart"></ion-icon>
         </h2>
-        <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
-          <h2>
-            <ion-icon name="person"></ion-icon>
-          </h2>
+        <Link className={styles.icon} to="/login" style={{ textDecoration: "none", color: "white" }}>
+        <h2>
+          <ion-icon name="person"></ion-icon>
+        </h2>
         </Link>
-        <Link to="/settings" style={{ textDecoration: "none", color: "white" }}>
+        <Link className={styles.icon} to="/settings" style={{ textDecoration: "none", color: "white" }}>
           <h2>
             <ion-icon name="settings"></ion-icon>
           </h2>
         </Link>
+
       </div>
 
       <div className={styles.items}>
@@ -144,8 +85,17 @@ export const NavBar = ({ user, handleSignIn }) => {
         )}
 
         {user ? <p onClick={handleLogoutClick}>Logout</p> : null}
+
+        {/* {userLogin ? userLogin.email : null }
+        <h6>{userProve.name}</h6>
+        <img src={userProve.images} alt={userProve.name} className={styles.avatar} />
+        {user ? user.displayName : null }  
+        {user ? (
+        <p onClick={handleLogoutClick}>Logout</p>
+      ) : null} */}
+
       </div>
+
     </div>
   );
 };
-

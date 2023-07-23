@@ -129,10 +129,12 @@ export const getProvider = () => {
   }
 };
 
+
 export const login = (userData) => {
   try {
     return async (dispatch) => {
       await axios.post(`${ENDPOINT}login`, userData).then((response) => {
+        console.log(response.data)
         if (!response.data) throw Error("¡The user does not exist!");
         
         return dispatch({ type: LOGIN, payload: response.data });
@@ -142,3 +144,6 @@ export const login = (userData) => {
     throw new Error(error.message);
   }
 };
+
+
+

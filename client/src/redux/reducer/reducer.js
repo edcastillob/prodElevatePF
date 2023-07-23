@@ -18,7 +18,7 @@ const initialState = {
   productDetail: [],
   category: [],
   provider: [],
-  user: [],
+  user: null,
   role: [],
 };
 
@@ -90,12 +90,13 @@ function reducer(state = initialState, actions) {
         user: [...state.user, payload],
       };
 
-    case LOGIN:
-      console.log(actions.payload);
-      return {
-        ...state,
-        user: [...state.user, actions.payload],
-      };
+      case LOGIN:
+        console.log('reducer login: ', actions.payload);
+        return {
+          ...state,
+          user: actions.payload, 
+        };
+      
     default:
       return state;
   }
