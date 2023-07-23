@@ -1,34 +1,36 @@
 .container{
+    border: 1px solid black;
+    display: flex;
     width: 100%;
     height: 80vh;
-    display: flex;
 }
 
 .divLeft{
-    /* border: 1px solid black; */
+    border: 1px solid black;
     width: 50%;
+    padding: 1rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
-.form{
-    width: 90%;
-    /* border: 1px solid #cacaca; */
-    padding: 1rem;
+.formContainer{
+    border: 1px solid #cacaca;
+    box-shadow: 0 2px 0 #acaaaa;
+    width: 70%;
+    display: flex;
     border-radius: 10px;
+    padding: 2rem 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .divRight{
     /* border: 1px solid red; */
     width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    padding: 1rem;
-    background-image: radial-gradient(circle at 74.18% -16.45%, #00f3ff 0, #00c9fc 25%, #059cc7 50%, #287293 75%, #294e64 100%);
+    background-image: url('https://e0.pxfuel.com/wallpapers/278/345/desktop-wallpaper-handshake-business-concepts-conclusion-of-a-deal-hand.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
