@@ -1,0 +1,52 @@
+.container{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+}
+
+.divLeft{
+    /* border: 1px solid black; */
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    width: 90%;
+    /* border: 1px solid #cacaca; */
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.divRight{
+    /* border: 1px solid red; */
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding: 1rem;
+    background-image: radial-gradient(circle at 74.18% -16.45%, #00f3ff 0, #00c9fc 25%, #059cc7 50%, #287293 75%, #294e64 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.create{
+    border: 1px solid #cacaca;
+    width: 30%;
+    padding: 0.7rem;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    background-color: #000924;
+    color: #cacaca;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.97);
+        color: #fff;
+        transition: .3s;
+    }
+    
+}
