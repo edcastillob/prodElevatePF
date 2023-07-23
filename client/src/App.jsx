@@ -1,7 +1,8 @@
 import "./App.css";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { NavBar } from "./components/NavBar/NavBar";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Home } from "./components/Home/Home";
 import { ProductDetail } from "./components/Product/productDetail/ProductDetail";
 import { Landing } from "./components/Landing/Landing";
@@ -14,15 +15,18 @@ import { Login } from "./components/users/login/Login";
 import {Configuration} from './components/Configuration/Configuration'
 import {Footer} from './components/Footer/Footer'
 
+
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 // Importa 'auth' desde firebase.js
 import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
 
 function App() {
+  axios.defaults.baseURL = "http://localhost:3001";
   const location = useLocation();
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setShowNavBar(location.pathname !== "/");
@@ -45,15 +49,46 @@ function App() {
     });
   }, []);
 
+  // const handleSignIn = async () => {
+  //   try {
+  //     const user = await handleGoogleSignIn();
+  //     console.log(user, ".......");
+  //     setCurrentUser(user);
+  //   } catch (error) {
+  //     // Handle the sign-in error here
+  //   }
+  // };
   const handleSignIn = async () => {
     try {
       const user = await handleGoogleSignIn();
-      console.log(user, ".......");
-      setCurrentUser(user);
+  
+      // Almacena el token JWT en el local storage
+      localStorage.setItem("jwt", user.token);
+  
+      setCurrentUser(user.user);
+      // Redirige al home después del inicio de sesión exitoso
+      navigate("/home");
     } catch (error) {
       // Handle the sign-in error here
+      console.log(error);
     }
   };
+  
+
+// Agrega el token JWT en los headers de las solicitudes
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
   return (
     <>
       {showNavBar && <NavBar user={currentUser} handleSignIn={handleSignIn} />}
