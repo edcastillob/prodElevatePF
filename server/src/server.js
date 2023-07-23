@@ -5,7 +5,6 @@ const cors = require("cors");
 const passport = require("passport");
 const Strategy = require("passport-local").Strategy;
 const session = require("express-session");
-const path = require("path");
 const { User } = require("./db");
 
 const server = express();
@@ -13,13 +12,13 @@ const server = express();
 server.use(morgan("dev"));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
-server.use(cors());
+server.use(cors())
 
 // Configuración de la sesión con express-session
 server.use(
   session({
     secret: "secret",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
   })
 );
@@ -63,6 +62,9 @@ passport.deserializeUser(function (id, done) {
       return done(error);
     });
 });
+
+// server.set('views', __dirname + '/views');
+// server.set('view engine', 'ejs');
 
 server.use(router);
 

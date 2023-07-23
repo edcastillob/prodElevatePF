@@ -34,15 +34,17 @@ export const Login = () => {
     }));
   };
 
-    const handleSubmit = (event) => {
-      event.preventDefault();  
-      console.log("desde submit: ", userData) 
-      dispatch(login(userData));      
-      // setUserData({
-      //   username: '',
-      //   password:'',
-      // });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    try {
+      console.log("desde submit: ", userData);
+      dispatch(login(userData)); // Esperar a que la acción termine antes de redirigir
+      window.location.reload(); // Forzar el refresco de la página
+    } catch (error) {
+      console.error(error.message);
+      // Manejar el error, por ejemplo, mostrando un mensaje de error al usuario
     }
+  };
 
 
 
