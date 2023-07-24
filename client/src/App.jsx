@@ -38,9 +38,9 @@ function App() {
         setCurrentUser(user);
       navigate("/home");
       } else {
-        console.log("Usuario no logueado");
-        setCurrentUser(null);
-        navigate("/");
+        // console.log("Usuario no logueado");
+        // setCurrentUser(null);
+        // navigate("/");
       }
     });
   }, []);
@@ -71,12 +71,12 @@ function App() {
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
-          <Route path="/settings" element={<Configuration />} />
 
           <Route path="/cart" element={<Cart />} />
 
-          {/* {currentUser && (
-          )} */}
+          {currentUser && (
+          <Route path="/settings" element={<Configuration />} />
+          )}
 
         </Routes>
         <Footer />
