@@ -17,88 +17,40 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 // Importa 'auth' desde firebase.js
 import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
-import axios from 'axios';
+
 
 function App() {
-  // axios.defaults.baseURL = "http://localhost:3001";
   const location = useLocation();
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
-  const navigate = useNavigate();
-
+  
   useEffect(() => {
     setShowNavBar(location.pathname !== "/");
   }, [location]);
 
+
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in
+      if (user) {       
         const uid = user.uid;
-        console.log("Usuario logueado:", user);
-        // Puedes realizar cualquier otra acción necesaria
+        console.log('Usuario logueado:', user);
         setCurrentUser(user);
       } else {
-        // User is signed out
-        console.log("Usuario no logueado");
+        console.log('Usuario no logueado');
         setCurrentUser(null);
       }
-    });
-  }, []);
+    })}, []);
 
-  // const handleSignIn = async () => {
-  //   try {
-  //     const user = await handleGoogleSignIn();
-  //     console.log(user, ".......");
-  //     setCurrentUser(user);
-  //   } catch (error) {
-  //     // Handle the sign-in error here
-  //   }
-  // };
-  useEffect(() => {
-    // Cargar usuario desde sessionStorage si está disponible
-    const storedUser = sessionStorage.getItem("user");
-    if (storedUser) {
-      // Agregar una pequeña espera para asegurarse de que el usuario esté completamente cargado
-      setTimeout(() => {
-        const user = JSON.parse(storedUser);
-        setCurrentUser(user);
-      }, 500);
-    }
-  }, []);
 
   const handleSignIn = async () => {
     try {
       const user = await handleGoogleSignIn();
-  
-      // Almacena el token JWT en el local storage
-      localStorage.setItem("jwt", user.token);
-  
-      setCurrentUser(user.user);
-      // Redirige al home después del inicio de sesión exitoso
-      navigate("/home");
+      console.log(user, '.......')
+      setCurrentUser(user);
     } catch (error) {
-      // Handle the sign-in error here
-      console.log(error);
     }
   };
-  
-
-// Agrega el token JWT en los headers de las solicitudes
-axios.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
   return (
     <>
       {showNavBar && <NavBar user={currentUser} handleSignIn={handleSignIn} />}
