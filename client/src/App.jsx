@@ -27,6 +27,8 @@ import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCat
 import { ProvidersAll } from "./components/Product/provider/ProvidersAll/ProvidersAll";
 import { EditProvider } from "./components/Product/provider/EditProvider/EditProvider";
 import { SettingsProduct } from "./components/Product/SettingsProduct/SettingProduct";
+import Chat from './components/Chat/Chat';
+
 
 function App() {
   const location = useLocation();
@@ -109,6 +111,7 @@ function App() {
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )}
+          <Route path="/chat/" element={<Chat />} />
         </Routes>
         <ToastContainer
           position="top-center"
