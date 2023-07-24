@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { NavBar } from './components/NavBar/NavBar';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Home } from './components/Home/Home';
 import { ProductDetail } from './components/Product/productDetail/ProductDetail';
 import { Landing } from './components/Landing/Landing';
@@ -17,9 +17,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 // Importa 'auth' desde firebase.js
 import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
+import axios from 'axios';
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:3001";
+  // axios.defaults.baseURL = "http://localhost:3001";
   const location = useLocation();
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
