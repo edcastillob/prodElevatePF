@@ -2,7 +2,6 @@
 const { Router } = require("express");
 const { isAuthenticated } = require("../middleware/isAuthenticated");
 const { getAllProducts } = require("../controllers/GET/getAllProducts")
-const { getProductId } = require("../controllers/GET/getProductId")
 const { postProduct } = require("../controllers/POST/postProduct");
 const { postCategory } = require("../controllers/POST/postCategory");
 const { postProvider } = require("../controllers/POST/postProvider");
@@ -27,8 +26,53 @@ router.get('/', function(req, res) {
     res.send('Backend prodElevate');
 });
 
-router.post("/login", passport.authenticate("local"), loginJS);
-router.get("/logout", logout)
+// Ruta login
+// router.get('/login', (req, res) => {
+//     res.render('login');
+// });
+
+router.post(
+    '/login', 
+    passport.authenticate('local'), 
+    (req, res) => {
+        const { name, identification, numPhone, address, image, email } = req.user.dataValues;
+        res.setHeader("Access-Control-Allow-Credentials", "true"); // Habilitar las credenciales
+        res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Define aquí la URL de tu frontend 
+        res.send({
+            User: {
+                name,
+                identification,
+                email,
+                numPhone,
+                address,
+                image
+            }
+        });
+    }
+);
+
+// Ruta Logout
+router.get('/logout', function(req, res, next) {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.send('Session Closed Correctly');
+    });
+});
+
+// Ruta protegida
+router.get('/profile', isAuthenticated, (req, res) => {
+    const { name, identification, numPhone, address, image, isActive } = req.user;
+    res.send({
+        User: {
+            name,
+            identification,
+            numPhone,
+            address,
+            image,
+            isActive
+        }
+    });
+});
 
 router.post('/role', postRole);
 
@@ -37,7 +81,6 @@ router.post('/user', postUser);
 router.put('/user/:id', putUser);
 
 router.get('/product', getAllProducts);
-router.get('/productid/:id', getProductId);
 
 router.post('/product', postProduct);
 router.put('/product/:id', putProduct);

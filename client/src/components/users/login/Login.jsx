@@ -136,21 +136,18 @@ export const Login = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();  
-    console.log("desde submit: ", userData) 
-    dispatch(login(userData));
-    
-    // Guardar los datos del usuario en el LocalStorage si el inicio de sesión es exitoso
-    localStorage.setItem("user", JSON.stringify(userData));
-    
-    // Redirige al home después del inicio de sesión exitoso
-    navigate("/home");
-    
-    // setUserData({
-    //   username: '',
-    //   password:'',
-    // });
-  }
+    event.preventDefault();
+    try {
+      console.log("desde submit: ", userData);
+      dispatch(login(userData)); // Esperar a que la acción termine antes de redirigir
+      window.location.reload(); // Forzar el refresco de la página
+    } catch (error) {
+      console.error(error.message);
+      // Manejar el error, por ejemplo, mostrando un mensaje de error al usuario
+    }
+  };
+
+
 
   return (
     <div className={styles.container}>

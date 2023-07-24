@@ -133,17 +133,26 @@ export const getProvider = () => {
 export const login = (userData) => {
   try {
     return async (dispatch) => {
-      await axios.post(`${ENDPOINT}login`, userData).then((response) => {
-        console.log(response.data)
-        if (!response.data) throw Error("¡The user does not exist!");
-        
-        return dispatch({ type: LOGIN, payload: response.data });
-      });
+      const response = await axios.post(`${ENDPOINT}login`, userData);
+      if (response.data) {
+        const user = response.data;
+        sessionStorage.setItem("user", JSON.stringify(user)); // Guardar información del usuario en sessionStorage
+        return dispatch({ type: LOGIN, payload: user.User });
+      }
+      throw new Error("Credenciales inválidas");
     };
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
-
-
+export const logout = () => {
+  try {
+    return async (dispatch) => {
+      sessionStorage.removeItem("user"); // Eliminar la información del usuario del sessionStorage
+      return dispatch({ type: LOGIN, payload: null });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
