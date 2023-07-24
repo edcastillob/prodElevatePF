@@ -6,9 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../users/Firebase/logout.js";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/actions";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 // import userImg from "../.././assets/user.png"
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 
 export const NavBar = ({ user, handleSignIn }) => {
@@ -51,7 +51,8 @@ export const NavBar = ({ user, handleSignIn }) => {
  
 
 
-  if(userLogin.length !==0){
+  if(userLogin){
+    console.log(userLogin)
     const email = userLogin[0].User.email
     console.log(email)
   }
@@ -94,15 +95,11 @@ export const NavBar = ({ user, handleSignIn }) => {
         </Link>
 
       </div>
-      <SearchBar />
+     
       <div className={styles.items}>
-        <h2>
-          <ion-icon name="cart"></ion-icon>
-        </h2>
-        <h2 onClick={handleLogoutClick}>
-          <ion-icon name="person"></ion-icon>
-        </h2>
-
+       
+        
+        {/* {user ? <h2 onClick={handleLogoutClick}>Logout </h2> : null} */}
         {user ? user.displayName : null}
 
         {/* Renderizar la imagen del usuario si existe */}
