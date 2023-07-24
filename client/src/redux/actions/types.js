@@ -18,3 +18,10 @@ export const ADD_USER = "ADD_USER";
 export const ADD_ROLE = "ADD_ROLE";
 export const VALIDATION_USER = "VALIDATION_USER";
 
+//Cart
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_TO_CART = "REMOVE_TO_CART";
+export const DECREMENT_CART = "DECREMENT_CART";
+export const INCREMENT_CART = "INCREMENT_CART";
+export const CLEAR_CART = "CLEAR_CART";
+export const CALCULE_TOTALS = "CALCULE_TOTALS";
