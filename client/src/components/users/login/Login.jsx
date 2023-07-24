@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useDispatch , useSelector} from 'react-redux';
+import {  useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../redux/actions/actions'; 
 import { handleGoogleSignIn } from "../Firebase/GoogleLogin.js";
 import { useNavigate } from "react-router-dom";
@@ -7,21 +7,14 @@ import styles from "./Login.module.css";
 import google from "../../../assets/google.png"
 
 
-// import { userCredential } from './firebase/autentication.js'; // Asumiendo que exportas la función desde el archivo
-// import '../Firebase/autentication';
-
-
 export const Login = () => {
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
-  
-  useEffect(() => {
-    if (user.length !== 0) {
-      navigate("/home");
-    }
-  }, [user, navigate]);
+  const user = useSelector((state) => state.user);  
+
+
+
+
 
   const [userData, setUserData] = useState({
     username: '',
@@ -36,15 +29,19 @@ export const Login = () => {
     }));
   };
 
-    const handleSubmit = (event) => {
-      event.preventDefault();  
-      console.log("desde submit: ", userData) 
-      dispatch(login(userData));      
-      // setUserData({
-      //   username: '',
-      //   password:'',
-      // });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    try {
+      console.log("desde submit: ", userData);
+      dispatch(login(userData)); // Esperar a que la acción termine antes de redirigir
+      window.location.reload(); // Forzar el refresco de la página
+      navigate("/home");
+
+    } catch (error) {
+      console.error(error.message);
+      // Manejar el error, por ejemplo, mostrando un mensaje de error al usuario
     }
+  };
 
 
 

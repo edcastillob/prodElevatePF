@@ -20,7 +20,27 @@ export const Home = () => {
   useEffect(() => {
     setOptionProducts(productsFiltered.length ? productsFiltered : products);
   }, [productsFiltered, products]);
+  useEffect(() => {
+    // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
+    const storedUserData = JSON.parse(localStorage.getItem("user"));
+    if (storedUserData) {
+      dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
+    }
 
+    // Agregar el evento DOMContentLoaded para que se dispare al cargar y refrescar la página
+    const handleDOMContentLoaded = () => {
+      const storedUserData = JSON.parse(localStorage.getItem("user"));
+      if (storedUserData) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
+      }
+    };
+
+    window.addEventListener("DOMContentLoaded", handleDOMContentLoaded);
+
+    return () => {
+      window.removeEventListener("DOMContentLoaded", handleDOMContentLoaded);
+    };
+  }, [dispatch]);
   return (
     <div className={styles.cards}>
       {productsFiltered.length ? (
@@ -42,13 +62,7 @@ export const Home = () => {
       )}
 
       {optionProducts?.map((product) => (
-        <CardProduct
-          key={product.id}
-          id={product.id}
-          image={product.images}
-          name={product.name}
-          salePrice={product.salePrice}
-        />
+        <CardProduct key={product.id} product={product} />
       ))}
     </div>
   );

@@ -1,25 +1,27 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import { NavBar } from './components/NavBar/NavBar';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { Home } from './components/Home/Home';
-import { ProductDetail } from './components/Product/productDetail/ProductDetail';
-import { Landing } from './components/Landing/Landing';
-import { Category } from './components/Product/category/Category';
-import { Product } from './components/Product/createProduct/Product';
-import { Provider } from './components/Product/provider/Provider';
-import { Role } from './components/users/role/Role';
-import { CreateUser } from './components/users/createUser/CreateUser';
-import {Configuration} from './components/Configuration/Configuration'
-import {Footer} from './components/Footer/Footer'
-import { Login } from './components/users/login/Login';
+import "./App.css";
+import { useState, useEffect } from "react";
+import { NavBar } from "./components/NavBar/NavBar";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Home } from "./components/Home/Home";
+import { ProductDetail } from "./components/Product/productDetail/ProductDetail";
+import { Landing } from "./components/Landing/Landing";
+import { Category } from "./components/Product/category/Category";
+import { Product } from "./components/Product/createProduct/Product";
+import { Provider } from "./components/Product/provider/Provider";
+import { Role } from "./components/users/role/Role";
+import { CreateUser } from "./components/users/createUser/CreateUser";
+import { Configuration } from "./components/Configuration/Configuration";
+import { Footer } from "./components/Footer/Footer";
+import { Login } from "./components/users/login/Login";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 // Importa 'auth' desde firebase.js
 import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
+import Cart from "./components/Cart/Cart";
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -31,27 +33,28 @@ function App() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in
         const uid = user.uid;
         console.log("Usuario logueado:", user);
-        // Puedes realizar cualquier otra acción necesaria
         setCurrentUser(user);
+      navigate("/home");
       } else {
-        // User is signed out
-        console.log("Usuario no logueado");
-        setCurrentUser(null);
+        // console.log("Usuario no logueado");
+        // setCurrentUser(null);
+        // navigate("/");
       }
     });
   }, []);
 
   const handleSignIn = async () => {
     try {
-      const user = await handleGoogleSignIn();
-      console.log(user, ".......");
+
+      const user = await handleGoogleSignIn();      
       setCurrentUser(user);
+      navigate("/home");
     } catch (error) {
-      // Handle the sign-in error here
+      navigate("/login");
     }
+
   };
   return (
     <>
@@ -68,7 +71,13 @@ function App() {
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
+
+          <Route path="/cart" element={<Cart />} />
+
+          {currentUser && (
           <Route path="/settings" element={<Configuration />} />
+          )}
+
         </Routes>
         <Footer />
       </div>

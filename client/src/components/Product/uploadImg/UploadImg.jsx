@@ -12,7 +12,8 @@ export const UploadImg = ({
 
   const uploadImages = async (event) => {
     const files = event.target.files;
-    if (files.length + uploadedImages.length > 3) {
+    // if (files && files.length + uploadedImages.length > 3) {
+      if (!files || files.length === 0) {
       alert("You can only upload 3 images per product.");
       return;
     }

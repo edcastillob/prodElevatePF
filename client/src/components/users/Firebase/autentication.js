@@ -1,6 +1,9 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { showMessage } from './showMessage.js'
 
+
+
+
 export const userCredential = async ({ user, password }) => {
   try {
     const auth = getAuth();
