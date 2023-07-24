@@ -1,10 +1,10 @@
 const nodemailer = require('nodemailer');
 const Mailgen = require('mailgen');
 
-const sendMailer = async (req, res) => {
-  
+const sendMailer = async (product) => {
+  console.log(product.dataValues, 'dataValues ')
   try {
-    const { email } = req.params;
+    // const { email } = req.params;
     
     const transporter = nodemailer.createTransport({
       // port: 465 - true, 567 - false
@@ -16,26 +16,35 @@ const sendMailer = async (req, res) => {
     });
 
     const MailGenerator = new Mailgen({
-      theme: 'default',
+      theme: 'salted',
       product: {
-        name: "Mailgen",
+        name: "Aviso de Stock Minimo",
         link: 'https://mailgen.js'
       }
     })
 
     const response = {
       body: {
-        // name,
-        intro: 'Intro de prueba',
+        name: 'Administrador',
+        intro: `El producto ${product.dataValues.name} ha llegado a su stock minimo`,
         table : {
           data: [
             {
-              item: 'Item 1',
-              description: 'Description de item 1',
-              price: "S/100"
+              ID: `${product.dataValues.id}`,
+              Producto: `${product.dataValues.name}`,
+              Descripción: `${product.dataValues.description}`,
+              Stock_Min: `${product.dataValues.minStock} und.`
             }
           ]
         },
+        action: {
+          instructions: 'To get started with Mailgen, please click here:',
+          button: {
+              color: '#22BC66', // Optional action button color
+              text: 'Confirm your account',
+              link: 'https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010'
+          }
+      },
         outro: 'Outro aqui...'   
       }
     }
@@ -44,15 +53,15 @@ const sendMailer = async (req, res) => {
 
     const message = {
       from: process.env.EMAIL, // sender address
-      to: `${email}`, // list of receivers
-      subject: "TEST MAILGEN: Hello ✔", // Subject line
+      to: 'mendozaveralucia@gmail.com', // list of receivers
+      subject: "Advertencia de Stock Mínimo", // Subject line
       // text: "Hello world?", // plain text body
       // html: "<b>Hello world  test</b>", // html body
       html: mail
     }
 
     const info = await transporter.sendMail(message);
-    console.log(info, 'infoo')
+    // console.log(info, 'infoo')
     //   .then((info) => {
     //   return res.status(201)
     //   .json({ 
