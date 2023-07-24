@@ -2,7 +2,6 @@ const passport = require("passport")
 const { Router } = require("express");
 const { isAuthenticated } = require("../middleware/isAuthenticated");
 const { getAllProducts } = require("../controllers/GET/getAllProducts")
-const { getProductId } = require("../controllers/GET/getProductId")
 const { postProduct } = require("../controllers/POST/postProduct");
 const { postCategory } = require("../controllers/POST/postCategory");
 const { postProvider } = require("../controllers/POST/postProvider");
@@ -22,34 +21,36 @@ router.get('/', function(req, res) {
     res.send('Backend prodElevate');
 });
 
-
+// Ruta login
+// router.get('/login', (req, res) => {
+//     res.render('login');
+// });
 
 router.post(
     '/login', 
     passport.authenticate('local'), 
     (req, res) => {
-        const { name, identification, numPhone, address, image, email } = req.user.dataValues; 
+        const { name, identification, numPhone, address, image, email } = req.user.dataValues;
+        res.setHeader("Access-Control-Allow-Credentials", "true"); // Habilitar las credenciales
+        res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Define aquí la URL de tu frontend 
         res.send({
             User: {
                 name,
                 identification,
+                email,
                 numPhone,
                 address,
-                image,
-                email
+                image
             }
-        });      
+        });
     }
 );
-router.use('/login', (err, req, res, next) => {
-    res.status(401).send({ message: 'Inicio de sesión fallido. Verifica tus credenciales.' });
-  });
 
 // Ruta Logout
 router.get('/logout', function(req, res, next) {
     req.logout(function(err) {
         if (err) { return next(err); }
-        res.redirect('/');
+        res.send('Session Closed Correctly');
     });
 });
 
@@ -75,7 +76,6 @@ router.post('/user', postUser);
 router.put('/user/:id', putUser);
 
 router.get('/product', getAllProducts);
-router.get('/productid/:id', getProductId);
 
 router.post('/product', postProduct);
 router.put('/product/:id', putProduct);

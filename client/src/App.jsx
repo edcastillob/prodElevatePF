@@ -44,6 +44,18 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    // Cargar usuario desde sessionStorage si está disponible
+    const storedUser = sessionStorage.getItem("user");
+    if (storedUser) {
+      // Agregar una pequeña espera para asegurarse de que el usuario esté completamente cargado
+      setTimeout(() => {
+        const user = JSON.parse(storedUser);
+        setCurrentUser(user);
+      }, 500);
+    }
+  }, []);
+
   const handleSignIn = async () => {
     try {
       const user = await handleGoogleSignIn();
