@@ -68,7 +68,7 @@ export const NavBar = ({ user, handleSignIn }) => {
     }
     window.location.reload(); // Forzar la recarga completa de la página
   };
-
+console.log(user)
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
       <div className={styles.divLogo}>
