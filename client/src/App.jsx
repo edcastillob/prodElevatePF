@@ -21,6 +21,7 @@ import Cart from "./components/Cart/Cart";
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -35,19 +36,25 @@ function App() {
         const uid = user.uid;
         console.log("Usuario logueado:", user);
         setCurrentUser(user);
+      navigate("/home");
       } else {
         console.log("Usuario no logueado");
         setCurrentUser(null);
+        navigate("/");
       }
     });
   }, []);
 
   const handleSignIn = async () => {
     try {
-      const user = await handleGoogleSignIn();
-      console.log(user, ".......");
+
+      const user = await handleGoogleSignIn();      
       setCurrentUser(user);
-    } catch (error) {}
+      navigate("/home");
+    } catch (error) {
+      navigate("/login");
+    }
+
   };
   return (
     <>
@@ -65,7 +72,12 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
           <Route path="/settings" element={<Configuration />} />
+
           <Route path="/cart" element={<Cart />} />
+
+          {/* {currentUser && (
+          )} */}
+
         </Routes>
         <Footer />
       </div>

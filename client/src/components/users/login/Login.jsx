@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../redux/actions/actions'; 
 import { handleGoogleSignIn } from "../Firebase/GoogleLogin.js";
@@ -6,20 +6,13 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import google from "../../../assets/google.png"
 
+
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);  
 
-  // Cargar datos del usuario desde el LocalStorage al inicio
-  useEffect(() => {
-    const userDataFromLocalStorage = localStorage.getItem("user");
-    if (userDataFromLocalStorage) {
-      const userData = JSON.parse(userDataFromLocalStorage);
-      dispatch(login(userData));
-      navigate("/home"); // Redirige al home si hay una sesión activa
-    }
-  }, [dispatch, navigate]);
+
 
 
 
@@ -42,6 +35,8 @@ export const Login = () => {
       console.log("desde submit: ", userData);
       dispatch(login(userData)); // Esperar a que la acción termine antes de redirigir
       window.location.reload(); // Forzar el refresco de la página
+      navigate("/home");
+
     } catch (error) {
       console.error(error.message);
       // Manejar el error, por ejemplo, mostrando un mensaje de error al usuario

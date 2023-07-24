@@ -139,8 +139,7 @@ export const login = (userData) => {
     return async (dispatch) => {
       const response = await axios.post(`${ENDPOINT}login`, userData);
       if (response.data) {
-        const user = response.data;
-        sessionStorage.setItem("user", JSON.stringify(user)); // Guardar información del usuario en sessionStorage
+        const user = response.data;        
         return dispatch({ type: LOGIN, payload: user.User });
       }
       throw new Error("Credenciales inválidas");
