@@ -3,6 +3,7 @@
     position: relative;
     color: white;
     /* border: 1px solid blue; */
+    padding: 50px;
     display: flex;
     justify-content: space-evenly;
     width: 100vw;
@@ -12,6 +13,8 @@
 .divLogo{
     /* border: 1px solid white; */
     display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     /* right: 130px; */
     
@@ -19,38 +22,43 @@
 }
 
 .divLogo img{
-    margin-top: -1.1rem;
-    width: 100px;
+    width: 100%;
     height: 100px;
+}
+
+.divSearch{
+    /* border: 1px solid white; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .items{
     /* border: 1px solid white; */
-    position: relative;
-    /* left: 120px; */
-    padding-top: 0.8rem;
     display: flex;
-    flex-direction: row;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.3rem;
     gap: 1rem;
-    justify-content: end;
+    justify-content: center;
+    align-items: center;
 }
 
-h2{
-    cursor: pointer;
+.icon{
     transition: .2s;
     &:hover{
-        transform: scale(0.8);
-        transition: .5s;
+        transform: scale(0.9);
+        transition: .3s;
+        cursor: pointer;
     }
 }
 
-.options{
-    /* border: 1px solid white; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.2rem;
+.avatar{
+    width: 40px;
+    height: auto;
 }
+
+
 
 .optionItem{
     text-decoration: none;

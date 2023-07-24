@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { addProvider } from "../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
+import styles from "./Provider.module.css"
 
 export const Provider = () => {
   const dispatch = useDispatch();
@@ -33,67 +34,69 @@ export const Provider = () => {
     });
   };
   return (
-    <div>
-      <div className="container-sm">
-        <h1>provider</h1>
-        <hr />
-        <form onSubmit={handleSubmit}>
+    <div className={styles.container}>
+        <div className={styles.divLeft}>
+          <form onSubmit={handleSubmit} className={styles.formContainer}>
+            <h4 style={{fontFamily: 'Poppins'}}>New Provider</h4>
           {/* Nombre de proveedor */}
-          <label htmlFor="name">Provider: </label>
+          
           <input
-            className="form-control"
+            className="form-control mb-3 w-75"
             type="text"
             name="name"
-            placeholder=" enter name "
+            placeholder= "Fullname"
             value={provider.name}
             onChange={handleChange}
           />
 
           {/* identificacion DNI RIF  de proveedor */}
-          <label htmlFor="identification">RIF/ DNI/ Identification: </label>
           <input
-            className="form-control"
+            className="form-control mb-3 w-75"
             type="text"
             name="identification"
+            placeholder="DNI/RIF/Document ID"
             value={provider.identification}
             onChange={handleChange}
           />
 
           {/* email  de proveedor */}
-          <label htmlFor="email">email: </label>
           <input
-            className="form-control"
+            className="form-control mb-3 w-75"
             type="email"
             name="email"
+            placeholder="Email"
             value={provider.email}
             onChange={handleChange}
           />
 
           {/* direccion de proveedor */}
-          <label htmlFor="name">address: </label>
           <input
-            className="form-control"
+            className="form-control mb-3 w-75"
             type="textarea"
             name="address"
+            placeholder="Address"
             value={provider.address}
             onChange={handleChange}
           />
 
           {/* numero telef de proveedor */}
-          <label htmlFor="name">Number Phone: </label>
           <input
-            className="form-control"
+            className="form-control mb-3 w-75"
             type="text"
             name="numPhone"
+            placeholder="Phone N°"
             value={provider.numPhone}
             onChange={handleChange}
           />
 
           <br />
 
-          <button className="btn btn-primary">submit</button>
+          <button className={styles.create}>Create</button>
         </form>
       </div>
-    </div>
+        <div className={styles.divRight}>
+        </div>
+      </div>
+
   );
 };

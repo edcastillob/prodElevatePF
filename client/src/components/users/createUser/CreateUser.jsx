@@ -5,72 +5,88 @@ import prueba from '../../../assets/prueba.jpg';
 import logo from '../../../assets/logo_2.png';
 import facebook from '../../../assets/facebook.png';
 import google from '../../../assets/google.png';
+import validate from './validation'
 
 // import axios from 'axios';
+
 import { useDispatch } from 'react-redux';
 import { addUser } from '../../../redux/actions/actions';
 
 
+
 export const CreateUser = () => {
-// GOOGLE FORM
-  const [showPassword, setShowPassword] = useState(false);
-  const formsRef = useRef(null);
-//
+
   const dispatch = useDispatch();
 
 
-// GOOGLE FORM HANDLERS
-const handlePasswordToggle = () => {
-  setShowPassword((prevShowPassword) => !prevShowPassword);
-};
 
-const handleLinkClick = (e) => {
-  e.preventDefault();
-  formsRef.current.classList.toggle(styles['show-signup']);
-};
-//
 
 let cleanImg = [];
   const [userData, setUserData] = useState({
-    name: "",
-    identification: "",
-    email: "",
-    numPhone: "",
-    address: "",
-    password: "",
+    name: '',
+    identification: '',
+    email: '',
+    numPhone: '',
+    address: '',
+    password: '',
     images: [],
   });
+
+  const [errors, setErrors] = useState({})
+
+  
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
+    }))
+    setErrors(validate({
+      ...userData,
+      [name]: value,
+    }))
   };
 
+ 
+
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(userData);
+    event.preventDefault(); 
+    if (Object.keys(errors).length > 0) {
+      alert("Por favor, completa los campos correctamente antes de enviar la información.");
+      return;
+    }
+    
+
+    console.log(userData) 
     dispatch(addUser(userData));
     alert("Exito");
     setUserData({
-      name: "",
-      identification: "",
-      email: "",
-      numPhone: "",
-      address: "",
-      password: "",
+      name: '',
+      identification: '',
+      email: '',
+      numPhone: '',
+      address: '',
+      password: '',
       images: cleanImg,
     });
-  };
+  }
+
+  
+  
 
   const handleImageUpload = (imageUrl) => {
     setUserData((userData) => ({
       ...userData,
       images: imageUrl,
     }));
+  
   };
+
+ 
+  
+
 
   return (
     <div className={styles.container}>
@@ -90,71 +106,80 @@ let cleanImg = [];
       <div className={styles.divRight}>
       <div className={`${styles.form} ${styles.signup}`}>
           <div className={styles['form-content']}>
-            <header>Create User</header>
+            <h4>Create User</h4>
             <form onSubmit={handleSubmit}>
+              {/* _____________NAME________________ */}
               <div className={`${styles.field} ${styles['input-field']}`}>
                 <input 
                 type="text" 
                 name='name' 
-                placeholder="Name" 
-                className={styles.input}
+                placeholder="Fullname" 
+                className={`form-control ${errors.name && 'is-invalid'}`}
                 onChange={handleInputChange} />
+              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
               </div>
-              <div className={`${styles.field} ${styles['input-field']}`}>
-                <input 
-                type="text" 
-                name='identification' 
-                placeholder="N° ID" 
-                className={styles.input}
-                onChange={handleInputChange} />
-              </div>
-              <div className={`${styles.field} ${styles['input-field']}`}>
-                <input 
-                type="text" 
-                name='numPhone' 
-                placeholder="Phone Number" 
-                className={styles.input}
-                onChange={handleInputChange} />
-              </div>
-              <div className={`${styles.field} ${styles['input-field']}`}>
-                <input 
-                type="text" 
-                name='address' 
-                placeholder="Address" 
-                className={styles.input}
-                onChange={handleInputChange} />
-              </div>
+              {/* _____________EMAIL________________ */}
               <div className={`${styles.field} ${styles['input-field']}`}>
                 <input 
                 type="email" 
                 name='email' 
                 placeholder="Email" 
-                className={styles.input}
+                className={`form-control ${errors.email && 'is-invalid'}`}
                 onChange={handleInputChange} />
+                {errors.email && <div className="invalid-feedback">{errors.email}</div>}
               </div>
+              {/* _____________ID________________ */}
+              <div className={`${styles.field} ${styles['input-field']}`}>
+                <input 
+                type="text" 
+                name='identification' 
+                placeholder="Document ID" 
+                className={`form-control ${errors.identification && 'is-invalid'}`}
+                onChange={handleInputChange}/>
+                {errors.identification && <div className="invalid-feedback">{errors.identification}</div>}
+              </div>
+              {/* _____________PHONE NUMBER________________ */}
+              <div className={`${styles.field} ${styles['input-field']}`}>
+                <input 
+                type="text" 
+                name='numPhone' 
+                placeholder="Phone N°" 
+                className={`form-control ${errors.numPhone && 'is-invalid'}`}
+                onChange={handleInputChange} />
+                {errors.numPhone && <div className="invalid-feedback">{errors.numPhone}</div>}
+              </div>
+              {/* _____________ADDRESS________________ */}
+              <div className={`${styles.field} ${styles['input-field']}`}>
+                <input 
+                type="text" 
+                name='address' 
+                placeholder="Address" 
+                className={`form-control ${errors.address && 'is-invalid'}`}
+                onChange={handleInputChange} />
+                {errors.address && <div className="invalid-feedback">{errors.address}</div>}
+              </div>
+              {/* _____________PASSWORD________________ */}
               <div className={`${styles.field} ${styles['input-field']}`}>
                 <input 
                 type="password" 
                 name='password' 
                 placeholder="Create password" 
-                className={styles.password}
+                className={`form-control ${errors.password && 'is-invalid'}`}
                 onChange={handleInputChange} />
+                {errors.password && <div className="invalid-feedback">{errors.password}</div>}
               </div>
-              
-              {/* <div className={`${styles.field} ${styles['input-field']}`}>
-                <input type="password" placeholder="Confirm password" className={styles.password} />
-                <i className={`bx bx-hide ${styles['eye-icon']}`}></i>
-              </div> */}
-              <label><h6>Profile Picture</h6></label>
-              {/* <UploadImg onImageUpload={handleImageUpload} />
-               */}
-               <UploadImg
-          onImageUpload={handleImageUpload}
-          uploadedImages={userData.images}
-          clearUploadedImages={() =>
-            setUserData((userData) => ({ ...userData, images: [] }))
-          }
-          />
+              {/* _____________CONFIRM PASSWORD________________ */}
+              <div className={`${styles.field} ${styles['input-field']}`}>
+                <input 
+                  type="password" 
+                  name='confirmPassword' 
+                  placeholder="Confirm password" 
+                  className={`form-control ${errors.confirmPassword && 'is-invalid'}`}
+                  onChange={handleInputChange} />
+                {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
+              </div>
+
+              <UploadImg onImageUpload={handleImageUpload} />
               <br />
               <div className={`${styles.field} ${styles['button-field']}`}>
                 <button type='submit'>Create</button>
@@ -167,22 +192,17 @@ let cleanImg = [];
             </div>
           </div>
           <div className={styles.line}></div>
-          <div className={styles['media-options']}>
-            <a href="#" className={`${styles.field} ${styles.facebook}`}>
-              <img src={facebook}  className={styles['facebook-icon']} />
-
-              {/* <i className={`bx bxl-facebook ${styles['facebook-icon']}`}></i> */}
-              <span>Continue with Facebook</span>
-            </a>
-          </div>
-          <div className={styles['media-options']}>
-            <a href="#" className={`${styles.field} ${styles.google}`}>
-              <img src={google} alt="" className={styles['google-img']} />
+          <div className={styles.social}>
+            <a href="#" style={{textDecoration:'none', display:'flex', 
+            alignItems:'center',
+            gap:'1rem'}}>
+              <img src={google} alt="Google" />
               <span>Continue with Google</span>
             </a>
           </div>
         </div>
-      </div>     
+      </div>
+      
       
     </div>
   );

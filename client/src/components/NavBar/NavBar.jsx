@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../users/Firebase/logout.js";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/actions";
+import { useSelector } from "react-redux";
+import userImg from "../.././assets/user.png"
+
 
 
 export const NavBar = ({ user, handleSignIn }) => {
@@ -13,6 +16,19 @@ export const NavBar = ({ user, handleSignIn }) => {
   const dispatch = useDispatch();
   const userLogin= useSelector((state) => state.user);
   console.log("_________",userLogin)
+
+
+  if(userLogin.length !==0){
+    const email = userLogin[0].User.email
+    console.log(email)
+  }
+
+  const userProve = {
+    name: "Luis Naveda",
+    email: "luisnaveda10@gmail.com",
+    images: userImg,
+  }
+
   
   const handleLogoutClick = () => {
     if (user.displayName){
@@ -29,22 +45,24 @@ export const NavBar = ({ user, handleSignIn }) => {
           <img className="img-fluid" src={logo} alt="img-logo" />
         </Link>
       </div>
-      
+      <div className={styles.divSearch}>
       <SearchBar />
+      </div>
       <div className={styles.items}>
-        <h2>
+        <h2 className={styles.icon}>
           <ion-icon name="cart"></ion-icon>
         </h2>
-        <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
-
+        <Link className={styles.icon} to="/login" style={{ textDecoration: "none", color: "white" }}>
         <h2>
           <ion-icon name="person"></ion-icon>
-        </h2></Link>
-        <Link to="/settings" style={{ textDecoration: "none", color: "white" }}>
+        </h2>
+        </Link>
+        <Link className={styles.icon} to="/settings" style={{ textDecoration: "none", color: "white" }}>
           <h2>
             <ion-icon name="settings"></ion-icon>
           </h2>
         </Link>
+
       </div>
       <SearchBar />
       <div className={styles.items}>
@@ -60,10 +78,17 @@ export const NavBar = ({ user, handleSignIn }) => {
       {user ? user.User?.email : null} 
       {user ? user.email : null} 
 
+
+        {userLogin ? userLogin.email : null }
+        <h6>{userProve.name}</h6>
+        <img src={userProve.images} alt={userProve.name} className={styles.avatar} />
+        {user ? user.displayName : null }  
+
         {user ? (
         <p onClick={handleLogoutClick}>Logout</p>
       ) : null}
       </div>
+
     </div>
   );
 };
