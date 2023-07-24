@@ -4,7 +4,7 @@
   "description": "prodElevatePFHenry",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js",
+    "server": "nodemon index.js --ignore client",
     "start": "npm run server"
   },
   "author": "GITHUB: edcastillob, Pvargas90, Davidoar15, luisnavedag, yonathanbaez25, veraluciamendoza ",

@@ -11,6 +11,10 @@ import { Provider } from './components/Product/provider/Provider';
 import { Role } from './components/users/role/Role';
 import { CreateUser } from './components/users/createUser/CreateUser';
 import { Login } from './components/users/login/Login';
+import Chat from './components/Chat/Chat';
+// import io from 'socket.io-client';
+
+// const socket = io("/");
 
 function App() {
   const location = useLocation();
@@ -35,6 +39,7 @@ function App() {
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
+          <Route path="/chat/" element={<Chat />} />
         </Routes>
       </div>
     </>
