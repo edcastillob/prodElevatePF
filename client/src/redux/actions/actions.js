@@ -10,10 +10,15 @@ import {
   ADD_USER,
   GET_PROVIDER,
   LOGIN,
+  ADD_TO_CART,
+  CALCULE_TOTALS,
+  REMOVE_TO_CART,
+  DECREMENT_CART,
+  INCREMENT_CART,
+  CLEAR_CART,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
-
 
 export const showProducts = () => {
   try {
@@ -129,7 +134,6 @@ export const getProvider = () => {
   }
 };
 
-
 export const login = (userData) => {
   try {
     return async (dispatch) => {
@@ -155,4 +159,44 @@ export const logout = () => {
   } catch (error) {
     throw new Error(error.message);
   }
+};
+
+//Cart
+export const addToCart = (product) => {
+  return {
+    type: ADD_TO_CART,
+    payload: product,
+  };
+};
+
+export const calculateTotals = () => {
+  return {
+    type: CALCULE_TOTALS,
+  };
+};
+
+export const removeToCart = (product) => {
+  return {
+    type: REMOVE_TO_CART,
+    payload: product,
+  };
+};
+
+export const decrementToCart = (product) => {
+  return {
+    type: DECREMENT_CART,
+    payload: product,
+  };
+};
+
+export const incrementToCart = (product) => {
+  return {
+    type: INCREMENT_CART,
+    payload: product,
+  };
+};
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+  };
 };

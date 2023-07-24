@@ -62,13 +62,7 @@ export const Home = () => {
       )}
 
       {optionProducts?.map((product) => (
-        <CardProduct
-          key={product.id}
-          id={product.id}
-          image={product.images}
-          name={product.name}
-          salePrice={product.salePrice}
-        />
+        <CardProduct key={product.id} product={product} />
       ))}
     </div>
   );

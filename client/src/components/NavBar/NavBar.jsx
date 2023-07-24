@@ -10,9 +10,7 @@ import { logout } from "../../redux/actions/actions";
 // import userImg from "../.././assets/user.png"
 // import { useDispatch } from "react-redux";
 
-
 export const NavBar = ({ user, handleSignIn }) => {
-
   const navigate = useNavigate();
   const userLogin = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -34,11 +32,7 @@ export const NavBar = ({ user, handleSignIn }) => {
     if (storedUserData) {
       dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
     }
-  
   }, [dispatch, navigate, user]);
- 
-
-
 
   // const userProve = {
   //   name: "Luis Naveda",
@@ -46,22 +40,14 @@ export const NavBar = ({ user, handleSignIn }) => {
   //   images: userImg,
   // }
 
-  
-
- 
-
-
-  if(userLogin){
-    console.log(userLogin)
-    const email = userLogin[0].User.email
-    console.log(email)
+  if (userLogin) {
+    console.log(userLogin);
+    const email = userLogin[0].User.email;
+    console.log(email);
   }
 
-
-
-  
   const handleLogoutClick = () => {
-    if (user.displayName){
+    if (user.displayName) {
       logoutUser();
     } else {
       dispatch(logout());
@@ -77,35 +63,49 @@ export const NavBar = ({ user, handleSignIn }) => {
         </Link>
       </div>
       <div className={styles.divSearch}>
-      <SearchBar />
+        <SearchBar />
       </div>
       <div className={styles.items}>
-        <h2 className={styles.icon}>
-          <ion-icon name="cart"></ion-icon>
-        </h2>
-        <Link className={styles.icon} to="/login" style={{ textDecoration: "none", color: "white" }}>
-        <h2>
-          <ion-icon name="person"></ion-icon>
-        </h2>
+        <Link
+          className={styles.icon}
+          to="/cart"
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          <h2 className={styles.icon}>
+            <ion-icon name="cart"></ion-icon>
+          </h2>
         </Link>
-        <Link className={styles.icon} to="/settings" style={{ textDecoration: "none", color: "white" }}>
+        <Link
+          className={styles.icon}
+          to="/login"
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          <h2>
+            <ion-icon name="person"></ion-icon>
+          </h2>
+        </Link>
+        <Link
+          className={styles.icon}
+          to="/settings"
+          style={{ textDecoration: "none", color: "white" }}
+        >
           <h2>
             <ion-icon name="settings"></ion-icon>
           </h2>
         </Link>
-
       </div>
-     
+
       <div className={styles.items}>
-       
-        
         {/* {user ? <h2 onClick={handleLogoutClick}>Logout </h2> : null} */}
         {user ? user.displayName : null}
 
         {/* Renderizar la imagen del usuario si existe */}
-        {userLogin && userLogin.user && userLogin.user.image && userLogin.user.image.length > 0 && (
-          <img src={userLogin.user.image[0]} alt="User Avatar" />
-        )}
+        {userLogin &&
+          userLogin.user &&
+          userLogin.user.image &&
+          userLogin.user.image.length > 0 && (
+            <img src={userLogin.user.image[0]} alt="User Avatar" />
+          )}
 
         {user ? <p onClick={handleLogoutClick}>Logout</p> : null}
 
@@ -127,9 +127,7 @@ export const NavBar = ({ user, handleSignIn }) => {
         {user ? (
         <p onClick={handleLogoutClick}>Logout</p>
       ) : null} */}
-
       </div>
-
     </div>
   );
 };
