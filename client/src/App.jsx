@@ -38,9 +38,14 @@ function App() {
         setCurrentUser(user);
       navigate("/home");
       } else {
+
+        console.log("Usuario no logueado");
+        setCurrentUser(null);
+
         // console.log("Usuario no logueado");
         // setCurrentUser(null);
         // navigate("/");
+
       }
     });
   }, []);
@@ -48,12 +53,14 @@ function App() {
   const handleSignIn = async () => {
     try {
 
+
+
       const user = await handleGoogleSignIn();      
       setCurrentUser(user);
       navigate("/home");
     } catch (error) {
-      navigate("/login");
-    }
+      navigate("/login");   }
+
 
   };
   return (
@@ -76,6 +83,8 @@ function App() {
 
           {currentUser && (
           <Route path="/settings" element={<Configuration />} />
+
+          <Route path="/cart" element={<Cart />} />
           )}
 
         </Routes>

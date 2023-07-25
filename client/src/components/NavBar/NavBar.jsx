@@ -128,7 +128,6 @@ console.log(user)
         <p onClick={handleLogoutClick}>Logout</p>
       ) : null} */}
       </div>
-
     </div>
   );
 };
