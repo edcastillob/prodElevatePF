@@ -70,7 +70,7 @@ export const NavBar = ({ user, handleSignIn }) => {
         </Link>
       </div>
       <div className={styles.divSearch}>
-        <SearchBar />
+        {/* <SearchBar /> */}
       </div>
       <div className={styles.items}>
         <Link
@@ -82,7 +82,8 @@ export const NavBar = ({ user, handleSignIn }) => {
             <ion-icon name="cart"></ion-icon>
           </h2>
         </Link>
-        <Link
+        {user ? null : (
+          <Link
           className={styles.icon}
           to="/login"
           style={{ textDecoration: "none", color: "white" }}
@@ -91,6 +92,8 @@ export const NavBar = ({ user, handleSignIn }) => {
             <ion-icon name="person"></ion-icon>
           </h2>
         </Link>
+        )}
+        
         {/* <Link
           className={styles.icon}
           to="/settings"
@@ -111,7 +114,7 @@ export const NavBar = ({ user, handleSignIn }) => {
 
         {user ? (
           <div
-            className={`dropdown-toggle ${styles.userInfo} ${styles.userContainer}`}
+            className={` ${styles.userInfo} ${styles.userContainer}`}
             onClick={handleDropdownToggle}
           >
             <p className={styles.name}>{user.displayName}</p>
