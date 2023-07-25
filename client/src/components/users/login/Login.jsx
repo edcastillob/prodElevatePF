@@ -34,12 +34,10 @@ export const Login = () => {
     try {
       console.log("desde submit: ", userData);
       dispatch(login(userData)); // Esperar a que la acción termine antes de redirigir
-      window.location.reload(); // Forzar el refresco de la página
       navigate("/home");
 
     } catch (error) {
       console.error(error.message);
-      // Manejar el error, por ejemplo, mostrando un mensaje de error al usuario
     }
   };
 
