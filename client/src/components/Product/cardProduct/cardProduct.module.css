@@ -39,10 +39,9 @@
     width: 90%;
     min-height: 60%;
     max-height: 75%;
-    filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.3));
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-
+    border-radius: 10px;
+    filter: drop-shadow(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    
 }
 
 .description{

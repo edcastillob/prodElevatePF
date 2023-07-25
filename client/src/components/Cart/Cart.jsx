@@ -17,7 +17,6 @@ import StripeButton from "../StripeButton/StripeButton";
 
 import { ToastContainer } from "react-toastify";
 
-
 const Cart = () => {
   const { cartItems, cartTotalAmount } = useSelector((state) => state);
 
@@ -82,8 +81,11 @@ const Cart = () => {
                 <div className={styles.cartProduct}>
                   <img src={cartItem.images} alt={cartItem.name} />
                   <div>
-                    <h3>{cartItem.name}</h3>
-                    <p>{cartItem.description}</p>
+                    <h3>{cartItem.name}</h3> 
+                    <div
+                      className={styles.descriptionItem}
+                      dangerouslySetInnerHTML={{ __html: cartItem.description }}
+                    ></div>
                     <button onClick={() => handledRemoveFromCart(cartItem)}>
                       Remove
                     </button>
