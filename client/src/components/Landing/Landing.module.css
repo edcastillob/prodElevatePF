@@ -104,6 +104,7 @@
     margin-top: 1rem;
     font-family: 'Poppins';
     color: #cacaca;
+    margin-left: 0.5rem;
 }
 
 .button{
@@ -151,15 +152,17 @@
 .companie{
     /* border: 1px solid #cacaca; */
     width: 30%;
-    height: 30vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .companie img{
     margin-top: 1rem;
-    width: 70%;
+    width: 75%;
     height: auto;
-
+    user-select: none;
+    
 }
