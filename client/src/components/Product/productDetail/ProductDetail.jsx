@@ -43,7 +43,7 @@ export const ProductDetail = () => {
 
 
   return (
-    <div style={{ padding: "1rem" }}>
+    <div style={{padding:'1rem'}}>
       {loading ? (
         <div>
           <img src={loadingImg} alt="Loading" />
