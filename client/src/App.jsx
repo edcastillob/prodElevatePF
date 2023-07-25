@@ -18,6 +18,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
 import Cart from "./components/Cart/Cart";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const location = useLocation();
@@ -73,12 +75,22 @@ function App() {
           <Route path="/productid/:id" element={<ProductDetail />} />
 
           <Route path="/cart" element={<Cart />} />
-
           {currentUser && (
-          <Route path="/settings" element={<Configuration />} />
-          )}
+            <Route path="/settings" element={<Configuration />} />
+            )}
 
         </Routes>
+        <ToastContainer 
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        closeButton={false}
+        theme="dark"
+        />
         <Footer />
       </div>
     </>

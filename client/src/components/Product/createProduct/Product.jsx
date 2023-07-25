@@ -7,6 +7,9 @@ import {
 } from "../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Product.module.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const Product = () => {
   const dispatch = useDispatch();
@@ -68,7 +71,7 @@ export const Product = () => {
     event.preventDefault();
     console.log(product);
     dispatch(addProduct(product));
-    alert("Exito");
+    toast.success('¡Product created successfully!');
     setProduct({
       category: "",
       name: "",
