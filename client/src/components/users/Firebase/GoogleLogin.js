@@ -1,4 +1,7 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -16,7 +19,16 @@ export const handleGoogleSignIn = async () => {
       console.log("Usuario autenticado con Google:", result.user);
   
      
-        alert('Welcome ' + result.user.displayName)
+        toast.info('Welcome ' + result.user.displayName, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          })
     } catch (error) {
       // Handle Errors 
       const errorCode = error.code;
