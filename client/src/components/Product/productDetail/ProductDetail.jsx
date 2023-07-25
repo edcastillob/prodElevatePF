@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getProductDetail } from '../../../redux/actions/actions';
-import { Card, CardImg, CardBody, CardTitle, CardText } from 'reactstrap';
-import loadingImg from '../../../assets/loading.png'
-import { getCategory } from '../../../redux/actions/actions';
-import styles from './ProductDetail.module.css'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { getProductDetail } from "../../../redux/actions/actions";
+import { Card, CardImg, CardBody, CardTitle, CardText } from "reactstrap";
+import loadingImg from "../../../assets/loading.png";
+import { getCategory } from "../../../redux/actions/actions";
+import styles from "./ProductDetail.module.css";
+import { addToCart } from "../../../redux/actions/actions";
+
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getCategory());
   }, []);
@@ -38,6 +41,7 @@ export const ProductDetail = () => {
     selectedCategory.find((cat) => cat.id === categoryId)?.name ||
     "Unknown Category";
 
+
   return (
     <div style={{padding:'1rem'}}>
       {loading ? (
@@ -46,16 +50,21 @@ export const ProductDetail = () => {
         </div>
       ) : (
         <div className={styles.container}>
-        <div className={styles.divImg}>
-          <img src={images} alt={name}/>
-        </div>
-        <div className={styles.description}>
-          <h4>{name}</h4>
-          <p className={styles.descriptionItem}>{description} </p>
-          <h6>Category: {category} </h6>
-          <h4>Price ${salePrice} </h4>
-          <button className={styles.buttonCart}>Add to Cart</button>
-        </div>
+          <div className={styles.divImg}>
+            <img src={images} alt={name} />
+          </div>
+          <div className={styles.description}>
+            <h4>{name}</h4>
+            <p className={styles.descriptionItem}>{description} </p>
+            <h6>Category: {category} </h6>
+            <h4>Price ${salePrice} </h4>
+            {/* <button
+              className={styles.buttonCart}
+              onClick={() => handledAddToCart(product)}
+            >
+              Add to Cart
+            </button> */}
+          </div>
         </div>
       )}
     </div>

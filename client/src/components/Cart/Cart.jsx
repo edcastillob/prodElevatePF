@@ -1,7 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import "react-toastify/dist/ReactToastify.css";
+//import StripeButton from "../StripeCart/StripeButton";
+
 import styles from "./Cart.module.css";
 import {
   addToCart,
@@ -11,7 +14,9 @@ import {
   removeToCart,
 } from "../../redux/actions/actions";
 import StripeButton from "../StripeButton/StripeButton";
+
 import { ToastContainer } from "react-toastify";
+
 
 const Cart = () => {
   const { cartItems, cartTotalAmount } = useSelector((state) => state);
@@ -132,6 +137,7 @@ const Cart = () => {
           </div>
         </div>
       )}
+
       <ToastContainer />
     </div>
   );
