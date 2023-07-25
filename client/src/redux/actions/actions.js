@@ -20,6 +20,9 @@ import {
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
 
+import { toast } from "react-toastify";
+
+
 export const showProducts = () => {
   try {
     return async (dispatch) => {
@@ -162,11 +165,23 @@ export const logout = () => {
 
 //Cart
 export const addToCart = (product) => {
+
+  return function (dispatch) {
+    dispatch({
+      type: ADD_TO_CART,
+      payload: product,
+    });
+    toast.success(`${product.name} add to cart`, {
+      position: "bottom-left",
+    });
+
   return {
     type: ADD_TO_CART,
     payload: product,
+
   };
 };
+}
 
 export const calculateTotals = () => {
   return {
@@ -175,18 +190,42 @@ export const calculateTotals = () => {
 };
 
 export const removeToCart = (product) => {
+
+  return function (dispatch) {
+    dispatch({
+      type: REMOVE_TO_CART,
+      payload: product,
+    });
+    toast.error(`${product.name} remove from de cart`, {
+      position: "bottom-left",
+    });
+
   return {
     type: REMOVE_TO_CART,
     payload: product,
+
   };
 };
+}
 
 export const decrementToCart = (product) => {
+
+  return function (dispatch) {
+    dispatch({
+      type: DECREMENT_CART,
+      payload: product,
+    });
+    toast.info(` Decrement ${product.name} cart quantity`, {
+      position: "bottom-left",
+    });
+
   return {
     type: DECREMENT_CART,
     payload: product,
+
   };
 };
+}
 
 export const incrementToCart = (product) => {
   return {
@@ -195,7 +234,18 @@ export const incrementToCart = (product) => {
   };
 };
 export const clearCart = () => {
+
+  return function (dispatch) {
+    dispatch({
+      type: CLEAR_CART,
+    });
+    toast.error(`The cart is clear`, {
+      position: "bottom-left",
+    });
+
   return {
     type: CLEAR_CART,
+
   };
 };
+}
