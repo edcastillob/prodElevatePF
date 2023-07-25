@@ -29,6 +29,7 @@
   align-items: center;
   grid-template-columns: 3fr 1fr 1fr 1fr;
   column-gap: 0.5rem;
+  text-align: left;
 }
 
 .cartItem {
