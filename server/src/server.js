@@ -7,7 +7,12 @@ const Strategy = require("passport-local").Strategy;
 const session = require("express-session");
 const { User } = require("./db");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
+const bodyParser = require('body-parser');
 
+
+const server = express();
+server.use(bodyParser.json({ limit: '3mb' }));
+server.use(bodyParser.urlencoded({ limit: '3mb', extended: true }));
 // Configuracion de la estrategia local de Passport
 passport.use(new Strategy(
   function(username, password, done) {
@@ -49,7 +54,6 @@ passport.deserializeUser(function(id, done) {
         });
 });
 
-const server = express();
 
 // Configuracion del view engine para renderizar templates de EJS
 server.set('views', __dirname + '/views');
