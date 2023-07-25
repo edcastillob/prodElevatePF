@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./NavBar.module.css";
 import { SearchBar } from "../SearchBar/SearchBar";
 import logo from "../../assets/logo_2.png";
@@ -11,6 +11,9 @@ import { logout } from "../../redux/actions/actions";
 // import { useDispatch } from "react-redux";
 
 export const NavBar = ({ user, handleSignIn }) => {
+  //Lógica Dropdown
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const navigate = useNavigate();
   const userLogin = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -34,11 +37,7 @@ export const NavBar = ({ user, handleSignIn }) => {
     }
   }, [dispatch, navigate, user]);
 
-  // const userProve = {
-  //   name: "Luis Naveda",
-  //   email: "luisnaveda10@gmail.com",
-  //   images: userImg,
-  // }
+
 
   if (userLogin) {
     console.log(userLogin);
@@ -54,7 +53,15 @@ export const NavBar = ({ user, handleSignIn }) => {
     }
     window.location.reload(); // Forzar la recarga completa de la página
   };
-console.log(user)
+  console.log(user)
+
+  //Handle Dropdown
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  }
+
+
+  
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
       <div className={styles.divLogo}>
@@ -63,7 +70,7 @@ console.log(user)
         </Link>
       </div>
       <div className={styles.divSearch}>
-        <SearchBar />
+        {/* <SearchBar /> */}
       </div>
       <div className={styles.items}>
         <Link
@@ -75,7 +82,8 @@ console.log(user)
             <ion-icon name="cart"></ion-icon>
           </h2>
         </Link>
-        <Link
+        {user ? null : (
+          <Link
           className={styles.icon}
           to="/login"
           style={{ textDecoration: "none", color: "white" }}
@@ -84,7 +92,9 @@ console.log(user)
             <ion-icon name="person"></ion-icon>
           </h2>
         </Link>
-        <Link
+        )}
+        
+        {/* <Link
           className={styles.icon}
           to="/settings"
           style={{ textDecoration: "none", color: "white" }}
@@ -92,14 +102,7 @@ console.log(user)
           <h2>
             <ion-icon name="settings"></ion-icon>
           </h2>
-        </Link>
-      </div>
-
-      <div className={styles.items}>
-        {/* {user ? <h2 onClick={handleLogoutClick}>Logout </h2> : null} */}
-        {user ? user.displayName : null}
-
-        {/* Renderizar la imagen del usuario si existe */}
+        </Link> */}
         {userLogin &&
           userLogin.user &&
           userLogin.user.image &&
@@ -107,27 +110,42 @@ console.log(user)
             <img src={userLogin.user.image[0]} alt="User Avatar" />
           )}
 
-        {user ? <p onClick={handleLogoutClick}>Logout</p> : null}
-
-        {/* {userLogin ? userLogin.email : null }
-
-      {user ? user.User?.name : null} 
-      {user ? user.displayName : null} 
-      
-      {user ? user.User?.email : null} 
-      {user ? user.email : null} 
-
-
-        {userLogin ? userLogin.email : null }
-
-        <h6>{userProve.name}</h6>
-        <img src={userProve.images} alt={userProve.name} className={styles.avatar} />
-        {user ? user.displayName : null }  
+        
 
         {user ? (
-        <p onClick={handleLogoutClick}>Logout</p>
-      ) : null} */}
+          <div
+            className={` ${styles.userInfo} ${styles.userContainer}`}
+            onClick={handleDropdownToggle}
+          >
+            <p className={styles.name}>{user.displayName}</p>
+            <img src={user.photoURL} alt={user.displayName} className={styles.avatar} />
+
+            {/* Dropdown de opciones */}
+            {isDropdownOpen && (
+              <ul className={styles.dropdownOptions}>
+                <li>
+                  <Link
+                  className={styles.icon}
+                  to="/settings"
+                  style={{ textDecoration: "none", color: "black", fontFamily:'Poppins', textAlign:'start' }}
+                >
+                  <h6>
+                    <ion-icon name="settings"></ion-icon> Settings
+                  </h6>
+                </Link>
+                </li>
+
+                <li>{user ? <h6 style={{color:'black', fontFamily:'Poppins', textAlign:'start'}} onClick={handleLogoutClick}><ion-icon name="power"></ion-icon> Logout</h6> : null}
+                </li>
+                
+                
+              </ul>
+            )}
+          </div>
+        ) : null}
+
       </div>
+
     </div>
   );
 };
