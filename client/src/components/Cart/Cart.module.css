@@ -1,8 +1,10 @@
 /* Cart */
 .cartContainer {
   padding: 2rem 4rem;
+
   height: 80vh;
   width: 100%;
+
 }
 
 .cartContainer h2 {

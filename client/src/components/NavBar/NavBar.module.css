@@ -64,6 +64,7 @@
 
 .name{
     font-family: 'Poppins';
+    margin-top: 0.7rem;
 }
 
 .avatar{
@@ -95,11 +96,12 @@
     position: relative;
   }
   
-
+  /* Estilos para el nombre del usuario */
   .name {
     font-family: 'Poppins';
   }
   
+  /* Estilos para el avatar del usuario */
   .avatar {
     width: 35px;
     height: 35px;
@@ -107,7 +109,7 @@
     object-fit: cover;
   }
   
- 
+  /* Estilos para el dropdown de opciones */
   .dropdownOptions {
     position: absolute;
     top: 100%;
@@ -122,13 +124,13 @@
     z-index: 1;
   }
   
-
+  /* Estilos para cada opción del dropdown */
   .dropdownOptions li {
     padding: 8px 16px;
     cursor: pointer;
   }
   
-  
+  /* Estilo adicional para resaltar las opciones al pasar el ratón sobre ellas */
   .dropdownOptions li:hover {
     background-color: #f1f1f1;
   }
