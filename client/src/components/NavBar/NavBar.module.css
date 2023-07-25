@@ -17,6 +17,7 @@
     justify-content: center;
     position: relative;
     /* right: 130px; */
+    padding-left: 1rem;
     
     
 }
@@ -24,6 +25,7 @@
 .divLogo img{
     width: 100%;
     height: 100px;
+    margin-top: 0.4rem;
 }
 
 .divSearch{
@@ -45,9 +47,10 @@
 }
 
 .icon{
+    margin-top: 0.4rem;
     transition: .2s;
     &:hover{
-        transform: scale(0.9);
+        transform: scale(0.96);
         transition: .3s;
         cursor: pointer;
     }
