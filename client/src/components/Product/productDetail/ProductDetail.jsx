@@ -81,6 +81,7 @@ import loadingImg from "../../../assets/loading.png";
 import { getCategory } from "../../../redux/actions/actions";
 import styles from "./ProductDetail.module.css";
 import { addToCart } from "../../../redux/actions/actions";
+import { Link } from "react-router-dom";
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -108,6 +109,11 @@ export const ProductDetail = () => {
 
   const { images, categoryId, salePrice, description, name } = productDetail;
 
+  const handledAddToCart = (product) => {
+    dispatch(addToCart(productDetail));
+    navigate("/cart");
+  };
+
   // Buscar la categoría correspondiente al categoryId
   const category =
     selectedCategory.find((cat) => cat.id === categoryId)?.name ||
@@ -121,6 +127,13 @@ export const ProductDetail = () => {
         </div>
       ) : (
         <div className={styles.container}>
+          <div className={styles.back}>
+            <Link to='/home'>
+              <div className={styles.backButton}>
+                <p><ion-icon name="arrow-round-back"></ion-icon><ion-icon name="home"></ion-icon></p>
+              </div>
+            </Link>
+          </div>
           <div className={styles.divImg}>
             <img src={images} alt={name} />
           </div>
@@ -133,12 +146,12 @@ export const ProductDetail = () => {
             ></div>
             <h6>Category: {category} </h6>
             <h4>Price ${salePrice} </h4>
-            {/* <button
+            <button
               className={styles.buttonCart}
-              onClick={() => handledAddToCart(product)}
+              onClick={() => handledAddToCart(productDetail)}
             >
               Add to Cart
-            </button> */}
+            </button>
           </div>
         </div>
       )}
