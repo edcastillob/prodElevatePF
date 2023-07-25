@@ -18,6 +18,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
 import Cart from "./components/Cart/Cart";
+import { EditProduct } from "./components/Product/editProduct/EditProduct";
 
 function App() {
   const location = useLocation();
@@ -78,6 +79,7 @@ function App() {
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
+          <Route path="/productidedit/:id" element={<EditProduct />} />
 
           <Route path="/cart" element={<Cart />} />
 

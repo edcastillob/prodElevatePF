@@ -16,6 +16,7 @@ import {
   DECREMENT_CART,
   INCREMENT_CART,
   CLEAR_CART,
+  GET_PRODUCT_ID,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -38,6 +39,8 @@ export const showProducts = () => {
 export const getProductName = (name) => {
   return { type: GET_PRODUCT_NAME, payload: name };
 };
+
+
 
 export const getProductDetail = (id) => {
   return (dispatch) => {

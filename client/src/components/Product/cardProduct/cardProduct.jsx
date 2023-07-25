@@ -37,6 +37,12 @@ export const CardProduct = ({ product }) => {
         >
           Add to Cart
         </button>
+        <Link
+        title="Edit Product"
+        to={`/productidedit/${id}`}        
+        >
+        Edit
+        </Link>
       </div>
     </div>
   );
