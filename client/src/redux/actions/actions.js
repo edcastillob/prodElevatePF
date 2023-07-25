@@ -181,6 +181,7 @@ export const addToCart = (product) => {
 
   };
 };
+}
 
 export const calculateTotals = () => {
   return {
@@ -205,6 +206,7 @@ export const removeToCart = (product) => {
 
   };
 };
+}
 
 export const decrementToCart = (product) => {
 
@@ -223,6 +225,7 @@ export const decrementToCart = (product) => {
 
   };
 };
+}
 
 export const incrementToCart = (product) => {
   return {
@@ -245,3 +248,4 @@ export const clearCart = () => {
 
   };
 };
+}

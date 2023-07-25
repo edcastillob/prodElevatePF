@@ -83,9 +83,8 @@ function App() {
 
           {currentUser && (
           <Route path="/settings" element={<Configuration />} />
-
-          <Route path="/cart" element={<Cart />} />
           )}
+          <Route path="/cart" element={<Cart />} />
 
         </Routes>
         <Footer />
