@@ -34,7 +34,7 @@ export const EditProduct = () => {
   return (
     <div style={{ boxShadow: 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px' }}>
 
-      <h3>activo: {productDetail.isActive.toString()} </h3>
+      <h3>activo: {productDetail.isActive} </h3>
       <h3>Nombre: {productDetail.name} </h3>
       <img src={productDetail.images} alt=""
        style={{ width: '200px', height: 'auto' }}/>
