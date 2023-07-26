@@ -7,15 +7,20 @@ import { logoutUser } from "../users/Firebase/logout.js";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/actions";
 // import { useSelector } from "react-redux";
-// import userImg from "../.././assets/user.png"
+import userImg from "../.././assets/user.png"
 // import { useDispatch } from "react-redux";
 
-export const NavBar = ({ user, handleSignIn }) => {
+
+export const NavBar = ({ user, userLocal, handleSignIn }) => {
+=======
+
   //Lógica Dropdown
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+
   const navigate = useNavigate();
-  const userLogin = useSelector((state) => state.user);
+  let userLogin = useSelector((state) => state.user);
+  
   const dispatch = useDispatch();
 
   // const handleLogoutClick = () => {
@@ -29,30 +34,33 @@ export const NavBar = ({ user, handleSignIn }) => {
   //   // Redirige al login después de cerrar sesión
   //   navigate("/login");
   // };
-  useEffect(() => {
-    // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
-    const storedUserData = JSON.parse(localStorage.getItem("user"));
-    if (storedUserData) {
-      dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
-    }
-  }, [dispatch, navigate, user]);
+  // useEffect(() => {
+  //   // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
+  //   const storedUserData = JSON.parse(localStorage.getItem("user"));
+  //   if (storedUserData) {
+  //     dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
+  //   }
+  // }, [dispatch, navigate, user]);
 
 
 
-  if (userLogin) {
-    console.log(userLogin);
-    const email = userLogin[0].User.email;
-    console.log(email);
-  }
+  // if (userLogin) {
+  //   console.log(userLogin);
+  //   const email = userLogin[0].User.email;
+  //   console.log(email);
+  // }
 
   const handleLogoutClick = () => {
-    if (user.displayName) {
-      logoutUser();
-    } else {
+    if (userLocal) {
       dispatch(logout());
+    } else {
+      logoutUser();
     }
     window.location.reload(); // Forzar la recarga completa de la página
   };
+
+
+
   console.log(user)
 
   //Handle Dropdown
@@ -62,6 +70,7 @@ export const NavBar = ({ user, handleSignIn }) => {
 
 
   
+
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
       <div className={styles.divLogo}>
@@ -102,6 +111,53 @@ export const NavBar = ({ user, handleSignIn }) => {
           <h2>
             <ion-icon name="settings"></ion-icon>
           </h2>
+
+        </Link>
+      </div>
+
+      <div className={styles.items}>
+        {/* {user ? <h2 onClick={handleLogoutClick}>Logout </h2> : null} */}
+        {userLocal ? userLocal.name : null}
+        {user ? user.displayName : null}
+
+        {/* Renderizar la imagen del usuario si existe */}
+        {userLocal ? 
+            <div className={styles.containerPFP}>
+              <img className={styles.userPFP} src={userLocal.image} alt="PFP"></img>
+            </div>  
+            : null
+        }
+        {user ?
+          <div className={styles.containerPFP}>
+            <img className={styles.userPFP} src={user.photoURL} alt="PFP"></img>
+          </div>  
+          : null            
+        }
+        {
+          !user && !userLocal &&
+          <div className={styles.containerPFP}>
+            <img className={styles.userPFP} src={userImg} alt="PFP"></img>
+          </div>
+        }
+
+        {userLocal ? <p onClick={handleLogoutClick}>Logout</p> : null}
+        {user ? <p onClick={handleLogoutClick}>Logout</p> : null}
+
+        {/* {userLogin ? userLogin.email : null }
+
+      {user ? user.User?.name : null} 
+      {user ? user.displayName : null} 
+      
+      {user ? user.User?.email : null} 
+      {user ? user.email : null} 
+
+
+        {userLogin ? userLogin.email : null }
+
+        <h6>{userProve.name}</h6>
+        <img src={userProve.images} alt={userProve.name} className={styles.avatar} />
+        {user ? user.displayName : null }  
+
         </Link> */}
         {userLogin &&
           userLogin.user &&
@@ -111,6 +167,7 @@ export const NavBar = ({ user, handleSignIn }) => {
           )}
 
         
+
 
         {user ? (
           <div

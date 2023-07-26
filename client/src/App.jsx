@@ -30,6 +30,7 @@ function App() {
   const navigate = useNavigate();
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentUserLocal, setCurrentUserLocal] = useState(null);
 
   useEffect(() => {
     setShowNavBar(location.pathname !== "/");
@@ -56,6 +57,15 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
+    const storedUserData = JSON.parse(localStorage.getItem("user"));
+    if (storedUserData) {
+      // No necesitamos el estado global de Redux, simplemente utilizamos el "user" prop
+      setCurrentUserLocal(storedUserData);
+    }
+  }, []);
+
   const handleSignIn = async () => {
     try {
 
@@ -71,7 +81,7 @@ function App() {
   };
   return (
     <>
-      {showNavBar && <NavBar user={currentUser} handleSignIn={handleSignIn} />}
+      {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />}
       <div>
         <Routes>
           <Route exact path="/" element={<Landing />} />
@@ -87,10 +97,15 @@ function App() {
           <Route path="/productidedit/:id" element={<EditProduct />} />
 
           <Route path="/cart" element={<Cart />} />
-          {currentUser && (
-            <Route path="/settings" element={<Configuration />} />
-            )}       
-        
+
+
+          {(currentUser || currentUserLocal) && (
+          <Route path="/settings" element={<Configuration />} />
+          )}
+
+
+          
+
         </Routes>
         <ToastContainer 
         position="top-center"
