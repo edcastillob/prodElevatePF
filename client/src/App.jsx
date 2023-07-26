@@ -18,10 +18,12 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
 import Cart from "./components/Cart/Cart";
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
+
 
 
 
@@ -30,7 +32,9 @@ function App() {
   const navigate = useNavigate();
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
+
   const [currentUserLocal, setCurrentUserLocal] = useState(null);
+
 
   useEffect(() => {
     setShowNavBar(location.pathname !== "/");
@@ -56,6 +60,15 @@ function App() {
       }
     });
   }, []);
+
+
+  const handleSignIn = async () => {
+    try {
+      const user = await handleGoogleSignIn();
+      console.log(user, ".......");
+      setCurrentUser(user);
+    } catch (error) {}
+
 
   useEffect(() => {
     // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
@@ -101,10 +114,10 @@ function App() {
 
           {(currentUser || currentUserLocal) && (
           <Route path="/settings" element={<Configuration />} />
+
+          <Route path="/cart" element={<Cart />} />
+
           )}
-
-
-          
 
         </Routes>
         <ToastContainer 

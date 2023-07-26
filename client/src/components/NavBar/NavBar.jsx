@@ -11,8 +11,9 @@ import userImg from "../.././assets/user.png"
 // import { useDispatch } from "react-redux";
 
 
+
 export const NavBar = ({ user, userLocal, handleSignIn }) => {
-=======
+
 
   //Lógica Dropdown
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -34,6 +35,15 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
   //   // Redirige al login después de cerrar sesión
   //   navigate("/login");
   // };
+
+  useEffect(() => {
+    // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
+    const storedUserData = JSON.parse(localStorage.getItem("user"));
+    if (storedUserData) {
+      dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
+    }
+  }, [dispatch, navigate, user]);
+
   // useEffect(() => {
   //   // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
   //   const storedUserData = JSON.parse(localStorage.getItem("user"));
@@ -49,6 +59,22 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
   //   const email = userLogin[0].User.email;
   //   console.log(email);
   // }
+
+
+  if (userLogin) {
+    console.log(userLogin);
+    const email = userLogin[0].User.email;
+    console.log(email);
+  }
+
+  const handleLogoutClick = () => {
+    if (user.displayName) {
+      logoutUser();
+    } else {
+      dispatch(logout());
+    }
+    window.location.reload(); // Forzar la recarga completa de la página
+  };
 
   const handleLogoutClick = () => {
     if (userLocal) {
@@ -71,6 +97,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
 
   
 
+
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
       <div className={styles.divLogo}>
@@ -79,7 +106,11 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
         </Link>
       </div>
       <div className={styles.divSearch}>
+
+        <SearchBar />
+
         {/* <SearchBar /> */}
+
       </div>
       <div className={styles.items}>
         <Link
@@ -90,9 +121,9 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
           <h2 className={styles.icon}>
             <ion-icon name="cart"></ion-icon>
           </h2>
+
         </Link>
-        {user ? null : (
-          <Link
+        <Link
           className={styles.icon}
           to="/login"
           style={{ textDecoration: "none", color: "white" }}
@@ -101,6 +132,23 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
             <ion-icon name="person"></ion-icon>
           </h2>
         </Link>
+        <Link
+          className={styles.icon}
+          to="/settings"
+
+        </Link>
+        {user ? null : (
+          <Link
+          className={styles.icon}
+          to="/login"
+
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          <h2>
+            <ion-icon name="person"></ion-icon>
+          </h2>
+        </Link>
+
         )}
         
         {/* <Link
@@ -113,6 +161,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
           </h2>
 
         </Link>
+
       </div>
 
       <div className={styles.items}>
@@ -121,6 +170,15 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
         {user ? user.displayName : null}
 
         {/* Renderizar la imagen del usuario si existe */}
+
+        {userLogin &&
+          userLogin.user &&
+          userLogin.user.image &&
+          userLogin.user.image.length > 0 && (
+            <img src={userLogin.user.image[0]} alt="User Avatar" />
+          )}
+
+
         {userLocal ? 
             <div className={styles.containerPFP}>
               <img className={styles.userPFP} src={userLocal.image} alt="PFP"></img>
@@ -141,6 +199,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
         }
 
         {userLocal ? <p onClick={handleLogoutClick}>Logout</p> : null}
+
         {user ? <p onClick={handleLogoutClick}>Logout</p> : null}
 
         {/* {userLogin ? userLogin.email : null }
@@ -168,8 +227,11 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
 
         
 
-
         {user ? (
+
+        <p onClick={handleLogoutClick}>Logout</p>
+      ) : null} */}
+
           <div
             className={` ${styles.userInfo} ${styles.userContainer}`}
             onClick={handleDropdownToggle}
@@ -201,8 +263,8 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
           </div>
         ) : null}
 
-      </div>
 
+      </div>
     </div>
   );
 };

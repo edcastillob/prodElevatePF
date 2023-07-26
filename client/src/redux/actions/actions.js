@@ -16,12 +16,19 @@ import {
   DECREMENT_CART,
   INCREMENT_CART,
   CLEAR_CART,
+
+} from "./types";
+import axios from "axios";
+import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
+import { toast } from "react-toastify";
+
   GET_PRODUCT_ID,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
 
 import { toast } from "react-toastify";
+
 
 
 export const showProducts = () => {
@@ -180,6 +187,10 @@ export const addToCart = (product) => {
       position: "bottom-left",
     });
 
+  };
+};
+
+
   return {
     type: ADD_TO_CART,
     payload: product,
@@ -205,6 +216,12 @@ export const removeToCart = (product) => {
       position: "bottom-left",
     });
 
+  };
+};
+
+export const decrementToCart = (product) => {
+
+
   return {
     type: REMOVE_TO_CART,
     payload: product,
@@ -215,6 +232,7 @@ export const removeToCart = (product) => {
 
 export const decrementToCart = (product) => {
 
+
   return function (dispatch) {
     dispatch({
       type: DECREMENT_CART,
@@ -224,6 +242,10 @@ export const decrementToCart = (product) => {
       position: "bottom-left",
     });
 
+  };
+};
+
+
   return {
     type: DECREMENT_CART,
     payload: product,
@@ -231,6 +253,7 @@ export const decrementToCart = (product) => {
   };
 };
 }
+
 
 export const incrementToCart = (product) => {
   return {
@@ -248,9 +271,14 @@ export const clearCart = () => {
       position: "bottom-left",
     });
 
+  };
+};
+
+
   return {
     type: CLEAR_CART,
 
   };
 };
 }
+
