@@ -10,7 +10,14 @@ import { logout } from "../../redux/actions/actions";
 import userImg from "../.././assets/user.png"
 // import { useDispatch } from "react-redux";
 
+
 export const NavBar = ({ user, userLocal, handleSignIn }) => {
+=======
+
+  //Lógica Dropdown
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+
   const navigate = useNavigate();
   let userLogin = useSelector((state) => state.user);
   
@@ -35,11 +42,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
   //   }
   // }, [dispatch, navigate, user]);
 
-  // const userProve = {
-  //   name: "Luis Naveda",
-  //   email: "luisnaveda10@gmail.com",
-  //   images: userImg,
-  // }
+
 
   // if (userLogin) {
   //   console.log(userLogin);
@@ -56,6 +59,18 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
     window.location.reload(); // Forzar la recarga completa de la página
   };
 
+
+
+  console.log(user)
+
+  //Handle Dropdown
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  }
+
+
+  
+
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
       <div className={styles.divLogo}>
@@ -64,7 +79,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
         </Link>
       </div>
       <div className={styles.divSearch}>
-        <SearchBar />
+        {/* <SearchBar /> */}
       </div>
       <div className={styles.items}>
         <Link
@@ -76,7 +91,8 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
             <ion-icon name="cart"></ion-icon>
           </h2>
         </Link>
-        <Link
+        {user ? null : (
+          <Link
           className={styles.icon}
           to="/login"
           style={{ textDecoration: "none", color: "white" }}
@@ -85,7 +101,9 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
             <ion-icon name="person"></ion-icon>
           </h2>
         </Link>
-        <Link
+        )}
+        
+        {/* <Link
           className={styles.icon}
           to="/settings"
           style={{ textDecoration: "none", color: "white" }}
@@ -93,6 +111,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
           <h2>
             <ion-icon name="settings"></ion-icon>
           </h2>
+
         </Link>
       </div>
 
@@ -139,9 +158,49 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
         <img src={userProve.images} alt={userProve.name} className={styles.avatar} />
         {user ? user.displayName : null }  
 
+        </Link> */}
+        {userLogin &&
+          userLogin.user &&
+          userLogin.user.image &&
+          userLogin.user.image.length > 0 && (
+            <img src={userLogin.user.image[0]} alt="User Avatar" />
+          )}
+
+        
+
+
         {user ? (
-        <p onClick={handleLogoutClick}>Logout</p>
-      ) : null} */}
+          <div
+            className={` ${styles.userInfo} ${styles.userContainer}`}
+            onClick={handleDropdownToggle}
+          >
+            <p className={styles.name}>{user.displayName}</p>
+            <img src={user.photoURL} alt={user.displayName} className={styles.avatar} />
+
+            {/* Dropdown de opciones */}
+            {isDropdownOpen && (
+              <ul className={styles.dropdownOptions}>
+                <li>
+                  <Link
+                  className={styles.icon}
+                  to="/settings"
+                  style={{ textDecoration: "none", color: "black", fontFamily:'Poppins', textAlign:'start' }}
+                >
+                  <h6>
+                    <ion-icon name="settings"></ion-icon> Settings
+                  </h6>
+                </Link>
+                </li>
+
+                <li>{user ? <h6 style={{color:'black', fontFamily:'Poppins', textAlign:'start'}} onClick={handleLogoutClick}><ion-icon name="power"></ion-icon> Logout</h6> : null}
+                </li>
+                
+                
+              </ul>
+            )}
+          </div>
+        ) : null}
+
       </div>
 
     </div>

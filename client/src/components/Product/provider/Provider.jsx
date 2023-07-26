@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { addProvider } from "../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
-import styles from "./Provider.module.css"
+import styles from "./Provider.module.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const Provider = () => {
   const dispatch = useDispatch();
@@ -24,7 +27,7 @@ export const Provider = () => {
     event.preventDefault();
     console.log(provider);
     dispatch(addProvider(provider));
-    alert("Exito");
+    toast.success('¡Provider created successfully!');
     setProvider({
       name: "",
       email: "",

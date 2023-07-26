@@ -1,8 +1,10 @@
 /* Cart */
 .cartContainer {
   padding: 2rem 4rem;
-  height: 80vh;
+
+  min-height: 80vh;
   width: 100%;
+
 }
 
 .cartContainer h2 {
@@ -27,6 +29,7 @@
   align-items: center;
   grid-template-columns: 3fr 1fr 1fr 1fr;
   column-gap: 0.5rem;
+  text-align: left;
 }
 
 .cartItem {

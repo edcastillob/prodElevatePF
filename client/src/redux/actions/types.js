@@ -3,6 +3,7 @@ export const SHOW_PRODUCTS = "SHOW_PRODUCTS";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const GET_PRODUCT_NAME = "GET_PRODUCT_NAME";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
+export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 
 // Category
 export const ADD_CATEGORY = "ADD_CATEGORY";

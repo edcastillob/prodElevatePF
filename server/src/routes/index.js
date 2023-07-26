@@ -78,6 +78,7 @@ router.get("/profile", isAuthenticated, (req, res) => {
   });
 });
 
+
 // router.post(
 //     '/login', 
 //     passport.authenticate('local'), 
@@ -120,6 +121,7 @@ router.get("/profile", isAuthenticated, (req, res) => {
 //         }
 //     });
 // });
+
 
 
 router.post("/role", postRole);
