@@ -163,9 +163,8 @@ export const Product = () => {
             />
          
 
-        <div className="d-flex g-3">
-            {/* precio de compra de Producto */}
-        
+        {/* precio de compra de Producto */}
+        <div className="d-flex g-3">        
         <div className="input-group">
           <input
             className="form-control mb-3 w-25"
@@ -208,8 +207,8 @@ export const Product = () => {
         />
         
 
+          {/* Proveedor */}
         <div className="container-m">
-          {/* ... */}
           <select
             className="form-select form-select-sm mb-3 w-50 d-flex"
             name="provider"
