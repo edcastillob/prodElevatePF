@@ -21,6 +21,10 @@ import Cart from "./components/Cart/Cart";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { EditProduct } from "./components/Product/editProduct/EditProduct";
+
+
+
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -80,6 +84,7 @@ function App() {
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
+          <Route path="/productidedit/:id" element={<EditProduct />} />
 
           <Route path="/cart" element={<Cart />} />
           {currentUser && (
