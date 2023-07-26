@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { CardProduct } from "../Product/cardProduct/CardProduct";
+import { CardProduct } from "../Product/cardProduct/cardProduct";
 import { showProducts } from "../../redux/actions/actions";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { SearchBar } from "../SearchBar/SearchBar";
+import TypeIt from "typeit-react";
+import Marquee from "react-fast-marquee";
 import styles from "./Home.module.css";
 
 export const Home = () => {
@@ -42,8 +44,16 @@ export const Home = () => {
       window.removeEventListener("DOMContentLoaded", handleDOMContentLoaded);
     };
   }, [dispatch]);
+
+
   return (
     <div className={styles.container}>
+
+      <div className={styles.welcome}>
+        <Marquee className={styles.message}>
+           Welcome to ProdElevate - The place for the exponential growth of your business
+        </Marquee>
+      </div>
       <div className={styles.divSearch}>
         <SearchBar />
       </div>
@@ -67,7 +77,7 @@ export const Home = () => {
       )}
 
       {optionProducts?.map((product) => (
-        <CardProduct key={product.id} product={product} />
+        <CardProduct key={product.id} product={product}/>
       ))}
     </div>
     </div>

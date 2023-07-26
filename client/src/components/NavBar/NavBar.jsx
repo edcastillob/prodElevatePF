@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./NavBar.module.css";
-import { SearchBar } from "../SearchBar/SearchBar";
 import logo from "../../assets/logo_2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../users/Firebase/logout.js";
@@ -122,7 +121,10 @@ export const NavBar = ({ user, handleSignIn }) => {
 
             {/* Dropdown de opciones */}
             {isDropdownOpen && (
-              <ul className={styles.dropdownOptions}>
+              <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
+                <li>
+                  <h6 style={{color:'black', fontFamily:'Poppins', textAlign:'start'}}><ion-icon name="person"></ion-icon> Profile</h6>
+                </li>
                 <li>
                   <Link
                   className={styles.icon}
