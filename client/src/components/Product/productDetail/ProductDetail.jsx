@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getProductDetail } from '../../../redux/actions/actions';
-import { Card, CardImg, CardBody, CardTitle, CardText } from 'reactstrap';
-import loadingImg from '../../../assets/loading.png'
-import { getCategory } from '../../../redux/actions/actions';
-import styles from './ProductDetail.module.css'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { getProductDetail } from "../../../redux/actions/actions";
+import loadingImg from "../../../assets/loading.png";
+import { getCategory } from "../../../redux/actions/actions";
+import styles from "./ProductDetail.module.css";
 
+import { addToCart } from "../../../redux/actions/actions";
+import { Link } from "react-router-dom";
+// import { addToCart } from "../../../redux/actions/actions";
 export const ProductDetail = () => {
+ 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getCategory());
   }, []);
@@ -31,8 +35,12 @@ export const ProductDetail = () => {
   }, [dispatch, id]);
 
   const { images, categoryId, salePrice, description, name } = productDetail;
-  console.log(selectedCategory);
-  console.log(productDetail);
+
+  const handledAddToCart = (product) => {
+    dispatch(addToCart(productDetail));
+    navigate("/cart");
+  };
+
   // Buscar la categoría correspondiente al categoryId
   const category =
     selectedCategory.find((cat) => cat.id === categoryId)?.name ||
@@ -46,16 +54,32 @@ export const ProductDetail = () => {
         </div>
       ) : (
         <div className={styles.container}>
-        <div className={styles.divImg}>
-          <img src={images} alt={name}/>
-        </div>
-        <div className={styles.description}>
-          <h4>{name}</h4>
-          <p className={styles.descriptionItem}>{description} </p>
-          <h6>Category: {category} </h6>
-          <h4>Price ${salePrice} </h4>
-          <button className={styles.buttonCart}>Add to Cart</button>
-        </div>
+          <div className={styles.back}>
+            <Link to='/home'>
+              <div className={styles.backButton}>
+                <p><ion-icon name="arrow-round-back"></ion-icon><ion-icon name="home"></ion-icon></p>
+              </div>
+            </Link>
+          </div>
+          <div className={styles.divImg}>
+            <img src={images} alt={name} />
+          </div>
+          <div className={styles.description}>
+            <h4>{name}</h4>
+            {/* Utilizamos dangerouslySetInnerHTML para renderizar el HTML */}
+            <div
+              className={styles.descriptionItem}
+              dangerouslySetInnerHTML={{ __html: description }}
+            ></div>
+            <h6>Category: {category} </h6>
+            <h4>Price ${salePrice} </h4>
+            <button
+              className={styles.buttonCart}
+              onClick={() => handledAddToCart(productDetail)}
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       )}
     </div>

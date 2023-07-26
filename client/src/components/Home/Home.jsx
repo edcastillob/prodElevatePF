@@ -4,6 +4,7 @@ import { CardProduct } from "../Product/cardProduct/CardProduct";
 import { showProducts } from "../../redux/actions/actions";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { SearchBar } from "../SearchBar/SearchBar";
 import styles from "./Home.module.css";
 
 export const Home = () => {
@@ -42,11 +43,15 @@ export const Home = () => {
     };
   }, [dispatch]);
   return (
+    <div className={styles.container}>
+      <div className={styles.divSearch}>
+        <SearchBar />
+      </div>
     <div className={styles.cards}>
       {productsFiltered.length ? (
         <div>
           <NavLink
-            to="/home"
+            
             style={{ textDecoration: "none" }}
             onClick={() => {
               navigate.push("/home");
@@ -64,6 +69,7 @@ export const Home = () => {
       {optionProducts?.map((product) => (
         <CardProduct key={product.id} product={product} />
       ))}
+    </div>
     </div>
   );
 };

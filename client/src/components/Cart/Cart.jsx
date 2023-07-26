@@ -1,7 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import "react-toastify/dist/ReactToastify.css";
+
+
+import "react-toastify/dist/ReactToastify.css";
+//import StripeButton from "../StripeCart/StripeButton";
+
+
 import styles from "./Cart.module.css";
 import {
   addToCart,
@@ -11,6 +18,7 @@ import {
   removeToCart,
 } from "../../redux/actions/actions";
 import StripeButton from "../StripeButton/StripeButton";
+
 import { ToastContainer } from "react-toastify";
 
 const Cart = () => {
@@ -18,13 +26,24 @@ const Cart = () => {
 
   const dispatch = useDispatch();
 
+
+import { ToastContainer } from "react-toastify";
+
+const Cart = () => {
+  const { cartItems, cartTotalAmount } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+  console.log(cartItems);
+
   useEffect(() => {
     dispatch(calculateTotals());
   }, [cartItems]);
 
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
+
 
   const handledRemoveFromCart = (cartItem) => {
     dispatch(removeToCart(cartItem));
@@ -69,6 +88,7 @@ const Cart = () => {
         </div>
       ) : (
         <div>
+
           <div className={styles.continueShoping}>
             <Link to="/home">
               <svg
@@ -87,6 +107,7 @@ const Cart = () => {
               <span>Continue Shoping</span>
             </Link>
           </div>
+
           <div className={styles.titles}>
             <h3 className={styles.productTitle}>Product</h3>
             <h3 className={styles.price}>Price</h3>
@@ -99,8 +120,16 @@ const Cart = () => {
                 <div className={styles.cartProduct}>
                   <img src={cartItem.images} alt={cartItem.name} />
                   <div>
+
                     <h3>{cartItem.name}</h3>
                     <p>{cartItem.description}</p>
+
+                    <h3>{cartItem.name}</h3> 
+                    <div
+                      className={styles.descriptionItem}
+                      dangerouslySetInnerHTML={{ __html: cartItem.description }}
+                    ></div>
+
                     <button onClick={() => handledRemoveFromCart(cartItem)}>
                       Remove
                     </button>
@@ -130,12 +159,36 @@ const Cart = () => {
                 <span>Subtotal</span>
                 <span className={styles.amount}>${cartTotalAmount}</span>
               </div>
+
               <p>Taxes and Shiping include</p>
               <StripeButton cartItems={cartItems} />
+
+              <p>Taxes and Shiping</p>
+              <StripeButton cartItems={cartItems} />
+              <div className={styles.continueShoping}>
+                <Link to="/home">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    className="bi bi-arrow-left"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                    />
+                  </svg>
+                  <span>Continue Shoping</span>
+                </Link>
+              </div>
+
             </div>
           </div>
         </div>
       )}
+
       <ToastContainer />
     </div>
   );

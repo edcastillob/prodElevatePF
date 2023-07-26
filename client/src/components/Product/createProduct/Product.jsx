@@ -7,6 +7,11 @@ import {
 } from "../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Product.module.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 
 export const Product = () => {
   const dispatch = useDispatch();
@@ -35,6 +40,15 @@ export const Product = () => {
     provider: [],
     images: [],
   });
+  const [description, setDescription] = useState('');
+
+  const handleDescriptionChange = (value) => {
+    setDescription(value);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      description: value,
+    }));
+  };
 
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
@@ -68,7 +82,7 @@ export const Product = () => {
     event.preventDefault();
     console.log(product);
     dispatch(addProduct(product));
-    alert("Exito");
+    toast.success('¡Product created successfully!');
     setProduct({
       category: "",
       name: "",
@@ -119,16 +133,28 @@ export const Product = () => {
         </div>
         
 
-        {/* Descripcion de Producto */}
-        
-        <input
-          className="form-control mb-3"
-          type="textarea"
-          name="description"
-          placeholder="Description"
-          value={product.description}
-          onChange={handleChange}
-        />
+         {/* Descripcion de Producto */}
+         <div className="form-control mb-3">            
+            <ReactQuill
+              value={product.description}
+              onChange={handleDescriptionChange}
+              modules={{
+                toolbar: [
+                  [{ header: [1, 2, 3, 4, false] }],
+                  [ 'bold', 'italic', 'underline', 'strike'],
+                  [{ list: 'ordered' }, { list: 'bullet' }],
+                  ['link'],
+                ],
+              }}
+              formats={[
+                'header',
+                'bold', 'italic', 'underline', 'strike',
+                'list', 'bullet',
+                'link', 'image',
+              ]}
+              placeholder="enter description to product..."
+            />
+          </div>
 
         <div className="d-flex g-3">
             {/* precio de compra de Producto */}

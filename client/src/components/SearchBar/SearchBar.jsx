@@ -26,7 +26,7 @@ export const SearchBar = () => {
         value={name}
         autoComplete="off"
         className={styles.searchInput}
-        placeholder="Search product or category"
+        placeholder="Search product..."
         onChange={handleChange}
       />
       <button onClick={handleClick}>

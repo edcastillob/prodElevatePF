@@ -19,10 +19,22 @@ import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
 import Cart from "./components/Cart/Cart";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { EditProduct } from "./components/Product/editProduct/EditProduct";
+
+
+
+
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
+
+  const [currentUserLocal, setCurrentUserLocal] = useState(null);
+
 
   useEffect(() => {
     setShowNavBar(location.pathname !== "/");
@@ -35,12 +47,20 @@ function App() {
         const uid = user.uid;
         console.log("Usuario logueado:", user);
         setCurrentUser(user);
+      navigate("/home");
       } else {
+
         console.log("Usuario no logueado");
         setCurrentUser(null);
+
+        // console.log("Usuario no logueado");
+        // setCurrentUser(null);
+        // navigate("/");
+
       }
     });
   }, []);
+
 
   const handleSignIn = async () => {
     try {
@@ -48,10 +68,33 @@ function App() {
       console.log(user, ".......");
       setCurrentUser(user);
     } catch (error) {}
+
+
+  useEffect(() => {
+    // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
+    const storedUserData = JSON.parse(localStorage.getItem("user"));
+    if (storedUserData) {
+      // No necesitamos el estado global de Redux, simplemente utilizamos el "user" prop
+      setCurrentUserLocal(storedUserData);
+    }
+  }, []);
+
+  const handleSignIn = async () => {
+    try {
+
+
+
+      const user = await handleGoogleSignIn();      
+      setCurrentUser(user);
+      navigate("/home");
+    } catch (error) {
+      navigate("/login");   }
+
+
   };
   return (
     <>
-      {showNavBar && <NavBar user={currentUser} handleSignIn={handleSignIn} />}
+      {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />}
       <div>
         <Routes>
           <Route exact path="/" element={<Landing />} />
@@ -64,9 +107,30 @@ function App() {
           {/* <Route exact path="/" element={<Provider />} /> */}
           <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
-          <Route path="/settings" element={<Configuration />} />
+          <Route path="/productidedit/:id" element={<EditProduct />} />
+
           <Route path="/cart" element={<Cart />} />
+
+
+          {(currentUser || currentUserLocal) && (
+          <Route path="/settings" element={<Configuration />} />
+
+          <Route path="/cart" element={<Cart />} />
+
+          )}
+
         </Routes>
+        <ToastContainer 
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        closeButton={false}
+        theme="dark"
+        />
         <Footer />
       </div>
     </>
@@ -74,3 +138,4 @@ function App() {
 }
 
 export default App;
+

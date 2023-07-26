@@ -9,7 +9,7 @@ import adidas from '../../assets/adidas.png';
 import puma from '../../assets/puma.png';
 import apple from '../../assets/apple.png';
 import samsung from '../../assets/samsung.png';
-import ml from '../../assets/ml.png';
+
 
 
 
@@ -26,7 +26,7 @@ export const Landing = () => {
         arrows: false,
       };
     
-    const companyLogos = [adidas, puma, apple, samsung, ml]
+    const companyLogos = [adidas, puma, apple, samsung]
 
   return (
         <div className={styles.container}>
@@ -47,15 +47,18 @@ export const Landing = () => {
                     <h1 className={styles.title}>Welcome to ProdElevate</h1>
                     <h4 style={{color:'#cacaca', fontFamily: 'Poppins'}}>It's time to...</h4>
                     <div className={styles.item}>
-                        <img src={check} alt="check" />
+                        {/* <img src={check} alt="check" /> */}
+                        <span style={{color: 'white'}}>&#8680;</span>
                         <p className={styles.description}>Take full control of your business</p>
                     </div>
                     <div className={styles.item}>
-                        <img src={check} alt="check" />
+                        {/* <img src={check} alt="check" /> */}
+                        <span style={{color: 'white'}}>&#8680;</span>
                         <p className={styles.description}>Control and manage your finances and inventory</p>
                     </div>
                     <div className={styles.item}>
-                        <img src={check} alt="check" />
+                        {/* <img src={check} alt="check" /> */}
+                        <span style={{color: 'white'}}>&#8680;</span>
                         <p className={styles.description} style={{marginTop:'1rem'}}>Increase your sales and accelerate your business growth with our powerful management tool</p>
                     </div>
                     <Link to='/home' className={styles.button}>

@@ -18,8 +18,13 @@ import {
 } from "../actions/types";
 
 const initialState = {
+
   cartItems: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
+
+  cartItems: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
@@ -125,6 +130,7 @@ function reducer(state = initialState, actions) {
           return item;
         });
 
+
         return {
           ...state,
           cartItems: updatedCartItems,
@@ -135,6 +141,20 @@ function reducer(state = initialState, actions) {
           ...state,
           cartItems: [...state.cartItems, newItem],
         };
+
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        return {
+          ...state,
+          cartItems: updatedCartItems,
+        };
+      } else {
+        const newItem = { ...actions.payload, cartQuantity: 1 };
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        return {
+          ...state,
+          cartItems: [...state.cartItems, newItem],
+        };
+
       }
     }
 
@@ -165,6 +185,9 @@ function reducer(state = initialState, actions) {
       const newCartItem = state.cartItems.filter(
         (cartItem) => cartItem.id !== actions.payload.id
       );
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+
       return {
         ...state,
         cartItems: newCartItem,
