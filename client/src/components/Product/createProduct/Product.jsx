@@ -11,13 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import objeto1 from '../../../assets/objeto1.png';
-import objeto2 from '../../../assets/objeto2.png';
-import objeto3 from '../../../assets/objeto3.png';
-import objeto4 from '../../../assets/objeto4.png';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+
 
 
 
