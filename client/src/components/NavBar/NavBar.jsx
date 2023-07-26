@@ -6,15 +6,20 @@ import { logoutUser } from "../users/Firebase/logout.js";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/actions";
 // import { useSelector } from "react-redux";
-// import userImg from "../.././assets/user.png"
+import userImg from "../.././assets/user.png"
 // import { useDispatch } from "react-redux";
 
-export const NavBar = ({ user, handleSignIn }) => {
+
+export const NavBar = ({ user, userLocal, handleSignIn }) => {
+
+
   //Lógica Dropdown
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+
   const navigate = useNavigate();
-  const userLogin = useSelector((state) => state.user);
+  let userLogin = useSelector((state) => state.user);
+  
   const dispatch = useDispatch();
 
   // const handleLogoutClick = () => {
@@ -28,30 +33,33 @@ export const NavBar = ({ user, handleSignIn }) => {
   //   // Redirige al login después de cerrar sesión
   //   navigate("/login");
   // };
-  useEffect(() => {
-    // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
-    const storedUserData = JSON.parse(localStorage.getItem("user"));
-    if (storedUserData) {
-      dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
-    }
-  }, [dispatch, navigate, user]);
+  // useEffect(() => {
+  //   // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
+  //   const storedUserData = JSON.parse(localStorage.getItem("user"));
+  //   if (storedUserData) {
+  //     dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
+  //   }
+  // }, [dispatch, navigate, user]);
 
 
 
-  if (userLogin) {
-    console.log(userLogin);
-    const email = userLogin[0].User.email;
-    console.log(email);
-  }
+  // if (userLogin) {
+  //   console.log(userLogin);
+  //   const email = userLogin[0].User.email;
+  //   console.log(email);
+  // }
 
   const handleLogoutClick = () => {
-    if (user.displayName) {
-      logoutUser();
-    } else {
+    if (userLocal) {
       dispatch(logout());
+    } else {
+      logoutUser();
     }
     window.location.reload(); // Forzar la recarga completa de la página
   };
+
+
+
   console.log(user)
 
   //Handle Dropdown
@@ -60,54 +68,53 @@ export const NavBar = ({ user, handleSignIn }) => {
   }
 
 
-  
-  return (
-    <div className={`p-0 m-0 ${styles.navContainer}`}>
-      <div className={styles.divLogo}>
-        <Link to="/home">
-          <img className="img-fluid" src={logo} alt="img-logo" />
-        </Link>
-      </div>
-      <div className={styles.divSearch}>
-        {/* <SearchBar /> */}
-      </div>
-      <div className={styles.items}>
+return (
+  <div className={`p-0 m-0 ${styles.navContainer}`}>
+    <div className={styles.divLogo}>
+      <Link to="/home">
+        <img className="img-fluid" src={logo} alt="img-logo" />
+      </Link>
+    </div>
+    <div className={styles.divSearch}>
+      {/* <SearchBar /> */}
+    </div>
+    <div className={styles.items}>
+      <Link
+        className={styles.icon}
+        to="/cart"
+        style={{ textDecoration: "none", color: "white" }}
+      >
+        <h2 className={styles.icon}>
+          <ion-icon name="cart"></ion-icon>
+        </h2>
+      </Link>
+      {user ? null : (
         <Link
-          className={styles.icon}
-          to="/cart"
-          style={{ textDecoration: "none", color: "white" }}
-        >
-          <h2 className={styles.icon}>
-            <ion-icon name="cart"></ion-icon>
-          </h2>
-        </Link>
-        {user ? null : (
-          <Link
-          className={styles.icon}
-          to="/login"
-          style={{ textDecoration: "none", color: "white" }}
-        >
-          <h2>
-            <ion-icon name="person"></ion-icon>
-          </h2>
-        </Link>
+        className={styles.icon}
+        to="/login"
+        style={{ textDecoration: "none", color: "white" }}
+      >
+        <h2>
+          <ion-icon name="person"></ion-icon>
+        </h2>
+      </Link>
+      )}
+      
+      {/* <Link
+        className={styles.icon}
+        to="/settings"
+        style={{ textDecoration: "none", color: "white" }}
+      >
+        <h2>
+          <ion-icon name="settings"></ion-icon>
+        </h2>
+      </Link> */}
+      {userLogin &&
+        userLogin.user &&
+        userLogin.user.image &&
+        userLogin.user.image.length > 0 && (
+          <img src={userLogin.user.image[0]} alt="User Avatar" />
         )}
-        
-        {/* <Link
-          className={styles.icon}
-          to="/settings"
-          style={{ textDecoration: "none", color: "white" }}
-        >
-          <h2>
-            <ion-icon name="settings"></ion-icon>
-          </h2>
-        </Link> */}
-        {userLogin &&
-          userLogin.user &&
-          userLogin.user.image &&
-          userLogin.user.image.length > 0 && (
-            <img src={userLogin.user.image[0]} alt="User Avatar" />
-          )}
 
         
 
