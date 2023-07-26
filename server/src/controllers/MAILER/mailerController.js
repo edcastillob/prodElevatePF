@@ -26,26 +26,26 @@ const sendMailer = async (product) => {
     const response = {
       body: {
         name: 'Administrador',
-        intro: `El producto ${product.dataValues.name} ha llegado a su stock minimo`,
+        intro: `El siguiente producto ha llegado a su stock mínimo:`,
         table : {
           data: [
             {
-              ID: `${product.dataValues.id}`,
+              // ID: `${product.dataValues.id}`,
               Producto: `${product.dataValues.name}`,
               Descripción: `${product.dataValues.description}`,
-              Stock_Min: `${product.dataValues.minStock} und.`
+              Stock_Minimo: `${product.dataValues.minStock} und.`
             }
           ]
         },
-        action: {
-          instructions: 'To get started with Mailgen, please click here:',
-          button: {
-              color: '#22BC66', // Optional action button color
-              text: 'Confirm your account',
-              link: 'https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010'
-          }
-      },
-        outro: 'Outro aqui...'   
+      //   action: {
+      //     instructions: 'To get started with Mailgen, please click here:',
+      //     button: {
+      //         color: '#22BC66', // Optional action button color
+      //         text: 'Confirm your account',
+      //         link: 'https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010'
+      //     }
+      // },
+        outro: 'Revisa el inventario del producto'   
       }
     }
 
@@ -54,7 +54,7 @@ const sendMailer = async (product) => {
     const message = {
       from: process.env.EMAIL, // sender address
       to: 'mendozaveralucia@gmail.com', // list of receivers
-      subject: "Advertencia de Stock Mínimo", // Subject line
+      subject: "Notificación de Stock Mínimo", // Subject line
       // text: "Hello world?", // plain text body
       // html: "<b>Hello world  test</b>", // html body
       html: mail

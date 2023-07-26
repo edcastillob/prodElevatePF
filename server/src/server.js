@@ -9,9 +9,9 @@ const { User } = require("./db");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
 const bodyParser = require('body-parser');
 
-// Socket Server - P1
-const http = require('http');
-const { Server } = require('socket.io');
+// // Socket Server - P1
+// const http = require('http');
+// const { Server } = require('socket.io');
 
 const server = express();
 server.use(bodyParser.json({ limit: '3mb' }));
@@ -122,21 +122,21 @@ passport.deserializeUser(function (id, done) {
 
 server.use(router);
 
-// Configurando el Socket Server - P2
-const serverNode = http.createServer(server);
-const io = new Server(serverNode);
+// // Configurando el Socket Server - P2
+// const serverNode = http.createServer(server);
+// const io = new Server(serverNode);
 
-// Conexion
-io.on('connection', socket => {
-  console.log(socket.id, 'Client id')
+// // Conexion socket con frontend
+// io.on('connection', socket => {
+//   console.log(socket.id, 'Client id')
 
-  socket.on('chat', (body) => {
-    console.log(body, 'chat')
-    socket.broadcast.emit('message', {
-      body,
-      from: socket.id.slice(6)
-    })
-  })
-})
+//   socket.on('chat', (body) => {
+//     console.log(body, 'chat')
+//     socket.broadcast.emit('message', {
+//       body,
+//       from: socket.id.slice(6)
+//     })
+//   })
+// })
 
-module.exports = serverNode;
+module.exports = server;

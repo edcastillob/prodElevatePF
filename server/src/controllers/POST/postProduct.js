@@ -1,4 +1,4 @@
-const { sendMailer } = require("../../controller/mailerController");
+const { sendMailer } = require("../MAILER/mailerController");
 const { Product, Provider } = require("../../db");
 
 async function postProduct(req, res) {   
@@ -28,7 +28,7 @@ async function postProduct(req, res) {
             categoryId
         });
 
-        if (product && minStock) {
+        if (product && minStock >= 0) {
           sendMailer(product);
         }
 

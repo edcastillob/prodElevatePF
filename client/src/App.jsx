@@ -111,7 +111,7 @@ function App() {
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )}
-          <Route path="/chat/" element={<Chat />} />
+          {/* <Route path="/chat/" element={<Chat />} /> */}
         </Routes>
         <ToastContainer
           position="top-center"
