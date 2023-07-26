@@ -45,24 +45,6 @@ const Cart = () => {
   return (
     <div className={styles.cartContainer}>
       <h2>Shoping Cart</h2>
-      <div className={styles.continueShoping}>
-        <Link to="/home">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            className="bi bi-arrow-left"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule="evenodd"
-              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-            />
-          </svg>
-          <span>Continue Shoping</span>
-        </Link>
-      </div>
       {cartItems.length === 0 ? (
         <div className={styles.cartEmpty}>
           <p>Your Cart esta vacio</p>
@@ -87,6 +69,24 @@ const Cart = () => {
         </div>
       ) : (
         <div>
+          <div className={styles.continueShoping}>
+            <Link to="/home">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                className="bi bi-arrow-left"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                />
+              </svg>
+              <span>Continue Shoping</span>
+            </Link>
+          </div>
           <div className={styles.titles}>
             <h3 className={styles.productTitle}>Product</h3>
             <h3 className={styles.price}>Price</h3>
