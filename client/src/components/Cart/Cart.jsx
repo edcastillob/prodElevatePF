@@ -14,12 +14,16 @@ import StripeButton from "../StripeButton/StripeButton";
 import { ToastContainer } from "react-toastify";
 
 const Cart = () => {
-  const { cartItems, cartTotalAmount } = useSelector((state) => state);
+  let { cartItems, cartTotalAmount } = useSelector((state) => state);
 
   const dispatch = useDispatch();
-  console.log(cartItems);
+
   useEffect(() => {
     dispatch(calculateTotals());
+  }, [cartItems]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   const handledRemoveFromCart = (cartItem) => {
