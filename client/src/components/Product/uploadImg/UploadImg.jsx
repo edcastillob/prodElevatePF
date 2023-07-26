@@ -12,8 +12,7 @@ export const UploadImg = ({
 
   const uploadImages = async (event) => {
     const files = event.target.files;
-    // if (files && files.length + uploadedImages.length > 3) {
-      if (!files || files.length === 0) {
+    if (files.length + uploadedImages.length > 3) {
       alert("You can only upload 3 images per product.");
       return;
     }
@@ -64,15 +63,6 @@ export const UploadImg = ({
         multiple
       />
 
-      {loading ? <img src={loadingImg} alt="Loading" /> : ""}
-      {uploadedImages?.map((img, index) => (
-        <div key={index}>
-          <img src={img} style={{ width: "300px" }} alt="Uploaded" />
-          <button type="button" onClick={() => handleRemoveImage(index)}>
-            Remove
-          </button>
-        </div>
-      ))}
     </div>
   );
 };
