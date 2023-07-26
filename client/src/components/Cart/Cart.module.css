@@ -154,6 +154,7 @@
   cursor: pointer;
   background-color: black;
   color: white;
+  margin-bottom: 2rem;
 }
 
 .continueShoping,
@@ -172,6 +173,11 @@
 .continueShoping a span,
 .startShoping a span {
   margin-left: 0.5rem;
+}
+
+.continueShoping {
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .cartEmpty {
