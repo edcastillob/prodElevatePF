@@ -58,6 +58,9 @@ router.get("/logout", function (req, res, next) {
     if (err) {
       return next(err);
     }
+
+    req.session.destroy();
+
     res.send("Session Closed Correctly");
   });
 });
@@ -76,6 +79,10 @@ router.get("/profile", isAuthenticated, (req, res) => {
     },
   });
 });
+
+
+router.post("/role", postRole);
+
 
 
 // router.post(
@@ -124,6 +131,7 @@ router.get("/profile", isAuthenticated, (req, res) => {
 
 
 router.post("/role", postRole);
+
 
 router.get("/user", getAllUsers);
 router.post("/user", postUser);
