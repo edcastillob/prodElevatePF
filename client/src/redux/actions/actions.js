@@ -145,10 +145,8 @@ export const login = (userData) => {
     return async (dispatch) => {
       const response = await axios.post(`${ENDPOINT}login`, userData);
       if (response.data) {
-        const user = response.data.User; 
-        localStorage.setItem("user", JSON.stringify(user));       
-        window.location.reload()
-        return dispatch({ type: LOGIN, payload: user });
+        const user = response.data;        
+        return dispatch({ type: LOGIN, payload: user.User });
       }
       throw new Error("Credenciales inválidas");
     };
@@ -160,7 +158,7 @@ export const login = (userData) => {
 export const logout = () => {
   try {
     return async (dispatch) => {
-      localStorage.removeItem("user"); // Eliminar la información del usuario del sessionStorage
+      sessionStorage.removeItem("user"); // Eliminar la información del usuario del sessionStorage
       return dispatch({ type: LOGIN, payload: null });
     };
   } catch (error) {
