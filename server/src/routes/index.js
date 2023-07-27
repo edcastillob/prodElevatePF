@@ -14,7 +14,6 @@ const { putUser } = require("../controllers/PUT/putUser");
 const { putCategory } = require("../controllers/PUT/putCategory");
 const { putProvider } = require("../controllers/PUT/putProvider");
 const { getAllUsers } = require("../controllers/GET/getAllUsers");
-// const { loginJS, logout } = require("../controllers/LOGIN-USER/login");
 const { getAllCategories } = require("../controllers/GET/getAllCategories");
 const { getAllProviders } = require("../controllers/GET/getAllProviders");
 const express = require("express");

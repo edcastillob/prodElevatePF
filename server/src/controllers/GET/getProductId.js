@@ -1,10 +1,12 @@
-const { Product } = require("../../db");
+const { Product, Provider } = require("../../db");
 
 async function getProductId(req, res) {
     try {
         const { id } = req.params;
-        console.log("El id es: ", id)
-        const productID = await Product.findByPk(id);
+        const productID = await Product.findByPk(id, {
+            include:  {model: Provider }
+        });
+        console.log(productID)
         
         return res.status(200).json(productID);
     } catch (error) {
