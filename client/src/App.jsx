@@ -66,15 +66,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
-    const storedUserData = JSON.parse(localStorage.getItem("user"));
-    if (storedUserData) {
-      // No necesitamos el estado global de Redux, simplemente utilizamos el "user" prop
-      setCurrentUserLocal(storedUserData);
-    }
-  }, []);
-
   const handleSignIn = async () => {
     try {
 
