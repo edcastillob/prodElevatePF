@@ -17,6 +17,7 @@ import {
   INCREMENT_CART,
   CLEAR_CART,
   GET_PRODUCT_ID,
+  EDIT_PRODUCT,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -70,6 +71,18 @@ export const addProduct = (product) => {
   };
 };
 
+export const editProduct = (productId, changeProduct) => {
+  console.log("1: ",changeProduct)
+  console.log("2: ",productId)
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}product/${productId}`, changeProduct);
+      return dispatch({ type: EDIT_PRODUCT, payload: { productId, changeProduct } });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addCategory = (category) => {
   return async (dispatch) => {
     try {
@@ -252,3 +265,4 @@ export const clearCart = () => {
   };
 };
 }
+

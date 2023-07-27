@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { UploadImg } from "../uploadImg/UploadImg";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import {
   getCategory,
   getProvider,
   getProductDetail,
+  editProduct
 } from "../../../redux/actions/actions";
 import styles from "./EditProduct.module.css";
 import ReactQuill from "react-quill";
@@ -39,7 +43,6 @@ export const EditProduct = () => {
     provider: [],
     stock: "",
     images: productDetail.images,
-
   });
 
   useEffect(() => {
@@ -55,10 +58,9 @@ export const EditProduct = () => {
       productDetail.description &&
       productDetail.purchasePrice &&
       productDetail.salePrice &&
-      productDetail.minStock &&     
-      Array.isArray(productDetail.providers) &&  
-      productDetail.images    
-
+      productDetail.minStock &&
+      Array.isArray(productDetail.providers) &&
+      productDetail.images
     ) {
       const providerIds = productDetail.providers.map((prov) => prov.id);
       setChangeProduct({
@@ -67,10 +69,10 @@ export const EditProduct = () => {
         description: productDetail.description,
         purchasePrice: productDetail.purchasePrice,
         salePrice: productDetail.salePrice,
-        minStock: productDetail.minStock,       
+        minStock: productDetail.minStock,
         provider: providerIds,
         stock: productDetail.stock,
-        images: productDetail.images
+        images: productDetail.images,
       });
     }
   }, [
@@ -79,10 +81,10 @@ export const EditProduct = () => {
     productDetail.description,
     productDetail.purchasePrice,
     productDetail.salePrice,
-    productDetail.minStock,   
+    productDetail.minStock,
     productDetail.providers,
     productDetail.stock,
-    productDetail.images
+    productDetail.images,
   ]);
 
   const handleChange = (event) => {
@@ -124,6 +126,39 @@ export const EditProduct = () => {
     }));
   };
 
+  
+
+  const handleRemoveImage = () => {
+    setChangeProduct((prevProduct) => ({
+      ...prevProduct,
+      images: "",
+    }));
+  };
+
+  const handleImageUpload = (imageUrls) => {
+    setChangeProduct((imgProduct) => ({
+      ...imgProduct,
+      images: [...(imgProduct.images || []), ...imageUrls],
+    }));    
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Datos enviados: ",changeProduct);
+    dispatch(editProduct(id, changeProduct));
+    toast.success('¡Edit Product successfully!');
+    // setProduct({
+    //   category: "",
+    //   name: "",
+    //   description: "",
+    //   purchasePrice: "",
+    //   salePrice: "",
+    //   minimumStock: "",
+    //   provider: [],
+    //   images: [],
+    // });  
+  };
+
   console.log("productDetail: ", productDetail);
   console.log("stock: ", productDetail.stock);
   console.log("changeProduct:  ", changeProduct);
@@ -133,7 +168,7 @@ export const EditProduct = () => {
       <div className={styles.divLeft}>
         <hr />
         {/* Formulario */}
-        <form>
+        <form onSubmit={handleSubmit} className={styles.form}>
           {/* Categoria de Producto */}
           <div className="d-flex justify-content-around">
             <select
@@ -163,7 +198,6 @@ export const EditProduct = () => {
             onChange={handleChange}
             defaultValue={productDetail.name}
           />
-
 
           {/* Descripcion de Producto */}
 
@@ -234,9 +268,6 @@ export const EditProduct = () => {
             onChange={handleChange}
           />
 
-          
-        
-
           {/* Proveedor */}
           <div className="container-m">
             <select
@@ -256,7 +287,6 @@ export const EditProduct = () => {
 
             <div className="d-flex w-50">
               {changeProduct.provider?.map((providerId) => {
-                
                 const selectedProvider = provider.find(
                   (prov) => prov.id === providerId
                 );
@@ -284,25 +314,59 @@ export const EditProduct = () => {
                   </ul>
                 );
               })}
-          </div>
-                 
-          {/* stock minimo de Producto */}
-          <input
-            className="form-control mb-3"
-            type="text"
-            name="stock"
-            placeholder="-- Minimum stock --"
-            value={changeProduct.stock}
-            onChange={handleChange}
+            </div>
+
+            {/* stock minimo de Producto */}
+            <input
+              className="form-control mb-3"
+              type="text"
+              name="stock"
+              placeholder="-- Minimum stock --"
+              value={changeProduct.stock}
+              onChange={handleChange}
             />
-          <div>
-           <img
-             src={changeProduct.images}
-             alt=""
-             style={{ width: "200px", height: "auto" }}
-           /> 
+            <div>
+              <div className="d-flex align-items-center">
+                <div>
+                {changeProduct.images ? (
+      <div>
+        <button
+          type="button"
+          className="btn btn-danger btn-sm"
+          onClick={handleRemoveImage}
+        >
+          X
+        </button>
+        <img
+          src={changeProduct.images}
+          alt=""
+          style={{ width: "200px", height: "auto" }}
+        />
+      </div>
+    ) : (
+      <div>
+        <h6 style={{ fontFamily: "Poppins", textAlign: "start", marginTop: "-1rem" }}>
+          Image:
+        </h6>
+        <UploadImg
+          onImageUpload={handleImageUpload}
+          uploadedImages={changeProduct.images}
+          clearUploadedImages={() =>
+          setChangeProduct((product) => ({ ...product, images: [] }))
+           }
+          />
+      </div>
+    )}
+                <br />
+                  
+                  
+                </div>
+              </div>
+            </div>
           </div>
-          </div>  
+        <button type="submit" class="btn btn-dark">
+          edit product
+        </button>
         </form>
       </div>
     </div>
