@@ -10,6 +10,7 @@ export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const GET_CATEGORY = "GET_CATEGORY";
 export const GET_CATEGORY_ID = "GET_CATEGORY_ID";
+export const EDIT_CATEGORY = "EDIT_CATEGORY";
 
 //Provider
 export const ADD_PROVIDER = "ADD_PROVIDER";

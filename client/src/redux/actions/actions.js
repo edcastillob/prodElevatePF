@@ -18,6 +18,7 @@ import {
   CLEAR_CART,
   EDIT_PRODUCT,
   GET_CATEGORY_ID,
+  EDIT_CATEGORY,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -122,6 +123,19 @@ export const getCategoryId = (id) => {
   };
 };
 
+export const categoryEdit = (categoryId, editCategory) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}category/${categoryId}`, editCategory);
+      return dispatch({
+        type:EDIT_CATEGORY,
+        payload: { categoryId, editCategory },
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addProvider = (provider) => {
   return async (dispatch) => {
     try {

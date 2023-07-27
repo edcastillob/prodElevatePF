@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategory } from '../../../../redux/actions/actions';
+import { Link } from "react-router-dom";
+
 
 export const ShowCategory = () => {
   const dispatch = useDispatch();
@@ -8,30 +10,35 @@ export const ShowCategory = () => {
     dispatch(getCategory());
   }, []);
 
-  const categories = useSelector((state) => state.category);
+  const category = useSelector((state) => state.category);
 
-  const compareCategories = (a, b) => {
+  const comparecategory = (a, b) => {
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
     if (nameA < nameB) return -1;
     if (nameA > nameB) return 1;
     return 0;
   };
-  categories.sort(compareCategories);
+  category.sort(comparecategory);
 
-  const handleEdit = (category) => {
-    console.log('Editar categoría:', category);
-  };
-
+ 
+  console.log("desde show:" , category)
   return (
     <div>
-      {categories.map((category) => (
-        <div key={category.id} style={categoryContainerStyle}>
+      {category.map((category) => (
+        <div key={category.id} style={categoryContainerStyle}>            
           <div>Name: {category.name}</div>
           <div>Description: {category.description}</div>
-          <button className='btn btn-dark' onClick={() => handleEdit(category)}>Update</button>
+         
+      <Link title="Edit Category" to={`/categoryedit/${category.id}`}>
+            <button>
+              <ion-icon name="create"></ion-icon>
+            </button>
+          </Link>
         </div>
-      ))}
+      )
+      )
+      }
     </div>
   );
 };

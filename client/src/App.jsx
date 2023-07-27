@@ -24,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
+import { ProvidersAll } from "./components/Product/provider/ProvidersAll/ProvidersAll";
 
 function App() {
   const location = useLocation();
@@ -39,6 +40,8 @@ function App() {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
+
+      console.log("Yonatan id user: ",user)
       if (user) {
         const uid = user.uid;
         console.log("Usuario logueado:", user);
@@ -84,13 +87,14 @@ function App() {
           <Route exact path="/producto" element={<Product />} />
           {/* <Route exact path="/categoria" element={<Category />} /> */}
           <Route exact path="/categoria" element={<ShowCategory/>} />
-          <Route exact path="/proveedor" element={<Provider />} />
+          <Route exact path="/proveedor" element={<ProvidersAll />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/usuario" element={<CreateUser />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/productidedit/:id" element={<EditProduct />} />
+          <Route path="/categoryedit/:id" element={<EditCategory />} />
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )}

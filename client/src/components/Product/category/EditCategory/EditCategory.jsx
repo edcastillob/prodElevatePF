@@ -1,19 +1,41 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addCategory } from '../../../../redux/actions/actions';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {  categoryEdit, getCategoryId } from '../../../../redux/actions/actions';
 import styles from './EditCategory.module.css'
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 export const EditCategory = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
-  const { id } = params;
+  const { id } = params; 
+
+
   
-  
+  const category = useSelector((state) => state.category);
   const [editCategory, setEditCategory] = useState({
-    name: "",
-    description: "",
+    name: category.name,
+    description: category.description,
   });
+  
+  useEffect(() => {    
+    dispatch(getCategoryId(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (
+      category.name &&
+      category.description 
+    ) {      
+      setEditCategory({
+        name: category.name,
+        description: category.description
+      });
+    }
+  }, [
+    category.name,
+    category.description
+  ]);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -23,20 +45,14 @@ export const EditCategory = () => {
     });
   };
 
-  // const handleChangeCheckBox = (event) => {
-  //     event.preventDefault();
-  //     setEditeditCategory({...editCategory, isActive : event.target.checked});
-  //   }
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(editCategory);
-    dispatch(addCategory(editCategory));
-    alert("Exito");
-    setEditCategory({
-      name: "",
-      description: "",
-    });
+    dispatch(categoryEdit(id, editCategory));
+    alert("successfully updated"); 
+    navigate("/settings");
   };
+  console.log("Edit category: ", editCategory)
   return (
     <div>
         
@@ -44,21 +60,8 @@ export const EditCategory = () => {
         <ion-icon name="arrow-round-back"></ion-icon>
         <h2 className={styles.mainTitle}>Create New Category</h2>      
         <hr />
-        <form onSubmit={ handleSubmit } className={styles.formContainer}>
-        
-        {/* <label htmlFor="isActive">active</label>
-        <input
-        className='form-check-input mt-10'
-        type="checkbox"
-        name='isActive'
-        id='isActive'
-        value={category.isActive}
-        onChange={handleChangeCheckBox}
-        />
-        <br /> */}
 
-        
-        
+        <form onSubmit={ handleSubmit } className={styles.formContainer}>   
         {/* Nombre de categoria */}
         <label htmlFor="name">Name: </label>        
         <input
@@ -79,7 +82,7 @@ export const EditCategory = () => {
         onChange={handleChange}
       />
         <br />
-        <button className={styles.btn}>Create Category</button> 
+        <button className={styles.btn}>Update Category</button> 
         </form>
       </div>
     </div>

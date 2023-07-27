@@ -17,6 +17,7 @@ import {
   SHOW_PRODUCTS,
   EDIT_PRODUCT,
   GET_CATEGORY_ID,
+  EDIT_CATEGORY,
 } from "../actions/types";
 
 const initialState = {
@@ -221,6 +222,14 @@ function reducer(state = initialState, actions) {
         ...state,
         products: state.products.map((product) =>
           product.id === productId ? { ...product, ...updatedProduct } : product
+        ),
+      };
+      case EDIT_CATEGORY:
+      const { categoryId, updatedCategory } = actions.payload;
+      return {
+        ...state,
+        category: state.category.map((categ) =>
+          categ.id === categoryId ? { ...category, ...updatedCategory } : category
         ),
       };
 
