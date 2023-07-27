@@ -3,10 +3,10 @@ import styles from "./cardProduct.module.css";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/actions/actions";
 
+
 export const CardProduct = ({ product }) => {
   const { id, name, category, images, salePrice } = product;
   // <NavLink title="Detail Product" to={`/productid/${id}`}></NavLink>
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,13 +38,16 @@ export const CardProduct = ({ product }) => {
           Add to Cart
         </button>
 
+        
         <Link
         title="Edit Product"
         to={`/productidedit/${id}`}        
         >
-        Edit
-        </Link>
-
+          <button className={styles.editProduct}><ion-icon name="create"></ion-icon></button>
+        </Link> 
+        
+         
+        
       </div>
     </div>
   );
