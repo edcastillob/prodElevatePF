@@ -10,6 +10,7 @@ export const UploadImg = ({ onImageUpload }) => {
     const files = event.target.files;
 
     if (!files || files.length === 0) {
+
       alert("You can only upload 3 images per product.");
       return;
     }
@@ -45,6 +46,7 @@ export const UploadImg = ({ onImageUpload }) => {
         selectedImages.map((img, index) => (
           <img key={index} src={img} style={{ display: "none" }} alt="Uploaded" />
         ))}
+
     </div>
   );
 };
