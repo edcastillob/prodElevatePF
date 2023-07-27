@@ -7,6 +7,13 @@ import {
 } from "../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Product.module.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+
+
 
 export const Product = () => {
   const dispatch = useDispatch();
@@ -35,6 +42,15 @@ export const Product = () => {
     provider: [],
     images: [],
   });
+  const [description, setDescription] = useState('');
+
+  const handleDescriptionChange = (value) => {
+    setDescription(value);
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      description: value,
+    }));
+  };
 
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
@@ -68,7 +84,7 @@ export const Product = () => {
     event.preventDefault();
     console.log(product);
     dispatch(addProduct(product));
-    alert("Exito");
+    toast.success('¡Product created successfully!');
     setProduct({
       category: "",
       name: "",
@@ -83,12 +99,15 @@ export const Product = () => {
     setIsImageUploaded(false);
   };
 
+
+   
+
   return (
     <div className={styles.container}>
       <div className={styles.divLeft}>
       <hr />
       <form onSubmit={handleSubmit} className={styles.form}>
-        <h5 style={{fontFamily:'Poppins'}}>New product</h5>
+        <h5 style={{fontFamily:'Poppins', marginBottom:'2rem'}}>New product</h5>
         {/* Categoria de Producto */}
         <div className="d-flex justify-content-around">
         <select
@@ -119,16 +138,30 @@ export const Product = () => {
         </div>
         
 
-        {/* Descripcion de Producto */}
-        
-        <input
-          className="form-control mb-3"
-          type="textarea"
-          name="description"
-          placeholder="Description"
-          value={product.description}
-          onChange={handleChange}
-        />
+         {/* Descripcion de Producto */}
+         {/* <h6 style={{fontFamily:'Poppins', textAlign:'start'}}>Description:</h6> */}
+                    
+            <ReactQuill
+              value={product.description}
+              onChange={handleDescriptionChange}
+              modules={{
+                toolbar: [
+                  [{ header: [1, 2, 3, 4, false] }],
+                  [ 'bold', 'italic', 'underline', 'strike'],
+                  [{ list: 'ordered' }, { list: 'bullet' }],
+                  ['link'],
+                ],
+              }}
+              formats={[
+                'header',
+                'bold', 'italic', 'underline', 'strike',
+                'list', 'bullet',
+                'link', 'image',
+              ]}
+              placeholder="Enter product description..."
+              style={{height:'130px', marginBottom:'4rem'}}
+            />
+         
 
         <div className="d-flex g-3">
             {/* precio de compra de Producto */}
@@ -173,11 +206,12 @@ export const Product = () => {
           value={product.minimumStock}
           onChange={handleChange}
         />
+        
 
         <div className="container-m">
           {/* ... */}
           <select
-            className="form-select form-select-sm mb-3 w-100"
+            className="form-select form-select-sm mb-3 w-50 d-flex"
             name="provider"
             id="provider"
             value=""
@@ -191,13 +225,13 @@ export const Product = () => {
             ))}
           </select>
 
-          <div>
+          <div className="d-flex w-50">
             {product.provider?.map((provId) => {
               const selectedProvider = provider.find(
                 (prov) => prov.id === provId
               );
               return (
-                <ul className="list-group" key={`provider_${provId}`}>
+                <ul className="list-group d-flex" key={`provider_${provId}`}>
                   <li
                     className="list-group-item"
                     key={`provider_item_${provId}`}
@@ -210,22 +244,25 @@ export const Product = () => {
           </div>
           {/* ... */}
         </div>
+              <br />
 
+          {/* <UploadImg onImageUpload={handleImageUpload} /> */}
+          <h6 style={{fontFamily:'Poppins', textAlign:'start', marginTop:'-1rem'}}>Image:</h6>
+          <UploadImg
+          onImageUpload={handleImageUpload}
+          uploadedImages={product.images}
+          clearUploadedImages={() =>
+          setUserData((product) => ({ ...product, images: [] }))
+           }
+          />
         <br />
         <button className={styles.create}>Create</button>
       </form>
 
       </div>
-      <div className={styles.divRight}>
-        
-        {/* <UploadImg onImageUpload={handleImageUpload} /> */}
-      <UploadImg
-        onImageUpload={handleImageUpload}
-        uploadedImages={product.images}
-        clearUploadedImages={() =>
-          setUserData((product) => ({ ...product, images: [] }))
-        }
-      />
+      <div className={styles.containerRight}>
+      
+           
           
       </div>
     </div>

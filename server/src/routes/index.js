@@ -21,6 +21,7 @@ const express = require("express");
 const passport = require("passport");
 const authController = require("../controllers/authController");
 const { postStripe } = require("../controllers/POST/postStripe");
+const { postFavorite } = require("../controllers/POST/postFavorite");
 
 const router = Router();
 
@@ -28,12 +29,10 @@ router.get("/", function (req, res) {
   res.send("Backend prodElevate");
 });
 
-
 // Ruta login
 // router.get('/login', (req, res) => {
 //     res.render('login');
 // });
-
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
   const { name, identification, numPhone, address, image, email } =
@@ -78,13 +77,15 @@ router.get("/profile", isAuthenticated, (req, res) => {
   });
 });
 
+router.post("/role", postRole);
+
 // router.post(
-//     '/login', 
-//     passport.authenticate('local'), 
+//     '/login',
+//     passport.authenticate('local'),
 //     (req, res) => {
 //         const { name, identification, numPhone, address, image, email } = req.user.dataValues;
 //         res.setHeader("Access-Control-Allow-Credentials", "true"); // Habilitar las credenciales
-//         res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Define aquí la URL de tu frontend 
+//         res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Define aquí la URL de tu frontend
 //         res.send({
 //             User: {
 //                 name,
@@ -121,7 +122,6 @@ router.get("/profile", isAuthenticated, (req, res) => {
 //     });
 // });
 
-
 router.post("/role", postRole);
 
 router.get("/user", getAllUsers);
@@ -143,5 +143,7 @@ router.post("/provider", postProvider);
 router.put("/provider/:id", putProvider);
 
 router.post("/stripe", postStripe);
+
+router.post("/favorite", postFavorite);
 
 module.exports = router;

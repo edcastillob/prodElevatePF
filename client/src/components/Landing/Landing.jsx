@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from './Landing.module.css';
 import logo from '../../assets/logo_2.png';
-import check from '../../assets/check.png';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";

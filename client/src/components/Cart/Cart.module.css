@@ -1,7 +1,8 @@
 /* Cart */
 .cartContainer {
   padding: 2rem 4rem;
-  height: 80vh;
+
+  min-height: 80vh;
   width: 100%;
 }
 
@@ -27,6 +28,7 @@
   align-items: center;
   grid-template-columns: 3fr 1fr 1fr 1fr;
   column-gap: 0.5rem;
+  text-align: left;
 }
 
 .cartItem {
@@ -174,6 +176,11 @@
 .continueShoping a span,
 .startShoping a span {
   margin-left: 0.5rem;
+}
+
+.continueShoping {
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .cartEmpty {

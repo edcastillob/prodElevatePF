@@ -1,12 +1,13 @@
 .container{
     width: 100%;
-    height: 80vh;
+    min-height: 100%;
     display: flex;
 }
 
 .divLeft{
     /* border: 1px solid black; */
     width: 50%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,19 +21,21 @@
     border-radius: 10px;
 }
 
-.divRight{
+.containerRight{
     /* border: 1px solid red; */
     width: 50%;
-    height: 100%;
+    min-height: 100%;
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     padding: 1rem;
-    background-image: radial-gradient(circle at 74.18% -16.45%, #00f3ff 0, #00c9fc 25%, #059cc7 50%, #287293 75%, #294e64 100%);
+    background-color: #000924;
+    background-image: url('https://blog.miwally.com/hubfs/ecommerce-guia-completa-para-tu-tienda-online_portada_ecommerce.jpg');
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
 }
+
 
 .create{
     border: 1px solid #cacaca;
@@ -50,3 +53,20 @@
     }
     
 }
+
+
+
+.slider-container {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #011248;
+  }
+  
+  .slider-container img {
+    height: 200px;
+    width: 200px;
+  }
