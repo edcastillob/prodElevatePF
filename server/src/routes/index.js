@@ -22,6 +22,10 @@ const passport = require("passport");
 const authController = require("../controllers/authController");
 const { postStripe } = require("../controllers/POST/postStripe");
 const { postFavorite } = require("../controllers/POST/postFavorite");
+const { deleteUser } = require("../controllers/DELETE/deleteUser");
+const { deleteProduct } = require("../controllers/DELETE/deleteProduct");
+const { deleteProvider } = require("../controllers/DELETE/deteleProvider");
+const { deleteCategory } = require("../controllers/DELETE/deleteCategory");
 
 const router = Router();
 
@@ -127,20 +131,24 @@ router.post("/role", postRole);
 router.get("/user", getAllUsers);
 router.post("/user", postUser);
 router.put("/user/:id", putUser);
+router.delete("/user/:id", deleteUser);
 
 router.get("/product", getAllProducts);
 router.get("/productid/:id", getProductId);
 
 router.post("/product", postProduct);
 router.put("/product/:id", putProduct);
+router.delete("/product/:id", deleteProduct);
 
 router.get("/category", getAllCategories);
 router.post("/category", postCategory);
 router.put("/category/:id", putCategory);
+router.delete("/category/:id", deleteCategory);
 
 router.get("/provider", getAllProviders);
 router.post("/provider", postProvider);
 router.put("/provider/:id", putProvider);
+router.delete("/provider/:id", deleteProvider);
 
 router.post("/stripe", postStripe);
 
