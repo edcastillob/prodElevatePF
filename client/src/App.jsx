@@ -18,12 +18,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./components/users/Firebase/firebase.js";
 import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
 import Cart from "./components/Cart/Cart";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
-
-
 
 function App() {
   const location = useLocation();
@@ -43,16 +41,14 @@ function App() {
         const uid = user.uid;
         console.log("Usuario logueado:", user);
         setCurrentUser(user);
-      navigate("/home");
+        navigate("/home");
       } else {
-
         console.log("Usuario no logueado");
         setCurrentUser(null);
 
         // console.log("Usuario no logueado");
         // setCurrentUser(null);
         // navigate("/");
-
       }
     });
   }, []);
@@ -68,16 +64,12 @@ function App() {
 
   const handleSignIn = async () => {
     try {
-
-
-
-      const user = await handleGoogleSignIn();      
+      const user = await handleGoogleSignIn();
       setCurrentUser(user);
       navigate("/home");
     } catch (error) {
-      navigate("/login");   }
-
-
+      navigate("/login");
+    }
   };
   return (
     <>
@@ -86,38 +78,30 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/" element={<Landing />} />
-          <Route exact path="/categoria" element={<Category />} />
+          <Route exact path="/home" element={<Home />} />
           <Route exact path="/producto" element={<Product />} />
+          <Route exact path="/categoria" element={<Category />} />
           <Route exact path="/proveedor" element={<Provider />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/usuario" element={<CreateUser />} />
-          {/* <Route exact path="/" element={<Provider />} /> */}
-          <Route exact path="/home" element={<Home />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
-          <Route path="/productidedit/:id" element={<EditProduct />} />
-
           <Route path="/cart" element={<Cart />} />
-
-
+          <Route path="/productidedit/:id" element={<EditProduct />} />
           {(currentUser || currentUserLocal) && (
-          <Route path="/settings" element={<Configuration />} />
+            <Route path="/settings" element={<Configuration />} />
           )}
-
-
-          
-
         </Routes>
-        <ToastContainer 
-        position="top-center"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        closeButton={false}
-        theme="dark"
+        <ToastContainer
+          position="top-center"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          closeButton={false}
+          theme="dark"
         />
         <Footer />
       </div>
@@ -126,4 +110,3 @@ function App() {
 }
 
 export default App;
-

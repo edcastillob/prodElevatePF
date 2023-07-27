@@ -17,12 +17,12 @@ import {
   INCREMENT_CART,
   CLEAR_CART,
   GET_PRODUCT_ID,
+  EDIT_PRODUCT,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
 
 import { toast } from "react-toastify";
-
 
 export const showProducts = () => {
   try {
@@ -39,8 +39,6 @@ export const showProducts = () => {
 export const getProductName = (name) => {
   return { type: GET_PRODUCT_NAME, payload: name };
 };
-
-
 
 export const getProductDetail = (id) => {
   return (dispatch) => {
@@ -70,6 +68,21 @@ export const addProduct = (product) => {
   };
 };
 
+export const editProduct = (productId, changeProduct) => {
+  console.log("1: ", changeProduct);
+  console.log("2: ", productId);
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}product/${productId}`, changeProduct);
+      return dispatch({
+        type: EDIT_PRODUCT,
+        payload: { productId, changeProduct },
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addCategory = (category) => {
   return async (dispatch) => {
     try {
@@ -170,7 +183,6 @@ export const logout = () => {
 
 //Cart
 export const addToCart = (product) => {
-
   return function (dispatch) {
     dispatch({
       type: ADD_TO_CART,
@@ -180,13 +192,12 @@ export const addToCart = (product) => {
       position: "bottom-left",
     });
 
-  return {
-    type: ADD_TO_CART,
-    payload: product,
-
+    return {
+      type: ADD_TO_CART,
+      payload: product,
+    };
   };
 };
-}
 
 export const calculateTotals = () => {
   return {
@@ -195,7 +206,6 @@ export const calculateTotals = () => {
 };
 
 export const removeToCart = (product) => {
-
   return function (dispatch) {
     dispatch({
       type: REMOVE_TO_CART,
@@ -205,16 +215,14 @@ export const removeToCart = (product) => {
       position: "bottom-left",
     });
 
-  return {
-    type: REMOVE_TO_CART,
-    payload: product,
-
+    return {
+      type: REMOVE_TO_CART,
+      payload: product,
+    };
   };
 };
-}
 
 export const decrementToCart = (product) => {
-
   return function (dispatch) {
     dispatch({
       type: DECREMENT_CART,
@@ -224,13 +232,12 @@ export const decrementToCart = (product) => {
       position: "bottom-left",
     });
 
-  return {
-    type: DECREMENT_CART,
-    payload: product,
-
+    return {
+      type: DECREMENT_CART,
+      payload: product,
+    };
   };
 };
-}
 
 export const incrementToCart = (product) => {
   return {
@@ -239,7 +246,6 @@ export const incrementToCart = (product) => {
   };
 };
 export const clearCart = () => {
-
   return function (dispatch) {
     dispatch({
       type: CLEAR_CART,
@@ -248,9 +254,8 @@ export const clearCart = () => {
       position: "bottom-left",
     });
 
-  return {
-    type: CLEAR_CART,
-
+    return {
+      type: CLEAR_CART,
+    };
   };
 };
-}
