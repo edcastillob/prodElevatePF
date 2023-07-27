@@ -80,48 +80,47 @@ router.get("/profile", isAuthenticated, (req, res) => {
 
 router.post("/role", postRole);
 
-// router.post(
-//     '/login',
-//     passport.authenticate('local'),
-//     (req, res) => {
-//         const { name, identification, numPhone, address, image, email } = req.user.dataValues;
-//         res.setHeader("Access-Control-Allow-Credentials", "true"); // Habilitar las credenciales
-//         res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Define aquí la URL de tu frontend
-//         res.send({
-//             User: {
-//                 name,
-//                 identification,
-//                 email,
-//                 numPhone,
-//                 address,
-//                 image
-//             }
-//         });
-//     }
-// );
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  const { name, identification, numPhone, address, image, email } =
+    req.user.dataValues;
+  res.setHeader("Access-Control-Allow-Credentials", "true"); // Habilitar las credenciales
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Define aquí la URL de tu frontend
+  res.send({
+    User: {
+      name,
+      identification,
+      email,
+      numPhone,
+      address,
+      image,
+    },
+  });
+});
 
-// // Ruta Logout
-// router.get('/logout', function(req, res, next) {
-//     req.logout(function(err) {
-//         if (err) { return next(err); }
-//         res.send('Session Closed Correctly');
-//     });
-// });
+// Ruta Logout
+router.get("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.send("Session Closed Correctly");
+  });
+});
 
-// Ruta protegida
-// router.get('/profile', isAuthenticated, (req, res) => {
-//     const { name, identification, numPhone, address, image, isActive } = req.user;
-//     res.send({
-//         User: {
-//             name,
-//             identification,
-//             numPhone,
-//             address,
-//             image,
-//             isActive
-//         }
-//     });
-// });
+//Ruta protegida
+router.get("/profile", isAuthenticated, (req, res) => {
+  const { name, identification, numPhone, address, image, isActive } = req.user;
+  res.send({
+    User: {
+      name,
+      identification,
+      numPhone,
+      address,
+      image,
+      isActive,
+    },
+  });
+});
 
 router.post("/role", postRole);
 
