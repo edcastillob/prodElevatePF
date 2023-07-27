@@ -48,7 +48,7 @@ export const Home = () => {
 
   return (
     <div className={styles.container}>
-    <div className={styles.container}>
+   
    {/* //COMMENT */}
       <div className={styles.welcome}>
         <Marquee className={styles.message}>
