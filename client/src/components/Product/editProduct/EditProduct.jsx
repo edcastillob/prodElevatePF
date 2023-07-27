@@ -19,8 +19,6 @@ export const EditProduct = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { id } = params;
-  const [loading, setLoading] = useState(true);
-
   const category = useSelector((state) => state.category);
   const provider = useSelector((state) => state.provider);
   const productDetail = useSelector((state) => state.productDetail);
