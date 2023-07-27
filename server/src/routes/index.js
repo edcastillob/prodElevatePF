@@ -56,9 +56,7 @@ router.get("/logout", function (req, res, next) {
     if (err) {
       return next(err);
     }
-
     req.session.destroy();
-
     res.send("Session Closed Correctly");
   });
 });
