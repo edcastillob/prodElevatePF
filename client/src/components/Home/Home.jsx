@@ -45,42 +45,40 @@ export const Home = () => {
     };
   }, [dispatch]);
 
-
   return (
     <div className={styles.container}>
-    <div className={styles.container}>
-   {/* //COMMENT */}
+      {/* //COMMENT */}
       <div className={styles.welcome}>
         <Marquee className={styles.message}>
-           Welcome to ProdElevate - The place for the exponential growth of your business
+          Welcome to ProdElevate - The place for the exponential growth of your
+          business
         </Marquee>
       </div>
       <div className={styles.divSearch}>
         <SearchBar />
       </div>
-    <div className={styles.cards}>
-      {productsFiltered.length ? (
-        <div>
-          <NavLink
-            
-            style={{ textDecoration: "none" }}
-            onClick={() => {
-              navigate.push("/home");
-              dispatch(showProducts());
-            }}
-          >
-            {" "}
-            <h3>&#8592;</h3>{" "}
-          </NavLink>
-        </div>
-      ) : (
-        ""
-      )}
+      <div className={styles.cards}>
+        {productsFiltered.length ? (
+          <div>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              onClick={() => {
+                navigate.push("/home");
+                dispatch(showProducts());
+              }}
+            >
+              {" "}
+              <h3>&#8592;</h3>{" "}
+            </NavLink>
+          </div>
+        ) : (
+          ""
+        )}
 
-      {optionProducts?.map((product) => (
-        <CardProduct key={product.id} product={product}/>
-      ))}
-    </div>
+        {optionProducts?.map((product) => (
+          <CardProduct key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };

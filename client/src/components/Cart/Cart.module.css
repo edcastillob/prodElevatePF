@@ -4,7 +4,6 @@
 
   min-height: 80vh;
   width: 100%;
-
 }
 
 .cartContainer h2 {
@@ -177,6 +176,11 @@
 .continueShoping a span,
 .startShoping a span {
   margin-left: 0.5rem;
+}
+
+.continueShoping {
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .cartEmpty {
