@@ -169,7 +169,7 @@ let cleanImg = [];
                 {errors.password && <div className="invalid-feedback">{errors.password}</div>}
               </div>
               {/* _____________CONFIRM PASSWORD________________ */}
-              <div className={`${styles.field} ${styles['input-field']}`}>
+              <div className={`${styles.field} ${styles['input-field']} mb-3`}>
                 <input 
                   type="password" 
                   name='confirmPassword' 
