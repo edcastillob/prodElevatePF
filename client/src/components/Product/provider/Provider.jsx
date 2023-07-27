@@ -14,6 +14,7 @@ export const Provider = () => {
     address: "",
     numPhone: "",
     identification: "",
+    country: "",
   });
 
   const handleChange = (event) => {
@@ -34,13 +35,14 @@ export const Provider = () => {
       address: "",
       numPhone: "",
       identification: "",
+      country: "",
     });
   };
   return (
     <div className={styles.container}>
         <div className={styles.divLeft}>
           <form onSubmit={handleSubmit} className={styles.formContainer}>
-            <h4 style={{fontFamily: 'Poppins'}}>New Provider</h4>
+            <h4 style={{fontFamily: 'Poppins', marginBottom:'1rem'}}>New Provider</h4>
           {/* Nombre de proveedor */}
           
           <input
@@ -69,6 +71,16 @@ export const Provider = () => {
             name="email"
             placeholder="Email"
             value={provider.email}
+            onChange={handleChange}
+          />
+
+          {/* Pais de proveedor */}
+          <input
+            className="form-control mb-3 w-75"
+            type="textarea"
+            name="country"
+            placeholder="Country"
+            value={provider.country}
             onChange={handleChange}
           />
 
