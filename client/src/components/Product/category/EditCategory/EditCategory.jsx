@@ -9,6 +9,7 @@ export const EditCategory = () => {
   const params = useParams();
   const { id } = params;
   
+  
   const [editCategory, setEditCategory] = useState({
     name: "",
     description: "",

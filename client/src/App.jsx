@@ -6,10 +6,10 @@ import { Home } from "./components/Home/Home";
 import { ProductDetail } from "./components/Product/productDetail/ProductDetail";
 import { Landing } from "./components/Landing/Landing";
 // import { Category } from "./components/Product/category/Category";
-import { EditCategory } from "./components/Product//category/EditCategory/EditCategory";
 import { Product } from "./components/Product/createProduct/Product";
 import { Provider } from "./components/Product/provider/Provider";
 import { Role } from "./components/users/role/Role";
+import { EditCategory } from "./components/Product//category/EditCategory/EditCategory";
 import { CreateUser } from "./components/users/createUser/CreateUser";
 import { Configuration } from "./components/Configuration/Configuration";
 import { Footer } from "./components/Footer/Footer";
@@ -23,6 +23,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
+import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
 
 function App() {
   const location = useLocation();
@@ -82,7 +83,7 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/producto" element={<Product />} />
           {/* <Route exact path="/categoria" element={<Category />} /> */}
-          <Route exact path="/categoria" element={<EditCategory/>} />
+          <Route exact path="/categoria" element={<ShowCategory/>} />
           <Route exact path="/proveedor" element={<Provider />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/login" element={<Login />} />
