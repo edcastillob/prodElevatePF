@@ -65,7 +65,7 @@ export const ProductDetail = () => {
             <img src={images} alt={name} />
           </div>
           <div className={styles.description}>
-            <h4>{name}</h4>
+            <h4 style={{fontFamily:'Poppins'}}>{name}</h4>
             {/* Utilizamos dangerouslySetInnerHTML para renderizar el HTML */}
             <div
               className={styles.descriptionItem}
