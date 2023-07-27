@@ -7,13 +7,10 @@ import {
 } from "../../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Product.module.css";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-
-
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export const Product = () => {
   const dispatch = useDispatch();
@@ -42,7 +39,7 @@ export const Product = () => {
     provider: [],
     images: [],
   });
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
 
   const handleDescriptionChange = (value) => {
     setDescription(value);
@@ -84,7 +81,7 @@ export const Product = () => {
     event.preventDefault();
     console.log(product);
     dispatch(addProduct(product));
-    toast.success('¡Product created successfully!');
+    toast.success("¡Product created successfully!");
     setProduct({
       category: "",
       name: "",
@@ -99,171 +96,173 @@ export const Product = () => {
     setIsImageUploaded(false);
   };
 
-
-   
-
   return (
     <div className={styles.container}>
       <div className={styles.divLeft}>
-      <hr />
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h5 style={{fontFamily:'Poppins', marginBottom:'2rem'}}>New product</h5>
-        {/* Categoria de Producto */}
-        <div className="d-flex justify-content-around">
-        <select
-          className="form-select form-select-sm mb-3 w-50 d-start"
-          name="category"
-          id="category"
-          value={product.category}
-          onChange={handleChange}
-        >
-          <option value="">-- Category --</option>
-          {sortedCategories.map((catg) => (
-            <option key={catg.id} value={catg.id}>
-              {catg.name}
-            </option>
-          ))}
-        </select>
+        <hr />
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
+            New product
+          </h5>
+          {/* Categoria de Producto */}
+          <div className="d-flex justify-content-around">
+            <select
+              className="form-select form-select-sm mb-3 w-50 d-start"
+              name="category"
+              id="category"
+              value={product.category}
+              onChange={handleChange}
+            >
+              <option value="">-- Category --</option>
+              {sortedCategories.map((catg) => (
+                <option key={catg.id} value={catg.id}>
+                  {catg.name}
+                </option>
+              ))}
+            </select>
 
-        {/* Nombre de Producto */}
-        
-        <input
-          className="form-control mb-3 w-50 d-end"
-          type="text"
-          name="name"
-          placeholder= "Product Name"
-          value={product.name}
-          onChange={handleChange}
-        />
-        </div>
-        
+            {/* Nombre de Producto */}
 
-         {/* Descripcion de Producto */}
-         {/* <h6 style={{fontFamily:'Poppins', textAlign:'start'}}>Description:</h6> */}
-                    
-            <ReactQuill
-              value={product.description}
-              onChange={handleDescriptionChange}
-              modules={{
-                toolbar: [
-                  [{ header: [1, 2, 3, 4, false] }],
-                  [ 'bold', 'italic', 'underline', 'strike'],
-                  [{ list: 'ordered' }, { list: 'bullet' }],
-                  ['link'],
-                ],
-              }}
-              formats={[
-                'header',
-                'bold', 'italic', 'underline', 'strike',
-                'list', 'bullet',
-                'link', 'image',
-              ]}
-              placeholder="Enter product description..."
-              style={{height:'130px', marginBottom:'4rem'}}
+            <input
+              className="form-control mb-3 w-50 d-end"
+              type="text"
+              name="name"
+              placeholder="Product Name"
+              value={product.name}
+              onChange={handleChange}
             />
-         
+          </div>
 
-        {/* precio de compra de Producto */}
-        <div className="d-flex g-3">        
-        <div className="input-group">
+          {/* Descripcion de Producto */}
+          {/* <h6 style={{fontFamily:'Poppins', textAlign:'start'}}>Description:</h6> */}
+
+          <ReactQuill
+            value={product.description}
+            onChange={handleDescriptionChange}
+            modules={{
+              toolbar: [
+                [{ header: [1, 2, 3, 4, false] }],
+                ["bold", "italic", "underline", "strike"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["link"],
+              ],
+            }}
+            formats={[
+              "header",
+              "bold",
+              "italic",
+              "underline",
+              "strike",
+              "list",
+              "bullet",
+              "link",
+              "image",
+            ]}
+            placeholder="Enter product description..."
+            style={{ height: "130px", marginBottom: "4rem" }}
+          />
+
+          {/* precio de compra de Producto */}
+          <div className="d-flex g-3">
+            <div className="input-group">
+              <input
+                className="form-control mb-3 w-25"
+                type="text"
+                name="purchasePrice"
+                placeholder="-- Purchase price --"
+                value={product.purchasePrice}
+                onChange={handleChange}
+              />
+              <span className="input-group-text mb-3">$</span>
+              {/* <span className="input-group-text mb-3">0.00</span> */}
+            </div>
+
+            {/* precio de venta de Producto */}
+
+            <div className="input-group">
+              <input
+                className="form-control mb-3 w-25"
+                type="text"
+                name="salePrice"
+                placeholder="-- Sale price --"
+                value={product.salePrice}
+                onChange={handleChange}
+              />
+              <span className="input-group-text mb-3">$</span>
+              {/* <span className="input-group-text mb-3">0.00</span> */}
+            </div>
+          </div>
+
+          {/* stock minimo de Producto */}
           <input
-            className="form-control mb-3 w-25"
-            type="text"
-            name="purchasePrice"
-            placeholder="-- Purchase price --"
-            value={product.purchasePrice}
+            className="form-control mb-3"
+            type="minimumStock"
+            name="minimumStock"
+            placeholder="-- Minimum stock --"
+            value={product.minimumStock}
             onChange={handleChange}
           />
-          <span className="input-group-text mb-3">$</span>
-          {/* <span className="input-group-text mb-3">0.00</span> */}
-        </div>
-
-        {/* precio de venta de Producto */}
-        
-        <div className="input-group">
-          <input
-            className="form-control mb-3 w-25"
-            type="text"
-            name="salePrice"
-            placeholder="-- Sale price --"
-            value={product.salePrice}
-            onChange={handleChange}
-          />
-          <span className="input-group-text mb-3">$</span>
-          {/* <span className="input-group-text mb-3">0.00</span> */}
-        </div>
-
-        </div>
-        
-
-        {/* stock minimo de Producto */}
-        <input
-          className="form-control mb-3"
-          type="minimumStock"
-          name="minimumStock"
-          placeholder="-- Minimum stock --"
-          value={product.minimumStock}
-          onChange={handleChange}
-        />
-        
 
           {/* Proveedor */}
-        <div className="container-m">
-          <select
-            className="form-select form-select-sm mb-3 w-50 d-flex"
-            name="provider"
-            id="provider"
-            value=""
-            onChange={handleProviderSelect}
-          >
-            <option value="">-- Select provider --</option>
-            {sortedproviders?.map((prov) => (
-              <option key={prov.id} value={prov.id}>
-                {prov.name}
-              </option>
-            ))}
-          </select>
+          <div className="container-m">
+            <select
+              className="form-select form-select-sm mb-3 w-50 d-flex"
+              name="provider"
+              id="provider"
+              value=""
+              onChange={handleProviderSelect}
+            >
+              <option value="">-- Select provider --</option>
+              {sortedproviders?.map((prov) => (
+                <option key={prov.id} value={prov.id}>
+                  {prov.name}
+                </option>
+              ))}
+            </select>
 
-          <div className="d-flex w-50">
-            {product.provider?.map((provId) => {
-              const selectedProvider = provider.find(
-                (prov) => prov.id === provId
-              );
-              return (
-                <ul className="list-group d-flex" key={`provider_${provId}`}>
-                  <li
-                    className="list-group-item"
-                    key={`provider_item_${provId}`}
-                  >
-                    {selectedProvider.name}
-                  </li>
-                </ul>
-              );
-            })}
+            <div className="d-flex w-50">
+              {product.provider?.map((provId) => {
+                const selectedProvider = provider.find(
+                  (prov) => prov.id === provId
+                );
+                return (
+                  <ul className="list-group d-flex" key={`provider_${provId}`}>
+                    <li
+                      className="list-group-item"
+                      key={`provider_item_${provId}`}
+                    >
+                      {selectedProvider.name}
+                    </li>
+                  </ul>
+                );
+              })}
+            </div>
+            {/* ... */}
           </div>
-          {/* ... */}
-        </div>
-              <br />
+          <br />
 
           {/* <UploadImg onImageUpload={handleImageUpload} /> */}
-          <h6 style={{fontFamily:'Poppins', textAlign:'start', marginTop:'-1rem'}}>Image:</h6>
+          <h6
+            style={{
+              fontFamily: "Poppins",
+              textAlign: "start",
+              marginTop: "-1rem",
+            }}
+          >
+            Image:
+          </h6>
           <UploadImg
-          onImageUpload={handleImageUpload}
-          uploadedImages={product.images}
-          clearUploadedImages={() =>
-          setUserData((product) => ({ ...product, images: [] }))
-           }
+            onImageUpload={handleImageUpload}
+            uploadedImages={product.images}
+            clearUploadedImages={() =>
+              setUserData((product) => ({ ...product, images: [] }))
+            }
           />
-        <br />
-        <button className={styles.create}>Create</button>
-      </form>
-
+          <br />
+          <button className={styles.create}>Create</button>
+        </form>
       </div>
-      <div className={styles.containerRight}>
-      
-           
-          
-      </div>
+      <div className={styles.containerRight}></div>
     </div>
   );
 };

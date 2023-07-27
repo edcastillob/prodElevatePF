@@ -4,7 +4,7 @@ export const ADD_PRODUCT = "ADD_PRODUCT";
 export const GET_PRODUCT_NAME = "GET_PRODUCT_NAME";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
-export const EDIT_PRODUCT ="EDIT_PRODUCT";
+export const EDIT_PRODUCT = "EDIT_PRODUCT";
 
 // Cgory
 export const ADD_CATEGORY = "ADD_CATEGORY";

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UploadImg } from "../uploadImg/UploadImg";
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import {
   getCategory,
   getProvider,
   getProductDetail,
-  editProduct
+  editProduct,
 } from "../../../redux/actions/actions";
 import styles from "./EditProduct.module.css";
 import ReactQuill from "react-quill";
@@ -126,8 +126,6 @@ export const EditProduct = () => {
     }));
   };
 
-  
-
   const handleRemoveImage = () => {
     setChangeProduct((prevProduct) => ({
       ...prevProduct,
@@ -139,24 +137,14 @@ export const EditProduct = () => {
     setChangeProduct((imgProduct) => ({
       ...imgProduct,
       images: [...(imgProduct.images || []), ...imageUrls],
-    }));    
+    }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos enviados: ",changeProduct);
+    console.log("Datos enviados: ", changeProduct);
     dispatch(editProduct(id, changeProduct));
-    toast.success('¡Edit Product successfully!');
-    // setProduct({
-    //   category: "",
-    //   name: "",
-    //   description: "",
-    //   purchasePrice: "",
-    //   salePrice: "",
-    //   minimumStock: "",
-    //   provider: [],
-    //   images: [],
-    // });  
+    toast.success("¡Edit Product successfully!");
   };
 
   console.log("productDetail: ", productDetail);
@@ -328,45 +316,52 @@ export const EditProduct = () => {
             <div>
               <div className="d-flex align-items-center">
                 <div>
-                {changeProduct.images ? (
-      <div>
-        <button
-          type="button"
-          className="btn btn-danger btn-sm"
-          onClick={handleRemoveImage}
-        >
-          X
-        </button>
-        <img
-          src={changeProduct.images}
-          alt=""
-          style={{ width: "200px", height: "auto" }}
-        />
-      </div>
-    ) : (
-      <div>
-        <h6 style={{ fontFamily: "Poppins", textAlign: "start", marginTop: "-1rem" }}>
-          Image:
-        </h6>
-        <UploadImg
-          onImageUpload={handleImageUpload}
-          uploadedImages={changeProduct.images}
-          clearUploadedImages={() =>
-          setChangeProduct((product) => ({ ...product, images: [] }))
-           }
-          />
-      </div>
-    )}
-                <br />
-                  
-                  
+                  {changeProduct.images ? (
+                    <div>
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-sm"
+                        onClick={handleRemoveImage}
+                      >
+                        X
+                      </button>
+                      <img
+                        src={changeProduct.images}
+                        alt=""
+                        style={{ width: "200px", height: "auto" }}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <h6
+                        style={{
+                          fontFamily: "Poppins",
+                          textAlign: "start",
+                          marginTop: "-1rem",
+                        }}
+                      >
+                        Image:
+                      </h6>
+                      <UploadImg
+                        onImageUpload={handleImageUpload}
+                        uploadedImages={changeProduct.images}
+                        clearUploadedImages={() =>
+                          setChangeProduct((product) => ({
+                            ...product,
+                            images: [],
+                          }))
+                        }
+                      />
+                    </div>
+                  )}
+                  <br />
                 </div>
               </div>
             </div>
           </div>
-        <button type="submit" class="btn btn-dark">
-          edit product
-        </button>
+          <button type="submit" class="btn btn-dark">
+            edit product
+          </button>
         </form>
       </div>
     </div>

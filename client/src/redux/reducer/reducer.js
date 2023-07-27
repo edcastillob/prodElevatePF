@@ -15,7 +15,7 @@ import {
   LOGIN,
   REMOVE_TO_CART,
   SHOW_PRODUCTS,
-  EDIT_PRODUCT
+  EDIT_PRODUCT,
 } from "../actions/types";
 
 const initialState = {
@@ -207,7 +207,7 @@ function reducer(state = initialState, actions) {
         cartItems: [],
       };
 
-      case EDIT_PRODUCT:
+    case EDIT_PRODUCT:
       const { productId, updatedProduct } = actions.payload;
       return {
         ...state,
