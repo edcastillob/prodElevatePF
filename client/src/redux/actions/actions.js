@@ -16,8 +16,8 @@ import {
   DECREMENT_CART,
   INCREMENT_CART,
   CLEAR_CART,
-  GET_PRODUCT_ID,
   EDIT_PRODUCT,
+  GET_CATEGORY_ID,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -69,8 +69,6 @@ export const addProduct = (product) => {
 };
 
 export const editProduct = (productId, changeProduct) => {
-  console.log("1: ", changeProduct);
-  console.log("2: ", productId);
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}product/${productId}`, changeProduct);
@@ -105,6 +103,23 @@ export const getCategory = () => {
   } catch (error) {
     throw new Error(error.message);
   }
+};
+
+export const getCategoryId = (id) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}category/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          dispatch({ type: GET_CATEGORY_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching category details."); // Lanza una nueva excepción
+        });
+    });
+  };
 };
 
 export const addProvider = (provider) => {
