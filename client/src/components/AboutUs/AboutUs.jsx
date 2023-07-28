@@ -46,9 +46,3 @@ export const AboutUs = () => {
     </div>
   );
 };
-/*
-    Con prodElevate aspiramos a propiciar un servicio rapido, versatil y seguro para todo tipo 
-    de cliente que vea en prodElevate lo que necesita para propulsar y administrar su negocio. 
-    La mayor meta es poder seguir creciendo junto a nuestros clientes y perfeccionar aun mas
-    la plataforma para su comodidad.
-*/
