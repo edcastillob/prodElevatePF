@@ -15,12 +15,14 @@ const { putCategory } = require("../controllers/PUT/putCategory");
 const { putProvider } = require("../controllers/PUT/putProvider");
 const { getAllUsers } = require("../controllers/GET/getAllUsers");
 const { getAllCategories } = require("../controllers/GET/getAllCategories");
+const { getCategoryId } = require("../controllers/GET/getCategoryId");
 const { getAllProviders } = require("../controllers/GET/getAllProviders");
 const express = require("express");
 const passport = require("passport");
 const authController = require("../controllers/authController");
 const { postStripe } = require("../controllers/POST/postStripe");
 const { postFavorite } = require("../controllers/POST/postFavorite");
+const { getProviderId } = require("../controllers/GET/getProviderId");
 
 const router = Router();
 
@@ -91,10 +93,12 @@ router.post("/product", postProduct);
 router.put("/product/:id", putProduct);
 
 router.get("/category", getAllCategories);
+router.get("/category/:id", getCategoryId);
 router.post("/category", postCategory);
 router.put("/category/:id", putCategory);
 
 router.get("/provider", getAllProviders);
+router.get("/provider/:id", getProviderId);
 router.post("/provider", postProvider);
 router.put("/provider/:id", putProvider);
 

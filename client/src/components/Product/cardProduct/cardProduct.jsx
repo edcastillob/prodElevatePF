@@ -12,7 +12,7 @@ export const CardProduct = ({ product }) => {
   const navigate = useNavigate();
 
   const handledAddToCart = (product) => {
-    dispatch(addToCart(product));
+    dispatch(addToCart(product)); 
     navigate("/cart");
   };
 

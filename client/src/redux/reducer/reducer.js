@@ -17,6 +17,9 @@ import {
   SHOW_PRODUCTS,
   EDIT_PRODUCT,
   GET_CATEGORY_ID,
+  EDIT_CATEGORY,
+  GET_PROVIDER_ID,
+  EDIT_PROVIDER,
 } from "../actions/types";
 
 const initialState = {
@@ -91,6 +94,12 @@ function reducer(state = initialState, actions) {
         ...state,
         provider: [...state.provider, payload],
       };
+      case GET_PROVIDER_ID:
+        console.log("Provider id: ",actions.payload);
+        return {
+          ...state,
+          provider: actions.payload,
+        };
 
     case GET_PROVIDER:
       return {
@@ -221,6 +230,22 @@ function reducer(state = initialState, actions) {
         ...state,
         products: state.products.map((product) =>
           product.id === productId ? { ...product, ...updatedProduct } : product
+        ),
+      };
+      case EDIT_CATEGORY:
+      const { categoryId, updatedCategory } = actions.payload;
+      return {
+        ...state,
+        category: state.category.map((categ) =>
+          categ.id === categoryId ? { ...category, ...updatedCategory } : category
+        ),
+      };
+      case EDIT_PROVIDER:
+      const { providerId, updateProvider } = actions.payload;
+      return {
+        ...state,
+        provider: state.provider.map((prov) =>
+          prov.id === providerId ? { ...provider, ...updateProvider } : provider
         ),
       };
 
