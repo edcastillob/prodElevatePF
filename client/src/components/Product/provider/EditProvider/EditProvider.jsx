@@ -74,9 +74,7 @@ export const EditProvider = () => {
     dispatch(editProvider(id, changeProvider));
     toast.success("¡Edit Provider successfully!");
   };
-  console.log(id)
-  console.log("Provider", provider)
-  console.log("Cambios ", changeProvider)
+ 
   return (
     <div className={styles.container}>
     <div className={styles.divLeft}>

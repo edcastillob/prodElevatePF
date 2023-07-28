@@ -31,7 +31,7 @@ export const ProvidersAll = () => {
       <input
         type="text"
         placeholder="Search provider"
-        value={searchTerm}
+        value={searchProvider}
         onChange={(event) => setSearchProvider(event.target.value)}
       />
 

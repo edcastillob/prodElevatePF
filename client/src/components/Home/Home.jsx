@@ -44,10 +44,8 @@ export const Home = () => {
       window.removeEventListener("DOMContentLoaded", handleDOMContentLoaded);
     };
   }, [dispatch]);
-
   return (
-    <div className={styles.container}>
-      {/* //COMMENT */}
+    <div className={styles.container}>      
       <div className={styles.welcome}>
         <Marquee className={styles.message}>
           Welcome to ProdElevate - The place for the exponential growth of your
@@ -57,6 +55,7 @@ export const Home = () => {
       <div className={styles.divSearch}>
         <SearchBar />
       </div>
+
       <div className={styles.cards}>
         {productsFiltered.length ? (
           <div>

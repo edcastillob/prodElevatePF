@@ -9,8 +9,14 @@ export const ShowCategory = () => {
   useEffect(() => {
     dispatch(getCategory());
   }, []);
-
+  
   const category = useSelector((state) => state.category);
+  useEffect(() => {
+    // Si category es un objeto, volvemos a obtener el array
+    if (typeof category === 'object') {
+      dispatch(getCategory());
+    }   
+  }, [category, dispatch]);
 
   const comparecategory = (a, b) => {
     const nameA = a.name.toUpperCase();
@@ -19,13 +25,17 @@ export const ShowCategory = () => {
     if (nameA > nameB) return 1;
     return 0;
   };
-  category.sort(comparecategory);
+  if (typeof category === 'Array') {
+    category.sort(comparecategory);
+    
+  }   
 
  
   console.log("desde show:" , category)
+  if (!category || category.length === 0) return <div>Loading...</div>;
   return (
     <div>
-      {category.map((category) => (
+      {category?.map((category) => (
         <div key={category.id} style={categoryContainerStyle}>            
           <div>Name: {category.name}</div>
           <div>Description: {category.description}</div>
