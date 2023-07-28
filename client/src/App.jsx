@@ -27,6 +27,8 @@ import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCat
 import { ProvidersAll } from "./components/Product/provider/ProvidersAll/ProvidersAll";
 import { EditProvider } from "./components/Product/provider/EditProvider/EditProvider";
 import { SettingsProduct } from "./components/Product/SettingsProduct/SettingProduct";
+import { UsersAll } from "./components/users/UsersAll/UsersAll";
+import { EditUser } from "./components/users/EditUser/EditUser";
 
 function App() {
   const location = useLocation();
@@ -101,11 +103,13 @@ function App() {
           <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/usuario" element={<CreateUser />} />
+          {/* <Route exact path="/usuario" element={<CreateUser />} /> */}
+          <Route exact path="/usuario" element={<UsersAll />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/productidedit/:id" element={<EditProduct />} />
           <Route path="/categoryedit/:id" element={<EditCategory />} />
+          <Route path="/useredit/:id" element={<EditUser />} />
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )}
