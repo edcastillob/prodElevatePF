@@ -15,6 +15,8 @@ export const EDIT_CATEGORY = "EDIT_CATEGORY";
 //Provider
 export const ADD_PROVIDER = "ADD_PROVIDER";
 export const GET_PROVIDER = "GET_PROVIDER";
+export const GET_PROVIDER_ID = "GET_PROVIDER_ID";
+export const EDIT_PROVIDER = "EDIT_PROVIDER";
 
 //User
 export const LOGIN = "LOGIN";

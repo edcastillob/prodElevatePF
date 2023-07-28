@@ -22,6 +22,7 @@ const passport = require("passport");
 const authController = require("../controllers/authController");
 const { postStripe } = require("../controllers/POST/postStripe");
 const { postFavorite } = require("../controllers/POST/postFavorite");
+const { getProviderId } = require("../controllers/GET/getProviderId");
 
 const router = Router();
 
@@ -99,6 +100,7 @@ router.post("/category", postCategory);
 router.put("/category/:id", putCategory);
 
 router.get("/provider", getAllProviders);
+router.get("/provider/:id", getProviderId);
 router.post("/provider", postProvider);
 router.put("/provider/:id", putProvider);
 

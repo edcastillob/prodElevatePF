@@ -19,6 +19,8 @@ import {
   EDIT_PRODUCT,
   GET_CATEGORY_ID,
   EDIT_CATEGORY,
+  GET_PROVIDER_ID,
+  EDIT_PROVIDER,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -146,7 +148,36 @@ export const addProvider = (provider) => {
     }
   };
 };
+export const getProviderId = (id) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}provider/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          dispatch({ type: GET_PROVIDER_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching provider"); 
+        });
+    });
+  };
+};
 
+export const editProvider = (providerId, editProvider) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}provider/${providerId}`, editProvider);
+      return dispatch({
+        type:EDIT_PROVIDER,
+        payload: { providerId, editProvider },
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addRole = (role) => {
   return async (dispatch) => {
     try {

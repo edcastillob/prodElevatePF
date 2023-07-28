@@ -25,6 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
 import { ProvidersAll } from "./components/Product/provider/ProvidersAll/ProvidersAll";
+import { EditProvider } from "./components/Product/provider/EditProvider/EditProvider";
 
 function App() {
   const location = useLocation();
@@ -70,8 +71,7 @@ function App() {
   const handleSignIn = async () => {
     try {
       const user = await handleGoogleSignIn();
-      setCurrentUser(user);
-      navigate("/home");
+      setCurrentUser(user);      
     } catch (error) {
       navigate("/login");
     }
@@ -88,6 +88,7 @@ function App() {
           {/* <Route exact path="/categoria" element={<Category />} /> */}
           <Route exact path="/categoria" element={<ShowCategory/>} />
           <Route exact path="/proveedor" element={<ProvidersAll />} />
+          <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/usuario" element={<CreateUser />} />
