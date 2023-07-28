@@ -4,7 +4,7 @@ const { conn } = require("./src/db");
 const PORT = 3001;
 
 conn
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     server.listen(PORT, () => {
       console.log(`prodElevate Server listening in port ${PORT}...`);
