@@ -1,7 +1,7 @@
 import { useState } from "react"; // Importa useState
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProvider } from "../../../../redux/actions/actions";
+import { deleteProvider, getProvider } from "../../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import styles from "./Providers.module.css";
 
@@ -24,6 +24,12 @@ export const ProvidersAll = () => {
   const filteredProvider = sortedProvider.filter((provider) =>
     provider.name.toLowerCase().includes(searchProvider.toLowerCase())
   );
+
+  const handleDeleteProvider = (providerId) => {
+    if (window.confirm("Are you sure you want to delete this provider?")) {
+      dispatch(deleteProvider(providerId));
+    }
+  };
 
   return (
     <div>
@@ -49,6 +55,9 @@ export const ProvidersAll = () => {
               <ion-icon name="create"></ion-icon>
             </button>
           </Link>
+          <button onClick={() => handleDeleteProvider(provider.id)}>
+              <ion-icon name="close"></ion-icon>
+          </button>
         </div>
       ))}
     </div>

@@ -21,6 +21,8 @@ import {
   GET_PROVIDER_ID,
   EDIT_PROVIDER,
   DELETE_PRODUCT,
+  DELETE_CATEGORY,
+  DELETE_PROVIDER,
 } from "../actions/types";
 
 const initialState = {
@@ -256,6 +258,21 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         products: updatedProducts,
+      };
+
+      case DELETE_CATEGORY:      
+      const updatedCateg = state.category.filter(
+        (cat) => cat.id !== actions.payload );     
+      return {
+        ...state,
+        category: updatedCateg,
+      };
+      case DELETE_PROVIDER:      
+      const updateProv = state.provider.filter(
+        (cat) => cat.id !== actions.payload );     
+      return {
+        ...state,
+        provider: updateProv,
       };
 
     default:

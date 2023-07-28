@@ -7,17 +7,20 @@ export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
-// Cgory
+// Category
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const GET_CATEGORY = "GET_CATEGORY";
 export const GET_CATEGORY_ID = "GET_CATEGORY_ID";
 export const EDIT_CATEGORY = "EDIT_CATEGORY";
+export const DELETE_CATEGORY = "DELETE_CATEGORY";
+
 
 //Provider
 export const ADD_PROVIDER = "ADD_PROVIDER";
 export const GET_PROVIDER = "GET_PROVIDER";
 export const GET_PROVIDER_ID = "GET_PROVIDER_ID";
 export const EDIT_PROVIDER = "EDIT_PROVIDER";
+export const DELETE_PROVIDER = "DELETE_PROVIDER";
 
 //User
 export const LOGIN = "LOGIN";
