@@ -26,6 +26,7 @@ import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
 import { ProvidersAll } from "./components/Product/provider/ProvidersAll/ProvidersAll";
 import { EditProvider } from "./components/Product/provider/EditProvider/EditProvider";
+import { SettingsProduct } from "./components/Product/SettingsProduct/SettingProduct";
 
 function App() {
   const location = useLocation();
@@ -87,9 +88,13 @@ function App() {
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
         <Routes>
+          {/* showcategory muestra todas las categorias es la vista al acceder a category desde admin */}
+          {/* ProviderAll muestra todas las providers es la vista al acceder a providers desde admin */}
+          {/* SettingsProduct muestra todas las products es la vista al acceder a Product desde admin */}
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
-          <Route exact path="/producto" element={<Product />} />
+          {/* <Route exact path="/producto" element={<Product />} /> */}
+          <Route exact path="/producto" element={<SettingsProduct />} />
           {/* <Route exact path="/categoria" element={<Category />} /> */}
           <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/proveedor" element={<ProvidersAll />} />
