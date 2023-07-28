@@ -22,6 +22,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
+import { AboutUs } from "./components/AboutUs/AboutUs";
+import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
+import { TermsConditions } from "./components/TermsConditions/TermsConditions";
+import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
 
 function App() {
   const location = useLocation();
@@ -79,6 +83,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
+          <Route exact path="/about" element={<AboutUs />} />
+          <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
+          <Route exact path="/terms_&_conditions" element={<TermsConditions />} />
+          <Route exact path="/contact" element={<ContactUs />} />
           <Route exact path="/producto" element={<Product />} />
           <Route exact path="/categoria" element={<Category />} />
           <Route exact path="/proveedor" element={<Provider />} />
