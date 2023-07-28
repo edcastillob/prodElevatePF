@@ -1,39 +1,21 @@
 const { Favorite, User } = require("../../db");
 
 const postFavorite = async (req, res) => {
-  const {
-    name,
-    description,
-    purchasePrice,
-    salePrice,
-    images,
-    stock,
-    minStock,
-    isActive,
-    user,
-  } = req.body;
-  if (
-    !name ||
-    !description ||
-    !purchasePrice ||
-    !salePrice ||
-    !images ||
-    !stock ||
-    !minStock ||
-    !isActive
-  ) {
+  console.log(req.body);
+  const { id, name, description, salePrice, images, stock, isActive, user } =
+    req.body;
+  if (!name || !description || !salePrice || !images || !stock || !isActive) {
     return res.status(401).send("Faltan datos");
   }
 
   try {
     const favorite = await Favorite.create({
+      id,
       name,
       description,
-      purchasePrice,
       salePrice,
       images,
       stock,
-      minStock,
       isActive,
     });
 

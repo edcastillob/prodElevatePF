@@ -18,6 +18,8 @@ import {
   CLEAR_CART,
   GET_PRODUCT_ID,
   EDIT_PRODUCT,
+  ADD_FAV,
+  REMOVE_FAV,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -255,5 +257,36 @@ export const clearCart = () => {
     return {
       type: CLEAR_CART,
     };
+  };
+};
+
+export const addFav = (product) => {
+  const endpoint = "http://localhost:3001/favorite";
+  return async (dispatch) => {
+    try {
+      console.log(product);
+      const { data } = await axios.post(endpoint, product);
+      return dispatch({
+        type: ADD_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const removeFav = (id) => {
+  const endpoint = "http://localhost:3001/favorite" + id;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      return dispatch({
+        type: REMOVE_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
   };
 };

@@ -16,11 +16,16 @@ import {
   REMOVE_TO_CART,
   SHOW_PRODUCTS,
   EDIT_PRODUCT,
+  ADD_FAV,
+  REMOVE_FAV,
 } from "../actions/types";
 
 const initialState = {
   cartItems: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
+    : [],
+  favorites: localStorage.getItem("favorites")
+    ? JSON.parse(localStorage.getItem("favorites"))
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
@@ -215,6 +220,13 @@ function reducer(state = initialState, actions) {
           product.id === productId ? { ...product, ...updatedProduct } : product
         ),
       };
+
+    //Favorite
+
+    case ADD_FAV:
+      return { ...state, favorites: actions.payload };
+    case REMOVE_FAV:
+      return { ...state, favorites: actions.payload };
 
     default:
       return state;

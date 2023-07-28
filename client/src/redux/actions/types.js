@@ -27,3 +27,7 @@ export const DECREMENT_CART = "DECREMENT_CART";
 export const INCREMENT_CART = "INCREMENT_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const CALCULE_TOTALS = "CALCULE_TOTALS";
+
+//Favorite
+export const ADD_FAV = "ADD_FAV";
+export const REMOVE_FAV = "REMOVE_FAV";

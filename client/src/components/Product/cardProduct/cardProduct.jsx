@@ -1,13 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./cardProduct.module.css";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addFav, addToCart, removeFav } from "../../../redux/actions/actions";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 export const CardProduct = ({ product }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isFav, setIsFav] = useState(false);
   const { id, name, category, images, salePrice } = product;
+  const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,6 +17,28 @@ export const CardProduct = ({ product }) => {
     dispatch(addToCart(product));
     navigate("/cart");
   };
+
+  const handleFavorite = (event) => {
+    if (isFav) {
+      setIsFav(false);
+      dispatch(removeFav(id));
+    } else {
+      setIsFav(true);
+      dispatch(addFav(productWithUser));
+    }
+  };
+
+  useEffect(() => {
+    favorites.forEach((fav) => {
+      if (fav.id === id) {
+        setIsFav(true);
+      }
+    });
+  }, [favorites]);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -28,8 +52,22 @@ export const CardProduct = ({ product }) => {
     });
   }, []);
 
+  const productWithUser = {
+    ...product,
+    user: currentUser
+      ? currentUser.uid
+      : "6807268a-db8a-4201-82b8-1d325edb7709",
+  };
+
   return (
     <div className={styles.cardContainer}>
+      <div className={styles.favContainer}>
+        {isFav ? (
+          <button onClick={handleFavorite}>❤️</button>
+        ) : (
+          <button onClick={handleFavorite}>🤍</button>
+        )}
+      </div>
       <Link
         title="Detail Product"
         to={`/productid/${id}`}

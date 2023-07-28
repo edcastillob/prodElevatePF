@@ -74,7 +74,6 @@ export const Home = () => {
         ) : (
           ""
         )}
-
         {optionProducts?.map((product) => (
           <CardProduct key={product.id} product={product} />
         ))}

@@ -22,6 +22,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
+import Favorites from "./components/Favorites/Favorites";
 
 function App() {
   const location = useLocation();
@@ -87,6 +88,7 @@ function App() {
           <Route exact path="/usuario" element={<CreateUser />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/productidedit/:id" element={<EditProduct />} />
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
