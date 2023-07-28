@@ -22,6 +22,8 @@ import {
   GET_PROVIDER_ID,
   EDIT_PROVIDER,
   DELETE_PRODUCT,
+  DELETE_CATEGORY,
+  DELETE_PROVIDER,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -105,6 +107,15 @@ export const addCategory = (category) => {
     }
   };
 };
+export const deleteCategory = (categoryId) => async (dispatch) => {
+  try {
+    await axios.delete(`${ENDPOINT}category/${categoryId}`);
+    dispatch({ type: DELETE_CATEGORY, payload: categoryId });
+  } catch (error) {
+    console.error("Error deleting category:", error);
+    return error.message;
+  }
+};
 
 export const getCategory = () => {
   try {
@@ -158,6 +169,15 @@ export const addProvider = (provider) => {
       return error.message;
     }
   };
+};
+export const deleteProvider = (providerId) => async (dispatch) => {
+  try {
+    await axios.delete(`${ENDPOINT}provider/${providerId}`);
+    dispatch({ type: DELETE_PROVIDER, payload: providerId });
+  } catch (error) {
+    console.error("Error deleting provider:", error);
+    return error.message;
+  }
 };
 export const getProviderId = (id) => {
   return (dispatch) => {

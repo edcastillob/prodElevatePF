@@ -93,8 +93,8 @@ function App() {
           {/* SettingsProduct muestra todas las products es la vista al acceder a Product desde admin */}
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
-          {/* <Route exact path="/producto" element={<Product />} /> */}
-          <Route exact path="/producto" element={<SettingsProduct />} />
+          <Route exact path="/producto" element={<Product />} />
+          {/* <Route exact path="/producto" element={<SettingsProduct />} /> */}
           {/* <Route exact path="/categoria" element={<Category />} /> */}
           <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/proveedor" element={<ProvidersAll />} />

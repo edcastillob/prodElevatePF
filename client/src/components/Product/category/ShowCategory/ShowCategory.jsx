@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategory } from '../../../../redux/actions/actions';
+import { deleteCategory, getCategory } from '../../../../redux/actions/actions';
 import { Link } from "react-router-dom";
 
 
@@ -12,7 +12,6 @@ export const ShowCategory = () => {
   
   const category = useSelector((state) => state.category);
   useEffect(() => {
-    // Si category es un objeto, volvemos a obtener el array
     if (typeof category === 'object') {
       dispatch(getCategory());
     }   
@@ -33,6 +32,12 @@ export const ShowCategory = () => {
  
   console.log("desde show:" , category)
   if (!category || category.length === 0) return <div>Loading...</div>;
+
+  const handleDeleteCategory = (categoryId) => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      dispatch(deleteCategory(categoryId));
+    }
+  };
   return (
     <div>
       {category?.map((category) => (
@@ -45,10 +50,11 @@ export const ShowCategory = () => {
               <ion-icon name="create"></ion-icon>
             </button>
           </Link>
+          <button onClick={() => handleDeleteCategory(category.id)}>
+              <ion-icon name="close"></ion-icon>
+          </button>
         </div>
-      )
-      )
-      }
+      ))}
     </div>
   );
 };
