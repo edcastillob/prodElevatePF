@@ -44,7 +44,7 @@ export const UsersAll = () => {
       {filteredUsers?.map((user) => (
         <div key={user.id}>
          
-          <h5 >Email: {user.name}</h5>   
+          <h5 >Name: {user.name}</h5>   
           <h5 >Email: {user.email}</h5>   
           <Link title="Edit user" to={`/userEdit/${user.id}`}>
             <button>
