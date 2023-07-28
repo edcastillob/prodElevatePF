@@ -21,6 +21,7 @@ import {
   EDIT_CATEGORY,
   GET_PROVIDER_ID,
   EDIT_PROVIDER,
+  DELETE_PRODUCT,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -69,6 +70,16 @@ export const addProduct = (product) => {
       return error.message;
     }
   };
+};
+
+export const deleteProduct = (productId) => async (dispatch) => {
+  try {
+    await axios.delete(`${ENDPOINT}product/${productId}`);
+    dispatch({ type: DELETE_PRODUCT, payload: productId });
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    return error.message;
+  }
 };
 
 export const editProduct = (productId, changeProduct) => {
