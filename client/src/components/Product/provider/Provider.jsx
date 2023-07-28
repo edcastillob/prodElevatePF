@@ -73,7 +73,7 @@ export const Provider = () => {
             onChange={handleChange}
           />
 
-          {/* Pais de proveedor
+          {/* Pais de proveedor */}
           <input
             className="form-control mb-3 w-75"
             type="textarea"
@@ -81,7 +81,7 @@ export const Provider = () => {
             placeholder="Country"
             value={provider.country}
             onChange={handleChange}
-          /> */}
+          />
 
           {/* direccion de proveedor */}
           <input
@@ -103,14 +103,14 @@ export const Provider = () => {
             onChange={handleChange}
           />
           {/* country  de proveedor */}
-          <label htmlFor="name">country: </label>
+          {/* <label htmlFor="name">country: </label>
           <input
             className="form-control"
             type="text"
             name="country"
             value={provider.country}
             onChange={handleChange}
-          />
+          /> */}
           <br />
 
           <button className={styles.create}>Create</button>

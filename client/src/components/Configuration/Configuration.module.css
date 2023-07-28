@@ -1,11 +1,10 @@
 .container{
     background-color: #f0f4f7;
     width: 100vw;
-    min-height: 110vh;
+    min-height: 120vh;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
-    
 }
 
 .title{
@@ -35,7 +34,7 @@
 }
 
 .sidebar{
-    border: 1px solid #cacaca;
+    border: 2px solid #cacaca;
     background-color: hsl(204, 65%, 43%);
     /* border-radius: 10px; */
     width: 15%;
@@ -65,7 +64,7 @@
 
 /* // DIV RIGHT */
 .components{
-    border: 1px solid #cacaca;
+    border: 3px solid #cacaca;
     width: 80%;
     border-radius: 10px;
     padding: 1rem;
