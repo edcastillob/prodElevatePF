@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./SettingProduct.module.css";
-import { showProducts } from "../../../redux/actions/actions";
+import { deleteProduct, showProducts } from "../../../redux/actions/actions";
 
 export const SettingsProduct = () => {
   const dispatch = useDispatch();
@@ -25,6 +25,12 @@ export const SettingsProduct = () => {
     products.name.toLowerCase().includes(searchProducts.toLowerCase())
   );
 
+  const handleDeleteProduct = (productId) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      dispatch(deleteProduct(productId));
+    }
+  };
+
   return (
     <div className={styles.cardContainer}>
       <h2>Products Administration</h2>      
@@ -38,12 +44,15 @@ export const SettingsProduct = () => {
       {filteredProducts?.map((product) => (
         <div key={product.id} className={styles.cardContainer}>
           <img className={styles.img} src={product.images} alt="product" />
-          <h5 className={styles.title}>Name: {product.name}</h5>          
+          <h5 className={styles.title}>Name: {product.name}</h5>   
           <Link title="Edit product" to={`/productidedit/${product.id}`}>
             <button>
               <ion-icon name="create"></ion-icon>
             </button>
           </Link>
+          <button onClick={() => handleDeleteProduct(product.id)}>
+              <ion-icon name="close"></ion-icon>
+          </button>
         </div>
       ))}
     </div>
