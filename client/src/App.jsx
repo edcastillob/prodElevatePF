@@ -78,7 +78,7 @@ function App() {
   };
   return (
     <>
-      {showNavBar && <NavBar user={currentUser} handleSignIn={handleSignIn} />}
+      {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />}
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
         <Routes>
