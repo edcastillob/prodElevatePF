@@ -27,7 +27,7 @@ export const ProvidersAll = () => {
 
   return (
     <div>
-      <h2>ProvidersAll</h2>      
+      <h2 style={{fontFamily:'Poppins'}}>Providers</h2>      
       <input
         type="text"
         placeholder="Search provider"

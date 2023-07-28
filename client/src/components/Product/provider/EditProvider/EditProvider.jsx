@@ -29,6 +29,7 @@ export const EditProvider = () => {
     isActive: "",
     name: "",
     numPhone:"",  
+    country: "",
   });
   
   useEffect(() => {
@@ -38,7 +39,8 @@ export const EditProvider = () => {
       provider.identification &&
       provider.isActive &&
       provider.name &&
-      provider.numPhone     
+      provider.numPhone &&
+      provider.country     
     ) {
       setChangeProvider({
         address: provider.address,
@@ -46,7 +48,8 @@ export const EditProvider = () => {
         identification: provider.identification,
         isActive: provider.isActive,
         name: provider.name,
-        numPhone: provider.numPhone
+        numPhone: provider.numPhone,
+        country: provider.country
       });
     }
   }, [
@@ -55,7 +58,8 @@ export const EditProvider = () => {
     provider.identification,
     provider.isActive,
     provider.name,
-    provider.numPhone
+    provider.numPhone,
+    provider.country
   ]);
 
 
@@ -111,6 +115,16 @@ export const EditProvider = () => {
         value={changeProvider.email}
         onChange={handleChange}
       />
+
+      {/* Pais de proveedor */}
+      <input
+            className="form-control mb-3 w-75"
+            type="textarea"
+            name="country"
+            placeholder="Country"
+            value={changeProvider.country}
+            onChange={handleChange}
+          />
 
       {/* direccion de proveedor */}
       <input

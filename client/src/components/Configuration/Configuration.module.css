@@ -41,23 +41,28 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
     
 }
 
 .options{
-    border-top: 1px solid #cacaca;
-    border-bottom: 1px solid #cacaca;
-    width: 100%;
-    padding: 1rem;
-    /* border-radius: 10px; */
+    border: 1px solid #cacaca;
+    
+    padding: 0.5rem;
+    border-radius: 10px;
     cursor: pointer;
     font-family: 'Poppins';
     color: #fff;
     transition: .2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover{
         background-color: #428fc2;
         transition: .3s;
     }
+
 }
 
 
