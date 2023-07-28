@@ -9,7 +9,7 @@ import { ProvidersAll } from "../Product/provider/ProvidersAll/ProvidersAll";
 import { EditProvider } from '../Product/provider/EditProvider/EditProvider';
 import { SettingsProduct } from '../Product/SettingsProduct/SettingProduct';
 import { ShowCategory } from '../Product/category/ShowCategory/ShowCategory';
-
+import logo from '../../assets/logo_2.png'
 
 
 export const Configuration = () =>{
@@ -19,23 +19,7 @@ export const Configuration = () =>{
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
-  //Another component inside
-  const [showAnotherComponent, setShowAnotherComponent] = useState(false);
 
-  //Provider Component
-  const [showProvidersAll, setShowProvidersAll] = useState(true);
-
-  //Handle component inside
-  const handleShowAnotherComponent = () => {
-    setShowAnotherComponent(true);
-    setShowProvidersAll(false);
-  };
-
-  //Ocultarlo
-  const handleHideAnotherComponent = () => {
-    setShowAnotherComponent(false);
-    setShowProvidersAll(true);
-  };
    
 
   // Component selection states
@@ -107,8 +91,8 @@ export const Configuration = () =>{
     return(
         <div className={styles.container}>
             <div className={styles.title}>
-                <img src={config} alt="Settings" />
-                <h4>Settings</h4>
+                
+                <h4><span style={{fontSize:'2.5rem', marginTop:'10px', color:'#000924'}}><ion-icon name="settings"></ion-icon></span>  Settings</h4>
             </div>
             <div className={styles.content}>
             <div className={styles.sidebar}>
@@ -116,7 +100,7 @@ export const Configuration = () =>{
             {/* PRODUCT */}
             <div className={styles.optionContainer}>
             <div className={styles.options}  onClick={() => handleProductOptionClick('Products')}>
-            <span style={{fontSize:'1.3rem', marginRight:'0.5rem'}}><ion-icon name="basket"></ion-icon></span>Product
+            <span style={{fontSize:'2.4rem', marginRight:'0.5rem'}}><ion-icon name="basket"></ion-icon></span>Product
             </div>
             <div className={styles.dropdownOption}
             onClick={() => handleProductOptionClick('Create Product')}>
@@ -127,7 +111,7 @@ export const Configuration = () =>{
             {/* PROVIDER */}
           <div className={styles.optionContainer}>
             <div className={styles.options}  onClick={() => handleProviderOptionClick('Providers')}>
-            <span style={{fontSize:'1.3rem', marginRight:'0.5rem'}}><ion-icon name="contacts"></ion-icon></span>Provider
+            <span style={{fontSize:'2.4rem', marginRight:'0.5rem'}}><ion-icon name="contacts"></ion-icon></span>Provider
             </div>
             <div className={styles.dropdownOption}
             onClick={() => handleProviderOptionClick('Create Provider')}>
@@ -139,7 +123,7 @@ export const Configuration = () =>{
             {/* CATEGORY */}
           <div className={styles.optionContainer}>
             <div className={styles.options}  onClick={() => handleCategoryOptionClick('Category')}>
-            <span style={{fontSize:'1.3rem', marginRight:'0.5rem'}}><ion-icon name="apps"></ion-icon></span>Category
+            <span style={{fontSize:'2.4rem', marginRight:'0.5rem'}}><ion-icon name="apps"></ion-icon></span>Category
             </div>
             <div className={styles.dropdownOption}
             onClick={() => handleCategoryOptionClick('Create Category')}>
@@ -150,7 +134,7 @@ export const Configuration = () =>{
               {/* USER */}
           <div className={styles.optionContainer}>
             <div className={styles.options} onClick={() => handleCategoryOptionClick('User')}>
-            <span style={{fontSize:'1.3rem', marginRight:'0.5rem'}}><ion-icon name="contact"></ion-icon></span>User
+            <span style={{fontSize:'2.4rem', marginRight:'0.5rem'}}><ion-icon name="contact"></ion-icon></span>User
             </div>
             <div className={styles.dropdownOption}
             onClick={() => handleUserOptionClick('Create User')}>
@@ -175,27 +159,20 @@ export const Configuration = () =>{
 
 
       {/* PROVIDER COMPONENTS */}
-      {showProvidersAll && (
-                <ProvidersAll
-                  showAnotherComponent={showAnotherComponent}
-                  handleShowAnotherComponent={handleShowAnotherComponent}
-                />
-              )}
+      {selectedProviderComponent === 'Providers' && <ProvidersAll />}
+      {selectedProviderComponent === 'Create Provider' && <Provider />}
 
-              {/* COMPONENTS INSIDE */}
-              {showAnotherComponent && <EditProvider onBack={handleHideAnotherComponent} />}
+
 
       {/* CATEGORY COMPONENTS */}
       {selectedCategoryComponent === 'Category' && <ShowCategory />}
       {selectedCategoryComponent === 'Create Category' && <Category />}
 
-      {/* COMPONENTS INSIDE */}
-      {/* {showAnotherComponent && <EditProvider />} */}
     </>
   ) : (
-    <div>
-      <img src="/ruta-de-la-imagen.jpg" alt="Imagen por defecto" />
-      <p>Settings.</p>
+    <div style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'space-around'}}>
+      <img src={logo} alt="ProdElevate" />
+      <h3 style={{fontFamily:'Poppins', color:'#fff', fontWeight:'700'}}>ONLINE SALES AND ADMINISTRATION SYSTEM</h3>
     </div>
   )}
             </div>
