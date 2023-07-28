@@ -98,7 +98,7 @@ export const Product = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.divLeft}>
+      
         <hr />
         <form onSubmit={handleSubmit} className={styles.form}>
           <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
@@ -262,7 +262,7 @@ export const Product = () => {
           <button className={styles.create}>Create</button>
         </form>
       </div>
-      <div className={styles.containerRight}></div>
-    </div>
+      
+  
   );
 };

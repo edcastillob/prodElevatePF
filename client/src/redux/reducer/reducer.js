@@ -16,6 +16,7 @@ import {
   REMOVE_TO_CART,
   SHOW_PRODUCTS,
   EDIT_PRODUCT,
+  GET_CATEGORY_ID,
 } from "../actions/types";
 
 const initialState = {
@@ -72,6 +73,13 @@ function reducer(state = initialState, actions) {
         ...state,
         category: [...state.category, payload],
       };
+
+      case GET_CATEGORY_ID:
+        console.log("Category id: ",actions.payload);
+        return {
+          ...state,
+          category: actions.payload,
+        };
     case GET_CATEGORY:
       return {
         ...state,
