@@ -5,10 +5,11 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Home } from "./components/Home/Home";
 import { ProductDetail } from "./components/Product/productDetail/ProductDetail";
 import { Landing } from "./components/Landing/Landing";
-import { Category } from "./components/Product/category/Category";
+// import { Category } from "./components/Product/category/Category";
 import { Product } from "./components/Product/createProduct/Product";
 import { Provider } from "./components/Product/provider/Provider";
 import { Role } from "./components/users/role/Role";
+import { EditCategory } from "./components/Product//category/EditCategory/EditCategory";
 import { CreateUser } from "./components/users/createUser/CreateUser";
 import { Configuration } from "./components/Configuration/Configuration";
 import { Footer } from "./components/Footer/Footer";
@@ -22,6 +23,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
+import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
+import { ProvidersAll } from "./components/Product/provider/ProvidersAll/ProvidersAll";
+import { EditProvider } from "./components/Product/provider/EditProvider/EditProvider";
+import { SettingsProduct } from "./components/Product/SettingsProduct/SettingProduct";
 import { AboutUs } from "./components/AboutUs/AboutUs";
 import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { TermsConditions } from "./components/TermsConditions/TermsConditions";
@@ -41,6 +46,7 @@ function App() {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
+      console.log("Yonatan id user: ", user);
       if (user) {
         const uid = user.uid;
         console.log("Usuario logueado:", user);
@@ -70,32 +76,44 @@ function App() {
     try {
       const user = await handleGoogleSignIn();
       setCurrentUser(user);
-      navigate("/home");
     } catch (error) {
       navigate("/login");
     }
   };
   return (
     <>
-      {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />}
+      {showNavBar && (
+        <NavBar
+          user={currentUser}
+          userLocal={currentUserLocal}
+          handleSignIn={handleSignIn}
+        />
+      )}
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
         <Routes>
+          {/* showcategory muestra todas las categorias es la vista al acceder a category desde admin */}
+          {/* ProviderAll muestra todas las providers es la vista al acceder a providers desde admin */}
+          {/* SettingsProduct muestra todas las products es la vista al acceder a Product desde admin */}
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/about" element={<AboutUs />} />
           <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
           <Route exact path="/terms_&_conditions" element={<TermsConditions />} />
           <Route exact path="/contact" element={<ContactUs />} />
-          <Route exact path="/producto" element={<Product />} />
-          <Route exact path="/categoria" element={<Category />} />
-          <Route exact path="/proveedor" element={<Provider />} />
+          {/* <Route exact path="/producto" element={<Product />} /> */}
+          <Route exact path="/producto" element={<SettingsProduct />} />
+          {/* <Route exact path="/categoria" element={<Category />} /> */}
+          <Route exact path="/categoria" element={<ShowCategory />} />
+          <Route exact path="/proveedor" element={<ProvidersAll />} />
+          <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/usuario" element={<CreateUser />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/productidedit/:id" element={<EditProduct />} />
+          <Route path="/categoryedit/:id" element={<EditCategory />} />
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )}

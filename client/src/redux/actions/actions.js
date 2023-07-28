@@ -16,8 +16,11 @@ import {
   DECREMENT_CART,
   INCREMENT_CART,
   CLEAR_CART,
-  GET_PRODUCT_ID,
   EDIT_PRODUCT,
+  GET_CATEGORY_ID,
+  EDIT_CATEGORY,
+  GET_PROVIDER_ID,
+  EDIT_PROVIDER,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -69,8 +72,6 @@ export const addProduct = (product) => {
 };
 
 export const editProduct = (productId, changeProduct) => {
-  console.log("1: ", changeProduct);
-  console.log("2: ", productId);
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}product/${productId}`, changeProduct);
@@ -107,6 +108,36 @@ export const getCategory = () => {
   }
 };
 
+export const getCategoryId = (id) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}category/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          dispatch({ type: GET_CATEGORY_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching category details."); // Lanza una nueva excepción
+        });
+    });
+  };
+};
+
+export const categoryEdit = (categoryId, editCategory) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}category/${categoryId}`, editCategory);
+      return dispatch({
+        type:EDIT_CATEGORY,
+        payload: { categoryId, editCategory },
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addProvider = (provider) => {
   return async (dispatch) => {
     try {
@@ -117,7 +148,36 @@ export const addProvider = (provider) => {
     }
   };
 };
+export const getProviderId = (id) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}provider/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          dispatch({ type: GET_PROVIDER_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching provider"); 
+        });
+    });
+  };
+};
 
+export const editProvider = (providerId, editProvider) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}provider/${providerId}`, editProvider);
+      return dispatch({
+        type:EDIT_PROVIDER,
+        payload: { providerId, editProvider },
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addRole = (role) => {
   return async (dispatch) => {
     try {

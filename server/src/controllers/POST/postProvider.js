@@ -4,7 +4,7 @@ async function postProvider(req, res) {
     console.log(req.body)  
     try {
         const { name, identification, email, numPhone, country, address } = req.body;
-        if (!name || !identification || !email || !numPhone  || !country || !address) {
+        if (!name || !identification || !email || !numPhone || !country || !address) {
             return res.status(401).send("Missing Data");
         };
 
