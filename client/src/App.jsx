@@ -41,8 +41,7 @@ function App() {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-
-      console.log("Yonatan id user: ",user)
+      console.log("Yonatan id user: ", user);
       if (user) {
         const uid = user.uid;
         console.log("Usuario logueado:", user);
@@ -71,14 +70,20 @@ function App() {
   const handleSignIn = async () => {
     try {
       const user = await handleGoogleSignIn();
-      setCurrentUser(user);      
+      setCurrentUser(user);
     } catch (error) {
       navigate("/login");
     }
   };
   return (
     <>
-      {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />}
+      {showNavBar && (
+        <NavBar
+          user={currentUser}
+          userLocal={currentUserLocal}
+          handleSignIn={handleSignIn}
+        />
+      )}
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
         <Routes>
@@ -86,7 +91,7 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/producto" element={<Product />} />
           {/* <Route exact path="/categoria" element={<Category />} /> */}
-          <Route exact path="/categoria" element={<ShowCategory/>} />
+          <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/proveedor" element={<ProvidersAll />} />
           <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />

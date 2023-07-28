@@ -13,13 +13,13 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 export const Product = () => {
-  const dispatch = useDispatch();
-  const category = useSelector((state) => state.category);
-  const provider = useSelector((state) => state.provider);
   useEffect(() => {
     dispatch(getCategory());
     dispatch(getProvider());
   }, []);
+  const dispatch = useDispatch();
+  const category = useSelector((state) => state.category);
+  const provider = useSelector((state) => state.provider);
 
   const sortedCategories = [...category].sort((a, b) =>
     a.name.localeCompare(b.name)
@@ -95,7 +95,7 @@ export const Product = () => {
     // Reiniciar isImageUploaded a false después de enviar el formulario
     setIsImageUploaded(false);
   };
-
+   console.log('provider: ', provider)
   return (
     <div className={styles.container}>
       <div className={styles.divLeft}>
