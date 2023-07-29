@@ -33,6 +33,7 @@ export const EDIT_USERS = "EDIT_USERS";
 export const GET_USER_ID = "GET_USER_ID";
 
 
+
 //Cart
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_TO_CART = "REMOVE_TO_CART";
@@ -40,3 +41,13 @@ export const DECREMENT_CART = "DECREMENT_CART";
 export const INCREMENT_CART = "INCREMENT_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const CALCULE_TOTALS = "CALCULE_TOTALS";
+
+//Favorite
+export const ADD_FAV = "ADD_FAV";
+export const REMOVE_FAV = "REMOVE_FAV";
+
+//filter
+export const PRICE_HIGHER_LOWER = "PRICE_HIGHER_LOWER";
+export const PRICE_LOWER_HIGHER = "PRICE_LOWER_HIGHER";
+export const FILTER_NAME_ASC = "PRICE_HIGHER_LOWER";
+export const FILTER_NAME_DESC = "PRICE_LOWER_HIGHER";

@@ -25,7 +25,7 @@ export const Provider = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(provider);
+    // console.log(provider);
     dispatch(addProvider(provider));
     toast.success("¡Provider created successfully!");
     setProvider({
@@ -39,71 +39,72 @@ export const Provider = () => {
   };
   return (
     <div className={styles.container}>
-        
-          <form onSubmit={handleSubmit} className={styles.formContainer}>
-            <h4 style={{fontFamily: 'Poppins', marginBottom:'1rem'}}>New Provider</h4>
-          {/* Nombre de proveedor */}
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+        <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
+          New Provider
+        </h4>
+        {/* Nombre de proveedor */}
 
-          <input
-            className="form-control mb-3 w-75"
-            type="text"
-            name="name"
-            placeholder="Fullname"
-            value={provider.name}
-            onChange={handleChange}
-          />
+        <input
+          className="form-control mb-3 w-75"
+          type="text"
+          name="name"
+          placeholder="Fullname"
+          value={provider.name}
+          onChange={handleChange}
+        />
 
-          {/* identificacion DNI RIF  de proveedor */}
-          <input
-            className="form-control mb-3 w-75"
-            type="text"
-            name="identification"
-            placeholder="DNI/RIF/Document ID"
-            value={provider.identification}
-            onChange={handleChange}
-          />
+        {/* identificacion DNI RIF  de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="text"
+          name="identification"
+          placeholder="DNI/RIF/Document ID"
+          value={provider.identification}
+          onChange={handleChange}
+        />
 
-          {/* email  de proveedor */}
-          <input
-            className="form-control mb-3 w-75"
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={provider.email}
-            onChange={handleChange}
-          />
+        {/* email  de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={provider.email}
+          onChange={handleChange}
+        />
 
-          {/* Pais de proveedor */}
-          <input
-            className="form-control mb-3 w-75"
-            type="textarea"
-            name="country"
-            placeholder="Country"
-            value={provider.country}
-            onChange={handleChange}
-          />
+        {/* Pais de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="textarea"
+          name="country"
+          placeholder="Country"
+          value={provider.country}
+          onChange={handleChange}
+        />
 
-          {/* direccion de proveedor */}
-          <input
-            className="form-control mb-3 w-75"
-            type="textarea"
-            name="address"
-            placeholder="Address"
-            value={provider.address}
-            onChange={handleChange}
-          />
+        {/* direccion de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="textarea"
+          name="address"
+          placeholder="Address"
+          value={provider.address}
+          onChange={handleChange}
+        />
 
-          {/* numero telef de proveedor */}
-          <input
-            className="form-control mb-3 w-75"
-            type="text"
-            name="numPhone"
-            placeholder="Phone N°"
-            value={provider.numPhone}
-            onChange={handleChange}
-          />
-          {/* country  de proveedor */}
-          {/* <label htmlFor="name">country: </label>
+        {/* numero telef de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="text"
+          name="numPhone"
+          placeholder="Phone N°"
+          value={provider.numPhone}
+          onChange={handleChange}
+        />
+        {/* country  de proveedor */}
+        {/* <label htmlFor="name">country: </label>
           <input
             className="form-control"
             type="text"
@@ -111,12 +112,10 @@ export const Provider = () => {
             value={provider.country}
             onChange={handleChange}
           /> */}
-          <br />
+        <br />
 
-          <button className={styles.create}>Create</button>
-        </form>
-      
-      </div>
-
+        <button className={styles.create}>Create</button>
+      </form>
+    </div>
   );
 };

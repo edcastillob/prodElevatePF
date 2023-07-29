@@ -10,7 +10,6 @@ export const UploadImg = ({ onImageUpload }) => {
     const files = event.target.files;
 
     if (!files || files.length === 0) {
-
       alert("You can only upload 3 images per product.");
       return;
     }
@@ -30,24 +29,32 @@ export const UploadImg = ({ onImageUpload }) => {
       newSelectedImages.push(imageUrl);
     }
 
-    setSelectedImages((prevSelectedImages) => [...prevSelectedImages, ...newSelectedImages]);
+    setSelectedImages((prevSelectedImages) => [
+      ...prevSelectedImages,
+      ...newSelectedImages,
+    ]);
     onImageUpload(newSelectedImages); // Guardar las imágenes inmediatamente después de cargarlas
   };
 
   return (
     <div>
-      <Input 
-      type="file" 
-      name="file" 
-      placeholder="Upload image product" 
-      onChange={uploadImages} multiple 
+      <Input
+        type="file"
+        name="file"
+        placeholder="Upload image product"
+        onChange={uploadImages}
+        multiple
       />
 
       {selectedImages.length > 0 &&
         selectedImages.map((img, index) => (
-          <img key={index} src={img} style={{ display: "none" }} alt="Uploaded" />
+          <img
+            key={index}
+            src={img}
+            style={{ display: "none" }}
+            alt="Uploaded"
+          />
         ))}
-
     </div>
   );
 };

@@ -17,10 +17,16 @@ import {
   INCREMENT_CART,
   CLEAR_CART,
   EDIT_PRODUCT,
+  ADD_FAV,
+  REMOVE_FAV,
   GET_CATEGORY_ID,
   EDIT_CATEGORY,
   GET_PROVIDER_ID,
   EDIT_PROVIDER,
+  PRICE_HIGHER_LOWER,
+  PRICE_LOWER_HIGHER,
+  FILTER_NAME_ASC,
+  FILTER_NAME_DESC,
   DELETE_PRODUCT,
   DELETE_CATEGORY,
   DELETE_PROVIDER,
@@ -38,7 +44,6 @@ export const showProducts = () => {
   try {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}product`);
-      console.log(data);
       return dispatch({ type: SHOW_PRODUCTS, payload: data });
     };
   } catch (error) {
@@ -56,12 +61,12 @@ export const getProductDetail = (id) => {
       axios
         .get(`${ENDPOINT}productid/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_PRODUCT_DETAIL, payload: response.data });
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching product details."); 
+          throw new Error("Error fetching product details.");
         });
     });
   };
@@ -106,7 +111,7 @@ export const getUsers = () => {
   try {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}user`);
-      console.log(data);
+      // console.log(data);
       return dispatch({ type: GET_ALL_USERS, payload: data });
     };
   } catch (error) {
@@ -135,18 +140,19 @@ export const editUser = (userId, changeUser) => {
     }
   };
 };
+
 export const getUserId = (id) => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       axios
         .get(`${ENDPOINT}user/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_USER_ID, payload: response.data });
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching user details."); 
+          throw new Error("Error fetching user details.");
         });
     });
   };
@@ -191,12 +197,12 @@ export const getCategoryId = (id) => {
       axios
         .get(`${ENDPOINT}category/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_CATEGORY_ID, payload: response.data });
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching category details."); 
+          throw new Error("Error fetching category details.");
         });
     });
   };
@@ -207,7 +213,7 @@ export const categoryEdit = (categoryId, editCategory) => {
     try {
       await axios.put(`${ENDPOINT}category/${categoryId}`, editCategory);
       return dispatch({
-        type:EDIT_CATEGORY,
+        type: EDIT_CATEGORY,
         payload: { categoryId, editCategory },
       });
     } catch (error) {
@@ -240,12 +246,12 @@ export const getProviderId = (id) => {
       axios
         .get(`${ENDPOINT}provider/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_PROVIDER_ID, payload: response.data });
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching provider"); 
+          throw new Error("Error fetching provider");
         });
     });
   };
@@ -256,7 +262,7 @@ export const editProvider = (providerId, editProvider) => {
     try {
       await axios.put(`${ENDPOINT}provider/${providerId}`, editProvider);
       return dispatch({
-        type:EDIT_PROVIDER,
+        type: EDIT_PROVIDER,
         payload: { providerId, editProvider },
       });
     } catch (error) {
@@ -304,9 +310,9 @@ export const login = (userData) => {
     return async (dispatch) => {
       const response = await axios.post(`${ENDPOINT}login`, userData);
       if (response.data) {
-        const user = response.data.User; 
-        localStorage.setItem("user", JSON.stringify(user));       
-        window.location.reload()
+        const user = response.data.User;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.reload();
         return dispatch({ type: LOGIN, payload: user });
       }
       throw new Error("Credenciales inválidas");
@@ -403,5 +409,98 @@ export const clearCart = () => {
     return {
       type: CLEAR_CART,
     };
+  };
+};
+
+export const addFav = (product) => {
+  const endpoint = "http://localhost:3001/favorite";
+  return async (dispatch) => {
+    try {
+      console.log(product);
+      const { data } = await axios.post(endpoint, product);
+      return dispatch({
+        type: ADD_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const removeFav = (id) => {
+  const endpoint = `http://localhost:3001/favorite/${id}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      return dispatch({
+        type: REMOVE_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+//Filter
+
+export const priceHigherLower = () => {
+  const endpoint = "http://localhost:3001/filter/price/higher-lower";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: PRICE_HIGHER_LOWER,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const priceLowerHigher = () => {
+  const endpoint = "http://localhost:3001/filter/price/lower-higher";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: PRICE_LOWER_HIGHER,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const filterNameAsc = () => {
+  const endpoint = "http://localhost:3001/filter/name/asc";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: FILTER_NAME_ASC,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const filterNameDesc = () => {
+  const endpoint = "http://localhost:3001/filter/name/desc";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: FILTER_NAME_DESC,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
   };
 };

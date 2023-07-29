@@ -46,7 +46,7 @@ export const CreateUser = () => {
     event.preventDefault();
     if (Object.keys(errors).length > 0) {
       alert(
-        "Por favor, completa los campos correctamente antes de enviar la información."
+        "fill in the fields correctly before sending the information."
       );
       return;
     }
