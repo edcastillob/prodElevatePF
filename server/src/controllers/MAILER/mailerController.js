@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const Mailgen = require('mailgen');
 
-const sendMailer = async (product, res) => {
+const sendMailer = async (product) => {
   console.log(product.dataValues, 'dataValues ')
   try {
     // const { email } = req.params;
@@ -11,7 +11,7 @@ const sendMailer = async (product, res) => {
       service: 'gmail',
       auth: {
         user: 'mendozaveralucia@gmail.com',
-        pass: 'pgazpnjfbfvbkpe'
+        pass: 'pgazpnjfbfvbkpxe'
       }
     });
 
@@ -26,7 +26,7 @@ const sendMailer = async (product, res) => {
     const response = {
       body: {
         name: 'Administrador',
-        intro: `El siguiente producto ha llegado a su stock mínimo:`,
+        intro: `El siguiente producto ha sido cerado en Base de datos prodElevate:`,
         table : {
           data: [
             {
@@ -52,8 +52,8 @@ const sendMailer = async (product, res) => {
     const mail = MailGenerator.generate(response)
 
     const message = {
-      from: process.env.EMAIL, // sender address
-      to: 'mendozaveralucia@gmail.com', // list of receivers
+      from: "prodelevatepf@gmail.com", // sender address
+      to: 'edwar.castillo@gmail.com', // list of receivers
       subject: "Notificación de Stock Mínimo", // Subject line
       // text: "Hello world?", // plain text body
       // html: "<b>Hello world  test</b>", // html body
@@ -79,7 +79,8 @@ const sendMailer = async (product, res) => {
     // console.log(email, 'email')
     // res.status(201).json('Enviado...')
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    // return res.status(400).json({ error: error.message });
+    throw error;
   }
 }
 
