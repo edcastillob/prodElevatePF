@@ -27,12 +27,17 @@ const { deleteProduct } = require("../controllers/DELETE/deleteProduct");
 const { deleteProvider } = require("../controllers/DELETE/deteleProvider");
 const { deleteCategory } = require("../controllers/DELETE/deleteCategory");
 const { getProviderId } = require("../controllers/GET/getProviderId");
+const { getUserId } = require("../controllers/GET/getUserId");
 
 
 const router = Router();
 
-router.get("/", function (req, res) {
-  res.send("Backend prodElevate");
+const mailerRoutes = require('./mailerRoutes')
+
+router.use('/notification', mailerRoutes);
+
+router.get('/', function(req, res) {
+    res.send('Backend prodElevate');
 });
 
 // Ruta login
@@ -88,6 +93,7 @@ router.post("/role", postRole);
 router.post("/role", postRole);
 
 router.get("/user", getAllUsers);
+router.get("/user/:id", getUserId);
 router.post("/user", postUser);
 router.put("/user/:id", putUser);
 router.delete("/user/:id", deleteUser);

@@ -27,6 +27,11 @@ export const LOGIN = "LOGIN";
 export const ADD_USER = "ADD_USER";
 export const ADD_ROLE = "ADD_ROLE";
 export const VALIDATION_USER = "VALIDATION_USER";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const DELETE_USERS = "DELETE_USERS";
+export const EDIT_USERS = "EDIT_USERS";
+export const GET_USER_ID = "GET_USER_ID";
+
 
 //Cart
 export const ADD_TO_CART = "ADD_TO_CART";
