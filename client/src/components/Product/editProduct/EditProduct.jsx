@@ -35,6 +35,8 @@ export const EditProduct = () => {
   const [changeProduct, setChangeProduct] = useState({
     category: productDetail.categoryId,
     name: productDetail.name,
+    brand: productDetail.brand,
+    condition: productDetail.condition,
     description: productDetail.description,
     purchasePrice: productDetail.purchasePrice,
     salePrice: productDetail.salePrice,
@@ -54,6 +56,8 @@ export const EditProduct = () => {
     if (
       productDetail.categoryId &&
       productDetail.name &&
+      productDetail.brand &&
+      productDetail.condition &&
       productDetail.description &&
       productDetail.purchasePrice &&
       productDetail.salePrice &&
@@ -65,6 +69,8 @@ export const EditProduct = () => {
       setChangeProduct({
         category: productDetail.categoryId,
         name: productDetail.name,
+        brand: productDetail.brand,
+        condition: productDetail.condition,
         description: productDetail.description,
         purchasePrice: productDetail.purchasePrice,
         salePrice: productDetail.salePrice,
@@ -77,6 +83,8 @@ export const EditProduct = () => {
   }, [
     productDetail.categoryId,
     productDetail.name,
+    productDetail.brand,
+    productDetail.condition,
     productDetail.description,
     productDetail.purchasePrice,
     productDetail.salePrice,
@@ -141,7 +149,7 @@ export const EditProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("Datos enviados: ", changeProduct);
+    console.log("Datos enviados: ", changeProduct);
     dispatch(editProduct(id, changeProduct));
     toast.success("¡Edit Product successfully!");
     navigate('/settings')
@@ -149,7 +157,7 @@ export const EditProduct = () => {
 
   // console.log("productDetail: ", productDetail);
   // console.log("stock: ", productDetail.stock);
-  // console.log("changeProduct:  ", changeProduct);
+  console.log("changeProduct:  ", changeProduct);
 
   return (
     <div className={styles.container}>
@@ -173,7 +181,7 @@ export const EditProduct = () => {
                 </option>
               ))}
             </select>
-          </div>
+          
 
           {/* Nombre de Producto */}
 
@@ -186,7 +194,30 @@ export const EditProduct = () => {
             onChange={handleChange}
             defaultValue={productDetail.name}
           />
+        </div>
 
+        <div className="d-flex justify-content-around">
+          {/* brand de Producto */}
+          <input
+            className="form-control mb-3 w-50 d-end"
+            type="text"
+            name="brand"
+            placeholder="Product brand"
+            value={changeProduct.brand}
+            onChange={handleChange}
+          />
+          <select
+  className="form-control mb-3 w-50 d-end"
+  name="condition"
+  value={changeProduct.condition}
+  onChange={handleChange}
+>
+  <option value="">Select condition</option>
+  <option value="Brand New">Brand New</option>
+  <option value="Used">Used</option>
+  <option value="Like New">Like New</option>
+</select>
+        </div>
           {/* Descripcion de Producto */}
 
           <ReactQuill

@@ -34,6 +34,8 @@ export const Product = () => {
   const [product, setProduct] = useState({
     category: "",
     name: "",
+    brand: "",
+    condition: "",
     description: "",
     purchasePrice: "",
     salePrice: "",
@@ -81,12 +83,14 @@ export const Product = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(product);
+    // console.log(product);
     dispatch(addProduct(product));
     toast.success("¡Product created successfully!");
     setProduct({
       category: "",
       name: "",
+      brand: "",
+      condition: "",
       description: "",
       purchasePrice: "",
       salePrice: "",
@@ -134,6 +138,28 @@ export const Product = () => {
             value={product.name}
             onChange={handleChange}
           />
+        </div>
+        <div className="d-flex justify-content-around">
+          {/* brand de Producto */}
+          <input
+            className="form-control mb-3 w-50 d-end"
+            type="text"
+            name="brand"
+            placeholder="Product brand"
+            value={product.brand}
+            onChange={handleChange}
+          />
+          <select
+  className="form-control mb-3 w-50 d-end"
+  name="condition"
+  value={product.condition}
+  onChange={handleChange}
+>
+  <option value="">Select condition</option>
+  <option value="Brand New">Brand New</option>
+  <option value="Used">Used</option>
+  <option value="Like New">Like New</option>
+</select>
         </div>
 
         {/* Descripcion de Producto */}

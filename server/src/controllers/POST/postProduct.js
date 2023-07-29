@@ -30,14 +30,14 @@ async function postProduct(req, res) {
 
     const product = await Product.create({
       name,
+      brand,
+      condition,
       description,
       purchasePrice,
       salePrice,
       images,
       stock,
       minStock,
-      brand,
-      condition,
       categoryId,
     });
 

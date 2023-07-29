@@ -21,6 +21,9 @@ async function putProduct(req, res) {
   if (typeof newData.minStock === "string") {
     newData.minStock = parseInt(newData.minStock);
   }
+  if (typeof newData.category === "string") {
+    newData.category = parseInt(newData.category);
+  }
 
   try {
     const product = await Product.findOne({
