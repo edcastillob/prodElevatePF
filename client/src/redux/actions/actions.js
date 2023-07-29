@@ -16,10 +16,17 @@ import {
   DECREMENT_CART,
   INCREMENT_CART,
   CLEAR_CART,
-  GET_PRODUCT_ID,
   EDIT_PRODUCT,
   ADD_FAV,
   REMOVE_FAV,
+  GET_CATEGORY_ID,
+  EDIT_CATEGORY,
+  GET_PROVIDER_ID,
+  EDIT_PROVIDER,
+  PRICE_HIGHER_LOWER,
+  PRICE_LOWER_HIGHER,
+  FILTER_NAME_ASC,
+  FILTER_NAME_DESC,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -71,8 +78,6 @@ export const addProduct = (product) => {
 };
 
 export const editProduct = (productId, changeProduct) => {
-  console.log("1: ", changeProduct);
-  console.log("2: ", productId);
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}product/${productId}`, changeProduct);
@@ -109,6 +114,36 @@ export const getCategory = () => {
   }
 };
 
+export const getCategoryId = (id) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}category/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          dispatch({ type: GET_CATEGORY_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching category details."); // Lanza una nueva excepción
+        });
+    });
+  };
+};
+
+export const categoryEdit = (categoryId, editCategory) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}category/${categoryId}`, editCategory);
+      return dispatch({
+        type: EDIT_CATEGORY,
+        payload: { categoryId, editCategory },
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addProvider = (provider) => {
   return async (dispatch) => {
     try {
@@ -119,7 +154,36 @@ export const addProvider = (provider) => {
     }
   };
 };
+export const getProviderId = (id) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}provider/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          dispatch({ type: GET_PROVIDER_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching provider");
+        });
+    });
+  };
+};
 
+export const editProvider = (providerId, editProvider) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}provider/${providerId}`, editProvider);
+      return dispatch({
+        type: EDIT_PROVIDER,
+        payload: { providerId, editProvider },
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addRole = (role) => {
   return async (dispatch) => {
     try {
@@ -160,8 +224,10 @@ export const login = (userData) => {
     return async (dispatch) => {
       const response = await axios.post(`${ENDPOINT}login`, userData);
       if (response.data) {
-        const user = response.data;
-        return dispatch({ type: LOGIN, payload: user.User });
+        const user = response.data.User;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.reload();
+        return dispatch({ type: LOGIN, payload: user });
       }
       throw new Error("Credenciales inválidas");
     };
@@ -173,7 +239,7 @@ export const login = (userData) => {
 export const logout = () => {
   try {
     return async (dispatch) => {
-      sessionStorage.removeItem("user"); // Eliminar la información del usuario del sessionStorage
+      localStorage.removeItem("user"); // Eliminar la información del usuario del sessionStorage
       return dispatch({ type: LOGIN, payload: null });
     };
   } catch (error) {
@@ -277,12 +343,74 @@ export const addFav = (product) => {
 };
 
 export const removeFav = (id) => {
-  const endpoint = "http://localhost:3001/favorite" + id;
+  const endpoint = `http://localhost:3001/favorite/${id}`;
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(endpoint);
       return dispatch({
         type: REMOVE_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+//Filter
+
+export const priceHigherLower = () => {
+  const endpoint = "http://localhost:3001/filter/price/higher-lower";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: PRICE_HIGHER_LOWER,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const priceLowerHigher = () => {
+  const endpoint = "http://localhost:3001/filter/price/lower-higher";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: PRICE_LOWER_HIGHER,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const filterNameAsc = () => {
+  const endpoint = "http://localhost:3001/filter/name/asc";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: FILTER_NAME_ASC,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const filterNameDesc = () => {
+  const endpoint = "http://localhost:3001/filter/name/desc";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: FILTER_NAME_DESC,
         payload: data,
       });
     } catch (error) {

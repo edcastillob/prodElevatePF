@@ -25,6 +25,7 @@ export const CardProduct = ({ product }) => {
     } else {
       setIsFav(true);
       dispatch(addFav(productWithUser));
+      navigate("/favorites");
     }
   };
 
@@ -56,7 +57,7 @@ export const CardProduct = ({ product }) => {
     ...product,
     user: currentUser
       ? currentUser.uid
-      : "6807268a-db8a-4201-82b8-1d325edb7709",
+      : "3da16669-2425-4b38-a7d5-40ce000558d7",
   };
 
   return (

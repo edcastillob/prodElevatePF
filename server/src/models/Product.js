@@ -1,44 +1,56 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define('product', {
-    id: {
+  sequelize.define(
+    "product",
+    {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        unique: true
-    }, 
-    name: {
+        unique: true,
+      },
+      name: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    description: {
+        allowNull: false,
+      },
+      description: {
         type: DataTypes.TEXT,
-        allowNull: false
-    },
-    purchasePrice: {
+        allowNull: false,
+      },
+      purchasePrice: {
         type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    salePrice: {
+        allowNull: false,
+      },
+      salePrice: {
         type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    images: {
+        allowNull: false,
+      },
+      images: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false
-    },
-    stock: {
+        allowNull: false,
+      },
+      Brand: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      Condition: {
+        type: DataTypes.ENUM("Brand New", "Used", "like new"),
+        allowNull: false,
+      },
+      stock: {
         type: DataTypes.INTEGER,
-        defaultValue: 0
-    },
-    minStock: {
+        defaultValue: 0,
+      },
+      minStock: {
         type: DataTypes.INTEGER,
-        defaultValue: 0
-    },
-    isActive: {
+        defaultValue: 0,
+      },
+      isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true
+        defaultValue: true,
+      },
     },
-  }, { timestamps: false });
+    { timestamps: false }
+  );
 };

@@ -9,10 +9,14 @@ export const EDIT_PRODUCT = "EDIT_PRODUCT";
 // Cgory
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const GET_CATEGORY = "GET_CATEGORY";
+export const GET_CATEGORY_ID = "GET_CATEGORY_ID";
+export const EDIT_CATEGORY = "EDIT_CATEGORY";
 
 //Provider
 export const ADD_PROVIDER = "ADD_PROVIDER";
 export const GET_PROVIDER = "GET_PROVIDER";
+export const GET_PROVIDER_ID = "GET_PROVIDER_ID";
+export const EDIT_PROVIDER = "EDIT_PROVIDER";
 
 //User
 export const LOGIN = "LOGIN";
@@ -31,3 +35,9 @@ export const CALCULE_TOTALS = "CALCULE_TOTALS";
 //Favorite
 export const ADD_FAV = "ADD_FAV";
 export const REMOVE_FAV = "REMOVE_FAV";
+
+//filter
+export const PRICE_HIGHER_LOWER = "PRICE_HIGHER_LOWER";
+export const PRICE_LOWER_HIGHER = "PRICE_LOWER_HIGHER";
+export const FILTER_NAME_ASC = "PRICE_HIGHER_LOWER";
+export const FILTER_NAME_DESC = "PRICE_LOWER_HIGHER";

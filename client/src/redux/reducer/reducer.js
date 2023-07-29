@@ -18,6 +18,14 @@ import {
   EDIT_PRODUCT,
   ADD_FAV,
   REMOVE_FAV,
+  GET_CATEGORY_ID,
+  EDIT_CATEGORY,
+  GET_PROVIDER_ID,
+  EDIT_PROVIDER,
+  PRICE_HIGHER_LOWER,
+  PRICE_LOWER_HIGHER,
+  FILTER_NAME_ASC,
+  FILTER_NAME_DESC,
 } from "../actions/types";
 
 const initialState = {
@@ -77,6 +85,13 @@ function reducer(state = initialState, actions) {
         ...state,
         category: [...state.category, payload],
       };
+
+    case GET_CATEGORY_ID:
+      console.log("Category id: ", actions.payload);
+      return {
+        ...state,
+        category: actions.payload,
+      };
     case GET_CATEGORY:
       return {
         ...state,
@@ -87,6 +102,12 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         provider: [...state.provider, payload],
+      };
+    case GET_PROVIDER_ID:
+      console.log("Provider id: ", actions.payload);
+      return {
+        ...state,
+        provider: actions.payload,
       };
 
     case GET_PROVIDER:
@@ -220,6 +241,24 @@ function reducer(state = initialState, actions) {
           product.id === productId ? { ...product, ...updatedProduct } : product
         ),
       };
+    case EDIT_CATEGORY:
+      const { categoryId, updatedCategory } = actions.payload;
+      return {
+        ...state,
+        category: state.category.map((categ) =>
+          categ.id === categoryId
+            ? { ...category, ...updatedCategory }
+            : category
+        ),
+      };
+    case EDIT_PROVIDER:
+      const { providerId, updateProvider } = actions.payload;
+      return {
+        ...state,
+        provider: state.provider.map((prov) =>
+          prov.id === providerId ? { ...provider, ...updateProvider } : provider
+        ),
+      };
 
     //Favorite
 
@@ -227,6 +266,34 @@ function reducer(state = initialState, actions) {
       return { ...state, favorites: actions.payload };
     case REMOVE_FAV:
       return { ...state, favorites: actions.payload };
+
+    //Filter Price
+
+    case PRICE_HIGHER_LOWER:
+      return {
+        ...state,
+        products: actions.payload,
+      };
+
+    case PRICE_LOWER_HIGHER:
+      return {
+        ...state,
+        products: actions.payload,
+      };
+
+    // Filter Name
+
+    case FILTER_NAME_ASC:
+      return {
+        ...state,
+        products: actions.payload,
+      };
+
+    case FILTER_NAME_DESC:
+      return {
+        ...state,
+        products: actions.payload,
+      };
 
     default:
       return state;
