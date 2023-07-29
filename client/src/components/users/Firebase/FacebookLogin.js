@@ -1,18 +1,18 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
+export const handleFacebookSignIn = async () => {
+    const provider = new FacebookAuthProvider();
     const auth = getAuth();
-    auth.languageCode = 'it';    
+    auth.languageCode = 'it';
   
     try {
       const result = await signInWithPopup(auth, provider);      
-      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const credential = FacebookAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;    
       const user = result.user;
-      console.log("Usuario autenticado con Google:", result.user);
+      console.log("Usuario autenticado con Facebook:", result.user);
   
      
         toast.info('Welcome ' + result.user.displayName, {
@@ -32,9 +32,9 @@ export const handleGoogleSignIn = async () => {
       
       const email = error.customData.email;
       
-      const credential = GoogleAuthProvider.credentialFromError(error);
+      const credential = FacebookAuthProvider.credentialFromError(error);
      
-      console.log("Error al autenticar con Google:", error);
+      console.log("Error al autenticar con Facebook:", error);
     }
   };
   
