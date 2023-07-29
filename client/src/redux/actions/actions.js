@@ -140,6 +140,7 @@ export const editUser = (userId, changeUser) => {
     }
   };
 };
+
 export const getUserId = (id) => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {

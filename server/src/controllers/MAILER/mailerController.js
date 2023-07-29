@@ -4,7 +4,7 @@ const Mailgen = require('mailgen');
 const sendMailer = async (product) => {
   console.log(product.dataValues, 'dataValues ')
   try {
-    // const { email } = req.params;
+    //  const { email } = req.params;
     
     const transporter = nodemailer.createTransport({
       // port: 465 - true, 567 - false

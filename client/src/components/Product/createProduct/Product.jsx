@@ -13,11 +13,15 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
+
 export const Product = () => {
   useEffect(() => {
     dispatch(getCategory());
     dispatch(getProvider());
   }, []);
+
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const category = useSelector((state) => state.category);

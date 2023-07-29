@@ -149,15 +149,14 @@ export const EditProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos enviados: ", changeProduct);
-    dispatch(editProduct(id, changeProduct));
+    // console.log("Datos enviados: ", changeProduct);   
     toast.success("¡Edit Product successfully!");
     navigate('/settings')
   };
 
   // console.log("productDetail: ", productDetail);
   // console.log("stock: ", productDetail.stock);
-  console.log("changeProduct:  ", changeProduct);
+  // console.log("changeProduct:  ", changeProduct);
 
   return (
     <div className={styles.container}>
