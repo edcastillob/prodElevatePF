@@ -13,10 +13,11 @@ import styles from "./EditProduct.module.css";
 import ReactQuill from "react-quill";
 import loadingImg from "../../../assets/loading.png";
 import "react-quill/dist/quill.snow.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const EditProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   const category = useSelector((state) => state.category);
@@ -140,14 +141,15 @@ export const EditProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos enviados: ", changeProduct);
+    // console.log("Datos enviados: ", changeProduct);
     dispatch(editProduct(id, changeProduct));
     toast.success("¡Edit Product successfully!");
+    navigate('/settings')
   };
 
-  console.log("productDetail: ", productDetail);
-  console.log("stock: ", productDetail.stock);
-  console.log("changeProduct:  ", changeProduct);
+  // console.log("productDetail: ", productDetail);
+  // console.log("stock: ", productDetail.stock);
+  // console.log("changeProduct:  ", changeProduct);
 
   return (
     <div className={styles.container}>

@@ -17,7 +17,7 @@ import { Login } from "./components/users/login/Login";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 // Importa 'auth' desde firebase.js
 import { auth } from "./components/users/Firebase/firebase.js";
-import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; // Import your Google sign-in function
+import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; 
 import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +33,6 @@ import Panel from "./components/Dashboard";
 import { UsersAll } from "./components/users/UsersAll/UsersAll";
 import { EditUser } from "./components/users/EditUser/EditUser";
 
-
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,25 +41,20 @@ function App() {
   const [currentUserLocal, setCurrentUserLocal] = useState(null);
 
   useEffect(() => {
-    setShowNavBar(location.pathname !== "/" && location.pathname !== "/dashboard");
+    setShowNavBar(
+      location.pathname !== "/" && location.pathname !== "/dashboard"
+    );
   }, [location]);
 
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      console.log("Yonatan id user: ", user);
       if (user) {
         const uid = user.uid;
-        console.log("Usuario logueado:", user);
         setCurrentUser(user);
-        navigate("/home");
       } else {
-        console.log("Usuario no logueado");
-        setCurrentUser(null);
-
         // console.log("Usuario no logueado");
-        // setCurrentUser(null);
-        // navigate("/");
+        setCurrentUser(null);
       }
     });
   }, []);
@@ -93,10 +87,7 @@ function App() {
       )}
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
-      <Routes>
-          {/* showcategory muestra todas las categorias es la vista al acceder a category desde admin */}
-          {/* ProviderAll muestra todas las providers es la vista al acceder a providers desde admin */}
-          {/* SettingsProduct muestra todas las products es la vista al acceder a Product desde admin */}
+        <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/producto" element={<Product />} />

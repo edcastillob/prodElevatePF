@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const Mailgen = require('mailgen');
 
-const sendMailer = async (product) => {
+const sendMailer = async (product, res) => {
   console.log(product.dataValues, 'dataValues ')
   try {
     // const { email } = req.params;
@@ -10,8 +10,8 @@ const sendMailer = async (product) => {
       // port: 465 - true, 567 - false
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD
+        user: 'mendozaveralucia@gmail.com',
+        pass: 'pgazpnjfbfvbkpe'
       }
     });
 

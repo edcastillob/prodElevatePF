@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
 // const socket = io("/");
 
 const Chat = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newMessage = {
       body: message,
-      from: 'Me'
-    }
+      from: "Me",
+    };
 
     setMessages([...messages, newMessage]);
     // envia el mensaje a backend
     // socket.emit('chat', message);
-  } 
+  };
 
   // useEffect(() => {
   //   socket.on('message', receiveMesage);
@@ -31,8 +31,8 @@ const Chat = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '4rem'}}>
-        <input  
+      <form onSubmit={handleSubmit} style={{ display: "flex", gap: "4rem" }}>
+        <input
           type="text"
           placeholder="Escribe tu mensaje aqui..."
           onChange={(e) => setMessage(e.target.value)}
@@ -41,16 +41,14 @@ const Chat = () => {
       </form>
 
       <ul>
-        {
-          messages.map((message, index) => (
-            <li key={index}>
-              {message.from}:{message.body}
-            </li>
-          ))
-        }
+        {messages.map((message, index) => (
+          <li key={index}>
+            {message.from}:{message.body}
+          </li>
+        ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export default Chat;

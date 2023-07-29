@@ -10,7 +10,6 @@ import { addToCart } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 // import { addToCart } from "../../../redux/actions/actions";
 export const ProductDetail = () => {
- 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -47,7 +46,7 @@ export const ProductDetail = () => {
     "Unknown Category";
 
   return (
-    <div style={{padding:'1rem'}}>
+    <div style={{ padding: "1rem" }}>
       {loading ? (
         <div>
           <img src={loadingImg} alt="Loading" />
@@ -55,9 +54,12 @@ export const ProductDetail = () => {
       ) : (
         <div className={styles.container}>
           <div className={styles.back}>
-            <Link to='/home'>
+            <Link to="/home">
               <div className={styles.backButton}>
-                <p><ion-icon name="arrow-round-back"></ion-icon><ion-icon name="home"></ion-icon></p>
+                <p>
+                  <ion-icon name="arrow-round-back"></ion-icon>
+                  <ion-icon name="home"></ion-icon>
+                </p>
               </div>
             </Link>
           </div>
@@ -65,7 +67,7 @@ export const ProductDetail = () => {
             <img src={images} alt={name} />
           </div>
           <div className={styles.description}>
-            <h4 style={{fontFamily:'Poppins'}}>{name}</h4>
+            <h4 style={{ fontFamily: "Poppins" }}>{name}</h4>
             {/* Utilizamos dangerouslySetInnerHTML para renderizar el HTML */}
             <div
               className={styles.descriptionItem}

@@ -4,7 +4,7 @@ async function getCategoryId(req, res) {
     try {
         const { id } = req.params;
         const categoryID = await Category.findByPk(id);
-        console.log(categoryID)
+        // console.log(categoryID)
         
         return res.status(200).json(categoryID);
     } catch (error) {

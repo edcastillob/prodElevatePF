@@ -12,7 +12,7 @@ export const CardProduct = ({ product }) => {
   const navigate = useNavigate();
 
   const handledAddToCart = (product) => {
-    dispatch(addToCart(product)); 
+    dispatch(addToCart(product));
     navigate("/cart");
   };
 
@@ -51,13 +51,13 @@ export const CardProduct = ({ product }) => {
           Add to Cart
         </button>
 
-        {currentUser && (
+        {/* {currentUser && (
           <Link title="Edit Product" to={`/productidedit/${id}`}>
             <button className={styles.editProduct}>
               <ion-icon name="create"></ion-icon>
             </button>
           </Link>
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -45,7 +45,7 @@ export const Home = () => {
     };
   }, [dispatch]);
   return (
-    <div className={styles.container}>      
+    <div className={styles.container}>
       <div className={styles.welcome}>
         <Marquee className={styles.message}>
           Welcome to ProdElevate - The place for the exponential growth of your

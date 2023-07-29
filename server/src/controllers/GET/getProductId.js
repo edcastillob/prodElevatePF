@@ -6,7 +6,7 @@ async function getProductId(req, res) {
         const productID = await Product.findByPk(id, {
             include:  {model: Provider }
         });
-        console.log(productID)
+        // console.log(productID)
         
         return res.status(200).json(productID);
     } catch (error) {

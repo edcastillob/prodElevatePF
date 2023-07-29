@@ -38,7 +38,6 @@ export const showProducts = () => {
   try {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}product`);
-      console.log(data);
       return dispatch({ type: SHOW_PRODUCTS, payload: data });
     };
   } catch (error) {
@@ -56,12 +55,12 @@ export const getProductDetail = (id) => {
       axios
         .get(`${ENDPOINT}productid/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_PRODUCT_DETAIL, payload: response.data });
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching product details."); 
+          throw new Error("Error fetching product details.");
         });
     });
   };
@@ -106,7 +105,7 @@ export const getUsers = () => {
   try {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}user`);
-      console.log(data);
+      // console.log(data);
       return dispatch({ type: GET_ALL_USERS, payload: data });
     };
   } catch (error) {
@@ -141,12 +140,12 @@ export const getUserId = (id) => {
       axios
         .get(`${ENDPOINT}user/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_USER_ID, payload: response.data });
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching user details."); 
+          throw new Error("Error fetching user details.");
         });
     });
   };
@@ -191,12 +190,12 @@ export const getCategoryId = (id) => {
       axios
         .get(`${ENDPOINT}category/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_CATEGORY_ID, payload: response.data });
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching category details."); 
+          throw new Error("Error fetching category details.");
         });
     });
   };
@@ -207,7 +206,7 @@ export const categoryEdit = (categoryId, editCategory) => {
     try {
       await axios.put(`${ENDPOINT}category/${categoryId}`, editCategory);
       return dispatch({
-        type:EDIT_CATEGORY,
+        type: EDIT_CATEGORY,
         payload: { categoryId, editCategory },
       });
     } catch (error) {
@@ -240,12 +239,12 @@ export const getProviderId = (id) => {
       axios
         .get(`${ENDPOINT}provider/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_PROVIDER_ID, payload: response.data });
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching provider"); 
+          throw new Error("Error fetching provider");
         });
     });
   };
@@ -256,7 +255,7 @@ export const editProvider = (providerId, editProvider) => {
     try {
       await axios.put(`${ENDPOINT}provider/${providerId}`, editProvider);
       return dispatch({
-        type:EDIT_PROVIDER,
+        type: EDIT_PROVIDER,
         payload: { providerId, editProvider },
       });
     } catch (error) {
@@ -304,9 +303,9 @@ export const login = (userData) => {
     return async (dispatch) => {
       const response = await axios.post(`${ENDPOINT}login`, userData);
       if (response.data) {
-        const user = response.data.User; 
-        localStorage.setItem("user", JSON.stringify(user));       
-        window.location.reload()
+        const user = response.data.User;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.reload();
         return dispatch({ type: LOGIN, payload: user });
       }
       throw new Error("Credenciales inválidas");

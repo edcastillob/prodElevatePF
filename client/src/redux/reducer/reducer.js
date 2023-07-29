@@ -42,7 +42,7 @@ const initialState = {
   provider: [],
   user: null,
   role: [],
-  users:[],
+  users: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -66,7 +66,7 @@ function reducer(state = initialState, actions) {
       };
 
     case GET_PRODUCT_DETAIL:
-      console.log(actions.payload);
+      // console.log(actions.payload);
       // const filteredProduct = filterProduct.filter((prod) => prod.id === actions.payload);
       return {
         ...state,
@@ -85,12 +85,12 @@ function reducer(state = initialState, actions) {
         category: [...state.category, payload],
       };
 
-      case GET_CATEGORY_ID:
-        console.log("Category id: ",actions.payload);
-        return {
-          ...state,
-          category: actions.payload,
-        };
+    case GET_CATEGORY_ID:
+      // console.log("Category id: ", actions.payload);
+      return {
+        ...state,
+        category: actions.payload,
+      };
     case GET_CATEGORY:
       return {
         ...state,
@@ -102,12 +102,12 @@ function reducer(state = initialState, actions) {
         ...state,
         provider: [...state.provider, payload],
       };
-      case GET_PROVIDER_ID:
-        console.log("Provider id: ",actions.payload);
-        return {
-          ...state,
-          provider: actions.payload,
-        };
+    case GET_PROVIDER_ID:
+      // console.log("Provider id: ", actions.payload);
+      return {
+        ...state,
+        provider: actions.payload,
+      };
 
     case GET_PROVIDER:
       return {
@@ -127,7 +127,7 @@ function reducer(state = initialState, actions) {
       };
 
     case LOGIN:
-      console.log("reducer login: ", actions.payload);
+      // console.log("reducer login: ", actions.payload);
       return {
         ...state,
         user: actions.payload,
@@ -240,15 +240,17 @@ function reducer(state = initialState, actions) {
           product.id === productId ? { ...product, ...updatedProduct } : product
         ),
       };
-      case EDIT_CATEGORY:
+    case EDIT_CATEGORY:
       const { categoryId, updatedCategory } = actions.payload;
       return {
         ...state,
         category: state.category.map((categ) =>
-          categ.id === categoryId ? { ...category, ...updatedCategory } : category
+          categ.id === categoryId
+            ? { ...category, ...updatedCategory }
+            : category
         ),
       };
-      case EDIT_PROVIDER:
+    case EDIT_PROVIDER:
       const { providerId, updateProvider } = actions.payload;
       return {
         ...state,
@@ -257,54 +259,58 @@ function reducer(state = initialState, actions) {
         ),
       };
 
-      case DELETE_PRODUCT:      
+    case DELETE_PRODUCT:
       const updatedProducts = state.products.filter(
-        (product) => product.id !== actions.payload );     
+        (product) => product.id !== actions.payload
+      );
       return {
         ...state,
         products: updatedProducts,
       };
 
-      case DELETE_CATEGORY:      
+    case DELETE_CATEGORY:
       const updatedCateg = state.category.filter(
-        (cat) => cat.id !== actions.payload );     
+        (cat) => cat.id !== actions.payload
+      );
       return {
         ...state,
         category: updatedCateg,
       };
-      case DELETE_PROVIDER:      
+    case DELETE_PROVIDER:
       const updateProv = state.provider.filter(
-        (cat) => cat.id !== actions.payload );     
+        (cat) => cat.id !== actions.payload
+      );
       return {
         ...state,
         provider: updateProv,
       };
-      case GET_ALL_USERS:
+    case GET_ALL_USERS:
       return {
         ...state,
-        users: actions.payload,        
+        users: actions.payload,
       };
-      case DELETE_USERS:      
+    case DELETE_USERS:
       const updateUsers = state.users.filter(
-        (user) => user.id !== actions.payload );     
+        (user) => user.id !== actions.payload
+      );
       return {
         ...state,
         users: updateUsers,
       };
-      case EDIT_USERS:
-        const { userId, updateUser } = actions.payload;
-        return {
-          ...state,
-          users: state.users.map((prov) =>
-            prov.id === userId ? { ...users, ...updateUser } : users
-          ),
-        };
-        case GET_USER_ID:
-          console.log("User id: ",actions.payload);
-          return {
-            ...state,
-            users: actions.payload,
-          };
+    case EDIT_USERS:
+      const { userId, updateUser } = actions.payload;
+      return {
+        ...state,
+        users: state.users.map((prov) =>
+          prov.id === userId ? { ...users, ...updateUser } : users
+        ),
+      };
+    case GET_USER_ID:
+      // console.log("User id: ", actions.payload);
+      return {
+        ...state,
+        users: actions.payload,
+      };
     default:
       return state;
   }
