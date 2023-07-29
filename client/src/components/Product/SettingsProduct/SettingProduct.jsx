@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./SettingProduct.module.css";
 import { deleteProduct, showProducts } from "../../../redux/actions/actions";
+import { Table } from 'reactstrap';
 
 export const SettingsProduct = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,8 @@ export const SettingsProduct = () => {
   };
 
   return (
-    <div className={styles.cardContainer}>
-      <h2>Products Administration</h2>      
+    <div className={styles.container}>
+      <h2 style={{fontFamily:'Poppins'}}>Products Administration</h2>      
       <input
         type="text"
         placeholder="Search product"
@@ -42,8 +43,31 @@ export const SettingsProduct = () => {
       />
 
       {filteredProducts?.map((product) => (
-        <div key={product.id} className={styles.cardContainer}>
-          <img className={styles.img} src={product.images} alt="product" />
+        <Table key={product.id} className={styles.table}>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Name</th>
+                <th>
+                <Link title="Edit product" to={`/productidedit/${product.id}`}>
+                <button className={styles.edit}>
+                  <ion-icon name="create"></ion-icon>
+                </button>
+                </Link>
+                <button className={styles.delete} onClick={() => handleDeleteProduct(provider.id)}>
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+                </th>
+              </tr>
+            </thead>
+              <tbody>
+                <tr>
+                  <td><img src={product.images} alt={product.name} className={styles.img} /></td>
+                  <td>{product.name}</td>
+                  <td>{null}</td>
+                </tr>
+              </tbody>
+          {/* <img className={styles.img} src={product.images} alt="product" />
           <h5 className={styles.title}>Name: {product.name}</h5>   
           <Link title="Edit product" to={`/productidedit/${product.id}`}>
             <button>
@@ -52,8 +76,8 @@ export const SettingsProduct = () => {
           </Link>
           <button onClick={() => handleDeleteProduct(product.id)}>
               <ion-icon name="close"></ion-icon>
-          </button>
-        </div>
+          </button> */}
+        </Table>
       ))}
     </div>
   );

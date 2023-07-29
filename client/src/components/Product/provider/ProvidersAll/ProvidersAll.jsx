@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProvider, getProvider } from "../../../../redux/actions/actions";
 import { Link } from "react-router-dom";
-import styles from "./Providers.module.css";
+import { Table } from 'reactstrap';
+import styles from "./ProvidersAll.module.css";
 
 export const ProvidersAll = () => {
   const dispatch = useDispatch();
@@ -32,34 +33,50 @@ export const ProvidersAll = () => {
   };
 
   return (
-    <div>
-      <h2>ProvidersAll</h2>      
+    <div className={styles.container}>
+      <h2 style={{fontFamily:'Poppins'}}>Providers</h2>      
+      
       <input
         type="text"
+        className="form-control w-25 mb-3"
         placeholder="Search provider"
         value={searchProvider}
         onChange={(event) => setSearchProvider(event.target.value)}
       />
 
+      <div className={styles.tablesContainer}>
       {filteredProvider.map((provider) => (
-        <div key={provider.id} className={styles.cardContainer}>
-          <h5 className={styles.title}>Name: {provider.name}</h5>
-          <h6 className={styles.price}>
-            Identification: {provider.identification}
-          </h6>
-          <h6 className={styles.price}>Email: {provider.email}</h6>
-          <h6 className={styles.price}>Phone Number: {provider.numPhone}</h6>
+        <Table key={provider.id} className={styles.table}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Document N°</th>
+              <th>Email</th>
+              <th>Phone N°</th>
+              <th><Link title="Edit provider" to={`/proveedoredit/${provider.id}`}>
+                <button className={styles.edit}>
+                  <ion-icon name="create"></ion-icon>
+                </button>
+                </Link>
+                <button className={styles.delete} onClick={() => handleDeleteProvider(provider.id)}>
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+              </th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr>
+                <td>{provider.name}</td>
+                <td>{provider.identification}</td>
+                <td>{provider.email}</td>
+                <td>{provider.numPhone}</td>
+                <td>{null}</td>
 
-          <Link title="Edit provider" to={`/proveedoredit/${provider.id}`}>
-            <button>
-              <ion-icon name="create"></ion-icon>
-            </button>
-          </Link>
-          <button onClick={() => handleDeleteProvider(provider.id)}>
-              <ion-icon name="close"></ion-icon>
-          </button>
-        </div>
+              </tr>
+            </tbody>
+        </Table>
       ))}
+      </div>
     </div>
   );
 };

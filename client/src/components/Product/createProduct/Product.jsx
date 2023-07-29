@@ -98,7 +98,7 @@ export const Product = () => {
    console.log('provider: ', provider)
   return (
     <div className={styles.container}>
-      <div className={styles.divLeft}>
+      
         <hr />
         <form onSubmit={handleSubmit} className={styles.form}>
           <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
@@ -113,7 +113,7 @@ export const Product = () => {
               value={product.category}
               onChange={handleChange}
             >
-              <option value="">-- Category --</option>
+              <option value="" style={{fontFamily:'Poppins'}}>-- Category --</option>
               {sortedCategories.map((catg) => (
                 <option key={catg.id} value={catg.id}>
                   {catg.name}
@@ -159,7 +159,7 @@ export const Product = () => {
               "image",
             ]}
             placeholder="Enter product description..."
-            style={{ height: "130px", marginBottom: "4rem" }}
+            style={{ height: "130px", marginBottom: "4rem", fontFamily:'Poppins' }}
           />
 
           {/* precio de compra de Producto */}
@@ -262,7 +262,7 @@ export const Product = () => {
           <button className={styles.create}>Create</button>
         </form>
       </div>
-      <div className={styles.containerRight}></div>
-    </div>
+      
+  
   );
 };
