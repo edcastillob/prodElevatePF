@@ -13,11 +13,8 @@ export const ShowCategory = () => {
   }, []);
   
   const category = useSelector((state) => state.category);
-  useEffect(() => {
-    if (typeof category === 'object') {
-      dispatch(getCategory());
-    }   
-  }, [category, dispatch]);
+
+
 
   const comparecategory = (a, b) => {
     const nameA = a.name.toUpperCase();
@@ -26,10 +23,10 @@ export const ShowCategory = () => {
     if (nameA > nameB) return 1;
     return 0;
   };
-  if (typeof category === 'Array') {
+  if (Array.isArray(category)) {
     category.sort(comparecategory);
-    
-  }   
+  }
+  
 
  
   console.log("desde show:" , category)
