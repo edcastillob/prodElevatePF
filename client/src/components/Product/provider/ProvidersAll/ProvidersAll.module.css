@@ -1,19 +1,15 @@
 .container{
     background-color: #f0f4f7;
-    width: 100%;
+    border: 3px solid #cacaca;
+    border-radius: 10px;
+    display: flex;
     height: 100%;
-    padding: 1rem;
-    justify-content: space-around;
+    flex-direction: column;
+    padding: 2rem;
 }
 
 .table{
     font-family: 'Poppins';
-    width: 40%;
-}
-
-.img{
-    width: 90px;
-    height: auto;
 }
 
 .edit{

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCategory } from '../../../redux/actions/actions';
-import styles from './Category.module.css'
+import styles from './Category.module.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Category = () => {
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ export const Category = () => {
     event.preventDefault();
     console.log(category);
     dispatch(addCategory(category));
-    alert("Exito");
+    toast.success("¡Category created successfully!");
     setCategory({
       name: "",
       description: "",
@@ -36,11 +38,10 @@ export const Category = () => {
     <div>
         
         <div className={styles.container}>
-        <ion-icon name="arrow-round-back"></ion-icon>
-        <h2 className={styles.mainTitle}>Create New Category</h2>      
-        <hr />
+  
         <form onSubmit={ handleSubmit } className={styles.formContainer}>
         
+        <h4 style={{fontFamily: 'Poppins', marginBottom:'1rem'}}>New Category</h4>   
         {/* <label htmlFor="isActive">active</label>
         <input
         className='form-check-input mt-10'
@@ -55,26 +56,27 @@ export const Category = () => {
         
         
         {/* Nombre de categoria */}
-        <label htmlFor="name">Name: </label>        
         <input
-        type="text"
-        name="name"
-        placeholder="Enter Category Name... "
-        value={category.name}
-        onChange={handleChange}
-      />
+            className="form-control mb-3 w-75"
+            type="text"
+            name="name"
+            placeholder= "Category Name"
+            value={category.name}
+            onChange={handleChange}
+          />
 
-       {/* Descripcion de categoria */}
-       <label htmlFor="name">Description: </label>             
+       {/* Descripcion de categoria */}         
         <textarea
         type="textarea"
         name="description"
-        placeholder='Category Description...'
+        className='form-control'
+        style={{resize:'none', width:'75%', height:'30%', fontFamily:'Poppins'}}
+        placeholder='Enter Category Description...'
         value={category.description}
         onChange={handleChange}
       />
         <br />
-        <button className={styles.btn}>Create Category</button> 
+        <button className={styles.create}>Create</button>
         </form>
       </div>
     </div>

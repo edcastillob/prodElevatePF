@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteCategory, getCategory } from '../../../../redux/actions/actions';
 import { Link } from "react-router-dom";
+import styles from "./ShowCategory.module.css";
+import { Table } from 'reactstrap';
 
 
 export const ShowCategory = () => {
@@ -36,27 +38,42 @@ export const ShowCategory = () => {
     }
   };
   return (
-    <div>
+    <div className={styles.container}>
+      <h3 style={{fontFamily:'Poppins'}}>Categories</h3>
+    <div className={styles.categoryContainer}>
       {category?.map((category) => (
-        <div key={category.id} style={categoryContainerStyle}>            
-          <div>Name: {category.name}</div>
-          <div>Description: {category.description}</div>
-         
-      <Link title="Edit Category" to={`/categoryedit/${category.id}`}>
-            <button>
-              <ion-icon name="create"></ion-icon>
-            </button>
-          </Link>
-          <button onClick={() => handleDeleteCategory(category.id)}>
-              <ion-icon name="close"></ion-icon>
+        <Table key={category.id} className={styles.table}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th><Link title="Edit Category" to={`/categoryedit/${category.id}`}>
+                  <button className={styles.edit}>
+                    <ion-icon name="create"></ion-icon>
+                  </button>
+                  </Link>
+                  <button className={styles.delete} onClick={() => handleDeleteCategory(category.id)}>
+                    <ion-icon name="trash"></ion-icon>
           </button>
-        </div>
-      ))}
+              </th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr>
+                <td>{category.name}</td>
+                <td>{category.description}</td>
+                <td>{null}</td>
+              </tr>
+            </tbody>
+
+         
+      
+        </Table>
+      )
+      )
+    }
+    </div>
     </div>
   );
 };
-const categoryContainerStyle = {
-  border: '1px solid #ccc',
-  padding: '10px',
-  marginBottom: '10px',
-};
+

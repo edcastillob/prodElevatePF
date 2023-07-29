@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  categoryEdit, getCategoryId } from '../../../../redux/actions/actions';
 import styles from './EditCategory.module.css'
-import {  useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const EditCategory = () => {
   const dispatch = useDispatch();
@@ -49,7 +52,7 @@ export const EditCategory = () => {
     event.preventDefault();
     console.log(editCategory);
     dispatch(categoryEdit(id, editCategory));
-    alert("successfully updated"); 
+    toast.success("¡Updated successfully!"); 
     navigate("/settings");
   };
   console.log("Edit category: ", editCategory)
@@ -57,32 +60,45 @@ export const EditCategory = () => {
     <div>
         
         <div className={styles.container}>
-        <ion-icon name="arrow-round-back"></ion-icon>
-        <h2 className={styles.mainTitle}>Create New Category</h2>      
-        <hr />
-
-        <form onSubmit={ handleSubmit } className={styles.formContainer}>   
-        {/* Nombre de categoria */}
-        <label htmlFor="name">Name: </label>        
+  
+        <form onSubmit={ handleSubmit } className={styles.formContainer}>
+        
+        <h4 style={{fontFamily: 'Poppins', marginBottom:'1rem'}}>Edit Category</h4>   
+        {/* <label htmlFor="isActive">active</label>
         <input
-        type="text"
-        name="name"
-        placeholder="Enter Category Name... "
-        value={editCategory.name}
-        onChange={handleChange}
-      />
+        className='form-check-input mt-10'
+        type="checkbox"
+        name='isActive'
+        id='isActive'
+        value={category.isActive}
+        onChange={handleChangeCheckBox}
+        />
+        <br /> */}
 
-       {/* Descripcion de categoria */}
-       <label htmlFor="name">Description: </label>             
+        
+        
+        {/* Nombre de categoria */}
+        <input
+            className="form-control mb-3 w-75"
+            type="text"
+            name="name"
+            placeholder= "Category Name"
+            value={editCategory.name}
+            onChange={handleChange}
+          />
+
+       {/* Descripcion de categoria */}         
         <textarea
         type="textarea"
         name="description"
-        placeholder='editCategory Description...'
+        className='form-control'
+        style={{resize:'none', width:'75%', height:'30%', fontFamily:'Poppins'}}
+        placeholder='Enter Category Description...'
         value={editCategory.description}
         onChange={handleChange}
       />
         <br />
-        <button className={styles.btn}>Update Category</button> 
+        <button className={styles.create}>Update</button>
         </form>
       </div>
     </div>
