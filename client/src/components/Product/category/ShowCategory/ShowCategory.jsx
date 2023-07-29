@@ -55,8 +55,8 @@ export const ShowCategory = () => {
                     <ion-icon name="create"></ion-icon>
                   </button>
                   </Link>
-                  <button onClick={() => handleDeleteCategory(category.id)}>
-                  <ion-icon name="close"></ion-icon>
+                  <button className={styles.delete} onClick={() => handleDeleteCategory(category.id)}>
+                    <ion-icon name="trash"></ion-icon>
           </button>
               </th>
             </tr>

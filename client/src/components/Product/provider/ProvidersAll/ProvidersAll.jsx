@@ -55,11 +55,11 @@ export const ProvidersAll = () => {
               <th>Phone N°</th>
               <th><Link title="Edit provider" to={`/proveedoredit/${provider.id}`}>
                 <button className={styles.edit}>
-                <ion-icon name="create"></ion-icon>
+                  <ion-icon name="create"></ion-icon>
                 </button>
                 </Link>
-                <button onClick={() => handleDeleteProvider(provider.id)}>
-                  <ion-icon name="close"></ion-icon>
+                <button className={styles.delete} onClick={() => handleDeleteProvider(provider.id)}>
+                  <ion-icon name="trash"></ion-icon>
                 </button>
               </th>
             </tr>
