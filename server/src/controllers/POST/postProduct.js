@@ -1,3 +1,4 @@
+const { sendMailer } = require("../MAILER/mailerController");
 const { Product, Provider } = require("../../db");
 
 async function postProduct(req, res) {   
@@ -26,6 +27,10 @@ async function postProduct(req, res) {
             minStock,
             categoryId
         });
+
+        if (product && minStock >= 0) {
+          sendMailer(product);
+        }
 
         for (const providerId of provider) {
             const providerInstance = await Provider.findByPk(providerId);
