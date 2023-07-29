@@ -9,6 +9,8 @@ import { ProvidersAll } from "../Product/provider/ProvidersAll/ProvidersAll";
 import { EditProvider } from '../Product/provider/EditProvider/EditProvider';
 import { SettingsProduct } from '../Product/SettingsProduct/SettingProduct';
 import { ShowCategory } from '../Product/category/ShowCategory/ShowCategory';
+import { UsersAll } from '../users/UsersAll/UsersAll';
+import { CreateUser } from '../users/createUser/CreateUser';
 import logo from '../../assets/logo_2.png'
 
 
@@ -83,6 +85,8 @@ export const Configuration = () =>{
     // Resetear el estado de las otras opciones seleccionadas
     setSelectedProviderComponent(null);
     setSelectedProductComponent(null);
+    setSelectedCategoryComponent(null);
+
   };
 
  
@@ -133,7 +137,7 @@ export const Configuration = () =>{
 
               {/* USER */}
           <div className={styles.optionContainer}>
-            <div className={styles.options} onClick={() => handleCategoryOptionClick('User')}>
+            <div className={styles.options} onClick={() => handleUserOptionClick('User')}>
             <span style={{fontSize:'2.4rem', marginRight:'0.5rem'}}><ion-icon name="contact"></ion-icon></span>User
             </div>
             <div className={styles.dropdownOption}
@@ -167,6 +171,10 @@ export const Configuration = () =>{
       {/* CATEGORY COMPONENTS */}
       {selectedCategoryComponent === 'Category' && <ShowCategory />}
       {selectedCategoryComponent === 'Create Category' && <Category />}
+
+      {/* USER COMPONENTS */}
+      {selectedUserComponent === 'User' && <UsersAll />}
+      {selectedUserComponent === 'Create User' && <CreateUser />}
 
     </>
   ) : (

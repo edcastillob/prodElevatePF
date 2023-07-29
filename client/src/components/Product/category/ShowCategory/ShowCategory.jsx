@@ -37,16 +37,17 @@ export const ShowCategory = () => {
     }
   };
   return (
-   
-   <>
+    
+    <div className={styles.container}>
+     <h3 style={{fontFamily:'Poppins'}}>Categories</h3>
     <input
       type="text"
+      className='form-control w-25'
       placeholder="Search category"
       value={searchCategory}
       onChange={(event) => setSearchCategory(event.target.value)}
     />
-    <div className={styles.container}>
-      <h3 style={{fontFamily:'Poppins'}}>Categories</h3>
+
     <div className={styles.categoryContainer}>
       {filteredCategory?.map((category) => (
         <Table key={category.id} className={styles.table}>
@@ -61,7 +62,8 @@ export const ShowCategory = () => {
                   </Link>
                   <button className={styles.delete} onClick={() => handleDeleteCategory(category.id)}>
                     <ion-icon name="trash"></ion-icon>
-          </button>
+                  </button>
+
               </th>
             </tr>
           </thead>
@@ -81,7 +83,7 @@ export const ShowCategory = () => {
     }
     </div>
     </div>
-    </>
+
   );
 
 };
