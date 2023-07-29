@@ -17,10 +17,16 @@ import {
   INCREMENT_CART,
   CLEAR_CART,
   EDIT_PRODUCT,
+  ADD_FAV,
+  REMOVE_FAV,
   GET_CATEGORY_ID,
   EDIT_CATEGORY,
   GET_PROVIDER_ID,
   EDIT_PROVIDER,
+  PRICE_HIGHER_LOWER,
+  PRICE_LOWER_HIGHER,
+  FILTER_NAME_ASC,
+  FILTER_NAME_DESC,
   DELETE_PRODUCT,
   DELETE_CATEGORY,
   DELETE_PROVIDER,
@@ -402,5 +408,98 @@ export const clearCart = () => {
     return {
       type: CLEAR_CART,
     };
+  };
+};
+
+export const addFav = (product) => {
+  const endpoint = "http://localhost:3001/favorite";
+  return async (dispatch) => {
+    try {
+      console.log(product);
+      const { data } = await axios.post(endpoint, product);
+      return dispatch({
+        type: ADD_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const removeFav = (id) => {
+  const endpoint = `http://localhost:3001/favorite/${id}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      return dispatch({
+        type: REMOVE_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+//Filter
+
+export const priceHigherLower = () => {
+  const endpoint = "http://localhost:3001/filter/price/higher-lower";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: PRICE_HIGHER_LOWER,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const priceLowerHigher = () => {
+  const endpoint = "http://localhost:3001/filter/price/lower-higher";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: PRICE_LOWER_HIGHER,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const filterNameAsc = () => {
+  const endpoint = "http://localhost:3001/filter/name/asc";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: FILTER_NAME_ASC,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const filterNameDesc = () => {
+  const endpoint = "http://localhost:3001/filter/name/desc";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: FILTER_NAME_DESC,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
   };
 };

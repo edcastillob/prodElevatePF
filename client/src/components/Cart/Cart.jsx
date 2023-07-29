@@ -18,7 +18,8 @@ import StripeButton from "../StripeButton/StripeButton";
 import { ToastContainer } from "react-toastify";
 
 const Cart = () => {
-  const { cartItems, cartTotalAmount } = useSelector((state) => state);
+  const cartItems = useSelector((state) => state.cartItems);
+  const cartTotalAmount = useSelector((state) => state.cartTotalAmount);
 
   const dispatch = useDispatch();
   console.log(cartItems);

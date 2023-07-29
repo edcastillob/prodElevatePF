@@ -16,10 +16,16 @@ import {
   REMOVE_TO_CART,
   SHOW_PRODUCTS,
   EDIT_PRODUCT,
+  ADD_FAV,
+  REMOVE_FAV,
   GET_CATEGORY_ID,
   EDIT_CATEGORY,
   GET_PROVIDER_ID,
   EDIT_PROVIDER,
+  PRICE_HIGHER_LOWER,
+  PRICE_LOWER_HIGHER,
+  FILTER_NAME_ASC,
+  FILTER_NAME_DESC,
   DELETE_PRODUCT,
   DELETE_CATEGORY,
   DELETE_PROVIDER,
@@ -32,6 +38,9 @@ import {
 const initialState = {
   cartItems: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
+    : [],
+  favorites: localStorage.getItem("favorites")
+    ? JSON.parse(localStorage.getItem("favorites"))
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
@@ -86,7 +95,7 @@ function reducer(state = initialState, actions) {
       };
 
     case GET_CATEGORY_ID:
-      // console.log("Category id: ", actions.payload);
+      console.log("Category id: ", actions.payload);
       return {
         ...state,
         category: actions.payload,
@@ -103,7 +112,7 @@ function reducer(state = initialState, actions) {
         provider: [...state.provider, payload],
       };
     case GET_PROVIDER_ID:
-      // console.log("Provider id: ", actions.payload);
+      // console.log("Provider id: ", actions.payload);    
       return {
         ...state,
         provider: actions.payload,
@@ -257,6 +266,41 @@ function reducer(state = initialState, actions) {
         provider: state.provider.map((prov) =>
           prov.id === providerId ? { ...provider, ...updateProvider } : provider
         ),
+      };
+
+    //Favorite
+
+    case ADD_FAV:
+      return { ...state, favorites: actions.payload };
+    case REMOVE_FAV:
+      return { ...state, favorites: actions.payload };
+
+    //Filter Price
+
+    case PRICE_HIGHER_LOWER:
+      return {
+        ...state,
+        products: actions.payload,
+      };
+
+    case PRICE_LOWER_HIGHER:
+      return {
+        ...state,
+        products: actions.payload,
+      };
+
+    // Filter Name
+
+    case FILTER_NAME_ASC:
+      return {
+        ...state,
+        products: actions.payload,
+      };
+
+    case FILTER_NAME_DESC:
+      return {
+        ...state,
+        products: actions.payload,
       };
 
     case DELETE_PRODUCT:

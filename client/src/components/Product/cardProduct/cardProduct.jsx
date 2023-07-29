@@ -1,13 +1,28 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./cardProduct.module.css";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addFav,
+  addToCart,
+  getCategory,
+  removeFav,
+} from "../../../redux/actions/actions";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 export const CardProduct = ({ product }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const { id, name, category, images, salePrice } = product;
+  const [isFav, setIsFav] = useState(false);
+  const { id, name, images, salePrice, brand, condition, categoryId } = product;
+  const selectedCategory = useSelector((state) => state.category);
+  const category =
+    selectedCategory.find((cat) => cat.id === categoryId)?.name ||
+    "Unknown Category";
+
+  useEffect(() => {
+    dispatch(getCategory());
+  }, []);
+  const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,6 +30,29 @@ export const CardProduct = ({ product }) => {
     dispatch(addToCart(product));
     navigate("/cart");
   };
+
+  const handleFavorite = (event) => {
+    if (isFav) {
+      setIsFav(false);
+      dispatch(removeFav(id));
+    } else {
+      setIsFav(true);
+      dispatch(addFav(productWithUser));
+      navigate("/favorites");
+    }
+  };
+
+  useEffect(() => {
+    favorites.forEach((fav) => {
+      if (fav.id === id) {
+        setIsFav(true);
+      }
+    });
+  }, [favorites]);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -28,8 +66,22 @@ export const CardProduct = ({ product }) => {
     });
   }, []);
 
+  const productWithUser = {
+    ...product,
+    user: currentUser
+      ? currentUser.uid
+      : "3da16669-2425-4b38-a7d5-40ce000558d7",
+  };
+
   return (
     <div className={styles.cardContainer}>
+      <div className={styles.favContainer}>
+        {isFav ? (
+          <button onClick={handleFavorite}>❤️</button>
+        ) : (
+          <button onClick={handleFavorite}>🤍</button>
+        )}
+      </div>
       <Link
         title="Detail Product"
         to={`/productid/${id}`}
@@ -42,6 +94,10 @@ export const CardProduct = ({ product }) => {
       <div className={styles.description}>
         <h6 className={styles.title}>{name}</h6>
         <h5 className={styles.category}> {category}</h5>
+        <span className={styles.priceLabel}>Brand</span>
+        <h6 className={styles.price}>{brand}</h6>
+        <span className={styles.priceLabel}>Condition</span>
+        <h6 className={styles.price}>{condition}</h6>
         <span className={styles.priceLabel}>Price</span>
         <h6 className={styles.price}>${salePrice}</h6>
         <button
