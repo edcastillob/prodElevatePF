@@ -40,7 +40,7 @@ export const EditProvider = () => {
       provider.isActive &&
       provider.name &&
       provider.numPhone &&
-      provider.country 
+      provider.country
     ) {
       setChangeProvider({
         address: provider.address,
@@ -72,7 +72,7 @@ export const EditProvider = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos enviados: ", changeProvider);
+    // console.log("Datos enviados: ", changeProvider);
     dispatch(editProvider(id, changeProvider));
     toast.success("¡Edit Provider successfully!");
   };

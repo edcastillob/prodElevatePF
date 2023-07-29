@@ -4,10 +4,7 @@ import { VscHome } from "react-icons/vsc";
 import { BsPeople } from "react-icons/bs";
 import { MdOutlineReviews } from "react-icons/md";
 import { TbTruckDelivery, TbReportMoney } from "react-icons/tb";
-import {
-  AiOutlineSetting,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiOutlineSetting, AiOutlineShoppingCart } from "react-icons/ai";
 
 import { useState } from "react";
 import Customers from "./Customers";
@@ -26,27 +23,25 @@ const Panel = () => {
   };
 
   const renderView = () => {
-    switch(view) {
-      case 'panel':
-        return <Dash toggleActive={toggleActive}/>;
-      case 'customers':
+    switch (view) {
+      case "panel":
+        return <Dash toggleActive={toggleActive} />;
+      case "customers":
         return <Customers toggleActive={toggleActive} />;
-      case 'reviews':
+      case "reviews":
         return <Reviews />;
-      case 'products':
+      case "products":
         return <Products toggleActive={toggleActive} />;
-      case 'providers':
+      case "providers":
         return <Providers />;
-      case 'orders':
-          return <Orders />;
-      case 'settings':
-          return <Products toggleActive={toggleActive}/>;
+      case "orders":
+        return <Orders />;
+      case "settings":
+        return <Products toggleActive={toggleActive} />;
       default:
-        return <Dash toggleActive={toggleActive}/>;
+        return <Dash toggleActive={toggleActive} />;
     }
   };
-
- 
 
   // const options = {
   //   responsive: true,
@@ -59,7 +54,7 @@ const Panel = () => {
 
   return (
     <>
-      <div >
+      <div>
         <div
           className={`${styles.navigation} ${isActive ? styles.active : ""}`}
         >
@@ -71,34 +66,34 @@ const Panel = () => {
               </a>
             </li>
             <li>
-              <a href="#" onClick={() => setView('panel')}>
+              <a href="#" onClick={() => setView("panel")}>
                 <span className={styles.icon}>
                   <VscHome size="1.6em" />
                 </span>
-                <span >Dashboard</span>
+                <span>Dashboard</span>
               </a>
             </li>
 
             <li>
-              <a href="#" onClick={() => setView('products')}>
+              <a href="#" onClick={() => setView("products")}>
                 <span className={styles.icon}>
                   <AiOutlineShoppingCart size="1.6em" />
                 </span>
-                <span >Products</span>
+                <span>Products</span>
               </a>
             </li>
 
             <li>
-              <a href="#" onClick={() => setView('customers')}>
+              <a href="#" onClick={() => setView("customers")}>
                 <span className={styles.icon}>
                   <BsPeople size="1.6em" />
                 </span>
-                <span >Customers</span>
+                <span>Customers</span>
               </a>
             </li>
-    
+
             <li>
-              <a href="#" onClick={() => setView('providers')}>
+              <a href="#" onClick={() => setView("providers")}>
                 <span className={styles.icon}>
                   <TbTruckDelivery size="1.6em" />
                 </span>
@@ -107,29 +102,29 @@ const Panel = () => {
             </li>
 
             <li>
-              <a href="#" onClick={() => setView('reviews')}>
+              <a href="#" onClick={() => setView("reviews")}>
                 <span className={styles.icon}>
                   <MdOutlineReviews size="1.6em" />
                 </span>
-                <span >Reviews</span>
+                <span>Reviews</span>
               </a>
             </li>
 
             <li>
-              <a href="#" onClick={() => setView('orders')}>
+              <a href="#" onClick={() => setView("orders")}>
                 <span className={styles.icon}>
                   <TbReportMoney size="1.6em" />
                 </span>
-                <span >Orders</span>
+                <span>Orders</span>
               </a>
             </li>
 
             <li>
-              <a href="#" onClick={() => setView('settings')}>
+              <a href="#" onClick={() => setView("settings")}>
                 <span className={styles.icon}>
                   <AiOutlineSetting size="1.6em" />
                 </span>
-                <span >Settings</span>
+                <span>Settings</span>
               </a>
             </li>
           </ul>

@@ -107,13 +107,13 @@ export const CardProduct = ({ product }) => {
           Add to Cart
         </button>
 
-        {currentUser && (
+        {/* {currentUser && (
           <Link title="Edit Product" to={`/productidedit/${id}`}>
             <button className={styles.editProduct}>
               <ion-icon name="create"></ion-icon>
             </button>
           </Link>
-        )}
+        )} */}
       </div>
     </div>
   );

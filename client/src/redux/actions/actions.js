@@ -44,7 +44,6 @@ export const showProducts = () => {
   try {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}product`);
-      console.log(data);
       return dispatch({ type: SHOW_PRODUCTS, payload: data });
     };
   } catch (error) {
@@ -62,7 +61,7 @@ export const getProductDetail = (id) => {
       axios
         .get(`${ENDPOINT}productid/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_PRODUCT_DETAIL, payload: response.data });
           resolve();
         })
@@ -112,7 +111,7 @@ export const getUsers = () => {
   try {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}user`);
-      console.log(data);
+      // console.log(data);
       return dispatch({ type: GET_ALL_USERS, payload: data });
     };
   } catch (error) {
@@ -141,13 +140,14 @@ export const editUser = (userId, changeUser) => {
     }
   };
 };
+
 export const getUserId = (id) => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       axios
         .get(`${ENDPOINT}user/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_USER_ID, payload: response.data });
           resolve();
         })
@@ -197,7 +197,7 @@ export const getCategoryId = (id) => {
       axios
         .get(`${ENDPOINT}category/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_CATEGORY_ID, payload: response.data });
           resolve();
         })
@@ -246,7 +246,7 @@ export const getProviderId = (id) => {
       axios
         .get(`${ENDPOINT}provider/${id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({ type: GET_PROVIDER_ID, payload: response.data });
           resolve();
         })

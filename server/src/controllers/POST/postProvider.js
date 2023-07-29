@@ -1,7 +1,7 @@
 const { Provider } = require("../../db");
 
 async function postProvider(req, res) {  
-    console.log(req.body)  
+    // console.log(req.body)  
     try {
         const { name, identification, email, numPhone, country, address } = req.body;
         if (!name || !identification || !email || !numPhone || !country || !address) {

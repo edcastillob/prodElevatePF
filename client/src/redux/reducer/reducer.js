@@ -75,7 +75,7 @@ function reducer(state = initialState, actions) {
       };
 
     case GET_PRODUCT_DETAIL:
-      console.log(actions.payload);
+      // console.log(actions.payload);
       // const filteredProduct = filterProduct.filter((prod) => prod.id === actions.payload);
       return {
         ...state,
@@ -112,7 +112,7 @@ function reducer(state = initialState, actions) {
         provider: [...state.provider, payload],
       };
     case GET_PROVIDER_ID:
-      console.log("Provider id: ", actions.payload);
+      // console.log("Provider id: ", actions.payload);
       return {
         ...state,
         provider: actions.payload,
@@ -136,7 +136,7 @@ function reducer(state = initialState, actions) {
       };
 
     case LOGIN:
-      console.log("reducer login: ", actions.payload);
+      // console.log("reducer login: ", actions.payload);
       return {
         ...state,
         user: actions.payload,
@@ -350,7 +350,7 @@ function reducer(state = initialState, actions) {
         ),
       };
     case GET_USER_ID:
-      console.log("User id: ", actions.payload);
+      // console.log("User id: ", actions.payload);
       return {
         ...state,
         users: actions.payload,

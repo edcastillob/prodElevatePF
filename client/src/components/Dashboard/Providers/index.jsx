@@ -1,9 +1,5 @@
 const Providers = () => {
-  return (
-    <div>
-      Providers
-    </div>
-  )
-}
+  return <div>Providers</div>;
+};
 
 export default Providers;
