@@ -41,8 +41,7 @@ export const UploadImg = ({ onImageUpload }) => {
       name="file" 
       placeholder="Upload image product" 
       onChange={uploadImages} multiple 
-      custom // Agregamos la prop custom
-      customLabel="Choose files"
+      
       />
 
       {selectedImages.length > 0 &&

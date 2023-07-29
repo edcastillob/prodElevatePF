@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteCategory, getCategory } from '../../../../redux/actions/actions';
 import { Link } from "react-router-dom";
@@ -7,30 +7,29 @@ import { Table } from 'reactstrap';
 
 
 export const ShowCategory = () => {
+  const category = useSelector((state) => state.category);
+  const [searchCategory, setSearchCategory] = useState('');
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategory());
   }, []);
-  
-  const category = useSelector((state) => state.category);
 
-
-
-  const comparecategory = (a, b) => {
-    const nameA = a.name.toUpperCase();
-    const nameB = b.name.toUpperCase();
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
-    return 0;
-  };
-  if (Array.isArray(category)) {
-    category.sort(comparecategory);
-  }
-  
-
- 
-  console.log("desde show:" , category)
   if (!category || category.length === 0) return <div>Loading...</div>;
+  if (!Array.isArray(category)) return <div>Loading...</div>;
+  
+
+
+
+  const sortedCategory = category
+  .slice()
+  .sort((a, b) => a.name.localeCompare(b.name));
+ 
+  
+  const filteredCategory = sortedCategory.filter((category) =>
+    category.name.toLowerCase().includes(searchCategory.toLowerCase())
+  );
+ 
+
 
   const handleDeleteCategory = (categoryId) => {
     if (window.confirm("Are you sure you want to delete this category?")) {
@@ -38,10 +37,19 @@ export const ShowCategory = () => {
     }
   };
   return (
+    
     <div className={styles.container}>
-      <h3 style={{fontFamily:'Poppins'}}>Categories</h3>
+     <h3 style={{fontFamily:'Poppins'}}>Categories</h3>
+    <input
+      type="text"
+      className='form-control w-25'
+      placeholder="Search category"
+      value={searchCategory}
+      onChange={(event) => setSearchCategory(event.target.value)}
+    />
+    
     <div className={styles.categoryContainer}>
-      {category?.map((category) => (
+      {filteredCategory?.map((category) => (
         <Table key={category.id} className={styles.table}>
           <thead>
             <tr>
@@ -54,7 +62,7 @@ export const ShowCategory = () => {
                   </Link>
                   <button className={styles.delete} onClick={() => handleDeleteCategory(category.id)}>
                     <ion-icon name="trash"></ion-icon>
-          </button>
+                  </button>
               </th>
             </tr>
           </thead>
@@ -74,6 +82,8 @@ export const ShowCategory = () => {
     }
     </div>
     </div>
+    
   );
+
 };
 

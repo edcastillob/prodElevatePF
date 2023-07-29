@@ -2,8 +2,9 @@ import { useState } from "react"; // Importa useState
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import styles from "./SettingProduct.module.css";
 import {  deleteUsers, getUsers } from "../../../redux/actions/actions";
+import styles from "./UsersAll.module.css";
+import { Table } from 'reactstrap';
 
 export const UsersAll = () => {
   const dispatch = useDispatch();
@@ -32,30 +33,47 @@ export const UsersAll = () => {
   };
 
   return (
-    <div>
-      <h2>Users Administration</h2>      
+    <div className={styles.container}>
+      <h2>Users</h2>    
+
       <input
         type="text"
+        className="form-control w-25"
         placeholder="Search user"
         value={searchUsers}
         onChange={(event) => setSearchUsers(event.target.value)}
       />
-
+      <div className={styles.userContainer}>
       {filteredUsers?.map((user) => (
-        <div key={user.id}>
-         
-          <h5 >Name: {user.name}</h5>   
-          <h5 >Email: {user.email}</h5>   
-          <Link title="Edit user" to={`/userEdit/${user.id}`}>
-            <button>
+        <Table key={user.id} className={styles.table}>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>
+            <Link title="Edit user" to={`/userEdit/${user.id}`}>
+            <button className={styles.edit}>
               <ion-icon name="create"></ion-icon>
             </button>
-          </Link>
-          <button onClick={() => handleDeleteUsers(user.id)}>
-              <ion-icon name="close"></ion-icon>
-          </button>
-        </div>
+            </Link>
+            <button className={styles.delete} onClick={() => handleDeleteUsers(user.id)}>
+              <ion-icon name="trash"></ion-icon>
+            </button>
+            </th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <td><div className={styles.divImg}><img className={styles.avatar} src={user.image} alt={user.name}/></div></td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{null}</td>
+            </tr>
+          </tbody>
+    </Table>
       ))}
+      </div>
     </div>
   );
 };

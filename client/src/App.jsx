@@ -100,14 +100,14 @@ function App() {
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/producto" element={<Product />} />
-          {/* <Route exact path="/producto" element={<SettingsProduct />} /> */}
+          <Route exact path="/producto" element={<SettingsProduct />} />
           {/* <Route exact path="/categoria" element={<Category />} /> */}
           <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/proveedor" element={<ProvidersAll />} />
           <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/login" element={<Login />} />
-          {/* <Route exact path="/usuario" element={<CreateUser />} /> */}
+          <Route exact path="/usuario" element={<CreateUser />} />
           <Route exact path="/usuario" element={<UsersAll />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
