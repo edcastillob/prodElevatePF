@@ -24,6 +24,10 @@ import {
   DELETE_PRODUCT,
   DELETE_CATEGORY,
   DELETE_PROVIDER,
+  GET_ALL_USERS,
+  DELETE_USERS,
+  EDIT_USERS,
+  GET_USER_ID,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -57,7 +61,7 @@ export const getProductDetail = (id) => {
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching product details."); // Lanza una nueva excepción
+          throw new Error("Error fetching product details."); 
         });
     });
   };
@@ -97,6 +101,57 @@ export const editProduct = (productId, changeProduct) => {
     }
   };
 };
+
+export const getUsers = () => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(`${ENDPOINT}user`);
+      console.log(data);
+      return dispatch({ type: GET_ALL_USERS, payload: data });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+export const deleteUsers = (userId) => async (dispatch) => {
+  try {
+    await axios.delete(`${ENDPOINT}user/${userId}`);
+    dispatch({ type: DELETE_USERS, payload: userId });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    return error.message;
+  }
+};
+export const editUser = (userId, changeUser) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${ENDPOINT}user/${userId}`, changeUser);
+      return dispatch({
+        type: EDIT_USERS,
+        payload: { userId, changeUser },
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
+export const getUserId = (id) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}user/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          dispatch({ type: GET_USER_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching user details."); 
+        });
+    });
+  };
+};
+
 export const addCategory = (category) => {
   return async (dispatch) => {
     try {
@@ -141,7 +196,7 @@ export const getCategoryId = (id) => {
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching category details."); // Lanza una nueva excepción
+          throw new Error("Error fetching category details."); 
         });
     });
   };
@@ -264,7 +319,7 @@ export const login = (userData) => {
 export const logout = () => {
   try {
     return async (dispatch) => {
-      localStorage.removeItem("user"); // Eliminar la información del usuario del sessionStorage
+      localStorage.removeItem("user");
       return dispatch({ type: LOGIN, payload: null });
     };
   } catch (error) {
