@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  categoryEdit, getCategoryId } from '../../../../redux/actions/actions';
 import styles from './EditCategory.module.css'
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 
 export const EditCategory = () => {
   const dispatch = useDispatch();
