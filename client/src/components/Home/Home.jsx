@@ -14,6 +14,7 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import TypeIt from "typeit-react";
 import Marquee from "react-fast-marquee";
 import styles from "./Home.module.css";
+import OrderFilter from "../Filter/OrderFilter";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -95,30 +96,8 @@ export const Home = () => {
       <div className={styles.divSearch}>
         <SearchBar />
       </div>
-      <span> Sort by Price </span>
-      <select
-        className={styles.select}
-        value={filterPrice}
-        onChange={handleSortPrice}
-      >
-        <option value="All"> All </option>
-        <option value="higher"> Higher </option>
-        <option value="lower"> Lower</option>
-      </select>
-      <br />
 
-      <span> Sort by Name </span>
-      <select
-        className={styles.select}
-        value={filterName}
-        onChange={handleSortName}
-      >
-        <option value="All"> All </option>
-        <option value="Asc"> Asec </option>
-        <option value="Desc"> Desc</option>
-      </select>
-      <br />
-
+      <OrderFilter />
       <div className={styles.cards}>
         {productsFiltered.length ? (
           <div>
