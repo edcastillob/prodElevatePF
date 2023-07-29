@@ -5,6 +5,16 @@
     padding: 1rem;
 }
 
+.categoryContainer{
+    /* border: 1px solid #cacaca; */
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
 .table{
     font-family: 'Poppins';
     width: 40%;

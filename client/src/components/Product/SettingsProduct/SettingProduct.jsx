@@ -37,11 +37,13 @@ export const SettingsProduct = () => {
       <h2 style={{fontFamily:'Poppins'}}>Products Administration</h2>      
       <input
         type="text"
+        className="form-control w-25"
         placeholder="Search product"
         value={searchProducts}
         onChange={(event) => setSearchProducts(event.target.value)}
       />
 
+      <div className={styles.productContainer}>
       {filteredProducts?.map((product) => (
         <Table key={product.id} className={styles.table}>
             <thead>
@@ -67,18 +69,9 @@ export const SettingsProduct = () => {
                   <td>{null}</td>
                 </tr>
               </tbody>
-          {/* <img className={styles.img} src={product.images} alt="product" />
-          <h5 className={styles.title}>Name: {product.name}</h5>   
-          <Link title="Edit product" to={`/productidedit/${product.id}`}>
-            <button>
-              <ion-icon name="create"></ion-icon>
-            </button>
-          </Link>
-          <button onClick={() => handleDeleteProduct(product.id)}>
-              <ion-icon name="close"></ion-icon>
-          </button> */}
         </Table>
       ))}
+      </div>
     </div>
   );
 };
