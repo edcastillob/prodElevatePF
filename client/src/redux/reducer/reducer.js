@@ -26,6 +26,13 @@ import {
   PRICE_LOWER_HIGHER,
   FILTER_NAME_ASC,
   FILTER_NAME_DESC,
+  DELETE_PRODUCT,
+  DELETE_CATEGORY,
+  DELETE_PROVIDER,
+  GET_ALL_USERS,
+  DELETE_USERS,
+  EDIT_USERS,
+  GET_USER_ID,
 } from "../actions/types";
 
 const initialState = {
@@ -44,6 +51,7 @@ const initialState = {
   provider: [],
   user: null,
   role: [],
+  users: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -295,6 +303,58 @@ function reducer(state = initialState, actions) {
         products: actions.payload,
       };
 
+    case DELETE_PRODUCT:
+      const updatedProducts = state.products.filter(
+        (product) => product.id !== actions.payload
+      );
+      return {
+        ...state,
+        products: updatedProducts,
+      };
+
+    case DELETE_CATEGORY:
+      const updatedCateg = state.category.filter(
+        (cat) => cat.id !== actions.payload
+      );
+      return {
+        ...state,
+        category: updatedCateg,
+      };
+    case DELETE_PROVIDER:
+      const updateProv = state.provider.filter(
+        (cat) => cat.id !== actions.payload
+      );
+      return {
+        ...state,
+        provider: updateProv,
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: actions.payload,
+      };
+    case DELETE_USERS:
+      const updateUsers = state.users.filter(
+        (user) => user.id !== actions.payload
+      );
+      return {
+        ...state,
+        users: updateUsers,
+      };
+    case EDIT_USERS:
+      const { userId, updateUser } = actions.payload;
+      return {
+        ...state,
+        users: state.users.map((prov) =>
+          prov.id === userId ? { ...users, ...updateUser } : users
+        ),
+      };
+    case GET_USER_ID:
+      console.log("User id: ", actions.payload);
+      return {
+        ...state,
+        users: actions.payload,
+      };
     default:
       return state;
   }

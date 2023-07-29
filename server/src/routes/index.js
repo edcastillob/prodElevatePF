@@ -22,6 +22,10 @@ const passport = require("passport");
 const authController = require("../controllers/authController");
 const { postStripe } = require("../controllers/POST/postStripe");
 const { postFavorite } = require("../controllers/POST/postFavorite");
+const { deleteUser } = require("../controllers/DELETE/deleteUser");
+const { deleteProduct } = require("../controllers/DELETE/deleteProduct");
+const { deleteProvider } = require("../controllers/DELETE/deteleProvider");
+const { deleteCategory } = require("../controllers/DELETE/deleteCategory");
 const { getProviderId } = require("../controllers/GET/getProviderId");
 const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
 const {
@@ -32,8 +36,13 @@ const {
   getFilterNameAsc,
   getFilterNameDesc,
 } = require("../controllers/GET/getFilterName");
+const { getUserId } = require("../controllers/GET/getUserId");
 
 const router = Router();
+
+const mailerRoutes = require("./mailerRoutes");
+
+router.use("/notification", mailerRoutes);
 
 router.get("/", function (req, res) {
   res.send("Backend prodElevate");
@@ -92,24 +101,29 @@ router.post("/role", postRole);
 router.post("/role", postRole);
 
 router.get("/user", getAllUsers);
+router.get("/user/:id", getUserId);
 router.post("/user", postUser);
 router.put("/user/:id", putUser);
+router.delete("/user/:id", deleteUser);
 
 router.get("/product", getAllProducts);
 router.get("/productid/:id", getProductId);
 
 router.post("/product", postProduct);
 router.put("/product/:id", putProduct);
+router.delete("/product/:id", deleteProduct);
 
 router.get("/category", getAllCategories);
 router.get("/category/:id", getCategoryId);
 router.post("/category", postCategory);
 router.put("/category/:id", putCategory);
+router.delete("/category/:id", deleteCategory);
 
 router.get("/provider", getAllProviders);
 router.get("/provider/:id", getProviderId);
 router.post("/provider", postProvider);
 router.put("/provider/:id", putProvider);
+router.delete("/provider/:id", deleteProvider);
 
 router.post("/stripe", postStripe);
 

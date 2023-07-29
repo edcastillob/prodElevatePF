@@ -1,14 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./cardProduct.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addFav, addToCart, removeFav } from "../../../redux/actions/actions";
+import {
+  addFav,
+  addToCart,
+  getCategory,
+  removeFav,
+} from "../../../redux/actions/actions";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 export const CardProduct = ({ product }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isFav, setIsFav] = useState(false);
-  const { id, name, category, images, salePrice } = product;
+  const { id, name, images, salePrice, brand, condition, categoryId } = product;
+  const selectedCategory = useSelector((state) => state.category);
+  const category =
+    selectedCategory.find((cat) => cat.id === categoryId)?.name ||
+    "Unknown Category";
+
+  useEffect(() => {
+    dispatch(getCategory());
+  }, []);
   const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -81,6 +94,10 @@ export const CardProduct = ({ product }) => {
       <div className={styles.description}>
         <h6 className={styles.title}>{name}</h6>
         <h5 className={styles.category}> {category}</h5>
+        <span className={styles.priceLabel}>Brand</span>
+        <h6 className={styles.price}>{brand}</h6>
+        <span className={styles.priceLabel}>Condition</span>
+        <h6 className={styles.price}>{condition}</h6>
         <span className={styles.priceLabel}>Price</span>
         <h6 className={styles.price}>${salePrice}</h6>
         <button

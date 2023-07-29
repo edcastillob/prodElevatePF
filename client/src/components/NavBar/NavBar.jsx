@@ -191,6 +191,17 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                       textAlign: "start",
                     }}
                   >
+                    <ion-icon name="compass"></ion-icon> Dashboard
+                  </h6>
+                </li>
+                <li>
+                  <h6
+                    style={{
+                      color: "black",
+                      fontFamily: "Poppins",
+                      textAlign: "start",
+                    }}
+                  >
                     <ion-icon name="person"></ion-icon> Profile
                   </h6>
                 </li>

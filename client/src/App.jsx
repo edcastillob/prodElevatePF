@@ -5,7 +5,7 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Home } from "./components/Home/Home";
 import { ProductDetail } from "./components/Product/productDetail/ProductDetail";
 import { Landing } from "./components/Landing/Landing";
-import { Category } from "./components/Product/category/Category";
+//import { Category } from "./components/Product/category/Category";
 import { Product } from "./components/Product/createProduct/Product";
 import { Provider } from "./components/Product/provider/Provider";
 import { Role } from "./components/users/role/Role";
@@ -24,9 +24,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import Favorites from "./components/Favorites/Favorites";
-//import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
+import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
 import { ProvidersAll } from "./components/Product/provider/ProvidersAll/ProvidersAll";
 import { EditProvider } from "./components/Product/provider/EditProvider/EditProvider";
+import { SettingsProduct } from "./components/Product/SettingsProduct/SettingProduct";
+// import Chat from './components/Chat/Chat';
+import Panel from "./components/Dashboard";
+
+import { UsersAll } from "./components/users/UsersAll/UsersAll";
+import { EditUser } from "./components/users/EditUser/EditUser";
 
 function App() {
   const location = useLocation();
@@ -36,7 +42,9 @@ function App() {
   const [currentUserLocal, setCurrentUserLocal] = useState(null);
 
   useEffect(() => {
-    setShowNavBar(location.pathname !== "/");
+    setShowNavBar(
+      location.pathname !== "/" && location.pathname !== "/dashboard"
+    );
   }, [location]);
 
   useEffect(() => {
@@ -88,24 +96,32 @@ function App() {
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
         <Routes>
+          {/* showcategory muestra todas las categorias es la vista al acceder a category desde admin */}
+          {/* ProviderAll muestra todas las providers es la vista al acceder a providers desde admin */}
+          {/* SettingsProduct muestra todas las products es la vista al acceder a Product desde admin */}
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/producto" element={<Product />} />
-          <Route exact path="/categoria" element={<Category />} />
-          {/* <Route exact path="/categoria" element={<ShowCategory />} /> */}
-          <Route exact path="/proveedor" element={<Provider />} />
+          {/* <Route exact path="/producto" element={<SettingsProduct />} /> */}
+          {/* <Route exact path="/categoria" element={<Category />} /> */}
+          <Route exact path="/categoria" element={<ShowCategory />} />
+          <Route exact path="/proveedor" element={<ProvidersAll />} />
           <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/usuario" element={<CreateUser />} />
+          {/* <Route exact path="/usuario" element={<CreateUser />} /> */}
+          <Route exact path="/usuario" element={<UsersAll />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/productidedit/:id" element={<EditProduct />} />
           <Route path="/categoryedit/:id" element={<EditCategory />} />
+          <Route path="/useredit/:id" element={<EditUser />} />
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )}
+          <Route path="/dashboard" element={<Panel />} />
+          {/* <Route path="/chat/" element={<Chat />} /> */}
         </Routes>
         <ToastContainer
           position="top-center"
@@ -118,7 +134,8 @@ function App() {
           closeButton={false}
           theme="dark"
         />
-        <Footer />
+        {showNavBar && <Footer />}
+        {/* <Footer /> */}
       </div>
     </>
   );
