@@ -5,10 +5,9 @@ module.exports = (sequelize) => {
     "favorite",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.STRING,
         primaryKey: true,
-        unique: true,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
@@ -19,8 +18,8 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       purchasePrice: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
       salePrice: {
         type: DataTypes.FLOAT,

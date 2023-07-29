@@ -17,10 +17,16 @@ import {
   INCREMENT_CART,
   CLEAR_CART,
   EDIT_PRODUCT,
+  ADD_FAV,
+  REMOVE_FAV,
   GET_CATEGORY_ID,
   EDIT_CATEGORY,
   GET_PROVIDER_ID,
   EDIT_PROVIDER,
+  PRICE_HIGHER_LOWER,
+  PRICE_LOWER_HIGHER,
+  FILTER_NAME_ASC,
+  FILTER_NAME_DESC,
   DELETE_PRODUCT,
   DELETE_CATEGORY,
   DELETE_PROVIDER,
@@ -61,7 +67,7 @@ export const getProductDetail = (id) => {
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching product details."); 
+          throw new Error("Error fetching product details.");
         });
     });
   };
@@ -146,7 +152,7 @@ export const getUserId = (id) => {
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching user details."); 
+          throw new Error("Error fetching user details.");
         });
     });
   };
@@ -196,7 +202,7 @@ export const getCategoryId = (id) => {
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching category details."); 
+          throw new Error("Error fetching category details.");
         });
     });
   };
@@ -207,7 +213,7 @@ export const categoryEdit = (categoryId, editCategory) => {
     try {
       await axios.put(`${ENDPOINT}category/${categoryId}`, editCategory);
       return dispatch({
-        type:EDIT_CATEGORY,
+        type: EDIT_CATEGORY,
         payload: { categoryId, editCategory },
       });
     } catch (error) {
@@ -245,7 +251,7 @@ export const getProviderId = (id) => {
           resolve();
         })
         .catch((error) => {
-          throw new Error("Error fetching provider"); 
+          throw new Error("Error fetching provider");
         });
     });
   };
@@ -256,7 +262,7 @@ export const editProvider = (providerId, editProvider) => {
     try {
       await axios.put(`${ENDPOINT}provider/${providerId}`, editProvider);
       return dispatch({
-        type:EDIT_PROVIDER,
+        type: EDIT_PROVIDER,
         payload: { providerId, editProvider },
       });
     } catch (error) {
@@ -304,9 +310,9 @@ export const login = (userData) => {
     return async (dispatch) => {
       const response = await axios.post(`${ENDPOINT}login`, userData);
       if (response.data) {
-        const user = response.data.User; 
-        localStorage.setItem("user", JSON.stringify(user));       
-        window.location.reload()
+        const user = response.data.User;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.reload();
         return dispatch({ type: LOGIN, payload: user });
       }
       throw new Error("Credenciales inválidas");
@@ -403,5 +409,98 @@ export const clearCart = () => {
     return {
       type: CLEAR_CART,
     };
+  };
+};
+
+export const addFav = (product) => {
+  const endpoint = "http://localhost:3001/favorite";
+  return async (dispatch) => {
+    try {
+      console.log(product);
+      const { data } = await axios.post(endpoint, product);
+      return dispatch({
+        type: ADD_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const removeFav = (id) => {
+  const endpoint = `http://localhost:3001/favorite/${id}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      return dispatch({
+        type: REMOVE_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+//Filter
+
+export const priceHigherLower = () => {
+  const endpoint = "http://localhost:3001/filter/price/higher-lower";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: PRICE_HIGHER_LOWER,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const priceLowerHigher = () => {
+  const endpoint = "http://localhost:3001/filter/price/lower-higher";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: PRICE_LOWER_HIGHER,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const filterNameAsc = () => {
+  const endpoint = "http://localhost:3001/filter/name/asc";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: FILTER_NAME_ASC,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const filterNameDesc = () => {
+  const endpoint = "http://localhost:3001/filter/name/desc";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      return dispatch({
+        type: FILTER_NAME_DESC,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
   };
 };

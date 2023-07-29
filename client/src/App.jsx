@@ -5,7 +5,7 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Home } from "./components/Home/Home";
 import { ProductDetail } from "./components/Product/productDetail/ProductDetail";
 import { Landing } from "./components/Landing/Landing";
-// import { Category } from "./components/Product/category/Category";
+//import { Category } from "./components/Product/category/Category";
 import { Product } from "./components/Product/createProduct/Product";
 import { Provider } from "./components/Product/provider/Provider";
 import { Role } from "./components/users/role/Role";
@@ -23,6 +23,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
+import Favorites from "./components/Favorites/Favorites";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
 import { ProvidersAll } from "./components/Product/provider/ProvidersAll/ProvidersAll";
 import { EditProvider } from "./components/Product/provider/EditProvider/EditProvider";
@@ -33,7 +34,6 @@ import Panel from "./components/Dashboard";
 import { UsersAll } from "./components/users/UsersAll/UsersAll";
 import { EditUser } from "./components/users/EditUser/EditUser";
 
-
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,7 +42,9 @@ function App() {
   const [currentUserLocal, setCurrentUserLocal] = useState(null);
 
   useEffect(() => {
-    setShowNavBar(location.pathname !== "/" && location.pathname !== "/dashboard");
+    setShowNavBar(
+      location.pathname !== "/" && location.pathname !== "/dashboard"
+    );
   }, [location]);
 
   useEffect(() => {
@@ -111,6 +113,7 @@ function App() {
           <Route exact path="/usuario" element={<UsersAll />} />
           <Route path="/productid/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/productidedit/:id" element={<EditProduct />} />
           <Route path="/categoryedit/:id" element={<EditCategory />} />
           <Route path="/useredit/:id" element={<EditUser />} />

@@ -27,17 +27,25 @@ const { deleteProduct } = require("../controllers/DELETE/deleteProduct");
 const { deleteProvider } = require("../controllers/DELETE/deteleProvider");
 const { deleteCategory } = require("../controllers/DELETE/deleteCategory");
 const { getProviderId } = require("../controllers/GET/getProviderId");
+const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
+const {
+  getFilterPriceMajor,
+  getFilterPriceMinor,
+} = require("../controllers/GET/getfilterprice");
+const {
+  getFilterNameAsc,
+  getFilterNameDesc,
+} = require("../controllers/GET/getFilterName");
 const { getUserId } = require("../controllers/GET/getUserId");
-
 
 const router = Router();
 
-const mailerRoutes = require('./mailerRoutes')
+const mailerRoutes = require("./mailerRoutes");
 
-router.use('/notification', mailerRoutes);
+router.use("/notification", mailerRoutes);
 
-router.get('/', function(req, res) {
-    res.send('Backend prodElevate');
+router.get("/", function (req, res) {
+  res.send("Backend prodElevate");
 });
 
 // Ruta login
@@ -120,5 +128,12 @@ router.delete("/provider/:id", deleteProvider);
 router.post("/stripe", postStripe);
 
 router.post("/favorite", postFavorite);
+router.delete("/favorite/:id", deleteFavorite);
+
+router.get("/filter/price/higher-lower", getFilterPriceMajor);
+router.get("/filter/price/lower-higher", getFilterPriceMinor);
+
+router.get("/filter/name/asc", getFilterNameAsc);
+router.get("/filter/name/desc", getFilterNameDesc);
 
 module.exports = router;
