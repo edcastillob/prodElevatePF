@@ -11,8 +11,6 @@ import { SettingsProduct } from '../Product/SettingsProduct/SettingProduct';
 import { ShowCategory } from '../Product/category/ShowCategory/ShowCategory';
 import { UsersAll } from '../users/UsersAll/UsersAll';
 import { CreateUser } from '../users/createUser/CreateUser';
-
-
 import logo from '../../assets/logo_2.png'
 
 
@@ -88,6 +86,7 @@ export const Configuration = () =>{
     setSelectedProviderComponent(null);
     setSelectedProductComponent(null);
     setSelectedCategoryComponent(null);
+
   };
 
  

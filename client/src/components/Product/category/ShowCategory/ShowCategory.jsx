@@ -47,7 +47,7 @@ export const ShowCategory = () => {
       value={searchCategory}
       onChange={(event) => setSearchCategory(event.target.value)}
     />
-    
+
     <div className={styles.categoryContainer}>
       {filteredCategory?.map((category) => (
         <Table key={category.id} className={styles.table}>
@@ -63,6 +63,7 @@ export const ShowCategory = () => {
                   <button className={styles.delete} onClick={() => handleDeleteCategory(category.id)}>
                     <ion-icon name="trash"></ion-icon>
                   </button>
+
               </th>
             </tr>
           </thead>
@@ -82,7 +83,7 @@ export const ShowCategory = () => {
     }
     </div>
     </div>
-    
+
   );
 
 };

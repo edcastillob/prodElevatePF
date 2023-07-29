@@ -41,7 +41,6 @@ export const UploadImg = ({ onImageUpload }) => {
       name="file" 
       placeholder="Upload image product" 
       onChange={uploadImages} multiple 
-      
       />
 
       {selectedImages.length > 0 &&
