@@ -13,6 +13,7 @@ import Dash from "./Dash";
 import Products from "./Products";
 import Providers from "./Providers";
 import Orders from "./Orders";
+import { Configuration } from "../Configuration/Configuration";
 
 const Panel = () => {
   const [isActive, setIsActive] = useState(false);
@@ -37,7 +38,7 @@ const Panel = () => {
       case "orders":
         return <Orders />;
       case "settings":
-        return <Products toggleActive={toggleActive} />;
+        return <Configuration toggleActive={toggleActive} />;
       default:
         return <Dash toggleActive={toggleActive} />;
     }

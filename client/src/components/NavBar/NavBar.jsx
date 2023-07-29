@@ -5,9 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../users/Firebase/logout.js";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/actions";
-// import { useSelector } from "react-redux";
 import userImg from "../.././assets/user.png";
-// import { useDispatch } from "react-redux";
+
 
 export const NavBar = ({ user, userLocal, handleSignIn }) => {
   //Lógica Dropdown
@@ -107,7 +106,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                     <ion-icon name="person"></ion-icon> Profile
                   </h6>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     className={styles.icon}
                     to="/settings"
@@ -122,7 +121,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                       <ion-icon name="settings"></ion-icon> Settings
                     </h6>
                   </Link>
-                </li>
+                </li> */}
 
                 <li>
                   {userLocal ? (
@@ -159,15 +158,20 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
             {isDropdownOpen && (
               <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
                 <li>
-                  <h6
+                <Link
+                    className={styles.icon}
+                    to="/dashboard"
                     style={{
+                      textDecoration: "none",
                       color: "black",
                       fontFamily: "Poppins",
                       textAlign: "start",
                     }}
                   >
-                    <ion-icon name="compass"></ion-icon> Dashboard
-                  </h6>
+                    <h6>
+                      <ion-icon name="compass"></ion-icon> Dashboard
+                    </h6>
+                  </Link>
                 </li>
                 <li>
                   <h6
@@ -180,7 +184,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                     <ion-icon name="person"></ion-icon> Profile
                   </h6>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     className={styles.icon}
                     to="/settings"
@@ -195,7 +199,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                       <ion-icon name="settings"></ion-icon> Settings
                     </h6>
                   </Link>
-                </li>
+                </li> */}
 
                 <li>
                   {user ? (
