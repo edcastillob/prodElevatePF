@@ -23,6 +23,10 @@ import {
   DELETE_PRODUCT,
   DELETE_CATEGORY,
   DELETE_PROVIDER,
+  GET_ALL_USERS,
+  DELETE_USERS,
+  EDIT_USERS,
+  GET_USER_ID,
 } from "../actions/types";
 
 const initialState = {
@@ -38,6 +42,7 @@ const initialState = {
   provider: [],
   user: null,
   role: [],
+  users:[],
 };
 
 function reducer(state = initialState, actions) {
@@ -274,7 +279,32 @@ function reducer(state = initialState, actions) {
         ...state,
         provider: updateProv,
       };
-
+      case GET_ALL_USERS:
+      return {
+        ...state,
+        users: actions.payload,        
+      };
+      case DELETE_USERS:      
+      const updateUsers = state.users.filter(
+        (user) => user.id !== actions.payload );     
+      return {
+        ...state,
+        users: updateUsers,
+      };
+      case EDIT_USERS:
+        const { userId, updateUser } = actions.payload;
+        return {
+          ...state,
+          users: state.users.map((prov) =>
+            prov.id === userId ? { ...users, ...updateUser } : users
+          ),
+        };
+        case GET_USER_ID:
+          console.log("User id: ",actions.payload);
+          return {
+            ...state,
+            users: actions.payload,
+          };
     default:
       return state;
   }
