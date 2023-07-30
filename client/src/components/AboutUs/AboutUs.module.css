@@ -2,15 +2,32 @@
     width: 100%;
     min-height: 80vh;
     display: flex;
+    flex-direction: column;
+}
+
+.h2Container {
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+}
+.h2Container h2 {
+    color: green;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
 }
 
 .aboutContainer {
     width: 500px;
-    margin-top: 23px;
-    margin-left: 115px;
+    margin-right: 115px;
     margin-bottom: 23px;
-    text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -22,17 +39,12 @@
     border-radius: 20px;
     padding-left: 6px;
     padding-right: 6px;
-    transition: transform 0.7s ease;
-}
-.infoContainer:hover {
-    transform: scale(1.05);
 }
 
 .imagesContainer {
     width: 500px;
-    margin-top: 23px;
     margin-bottom: 23px;
-    margin-right: 115px;
+    margin-left: 115px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -40,17 +52,16 @@
 }
 
 .logoContainer {
-    width: 500px;
-    height: 220px;
+    width: 300px;
+    height: 177px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
-    background-color: #000924ee;
-    border-radius: 50px;    
-    transition: transform 0.7s ease;
+    border: 5px green inset;
+    border-radius: 100px;    
+    box-shadow: rgba(19, 204, 2, 0.3) 10px 10px 10px;
 }
-.logoContainer:hover {
-    transform: scale(1.03);
-}
+
 .logoContainer img {
     max-width: 100%;
     max-height: 100%;
@@ -76,11 +87,6 @@
 
 .ourContainer h2 {
     color: #01691b;
-}
-
-.ourContainer h3 {
-    font-style: italic;
-    color: #01691bb7;
 }
 
 .ourContainer p {
