@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import styles from "./Provider.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import validateForm from "./validation";
 
 export const Provider = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ export const Provider = () => {
     identification: "",
     country: "",
   });
+  const [errors, setErrors] = useState({});
+
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -26,16 +29,31 @@ export const Provider = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(provider);
-    dispatch(addProvider(provider));
-    toast.success("¡Provider created successfully!");
-    setProvider({
-      name: "",
-      email: "",
-      address: "",
-      numPhone: "",
-      identification: "",
-      country: "",
-    });
+    const errors = validateForm (
+      provider.name,
+      provider.email,
+      provider.address,
+      provider.numPhone,
+      provider.identification,
+      provider.country
+    );
+    setErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(addProvider(provider));
+      toast.success("¡Provider created successfully!");
+      setProvider({
+        name: "",
+        email: "",
+        address: "",
+        numPhone: "",
+        identification: "",
+        country: "",
+      });
+      setErrors({});
+    } else {
+      toast.error("Data is Incompleted. All fields must be filled Correctly");
+    }
   };
   return (
     <div className={styles.container}>
@@ -52,6 +70,9 @@ export const Provider = () => {
             value={provider.name}
             onChange={handleChange}
           />
+          {errors.name && (
+            <p className={styles.error}>{errors.name}</p>
+          )}
 
           {/* identificacion DNI RIF  de proveedor */}
           <input
@@ -62,6 +83,9 @@ export const Provider = () => {
             value={provider.identification}
             onChange={handleChange}
           />
+          {errors.identification && (
+            <p className={styles.error}>{errors.identification}</p>
+          )}
 
           {/* email  de proveedor */}
           <input
@@ -72,6 +96,9 @@ export const Provider = () => {
             value={provider.email}
             onChange={handleChange}
           />
+          {errors.email && (
+            <p className={styles.error}>{errors.email}</p>
+          )}
 
           {/* direccion de proveedor */}
           <input
@@ -82,6 +109,9 @@ export const Provider = () => {
             value={provider.address}
             onChange={handleChange}
           />
+          {errors.address && (
+            <p className={styles.error}>{errors.address}</p>
+          )}
 
           {/* numero telef de proveedor */}
           <input
@@ -92,6 +122,10 @@ export const Provider = () => {
             value={provider.numPhone}
             onChange={handleChange}
           />
+          {errors.numPhone && (
+            <p className={styles.error}>{errors.numPhone}</p>
+          )}
+
           {/* country  de proveedor */}
           <label htmlFor="name">country: </label>
           <input
@@ -101,6 +135,9 @@ export const Provider = () => {
             value={provider.country}
             onChange={handleChange}
           />
+          {errors.country && (
+            <p className={styles.error}>{errors.country}</p>
+          )}
           <br />
 
           <button className={styles.create}>Create</button>

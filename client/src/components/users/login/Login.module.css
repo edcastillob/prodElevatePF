@@ -109,3 +109,10 @@
     width: 22px;
     
   }
+
+  .error {
+    color: red;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }

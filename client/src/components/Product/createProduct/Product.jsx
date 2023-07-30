@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import validateForm from "./validation";
 
 export const Product = () => {
   useEffect(() => {
@@ -40,6 +41,7 @@ export const Product = () => {
     images: [],
   });
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleDescriptionChange = (value) => {
     setDescription(value);
@@ -80,20 +82,37 @@ export const Product = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(product);
-    dispatch(addProduct(product));
-    toast.success("¡Product created successfully!");
-    setProduct({
-      category: "",
-      name: "",
-      description: "",
-      purchasePrice: "",
-      salePrice: "",
-      minimumStock: "",
-      provider: [],
-      images: [],
-    });
-    // Reiniciar isImageUploaded a false después de enviar el formulario
-    setIsImageUploaded(false);
+    const errors = validateForm (
+      product.category,
+      product.name,
+      product.description,
+      product.purchasePrice,
+      product.salePrice,
+      product.minimumStock,
+      product.provider,
+      product.images
+    );
+    setErrors(errors);
+
+    if (Object.keys(product).length === 0) {
+      dispatch(addProduct(product));
+      toast.success("¡Product created successfully!");
+      setProduct({
+        category: "",
+        name: "",
+        description: "",
+        purchasePrice: "",
+        salePrice: "",
+        minimumStock: "",
+        provider: [],
+        images: [],
+      });
+      setErrors({});
+      // Reiniciar isImageUploaded a false después de enviar el formulario
+      setIsImageUploaded(false);
+    } else {
+      toast.error("Data is Incompleted. All fields must be filled Correctly");
+    }
   };
    console.log('provider: ', provider)
   return (
@@ -120,7 +139,9 @@ export const Product = () => {
                 </option>
               ))}
             </select>
-
+            {errors.category && (
+                  <p className={styles.error}>{errors.category}</p>
+            )}
             {/* Nombre de Producto */}
 
             <input
@@ -131,6 +152,9 @@ export const Product = () => {
               value={product.name}
               onChange={handleChange}
             />
+            {errors.name && (
+                  <p className={styles.error}>{errors.name}</p>
+            )}
           </div>
 
           {/* Descripcion de Producto */}
@@ -161,7 +185,9 @@ export const Product = () => {
             placeholder="Enter product description..."
             style={{ height: "130px", marginBottom: "4rem" }}
           />
-
+          {errors.description && (
+              <p className={styles.error}>{errors.description}</p>
+          )};
           {/* precio de compra de Producto */}
           <div className="d-flex g-3">
             <div className="input-group">
@@ -176,7 +202,9 @@ export const Product = () => {
               <span className="input-group-text mb-3">$</span>
               {/* <span className="input-group-text mb-3">0.00</span> */}
             </div>
-
+            {errors.purchasePrice && (
+                  <p className={styles.error}>{errors.purchasePrice}</p>
+            )}
             {/* precio de venta de Producto */}
 
             <div className="input-group">
@@ -191,6 +219,9 @@ export const Product = () => {
               <span className="input-group-text mb-3">$</span>
               {/* <span className="input-group-text mb-3">0.00</span> */}
             </div>
+            {errors.salePrice && (
+                <p className={styles.error}>{errors.salePrice}</p>
+            )}
           </div>
 
           {/* stock minimo de Producto */}
@@ -202,6 +233,9 @@ export const Product = () => {
             value={product.minimumStock}
             onChange={handleChange}
           />
+          {errors.minimumStock && (
+              <p className={styles.error}>{errors.minimumStock}</p>
+          )}
 
           {/* Proveedor */}
           <div className="container-m">
@@ -239,6 +273,9 @@ export const Product = () => {
             </div>
             {/* ... */}
           </div>
+          {errors.provider && (
+              <p className={styles.error}>{errors.provider}</p>
+          )}
           <br />
 
           {/* <UploadImg onImageUpload={handleImageUpload} /> */}
@@ -258,6 +295,9 @@ export const Product = () => {
               setUserData((product) => ({ ...product, images: [] }))
             }
           />
+          {errors.images && (
+             <p className={styles.error}>{errors.images}</p>
+          )}
           <br />
           <button className={styles.create}>Create</button>
         </form>

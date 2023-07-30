@@ -221,6 +221,7 @@ export const login = (userData) => {
         const user = response.data.User; 
         localStorage.setItem("user", JSON.stringify(user));       
         window.location.reload()
+        toast.success('Welcome ' + user.name);
         return dispatch({ type: LOGIN, payload: user });
       }
       throw new Error("Credenciales inválidas");

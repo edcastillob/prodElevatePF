@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCategory } from '../../../redux/actions/actions';
 import styles from './Category.module.css'
+import validateForm from './validation';
 
 export const Category = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,8 @@ export const Category = () => {
     name: "",
     description: "",
   });
+
+  const [errors, serErrors] = useState({});
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -25,12 +28,23 @@ export const Category = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(category);
-    dispatch(addCategory(category));
-    alert("Exito");
-    setCategory({
-      name: "",
-      description: "",
-    });
+    const errors = validateForm(
+      category.name,
+      category.description,
+    );
+    serErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(addCategory(category));
+      alert("Exito");
+      setCategory({
+        name: "",
+        description: "",
+      });
+      serErrors({});
+    } else {
+      alert("Data is Incompleted. All fields must be filled Correctly");
+    }
   };
   return (
     <div>
@@ -63,6 +77,9 @@ export const Category = () => {
         value={category.name}
         onChange={handleChange}
       />
+      {errors.name && (
+        <p className={styles.error}>{errors.name}</p>
+      )}
 
        {/* Descripcion de categoria */}
        <label htmlFor="name">Description: </label>             
@@ -73,6 +90,9 @@ export const Category = () => {
         value={category.description}
         onChange={handleChange}
       />
+      {errors.description && (
+        <p className={styles.error}>{errors.description}</p>
+      )}
         <br />
         <button className={styles.btn}>Create Category</button> 
         </form>
