@@ -75,25 +75,26 @@ export const CardProduct = ({ product }) => {
 
   return (
     <div className={styles.cardContainer}>
-      <div className={styles.favContainer}>
-        {isFav ? (
-          <button onClick={handleFavorite}>❤️</button>
-        ) : (
-          <button onClick={handleFavorite}>🤍</button>
-        )}
-      </div>
+      
+        
+      
       <Link
         title="Detail Product"
         to={`/productid/${id}`}
         className={styles.link}
       >
+        {isFav ? (
+          <button className={styles.favButton} onClick={handleFavorite}>❤️</button>
+        ) : (
+          <button className={styles.favButton} onClick={handleFavorite}>🤍</button>
+        )}
         <div className={styles.divImg}>
           <img className={styles.img} src={images} alt="product" />
         </div>
       </Link>
       <div className={styles.description}>
         <h6 className={styles.title}>{name}</h6>
-        <h5 className={styles.category}> {category}</h5>
+        <h6 className={styles.category}> {category}</h6>
         <span className={styles.priceLabel}>Brand</span>
         <h6 className={styles.price}>{brand}</h6>
         <span className={styles.priceLabel}>Condition</span>

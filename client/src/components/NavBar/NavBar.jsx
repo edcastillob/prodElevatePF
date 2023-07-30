@@ -96,6 +96,24 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
             {isDropdownOpen && (
               <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
                 <li>
+                <Link
+                    className={styles.icon}
+                    to="/dashboard"
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      fontFamily: "Poppins",
+                      textAlign: "start",
+                    }}
+                  >
+                    <h6>
+                      <ion-icon name="compass"></ion-icon> Dashboard
+                    </h6>
+                  </Link>
+                </li>
+                
+                
+                <li>
                   <h6
                     style={{
                       color: "black",
