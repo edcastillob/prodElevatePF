@@ -5,11 +5,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteProduct, showProducts } from "../../../redux/actions/actions";
-
+import { Modal, Button } from 'react-bootstrap';
 
 
 
 const Products = ({ toggleActive }) => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [productIdToDelete, setProductIdToDelete] = useState(null);
+
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(showProducts());
@@ -30,9 +34,14 @@ const Products = ({ toggleActive }) => {
   );
 
   const handleDeleteProduct = (productId) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      dispatch(deleteProduct(productId));
-    }
+    setProductIdToDelete(productId); 
+    setShowConfirmation(true); 
+  };
+
+  const handleConfirmDelete = () => {
+    dispatch(deleteProduct(productIdToDelete)); 
+    setProductIdToDelete(null); 
+    setShowConfirmation(false); 
   };
 
 
@@ -101,6 +110,23 @@ const Products = ({ toggleActive }) => {
           </div>
         </div>
       </div>
+      <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title> <h4 style={{fontFamily:'Poppins'}}>Confirmation</h4>
+           </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+         <h6 style={{fontFamily:'Poppins'}}>Are you sure you want to delete this product?</h6> 
+        </Modal.Body>
+        <Modal.Footer>
+          <Button style={{fontFamily:'Poppins'}} variant="secondary" onClick={() => setShowConfirmation(false)}>
+            Cancel
+          </Button>
+          <Button style={{fontFamily:'Poppins'}} variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

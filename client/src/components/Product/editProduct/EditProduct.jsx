@@ -151,7 +151,7 @@ export const EditProduct = () => {
     event.preventDefault();
     // console.log("Datos enviados: ", changeProduct);   
     toast.success("¡Edit Product successfully!");
-    navigate('/settings')
+    navigate('/home')
   };
 
   // console.log("productDetail: ", productDetail);

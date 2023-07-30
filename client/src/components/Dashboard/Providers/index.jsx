@@ -5,11 +5,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProvider, getProvider } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
+import { Modal, Button } from 'react-bootstrap';
 
 
 
 
 const Providers = ({ toggleActive }) => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [providerIdToDelete, setProviderIdToDelete] = useState(null);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProvider());
@@ -29,10 +33,16 @@ const Providers = ({ toggleActive }) => {
     provider.name.toLowerCase().includes(searchProvider.toLowerCase())
   );
 
+
   const handleDeleteProvider = (providerId) => {
-    if (window.confirm("Are you sure you want to delete this provider?")) {
-      dispatch(deleteProvider(providerId));
-    }
+    setProviderIdToDelete(providerId); 
+    setShowConfirmation(true); 
+  };
+
+  const handleConfirmDelete = () => {
+    dispatch(deleteProduct(providerIdToDelete)); 
+    setProviderIdToDelete(null); 
+    setShowConfirmation(false); 
   };
 
 
@@ -99,6 +109,24 @@ const Providers = ({ toggleActive }) => {
           </div>
         </div>
       </div>
+
+      <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title> <h4 style={{fontFamily:'Poppins'}}>Confirmation</h4>
+           </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+         <h6 style={{fontFamily:'Poppins'}}>Are you sure you want to delete this provider?</h6> 
+        </Modal.Body>
+        <Modal.Footer>
+          <Button style={{fontFamily:'Poppins'}} variant="secondary" onClick={() => setShowConfirmation(false)}>
+            Cancel
+          </Button>
+          <Button style={{fontFamily:'Poppins'}} variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

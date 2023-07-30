@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory, getCategory } from "../../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
+import { Modal, Button } from 'react-bootstrap';
 
 export const ShowCategory = ({ toggleActive }) => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [categoryIdToDelete, setCategoryIdToDelete] = useState(null);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategory());
@@ -26,10 +30,16 @@ export const ShowCategory = ({ toggleActive }) => {
     category.name.toLowerCase().includes(searchCategory.toLowerCase())
   );
 
+
   const handleDeleteCategory = (categoryId) => {
-    if (window.confirm("Are you sure you want to delete this category?")) {
-      dispatch(deleteCategory(categoryId));
-    }
+    setCategoryIdToDelete(categoryId); 
+    setShowConfirmation(true); 
+  };
+
+  const handleConfirmDelete = () => {
+    dispatch(deleteProduct(categoryIdToDelete)); 
+    setCategoryIdToDelete(null); 
+    setShowConfirmation(false); 
   };
 
 
@@ -92,6 +102,24 @@ export const ShowCategory = ({ toggleActive }) => {
       </div>
         </div>
       </div>
+
+      <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title> <h4 style={{fontFamily:'Poppins'}}>Confirmation</h4>
+           </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+         <h6 style={{fontFamily:'Poppins'}}>Are you sure you want to delete this category?</h6> 
+        </Modal.Body>
+        <Modal.Footer>
+          <Button style={{fontFamily:'Poppins'}} variant="secondary" onClick={() => setShowConfirmation(false)}>
+            Cancel
+          </Button>
+          <Button style={{fontFamily:'Poppins'}} variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
