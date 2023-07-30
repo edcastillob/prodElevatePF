@@ -1,63 +1,104 @@
 import styles from "../Dashboard.module.css";
 import { MdSearch, MdMenu } from "react-icons/md";
+import { useState } from "react"; // Importa useState
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { deleteProduct, showProducts } from "../../../redux/actions/actions";
+
+
+
 
 const Products = ({ toggleActive }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(showProducts());
+  }, []);
+
+  const products = useSelector((state) => state.products);
+  const [searchProducts, setSearchProducts] = useState("");
+
+  if (!products || products.length === 0) return <div>Loading...</div>;
+  if (!Array.isArray(products)) return <div>Loading...</div>;
+
+  const sortedProducts = products
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const filteredProducts = sortedProducts.filter((products) =>
+    products.name.toLowerCase().includes(searchProducts.toLowerCase())
+  );
+
+  const handleDeleteProduct = (productId) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      dispatch(deleteProduct(productId));
+    }
+  };
+
+
   return (
     <div>
+      {/* TOPBAR */}
       <div className={styles.topbar}>
         <div className={styles.toggle} onClick={toggleActive}>
           <MdMenu />
-        </div>
-        {/* search */}
-        <div className={styles.search}>
-          <label>
-            <input type="text" placeholder="Search here..." />
-            <MdSearch size="2em" className={styles.icon} />
-          </label>
         </div>
       </div>
 
       <div className={styles.customers}>
         <div className={styles.wrapper}>
           <div className={styles.customersHeader}>
-            <h2>Products</h2>
+            <h2 style={{fontFamily:'Poppins'}}>Products</h2>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <td>NAME</td>
-                <td>DESCRIPTION</td>
-                <td>PRICE</td>
-                <td>STOCK</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Airpods</td>
-                <td>Accesorios</td>
-                <td>$500</td>
-                <td>20</td>
-              </tr>
-              <tr>
-                <td>Apple watch</td>
-                <td>Accesorios</td>
-                <td>$800</td>
-                <td>14</td>
-              </tr>
-              <tr>
-                <td>MacBook Air</td>
-                <td>Computador</td>
-                <td>$1000</td>
-                <td>9</td>
-              </tr>
-              <tr>
-                <td>Laptop HP</td>
-                <td>Computador</td>
-                <td>$900</td>
-                <td>18</td>
-              </tr>
-            </tbody>
-          </table>
+
+      <input
+        type="text"
+        className="form-control w-25 h-50"
+        placeholder="Search product"
+        value={searchProducts}
+        onChange={(event) => setSearchProducts(event.target.value)}
+      />
+          <div className={styles.productContainer}>
+          {filteredProducts?.map((product) => (
+              <table key={product.id} className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Name</th>
+                  <th>
+                    <Link
+                      title="Edit product"
+                      to={`/productidedit/${product.id}`}
+                    >
+                      <button className={styles.edit}>
+                        <ion-icon name="create"></ion-icon>
+                      </button>
+                    </Link>
+                    <button
+                      className={styles.delete}
+                      onClick={() => handleDeleteProduct(product.id)}
+                    >
+                      <ion-icon name="trash"></ion-icon>
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img
+                      src={product.images}
+                      alt={product.name}
+                      className={styles.img}
+                    />
+                  </td>
+                  <td>{product.name}</td>
+                  <td>{null}</td>
+                </tr>
+              </tbody>
+            </table>
+          ))}
+          </div>
         </div>
       </div>
     </div>

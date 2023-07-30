@@ -5,15 +5,10 @@ import styles from "./Configuration.module.css";
 import { Provider } from "../Product/provider/Provider";
 import { Category } from "../Product/category/Category";
 import { Product } from "../Product/createProduct/Product";
-import { ProvidersAll } from "../Product/provider/ProvidersAll/ProvidersAll";
-// import { EditProvider } from "../Product/provider/EditProvider/EditProvider";
-import { SettingsProduct } from "../Product/SettingsProduct/SettingProduct";
-import { ShowCategory } from "../Product/category/ShowCategory/ShowCategory";
-import { UsersAll } from "../users/UsersAll/UsersAll";
-import { CreateUser } from "../users/createUser/CreateUser";
 import logo from "../../assets/logo_2.png";
+import { MdMenu } from "react-icons/md";
 
-export const Configuration = () => {
+export const Configuration = ({ toggleActive }) => {
   // Dropdown states
   const [isProviderDropdownOpen, setIsProviderDropdownOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
@@ -87,34 +82,22 @@ export const Configuration = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.toggle} onClick={toggleActive}>
+          <MdMenu />
+        </div>
       <div className={styles.title}>
-        <h4>
-          <span
-            style={{ fontSize: "2.5rem", marginTop: "10px", color: "#000924" }}
-          >
-            <ion-icon name="settings"></ion-icon>
-          </span>{" "}
-          Settings
-        </h4>
-      </div>
-      <div className={styles.content}>
+
         <div className={styles.sidebar}>
           {/* PRODUCT */}
           <div className={styles.optionContainer}>
             <div
               className={styles.options}
-              onClick={() => handleProductOptionClick("Products")}
+              onClick={() => handleProductOptionClick("Create Product")}
             >
               <span style={{ fontSize: "2.4rem", marginRight: "0.5rem" }}>
                 <ion-icon name="basket"></ion-icon>
               </span>
-              Product
-            </div>
-            <div
-              className={styles.dropdownOption}
-              onClick={() => handleProductOptionClick("Create Product")}
-            >
-              <ion-icon name="add"></ion-icon>Create Product
+              Create Product
             </div>
           </div>
 
@@ -122,18 +105,12 @@ export const Configuration = () => {
           <div className={styles.optionContainer}>
             <div
               className={styles.options}
-              onClick={() => handleProviderOptionClick("Providers")}
+              onClick={() => handleProviderOptionClick("Create Provider")}
             >
               <span style={{ fontSize: "2.4rem", marginRight: "0.5rem" }}>
                 <ion-icon name="contacts"></ion-icon>
               </span>
-              Provider
-            </div>
-            <div
-              className={styles.dropdownOption}
-              onClick={() => handleProviderOptionClick("Create Provider")}
-            >
-              <ion-icon name="add"></ion-icon>Create Provider
+              Create Provider
             </div>
           </div>
 
@@ -141,23 +118,17 @@ export const Configuration = () => {
           <div className={styles.optionContainer}>
             <div
               className={styles.options}
-              onClick={() => handleCategoryOptionClick("Category")}
+              onClick={() => handleCategoryOptionClick("Create Category")}
             >
               <span style={{ fontSize: "2.4rem", marginRight: "0.5rem" }}>
                 <ion-icon name="apps"></ion-icon>
               </span>
-              Category
-            </div>
-            <div
-              className={styles.dropdownOption}
-              onClick={() => handleCategoryOptionClick("Create Category")}
-            >
-              <ion-icon name="add"></ion-icon>Create Category
+              Create Category
             </div>
           </div>
 
           {/* USER */}
-          <div className={styles.optionContainer}>
+          {/* <div className={styles.optionContainer}>
             <div
               className={styles.options}
               onClick={() => handleUserOptionClick("User")}
@@ -165,7 +136,7 @@ export const Configuration = () => {
               <span style={{ fontSize: "2.4rem", marginRight: "0.5rem" }}>
                 <ion-icon name="contact"></ion-icon>
               </span>
-              User
+              Create User
             </div>
             <div
               className={styles.dropdownOption}
@@ -173,27 +144,28 @@ export const Configuration = () => {
             >
               <ion-icon name="add"></ion-icon>Create User
             </div>
-          </div>
+          </div> */}
         </div>
+
+
+      </div>
+      
+        
 
         <div className={styles.components}>
           {componentSelected ? (
             <>
               {/* PRODUCT COMPONENTS */}
-              {selectedProductComponent === "Products" && <SettingsProduct />}
               {selectedProductComponent === "Create Product" && <Product />}
 
               {/* PROVIDER COMPONENTS */}
-              {selectedProviderComponent === "Providers" && <ProvidersAll />}
               {selectedProviderComponent === "Create Provider" && <Provider />}
 
               {/* CATEGORY COMPONENTS */}
-              {selectedCategoryComponent === "Category" && <ShowCategory />}
               {selectedCategoryComponent === "Create Category" && <Category />}
 
               {/* USER COMPONENTS */}
-              {selectedUserComponent === "User" && <UsersAll />}
-              {selectedUserComponent === "Create User" && <CreateUser />}
+              {/* {selectedUserComponent === "Create User" && <CreateUser />} */}
             </>
           ) : (
             <div
@@ -218,6 +190,5 @@ export const Configuration = () => {
           )}
         </div>
       </div>
-    </div>
   );
 };

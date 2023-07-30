@@ -1,12 +1,14 @@
+import styles from "../../Dashboard/Dashboard.module.css";
+import { MdMenu } from "react-icons/md";
 import { useState } from "react"; // Importa useState
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { deleteUsers, getUsers } from "../../../redux/actions/actions";
-import styles from "./UsersAll.module.css";
-import { Table } from "reactstrap";
+import { Link } from "react-router-dom";
+import { BsTabletFill } from "react-icons/bs";
 
-export const UsersAll = () => {
+
+export const UsersAll = ({ toggleActive }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
@@ -33,19 +35,30 @@ export const UsersAll = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h2>Users</h2>
+    <div>
+      {/* TOPBAR */}
+      <div className={styles.topbar}>
+        <div className={styles.toggle} onClick={toggleActive}>
+          <MdMenu />
+        </div>
+      </div>
+
+      <div className={styles.customers}>
+        <div className={styles.wrapper}>
+          <div className={styles.customersHeader}>
+            <h2 style={{fontFamily:'Poppins'}}>Users</h2>
+          </div>
 
       <input
         type="text"
-        className="form-control w-25"
+        className="form-control w-25 h-75"
         placeholder="Search user"
         value={searchUsers}
         onChange={(event) => setSearchUsers(event.target.value)}
       />
-      <div className={styles.userContainer}>
+          <div className={styles.userContainer}>
         {filteredUsers?.map((user) => (
-          <Table key={user.id} className={styles.table}>
+          <table key={user.id} className={styles.table}>
             <thead>
               <tr>
                 <th>User</th>
@@ -71,7 +84,7 @@ export const UsersAll = () => {
                 <td>
                   <div className={styles.divImg}>
                     <img
-                      className={styles.avatar}
+                      className={styles.img}
                       src={user.image}
                       alt={user.name}
                     />
@@ -82,9 +95,12 @@ export const UsersAll = () => {
                 <td>{null}</td>
               </tr>
             </tbody>
-          </Table>
+          </table>
         ))}
+      </div>
+        </div>
       </div>
     </div>
   );
+
 };

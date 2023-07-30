@@ -1,17 +1,19 @@
+import styles from "../../../Dashboard/Dashboard.module.css";
+import { MdMenu } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory, getCategory } from "../../../../redux/actions/actions";
 import { Link } from "react-router-dom";
-import styles from "./ShowCategory.module.css";
 import { Table } from "reactstrap";
 
-export const ShowCategory = () => {
-  const category = useSelector((state) => state.category);
-  const [searchCategory, setSearchCategory] = useState("");
+export const ShowCategory = ({ toggleActive }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategory());
   }, []);
+
+  const category = useSelector((state) => state.category);
+  const [searchCategory, setSearchCategory] = useState("");
 
   if (!category || category.length === 0) return <div>Loading...</div>;
   if (!Array.isArray(category)) return <div>Loading...</div>;
@@ -29,20 +31,33 @@ export const ShowCategory = () => {
       dispatch(deleteCategory(categoryId));
     }
   };
+
+
   return (
-    <div className={styles.container}>
-      <h3 style={{ fontFamily: "Poppins" }}>Categories</h3>
+    <div>
+      {/* TOPBAR */}
+      <div className={styles.topbar}>
+        <div className={styles.toggle} onClick={toggleActive}>
+          <MdMenu />
+        </div>
+      </div>
+
+      <div className={styles.customers}>
+        <div className={styles.wrapper}>
+          <div className={styles.customersHeader}>
+            <h2 style={{fontFamily:'Poppins'}}>Categories</h2>
+          </div>
+
       <input
         type="text"
-        className="form-control w-25"
+        className="form-control w-25 h-50"
         placeholder="Search category"
         value={searchCategory}
         onChange={(event) => setSearchCategory(event.target.value)}
       />
-
-      <div className={styles.categoryContainer}>
+          <div className={styles.categoryContainer}>
         {filteredCategory?.map((category) => (
-          <Table key={category.id} className={styles.table}>
+          <table key={category.id} className={styles.table}>
             <thead>
               <tr>
                 <th>Name</th>
@@ -72,9 +87,12 @@ export const ShowCategory = () => {
                 <td>{null}</td>
               </tr>
             </tbody>
-          </Table>
+          </table>
         ))}
+      </div>
+        </div>
       </div>
     </div>
   );
 };
+
