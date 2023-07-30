@@ -42,6 +42,19 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
       </div>
       <div className={styles.divSearch}>{/* <SearchBar /> */}</div>
       <div className={styles.items}>
+
+      {user || userLocal ? (
+          <Link
+            className={styles.icon}
+            to="/favorites"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <h2>
+              <ion-icon name="heart"></ion-icon>
+            </h2>
+          </Link>
+        ) : null }
+
         <Link
           className={styles.icon}
           to="/cart"
@@ -63,6 +76,8 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
             </h2>
           </Link>
         )}
+
+        
 
         {/* <Link
               className={styles.icon}
