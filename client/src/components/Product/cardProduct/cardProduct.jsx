@@ -84,9 +84,9 @@ export const CardProduct = ({ product }) => {
         className={styles.link}
       >
         {isFav ? (
-          <button className={styles.favButton} onClick={handleFavorite}>❤️</button>
+          <button className={styles.favButton} onClick={handleFavorite}><h3 style={{color:'#000924'}}><ion-icon name="heart"></ion-icon></h3></button>
         ) : (
-          <button className={styles.favButton} onClick={handleFavorite}>🤍</button>
+          <button className={styles.favButton} onClick={handleFavorite}><h3><ion-icon name="heart-empty"></ion-icon></h3></button>
         )}
         <div className={styles.divImg}>
           <img className={styles.img} src={images} alt="product" />
