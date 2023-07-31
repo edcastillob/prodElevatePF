@@ -14,6 +14,7 @@ import ReactQuill from "react-quill";
 import loadingImg from "../../../assets/loading.png";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
+import validateForm from "./validation";
 
 export const EditProduct = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ export const EditProduct = () => {
     stock: "",
     images: productDetail.images,
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getCategory());
@@ -149,6 +151,31 @@ export const EditProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // console.log("Datos enviados: ", changeProduct);
+    const errors = validateForm (
+      changeProduct.category,
+      changeProduct.name,
+      changeProduct.brand,
+      changeProduct.condition,
+      changeProduct.description,
+      changeProduct.purchasePrice,
+      changeProduct.salePrice,
+      changeProduct.minStock,
+      changeProduct.provider,
+      changeProduct.stock,
+      changeProduct.images,
+    );
+    setErrors(errors);
+    
+    if (Object.keys(errors).length === 0) {
+      dispatch(editProduct(id, changeProduct));
+      toast.success("¡Edit Product successfully!");
+      setErrors({});
+    } else { 
+      toast.error("Data must be filled Correctly")
+    }
+
     // console.log("Datos enviados: ", changeProduct);   
     toast.success("¡Edit Product successfully!");
     navigate('/home')
@@ -183,8 +210,10 @@ export const EditProduct = () => {
                 </option>
               ))}
             </select>
-          
-
+          </div>
+          {errors.category && (
+            <p className={styles.error}>{errors.category}</p>
+          )}
           {/* Nombre de Producto */}
 
           <input
@@ -196,8 +225,9 @@ export const EditProduct = () => {
             onChange={handleChange}
             defaultValue={productDetail.name}
           />
-        </div>
-
+          {errors.name && (
+            <p className={styles.error}>{errors.name}</p>
+          )}
         <div className="d-flex justify-content-around">
           {/* brand de Producto */}
           <input
@@ -208,6 +238,9 @@ export const EditProduct = () => {
             value={changeProduct.brand}
             onChange={handleChange}
           />
+          {errors.brand && (
+            <p className={styles.error}>{errors.brand}</p>
+          )}
           <select
   className="form-control mb-3 w-50 d-end"
   name="condition"
@@ -219,6 +252,9 @@ export const EditProduct = () => {
   <option value="Used">Used</option>
   <option value="Like New">Like New</option>
 </select>
+{errors.condition && (
+  <p className={styles.error}>{errors.condition}</p>
+)}
         </div>
           {/* Descripcion de Producto */}
 
@@ -247,7 +283,9 @@ export const EditProduct = () => {
             placeholder="Enter product description..."
             style={{ height: "130px", marginBottom: "4rem" }}
           />
-
+          {errors.description && (
+            <p className={styles.error}>{errors.description}</p>
+          )}
           {/* precio de compra de Producto */}
           <div className="d-flex g-3">
             <div className="input-group">
@@ -262,7 +300,9 @@ export const EditProduct = () => {
               <span className="input-group-text mb-3">$</span>
               {/* <span className="input-group-text mb-3">0.00</span> */}
             </div>
-
+            {errors.purchasePrice && (
+              <p className={styles.error}>{errors.purchasePrice}</p>
+            )}
             {/* precio de venta de Producto */}
 
             <div className="input-group">
@@ -277,6 +317,9 @@ export const EditProduct = () => {
               <span className="input-group-text mb-3">$</span>
               {/* <span className="input-group-text mb-3">0.00</span> */}
             </div>
+            {errors.salePrice && (
+              <p className={styles.error}>{errors.salePrice}</p>
+            )}
           </div>
 
           {/* stock minimo de Producto */}
@@ -288,7 +331,9 @@ export const EditProduct = () => {
             value={changeProduct.minStock}
             onChange={handleChange}
           />
-
+          {errors.minStock && (
+            <p className={styles.error}>{errors.minStock}</p>
+          )}
           {/* Proveedor */}
           <div className="container-m">
             <select
@@ -336,16 +381,21 @@ export const EditProduct = () => {
                 );
               })}
             </div>
-
+            {errors.provider && (
+              <p className={styles.error}>{errors.provider}</p>
+            )}
             {/* stock minimo de Producto */}
             <input
               className="form-control mb-3"
               type="text"
               name="stock"
-              placeholder="-- Minimum stock --"
+              placeholder="-- Stock --"
               value={changeProduct.stock}
               onChange={handleChange}
             />
+            {errors.stock && (
+              <p className={styles.error}>{errors.stock}</p>
+            )}
             <div>
               <div className="d-flex align-items-center">
                 <div>
@@ -390,6 +440,9 @@ export const EditProduct = () => {
                   <br />
                 </div>
               </div>
+              {errors.images && (
+                <p className={styles.error}>{errors.images}</p>
+              )}
             </div>
           </div>
           <button type="submit" className={styles.create}>

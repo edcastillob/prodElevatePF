@@ -310,9 +310,9 @@ export const login = (userData) => {
     return async (dispatch) => {
       const response = await axios.post(`${ENDPOINT}login`, userData);
       if (response.data) {
-        const user = response.data.User;
-        localStorage.setItem("user", JSON.stringify(user));
-        window.location.reload();
+        const user = response.data.User; 
+        localStorage.setItem("user", JSON.stringify(user));       
+        window.location.reload()
         return dispatch({ type: LOGIN, payload: user });
       }
       throw new Error("Credenciales inválidas");

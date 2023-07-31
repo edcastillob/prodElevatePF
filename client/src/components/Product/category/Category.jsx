@@ -4,6 +4,7 @@ import { addCategory } from "../../../redux/actions/actions";
 import styles from "./Category.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import validateForm from './validation';
 
 export const Category = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,8 @@ export const Category = () => {
     name: "",
     description: "",
   });
+
+  const [errors, serErrors] = useState({});
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -27,12 +30,23 @@ export const Category = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log(category);
-    dispatch(addCategory(category));
-    toast.success("¡Category created successfully!");
-    setCategory({
-      name: "",
-      description: "",
-    });
+    const errors = validateForm(
+      category.name,
+      category.description,
+    );
+    serErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(addCategory(category));
+      toast.success("¡Category created successfully!");
+      setCategory({
+        name: "",
+        description: "",
+      });
+      serErrors({});
+    } else {
+      alert("Data is Incompleted. All fields must be filled Correctly");
+    }
   };
   return (
     <div>
@@ -61,6 +75,9 @@ export const Category = () => {
             value={category.name}
             onChange={handleChange}
           />
+      {errors.name && (
+        <p className={styles.error}>{errors.name}</p>
+      )}
 
           {/* Descripcion de categoria */}
           <textarea
@@ -77,7 +94,10 @@ export const Category = () => {
             value={category.description}
             onChange={handleChange}
           />
-          <br />
+        {errors.description && (
+        <p className={styles.error}>{errors.description}</p>
+      )}
+        <br />
           <button className={styles.create}>Create</button>
         </form>
       </div>

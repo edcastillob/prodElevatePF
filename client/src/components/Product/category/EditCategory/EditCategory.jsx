@@ -5,6 +5,7 @@ import styles from "./EditCategory.module.css";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import validateForm from './validation';
 
 export const EditCategory = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export const EditCategory = () => {
     name: category.name,
     description: category.description,
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getCategoryId(id));
@@ -42,6 +44,23 @@ export const EditCategory = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log(editCategory);
+
+    const errors = validateForm (
+      editCategory.name,
+      editCategory.description
+    );
+    setErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(categoryEdit(id, editCategory));
+      toast.success("¡Updated successfully!"); 
+      setErrors({});
+      navigate("/settings");
+    } else {
+      toast.error("Data must be filled Correctly");
+    }
+
+
     dispatch(categoryEdit(id, editCategory));
     toast.success("¡Updated successfully!");
     navigate("/dashboard");
@@ -74,7 +93,9 @@ export const EditCategory = () => {
             value={editCategory.name}
             onChange={handleChange}
           />
-
+      {errors.name && (
+        <p className={styles.error}>{errors.name}</p>
+      )}
           {/* Descripcion de categoria */}
           <textarea
             type="textarea"
@@ -90,7 +111,10 @@ export const EditCategory = () => {
             value={editCategory.description}
             onChange={handleChange}
           />
-          <br />
+        {errors.description && (
+        <p className={styles.error}>{errors.description}</p>
+      )}
+        <br />
           <button className={styles.create}>Update</button>
         </form>
       </div>
