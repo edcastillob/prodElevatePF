@@ -471,8 +471,9 @@ export const filterNameAsc = () => {
 };
 
 export const filterData = (filters) => {
-  // const endpoint = "http://localhost:3001/filter/data";
+
   const endpoint = `${ENDPOINT}filter/data`;
+
 
   return async (dispatch) => {
     try {
