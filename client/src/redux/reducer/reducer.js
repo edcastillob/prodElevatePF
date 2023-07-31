@@ -24,8 +24,6 @@ import {
   EDIT_PROVIDER,
   PRICE_HIGHER_LOWER,
   PRICE_LOWER_HIGHER,
-  FILTER_NAME_ASC,
-  FILTER_NAME_DESC,
   DELETE_PRODUCT,
   DELETE_CATEGORY,
   DELETE_PROVIDER,
@@ -33,6 +31,8 @@ import {
   DELETE_USERS,
   EDIT_USERS,
   GET_USER_ID,
+  FILTER_DATA,
+  FILTER_NAME,
 } from "../actions/types";
 
 const initialState = {
@@ -280,27 +280,23 @@ function reducer(state = initialState, actions) {
     case PRICE_HIGHER_LOWER:
       return {
         ...state,
-        products: actions.payload,
+        products: [...state.products.sort((a, b) => b.salePrice - a.salePrice)],
       };
 
     case PRICE_LOWER_HIGHER:
       return {
         ...state,
-        products: actions.payload,
+        products: [...state.products.sort((a, b) => a.salePrice - b.salePrice)],
       };
 
     // Filter Name
 
-    case FILTER_NAME_ASC:
+    case FILTER_NAME:
       return {
         ...state,
-        products: actions.payload,
-      };
-
-    case FILTER_NAME_DESC:
-      return {
-        ...state,
-        products: actions.payload,
+        products: [
+          ...state.products.sort((a, b) => a.name.localeCompare(b.name)),
+        ],
       };
 
     case DELETE_PRODUCT:
@@ -355,6 +351,13 @@ function reducer(state = initialState, actions) {
         ...state,
         users: actions.payload,
       };
+
+    case FILTER_DATA:
+      return {
+        ...state,
+        products: actions.payload,
+      };
+
     default:
       return state;
   }

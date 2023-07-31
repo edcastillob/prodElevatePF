@@ -18,6 +18,7 @@ export const SearchBar = () => {
     dispatch(getProductName(name));
     setName("");
   };
+
   return (
     <div className={styles.divSearchBar}>
       <input
