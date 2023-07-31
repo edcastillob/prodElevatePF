@@ -19,8 +19,8 @@
     box-shadow: 00 0 2px 0 #cacaca;
     border-radius: 10px;
     background-color: #fff;
-    width: 27%;
-    height: 95%;
+    width: 450px;
+    height: 550px;
     padding: 2rem;
 }
 
@@ -108,4 +108,11 @@
     height: 22px;
     width: 22px;
     
+  }
+
+  .error {
+    color: red;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
   }

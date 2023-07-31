@@ -4,7 +4,9 @@ import { login } from "../../../redux/actions/actions";
 import { handleGoogleSignIn } from "../Firebase/GoogleLogin.js";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-import google from "../../../assets/google.png";
+import google from "../../../assets/google.png"
+import validateForm from './validation';
+import { toast } from 'react-toastify';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export const Login = () => {
@@ -29,6 +31,7 @@ export const Login = () => {
     username: "",
     password: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -41,8 +44,24 @@ export const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      dispatch(login(userData));
-      navigate("/home");
+      // console.log("desde submit: ", userData);
+      const errors = validateForm(
+        userData.username, 
+      );
+      setErrors(errors);
+
+      if (Object.keys(errors).length === 0) {
+        dispatch(login(userData)); // Esperar a que la acción termine antes de redirigir
+        navigate("/home");
+        setUserData({
+          username: '',
+          password: ''
+        })
+        setErrors({});
+      } else {
+        toast.error("Error");
+      }
+
     } catch (error) {
       console.error(error.message);
     }
@@ -64,6 +83,9 @@ export const Login = () => {
             onChange={handleInputChange}
           />
         </div>
+        {errors.username && (
+          <p className={styles.error}>{errors.username}</p>
+        )}        
 
         <div className="mb-2 p-2">
           <input

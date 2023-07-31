@@ -7,12 +7,15 @@ import styles from "./EditProvider.module.css";
 import ReactQuill from "react-quill";
 // import loadingImg from "../../../assets/loading.png";
 import "react-quill/dist/quill.snow.css";
-import { useParams } from "react-router-dom";
+import {  useNavigate,useParams } from "react-router-dom";
 import { editProvider, getProviderId } from "../../../../redux/actions/actions";
+import validateForm from "./validation";
+
 
 export const EditProvider = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate()
   const { id } = params;
   useEffect(() => {
     dispatch(getProviderId(id));
@@ -31,7 +34,8 @@ export const EditProvider = () => {
     numPhone: "",
     country: "",
   });
-
+  const [errors, setErrors] = useState({});
+  
   useEffect(() => {
     if (
       provider.address &&
@@ -73,13 +77,43 @@ export const EditProvider = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log("Datos enviados: ", changeProvider);
+
+    const errors = validateForm (
+      changeProvider.name,
+      changeProvider.email,
+      changeProvider.identification,
+      changeProvider.address,
+      changeProvider.isActive,
+      changeProvider.numPhone,
+      changeProvider.country
+    );
+    setErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(editProvider(id, changeProvider));
+      toast.success("¡Edit Provider successfully!");
+      setChangeProvider({
+        address: "",
+        email: "",
+        identification: "",
+        isActive: "",
+        name: "",
+        numPhone:"",  
+      });
+      setErrors({});
+    } else {
+      toast.error("Data must be filled Correctly")
+    }
+
     dispatch(editProvider(id, changeProvider));
     toast.success("¡Edit Provider successfully!");
+    navigate("/dashboard");
+
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.divLeft}>
+      
         <form onSubmit={handleSubmit} className={styles.formContainer}>
           <h4 style={{ fontFamily: "Poppins" }}>Edit Provider</h4>
 
@@ -93,6 +127,9 @@ export const EditProvider = () => {
             value={changeProvider.name}
             onChange={handleChange}
           />
+      {errors.name && (
+        <p className={styles.error}>{errors.name}</p>
+      )}
 
           {/* identificacion DNI RIF  de proveedor */}
           <input
@@ -103,6 +140,9 @@ export const EditProvider = () => {
             value={changeProvider.identification}
             onChange={handleChange}
           />
+      {errors.identification && (
+        <p className={styles.error}>{errors.identification}</p>
+      )}
 
           {/* email  de proveedor */}
           <input
@@ -113,6 +153,9 @@ export const EditProvider = () => {
             value={changeProvider.email}
             onChange={handleChange}
           />
+      {errors.email && (
+        <p className={styles.error}>{errors.email}</p>
+      )}
 
           {/* direccion de proveedor */}
           <input
@@ -123,6 +166,9 @@ export const EditProvider = () => {
             value={changeProvider.address}
             onChange={handleChange}
           />
+      {errors.address && (
+        <p className={styles.error}>{errors.address}</p>
+      )}
 
           {/* numero telef de proveedor */}
           <input
@@ -133,6 +179,9 @@ export const EditProvider = () => {
             value={changeProvider.numPhone}
             onChange={handleChange}
           />
+          {errors.numPhone && (
+            <p className={styles.error}>{errors.numPhone}</p>
+          )}
           {/* Country proveedor */}
           <input
             className="form-control mb-3 w-75"
@@ -142,6 +191,9 @@ export const EditProvider = () => {
             value={changeProvider.country}
             onChange={handleChange}
           />
+          {errors.country && (
+            <p className={styles.error}>{errors.country}</p>
+          )}
 
           {/* Estado del proveedor */}
           <select
@@ -153,13 +205,15 @@ export const EditProvider = () => {
             <option value="t">Activo</option>
             <option value="f">Inactivo</option>
           </select>
+{errors.isActive && (
+  <p className={styles.error}>{errors.isActive}</p>
+)}
 
           <br />
 
-          <button className={styles.create}>update</button>
+          <button className={styles.create}>Update Provider</button>
         </form>
       </div>
-      <div className={styles.divRight}></div>
-    </div>
+    
   );
 };

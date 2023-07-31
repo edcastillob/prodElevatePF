@@ -31,6 +31,7 @@ const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
 
 const { getUserId } = require("../controllers/GET/getUserId");
 
+
 const router = Router();
 
 const mailerRoutes = require("./mailerRoutes");

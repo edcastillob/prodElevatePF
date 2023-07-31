@@ -17,7 +17,7 @@ import { Login } from "./components/users/login/Login";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 // Importa 'auth' desde firebase.js
 import { auth } from "./components/users/Firebase/firebase.js";
-import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin"; 
+import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin";
 import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,6 +33,10 @@ import Panel from "./components/Dashboard";
 
 import { UsersAll } from "./components/users/UsersAll/UsersAll";
 import { EditUser } from "./components/users/EditUser/EditUser";
+import { AboutUs } from "./components/AboutUs/AboutUs";
+import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
+import { TermsConditions } from "./components/TermsConditions/TermsConditions";
+import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
 
 function App() {
   const location = useLocation();
@@ -90,23 +94,30 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/" element={<Landing />} />
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path="/producto" element={<Product />} />
-          <Route exact path="/producto" element={<SettingsProduct />} />
-          {/* <Route exact path="/categoria" element={<Category />} /> */}
+          <Route exact path="/about" element={<AboutUs />} />
+          <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
+          <Route exact path="/contact" element={<ContactUs />} />
+          <Route exact path="/dashboard" element={<Panel />} />
+          <Route exact path="/favorites" element={<Favorites />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
+          <Route exact path="/productid/:id" element={<ProductDetail />} />
+          <Route path="/productidedit/:id" element={<EditProduct />} />
+          <Route exact path="/producto" element={<Product />} />
           <Route exact path="/proveedor" element={<ProvidersAll />} />
           <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/usuario" element={<CreateUser />} />
-          <Route exact path="/usuario" element={<UsersAll />} />
-          <Route path="/productid/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/productidedit/:id" element={<EditProduct />} />
-          <Route path="/categoryedit/:id" element={<EditCategory />} />
+          <Route exact path="/settings_product" element={<SettingsProduct />} />
+          <Route
+            exact
+            path="/terms_&_conditions"
+            element={<TermsConditions />}
+          />
           <Route path="/useredit/:id" element={<EditUser />} />
+          <Route exact path="/usuario" element={<CreateUser />} />
+
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )}

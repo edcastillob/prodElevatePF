@@ -1,0 +1,95 @@
+.container {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.h2Container {
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+}
+.h2Container h2 {
+    color: green;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.aboutContainer {
+    width: 500px;
+    margin-right: 115px;
+    margin-bottom: 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.infoContainer {
+    box-shadow: rgba(19, 204, 2, 0.3) 10px 10px 10px; 
+    border-radius: 20px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.imagesContainer {
+    width: 500px;
+    margin-bottom: 23px;
+    margin-left: 115px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoContainer {
+    width: 300px;
+    height: 177px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    border: 5px green inset;
+    border-radius: 100px;    
+    box-shadow: rgba(19, 204, 2, 0.3) 10px 10px 10px;
+}
+
+.logoContainer img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.imgContainer {
+    width: 500px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.imgContainer img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.ourContainer {
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+}
+
+.ourContainer h2 {
+    color: #01691b;
+}
+
+.ourContainer p {
+    font-size: 20px;
+    text-indent: 50px;
+}

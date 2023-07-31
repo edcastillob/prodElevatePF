@@ -1,13 +1,16 @@
 .container{
     width: 100%;
+    background-color: #f0f4f7;
     min-height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: start;
+    align-items: center;
+    padding: 1.5rem;
 }
 
 .form{
-    width: 70%;
+    width: 60%;
     border: 1px solid #fff;
     box-shadow: 0 2px 0 #acaaaa;
     background-color: #fff;
@@ -33,3 +36,11 @@
     
 }
 
+
+
+  .error {
+    color: red;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
