@@ -83,5 +83,6 @@ router.get('/UserProducts', async (req, res) => {
     }
 });
 
+router.get('/reviews', reviewsController.getAllReviews);
 
 module.exports = router;
