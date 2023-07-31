@@ -420,7 +420,7 @@ export const addFav = (product) => {
   return async (dispatch) => {
     try {
       console.log(product);
-      const { data } = await axios.post(endpoint, product);
+      const { data } = await axios.post("http://localhost:3001/favorite", product);
       return dispatch({
         type: ADD_FAV,
         payload: data,

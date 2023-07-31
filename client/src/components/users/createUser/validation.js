@@ -42,9 +42,7 @@ export default function validate(userData){
       }
 
     //PASSWORD
-    if(!passwordRegEx.test(userData.password)){
-        errors.password = "Requires uppercase, lowercase, special symbol, and number"
-    }
+    
 
     // CONFIRM PASSWORD
      if (!userData.confirmPassword) {

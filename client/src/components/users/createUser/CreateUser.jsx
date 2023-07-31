@@ -43,7 +43,7 @@ export const CreateUser = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    
     if (Object.keys(errors).length > 0) {
       toast.error(
         "Fill in the fields correctly before sending the information."

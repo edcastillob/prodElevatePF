@@ -59,7 +59,9 @@ export const CardProduct = ({ product }) => {
       if (user) {
         const uid = user.uid;
         setCurrentUser(user);
+        console.log(user)
       } else {
+        console.log(user)
         setCurrentUser(null);
       }
     });
@@ -80,7 +82,7 @@ export const CardProduct = ({ product }) => {
         className={styles.link}
       >
         {isFav ? (
-          <button className={styles.favButton} onClick={handleFavorite}>
+         <button className={styles.favButton} onClick={handleFavorite}>
             <h3 style={{ color: "#000924" }}>
               <ion-icon name="heart"></ion-icon>
             </h3>

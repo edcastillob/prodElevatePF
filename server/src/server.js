@@ -14,7 +14,7 @@ const bodyParser = require("body-parser");
 // const { Server } = require('socket.io');
 
 const server = express();
-server.use(cors());
+
 server.use(bodyParser.json({ limit: "3mb" }));
 server.use(bodyParser.urlencoded({ limit: "3mb", extended: true }));
 

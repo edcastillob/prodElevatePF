@@ -23,5 +23,18 @@ async function getScore (productId) {
                             )/score.numReviews)/2;
     return score;
 }
+const getAllReviews = async (req, res) => {
+    try {
+      // Utilizamos el método findAll de Sequelize para obtener todas las reviews de la base de datos
+      const reviews = await Review.findAll();
+  
+      // Enviamos las reviews como respuesta en formato JSON
+      res.json(reviews);
+    } catch (error) {
+      console.error("Error al obtener las reviews:", error);
+      res.status(500).json({ error: "Error al obtener las reviews" });
+    }
+  };
+  
 
-module.exports = {getProductReviews , getScore};
+module.exports = {getProductReviews , getScore, getAllReviews};

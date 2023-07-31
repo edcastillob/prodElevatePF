@@ -272,6 +272,7 @@ function reducer(state = initialState, actions) {
 
     //Favorite
 
+
     case ADD_FAV:
       return { ...state, favorites: actions.payload };
     case REMOVE_FAV:
