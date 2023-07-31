@@ -4,7 +4,7 @@ async function getProviderId(req, res) {
   try {
     const { id } = req.params;
     const providerID = await Provider.findByPk(id);
-    console.log(providerID);
+    // console.log(providerID);
 
     return res.status(200).json(providerID);
   } catch (error) {

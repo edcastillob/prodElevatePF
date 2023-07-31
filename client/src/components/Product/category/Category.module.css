@@ -4,10 +4,8 @@
     align-items: center;
     justify-content: center;
     height: 80vh;
-    background-image: url('../../../assets/reunion.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: #000924;
+    background-color: #f0f4f7;
+    border-radius: 10px;
 }
 
 .mainTitle{
@@ -15,58 +13,41 @@
 }
 
 .formContainer{
-    border: 1px solid black;
-    width: 35%;
-    background-color: #000924;
+    border: 1px solid #fff;
+    box-shadow: 0 2px 0 #acaaaa;
+    width: 40%;
+    height: 60vh;
+    background-color: #fff;
     padding: 0.5rem;
-    border-radius: 2%;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
 
-.formContainer label{
-    color: #fff;
-}
 
-.formContainer input{
-    width: 60%;
-    border: 1px solid black;
-}
-
-.formContainer textarea{
+.create{
+    border: 1px solid #cacaca;
+    position: relative;
+    left: 0.1rem;
+    width: 30%;
+    padding: 0.7rem;
     border-radius: 10px;
-    width: 60%;
-    height: auto;
-    resize: none;
+    font-family: 'Poppins';
+    background-color: #000924;
+    color: #cacaca;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.97);
+        color: #fff;
+        transition: .3s;
+    }
+    
 }
 
-.btn{
-    padding: 1.1rem 1.3rem;
-    margin-top: 0.4rem;
-    background: #059dc7;
-    border-radius: 2rem;
-    /* box-shadow: 0 0 0.5rem #02ECFF; */
-    font-size: 1rem;
-    color: #fff;
-    letter-spacing: 1px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: .3s;
-    /* opacity: 0; */
-    /* animation: slideTop 1s ease forwards; */
-    /* animation-delay: .1s; */
-  }
-  
-  .btn:hover{
-    background-color: #1eb777;
-    color: #000924;
-    transition: .5s ease;
-  }
-
-  .error {
+.error {
     color: red;
     font-size: 15px;
     margin-top: 0;

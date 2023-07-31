@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addCategory } from '../../../redux/actions/actions';
-import styles from './Category.module.css'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCategory } from "../../../redux/actions/actions";
+import styles from "./Category.module.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import validateForm from './validation';
 
 export const Category = () => {
@@ -27,7 +29,7 @@ export const Category = () => {
   //   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(category);
+    // console.log(category);
     const errors = validateForm(
       category.name,
       category.description,
@@ -36,7 +38,7 @@ export const Category = () => {
 
     if (Object.keys(errors).length === 0) {
       dispatch(addCategory(category));
-      alert("Exito");
+      toast.success("¡Category created successfully!");
       setCategory({
         name: "",
         description: "",
@@ -48,14 +50,12 @@ export const Category = () => {
   };
   return (
     <div>
-        
-        <div className={styles.container}>
-        <ion-icon name="arrow-round-back"></ion-icon>
-        <h2 className={styles.mainTitle}>Create New Category</h2>      
-        <hr />
-        <form onSubmit={ handleSubmit } className={styles.formContainer}>
-        
-        {/* <label htmlFor="isActive">active</label>
+      <div className={styles.container}>
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
+          <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
+            New Category
+          </h4>
+          {/* <label htmlFor="isActive">active</label>
         <input
         className='form-check-input mt-10'
         type="checkbox"
@@ -66,35 +66,39 @@ export const Category = () => {
         />
         <br /> */}
 
-        
-        
-        {/* Nombre de categoria */}
-        <label htmlFor="name">Name: </label>        
-        <input
-        type="text"
-        name="name"
-        placeholder="Enter Category Name... "
-        value={category.name}
-        onChange={handleChange}
-      />
+          {/* Nombre de categoria */}
+          <input
+            className="form-control mb-3 w-75"
+            type="text"
+            name="name"
+            placeholder="Category Name"
+            value={category.name}
+            onChange={handleChange}
+          />
       {errors.name && (
         <p className={styles.error}>{errors.name}</p>
       )}
 
-       {/* Descripcion de categoria */}
-       <label htmlFor="name">Description: </label>             
-        <textarea
-        type="textarea"
-        name="description"
-        placeholder='Category Description...'
-        value={category.description}
-        onChange={handleChange}
-      />
-      {errors.description && (
+          {/* Descripcion de categoria */}
+          <textarea
+            type="textarea"
+            name="description"
+            className="form-control"
+            style={{
+              resize: "none",
+              width: "75%",
+              height: "30%",
+              fontFamily: "Poppins",
+            }}
+            placeholder="Enter Category Description..."
+            value={category.description}
+            onChange={handleChange}
+          />
+        {errors.description && (
         <p className={styles.error}>{errors.description}</p>
       )}
         <br />
-        <button className={styles.btn}>Create Category</button> 
+          <button className={styles.create}>Create</button>
         </form>
       </div>
     </div>

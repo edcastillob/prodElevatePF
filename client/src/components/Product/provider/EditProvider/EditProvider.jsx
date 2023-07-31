@@ -16,20 +16,22 @@ export const EditProvider = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { id } = params;
-  useEffect(() => {dispatch(getProviderId(id))}, [dispatch, id]);
+  useEffect(() => {
+    dispatch(getProviderId(id));
+  }, [dispatch, id]);
   const provider = useSelector((state) => state.provider);
   if (provider && !provider.isActive) {
     provider.isActive = "f";
   }
 
-  
   const [changeProvider, setChangeProvider] = useState({
     address: "",
     email: "",
     identification: "",
     isActive: "",
     name: "",
-    numPhone:"",  
+    numPhone: "",
+    country: "",
   });
   const [errors, setErrors] = useState({});
   
@@ -40,7 +42,8 @@ export const EditProvider = () => {
       provider.identification &&
       provider.isActive &&
       provider.name &&
-      provider.numPhone     
+      provider.numPhone &&
+      provider.country
     ) {
       setChangeProvider({
         address: provider.address,
@@ -48,7 +51,8 @@ export const EditProvider = () => {
         identification: provider.identification,
         isActive: provider.isActive,
         name: provider.name,
-        numPhone: provider.numPhone
+        numPhone: provider.numPhone,
+        country: provider.country,
       });
     }
   }, [
@@ -57,10 +61,9 @@ export const EditProvider = () => {
     provider.identification,
     provider.isActive,
     provider.name,
-    provider.numPhone
+    provider.numPhone,
+    provider.country,
   ]);
-
-
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -72,14 +75,15 @@ export const EditProvider = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Datos enviados: ", changeProvider);
+    // console.log("Datos enviados: ", changeProvider);
     const errors = validateForm (
       changeProvider.name,
       changeProvider.email,
       changeProvider.identification,
       changeProvider.address,
       changeProvider.isActive,
-      changeProvider.numPhone
+      changeProvider.numPhone,
+      changeProvider.country
     );
     setErrors(errors);
 
@@ -99,102 +103,111 @@ export const EditProvider = () => {
       toast.error("Data must be filled Correctly")
     }
   };
- 
+
   return (
     <div className={styles.container}>
-    <div className={styles.divLeft}>
-      <form onSubmit={handleSubmit} className={styles.formContainer}>
-        <h4 style={{fontFamily: 'Poppins'}}>Edit Provider</h4>
+      <div className={styles.divLeft}>
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
+          <h4 style={{ fontFamily: "Poppins" }}>Edit Provider</h4>
 
-      {/* Nombre de proveedor */}
-      
-      <input
-        className="form-control mb-3 w-75"
-        type="text"
-        name="name"
-        placeholder= "Fullname"
-        value={changeProvider.name}
-        onChange={handleChange}
-      />
+          {/* Nombre de proveedor */}
+
+          <input
+            className="form-control mb-3 w-75"
+            type="text"
+            name="name"
+            placeholder="Fullname"
+            value={changeProvider.name}
+            onChange={handleChange}
+          />
       {errors.name && (
         <p className={styles.error}>{errors.name}</p>
       )}
 
-      {/* identificacion DNI RIF  de proveedor */}
-      <input
-        className="form-control mb-3 w-75"
-        type="text"
-        name="identification"
-        placeholder="DNI/RIF/Document ID"
-        value={changeProvider.identification}
-        onChange={handleChange}
-      />
+          {/* identificacion DNI RIF  de proveedor */}
+          <input
+            className="form-control mb-3 w-75"
+            type="text"
+            name="identification"
+            placeholder="DNI/RIF/Document ID"
+            value={changeProvider.identification}
+            onChange={handleChange}
+          />
       {errors.identification && (
         <p className={styles.error}>{errors.identification}</p>
       )}
 
-      {/* email  de proveedor */}
-      <input
-        className="form-control mb-3 w-75"
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={changeProvider.email}
-        onChange={handleChange}
-      />
+          {/* email  de proveedor */}
+          <input
+            className="form-control mb-3 w-75"
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={changeProvider.email}
+            onChange={handleChange}
+          />
       {errors.email && (
         <p className={styles.error}>{errors.email}</p>
       )}
 
-      {/* direccion de proveedor */}
-      <input
-        className="form-control mb-3 w-75"
-        type="textarea"
-        name="address"
-        placeholder="Address"
-        value={changeProvider.address}
-        onChange={handleChange}
-      />
+          {/* direccion de proveedor */}
+          <input
+            className="form-control mb-3 w-75"
+            type="textarea"
+            name="address"
+            placeholder="Address"
+            value={changeProvider.address}
+            onChange={handleChange}
+          />
       {errors.address && (
         <p className={styles.error}>{errors.address}</p>
       )}
 
-      {/* numero telef de proveedor */}
-      <input
-        className="form-control mb-3 w-75"
-        type="text"
-        name="numPhone"
-        placeholder="Phone N°"
-        value={changeProvider.numPhone}
-        onChange={handleChange}
-      />
-      {errors.numPhone && (
-        <p className={styles.error}>{errors.numPhone}</p>
-      )}
+          {/* numero telef de proveedor */}
+          <input
+            className="form-control mb-3 w-75"
+            type="text"
+            name="numPhone"
+            placeholder="Phone N°"
+            value={changeProvider.numPhone}
+            onChange={handleChange}
+          />
+          {errors.numPhone && (
+            <p className={styles.error}>{errors.numPhone}</p>
+          )}
+          {/* Country proveedor */}
+          <input
+            className="form-control mb-3 w-75"
+            type="text"
+            name="country"
+            placeholder="country"
+            value={changeProvider.country}
+            onChange={handleChange}
+          />
+          {errors.country && (
+            <p className={styles.error}>{errors.country}</p>
+          )}
 
-      {/* Estado del proveedor */}
-<select
-  className="form-control mb-3 w-75"
-  name="isActive"
-  value={changeProvider.isActive}
-  onChange={handleChange}
->
-  <option value="t">Activo</option>
-  <option value="f">Inactivo</option>
-</select>
+          {/* Estado del proveedor */}
+          <select
+            className="form-control mb-3 w-75"
+            name="isActive"
+            value={changeProvider.isActive}
+            onChange={handleChange}
+          >
+            <option value="t">Activo</option>
+            <option value="f">Inactivo</option>
+          </select>
 {errors.isActive && (
   <p className={styles.error}>{errors.isActive}</p>
 )}
 
-      <br />
+          <br />
 
-      <button className={styles.create}>update</button>
-    </form>
-  </div>
-    <div className={styles.divRight}>
+          <button className={styles.create}>update</button>
+        </form>
+      </div>
+      <div className={styles.divRight}></div>
     </div>
-  </div>
-
-);
-  
-}
+  );
+};

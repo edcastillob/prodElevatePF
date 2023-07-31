@@ -18,31 +18,6 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
 
   const dispatch = useDispatch();
 
-  // const handleLogoutClick = () => {
-  //   // Eliminar el usuario del estado global (Redux)
-  //   logoutUser();
-  //   dispatch({ type: "LOGOUT" });
-
-  //   // Eliminar el usuario del LocalStorage
-  //   localStorage.removeItem("user");
-
-  //   // Redirige al login después de cerrar sesión
-  //   navigate("/login");
-  // };
-  // useEffect(() => {
-  //   // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
-  //   const storedUserData = JSON.parse(localStorage.getItem("user"));
-  //   if (storedUserData) {
-  //     dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
-  //   }
-  // }, [dispatch, navigate, user]);
-
-  // if (userLogin) {
-  //   console.log(userLogin);
-  //   const email = userLogin[0].User.email;
-  //   console.log(email);
-  // }
-
   const handleLogoutClick = () => {
     if (userLocal) {
       dispatch(logout());
@@ -52,7 +27,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
     window.location.reload(); // Forzar la recarga completa de la página
   };
 
-  console.log(user);
+  // console.log(user);
 
   //Handle Dropdown
   const handleDropdownToggle = () => {
@@ -77,8 +52,8 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
             <ion-icon name="cart"></ion-icon>
           </h2>
         </Link>
-        
-        {(user || userLocal) ? null : (
+
+        {user || userLocal ? null : (
           <Link
             className={styles.icon}
             to="/login"
@@ -183,6 +158,17 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
             {/* Dropdown de opciones */}
             {isDropdownOpen && (
               <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
+                <li>
+                  <h6
+                    style={{
+                      color: "black",
+                      fontFamily: "Poppins",
+                      textAlign: "start",
+                    }}
+                  >
+                    <ion-icon name="compass"></ion-icon> Dashboard
+                  </h6>
+                </li>
                 <li>
                   <h6
                     style={{

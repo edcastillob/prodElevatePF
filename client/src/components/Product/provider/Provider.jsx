@@ -28,7 +28,7 @@ export const Provider = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(provider);
+    // console.log(provider);
     const errors = validateForm (
       provider.name,
       provider.email,
@@ -57,58 +57,72 @@ export const Provider = () => {
   };
   return (
     <div className={styles.container}>
-      <div className={styles.divLeft}>
-        <form onSubmit={handleSubmit} className={styles.formContainer}>
-          <h4 style={{ fontFamily: "Poppins" }}>New Provider</h4>
-          {/* Nombre de proveedor */}
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+        <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
+          New Provider
+        </h4>
+        {/* Nombre de proveedor */}
 
-          <input
-            className="form-control mb-3 w-75"
-            type="text"
-            name="name"
-            placeholder="Fullname"
-            value={provider.name}
-            onChange={handleChange}
-          />
+        <input
+          className="form-control mb-3 w-75"
+          type="text"
+          name="name"
+          placeholder="Fullname"
+          value={provider.name}
+          onChange={handleChange}
+        />
           {errors.name && (
             <p className={styles.error}>{errors.name}</p>
           )}
 
-          {/* identificacion DNI RIF  de proveedor */}
-          <input
-            className="form-control mb-3 w-75"
-            type="text"
-            name="identification"
-            placeholder="DNI/RIF/Document ID"
-            value={provider.identification}
-            onChange={handleChange}
-          />
+        {/* identificacion DNI RIF  de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="text"
+          name="identification"
+          placeholder="DNI/RIF/Document ID"
+          value={provider.identification}
+          onChange={handleChange}
+        />
           {errors.identification && (
             <p className={styles.error}>{errors.identification}</p>
           )}
 
-          {/* email  de proveedor */}
-          <input
-            className="form-control mb-3 w-75"
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={provider.email}
-            onChange={handleChange}
-          />
+        {/* email  de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={provider.email}
+          onChange={handleChange}
+        />
           {errors.email && (
             <p className={styles.error}>{errors.email}</p>
           )}
 
-          {/* direccion de proveedor */}
-          <input
-            className="form-control mb-3 w-75"
-            type="textarea"
-            name="address"
-            placeholder="Address"
-            value={provider.address}
-            onChange={handleChange}
-          />
+        {/* Pais de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="textarea"
+          name="country"
+          placeholder="Country"
+          value={provider.country}
+          onChange={handleChange}
+        />
+          {errors.country && (
+            <p className={styles.error}>{errors.country}</p>
+          )}
+
+        {/* direccion de proveedor */}
+        <input
+          className="form-control mb-3 w-75"
+          type="textarea"
+          name="address"
+          placeholder="Address"
+          value={provider.address}
+          onChange={handleChange}
+        />
           {errors.address && (
             <p className={styles.error}>{errors.address}</p>
           )}
@@ -125,25 +139,19 @@ export const Provider = () => {
           {errors.numPhone && (
             <p className={styles.error}>{errors.numPhone}</p>
           )}
-
           {/* country  de proveedor */}
-          <label htmlFor="name">country: </label>
+          {/*<label htmlFor="name">country: </label>
           <input
             className="form-control"
             type="text"
             name="country"
             value={provider.country}
             onChange={handleChange}
-          />
-          {errors.country && (
-            <p className={styles.error}>{errors.country}</p>
-          )}
-          <br />
+          /> */}
+        <br />
 
-          <button className={styles.create}>Create</button>
-        </form>
-      </div>
-      <div className={styles.divRight}></div>
+        <button className={styles.create}>Create</button>
+      </form>
     </div>
   );
 };
