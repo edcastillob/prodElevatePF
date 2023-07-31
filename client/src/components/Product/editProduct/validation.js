@@ -1,6 +1,8 @@
 export default function validateForm(
     category,
     name, 
+    brand,
+    condition,
     description,
     purchasePrice,
     salePrice,
@@ -21,9 +23,17 @@ export default function validateForm(
         errors.name = "The name can't be longer than 20 characters";
     }; 
 
+    if (!brand) {
+        errors.brand = "Description is required";
+    }; 
+
+    if (!condition) {
+        errors.condition = "Description is required";
+    }; 
+
     if (!description) {
         errors.description = "Description is required";
-    } 
+    }; 
 
     let purchase = parseFloat(purchasePrice)
     if (!purchasePrice) {

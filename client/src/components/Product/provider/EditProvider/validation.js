@@ -5,6 +5,7 @@ export default function validateForm(
     address,
     isActive,
     numPhone,
+    country
 ) {
     let errors = {};
     let RegExpression = /^[a-zA-Z\s]*$/;
@@ -49,6 +50,10 @@ export default function validateForm(
 
     if (!isActive) {
         errors.isActive = "Status of Provider is required"
+    }
+
+    if (!country) {
+        errors.country = "Country is required"
     }
 
     return errors

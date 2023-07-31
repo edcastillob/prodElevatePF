@@ -1,6 +1,8 @@
 export default function validateForm(
     category,
     name, 
+    brand,
+    condition,
     description,
     purchasePrice,
     salePrice,
@@ -18,6 +20,14 @@ export default function validateForm(
         errors.name = "Name is required";
     } else if (name.length > 20) {
         errors.name = "The name can't be longer than 20 characters";
+    }; 
+
+    if (!brand) {
+        errors.brand = "Brand is required";
+    }; 
+
+    if (!condition) {
+        errors.description = "Condition is required";
     }; 
 
     if (!description) {
