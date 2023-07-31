@@ -38,6 +38,7 @@ import { AboutUs } from "./components/AboutUs/AboutUs";
 import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { TermsConditions } from "./components/TermsConditions/TermsConditions";
 import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
+import { PostCompra } from './components/PostCompra/PostCompra';
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
 
 function App() {
