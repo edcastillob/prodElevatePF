@@ -37,6 +37,7 @@ import { AboutUs } from "./components/AboutUs/AboutUs";
 import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { TermsConditions } from "./components/TermsConditions/TermsConditions";
 import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
+import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
 
 function App() {
   const location = useLocation();
@@ -123,6 +124,8 @@ function App() {
           )}
           <Route path="/dashboard" element={<Panel />} />
           {/* <Route path="/chat/" element={<Chat />} /> */}
+
+          <Route path="/thankyoupage" element={<ThankYouPage />} />
         </Routes>
         <ToastContainer
           position="top-center"
