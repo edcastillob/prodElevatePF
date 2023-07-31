@@ -161,10 +161,13 @@ export const EditProduct = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.divLeft}>
+      
         <hr />
         {/* Formulario */}
         <form onSubmit={handleSubmit} className={styles.form}>
+        <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
+            Edit Product
+          </h4>
           {/* Categoria de Producto */}
           <div className="d-flex justify-content-around">
             <select
@@ -395,11 +398,11 @@ export const EditProduct = () => {
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-dark">
+          <button type="submit" className={styles.create}>
             Update product
           </button>
         </form>
       </div>
-    </div>
+    
   );
 };

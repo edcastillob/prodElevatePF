@@ -79,7 +79,25 @@ export const CardProduct = ({ product }) => {
         to={`/productid/${id}`}
         className={styles.link}
       >
-        {isFav ? (
+        {/* {isFav ? (
+          <button className={styles.favButton} onClick={handleFavorite}>
+            <h3 style={{ color: "#000924" }}>
+              <ion-icon name="heart"></ion-icon>
+            </h3>
+          </button>
+        ) : (
+          <button className={styles.favButton} onClick={handleFavorite}>
+            <h3>
+              <ion-icon name="heart-empty"></ion-icon>
+            </h3>
+          </button>
+        )} */}
+        <div className={styles.divImg}>
+          <img className={styles.img} src={images} alt="product" />
+        </div>
+      </Link>
+      <div className={styles.description}>
+      {isFav ? (
           <button className={styles.favButton} onClick={handleFavorite}>
             <h3 style={{ color: "#000924" }}>
               <ion-icon name="heart"></ion-icon>
@@ -92,11 +110,6 @@ export const CardProduct = ({ product }) => {
             </h3>
           </button>
         )}
-        <div className={styles.divImg}>
-          <img className={styles.img} src={images} alt="product" />
-        </div>
-      </Link>
-      <div className={styles.description}>
         <h6 className={styles.title}>{name}</h6>
         <h6 className={styles.category}> {category}</h6>
         <span className={styles.priceLabel}>Brand</span>
