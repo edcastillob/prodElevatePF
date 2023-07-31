@@ -1,9 +1,3 @@
-
-import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
-
-const FilterModal = ({ show, handleClose, handleFilter }) => {
-
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -70,9 +64,7 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                 value={filters.maxPrice}
                 onChange={handleInputChange}
               ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="formCategory">
+            </Form.Group>      
 
 
              
