@@ -1,0 +1,70 @@
+.container {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.h2Contact {
+    font-style: italic;
+}
+
+.contactContainer {
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.sideColumns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.centerColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.person {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 10px;
+}
+
+.info {
+    width: 240px;
+    height: 110px;
+    padding-top: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: left;
+}
+.info h6 {
+    text-align: center;
+}
+
+.photo {
+    width: 120px;
+    height: 90px;
+}
+.photo img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 50px;
+    border: 5px green inset;
+}
+
+.contactSpan {
+    color: green;
+    cursor: pointer;
+}
