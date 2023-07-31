@@ -44,7 +44,7 @@ export const EditCategory = () => {
     // console.log(editCategory);
     dispatch(categoryEdit(id, editCategory));
     toast.success("¡Updated successfully!");
-    navigate("/settings");
+    navigate("/dashboard");
   };
   // console.log("Edit category: ", editCategory);
   return (

@@ -6,7 +6,12 @@ import styles from "./SettingProduct.module.css";
 import { deleteProduct, showProducts } from "../../../redux/actions/actions";
 import { Table } from "reactstrap";
 
+
 export const SettingsProduct = () => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [productIdToDelete, setProductIdToDelete] = useState(null);
+
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(showProducts());
@@ -26,10 +31,21 @@ export const SettingsProduct = () => {
     products.name.toLowerCase().includes(searchProducts.toLowerCase())
   );
 
+  // const handleDeleteProduct = (productId) => {
+  //   if (window.confirm("Are you sure you want to delete this product?")) {
+  //     dispatch(deleteProduct(productId));
+  //   }
+  // };
+
   const handleDeleteProduct = (productId) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      dispatch(deleteProduct(productId));
-    }
+    setProductIdToDelete(productId); // Guarda el ID del usuario a eliminar en el estado local
+    setShowConfirmation(true); // Mostrar el modal de confirmación
+  };
+
+  const handleConfirmDelete = () => {
+    dispatch(deleteProduct(productIdToDelete)); // Realiza la acción de eliminación
+    setProductIdToDelete(null); // Limpia el estado local
+    setShowConfirmation(false); // Cierra el modal de confirmación
   };
 
   return (
@@ -84,6 +100,24 @@ export const SettingsProduct = () => {
           </Table>
         ))}
       </div>
+
+      <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title> <h4 style={{fontFamily:'Poppins'}}>Confirmation</h4>
+           </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+         <h6 style={{fontFamily:'Poppins'}}>Are you sure you want to delete this product?</h6> 
+        </Modal.Body>
+        <Modal.Footer>
+          <Button style={{fontFamily:'Poppins'}} variant="secondary" onClick={() => setShowConfirmation(false)}>
+            Cancel
+          </Button>
+          <Button style={{fontFamily:'Poppins'}} variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

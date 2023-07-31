@@ -1,12 +1,24 @@
+import styles from "../../Dashboard/Dashboard.module.css";
+import { MdMenu } from "react-icons/md";
 import { useState } from "react"; // Importa useState
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { deleteUsers, getUsers } from "../../../redux/actions/actions";
-import styles from "./UsersAll.module.css";
-import { Table } from "reactstrap";
+import { Link } from "react-router-dom";
+import { BsTabletFill } from "react-icons/bs";
+import { Modal, Button } from 'react-bootstrap';
 
-export const UsersAll = () => {
+
+
+
+
+
+export const UsersAll = ({ toggleActive }) => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [userIdToDelete, setUserIdToDelete] = useState(null);
+
+
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
@@ -27,25 +39,41 @@ export const UsersAll = () => {
   );
 
   const handleDeleteUsers = (UsersId) => {
-    if (window.confirm("Are you sure you want to delete this User?")) {
-      dispatch(deleteUsers(UsersId));
-    }
+    setUserIdToDelete(UsersId); 
+    setShowConfirmation(true); 
+  };
+
+  const handleConfirmDelete = () => {
+    dispatch(deleteUsers(userIdToDelete)); 
+    setUserIdToDelete(null); 
+    setShowConfirmation(false); 
   };
 
   return (
-    <div className={styles.container}>
-      <h2>Users</h2>
+    <div>
+      {/* TOPBAR */}
+      <div className={styles.topbar}>
+        <div className={styles.toggle} onClick={toggleActive}>
+          <MdMenu />
+        </div>
+      </div>
+
+      <div className={styles.customers}>
+        <div className={styles.wrapper}>
+          <div className={styles.customersHeader}>
+            <h2 style={{fontFamily:'Poppins'}}>Users</h2>
+          </div>
 
       <input
         type="text"
-        className="form-control w-25"
+        className="form-control w-25 h-75"
         placeholder="Search user"
         value={searchUsers}
         onChange={(event) => setSearchUsers(event.target.value)}
       />
-      <div className={styles.userContainer}>
+          <div className={styles.userContainer}>
         {filteredUsers?.map((user) => (
-          <Table key={user.id} className={styles.table}>
+          <table key={user.id} className={styles.table}>
             <thead>
               <tr>
                 <th>User</th>
@@ -71,7 +99,7 @@ export const UsersAll = () => {
                 <td>
                   <div className={styles.divImg}>
                     <img
-                      className={styles.avatar}
+                      className={styles.img}
                       src={user.image}
                       alt={user.name}
                     />
@@ -82,9 +110,31 @@ export const UsersAll = () => {
                 <td>{null}</td>
               </tr>
             </tbody>
-          </Table>
+          </table>
         ))}
       </div>
+        </div>
+        
+      </div>
+
+      <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title> <h4 style={{fontFamily:'Poppins'}}>Confirmation</h4>
+           </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+         <h6 style={{fontFamily:'Poppins'}}>Are you sure you want to delete this User?</h6> 
+        </Modal.Body>
+        <Modal.Footer>
+          <Button style={{fontFamily:'Poppins'}} variant="secondary" onClick={() => setShowConfirmation(false)}>
+            Cancel
+          </Button>
+          <Button style={{fontFamily:'Poppins'}} variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
+
 };
