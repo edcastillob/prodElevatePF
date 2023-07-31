@@ -153,28 +153,28 @@ export const EditProduct = () => {
     event.preventDefault();
 
     // console.log("Datos enviados: ", changeProduct);
-    const errors = validateForm (
-      changeProduct.category,
-      changeProduct.name,
-      changeProduct.brand,
-      changeProduct.condition,
-      changeProduct.description,
-      changeProduct.purchasePrice,
-      changeProduct.salePrice,
-      changeProduct.minStock,
-      changeProduct.provider,
-      changeProduct.stock,
-      changeProduct.images,
-    );
-    setErrors(errors);
+    // const errors = validateForm (
+    //   changeProduct.category,
+    //   changeProduct.name,
+    //   changeProduct.brand,
+    //   changeProduct.condition,
+    //   changeProduct.description,
+    //   changeProduct.purchasePrice,
+    //   changeProduct.salePrice,
+    //   changeProduct.minStock,
+    //   changeProduct.provider,
+    //   changeProduct.stock,
+    //   changeProduct.images,
+    // );
+    // setErrors(errors);
     
-    if (Object.keys(errors).length === 0) {
+    // if (Object.keys(errors).length === 0) {
       dispatch(editProduct(id, changeProduct));
       toast.success("¡Edit Product successfully!");
-      setErrors({});
-    } else { 
-      toast.error("Data must be filled Correctly")
-    }
+    //   setErrors({});
+    // } else { 
+    //   toast.error("Data must be filled Correctly")
+    // }
 
     // console.log("Datos enviados: ", changeProduct);   
     toast.success("¡Edit Product successfully!");
@@ -238,9 +238,9 @@ export const EditProduct = () => {
             value={changeProduct.brand}
             onChange={handleChange}
           />
-          {errors.brand && (
+          {/* {errors.brand && (
             <p className={styles.error}>{errors.brand}</p>
-          )}
+          )} */}
           <select
   className="form-control mb-3 w-50 d-end"
   name="condition"
@@ -283,9 +283,9 @@ export const EditProduct = () => {
             placeholder="Enter product description..."
             style={{ height: "130px", marginBottom: "4rem" }}
           />
-          {errors.description && (
+          {/* {errors.description && (
             <p className={styles.error}>{errors.description}</p>
-          )}
+          )} */}
           {/* precio de compra de Producto */}
           <div className="d-flex g-3">
             <div className="input-group">
@@ -300,9 +300,9 @@ export const EditProduct = () => {
               <span className="input-group-text mb-3">$</span>
               {/* <span className="input-group-text mb-3">0.00</span> */}
             </div>
-            {errors.purchasePrice && (
+            {/* {errors.purchasePrice && (
               <p className={styles.error}>{errors.purchasePrice}</p>
-            )}
+            )} */}
             {/* precio de venta de Producto */}
 
             <div className="input-group">
@@ -317,9 +317,9 @@ export const EditProduct = () => {
               <span className="input-group-text mb-3">$</span>
               {/* <span className="input-group-text mb-3">0.00</span> */}
             </div>
-            {errors.salePrice && (
+            {/* {errors.salePrice && (
               <p className={styles.error}>{errors.salePrice}</p>
-            )}
+            )} */}
           </div>
 
           {/* stock minimo de Producto */}
@@ -331,9 +331,9 @@ export const EditProduct = () => {
             value={changeProduct.minStock}
             onChange={handleChange}
           />
-          {errors.minStock && (
+          {/* {errors.minStock && (
             <p className={styles.error}>{errors.minStock}</p>
-          )}
+          )} */}
           {/* Proveedor */}
           <div className="container-m">
             <select
@@ -381,9 +381,9 @@ export const EditProduct = () => {
                 );
               })}
             </div>
-            {errors.provider && (
+            {/* {errors.provider && (
               <p className={styles.error}>{errors.provider}</p>
-            )}
+            )} */}
             {/* stock minimo de Producto */}
             <input
               className="form-control mb-3"
@@ -393,9 +393,9 @@ export const EditProduct = () => {
               value={changeProduct.stock}
               onChange={handleChange}
             />
-            {errors.stock && (
+            {/* {errors.stock && (
               <p className={styles.error}>{errors.stock}</p>
-            )}
+            )} */}
             <div>
               <div className="d-flex align-items-center">
                 <div>
@@ -440,9 +440,9 @@ export const EditProduct = () => {
                   <br />
                 </div>
               </div>
-              {errors.images && (
+              {/* {errors.images && (
                 <p className={styles.error}>{errors.images}</p>
-              )}
+              )} */}
             </div>
           </div>
           <button type="submit" className={styles.create}>

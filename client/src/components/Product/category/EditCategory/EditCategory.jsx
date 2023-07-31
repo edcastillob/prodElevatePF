@@ -45,25 +45,25 @@ export const EditCategory = () => {
     event.preventDefault();
     // console.log(editCategory);
 
-    const errors = validateForm (
-      editCategory.name,
-      editCategory.description
-    );
-    setErrors(errors);
+    // const errors = validateForm (
+    //   editCategory.name,
+    //   editCategory.description
+    // );
+    // setErrors(errors);
 
-    if (Object.keys(errors).length === 0) {
+    // if (Object.keys(errors).length === 0) {
       dispatch(categoryEdit(id, editCategory));
       toast.success("¡Updated successfully!"); 
-      setErrors({});
-      navigate("/settings");
-    } else {
-      toast.error("Data must be filled Correctly");
-    }
+      // setErrors({});
+      navigate("/dashboard");
+    // } else {
+    //   toast.error("Data must be filled Correctly");
+    // }
 
 
-    dispatch(categoryEdit(id, editCategory));
-    toast.success("¡Updated successfully!");
-    navigate("/dashboard");
+    // dispatch(categoryEdit(id, editCategory));
+    // toast.success("¡Updated successfully!");
+    // navigate("/dashboard");
   };
   // console.log("Edit category: ", editCategory);
   return (
@@ -93,9 +93,9 @@ export const EditCategory = () => {
             value={editCategory.name}
             onChange={handleChange}
           />
-      {errors.name && (
+      {/* {errors.name && (
         <p className={styles.error}>{errors.name}</p>
-      )}
+      )} */}
           {/* Descripcion de categoria */}
           <textarea
             type="textarea"
@@ -111,11 +111,11 @@ export const EditCategory = () => {
             value={editCategory.description}
             onChange={handleChange}
           />
-        {errors.description && (
+        {/* {errors.description && (
         <p className={styles.error}>{errors.description}</p>
-      )}
+      )} */}
         <br />
-          <button className={styles.create}>Update</button>
+          <button className={styles.create}>Update Category</button>
         </form>
       </div>
     </div>

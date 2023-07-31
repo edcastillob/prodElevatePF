@@ -110,6 +110,7 @@ function App() {
           <Route exact path="/proveedor" element={<ProvidersAll />} />
           <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
+          <Route exact path="/categoryedit/:id" element={<EditCategory />} />
           <Route exact path="/settings_product" element={<SettingsProduct />} />
           <Route
             exact
