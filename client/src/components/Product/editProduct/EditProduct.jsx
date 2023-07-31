@@ -151,6 +151,7 @@ export const EditProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     // console.log("Datos enviados: ", changeProduct);
     const errors = validateForm (
       changeProduct.category,
@@ -174,6 +175,11 @@ export const EditProduct = () => {
     } else { 
       toast.error("Data must be filled Correctly")
     }
+
+    // console.log("Datos enviados: ", changeProduct);   
+    toast.success("¡Edit Product successfully!");
+    navigate('/home')
+
   };
 
   // console.log("productDetail: ", productDetail);
@@ -182,10 +188,13 @@ export const EditProduct = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.divLeft}>
+      
         <hr />
         {/* Formulario */}
         <form onSubmit={handleSubmit} className={styles.form}>
+        <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
+          Edit product
+        </h5>
           {/* Categoria de Producto */}
           <div className="d-flex justify-content-around">
             <select
@@ -437,11 +446,10 @@ export const EditProduct = () => {
               )}
             </div>
           </div>
-          <button type="submit" class="btn btn-dark">
-            edit product
+          <button type="submit" className={styles.create}>
+            Update product
           </button>
         </form>
       </div>
-    </div>
   );
 };

@@ -44,6 +44,7 @@ export const EditCategory = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log(editCategory);
+
     const errors = validateForm (
       editCategory.name,
       editCategory.description
@@ -58,6 +59,11 @@ export const EditCategory = () => {
     } else {
       toast.error("Data must be filled Correctly");
     }
+
+
+    dispatch(categoryEdit(id, editCategory));
+    toast.success("¡Updated successfully!");
+    navigate("/dashboard");
 
   };
   // console.log("Edit category: ", editCategory);
