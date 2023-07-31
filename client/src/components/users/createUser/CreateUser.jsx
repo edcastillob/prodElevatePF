@@ -3,10 +3,10 @@ import { UploadImg } from "../../Product/uploadImg/UploadImg";
 import styles from "./CreateUser.module.css";
 import prueba from "../../../assets/prueba.jpg";
 import logo from "../../../assets/logo_2.png";
-import facebook from "../../../assets/facebook.png";
 import google from "../../../assets/google.png";
 import validate from "./validation";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../../redux/actions/actions";
 import { useNavigate } from "react-router-dom";
@@ -45,13 +45,13 @@ export const CreateUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (Object.keys(errors).length > 0) {
-      alert(
-        "fill in the fields correctly before sending the information."
+      toast.error(
+        "Fill in the fields correctly before sending the information."
       );
       return;
     }
     dispatch(addUser(userData));
-    alert("Exito");
+    toast.success("¡User created successfully!");
     navigate("/login");
   };
 
@@ -169,7 +169,7 @@ export const CreateUser = () => {
                 )}
               </div>
               {/* _____________CONFIRM PASSWORD________________ */}
-              <div className={`${styles.field} ${styles["input-field"]} mb-3`}>
+              <div className={`${styles.field} ${styles["input-field"]} mb-4`}>
                 <input
                   type="password"
                   name="confirmPassword"

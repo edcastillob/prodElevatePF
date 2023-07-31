@@ -82,7 +82,7 @@ export const EditUser = () => {
     // console.log("Datos enviados: ", changeUser);
     dispatch(editUser(id, changeUser));
     toast.success("¡Edit user successfully!");
-    navigate("/usuario");
+    navigate("/dashboard");
   };
 
   const handleRemoveImage = () => {
@@ -101,82 +101,82 @@ export const EditUser = () => {
 
   return (
     <div className={styles.container}>
-      <h4>Edit User</h4>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <h4 style={{ fontFamily: "Poppins" }}>Edit User</h4>
         {/* _____________NAME________________ */}
-        <div className={`${styles.field} ${styles["input-field"]}`}>
+        
           <input
             type="text"
             name="name"
             placeholder="Fullname"
-            className={`form-control ${errors.name && "is-invalid"}`}
+            className={`form-control mb-3 w-75 ${errors.name && "is-invalid"}`}
             onChange={handleChange}
             value={changeUser.name}
           />
           {errors.name && <div className="invalid-feedback">{errors.name}</div>}
-        </div>
+        
         {/* _____________EMAIL________________ */}
-        <div className={`${styles.field} ${styles["input-field"]}`}>
+       
           <input
             type="email"
             name="email"
             placeholder="Email"
-            className={`form-control ${errors.email && "is-invalid"}`}
+            className={`form-control mb-3 w-75 ${errors.email && "is-invalid"}`}
             onChange={handleChange}
             value={changeUser.email}
           />
           {errors.email && (
             <div className="invalid-feedback">{errors.email}</div>
           )}
-        </div>
+        
         {/* _____________ID________________ */}
-        <div className={`${styles.field} ${styles["input-field"]}`}>
+        
           <input
             type="text"
             name="identification"
             placeholder="Document ID"
-            className={`form-control ${errors.identification && "is-invalid"}`}
+            className={`form-control mb-3 w-75 ${errors.identification && "is-invalid"}`}
             onChange={handleChange}
             value={changeUser.identification}
           />
           {errors.identification && (
             <div className="invalid-feedback">{errors.identification}</div>
           )}
-        </div>
+      
         {/* _____________PHONE NUMBER________________ */}
-        <div className={`${styles.field} ${styles["input-field"]}`}>
+        
           <input
             type="text"
             name="numPhone"
             placeholder="Phone N°"
-            className={`form-control ${errors.numPhone && "is-invalid"}`}
+            className={`form-control mb-3 w-75 ${errors.numPhone && "is-invalid"}`}
             onChange={handleChange}
             value={changeUser.numPhone}
           />
           {errors.numPhone && (
             <div className="invalid-feedback">{errors.numPhone}</div>
           )}
-        </div>
+       
         {/* _____________ADDRESS________________ */}
-        <div className={`${styles.field} ${styles["input-field"]}`}>
+        
           <input
             type="text"
             name="address"
             placeholder="Address"
-            className={`form-control ${errors.address && "is-invalid"}`}
+            className={`form-control mb-3 w-75 ${errors.address && "is-invalid"}`}
             onChange={handleChange}
             value={changeUser.address}
           />
           {errors.address && (
             <div className="invalid-feedback">{errors.address}</div>
           )}
-        </div>
+       
 
         {/* Estado del usuario */}
-        <div className={`${styles.field} ${styles["input-field"]}`}>
+        
           <select
-            className="form-control mb-3 w-100"
+            className="form-control mb-3 w-75"
             name="isActive"
             value={changeUser.isActive}
             onChange={handleChange}
@@ -184,7 +184,6 @@ export const EditUser = () => {
             <option value="t">Activo</option>
             <option value="f">Inactivo</option>
           </select>
-        </div>
         <br />
 
         <div className="d-flex align-items-center">
@@ -248,8 +247,8 @@ export const EditUser = () => {
         <br />
         <br />
 
-        <button type="submit" class="btn btn-dark">
-          edit user
+        <button type="submit" className={styles.create}>
+          Update User
         </button>
       </form>
     </div>

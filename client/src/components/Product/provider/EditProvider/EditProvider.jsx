@@ -7,12 +7,13 @@ import styles from "./EditProvider.module.css";
 import ReactQuill from "react-quill";
 // import loadingImg from "../../../assets/loading.png";
 import "react-quill/dist/quill.snow.css";
-import { useParams } from "react-router-dom";
+import {  useNavigate,useParams } from "react-router-dom";
 import { editProvider, getProviderId } from "../../../../redux/actions/actions";
 
 export const EditProvider = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate()
   const { id } = params;
   useEffect(() => {
     dispatch(getProviderId(id));
@@ -75,11 +76,12 @@ export const EditProvider = () => {
     // console.log("Datos enviados: ", changeProvider);
     dispatch(editProvider(id, changeProvider));
     toast.success("¡Edit Provider successfully!");
+    navigate("/dashboard");
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.divLeft}>
+      
         <form onSubmit={handleSubmit} className={styles.formContainer}>
           <h4 style={{ fontFamily: "Poppins" }}>Edit Provider</h4>
 
@@ -156,10 +158,9 @@ export const EditProvider = () => {
 
           <br />
 
-          <button className={styles.create}>update</button>
+          <button className={styles.create}>Update Provider</button>
         </form>
       </div>
-      <div className={styles.divRight}></div>
-    </div>
+    
   );
 };
