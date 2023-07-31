@@ -53,7 +53,7 @@ export const SettingsProduct = () => {
       <h2 style={{ fontFamily: "Poppins" }}>Products Administration</h2>
       <input
         type="text"
-        className="form-control w-25"
+        className="form-control w-25 h-50"
         placeholder="Search product"
         value={searchProducts}
         onChange={(event) => setSearchProducts(event.target.value)}

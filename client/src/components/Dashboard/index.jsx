@@ -128,7 +128,7 @@ const Panel = () => {
               </a>
             </li> */}
 
-
+{/* 
             <li>
               <a href="#" onClick={() => setView("reviews")}>
                 <span className={styles.icon}>
@@ -136,7 +136,7 @@ const Panel = () => {
                 </span>
                 <span className={styles.titles}>Reviews</span>
               </a>
-            </li>
+            </li> */}
 
             {/* <li>
               <a href="#" onClick={() => setView("orders")}>

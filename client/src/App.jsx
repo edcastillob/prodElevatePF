@@ -22,6 +22,7 @@ import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import Favorites from "./components/Favorites/Favorites";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
@@ -37,7 +38,12 @@ import { AboutUs } from "./components/AboutUs/AboutUs";
 import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { TermsConditions } from "./components/TermsConditions/TermsConditions";
 import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
+<<<<<<< HEAD
 import { PostCompra } from './components/PostCompra/PostCompra';
+=======
+import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
+
+>>>>>>> c17622914d25c70838d49a2f41ae1b44626f352c
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -110,6 +116,7 @@ function App() {
           <Route exact path="/proveedor" element={<ProvidersAll />} />
           <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
+          <Route exact path="/categoryedit/:id" element={<EditCategory />} />
           <Route exact path="/settings_product" element={<SettingsProduct />} />
           <Route
             exact
@@ -124,6 +131,8 @@ function App() {
           )}
           <Route path="/dashboard" element={<Panel />} />
           {/* <Route path="/chat/" element={<Chat />} /> */}
+
+          <Route path="/thankyoupage" element={<ThankYouPage />} />
         </Routes>
         <ToastContainer
           position="top-center"
