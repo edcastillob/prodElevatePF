@@ -65,6 +65,12 @@
     width: 200px;
   }
 
+  .error { 
+    color: red;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+
   .create{
     border: 1px solid #cacaca;
     width: 30%;
@@ -80,4 +86,5 @@
         transition: .3s;
     }
     
+
 }
