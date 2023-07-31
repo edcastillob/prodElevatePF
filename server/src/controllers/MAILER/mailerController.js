@@ -53,8 +53,8 @@ const sendMailer = async (product) => {
 
     const message = {
       from: "prodelevatepf@gmail.com", // sender address
-      to: 'edwar.castillo@gmail.com', // list of receivers
-      subject: "Notificación de Stock Mínimo", // Subject line
+      to: 'luisnaveda10@gmail.com', // list of receivers
+      subject: "Notificación de Creación de Producto", // Subject line
       // text: "Hello world?", // plain text body
       // html: "<b>Hello world  test</b>", // html body
       html: mail

@@ -78,37 +78,37 @@ export const EditProvider = () => {
     event.preventDefault();
     // console.log("Datos enviados: ", changeProvider);
 
-    const errors = validateForm (
-      changeProvider.name,
-      changeProvider.email,
-      changeProvider.identification,
-      changeProvider.address,
-      changeProvider.isActive,
-      changeProvider.numPhone,
-      changeProvider.country
-    );
-    setErrors(errors);
+    // const errors = validateForm (
+    //   changeProvider.name,
+    //   changeProvider.email,
+    //   changeProvider.identification,
+    //   changeProvider.address,
+    //   changeProvider.isActive,
+    //   changeProvider.numPhone,
+    //   changeProvider.country
+    // );
+    // setErrors(errors);
 
-    if (Object.keys(errors).length === 0) {
+    // if (Object.keys(errors).length === 0) {
       dispatch(editProvider(id, changeProvider));
       toast.success("¡Edit Provider successfully!");
-      setChangeProvider({
-        address: "",
-        email: "",
-        identification: "",
-        isActive: "",
-        name: "",
-        numPhone:"",  
-      });
-      setErrors({});
-    } else {
-      toast.error("Data must be filled Correctly")
-    }
+      
+      // setChangeProvider({
+        //   address: "",
+        //   email: "",
+        //   identification: "",
+        //   isActive: "",
+        //   name: "",
+        //   numPhone:"",  
+        // });
+        // setErrors({});
+        navigate("/dashboard");
+    // } else {
+    //   toast.error("Data must be filled Correctly")
+    // }
 
-    dispatch(editProvider(id, changeProvider));
-    toast.success("¡Edit Provider successfully!");
-    navigate("/dashboard");
-
+    // dispatch(editProvider(id, changeProvider));
+    // toast.success("¡Edit Provider successfully!");
   };
 
   return (
@@ -127,9 +127,9 @@ export const EditProvider = () => {
             value={changeProvider.name}
             onChange={handleChange}
           />
-      {errors.name && (
+      {/* {errors.name && (
         <p className={styles.error}>{errors.name}</p>
-      )}
+      )} */}
 
           {/* identificacion DNI RIF  de proveedor */}
           <input
@@ -140,9 +140,9 @@ export const EditProvider = () => {
             value={changeProvider.identification}
             onChange={handleChange}
           />
-      {errors.identification && (
+      {/* {errors.identification && (
         <p className={styles.error}>{errors.identification}</p>
-      )}
+      )} */}
 
           {/* email  de proveedor */}
           <input
@@ -153,9 +153,9 @@ export const EditProvider = () => {
             value={changeProvider.email}
             onChange={handleChange}
           />
-      {errors.email && (
+      {/* {errors.email && (
         <p className={styles.error}>{errors.email}</p>
-      )}
+      )} */}
 
           {/* direccion de proveedor */}
           <input
@@ -166,9 +166,9 @@ export const EditProvider = () => {
             value={changeProvider.address}
             onChange={handleChange}
           />
-      {errors.address && (
+      {/* {errors.address && (
         <p className={styles.error}>{errors.address}</p>
-      )}
+      )} */}
 
           {/* numero telef de proveedor */}
           <input
@@ -179,9 +179,9 @@ export const EditProvider = () => {
             value={changeProvider.numPhone}
             onChange={handleChange}
           />
-          {errors.numPhone && (
+          {/* {errors.numPhone && (
             <p className={styles.error}>{errors.numPhone}</p>
-          )}
+          )} */}
           {/* Country proveedor */}
           <input
             className="form-control mb-3 w-75"
@@ -191,9 +191,9 @@ export const EditProvider = () => {
             value={changeProvider.country}
             onChange={handleChange}
           />
-          {errors.country && (
+          {/* {errors.country && (
             <p className={styles.error}>{errors.country}</p>
-          )}
+          )} */}
 
           {/* Estado del proveedor */}
           <select
@@ -205,9 +205,9 @@ export const EditProvider = () => {
             <option value="t">Activo</option>
             <option value="f">Inactivo</option>
           </select>
-{errors.isActive && (
+{/* {errors.isActive && (
   <p className={styles.error}>{errors.isActive}</p>
-)}
+)} */}
 
           <br />
 

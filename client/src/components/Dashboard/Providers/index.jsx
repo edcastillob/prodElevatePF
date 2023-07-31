@@ -63,7 +63,8 @@ const Providers = ({ toggleActive }) => {
 
       <input
         type="text"
-        className="form-control w-25 h-25"
+        className="form-control h-50 w-25"
+        style={{height:'50px'}}
         placeholder="Search provider"
         value={searchProvider}
         onChange={(event) => setSearchProvider(event.target.value)}

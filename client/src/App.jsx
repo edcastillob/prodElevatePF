@@ -22,6 +22,7 @@ import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import Favorites from "./components/Favorites/Favorites";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
@@ -110,6 +111,7 @@ function App() {
           <Route exact path="/proveedor" element={<ProvidersAll />} />
           <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
           <Route exact path="/rol" element={<Role />} />
+          <Route exact path="/categoryedit/:id" element={<EditCategory />} />
           <Route exact path="/settings_product" element={<SettingsProduct />} />
           <Route
             exact
