@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {  categoryEdit, getCategoryId } from '../../../../redux/actions/actions';
 import styles from './EditCategory.module.css'
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import validateForm from './validation';
+import { toast } from 'react-toastify';
 
 export const EditCategory = () => {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ export const EditCategory = () => {
     name: category.name,
     description: category.description,
   });
+  const [errors, setErrors] = useState({});
   
   useEffect(() => {    
     dispatch(getCategoryId(id));
@@ -48,9 +51,21 @@ export const EditCategory = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(editCategory);
-    dispatch(categoryEdit(id, editCategory));
-    alert("successfully updated"); 
-    navigate("/settings");
+    const errors = validateForm (
+      editCategory.name,
+      editCategory.description
+    );
+    setErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(categoryEdit(id, editCategory));
+      toast.success("successfully updated"); 
+      setErrors({});
+      navigate("/settings");
+    } else {
+      toast.error("Data must be filled Correctly");
+    }
+
   };
   console.log("Edit category: ", editCategory)
   return (
@@ -71,7 +86,9 @@ export const EditCategory = () => {
         value={editCategory.name}
         onChange={handleChange}
       />
-
+      {errors.name && (
+        <p className={styles.error}>{errors.name}</p>
+      )}
        {/* Descripcion de categoria */}
        <label htmlFor="name">Description: </label>             
         <textarea
@@ -81,6 +98,9 @@ export const EditCategory = () => {
         value={editCategory.description}
         onChange={handleChange}
       />
+      {errors.description && (
+        <p className={styles.error}>{errors.description}</p>
+      )}
         <br />
         <button className={styles.btn}>Update Category</button> 
         </form>
