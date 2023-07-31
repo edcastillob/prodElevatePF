@@ -38,12 +38,9 @@ import { AboutUs } from "./components/AboutUs/AboutUs";
 import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { TermsConditions } from "./components/TermsConditions/TermsConditions";
 import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
-<<<<<<< HEAD
 import { PostCompra } from './components/PostCompra/PostCompra';
-=======
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
 
->>>>>>> c17622914d25c70838d49a2f41ae1b44626f352c
 function App() {
   const location = useLocation();
   const navigate = useNavigate();

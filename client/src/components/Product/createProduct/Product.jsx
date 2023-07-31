@@ -102,11 +102,7 @@ export const Product = () => {
     // );
     // setErrors(errors);
 
-<<<<<<< HEAD
-    if (Object.keys(errors).length === 0) {
-=======
     // if (Object.keys(product).length === 0) {
->>>>>>> c17622914d25c70838d49a2f41ae1b44626f352c
       dispatch(addProduct(product));
       toast.success("¡Product created successfully!");
       
