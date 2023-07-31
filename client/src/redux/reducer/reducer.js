@@ -33,6 +33,8 @@ import {
   GET_USER_ID,
   FILTER_DATA,
   FILTER_NAME,
+  GET_ALL_REVIEWS,
+
 } from "../actions/types";
 
 const initialState = {
@@ -357,6 +359,12 @@ function reducer(state = initialState, actions) {
         ...state,
         products: actions.payload,
       };
+      case GET_ALL_REVIEWS :
+        return {
+            ...state,
+            productReviews: actions.payload
+        }
+       
 
     default:
       return state;

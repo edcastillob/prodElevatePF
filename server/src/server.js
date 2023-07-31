@@ -14,6 +14,7 @@ const bodyParser = require("body-parser");
 // const { Server } = require('socket.io');
 
 const server = express();
+server.use(cors());
 server.use(bodyParser.json({ limit: "3mb" }));
 server.use(bodyParser.urlencoded({ limit: "3mb", extended: true }));
 
@@ -118,7 +119,17 @@ passport.deserializeUser(function (id, done) {
 
 // server.set('views', __dirname + '/views');
 // server.set('view engine', 'ejs');
+const reviewsRoute = require ('./routes/review');
 
+
+server.use((req, res, next) => {
+  if (req.method === 'GET') {
+    res.setHeader('Cache-Control', 'no-store');
+  }
+  next();
+});
+
+server.use("/reviews", reviewsRoute);
 server.use(router);
 
 // // Configurando el Socket Server - P2

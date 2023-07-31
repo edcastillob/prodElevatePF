@@ -34,10 +34,13 @@ import {
   GET_USER_ID,
   FILTER_DATA,
   FILTER_NAME,
+  GET_USER_REVIEWS,
+  GET_ALL_REVIEWS,
+  ADD_REVIEW,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { toast } from "react-toastify";
 
 export const showProducts = () => {
@@ -480,6 +483,50 @@ export const filterData = (filters) => {
       });
     } catch (error) {
       window.alert(error);
+    }
+  };
+};
+//Reviews
+export const postReview = (reviewData) => {
+  return async function (dispatch) {
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+     
+      if (!user) {
+        console.error('Usuario no autenticado');
+        throw new Error('Usuario no autenticado'); 
+      }
+
+    
+      const token = await user.getIdToken();
+
+      
+      const userId = user.uid; 
+
+      
+      const response = await axios.post(`${ENDPOINT}reviews/Create`, reviewData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error('Error en la acción postReview:', error);
+      throw new Error('Error al crear la reseña');
+    }
+  };
+};
+export const getProductReviews = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`${ENDPOINT}reviews/product/${id}`);
+      return dispatch({ type: GET_ALL_REVIEWS, payload: response.data });
+    } catch (error) {
+      console.error('Error al obtener las reseñas del producto:', error);
+      
     }
   };
 };

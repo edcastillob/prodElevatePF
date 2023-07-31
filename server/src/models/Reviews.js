@@ -1,22 +1,22 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('review', { 
+  // defino el modelo
+  sequelize.define('review', {
     score: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
+      type: DataTypes.FLOAT,
+      allowNull: false,
     },
-    comment: {
+    title: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    date: {
-        type: DataTypes.DATEONLY,
-        allowNull: false
+    text: {
+      type: DataTypes.TEXT
     },
-    isActive: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
-    }
-  }, { timestamps: false });
+    userId: {
+      type: DataTypes.TEXT, 
+      allowNull: false,
+    },
+  });
 };
