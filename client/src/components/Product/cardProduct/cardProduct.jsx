@@ -38,7 +38,6 @@ export const CardProduct = ({ product }) => {
     } else {
       setIsFav(true);
       dispatch(addFav(productWithUser));
-      navigate("/favorites");
     }
   };
 
@@ -70,23 +69,28 @@ export const CardProduct = ({ product }) => {
     ...product,
     user: currentUser
       ? currentUser.uid
-      : "3da16669-2425-4b38-a7d5-40ce000558d7",
+      : "ed047b85-67d9-4a90-a461-b4ad1e2036e3",
   };
 
   return (
     <div className={styles.cardContainer}>
-      
-        
-      
       <Link
         title="Detail Product"
         to={`/productid/${id}`}
         className={styles.link}
       >
         {isFav ? (
-          <button className={styles.favButton} onClick={handleFavorite}><h3 style={{color:'#000924'}}><ion-icon name="heart"></ion-icon></h3></button>
+          <button className={styles.favButton} onClick={handleFavorite}>
+            <h3 style={{ color: "#000924" }}>
+              <ion-icon name="heart"></ion-icon>
+            </h3>
+          </button>
         ) : (
-          <button className={styles.favButton} onClick={handleFavorite}><h3><ion-icon name="heart-empty"></ion-icon></h3></button>
+          <button className={styles.favButton} onClick={handleFavorite}>
+            <h3>
+              <ion-icon name="heart-empty"></ion-icon>
+            </h3>
+          </button>
         )}
         <div className={styles.divImg}>
           <img className={styles.img} src={images} alt="product" />

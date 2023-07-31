@@ -28,7 +28,7 @@ const Favorites = () => {
       <h2>Favorites</h2>
       {favorites.length === 0 ? (
         <div className={styles.cartEmpty}>
-          <p>Your Cart esta vacio</p>
+          <p>You have no added favorites</p>
           <div className={styles.startShoping}>
             <Link to="/home">
               <svg
