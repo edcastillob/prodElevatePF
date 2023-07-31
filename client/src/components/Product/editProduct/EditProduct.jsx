@@ -35,6 +35,8 @@ export const EditProduct = () => {
   const [changeProduct, setChangeProduct] = useState({
     category: productDetail.categoryId,
     name: productDetail.name,
+    brand: productDetail.brand,
+    condition: productDetail.condition,
     description: productDetail.description,
     purchasePrice: productDetail.purchasePrice,
     salePrice: productDetail.salePrice,
@@ -54,6 +56,8 @@ export const EditProduct = () => {
     if (
       productDetail.categoryId &&
       productDetail.name &&
+      productDetail.brand &&
+      productDetail.condition &&
       productDetail.description &&
       productDetail.purchasePrice &&
       productDetail.salePrice &&
@@ -65,6 +69,8 @@ export const EditProduct = () => {
       setChangeProduct({
         category: productDetail.categoryId,
         name: productDetail.name,
+        brand: productDetail.brand,
+        condition: productDetail.condition,
         description: productDetail.description,
         purchasePrice: productDetail.purchasePrice,
         salePrice: productDetail.salePrice,
@@ -77,6 +83,8 @@ export const EditProduct = () => {
   }, [
     productDetail.categoryId,
     productDetail.name,
+    productDetail.brand,
+    productDetail.condition,
     productDetail.description,
     productDetail.purchasePrice,
     productDetail.salePrice,
@@ -186,6 +194,35 @@ export const EditProduct = () => {
             onChange={handleChange}
             defaultValue={productDetail.name}
           />
+          <div className="d-flex justify-content-around">
+            {/* brand de Producto */}
+            <input
+              className="form-control mb-3 w-50 d-end"
+              type="text"
+              name="brand"
+              placeholder="Product brand"
+              value={changeProduct.brand}
+              onChange={handleChange}
+            />
+            {/* {errors.brand && (
+              <p className={styles.error}>{errors.brand}</p>
+          )} */}
+            <select
+              className="form-control mb-3 w-50 d-end"
+              name="condition"
+              value={changeProduct.condition}
+              onChange={handleChange}
+            >
+              <option value="">Select condition</option>
+              <option value="Brand New">Brand New</option>
+              <option value="Used">Used</option>
+              <option value="Like New">Like New</option>
+            </select>
+            {/* {errors.condition && (
+              <p className={styles.error}>{errors.condition}</p>
+            )} */}
+          </div>
+
           {/* Descripcion de Producto */}
 
           <ReactQuill
@@ -213,6 +250,7 @@ export const EditProduct = () => {
             placeholder="Enter product description..."
             style={{ height: "130px", marginBottom: "4rem" }}
           />
+
           {/* precio de compra de Producto */}
           <div className="d-flex g-3">
             <div className="input-group">
@@ -227,6 +265,7 @@ export const EditProduct = () => {
               <span className="input-group-text mb-3">$</span>
               {/* <span className="input-group-text mb-3">0.00</span> */}
             </div>
+
             {/* precio de venta de Producto */}
 
             <div className="input-group">
@@ -252,6 +291,7 @@ export const EditProduct = () => {
             value={changeProduct.minStock}
             onChange={handleChange}
           />
+
           {/* Proveedor */}
           <div className="container-m">
             <select
@@ -299,6 +339,7 @@ export const EditProduct = () => {
                 );
               })}
             </div>
+
             {/* stock minimo de Producto */}
             <input
               className="form-control mb-3"
@@ -355,7 +396,7 @@ export const EditProduct = () => {
             </div>
           </div>
           <button type="submit" class="btn btn-dark">
-            edit product
+            Update product
           </button>
         </form>
       </div>
