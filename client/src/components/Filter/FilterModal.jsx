@@ -9,6 +9,7 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
   const category = useSelector((state) => state.category);
 
 
+
   const [filters, setFilters] = useState({
     minPrice: "",
     maxPrice: "",
@@ -31,7 +32,10 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
 
   const conditionOptions = ["Brand New", "Used", "Like New"];
 
+
+
  console.log(filters)
+
 
   return (
     <>
@@ -60,18 +64,9 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                 value={filters.maxPrice}
                 onChange={handleInputChange}
               ></Form.Control>
-            </Form.Group>
+            </Form.Group>      
 
-            {/* <Form.Group controlId="formCategory">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="introduce la categoria"
-                name="category"
-                value={filters.category}
-                onChange={handleInputChange}
-              ></Form.Control>
-            </Form.Group> */}
+
              
             <Form.Group controlId="formCategory">
               <Form.Label>Category</Form.Label>
@@ -88,10 +83,8 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                   </option>
                 ))}
               </Form.Control>
-              </Form.Group>
+              </Form.Group>            
 
-
-            
             <Form.Group controlId="formBrand">
               <Form.Label>Brand</Form.Label>
               <Form.Control
