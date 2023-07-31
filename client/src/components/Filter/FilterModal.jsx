@@ -1,7 +1,21 @@
+
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const FilterModal = ({ show, handleClose, handleFilter }) => {
+
+import React, { useEffect, useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategory } from "../../redux/actions/actions";
+
+const FilterModal = ({ show, handleClose, handleFilter }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {dispatch(getCategory())}, []);
+  const category = useSelector((state) => state.category);
+
+
+
   const [filters, setFilters] = useState({
     minPrice: "",
     maxPrice: "",
@@ -23,6 +37,11 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
   };
 
   const conditionOptions = ["Brand New", "Used", "Like New"];
+
+
+
+ console.log(filters)
+
 
   return (
     <>
@@ -52,16 +71,28 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
+
+            <Form.Group controlId="formCategory">
+
+
+             
             <Form.Group controlId="formCategory">
               <Form.Label>Category</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="introduce la categoria"
+                as="select"
                 name="category"
                 value={filters.category}
                 onChange={handleInputChange}
-              ></Form.Control>
-            </Form.Group>
+              >
+                <option value="">Selecciona una opción</option>
+                {category.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Form.Control>
+              </Form.Group>            
+
             <Form.Group controlId="formBrand">
               <Form.Label>Brand</Form.Label>
               <Form.Control
