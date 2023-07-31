@@ -1,4 +1,4 @@
-const { Favorite } = require("../../db");
+const { Favorite, User } = require("../../db");
 
 const postFavorite = async (req, res) => {
   console.log(req.body);
@@ -7,6 +7,7 @@ const postFavorite = async (req, res) => {
   if (!name || !description || !salePrice || !images || !stock || !isActive) {
     return res.status(401).send("Faltan datos");
   }
+
 
   try {
     const favorite = await Favorite.create({
@@ -20,6 +21,7 @@ const postFavorite = async (req, res) => {
     });
 
     await favorite.addUser(user);
+  
 
     const allFav = await Favorite.findAll();
     return res.status(201).json(allFav);

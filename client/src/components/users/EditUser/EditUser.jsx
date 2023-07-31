@@ -114,7 +114,7 @@ export const EditUser = () => {
             onChange={handleChange}
             value={changeUser.name}
           />
-          {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+          {/* {errors.name && <div className="invalid-feedback">{errors.name}</div>} */}
         
         {/* _____________EMAIL________________ */}
        
@@ -126,9 +126,9 @@ export const EditUser = () => {
             onChange={handleChange}
             value={changeUser.email}
           />
-          {errors.email && (
+          {/* {errors.email && (
             <div className="invalid-feedback">{errors.email}</div>
-          )}
+          )} */}
         
         {/* _____________ID________________ */}
         
@@ -140,9 +140,9 @@ export const EditUser = () => {
             onChange={handleChange}
             value={changeUser.identification}
           />
-          {errors.identification && (
+          {/* {errors.identification && (
             <div className="invalid-feedback">{errors.identification}</div>
-          )}
+          )} */}
       
         {/* _____________PHONE NUMBER________________ */}
         
@@ -154,9 +154,9 @@ export const EditUser = () => {
             onChange={handleChange}
             value={changeUser.numPhone}
           />
-          {errors.numPhone && (
+          {/* {errors.numPhone && (
             <div className="invalid-feedback">{errors.numPhone}</div>
-          )}
+          )} */}
        
         {/* _____________ADDRESS________________ */}
         
@@ -168,9 +168,9 @@ export const EditUser = () => {
             onChange={handleChange}
             value={changeUser.address}
           />
-          {errors.address && (
+          {/* {errors.address && (
             <div className="invalid-feedback">{errors.address}</div>
-          )}
+          )} */}
        
 
         {/* Estado del usuario */}

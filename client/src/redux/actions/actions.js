@@ -416,11 +416,11 @@ export const clearCart = () => {
 };
 
 export const addFav = (product) => {
-  const endpoint = "http://localhost:3001/favorite";
+  const endpoint = `${ENDPOINT}favorite`;
   return async (dispatch) => {
     try {
-      console.log(product);
-      const { data } = await axios.post("http://localhost:3001/favorite", product);
+      // console.log(product);
+      const { data } = await axios.post(endpoint, product);
       return dispatch({
         type: ADD_FAV,
         payload: data,
@@ -432,7 +432,8 @@ export const addFav = (product) => {
 };
 
 export const removeFav = (id) => {
-  const endpoint = `http://localhost:3001/favorite/${id}`;
+  const endpoint = `${ENDPOINT}favorite/${id}`;
+
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(endpoint);
@@ -473,7 +474,10 @@ export const filterNameAsc = () => {
 };
 
 export const filterData = (filters) => {
-  const endpoint = "http://localhost:3001/filter/data";
+
+  const endpoint = `${ENDPOINT}filter/data`;
+
+
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, filters);

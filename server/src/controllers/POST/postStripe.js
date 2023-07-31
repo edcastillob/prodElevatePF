@@ -38,7 +38,7 @@ async function postStripe(req, res) {
         enabled: true,
       },
       mode: "payment",
-      success_url: `${YOUR_DOMAIN}/post-compra`,
+      success_url: `${YOUR_DOMAIN}/thankyoupage`,
       cancel_url: `${YOUR_DOMAIN}/cart`,
     });
 
