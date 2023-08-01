@@ -30,6 +30,9 @@ const { getProviderId } = require("../controllers/GET/getProviderId");
 const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
 
 const { getUserId } = require("../controllers/GET/getUserId");
+const { checkEmail } = require("../controllers/authGoogle");
+
+
 
 
 const router = Router();
@@ -90,6 +93,8 @@ router.get("/profile", isAuthenticated, (req, res) => {
     },
   });
 });
+
+router.post('/check-email', checkEmail);
 
 router.post("/role", postRole);
 

@@ -5,10 +5,10 @@ import { getCategory } from "../../redux/actions/actions";
 
 const FilterModal = ({ show, handleClose, handleFilter }) => {
   const dispatch = useDispatch();
-  useEffect(() => {dispatch(getCategory())}, []);
+  useEffect(() => {
+    dispatch(getCategory());
+  }, []);
   const category = useSelector((state) => state.category);
-
-
 
   const [filters, setFilters] = useState({
     minPrice: "",
@@ -31,11 +31,6 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
   };
 
   const conditionOptions = ["Brand New", "Used", "Like New"];
-
-
-
- console.log(filters)
-
 
   return (
     <>
@@ -64,10 +59,8 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                 value={filters.maxPrice}
                 onChange={handleInputChange}
               ></Form.Control>
-            </Form.Group>      
+            </Form.Group>
 
-
-             
             <Form.Group controlId="formCategory">
               <Form.Label>Category</Form.Label>
               <Form.Control
@@ -83,7 +76,7 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                   </option>
                 ))}
               </Form.Control>
-              </Form.Group>            
+            </Form.Group>
 
             <Form.Group controlId="formBrand">
               <Form.Label>Brand</Form.Label>

@@ -209,7 +209,8 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                     </h6>
                   </Link>
                 </li>
-                {/* <li>
+                
+                <li>
                   <h6
                     style={{
                       color: "black",
@@ -219,7 +220,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                   >
                     <ion-icon name="person"></ion-icon> Profile
                   </h6>
-                </li> */}
+                </li> 
                 {/* <li>
                   <Link
                     className={styles.icon}

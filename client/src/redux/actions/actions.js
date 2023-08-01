@@ -490,47 +490,14 @@ export const filterData = (filters) => {
     }
   };
 };
-//Reviews
-export const postReview = (reviewData) => {
-  return async function (dispatch) {
+
+export const checkEmailAndRegister = (userData) => {
+  return async (dispatch) => {
     try {
-      const auth = getAuth();
-      const user = auth.currentUser;
-
-     
-      if (!user) {
-        console.error('Usuario no autenticado');
-        throw new Error('Usuario no autenticado'); 
-      }
-
-    
-      const token = await user.getIdToken();
-
-      
-      const userId = user.uid; 
-
-      
-      const response = await axios.post(`${ENDPOINT}reviews/Create`, reviewData, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      return response.data;
+      const response = await axios.post(`${ENDPOINT}check-email`, userData);
     } catch (error) {
-      console.error('Error en la acción postReview:', error);
-      throw new Error('Error al crear la reseña');
+      console.error('Error checking email:', error);
     }
   };
 };
-export const getProductReviews = (id) => {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(`${ENDPOINT}reviews/product/${id}`);
-      return dispatch({ type: GET_ALL_REVIEWS, payload: response.data });
-    } catch (error) {
-      console.error('Error al obtener las reseñas del producto:', error);
-      
-    }
-  };
-};
+
