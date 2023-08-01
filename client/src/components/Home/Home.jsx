@@ -17,7 +17,7 @@ import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
 
-export const Home = () => {
+export const Home = ( { user, userLocal, handleSignIn  } ) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -145,7 +145,7 @@ export const Home = () => {
           ""
         )}
         {optionProducts?.map((product) => (
-          <CardProduct key={product.id} product={product} />
+          <CardProduct key={product.id} product={product}  />
         ))}
       </div>
     </div>

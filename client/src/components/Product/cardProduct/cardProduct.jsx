@@ -10,7 +10,7 @@ import {
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 
-export const CardProduct = ({ product }) => {
+export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isFav, setIsFav] = useState(false);
   const { id, name, images, salePrice, brand, condition, categoryId } = product;
@@ -97,19 +97,21 @@ export const CardProduct = ({ product }) => {
         </div>
       </Link>
       <div className={styles.description}>
-      {isFav ? (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3 style={{ color: "#000924" }}>
-              <ion-icon name="heart"></ion-icon>
-            </h3>
-          </button>
-        ) : (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3>
-              <ion-icon name="heart-empty"></ion-icon>
-            </h3>
-          </button>
-        )}
+      {
+          isFav ? (
+            <button className={styles.favButton} onClick={handleFavorite}>
+              <h3 style={{ color: "#000924" }}>
+                <ion-icon name="heart"></ion-icon>
+              </h3>
+            </button>
+          ) : (
+            <button className={styles.favButton} onClick={handleFavorite}>
+              <h3>
+                <ion-icon name="heart-empty"></ion-icon>
+              </h3>
+            </button>
+          )
+        }
         <h6 className={styles.title}>{name}</h6>
         <h6 className={styles.category}> {category}</h6>
         <span className={styles.priceLabel}>Brand</span>

@@ -102,7 +102,9 @@ function App() {
           <Route exact path="/contact" element={<ContactUs />} />
           <Route exact path="/dashboard" element={<Panel />} />
           <Route exact path="/favorites" element={<Favorites />} />
-          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/home" element={<Home user={currentUser}
+          userLocal={currentUserLocal}
+          handleSignIn={handleSignIn}/>} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
           <Route exact path="/productid/:id" element={<ProductDetail />} />
