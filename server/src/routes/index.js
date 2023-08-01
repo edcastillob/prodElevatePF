@@ -31,6 +31,9 @@ const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
 const getCommentsByProduct = require("../controllers/GET/getComment");
 const {createComment, createReply} = require("../controllers/POST/postComment")
 const { getUserId } = require("../controllers/GET/getUserId");
+const { checkEmail } = require("../controllers/authGoogle");
+
+
 
 
 const router = Router();
@@ -91,6 +94,8 @@ router.get("/profile", isAuthenticated, (req, res) => {
     },
   });
 });
+
+router.post('/check-email', checkEmail);
 
 router.post("/role", postRole);
 

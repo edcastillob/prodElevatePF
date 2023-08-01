@@ -81,19 +81,7 @@ export const CardProduct = ({ product }) => {
         to={`/productid/${id}`}
         className={styles.link}
       >
-        {/* {isFav ? (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3 style={{ color: "#000924" }}>
-              <ion-icon name="heart"></ion-icon>
-            </h3>
-          </button>
-        ) : (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3>
-              <ion-icon name="heart-empty"></ion-icon>
-            </h3>
-          </button>
-        )} */}
+
         <div className={styles.divImg}>
           <img className={styles.img} src={images} alt="product" />
         </div>
@@ -126,14 +114,6 @@ export const CardProduct = ({ product }) => {
         >
           Add to Cart
         </button>
-
-        {/* {currentUser && (
-          <Link title="Edit Product" to={`/productidedit/${id}`}>
-            <button className={styles.editProduct}>
-              <ion-icon name="create"></ion-icon>
-            </button>
-          </Link>
-        )} */}
       </div>
     </div>
   );

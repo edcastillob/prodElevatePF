@@ -1,9 +1,10 @@
 import axios from "axios";
+import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
 
 const StripeButton = ({ cartItems }) => {
   const handledCheckout = () => {
     axios
-      .post("http://localhost:3001/stripe/", {
+      .post(`${ENDPOINT}stripe/`, {
         cartItems,
       })
       .then((response) => {

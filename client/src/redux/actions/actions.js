@@ -590,3 +590,14 @@ export const getCommentsByProduct = (productId) => {
 export const updateCurrentUser = (user) => {
   return { type: UPDATE_CURRENT_USER, payload: user };
 };
+
+export const checkEmailAndRegister = (userData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${ENDPOINT}check-email`, userData);
+    } catch (error) {
+      console.error('Error checking email:', error);
+    }
+  };
+};
+
