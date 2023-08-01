@@ -27,7 +27,7 @@ async function postProvider(req, res) {
         rol: "Provider",
       });
     }
-
+    
     // Crear el proveedor y asociarlo al usuario creado o existente
     const newProvider = await Provider.create({
       name,
