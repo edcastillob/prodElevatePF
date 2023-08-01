@@ -1,8 +1,7 @@
-// En el componente CommentForm:
-
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createComment,updateCurrentUser} from "../../redux/actions/actions";
+import { createComment } from "../../redux/actions/actions";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Box, TextField, Button } from "@mui/material";
 
 const CommentForm = ({ productId }) => {
@@ -11,40 +10,34 @@ const CommentForm = ({ productId }) => {
     productId: productId,
     text: "",
   });
+  const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
-  const { users, currentUser } = useSelector((state) => state); // Obtén la lista de usuarios locales y el usuario autenticado con Firebase desde el estado de Redux
+  const user = useSelector((state) => state.users); // Obtén el usuario desde Redux (puede ser de Firebase o de la base de datos local)
 
   useEffect(() => {
-    // Cuando se monta el componente, verificamos si el usuario está autenticado con Firebase y si sí, actualizamos el estado de Redux con los datos del usuario.
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      dispatch(updateCurrentUser(user || null));
+      setCurrentUser(user || null);
     });
 
     return () => unsubscribe();
-  }, [dispatch]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInput((prevInput) => ({
-      ...prevInput,
-      [name]: value,
-    }));
-  };
+  }, []); // Solo se ejecutará una vez al montar el componente
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Verificar si el usuario está autenticado
-    if (!currentUser && users.length === 0) {
+    // Obtener el email del usuario (Firebase o de la base de datos local)
+    const userEmail = currentUser ? currentUser.email : (user && user.email) || "";
+
+    // Validar si el usuario está autenticado o tiene un email válido
+    if (!currentUser && !user && !userEmail) {
       alert("Debes estar logueado para agregar un comentario");
       return;
     }
 
-    const user = currentUser || users[0]; // Utiliza currentUser si está definido, de lo contrario, toma el primer usuario de la lista de usuarios locales
     const commentData = {
       ...input,
-      userEmail: user.email, // Usamos el email del usuario autenticado o del usuario local como identificador del usuario que hizo el comentario
+      userEmail: userEmail, // Usamos el email como identificador del usuario que hizo el comentario
     };
 
     dispatch(createComment(commentData));
@@ -66,7 +59,7 @@ const CommentForm = ({ productId }) => {
             htmlFor="text"
             value={input.text}
             name="text"
-            onChange={handleInputChange}
+            onChange={(e) => setInput((prevInput) => ({ ...prevInput, text: e.target.value }))}
             InputLabelProps={{ shrink: true }}
             fullWidth
             multiline
