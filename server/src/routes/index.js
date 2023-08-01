@@ -28,7 +28,8 @@ const { deleteProvider } = require("../controllers/DELETE/deteleProvider");
 const { deleteCategory } = require("../controllers/DELETE/deleteCategory");
 const { getProviderId } = require("../controllers/GET/getProviderId");
 const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
-
+const getCommentsByProduct = require("../controllers/GET/getComment");
+const {createComment, createReply} = require("../controllers/POST/postComment")
 const { getUserId } = require("../controllers/GET/getUserId");
 
 
@@ -126,5 +127,18 @@ router.post("/favorite", postFavorite);
 router.delete("/favorite/:id", deleteFavorite);
 
 router.post("/filter/data", postFilterData);
+//////// Comentarios
+// Ruta para crear un nuevo comentario
+router.post("/comments", createComment);
+
+// Ruta para obtener los comentarios de un producto
+router.get("/products/:productId/comments", getCommentsByProduct);
+
+// Ruta para responder a un comentario
+router.post("/comments/:commentId/reply", createReply);
+
+
+
+
 
 module.exports = router;

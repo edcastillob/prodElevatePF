@@ -1,3 +1,4 @@
+// ProductDetail.js
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,15 +9,16 @@ import styles from "./ProductDetail.module.css";
 import { addToCart } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import Reviews from "../../Reviews/Review";
-import ReviewCard from "../../Reviews/ReviewCard";
 import AddReviewForm from "../../Reviews/addReview";
-import { Card, CardContent, Typography,styled,Button } from "@mui/material";
+import CommentSection from "../../Comment/CommentSection";
+import { Card, CardContent, Typography, styled, Button } from "@mui/material";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {Box,Grid} from "@mui/material";
+import { Box, Grid } from "@mui/material";
+
 export const ProductDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
     dispatch(getCategory());
   }, []);
@@ -63,24 +65,21 @@ export const ProductDetail = () => {
   };
 
   const category =
-    selectedCategory.find((cat) => cat.id === categoryId)?.name ||
-    "Unknown Category";
+    selectedCategory.find((cat) => cat.id === categoryId)?.name || "Unknown Category";
 
-    const StyledCard = styled(Card)({
-      
-      width: "600px", // Modifica el ancho a 800px
-      margin: "auto",
-      padding: "1rem",
-    });
-    
-    const StyledButton = styled(Button)({
-      backgroundColor: "#000924",
-      color: "#fff",
-      "&:hover": {
-        backgroundColor: "#000a30",
-      },
-    });
-    
+  const StyledCard = styled(Card)({
+    width: "600px", // Modifica el ancho a 800px
+    margin: "auto",
+    padding: "1rem",
+  });
+
+  const StyledButton = styled(Button)({
+    backgroundColor: "#000924",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#000a30",
+    },
+  });
   return (
     <div style={{ padding: "1rem" }}>
       {loading ? (
@@ -110,43 +109,19 @@ export const ProductDetail = () => {
             ></div>
             <h6>Category: {category} </h6>
             <h4>Price ${salePrice} </h4>
+            <Reviews/>
             <button
               className={styles.buttonCart}
               onClick={() => handledAddToCart(productDetail)}
             >
               Add to Cart
             </button>
-            <Reviews reviews={productReviews} />
+            
+            <CommentSection productId={id} userEmail={currentUser?.email} />
           </div>
-          
         </div>
       )}
-     
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
-        {/* Mostrar las reseñas aquí */}
-        <Box sx={{ marginBottom: "20px", display: "flex", flexDirection: "column" }}>
-          {productReviews && productReviews.length > 0 ? (
-            <>
-              <h3>Reseñas de los usuarios:</h3>
-              {productReviews.map((review) => (
-                <ReviewCard key={review.id} review={review} user={currentUser} />
-              ))}
-            </>
-          ) : (
-            <p>No hay reseñas disponibles.</p>
-          )}
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        {/* Mostrar el formulario de agregar reseña aquí */}
-        <StyledCard>
-          <Box sx={{ marginTop: "20px" }}>
-            <AddReviewForm productId={id} />
-          </Box>
-        </StyledCard>
-      </Grid>
-    </Grid>
+          <AddReviewForm productId={id} />
     </div>
   );
 };

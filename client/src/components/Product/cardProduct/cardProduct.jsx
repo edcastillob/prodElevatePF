@@ -71,7 +71,7 @@ export const CardProduct = ({ product }) => {
     ...product,
     user: currentUser
       ? currentUser.uid
-      : "ed047b85-67d9-4a90-a461-b4ad1e2036e3",
+      : "6a9fb616-ee00-4d42-bb0e-c320673a2b50",
   };
 
   return (
