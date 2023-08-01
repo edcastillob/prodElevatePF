@@ -34,7 +34,10 @@ import {
   FILTER_DATA,
   FILTER_NAME,
   GET_ALL_REVIEWS,
-
+  GET_COMMENTS_BY_PRODUCT,
+  CREATE_COMMENT,
+  CREATE_REPLY,
+  UPDATE_CURRENT_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -54,6 +57,8 @@ const initialState = {
   user: null,
   role: [],
   users: [],
+  comments: [],
+  currentUser: null,
 };
 
 function reducer(state = initialState, actions) {
@@ -365,8 +370,35 @@ function reducer(state = initialState, actions) {
             ...state,
             productReviews: actions.payload
         }
-       
-
+        case CREATE_COMMENT:
+      // Agregar el nuevo comentario al estado
+      return {
+        ...state,
+        comments: [...state.comments, actions.payload],
+      };
+    case GET_COMMENTS_BY_PRODUCT:
+      // Obtener los comentarios del producto del estado
+      return {
+        ...state,
+        comments: actions.payload,
+      };
+    case CREATE_REPLY:
+      // Agregar la respuesta al comentario en el estado
+      const { reply, commentId } = actions.payload;
+      const updatedComments = state.comments.map((comment) => {
+        if (comment.id === commentId) {
+          return {
+            ...comment,
+            replies: [...(comment.replies || []), reply],
+          };
+        }
+        return comment;
+      });
+      return {
+        ...state,
+        comments: updatedComments,
+      };
+      
     default:
       return state;
   }

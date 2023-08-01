@@ -39,7 +39,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Role, Sale, Provider, Category, Product, Favorite, Review} =
+const { User, Role, Sale, Provider, Category, Product, Favorite, Review, Comment} =
   sequelize.models;
 
 Role.hasMany(User);
@@ -67,6 +67,13 @@ Product.hasMany(Review);
 Review.belongsTo(Product);
 /* RELACIÓN ENTRE USUARIO Y REVIEW */
 
+Comment.belongsTo(Product); // Un comentario pertenece a un producto
+Product.hasMany(Comment);   // Un producto puede tener muchos comentarios
+
+Comment.hasMany(Comment, {
+  as: "replies", // alias para la asociación
+  foreignKey: "parentId", // clave foránea en la tabla Comment que referencia al comentario padre
+});
 
 module.exports = {
   ...sequelize.models,
