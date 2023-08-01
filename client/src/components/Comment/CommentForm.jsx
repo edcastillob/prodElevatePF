@@ -1,51 +1,82 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { createComment } from "../../redux/actions/actions"; 
+// En el componente CommentForm:
 
-const CommentForm = () => {
-    const dispatch = useDispatch();
-  const [text, setText] = useState("");
-  const [productId, setProductId] = useState("");
-  const currentUser = useSelector((state) => state.currentUser); // Suponiendo que almacenaste el estado del usuario actual en Redux
-  const handleSubmit = async () => {
-    // Obtener el ID del usuario actualmente autenticado desde Firebase
-    const userId = "6a9fb616-ee00-4d42-bb0e-c320673a2b50";
-    const userEmail = currentUser ? currentUser.email : "claudiodavid339@gmail.com";
-    try {
-        // Llamar a la acción para crear el comentario
-        const commentData = {
-          text,
-          productId,
-          userId,
-          userEmail,
-        };
-        const createdComment = await dispatch(createComment(commentData));
-  
-        // Aquí puedes manejar la respuesta si es necesario
-        console.log("Comentario creado:", createdComment);
-  
-        // Limpiar el formulario después de enviar el comentario
-        // ...
-      } catch (error) {
-        console.error("Error creando el comentario:", error);
-      }
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createComment,updateCurrentUser} from "../../redux/actions/actions";
+import { Box, TextField, Button } from "@mui/material";
+
+const CommentForm = ({ productId }) => {
+  const [input, setInput] = useState({
+    email: "", // Usaremos el email como identificador único
+    productId: productId,
+    text: "",
+  });
+  const dispatch = useDispatch();
+  const { users, currentUser } = useSelector((state) => state); // Obtén la lista de usuarios locales y el usuario autenticado con Firebase desde el estado de Redux
+
+  useEffect(() => {
+    // Cuando se monta el componente, verificamos si el usuario está autenticado con Firebase y si sí, actualizamos el estado de Redux con los datos del usuario.
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      dispatch(updateCurrentUser(user || null));
+    });
+
+    return () => unsubscribe();
+  }, [dispatch]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInput((prevInput) => ({
+      ...prevInput,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Verificar si el usuario está autenticado
+    if (!currentUser && users.length === 0) {
+      alert("Debes estar logueado para agregar un comentario");
+      return;
+    }
+
+    const user = currentUser || users[0]; // Utiliza currentUser si está definido, de lo contrario, toma el primer usuario de la lista de usuarios locales
+    const commentData = {
+      ...input,
+      userEmail: user.email, // Usamos el email del usuario autenticado o del usuario local como identificador del usuario que hizo el comentario
     };
+
+    dispatch(createComment(commentData));
+
+    setInput({
+      ...input,
+      text: "",
+    });
+  };
 
   return (
     <div>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Escribe tu comentario..."
-      />
-      <input
-        type="text"
-        value={productId}
-        onChange={(e) => setProductId(e.target.value)}
-        placeholder="ID del producto"
-      />
-      <button onClick={handleSubmit}>Enviar Comentario</button>
+      <form onSubmit={handleSubmit}>
+        <Box>
+          <TextField
+            id="standard-basic"
+            label="Agregar Comentario"
+            variant="standard"
+            htmlFor="text"
+            value={input.text}
+            name="text"
+            onChange={handleInputChange}
+            InputLabelProps={{ shrink: true }}
+            fullWidth
+            multiline
+            rows={4}
+          />
+        </Box>
+        <Button type="submit" variant="contained" color="primary">
+          Enviar Comentario
+        </Button>
+      </form>
     </div>
   );
 };

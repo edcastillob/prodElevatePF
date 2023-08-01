@@ -23,7 +23,8 @@ async function postProvider(req, res) {
         numPhone,
         address,
         password : "ProviderProdelevate",
-        image: ["https://res.cloudinary.com/debskxhfb/image/upload/v1690885045/vecteezy_user-icon-design_8844895_865_rev4hp.png"]
+        image: ["https://res.cloudinary.com/debskxhfb/image/upload/v1690885045/vecteezy_user-icon-design_8844895_865_rev4hp.png"],
+        rol: "Provider",
       });
     }
 

@@ -40,6 +40,7 @@ import {
   GET_COMMENTS_BY_PRODUCT,
   CREATE_COMMENT,
   CREATE_REPLY,
+  UPDATE_CURRENT_USER
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -553,6 +554,23 @@ export const createComment = (commentData) => {
   };
 };
 
+// Acción para responder a un comentario
+export const createReply = (text, commentId, userEmail) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${ENDPOINT}comments/${commentId}/reply`,
+        { text, userEmail } // Agregar el correo electrónico del usuario como parte de los datos de la respuesta
+      );
+      dispatch({
+        type: CREATE_REPLY,
+        payload: { reply: response.data, commentId },
+      });
+    } catch (error) {
+      console.error("Error al responder al comentario:", error);
+    }
+  };
+};
 // Acción para obtener los comentarios de un producto
 export const getCommentsByProduct = (productId) => {
   return async (dispatch) => {
@@ -569,19 +587,6 @@ export const getCommentsByProduct = (productId) => {
   };
 };
 
-// Acción para responder a un comentario
-export const createReply = (text, commentId) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(`${ENDPOINT}comments/${commentId}/reply`, {
-        text,
-      });
-      dispatch({
-        type: CREATE_REPLY,
-        payload: { reply: response.data, commentId },
-      });
-    } catch (error) {
-      console.error("Error al responder al comentario:", error);
-    }
-  };
+export const updateCurrentUser = (user) => {
+  return { type: UPDATE_CURRENT_USER, payload: user };
 };

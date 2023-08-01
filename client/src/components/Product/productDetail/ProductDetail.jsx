@@ -1,8 +1,7 @@
-// ProductDetail.js
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getProductDetail, getProductReviews } from "../../../redux/actions/actions";
+import { getProductDetail, getCommentsByProduct, getProductReviews } from "../../../redux/actions/actions";
 import loadingImg from "../../../assets/loading.png";
 import { getCategory } from "../../../redux/actions/actions";
 import styles from "./ProductDetail.module.css";
@@ -10,7 +9,9 @@ import { addToCart } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import Reviews from "../../Reviews/Review";
 import AddReviewForm from "../../Reviews/addReview";
-import CommentSection from "../../Comment/CommentSection";
+import CommentSection from "../../Comment/CommentSection"; // Importar el componente CommentSection
+import CommentForm from "../../Comment/CommentForm"; // Importar el componente CommentForm
+import Comment from "../../Comment/Comment"; // Importar el componente Comment
 import { Card, CardContent, Typography, styled, Button } from "@mui/material";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Box, Grid } from "@mui/material";
@@ -26,10 +27,9 @@ export const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const { id } = params;
-  const productReviews = useSelector((state) => state.productReviews);
   const productDetail = useSelector((state) => state.productDetail);
   const selectedCategory = useSelector((state) => state.category);
-
+  const productReviews = useSelector((state) => state.productReviews);
   useEffect(() => {
     dispatch(getProductDetail(id)) // Cargar los detalles del producto
       .then(() => {
@@ -59,7 +59,7 @@ export const ProductDetail = () => {
 
   const { images, categoryId, salePrice, description, name } = productDetail;
 
-  const handledAddToCart = (product) => {
+  const handledAddToCart = () => {
     dispatch(addToCart(productDetail));
     navigate("/cart");
   };
@@ -70,7 +70,7 @@ export const ProductDetail = () => {
   const StyledCard = styled(Card)({
     width: "600px", // Modifica el ancho a 800px
     margin: "auto",
-    padding: "1rem",
+    padding: "5rem",
   });
 
   const StyledButton = styled(Button)({
@@ -80,6 +80,14 @@ export const ProductDetail = () => {
       backgroundColor: "#000a30",
     },
   });
+
+  // Obtener los comentarios del producto
+  const comments = useSelector((state) => state.comments);
+
+  useEffect(() => {
+    dispatch(getCommentsByProduct(id));
+  }, [dispatch, id]);
+
   return (
     <div style={{ padding: "1rem" }}>
       {loading ? (
@@ -109,19 +117,37 @@ export const ProductDetail = () => {
             ></div>
             <h6>Category: {category} </h6>
             <h4>Price ${salePrice} </h4>
-            <Reviews/>
             <button
               className={styles.buttonCart}
               onClick={() => handledAddToCart(productDetail)}
             >
               Add to Cart
             </button>
-            
-            <CommentSection productId={id} userEmail={currentUser?.email} />
+            <Reviews reviews={productReviews} />
           </div>
         </div>
       )}
-          <AddReviewForm productId={id} />
+      <StyledCard>
+      <Card>
+      {/* Renderizar el formulario de comentarios */}
+      {currentUser && <CommentForm productId={id} />}
+
+      {/* Renderizar los comentarios */}
+      {comments.map((comment) => (
+        <Comment key={comment.id} comment={comment} userEmail={currentUser?.email} />
+      ))}
+      </Card>
+      </StyledCard>
+       <Grid item xs={12} sm={6}>
+        {/* Mostrar el formulario de agregar reseña aquí */}
+        <StyledCard>
+          
+          <Box sx={{ marginTop: "20px" }}>
+            <AddReviewForm productId={id} />
+          </Box>
+        </StyledCard>
+      </Grid>
+      
     </div>
   );
 };

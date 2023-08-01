@@ -37,6 +37,7 @@ import {
   GET_COMMENTS_BY_PRODUCT,
   CREATE_COMMENT,
   CREATE_REPLY,
+  UPDATE_CURRENT_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -57,6 +58,7 @@ const initialState = {
   role: [],
   users: [],
   comments: [],
+  currentUser: null,
 };
 
 function reducer(state = initialState, actions) {
@@ -396,7 +398,7 @@ function reducer(state = initialState, actions) {
         ...state,
         comments: updatedComments,
       };
-
+      
     default:
       return state;
   }

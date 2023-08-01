@@ -1,34 +1,17 @@
-import React, { useEffect, useState } from "react";
+// CommentSection.js
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createComment, getCommentsByProduct, createReply } from "../../redux/actions/actions";
+import { getCommentsByProduct } from "../../redux/actions/actions";
 import Comment from "./Comment";
-
-const CommentSection = ({ productId, userEmail }) => {
-  const [newCommentText, setNewCommentText] = useState("");
+import CommentForm from "./CommentForm";
+const CommentSection = ({ productId }) => {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUser);
   const comments = useSelector((state) => state.comments);
 
   useEffect(() => {
     dispatch(getCommentsByProduct(productId));
   }, [dispatch, productId]);
-
-  const handleCommentSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(createComment(newCommentText, productId, userEmail));
-      setNewCommentText("");
-    } catch (error) {
-      console.log("Error adding comment:", error);
-    }
-  };
-
-  const handleReplySubmit = async (commentId, replyText) => {
-    try {
-      dispatch(createReply(replyText, commentId, userEmail));
-    } catch (error) {
-      console.log("Error adding reply:", error);
-    }
-  };
 
   return (
     <div className="comment-section">
@@ -37,20 +20,11 @@ const CommentSection = ({ productId, userEmail }) => {
         <Comment
           key={comment.id}
           comment={comment}
-          userEmail={userEmail}
-          onSubmitReply={(commentId, replyText) => handleReplySubmit(commentId, replyText)}
+          userEmail={currentUser?.email} // Pasar el correo electrónico del usuario al componente Comment
         />
       ))}
-      {userEmail && (
-        <form onSubmit={handleCommentSubmit}>
-          <input
-            type="text"
-            placeholder="Write a comment..."
-            value={newCommentText}
-            onChange={(e) => setNewCommentText(e.target.value)}
-          />
-          <button type="submit">Comment</button>
-        </form>
+      {currentUser && (
+        <CommentForm productId={productId} /> // Mostrar el formulario de comentarios solo si hay un usuario autenticado
       )}
     </div>
   );
