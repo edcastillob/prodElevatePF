@@ -13,9 +13,12 @@
 .contactContainer {
     height: 400px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .sideColumns {
@@ -37,6 +40,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    min-width: 280px;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 10px;
 }
@@ -68,3 +72,4 @@
     color: green;
     cursor: pointer;
 }
+

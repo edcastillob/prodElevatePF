@@ -32,3 +32,14 @@
 .infoContainer p {
     text-indent: 45px;
 }
+
+@media (max-width: 768px) {
+    .infoContainer {
+      width: 90%;
+      max-height: none;
+    }
+  
+    .infoContainer p {
+      text-indent: 30px;
+    }
+  }
