@@ -133,17 +133,17 @@ const userMail = useSelector((state) => state.userMail);
             {isDropdownOpen && (
               <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
                 <li>
-                  <Link
-                    className={styles.icon}
+                <Link
                     to="/dashboard"
                     style={{
                       textDecoration: "none",
                       color: "black",
                       fontFamily: "Poppins",
                       textAlign: "start",
+                      display:'flex'
                     }}
                   >
-                    <h6>
+                    <h6 style={{display:'flex', gap:'5px'}}>
                       <ion-icon name="compass"></ion-icon> Dashboard
                     </h6>
                   </Link>
@@ -214,6 +214,7 @@ const userMail = useSelector((state) => state.userMail);
                   </Link>
                 </li>
 
+                
                 <li>
                   <h6
                     style={{
@@ -226,7 +227,24 @@ const userMail = useSelector((state) => state.userMail);
                   >
                     <ion-icon name="person"></ion-icon> Profile
                   </h6>
-                </li>
+                </li> 
+                
+                {/* <li>
+                  <Link
+                    className={styles.icon}
+                    to="/settings"
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      fontFamily: "Poppins",
+                      textAlign: "start",
+                    }}
+                  >
+                    <h6>
+                      <ion-icon name="settings"></ion-icon> Settings
+                    </h6>
+                  </Link>
+                </li> */}
 
                 <li>
                   {user ? (
