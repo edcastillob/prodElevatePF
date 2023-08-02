@@ -232,7 +232,7 @@ export const Product = () => {
         />
           {errors.description && (
               <p className={styles.error}>{errors.description}</p>
-          )};
+          )}
         {/* precio de compra de Producto */}
         <div className="d-flex g-3">
           <div className="input-group">
@@ -303,7 +303,7 @@ export const Product = () => {
             {product.provider?.map((provId) => {
               const selectedProvider = provider.find(
                 (prov) => prov.id === provId
-              );
+              )
               return (
                 <ul className="list-group d-flex" key={`provider_${provId}`}>
                   <li
@@ -313,7 +313,7 @@ export const Product = () => {
                     {selectedProvider.name}
                   </li>
                 </ul>
-              );
+              )
             })}
           </div>
           {/* ... */}
@@ -333,14 +333,17 @@ export const Product = () => {
           >
             Image:
           </h6>
+          <div className={styles.uploadImg}>
           <UploadImg
             onImageUpload={handleImageUpload}
             uploadedImages={product.images}
             clearUploadedImages={() =>
-              setUserData((product) => ({ ...product, images: [] }))
+              setProduct((product) => ({ ...product, images: [] }))
             }
           />
-          {errors.images && (
+
+          </div>
+          {/* {errors.images && (
              <p className={styles.error}>{errors.images}</p>
           )}
           <br />

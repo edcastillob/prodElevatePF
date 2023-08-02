@@ -32,6 +32,10 @@
     position: relative;
     top: 20px;
     left: 1px;
+    border: none;
+    background-color: none;
+    background: none;
+
     
 
 }

@@ -115,16 +115,16 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
               <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
                 <li>
                 <Link
-                    className={styles.icon}
                     to="/dashboard"
                     style={{
                       textDecoration: "none",
                       color: "black",
                       fontFamily: "Poppins",
                       textAlign: "start",
+                      display:'flex'
                     }}
                   >
-                    <h6>
+                    <h6 style={{display:'flex', gap:'5px'}}>
                       <ion-icon name="compass"></ion-icon> Dashboard
                     </h6>
                   </Link>
@@ -209,6 +209,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                     </h6>
                   </Link>
                 </li>
+
                 
                 <li>
                   <h6
@@ -221,6 +222,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                     <ion-icon name="person"></ion-icon> Profile
                   </h6>
                 </li> 
+                
                 {/* <li>
                   <Link
                     className={styles.icon}
