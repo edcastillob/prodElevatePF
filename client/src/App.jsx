@@ -41,6 +41,7 @@ import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
 import { useDispatch } from "react-redux";
 import { checkEmailAndRegister } from "./redux/actions/actions";
+import { ChangePassword } from "./components/users/changePassword/ChangePassword";
 
 function App() {
   const location = useLocation();
@@ -61,7 +62,7 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {        
         const uid = user.uid;
-        console.log(user)
+        // console.log(user)
         setCurrentUser(user);
         dispatch(checkEmailAndRegister(user))
       } else {
@@ -105,6 +106,7 @@ function App() {
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/contact" element={<ContactUs />} />
+          <Route exact path="/changepass" element={<ChangePassword />} />
           <Route exact path="/dashboard" element={<Panel />} />
           <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/home" element={<Home />} />

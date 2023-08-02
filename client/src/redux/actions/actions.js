@@ -34,6 +34,7 @@ import {
   GET_USER_ID,
   FILTER_DATA,
   FILTER_NAME,
+  GET_USER_EMAIL,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -149,6 +150,23 @@ export const getUserId = (id) => {
         .then((response) => {
           // console.log(response.data);
           dispatch({ type: GET_USER_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching user details.");
+        });
+    });
+  };
+};
+
+export const getUserEmail = (email) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}useremail/${encodeURIComponent(email)}`) 
+        .then((response) => {
+          // console.log('email desde actions: ',response.data);
+          dispatch({ type: GET_USER_EMAIL, payload: response.data });
           resolve();
         })
         .catch((error) => {
