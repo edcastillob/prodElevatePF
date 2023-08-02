@@ -234,24 +234,15 @@
 }
 
 .cardBox .card .cardName {
-  color: red;
+  color: rgb(9, 142, 225);
   font-size: 1.1em;
   margin-top: 5px;
+  font-weight: 600;
 }
 
 .cardBox .card .iconBx {
   font-size: 3.5em;
-  color: red;
-}
-
-.cardBox .card:hover {
-  /* background-color: #000924; */
-}
-
-.cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBx {
-  /* color: white; */
+  color: rgb(9, 142, 225);
 }
 
 /* charts */
@@ -274,9 +265,10 @@
   border-radius: 20px;
 }
 
-.graphBox .box span {
+.graphBox .box h2 {
   color:#000924;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
+  font-weight: 500;
 }
 
 /* details */
@@ -307,7 +299,7 @@
 }
 
 .cardHeader h2 {
-  font-weight: 600;
+  font-weight: 500;
   color: #000924;
 }
 
@@ -339,10 +331,10 @@
   border-bottom: none;
 }
 
-.details .recentOrders table tbody tr:hover {
+/* .details .recentOrders table tbody tr:hover {
   background-color: #000924;
   color: white;
-}
+} */
 
 .details .recentOrders table tr td {
   padding: 10px;
@@ -379,10 +371,10 @@
   object-fit: cover;
 }
 
-.recentCustomers table tr:hover{
+/* .recentCustomers table tr:hover{
   background-color: #000924;
   color: white;
-}
+} */
 
 .recentCustomers table tr td {
   padding:  12px 10px;
@@ -429,7 +421,7 @@
 }
 
 .customersHeader h2 {
-  font-weight: 600;
+  font-weight: 500;
   color: #000924;
 }
 
@@ -441,6 +433,16 @@
 
 .customers table thead td {
   font-weight: 600;
+  background-color: red;
+}
+
+.customers table thead th {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+  background-color: #000924;
+  color: white;
 }
 
 .customers .wrapper table tr {
@@ -452,10 +454,10 @@
   border-bottom: none;
 }
 
-.customers .wrapper table tbody tr:hover {
+/* .customers .wrapper table tbody tr:hover {
   background-color: #000924;
   color: white;
-}
+} */
 
 .customers .wrapper table tr td {
   padding: 10px;

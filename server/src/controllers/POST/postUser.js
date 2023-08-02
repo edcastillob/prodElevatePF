@@ -1,4 +1,5 @@
 const { User } = require("../../db");
+const { sendMailNewUser } = require("../MAILER/mailerController");
 
 async function postUser(req, res) {
     try {
@@ -21,6 +22,10 @@ async function postUser(req, res) {
             password
            
         });
+
+        if (newUser) {
+          sendMailNewUser(newUser)
+        }
 
         return res.status(201).json(newUser);
     } catch (error) {
