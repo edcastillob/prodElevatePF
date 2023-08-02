@@ -69,7 +69,7 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
     ...product,
     user: currentUser
       ? currentUser.uid
-      : "ed047b85-67d9-4a90-a461-b4ad1e2036e3",
+      : "691e3625-97aa-403e-9ec2-57b400b09ffa",
   };
 
   return (
@@ -79,7 +79,13 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
         to={`/productid/${id}`}
         className={styles.link}
       >
-        {/* {isFav ? (
+
+        <div className={styles.divImg}>
+          <img className={styles.img} src={images} alt="product" />
+        </div>
+      </Link>
+      <div className={styles.description}>
+      {isFav ? (
           <button className={styles.favButton} onClick={handleFavorite}>
             <h3 style={{ color: "#000924" }}>
               <ion-icon name="heart"></ion-icon>
@@ -91,27 +97,7 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
               <ion-icon name="heart-empty"></ion-icon>
             </h3>
           </button>
-        )} */}
-        <div className={styles.divImg}>
-          <img className={styles.img} src={images} alt="product" />
-        </div>
-      </Link>
-      <div className={styles.description}>
-      {
-          isFav ? (
-            <button className={styles.favButton} onClick={handleFavorite}>
-              <h3 style={{ color: "#000924" }}>
-                <ion-icon name="heart"></ion-icon>
-              </h3>
-            </button>
-          ) : (
-            <button className={styles.favButton} onClick={handleFavorite}>
-              <h3>
-                <ion-icon name="heart-empty"></ion-icon>
-              </h3>
-            </button>
-          )
-        }
+        )}
         <h6 className={styles.title}>{name}</h6>
         <h6 className={styles.category}> {category}</h6>
         <span className={styles.priceLabel}>Brand</span>
@@ -126,14 +112,6 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
         >
           Add to Cart
         </button>
-
-        {/* {currentUser && (
-          <Link title="Edit Product" to={`/productidedit/${id}`}>
-            <button className={styles.editProduct}>
-              <ion-icon name="create"></ion-icon>
-            </button>
-          </Link>
-        )} */}
       </div>
     </div>
   );
