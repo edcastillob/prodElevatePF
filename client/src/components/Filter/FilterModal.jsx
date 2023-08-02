@@ -1,7 +1,22 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const FilterModal = ({ show, handleClose, handleFilter }) => {
+=======
+import React, { useEffect, useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategory } from "../../redux/actions/actions";
+
+const FilterModal = ({ show, handleClose, handleFilter }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategory());
+  }, []);
+  const category = useSelector((state) => state.category);
+
+>>>>>>> 09d1b4b3c44c0666360e21af19ad6287e4ab4213
   const [filters, setFilters] = useState({
     minPrice: "",
     maxPrice: "",
@@ -52,6 +67,7 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
+<<<<<<< HEAD
             <Form.Group controlId="formCategory">
               <Form.Label>Category</Form.Label>
               <Form.Control
@@ -62,6 +78,26 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
+=======
+
+            <Form.Group controlId="formCategory">
+              <Form.Label>Category</Form.Label>
+              <Form.Control
+                as="select"
+                name="category"
+                value={filters.category}
+                onChange={handleInputChange}
+              >
+                <option value="">Selecciona una opción</option>
+                {category.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+
+>>>>>>> 09d1b4b3c44c0666360e21af19ad6287e4ab4213
             <Form.Group controlId="formBrand">
               <Form.Label>Brand</Form.Label>
               <Form.Control

@@ -61,3 +61,20 @@
 .cartItem .cartProduct button:hover {
   color: black;
 }
+
+.create {
+  border: 1px solid #cacaca;
+  width: 20%;
+  padding: 0.7rem;
+  border-radius: 10px;
+  font-family: "Poppins";
+  background-color: #000924;
+  color: #cacaca;
+  transition: 0.2s;
+  margin-bottom: 2rem;
+  &:hover {
+    transform: scale(0.97);
+    color: #fff;
+    transition: 0.3s;
+  }
+}

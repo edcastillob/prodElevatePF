@@ -20,8 +20,6 @@ export const Product = () => {
     dispatch(getProvider());
   }, []);
 
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const category = useSelector((state) => state.category);
@@ -89,7 +87,7 @@ export const Product = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log(product);
-    const errors = validateForm (
+    const errors = validateForm(
       product.category,
       product.name,
       product.brand,
@@ -153,175 +151,169 @@ export const Product = () => {
               ))}
             </select>
             {errors.category && (
-                  <p className={styles.error}>{errors.category}</p>
+              <p className={styles.error}>{errors.category}</p>
             )}
             {/* Nombre de Producto */}
 
-          <input
-            className="form-control mb-3 w-50 d-end"
-            type="text"
-            name="name"
-            placeholder="Product Name"
-            value={product.name}
-            onChange={handleChange}
-          />
-            {errors.name && (
-                  <p className={styles.error}>{errors.name}</p>
+            <input
+              className="form-control mb-3 w-50 d-end"
+              type="text"
+              name="name"
+              placeholder="Product Name"
+              value={product.name}
+              onChange={handleChange}
+            />
+            {errors.name && <p className={styles.error}>{errors.name}</p>}
+          </div>
+          <div className="d-flex justify-content-around">
+            {/* brand de Producto */}
+            <input
+              className="form-control mb-3 w-50 d-end"
+              type="text"
+              name="brand"
+              placeholder="Product brand"
+              value={product.brand}
+              onChange={handleChange}
+            />
+            {errors.brand && <p className={styles.error}>{errors.brand}</p>}
+            <select
+              className="form-control mb-3 w-50 d-end"
+              name="condition"
+              value={product.condition}
+              onChange={handleChange}
+            >
+              <option value="">Select condition</option>
+              <option value="Brand New">Brand New</option>
+              <option value="Used">Used</option>
+              <option value="Like New">Like New</option>
+            </select>
+            {errors.condition && (
+              <p className={styles.error}>{errors.condition}</p>
             )}
-        </div>
-        <div className="d-flex justify-content-around">
-          {/* brand de Producto */}
-          <input
-            className="form-control mb-3 w-50 d-end"
-            type="text"
-            name="brand"
-            placeholder="Product brand"
-            value={product.brand}
-            onChange={handleChange}
+          </div>
+
+          {/* Descripcion de Producto */}
+          {/* <h6 style={{fontFamily:'Poppins', textAlign:'start'}}>Description:</h6> */}
+
+          <ReactQuill
+            value={product.description}
+            onChange={handleDescriptionChange}
+            modules={{
+              toolbar: [
+                [{ header: [1, 2, 3, 4, false] }],
+                ["bold", "italic", "underline", "strike"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["link"],
+              ],
+            }}
+            formats={[
+              "header",
+              "bold",
+              "italic",
+              "underline",
+              "strike",
+              "list",
+              "bullet",
+              "link",
+              "image",
+            ]}
+            placeholder="Enter product description..."
+            style={{
+              height: "130px",
+              marginBottom: "4rem",
+              fontFamily: "Poppins",
+            }}
           />
-          {errors.brand && (
-              <p className={styles.error}>{errors.brand}</p>
-          )}
-          <select
-  className="form-control mb-3 w-50 d-end"
-  name="condition"
-  value={product.condition}
-  onChange={handleChange}
->
-  <option value="">Select condition</option>
-  <option value="Brand New">Brand New</option>
-  <option value="Used">Used</option>
-  <option value="Like New">Like New</option>
-</select>
-{errors.condition && (
-    <p className={styles.error}>{errors.condition}</p>
-)}
-        </div>
-
-        {/* Descripcion de Producto */}
-        {/* <h6 style={{fontFamily:'Poppins', textAlign:'start'}}>Description:</h6> */}
-
-        <ReactQuill
-          value={product.description}
-          onChange={handleDescriptionChange}
-          modules={{
-            toolbar: [
-              [{ header: [1, 2, 3, 4, false] }],
-              ["bold", "italic", "underline", "strike"],
-              [{ list: "ordered" }, { list: "bullet" }],
-              ["link"],
-            ],
-          }}
-          formats={[
-            "header",
-            "bold",
-            "italic",
-            "underline",
-            "strike",
-            "list",
-            "bullet",
-            "link",
-            "image",
-          ]}
-          placeholder="Enter product description..."
-          style={{
-            height: "130px",
-            marginBottom: "4rem",
-            fontFamily: "Poppins",
-          }}
-        />
           {errors.description && (
-              <p className={styles.error}>{errors.description}</p>
-          )};
-        {/* precio de compra de Producto */}
-        <div className="d-flex g-3">
-          <div className="input-group">
-            <input
-              className="form-control mb-3 w-25"
-              type="text"
-              name="purchasePrice"
-              placeholder="-- Purchase price --"
-              value={product.purchasePrice}
-              onChange={handleChange}
-            />
-            <span className="input-group-text mb-3">$</span>
-            {/* <span className="input-group-text mb-3">0.00</span> */}
-          </div>
+            <p className={styles.error}>{errors.description}</p>
+          )}
+          {/* precio de compra de Producto */}
+          <div className="d-flex g-3">
+            <div className="input-group">
+              <input
+                className="form-control mb-3 w-25"
+                type="text"
+                name="purchasePrice"
+                placeholder="-- Purchase price --"
+                value={product.purchasePrice}
+                onChange={handleChange}
+              />
+              <span className="input-group-text mb-3">$</span>
+              {/* <span className="input-group-text mb-3">0.00</span> */}
+            </div>
             {errors.purchasePrice && (
-                  <p className={styles.error}>{errors.purchasePrice}</p>
+              <p className={styles.error}>{errors.purchasePrice}</p>
             )}
-          {/* precio de venta de Producto */}
+            {/* precio de venta de Producto */}
 
-          <div className="input-group">
-            <input
-              className="form-control mb-3 w-25"
-              type="text"
-              name="salePrice"
-              placeholder="-- Sale price --"
-              value={product.salePrice}
-              onChange={handleChange}
-            />
-            <span className="input-group-text mb-3">$</span>
-            {/* <span className="input-group-text mb-3">0.00</span> */}
-          </div>
+            <div className="input-group">
+              <input
+                className="form-control mb-3 w-25"
+                type="text"
+                name="salePrice"
+                placeholder="-- Sale price --"
+                value={product.salePrice}
+                onChange={handleChange}
+              />
+              <span className="input-group-text mb-3">$</span>
+              {/* <span className="input-group-text mb-3">0.00</span> */}
+            </div>
             {errors.salePrice && (
-                <p className={styles.error}>{errors.salePrice}</p>
+              <p className={styles.error}>{errors.salePrice}</p>
             )}
-        </div>
-
-        {/* stock minimo de Producto */}
-        <input
-          className="form-control mb-3"
-          type="minimumStock"
-          name="minimumStock"
-          placeholder="-- Minimum stock --"
-          value={product.minimumStock}
-          onChange={handleChange}
-        />
-          {errors.minimumStock && (
-              <p className={styles.error}>{errors.minimumStock}</p>
-          )}
-
-        {/* Proveedor */}
-        <div className="container-m">
-          <select
-            className="form-select form-select-sm mb-3 w-50 d-flex"
-            name="provider"
-            id="provider"
-            value=""
-            onChange={handleProviderSelect}
-          >
-            <option value="">-- Select provider --</option>
-            {sortedproviders?.map((prov) => (
-              <option key={prov.id} value={prov.id}>
-                {prov.name}
-              </option>
-            ))}
-          </select>
-
-          <div className="d-flex w-50">
-            {product.provider?.map((provId) => {
-              const selectedProvider = provider.find(
-                (prov) => prov.id === provId
-              );
-              return (
-                <ul className="list-group d-flex" key={`provider_${provId}`}>
-                  <li
-                    className="list-group-item"
-                    key={`provider_item_${provId}`}
-                  >
-                    {selectedProvider.name}
-                  </li>
-                </ul>
-              );
-            })}
           </div>
-          {/* ... */}
-        </div>
-          {errors.provider && (
-              <p className={styles.error}>{errors.provider}</p>
+
+          {/* stock minimo de Producto */}
+          <input
+            className="form-control mb-3"
+            type="minimumStock"
+            name="minimumStock"
+            placeholder="-- Minimum stock --"
+            value={product.minimumStock}
+            onChange={handleChange}
+          />
+          {errors.minimumStock && (
+            <p className={styles.error}>{errors.minimumStock}</p>
           )}
-        <br />
+
+          {/* Proveedor */}
+          <div className="container-m">
+            <select
+              className="form-select form-select-sm mb-3 w-50 d-flex"
+              name="provider"
+              id="provider"
+              value=""
+              onChange={handleProviderSelect}
+            >
+              <option value="">-- Select provider --</option>
+              {sortedproviders?.map((prov) => (
+                <option key={prov.id} value={prov.id}>
+                  {prov.name}
+                </option>
+              ))}
+            </select>
+
+            <div className="d-flex w-50">
+              {product.provider?.map((provId) => {
+                const selectedProvider = provider.find(
+                  (prov) => prov.id === provId
+                );
+                return (
+                  <ul className="list-group d-flex" key={`provider_${provId}`}>
+                    <li
+                      className="list-group-item"
+                      key={`provider_item_${provId}`}
+                    >
+                      {selectedProvider.name}
+                    </li>
+                  </ul>
+                );
+              })}
+            </div>
+            {/* ... */}
+          </div>
+          {errors.provider && <p className={styles.error}>{errors.provider}</p>}
+          <br />
 
           {/* <UploadImg onImageUpload={handleImageUpload} /> */}
           <h6
@@ -333,16 +325,16 @@ export const Product = () => {
           >
             Image:
           </h6>
-          <UploadImg
-            onImageUpload={handleImageUpload}
-            uploadedImages={product.images}
-            clearUploadedImages={() =>
-              setUserData((product) => ({ ...product, images: [] }))
-            }
-          />
-          {errors.images && (
-             <p className={styles.error}>{errors.images}</p>
-          )}
+          <div className={styles.uploadImg}>
+            <UploadImg
+              onImageUpload={handleImageUpload}
+              uploadedImages={product.images}
+              clearUploadedImages={() =>
+                setProduct((product) => ({ ...product, images: [] }))
+              }
+            />
+          </div>
+          {errors.images && <p className={styles.error}>{errors.images}</p>}
           <br />
           <button className={styles.create}>Create</button>
         </form>

@@ -19,7 +19,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 100%;
-    height: 45%;
+    height: 40%;
     position: relative;
     background-color: #e9e9e9;
     display: flex;
@@ -29,9 +29,14 @@
 }
 
 .favButton{
-    position: absolute;
-    bottom: 190px;
-    left: 240px;
+    position: relative;
+    top: 20px;
+    left: 1px;
+    border: none;
+    background-color: none;
+    background: none;
+
+    
 
 }
 
@@ -60,7 +65,7 @@
     /* position: relative; */
     padding: 1rem;
     width: 100%;
-    height: 55%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     align-items: start;

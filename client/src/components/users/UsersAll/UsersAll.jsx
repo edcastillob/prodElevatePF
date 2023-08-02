@@ -66,7 +66,7 @@ export const UsersAll = ({ toggleActive }) => {
 
       <input
         type="text"
-        className="form-control w-25 h-75"
+        className="form-control w-25 h-50"
         placeholder="Search user"
         value={searchUsers}
         onChange={(event) => setSearchUsers(event.target.value)}

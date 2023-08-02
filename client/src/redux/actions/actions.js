@@ -39,6 +39,7 @@ import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
 
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const showProducts = () => {
   try {
@@ -310,9 +311,9 @@ export const login = (userData) => {
     return async (dispatch) => {
       const response = await axios.post(`${ENDPOINT}login`, userData);
       if (response.data) {
-        const user = response.data.User; 
-        localStorage.setItem("user", JSON.stringify(user));       
-        window.location.reload()
+        const user = response.data.User;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.reload();
         return dispatch({ type: LOGIN, payload: user });
       }
       throw new Error("Credenciales inválidas");
@@ -340,9 +341,7 @@ export const addToCart = (product) => {
       type: ADD_TO_CART,
       payload: product,
     });
-    toast.success(`${product.name} add to cart`, {
-      position: "bottom-left",
-    });
+    toast.success(`${product.name} add to cart`);
 
     return {
       type: ADD_TO_CART,
@@ -363,9 +362,7 @@ export const removeToCart = (product) => {
       type: REMOVE_TO_CART,
       payload: product,
     });
-    toast.error(`${product.name} remove from de cart`, {
-      position: "bottom-left",
-    });
+    toast.error(`${product.name} remove from de cart`);
 
     return {
       type: REMOVE_TO_CART,
@@ -379,9 +376,6 @@ export const decrementToCart = (product) => {
     dispatch({
       type: DECREMENT_CART,
       payload: product,
-    });
-    toast.info(` Decrement ${product.name} cart quantity`, {
-      position: "bottom-left",
     });
 
     return {
@@ -402,9 +396,7 @@ export const clearCart = () => {
     dispatch({
       type: CLEAR_CART,
     });
-    toast.error(`The cart is clear`, {
-      position: "bottom-left",
-    });
+    toast.error(`The cart is clear`);
 
     return {
       type: CLEAR_CART,
@@ -413,10 +405,10 @@ export const clearCart = () => {
 };
 
 export const addFav = (product) => {
-  const endpoint = "http://localhost:3001/favorite";
+  const endpoint = `${ENDPOINT}favorite`;
   return async (dispatch) => {
     try {
-      console.log(product);
+      // console.log(product);
       const { data } = await axios.post(endpoint, product);
       return dispatch({
         type: ADD_FAV,
@@ -429,7 +421,8 @@ export const addFav = (product) => {
 };
 
 export const removeFav = (id) => {
-  const endpoint = `http://localhost:3001/favorite/${id}`;
+  const endpoint = `${ENDPOINT}favorite/${id}`;
+
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(endpoint);
@@ -470,7 +463,8 @@ export const filterNameAsc = () => {
 };
 
 export const filterData = (filters) => {
-  const endpoint = "http://localhost:3001/filter/data";
+  const endpoint = `${ENDPOINT}filter/data`;
+
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, filters);
@@ -480,6 +474,16 @@ export const filterData = (filters) => {
       });
     } catch (error) {
       window.alert(error);
+    }
+  };
+};
+
+export const checkEmailAndRegister = (userData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${ENDPOINT}check-email`, userData);
+    } catch (error) {
+      console.error("Error checking email:", error);
     }
   };
 };

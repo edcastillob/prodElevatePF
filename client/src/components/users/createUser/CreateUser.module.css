@@ -17,6 +17,11 @@
     justify-content: space-around;
 }
 
+.uploadImg{
+  height: 190px;
+  display: flex;
+}
+
 .divContent{
     /* border: 1px solid black; */
     height: 40vh;
@@ -83,7 +88,7 @@
  
   
   /*----------- BUTTON CREATE -----------*/
-  .form button {
+  .create {
     height: 50px;
     width: 80%;
     color: #fff;
@@ -96,7 +101,7 @@
     padding: 0 1rem;
   }
   
-  .form button:hover {
+  .create:hover {
     background-color: #016dcb;
   }
   

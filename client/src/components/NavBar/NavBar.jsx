@@ -39,8 +39,11 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
         <Link to="/home">
           <img className="img-fluid" src={logo} alt="img-logo" />
         </Link>
+        <Link style={{textDecoration:'none', color:'#fff'}} to="/home"><h6 className={styles.homeButton}  style={{fontFamily:'Poppins'}}>Home</h6></Link>
       </div>
-      <div className={styles.divSearch}>{/* <SearchBar /> */}</div>
+      <div className={styles.divSearch}>
+        
+      </div>
       <div className={styles.items}>
 
       {user || userLocal ? (
@@ -112,23 +115,23 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
               <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
                 <li>
                 <Link
-                    className={styles.icon}
                     to="/dashboard"
                     style={{
                       textDecoration: "none",
                       color: "black",
                       fontFamily: "Poppins",
                       textAlign: "start",
+                      display:'flex'
                     }}
                   >
-                    <h6>
+                    <h6 style={{display:'flex', gap:'5px'}}>
                       <ion-icon name="compass"></ion-icon> Dashboard
                     </h6>
                   </Link>
                 </li>
                 
                 
-                <li>
+                {/* <li>
                   <h6
                     style={{
                       color: "black",
@@ -138,7 +141,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                   >
                     <ion-icon name="person"></ion-icon> Profile
                   </h6>
-                </li>
+                </li> */}
                 {/* <li>
                   <Link
                     className={styles.icon}
@@ -206,6 +209,8 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                     </h6>
                   </Link>
                 </li>
+
+                
                 <li>
                   <h6
                     style={{
@@ -216,7 +221,8 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
                   >
                     <ion-icon name="person"></ion-icon> Profile
                   </h6>
-                </li>
+                </li> 
+                
                 {/* <li>
                   <Link
                     className={styles.icon}
