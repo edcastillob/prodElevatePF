@@ -6,8 +6,8 @@ const Comment = ({ comment, userEmail }) => {
   const dispatch = useDispatch();
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [replyText, setReplyText] = useState("");
-  const userRole = useSelector((state) => state.users.role); 
-
+  const userRole = useSelector((state) => state.users.rol); 
+  const currentUser = useSelector((state) => state.currentUser);
   const handleReplySubmit = async (e) => {
     e.preventDefault();
 
@@ -29,7 +29,7 @@ const Comment = ({ comment, userEmail }) => {
     }
   };
 
-  const canUserReply = userRole === "Provider"; // Verificar si el usuario tiene el rol "Provider"
+  const canUserReply = currentUser === "Provider"; // Verificar si el usuario tiene el rol "Provider"
 
   return (
     <div className="comment">

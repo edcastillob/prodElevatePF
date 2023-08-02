@@ -61,6 +61,7 @@ export const Product = () => {
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   const handleChange = (event) => {
+    event.preventDefault();
     setProduct({
       ...product,
       [event.target.name]: event.target.value,
@@ -105,7 +106,6 @@ export const Product = () => {
     if (Object.keys(product).length === 0) {
       dispatch(addProduct(product));
       toast.success("¡Product created successfully!");
-      
       setProduct({
         category: "",
         name: "",
