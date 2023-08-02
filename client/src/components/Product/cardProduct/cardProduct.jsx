@@ -10,7 +10,7 @@ import {
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 
-export const CardProduct = ({ product }) => {
+export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isFav, setIsFav] = useState(false);
   const { id, name, images, salePrice, brand, condition, categoryId } = product;

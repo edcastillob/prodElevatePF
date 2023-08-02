@@ -4,18 +4,19 @@ import styles from "./CreateUser.module.css";
 import prueba from "../../../assets/prueba.jpg";
 import logo from "../../../assets/logo_2.png";
 import google from "../../../assets/google.png";
-import validate from "./validation";
+// import validate from "./validation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../../redux/actions/actions";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const CreateUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  let cleanImg = [];
+  
   const [userData, setUserData] = useState({
     name: "",
     identification: "",
@@ -185,22 +186,25 @@ export const CreateUser = () => {
                   </div>
                 )}
               </div>
-
-              <UploadImg onImageUpload={handleImageUpload} />
+                <div className={styles.uploadImg}>
+              <UploadImg 
+              onImageUpload={handleImageUpload}
+              uploadedImages={userData.images}
+              />
+                </div>
               <br />
               <div className={`${styles.field} ${styles["button-field"]}`}>
-                <button type="submit">Create</button>
+                <button className={styles.create} type="submit">Create</button>
               </div>
             </form>
             <div className={styles["form-link"]}>
               <span>
                 Already have an account?{" "}
-                <a
-                  href="#"
+                <Link to='/login'
                   className={`${styles.link} ${styles["login-link"]}`}
-                >
+                > 
                   Login
-                </a>
+                  </Link>
               </span>
             </div>
           </div>

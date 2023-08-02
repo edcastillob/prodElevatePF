@@ -178,8 +178,7 @@ export const EditProduct = () => {
 
     // console.log("Datos enviados: ", changeProduct);   
     toast.success("¡Edit Product successfully!");
-    navigate('/home')
-
+    navigate('/dashboard')
   };
 
   console.log("productDetail: ", productDetail);
@@ -192,9 +191,9 @@ export const EditProduct = () => {
         <hr />
         {/* Formulario */}
         <form onSubmit={handleSubmit} className={styles.form}>
-        <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
-          Edit product
-        </h5>
+        <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
+            Edit Product
+          </h4>
           {/* Categoria de Producto */}
           <div className="d-flex justify-content-around">
             <select
@@ -451,5 +450,6 @@ export const EditProduct = () => {
           </button>
         </form>
       </div>
+
   );
 };

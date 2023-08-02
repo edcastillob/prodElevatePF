@@ -1,0 +1,21 @@
+.xbutton{
+    margin-left: 1.5rem; 
+    color: #fff; 
+    border: 1px solid black; 
+    background-color: red;
+    border-radius: 8px;
+    transition: .2s;
+    width: 25px;
+    height: 25px;
+    &:hover{
+        transform: scale(0.97);
+        transition: .3s;
+    }
+}
+
+.divUpload{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
