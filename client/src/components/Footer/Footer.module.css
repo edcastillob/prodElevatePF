@@ -31,3 +31,25 @@
         transition: .5s;
     }
 }
+
+@media (max-width: 768px) {
+    .footerContainer {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .divLeft,
+    .divRight {
+      width: 100%;
+    }
+  
+    .divRight {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .divRight p {
+      margin: 0.5rem;
+      font-size: 15px;
+    }
+  }

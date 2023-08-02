@@ -99,6 +99,7 @@
     .cardsContainer {
       flex-direction: column;
       align-items: center;
+      margin-bottom: 10px;
     }
   
     .aboutContainer, .imagesContainer {
@@ -114,6 +115,13 @@
     .infoContainer {
       padding: 10px;
     }
+
+    .ourContainer h2 {
+      font-size: 23px;
+    }
+    .ourContainer p {
+      font-size: 15px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -122,11 +130,6 @@
     }
   
     .ourContainer h2 {
-      font-size: 1.8rem;
-    }
-  
-    .ourContainer p {
-      font-size: 18px;
-      text-indent: 30px;
+      font-size: 23px;
     }
   }
