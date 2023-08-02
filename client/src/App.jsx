@@ -21,8 +21,6 @@ import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin";
 import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import Favorites from "./components/Favorites/Favorites";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
@@ -31,7 +29,6 @@ import { EditProvider } from "./components/Product/provider/EditProvider/EditPro
 import { SettingsProduct } from "./components/Product/SettingsProduct/SettingProduct";
 // import Chat from './components/Chat/Chat';
 import Panel from "./components/Dashboard";
-
 import { UsersAll } from "./components/users/UsersAll/UsersAll";
 import { EditUser } from "./components/users/EditUser/EditUser";
 import { AboutUs } from "./components/AboutUs/AboutUs";

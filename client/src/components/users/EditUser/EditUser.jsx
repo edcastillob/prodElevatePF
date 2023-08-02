@@ -101,89 +101,92 @@ export const EditUser = () => {
 
   return (
     <div className={styles.container}>
-
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-      <h4 style={{ fontFamily: "Poppins" }}>Edit User</h4>
+        <h4 style={{ fontFamily: "Poppins" }}>Edit User</h4>
         {/* _____________NAME________________ */}
-        
-          <input
-            type="text"
-            name="name"
-            placeholder="Fullname"
-            className={`form-control mb-3 w-75 ${errors.name && "is-invalid"}`}
-            onChange={handleChange}
-            value={changeUser.name}
-          />
-          {/* {errors.name && <div className="invalid-feedback">{errors.name}</div>} */}
-        
+        <label>Name:</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="Fullname"
+          className={`form-control mb-3 w-75 ${errors.name && "is-invalid"}`}
+          onChange={handleChange}
+          value={changeUser.name}
+        />
+        {/* {errors.name && <div className="invalid-feedback">{errors.name}</div>} */}
+
         {/* _____________EMAIL________________ */}
-       
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className={`form-control mb-3 w-75 ${errors.email && "is-invalid"}`}
-            onChange={handleChange}
-            value={changeUser.email}
-          />
-          {/* {errors.email && (
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className={`form-control mb-3 w-75 ${errors.email && "is-invalid"}`}
+          onChange={handleChange}
+          value={changeUser.email}
+        />
+        {/* {errors.email && (
             <div className="invalid-feedback">{errors.email}</div>
           )} */}
-        
+
         {/* _____________ID________________ */}
-        
-          <input
-            type="text"
-            name="identification"
-            placeholder="Document ID"
-            className={`form-control mb-3 w-75 ${errors.identification && "is-invalid"}`}
-            onChange={handleChange}
-            value={changeUser.identification}
-          />
-          {/* {errors.identification && (
+        <label>Identification:</label>
+        <input
+          type="text"
+          name="identification"
+          placeholder="Document ID"
+          className={`form-control mb-3 w-75 ${
+            errors.identification && "is-invalid"
+          }`}
+          onChange={handleChange}
+          value={changeUser.identification}
+        />
+        {/* {errors.identification && (
             <div className="invalid-feedback">{errors.identification}</div>
           )} */}
-      
+
         {/* _____________PHONE NUMBER________________ */}
-        
-          <input
-            type="text"
-            name="numPhone"
-            placeholder="Phone N°"
-            className={`form-control mb-3 w-75 ${errors.numPhone && "is-invalid"}`}
-            onChange={handleChange}
-            value={changeUser.numPhone}
-          />
-          {/* {errors.numPhone && (
+        <label>Phone:</label>
+        <input
+          type="text"
+          name="numPhone"
+          placeholder="Phone N°"
+          className={`form-control mb-3 w-75 ${
+            errors.numPhone && "is-invalid"
+          }`}
+          onChange={handleChange}
+          value={changeUser.numPhone}
+        />
+        {/* {errors.numPhone && (
             <div className="invalid-feedback">{errors.numPhone}</div>
           )} */}
-       
+
         {/* _____________ADDRESS________________ */}
-        
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            className={`form-control mb-3 w-75 ${errors.address && "is-invalid"}`}
-            onChange={handleChange}
-            value={changeUser.address}
-          />
-          {/* {errors.address && (
+        <label>Address:</label>
+        <input
+          type="text"
+          name="address"
+          placeholder="Address"
+          className={`form-control mb-3 w-75 ${errors.address && "is-invalid"}`}
+          onChange={handleChange}
+          value={changeUser.address}
+        />
+        {/* {errors.address && (
             <div className="invalid-feedback">{errors.address}</div>
           )} */}
-       
 
         {/* Estado del usuario */}
-        
-          <select
-            className="form-control mb-3 w-75"
-            name="isActive"
-            value={changeUser.isActive}
-            onChange={handleChange}
-          >
-            <option value="t">Activo</option>
-            <option value="f">Inactivo</option>
-          </select>
+        <label>Status:</label>
+        <select
+          className="form-control mb-3 w-75"
+          name="isActive"
+          value={changeUser.isActive}
+          // onChange={handleChange}
+          aria-readonly
+        >
+          <option value="t">Activo</option>
+          <option value="f">Inactivo</option>
+        </select>
         <br />
 
         <div className="d-flex align-items-center">
