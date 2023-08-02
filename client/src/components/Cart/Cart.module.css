@@ -6,20 +6,25 @@
   width: 100%;
 }
 
-.cartContainer h2 {
+.cartContainer h3 {
   font-weight: 400;
   font-size: 40px;
   text-align: center;
+  font-family: 'Poppins';
 }
 
 .cartContainer .titles {
   margin: 2rem 0 1rem 0;
+  font-family: 'Poppins';
+
 }
 
 .carContainer .titles h3 {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 100;
   text-transform: uppercase;
+  font-family: 'Poppins';
+
 }
 
 .cartItem,
@@ -29,6 +34,8 @@
   grid-template-columns: 3fr 1fr 1fr 1fr;
   column-gap: 0.5rem;
   text-align: left;
+  font-family: 'Poppins';
+
 }
 
 .cartItem {
@@ -38,11 +45,15 @@
 
 .cartContainer .titles .productTitle {
   padding-left: 0.5rem;
+  font-family: 'Poppins';
+
 }
 
 .cartContainer .titles .total {
   padding-right: 0.5rem;
   justify-self: right;
+  font-family: 'Poppins';
+
 }
 
 .cartItem .cartProduct {
@@ -55,8 +66,20 @@
   margin-right: 1rem;
 }
 
+.delete{
+  color: #929191;
+  transition: .2s;
+  &:hover{
+    transform: scale(0.98);
+    color: black;
+    transition: .3s;
+  }
+}
+
 .cartItem .cartProduct h3 {
   font-weight: 400;
+  font-family: 'Poppins';
+
 }
 
 .cartItem .cartProduct button {
@@ -66,6 +89,8 @@
   cursor: pointer;
   background: none;
   color: gray;
+  font-family: 'Poppins';
+
 }
 
 .cartItem .cartProduct button:hover {
@@ -77,10 +102,11 @@
   align-items: flex-start;
   justify-content: center;
   flex-direction: row;
-  width: 138px;
+  width: 155px;
   max-width: 100%;
   border: 0.5px solid rgb(177, 177, 177);
   border-radius: 5px;
+
 }
 
 .cartProductQuantity button {
@@ -89,8 +115,10 @@
   background: none;
   padding: 0.7rem 1.5rem;
   cursor: pointer;
+  font-family: 'Poppins';
 
-  margin-left: 40px;
+
+  margin-left: 60px;
 }
 
 .cartProductQuantity .count {
@@ -101,6 +129,8 @@
   justify-self: right;
   padding-right: 0.5rem;
   font-weight: 700;
+  font-family: 'Poppins';
+
 }
 
 /* Cart Summary */
@@ -119,32 +149,47 @@
   height: 40px;
   border-radius: 5px;
   font-weight: 400;
-  border: 0.5px solid rgb(177, 177, 177);
-  color: gray;
-  background: none;
+  border: 0.5px solid black;
+  color: #fff;
+  background: red;
   outline: none;
   cursor: pointer;
+  font-family: 'Poppins';
+  transition: .2s;
+  &:hover{
+    transform: scale(0.98);
+    transition: .3s;
+  }
+
 }
 
 .cartCheckout {
   width: 270px;
   max-width: 100%;
+  font-family: 'Poppins';
+
 }
 
 .cartCheckout .subtotal {
   display: flex;
   justify-content: space-between;
   font-size: 20px;
+  font-family: 'Poppins';
+
 }
 
 .cartCheckout .subtotal .amount {
   font-weight: 700;
+  font-family: 'Poppins';
+
 }
 
 .cartCheckout p {
   font-size: 14px;
   font-weight: 200;
   margin: 0.5rem 0;
+  font-family: 'Poppins';
+
 }
 
 .cartCheckout button {
@@ -158,6 +203,12 @@
   cursor: pointer;
   background-color: black;
   color: white;
+  transition: .2s;
+  &:hover{
+      transform: scale(0.97);
+      color: #fff;
+      transition: .3s;
+  }
 }
 
 .continueShoping,
@@ -171,6 +222,8 @@
   text-decoration: none;
   display: flex;
   align-items: center;
+  font-family: 'Poppins';
+
 }
 
 .continueShoping a span,
@@ -179,8 +232,10 @@
 }
 
 .continueShoping {
-  font-size: 24px;
+  font-size: 15px;
   font-weight: 500;
+  font-family: 'Poppins';
+
 }
 
 .cartEmpty {
@@ -190,4 +245,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.create{
+  border: 1px solid #cacaca;
+  width: 30%;
+  padding: 0.7rem;
+  border-radius: 10px;
+  font-family: 'Poppins';
+  background-color: #000924;
+  color: #cacaca;
+  transition: .2s;
+  &:hover{
+      transform: scale(0.97);
+      color: #fff;
+      transition: .3s;
+  }
+  
 }

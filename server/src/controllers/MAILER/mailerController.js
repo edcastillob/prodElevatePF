@@ -73,8 +73,8 @@ const sendMailNewUser = async (user) => {
       // port: 465 - true, 567 - false
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD
+        user: 'mendozaveralucia@gmail.com',
+        pass: 'pgazpnjfbfvbkpxe'
       }
     });
 

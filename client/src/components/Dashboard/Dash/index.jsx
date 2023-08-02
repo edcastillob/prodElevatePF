@@ -44,9 +44,9 @@ const Panel = ({ toggleActive }) => {
           <MdMenu />
         </div>
         {/* userImg */}
-        <div className={styles.user}>
+        {/* <div className={styles.user}>
           <img src={logo} />
-        </div>
+        </div> */}
       </div>
 
       {/* cards */}

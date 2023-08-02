@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 //import StripeButton from "../StripeCart/StripeButton";
 
 import styles from "./Cart.module.css";
@@ -15,11 +16,14 @@ import {
 } from "../../redux/actions/actions";
 import StripeButton from "../StripeButton/StripeButton";
 
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cartItems);
   const cartTotalAmount = useSelector((state) => state.cartTotalAmount);
+    // MODAL STATE
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const dispatch = useDispatch();
   console.log(cartItems);
@@ -44,15 +48,21 @@ const Cart = () => {
   };
 
   const handledClear = () => {
+    setIsModalOpen(true);
+    // dispatch(clearCart());
+  };
+
+  const handleConfirmClear = () => {
     dispatch(clearCart());
+    setIsModalOpen(false); // Close the modal after clearing the cart
   };
 
   return (
     <div className={styles.cartContainer}>
-      <h2>Shoping Cart</h2>
+      <h3>Shoping Cart</h3>
       {cartItems.length === 0 ? (
         <div className={styles.cartEmpty}>
-          <p>Your Cart esta vacio</p>
+          <p>Your Cart is empty</p>
           <div className={styles.startShoping}>
             <Link to="/home">
               <svg
@@ -93,10 +103,10 @@ const Cart = () => {
             </Link>
           </div>
           <div className={styles.titles}>
-            <h3 className={styles.productTitle}>Product</h3>
-            <h3 className={styles.price}>Price</h3>
-            <h3 className={styles.quantity}>Quantity</h3>
-            <h3 className={styles.total}>Total</h3>
+            <h4 className={styles.productTitle}>Product</h4>
+            <h4 className={styles.price}>Price</h4>
+            <h4 className={styles.quantity}>Quantity</h4>
+            <h4 className={styles.total}>Total</h4>
           </div>
           <div className={styles.cartItems}>
             {cartItems?.map((cartItem) => (
@@ -104,13 +114,13 @@ const Cart = () => {
                 <div className={styles.cartProduct}>
                   <img src={cartItem.images} alt={cartItem.name} />
                   <div>
-                    <h3>{cartItem.name}</h3>
+                    <h4>{cartItem.name}</h4>
                     <div
                       className={styles.descriptionItem}
                       dangerouslySetInnerHTML={{ __html: cartItem.description }}
                     ></div>
                     <button onClick={() => handledRemoveFromCart(cartItem)}>
-                      Remove
+                    <h3 className={styles.delete}><ion-icon name="trash"></ion-icon></h3>
                     </button>
                   </div>
                 </div>
@@ -130,7 +140,7 @@ const Cart = () => {
             ))}
           </div>
           <div className={styles.cartSummary}>
-            <button className={styles.clearCart} onClick={() => handledClear()}>
+            <button className={styles.clearCart} onClick={() => setIsModalOpen(true)}>
               Clear Cart
             </button>
             <div className={styles.cartCheckout}>
@@ -139,13 +149,27 @@ const Cart = () => {
                 <span className={styles.amount}>${cartTotalAmount}</span>
               </div>
               <p>Taxes and Shiping</p>
-              <StripeButton cartItems={cartItems} />
+              <StripeButton cartItems={cartItems} className={styles.create} />
             </div>
           </div>
         </div>
       )}
 
-      <ToastContainer />
+      {/* MODAL */}
+      <Modal isOpen={isModalOpen} toggle={() => setIsModalOpen(false)} centered>
+        <ModalHeader style={{fontFamily:'Poppins'}} toggle={() => setIsModalOpen(false)}>Confirm</ModalHeader>
+        <ModalBody style={{fontFamily:'Poppins'}}>
+          Are you sure you want to clear the cart?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => setIsModalOpen(false)} style={{fontFamily:'Poppins'}}>
+            Cancel
+          </Button>
+          <Button color="danger" onClick={handleConfirmClear} style={{fontFamily:'Poppins'}}>
+            Clear
+          </Button>
+        </ModalFooter>
+        </Modal>
     </div>
   );
 };

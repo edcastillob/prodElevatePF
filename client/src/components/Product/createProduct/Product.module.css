@@ -33,7 +33,12 @@
         color: #fff;
         transition: .3s;
     }
-    
+
+}
+
+.uploadImg{
+    /* border: 1px solid black; */
+    height: 190px;
 }
 
 

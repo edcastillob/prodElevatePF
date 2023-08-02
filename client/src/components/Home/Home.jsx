@@ -10,14 +10,13 @@ import {
 } from "../../redux/actions/actions";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { SearchBar } from "../SearchBar/SearchBar";
 import TypeIt from "typeit-react";
 import Marquee from "react-fast-marquee";
 import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
 
-export const Home = () => {
+export const Home = ( { user, userLocal, handleSignIn  } ) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,18 +26,18 @@ export const Home = () => {
   const productsFiltered = useSelector((state) => state.productsFiltered);
 
   const [optionProducts, setOptionProducts] = useState([]);
+  const [searchProductNav, setSearchProductNav] = useState("");
 
   useEffect(() => {
     setOptionProducts(productsFiltered.length ? productsFiltered : products);
   }, [productsFiltered, products]);
+
   useEffect(() => {
-    // Recupera los datos del usuario almacenados en el LocalStorage al cargar la página
     const storedUserData = JSON.parse(localStorage.getItem("user"));
     if (storedUserData) {
       dispatch({ type: "LOGIN_SUCCESS", payload: storedUserData });
     }
 
-    // Agregar el evento DOMContentLoaded para que se dispare al cargar y refrescar la página
     const handleDOMContentLoaded = () => {
       const storedUserData = JSON.parse(localStorage.getItem("user"));
       if (storedUserData) {
@@ -53,7 +52,7 @@ export const Home = () => {
     };
   }, [dispatch]);
 
-  //filter Price
+ 
   const handlePriceHigher = () => {
     dispatch(priceHigherLower());
   };
@@ -85,6 +84,10 @@ export const Home = () => {
     setShowModal(false);
   };
 
+  const filteredProducts = optionProducts.filter((product) =>
+    product.name.toLowerCase().includes(searchProductNav.toLowerCase())
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.welcome}>
@@ -94,7 +97,13 @@ export const Home = () => {
         </Marquee>
       </div>
       <div className={styles.divSearch}>
-        <SearchBar />
+        {/* search */}
+        <input
+          type="text"
+          placeholder="search product"
+          value={searchProductNav}
+          onChange={(event) => setSearchProductNav(event.target.value)}
+        />
       </div>
       <div className={styles.oderFilters}>
         <div>
@@ -144,10 +153,14 @@ export const Home = () => {
         ) : (
           ""
         )}
-        {optionProducts?.map((product) => (
+
+        {/* optionProducts */}
+        {filteredProducts?.map((product) => (
           <CardProduct key={product.id} product={product} />
         ))}
       </div>
     </div>
   );
 };
+
+

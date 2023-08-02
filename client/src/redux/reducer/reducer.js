@@ -33,6 +33,7 @@ import {
   GET_USER_ID,
   FILTER_DATA,
   FILTER_NAME,
+  GET_USER_EMAIL,
 } from "../actions/types";
 
 const initialState = {
@@ -52,6 +53,7 @@ const initialState = {
   user: null,
   role: [],
   users: [],
+  userMail: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -350,6 +352,12 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         users: actions.payload,
+      };
+    case GET_USER_EMAIL:
+      // console.log("User mail reducer: ", actions.payload);
+      return {
+        ...state,
+        userMail: actions.payload,
       };
 
     case FILTER_DATA:

@@ -30,6 +30,10 @@ const { getProviderId } = require("../controllers/GET/getProviderId");
 const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
 
 const { getUserId } = require("../controllers/GET/getUserId");
+const { getUserByEmail } = require("../controllers/GET/getUserByEmail");
+const { checkEmail } = require("../controllers/authGoogle");
+
+
 
 
 const router = Router();
@@ -91,12 +95,15 @@ router.get("/profile", isAuthenticated, (req, res) => {
   });
 });
 
+router.post('/check-email', checkEmail);
+
 router.post("/role", postRole);
 
 router.post("/role", postRole);
 
 router.get("/user", getAllUsers);
 router.get("/user/:id", getUserId);
+router.get("/useremail/:email", getUserByEmail);
 router.post("/user", postUser);
 router.put("/user/:id", putUser);
 router.delete("/user/:id", deleteUser);
