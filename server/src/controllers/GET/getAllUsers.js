@@ -11,7 +11,8 @@ async function getAllUsers(req, res) {
                 'image', 
                 'numPhone',
                 'address',
-                'isActive'
+                'isActive',
+                'rol'
             ],
         });
         

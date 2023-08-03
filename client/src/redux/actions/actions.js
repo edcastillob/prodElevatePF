@@ -40,7 +40,7 @@ import {
   GET_COMMENTS_BY_PRODUCT,
   CREATE_COMMENT,
   CREATE_REPLY,
-  UPDATE_CURRENT_USER,
+
   GET_USER_EMAIL,
 } from "./types";
 import axios from "axios";
@@ -558,7 +558,7 @@ export const createComment = (commentData) => {
         type: CREATE_COMMENT,
         payload: response.data,
       });
-      return response.data; // Devolver los datos del comentario creado desde la respuesta
+      return response.data; 
     } catch (error) {
       console.error("Error al crear el comentario:", error);
     }
@@ -566,22 +566,26 @@ export const createComment = (commentData) => {
 };
 
 // Acción para responder a un comentario
-export const createReply = (text, commentId, userEmail) => {
+export const createReply = (replyData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `${ENDPOINT}comments/${commentId}/reply`,
-        { text, userEmail } // Agregar el correo electrónico del usuario como parte de los datos de la respuesta
-      );
-      dispatch({
-        type: CREATE_REPLY,
-        payload: { reply: response.data, commentId },
-      });
+      const { commentId, text, userEmail } = replyData;
+      const response = await axios.put(`${ENDPOINT}comments/${commentId}/reply`, { text, userEmail });
+
+      if (response.status === 201) {
+        dispatch({
+          type: CREATE_REPLY,
+          payload: { reply: response.data, commentId: commentId },
+        });
+      } else {
+        console.error("Error creating reply");
+      }
     } catch (error) {
       console.error("Error al responder al comentario:", error);
     }
   };
 };
+
 // Acción para obtener los comentarios de un producto
 export const getCommentsByProduct = (productId) => {
   return async (dispatch) => {
@@ -598,9 +602,7 @@ export const getCommentsByProduct = (productId) => {
   };
 };
 
-export const updateCurrentUser = (user) => {
-  return { type: UPDATE_CURRENT_USER, payload: user };
-};
+
 
 export const checkEmailAndRegister = (userData) => {
   return async (dispatch) => {

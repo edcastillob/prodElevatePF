@@ -30,7 +30,7 @@ const { getProviderId } = require("../controllers/GET/getProviderId");
 const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
 const getCommentsByProduct = require("../controllers/GET/getComment");
 const {createComment, createReply} = require("../controllers/POST/postComment")
-const { getUserId } = require("../controllers/GET/getUserId");
+const { getUserId} = require("../controllers/GET/getUserId");
 const { getUserByEmail } = require("../controllers/GET/getUserByEmail");
 const { checkEmail } = require("../controllers/authGoogle");
 
@@ -56,6 +56,7 @@ router.get("/", function (req, res) {
 router.post("/login", passport.authenticate("local"), (req, res) => {
   const { name, identification, numPhone, address, image, email } =
     req.user.dataValues;
+    console.log("Usuario autenticado:", req.user);
   res.setHeader("Access-Control-Allow-Credentials", "true"); // Habilitar las credenciales
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Define aquí la URL de tu frontend
   res.send({
@@ -142,8 +143,7 @@ router.post("/comments", createComment);
 router.get("/products/:productId/comments", getCommentsByProduct);
 
 // Ruta para responder a un comentario
-router.post("/comments/:commentId/reply", createReply);
-
+router.put("/comments/:commentId/reply", createReply);
 
 
 

@@ -20,6 +20,7 @@ module.exports = (sequelize) => {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         isEmail: true
     },
     image: {
@@ -40,7 +41,8 @@ module.exports = (sequelize) => {
     },
     rol: {
         type: DataTypes.STRING,
-        allowNull: true,
+        defaultValue:"User",
+       
     },
     isActive: {
         type: DataTypes.BOOLEAN,

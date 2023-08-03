@@ -16,6 +16,8 @@ import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
 
+
+
 export const Home = ( { user, userLocal, handleSignIn  } ) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
   }, []);
   const products = useSelector((state) => state.products);
   const productsFiltered = useSelector((state) => state.productsFiltered);
-
+  const productReviews = useSelector((state) => state.productReviews);
   const [optionProducts, setOptionProducts] = useState([]);
   const [searchProductNav, setSearchProductNav] = useState("");
 
@@ -156,7 +158,10 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
 
         {/* optionProducts */}
         {filteredProducts?.map((product) => (
-          <CardProduct key={product.id} product={product} />
+          <CardProduct 
+           key={product.id}
+          product={product}
+          />
         ))}
       </div>
     </div>

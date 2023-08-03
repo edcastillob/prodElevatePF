@@ -15,7 +15,7 @@ const Reviews = ({ reviews }) => {
       {reviews && reviews.length > 0 ? ( 
         <>
           <div style={{ marginLeft: "10px", display: "inline-block", width: "20%" }}>
-            <p>Promedio de puntuación:</p>
+            
           </div>
           <div style={{ marginLeft: "30px", display: "inline-block", flexDirection: "column", width: "25%", flexWrap: "wrap", textAlign: "left", justifyContent: "center" }}>
             <Rating name="read-only" value={calculateAverageScore()} readOnly />

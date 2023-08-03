@@ -128,3 +128,80 @@
 .generalReview {
     padding: 10px;
 }
+.comment-box {
+  background-color: #f0f2f5;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
+.comment {
+  margin-bottom: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.comment-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.comment-info {
+  display: flex;
+  align-items: center;
+}
+
+.comment-info img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-info span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #385898;
+}
+
+.reply-form {
+  margin-top: 10px;
+}
+
+.reply-form textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.reply-form button {
+  margin-top: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #385898;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reply-form button:hover {
+  background-color: #3b5998;
+}
+
+.reply-container {
+  margin-left: 40px;
+}
+
+
+.nested-reply-container {
+  margin-left: 40px;
+  background-color: #f0f2f5;
+  padding: 10px;
+  border-radius: 8px;
+}

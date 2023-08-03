@@ -67,12 +67,24 @@ Product.hasMany(Review);
 Review.belongsTo(Product);
 /* RELACIÓN ENTRE USUARIO Y REVIEW */
 
-Comment.belongsTo(Product); // Un comentario pertenece a un producto
-Product.hasMany(Comment);   // Un producto puede tener muchos comentarios
+Comment.belongsTo(Product); 
+Product.hasMany(Comment);   
 
+
+Comment.belongsTo(User, {
+  foreignKey: "userEmail", 
+  targetKey: "email", 
+  as: "user", 
+});
+Comment.belongsTo(User, {
+  foreignKey: "userEmail", 
+  targetKey: "email", 
+  as: "replyUser", 
+});
 Comment.hasMany(Comment, {
-  as: "replies", // alias para la asociación
-  foreignKey: "parentId", // clave foránea en la tabla Comment que referencia al comentario padre
+  as: "respuestas",
+  foreignKey: "parentId",
+ 
 });
 
 module.exports = {
