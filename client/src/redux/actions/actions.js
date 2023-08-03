@@ -36,6 +36,7 @@ import {
   FILTER_NAME,
   GET_USER_EMAIL,
   GET_ROLE,
+  GET_USER_SYSTEM_LOG,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -121,6 +122,7 @@ export const getUsers = () => {
     throw new Error(error.message);
   }
 };
+
 export const deleteUsers = (userId) => async (dispatch) => {
   try {
     await axios.delete(`${ENDPOINT}user/${userId}`);
@@ -170,6 +172,22 @@ export const getUserEmail = (email) => {
         .then((response) => {
           // console.log('email desde actions: ',response.data);
           dispatch({ type: GET_USER_EMAIL, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching user details.");
+        });
+    });
+  };
+};
+export const getUserSystemLog = (email) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}userlog/${encodeURIComponent(email)}`) 
+        .then((response) => {
+          // console.log('email desde actions: ',response.data);
+          dispatch({ type: GET_USER_SYSTEM_LOG, payload: response.data });
           resolve();
         })
         .catch((error) => {

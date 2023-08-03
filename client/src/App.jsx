@@ -36,8 +36,8 @@ import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { TermsConditions } from "./components/TermsConditions/TermsConditions";
 import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
-import { useDispatch } from "react-redux";
-import { checkEmailAndRegister } from "./redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { checkEmailAndRegister, getUsers } from "./redux/actions/actions";
 import { ChangePassword } from "./components/users/changePassword/ChangePassword";
 
 // LANGUAGE SETTINGS
@@ -118,6 +118,13 @@ function App() {
       navigate("/login");
     }
   };
+  console.log('currentUserLocal: ', currentUserLocal)
+  
+  
+  // useEffect(() => {dispatch(getUsers())}, []);
+  // const allUsers = useSelector((state) => state.users);
+  
+  // console.log('allUsers: ', allUsers)
   return (
     <>
     <I18nextProvider i18n={i18next}>

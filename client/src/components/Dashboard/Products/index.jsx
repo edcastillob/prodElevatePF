@@ -101,12 +101,12 @@ const Products = ({ toggleActive }) => {
                           <ion-icon name="create"></ion-icon>
                         </button>
                       </Link>
-                      <button
+                      {/* <button
                         className={styles.delete}
                         onClick={() => handleDeleteProduct(product.id)}
                       >
                         <ion-icon name="trash"></ion-icon>
-                      </button>
+                      </button> */}
                     </td>
                   </tr>
                 ))}

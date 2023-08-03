@@ -35,6 +35,7 @@ import {
   FILTER_NAME,
   GET_USER_EMAIL,
   GET_ROLE,
+  GET_USER_SYSTEM_LOG,
 } from "../actions/types";
 
 const initialState = {
@@ -55,6 +56,7 @@ const initialState = {
   role: [],
   users: [],
   userMail: [],
+  userLog:[],
 };
 
 function reducer(state = initialState, actions) {
@@ -371,7 +373,11 @@ function reducer(state = initialState, actions) {
           ...state,
           role: actions.payload,
         };
-
+        case GET_USER_SYSTEM_LOG:
+          return {
+            ...state,
+            userLog: actions.payload,
+          };
     default:
       return state;
   }

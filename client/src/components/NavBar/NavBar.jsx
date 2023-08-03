@@ -12,6 +12,7 @@ import countriesData from "../Country/db.json";
 export const NavBar = ({ user, userLocal, handleSignIn }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [modal, setModal] = useState(false);
 
  useEffect(() => { 
   dispatch(getRole());
@@ -24,7 +25,7 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
 
   }
 
-}, [user, userLocal])
+}, [user, userLocal, modal])
 
 
 
@@ -32,7 +33,6 @@ const userMail = useSelector((state) => state.userMail);
 const roles = useSelector((state) => state.role);
 
  
-  const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
   //Lógica Dropdown
@@ -69,8 +69,8 @@ const roles = useSelector((state) => state.role);
   const userRole = roles.find((rol) => rol.id === userMail.roleId);
   const userRoleg = roles.find((rol) => rol.id === userMail?.roleId);
 
-userLocal ? console.log('UserLocal' ,userLocal) : console.log('Local Vacio');
-user ? console.log('UserGoogle' ,user) : console.log('Google Vacio');
+// userLocal ? console.log('UserLocal' ,userLocal) : console.log('Local Vacio');
+// user ? console.log('UserGoogle' ,user) : console.log('Google Vacio');
 // console.log('userData: ', userMail)
 // console.log('roles: ', roles)
 // console.log('rol del user', userRole)
@@ -93,22 +93,6 @@ useEffect(() => {
   }
 }, [userLocal, usersAll]);
 
-// const getUserCountry = () => {
-//   if (userLocal && usersAll) {
-//     console.log('usersAll_veamos', usersAll)
-//     const userWithEmail = usersAll?.find((user) => user.email === userLocal.email);
-//     if (userWithEmail) {
-//       return userWithEmail.country;
-//     }
-//   } else if (user && usersAll) {
-//     const userWithEmail = usersAll?.find((userb) => userb.email === user.email);
-
-//     if (userWithEmail) {
-//       return userWithEmail.country;
-//     }
-//   }
-//   return "";
-// };
 const getUserCountry = () => {
   let usersArray = Array.isArray(usersAll) ? usersAll : (usersAll ? [usersAll] : []);
   

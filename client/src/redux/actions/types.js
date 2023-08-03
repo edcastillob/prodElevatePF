@@ -30,6 +30,7 @@ export const DELETE_USERS = "DELETE_USERS";
 export const EDIT_USERS = "EDIT_USERS";
 export const GET_USER_ID = "GET_USER_ID";
 export const GET_USER_EMAIL = "GET_USER_EMAIL";
+export const GET_USER_SYSTEM_LOG = "GET_USER_SYSTEM_LOG";
 
 //Cart
 export const ADD_TO_CART = "ADD_TO_CART";

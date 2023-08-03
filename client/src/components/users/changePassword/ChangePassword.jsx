@@ -13,19 +13,28 @@ import { editUser, getUserId } from "../../../redux/actions/actions";
 import countriesData from "../../Country/db.json";
 
 
+
 export const  ChangePassword = () => {
+  useEffect(() => {   
+    toast.info("¡to update confirm or change your password!");
+  }, [])
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userMail = location.state.userMail;
-
+  
   const params = useParams();
   const { id } = params;
-  useEffect(() => {
-    dispatch(getUserId(userMail.id));
+  useEffect(() => {   
+      dispatch(getUserId(userMail.id));   
   }, [dispatch, id]);
   
+  const userActive = useSelector((state) => state.users);
+  // console.log('userActive', userActive)
+  
+  
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [imageDeleted, setImageDeleted] = useState(false);
 
   const [passwordError, setPasswordError] = useState("");
 
@@ -33,7 +42,7 @@ export const  ChangePassword = () => {
     name: userMail.name,
     identification: userMail.identification,  
     numPhone:  userMail.numPhone, 
-    country:userMail.country ,  
+    country: userMail.country ,  
     password: userMail.password,
     confirmpassword: "______",
     image: userMail.image,    
@@ -77,20 +86,15 @@ export const  ChangePassword = () => {
   };
 
   const handleRemoveImage = () => {
-    setChangeUser((users) => ({
-      ...users,
+    setChangeUser((changeUser) => ({
+      ...changeUser,
       image: [],
     }));
+    setImageDeleted(true);
   };
 
-  // const handleImageUpload = (imageUrls) => {
-  //   setChangeUser((imgProduct) => ({
-  //     ...imgProduct,
-  //     image: [...(imgProduct.image || []), ...imageUrls],
-  //   }));
-  // };
   const handleImageUpload = (imageUrls) => {
-    console.log(".....",imageUrls)
+    // console.log(".....",imageUrls)
     // Convertir la URL en un array si es un string
     const urlsArray = typeof imageUrls !== 'Array' ? [imageUrls] : imageUrls;
   
@@ -106,7 +110,9 @@ export const  ChangePassword = () => {
   const handleSubmit = (event) => {
   event.preventDefault();
   if (changeUser.password !== changeUser.confirmpassword) {
-    setPasswordError("Passwords do not match");
+    toast.error("¡Passwords do not match!");
+    toast.info("¡to update confirm or change your password!");
+
     return;
   }
     dispatch(editUser(userMail.id, changeUser));
@@ -135,7 +141,9 @@ export const  ChangePassword = () => {
       country: countryValue,
     }));
   }
-  console.log(changeUser)
+  // console.log("_z_",userMail.country)
+
+  
   return(
     <div className={styles.container}>
 
@@ -182,6 +190,7 @@ export const  ChangePassword = () => {
                   className="form-control"
                   name="country"
                   onChange={handleCountrySelect}
+                  defaultValue={userMail.country}
                 >
                   <option value="">Select a country</option>
                   {sortedCountries.map((country) => (
@@ -217,72 +226,72 @@ export const  ChangePassword = () => {
       
       <br />
 
+      {/* _____________image________________ */}
       <div className="d-flex align-items-center">
-        <div>
-          {changeUser.image ? (
-            <div>
-              <button
-                type="button"
-                className="btn btn-danger btn-sm"
-                onClick={handleRemoveImage}
-              >
-                X
-              </button>
-              <div
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  overflow: "hidden",
-                  borderRadius: "50%",
-                  position: "relative",
-                }}
-              >
-                <img
-                  src={changeUser.image}
-                  alt=""
+          <div>
+            {changeUser.image && !imageDeleted ? (
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-danger btn-sm"
+                  onClick={handleRemoveImage}
+                >
+                  X
+                </button>
+                <div
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
+                    width: "40px",
+                    height: "40px",
+                    overflow: "hidden",
                     borderRadius: "50%",
+                    position: "relative",
                   }}
+                >
+                  <img
+                    src={changeUser.image}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h6
+                  style={{
+                    fontFamily: "Poppins",
+                    textAlign: "start",
+                    marginTop: "-1rem",
+                  }}
+                >
+                  Image:
+                </h6>
+                <UploadImg
+                  onImageUpload={handleImageUpload}
+                  uploadedImages={changeUser.image}
+                  clearUploadedImages={() =>
+                    setChangeUser((users) => ({
+                      ...users,
+                      image: [],
+                    }))
+                  }
                 />
               </div>
-            </div>
-          ) : (
-            <div>
-              <h6
-                style={{
-                  fontFamily: "Poppins",
-                  textAlign: "start",
-                  marginTop: "-1rem",
-                }}
-              >
-                Image:
-              </h6>
-              <UploadImg
-  onImageUpload={handleImageUpload}
-  uploadedImages={changeUser.image}
-  clearUploadedImages={() =>
-    setChangeUser((changeUser) => ({
-      ...changeUser,
-      image: [],
-    }))
-  }
-/>
-            </div>
-          )}
-           
+            )}
+          </div>
         </div>
-      </div>
 
-      <br />
-      <br />
+        <br />
+        <br />
 
-      <button type="submit" className={styles.create}>
-        Update User
-      </button>
-    </form>
-  </div>
-);
+        <button type="submit" className={styles.create}>
+          Update User
+        </button>
+      </form>
+    </div>
+  );
 };
