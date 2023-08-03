@@ -41,7 +41,42 @@
     justify-content: center;
     gap: 1rem;
     padding-top: 1rem;
+    position: relative;
+    cursor: pointer;
 }
+
+
+
+.dropdownOptions {
+    position: absolute;
+    top: 75%;
+    left: 0;
+    background-color: #0b090971;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 150px;    
+    z-index: 1;
+    border: none;
+    animation: slideBottom .4s ease;
+  }
+  
+  /* Estilos para cada opción del dropdown */
+  .dropdownOptions li {
+    padding: 8px;
+    cursor: pointer;
+    width: 100%;
+    color: #cacaca;
+    font-family: "Poppins";
+    transition: .2s;
+    &:hover{
+        background-color: #0b0909ad;
+        transition: .3s;
+    }
+   
+  }
 
 .signUp{
     text-decoration: none;
@@ -57,6 +92,11 @@
 .language{
     color: #cacaca;
     font-family: 'Poppins';
+    transition: .2s;
+    &:hover{
+        color: #fff;
+        transition: .3s;
+    }
 }
 
 .content{
@@ -165,6 +205,20 @@
     height: auto;
     user-select: none;
     
+}
+
+
+/* ANIMATION */
+
+@keyframes slideBottom {
+    0%{
+      transform: translateY(-5px);
+      opacity: 0;
+    }
+    100%{
+      transform: translateY(0);
+      opacity: 1;
+    }
 }
 
 /*En pruebas*/

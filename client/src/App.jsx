@@ -40,6 +40,27 @@ import { useDispatch } from "react-redux";
 import { checkEmailAndRegister } from "./redux/actions/actions";
 import { ChangePassword } from "./components/users/changePassword/ChangePassword";
 
+// LANGUAGE SETTINGS
+import { I18nextProvider } from "react-i18next";
+import i18next from "i18next";
+import global_es from "./translations/es/global.json";
+import global_en from "./translations/en/global.json";
+
+i18next.init({
+  interpolation: { escapeValue: false },
+  lng: "en",
+  resources: {
+    en: {
+      global: global_en,
+    },
+    es: {
+      global: global_es,
+    },
+  },
+});
+
+
+
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -47,6 +68,17 @@ function App() {
   const [showNavBar, setShowNavBar] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserLocal, setCurrentUserLocal] = useState(null);
+  // LANGUAGE STATE & HANDLE
+  const [currentLanguage, setCurrentLanguage] = useState(
+    localStorage.getItem("selectedLanguage") || "en" 
+  );
+
+  const handleLanguageChange = (language) => {
+    setCurrentLanguage(language);
+    localStorage.setItem("selectedLanguage", language); 
+  };
+
+
 
   useEffect(() => {
     setShowNavBar(
@@ -88,6 +120,7 @@ function App() {
   };
   return (
     <>
+    <I18nextProvider i18n={i18next}>
       {showNavBar && (
         <NavBar
           user={currentUser}
@@ -98,7 +131,7 @@ function App() {
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
         <Routes>
-          <Route exact path="/" element={<Landing />} />
+          <Route exact path="/" element={<Landing handleLanguageChange={handleLanguageChange} currentLanguage={currentLanguage}/>} />
           <Route exact path="/about" element={<AboutUs />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
@@ -143,8 +176,9 @@ function App() {
           theme="dark"
         />
         {showNavBar}
-        <Footer />
+        <Footer currentLanguage={currentLanguage} handleLanguageChange={handleLanguageChange} />
       </div>
+      </I18nextProvider>
     </>
   );
 }
