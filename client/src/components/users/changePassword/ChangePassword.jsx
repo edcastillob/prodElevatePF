@@ -10,23 +10,33 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { editUser, getUserId } from "../../../redux/actions/actions";
+import countriesData from "../../Country/db.json";
+
 
 export const  ChangePassword = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userMail = location.state.userMail;
+
+  const params = useParams();
+  const { id } = params;
+  useEffect(() => {
+    dispatch(getUserId(userMail.id));
+  }, [dispatch, id]);
   
+  const [selectedCountry, setSelectedCountry] = useState("");
 
   const [passwordError, setPasswordError] = useState("");
 
   const [changeUser, setChangeUser] = useState({
-    name: "",
-    identification: "",  
-    numPhone: "",   
-    password: "",
-    confirmpassword: "",
-    image: [],    
+    name: userMail.name,
+    identification: userMail.identification,  
+    numPhone:  userMail.numPhone, 
+    country:userMail.country ,  
+    password: userMail.password,
+    confirmpassword: "______",
+    image: userMail.image,    
   });
 
   const [errors, setErrors] = useState({});
@@ -36,6 +46,7 @@ export const  ChangePassword = () => {
       userMail.name &&
       userMail.identification &&
       userMail.numPhone &&
+      userMail.country &&
       userMail.password &&
       userMail.image
     ) {
@@ -43,6 +54,7 @@ export const  ChangePassword = () => {
         name: userMail.name,
         identification: userMail.identification,
         numPhone: userMail.numPhone,
+        country: userMail.country,
         password: userMail.password,
         image: userMail.image,
       });
@@ -51,6 +63,7 @@ export const  ChangePassword = () => {
     userMail.name,
     userMail.identification,
     userMail.numPhone,
+    userMail.country,
     userMail.password,
     userMail.image,
   ]);
@@ -66,16 +79,29 @@ export const  ChangePassword = () => {
   const handleRemoveImage = () => {
     setChangeUser((users) => ({
       ...users,
-      image: "",
+      image: [],
     }));
   };
 
+  // const handleImageUpload = (imageUrls) => {
+  //   setChangeUser((imgProduct) => ({
+  //     ...imgProduct,
+  //     image: [...(imgProduct.image || []), ...imageUrls],
+  //   }));
+  // };
   const handleImageUpload = (imageUrls) => {
+    console.log(".....",imageUrls)
+    // Convertir la URL en un array si es un string
+    const urlsArray = typeof imageUrls !== 'Array' ? [imageUrls] : imageUrls;
+  
     setChangeUser((imgProduct) => ({
       ...imgProduct,
-      image: [...(imgProduct.image || []), ...imageUrls],
+      image: urlsArray,
     }));
   };
+  
+  
+  
 
   const handleSubmit = (event) => {
   event.preventDefault();
@@ -87,6 +113,28 @@ export const  ChangePassword = () => {
     toast.success("¡Edit user successfully!");
     navigate("/home");
   };
+
+  const compareCountries = (a, b) => {
+    if (a.name.common < b.name.common) {
+      return -1;
+    }
+    if (a.name.common > b.name.common) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const sortedCountries = countriesData.countries.sort(compareCountries);
+
+  const handleCountrySelect = (event) => { 
+    event.preventDefault();
+    const countryValue = event.target.value; 
+    setSelectedCountry(countryValue);
+    setChangeUser((changeUser) => ({
+      ...changeUser,
+      country: countryValue,
+    }));
+  }
   console.log(changeUser)
   return(
     <div className={styles.container}>
@@ -128,7 +176,22 @@ export const  ChangePassword = () => {
           onChange={handleChange}
           value={changeUser.numPhone}
         /> 
-     
+                   {/* _____________country________________ */}
+                   <div >
+                <select
+                  className="form-control"
+                  name="country"
+                  onChange={handleCountrySelect}
+                >
+                  <option value="">Select a country</option>
+                  {sortedCountries.map((country) => (
+                    <option key={country.cca3} value={country.name.common}>
+                      {country.name.common}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
       {/* _____________password________________ */}
       <label>Password:</label>
         <input
@@ -198,17 +261,18 @@ export const  ChangePassword = () => {
                 Image:
               </h6>
               <UploadImg
-                onImageUpload={handleImageUpload}
-                uploadedImages={changeUser.image}
-                clearUploadedImages={() =>
-                  setChangeUser((users) => ({
-                    ...users,
-                    image: [],
-                  }))
-                }
-              />
+  onImageUpload={handleImageUpload}
+  uploadedImages={changeUser.image}
+  clearUploadedImages={() =>
+    setChangeUser((changeUser) => ({
+      ...changeUser,
+      image: [],
+    }))
+  }
+/>
             </div>
           )}
+           
         </div>
       </div>
 

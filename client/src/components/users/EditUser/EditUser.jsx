@@ -104,10 +104,10 @@ export const EditUser = () => {
       image: [...(imgProduct.image || []), ...imageUrls],
     }));
   };
-  // console.log("el usuario: ",users)
-  // console.log("el change: ",changeUser.roleId)
+  console.log("el usuario: ",users)
+  console.log("el change: ",changeUser)
   // console.log("el rol: ",roles)
-
+  console.log(users)
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
@@ -270,6 +270,7 @@ export const EditUser = () => {
                     }))
                   }
                 />
+              
               </div>
             )}
           </div>

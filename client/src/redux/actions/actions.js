@@ -131,6 +131,7 @@ export const deleteUsers = (userId) => async (dispatch) => {
   }
 };
 export const editUser = (userId, changeUser) => {
+  console.log('aqui va el change desde actions: ', changeUser)
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}user/${userId}`, changeUser);

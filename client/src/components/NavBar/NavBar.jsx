@@ -77,7 +77,7 @@ user ? console.log('UserGoogle' ,user) : console.log('Google Vacio');
 
 const [userCountry, setUserCountry] = useState("");
 const [userFlag, setUserFlag] = useState("");
-const usersAll = useSelector((state) => state.users);
+const usersAll = useSelector((state) => state.users) || [];
 useEffect(() => {
   const country = getUserCountry();
   setUserCountry(country);
@@ -93,24 +93,42 @@ useEffect(() => {
   }
 }, [userLocal, usersAll]);
 
+// const getUserCountry = () => {
+//   if (userLocal && usersAll) {
+//     console.log('usersAll_veamos', usersAll)
+//     const userWithEmail = usersAll?.find((user) => user.email === userLocal.email);
+//     if (userWithEmail) {
+//       return userWithEmail.country;
+//     }
+//   } else if (user && usersAll) {
+//     const userWithEmail = usersAll?.find((userb) => userb.email === user.email);
+
+//     if (userWithEmail) {
+//       return userWithEmail.country;
+//     }
+//   }
+//   return "";
+// };
 const getUserCountry = () => {
-  if (userLocal && usersAll) {
-    const userWithEmail = usersAll.find((user) => user.email === userLocal.email);
+  let usersArray = Array.isArray(usersAll) ? usersAll : (usersAll ? [usersAll] : []);
+  
+  if (userLocal && usersArray.length) {
+    const userWithEmail = usersArray.find((user) => user.email === userLocal.email);
     if (userWithEmail) {
       return userWithEmail.country;
     }
-  } else if (user && usersAll) {
-    const userWithEmail = usersAll.find((userb) => userb.email === user.email);
-
+  } else if (user && usersArray.length) {
+    const userWithEmail = usersArray.find((userb) => userb.email === user.email);
     if (userWithEmail) {
       return userWithEmail.country;
     }
   }
+  
   return "";
 };
 
 
-console.log(usersAll)
+// console.log(usersAll)
 // console.log(user.email)
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
