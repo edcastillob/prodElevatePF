@@ -35,6 +35,7 @@ import {
   FILTER_DATA,
   FILTER_NAME,
   GET_USER_EMAIL,
+  GET_ROLE,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -300,6 +301,17 @@ export const addRole = (role) => {
   };
 };
 
+export const getRole = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ENDPOINT}role`);
+      const roleData = response.data; 
+      return dispatch({ type: GET_ROLE, payload: roleData });
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
 export const addUser = (user) => {
   return async (dispatch) => {
     try {

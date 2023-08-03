@@ -36,7 +36,7 @@ export const Role = () => {
         <hr />
         <form onSubmit={ handleSubmit }>
         
-        {/* Nombre de categoria */}
+        {/* Nombre de rol */}
         <label htmlFor="name">Name: </label>        
         <input
         className='form-control'
@@ -47,7 +47,7 @@ export const Role = () => {
         onChange={handleChange}
       />
 
-       {/* Descripcion de categoria */}
+       {/* Descripcion de rol */}
        <label htmlFor="name">Description: </label>             
         <input
         className='form-control'

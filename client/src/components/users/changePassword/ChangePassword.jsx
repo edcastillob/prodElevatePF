@@ -16,7 +16,7 @@ export const  ChangePassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userMail = location.state.userMail;
-  console.log("xxx", userMail)
+  
 
   const [passwordError, setPasswordError] = useState("");
 

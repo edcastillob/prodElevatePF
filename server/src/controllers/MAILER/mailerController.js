@@ -10,8 +10,10 @@ const sendMailer = async (product) => {
       // port: 465 - true, 567 - false
       service: 'gmail',
       auth: {
-        user: 'mendozaveralucia@gmail.com',
-        pass: 'pgazpnjfbfvbkpxe'
+        user: 'prodelevatepf@gmail.com',
+        pass: 'znykqbnouxqdrrjf'
+        // user: 'mendozaveralucia@gmail.com',
+        // pass: 'pgazpnjfbfvbkpxe'
       }
     });
 
@@ -52,8 +54,8 @@ const sendMailer = async (product) => {
     const mail = MailGenerator.generate(response)
 
     const message = {
-      from: "prodelevatepf@gmail.com", // sender address
-      to: 'luisnaveda10@gmail.com', // list of receivers
+      from: "luisnaveda10@gmail.com", // sender address      
+      to: 'luisnaveda10@gmail.com',  // list of receivers     
       subject: "Notificación de Creación de Producto", // Subject line
       // text: "Hello world?", // plain text body
       // html: "<b>Hello world  test</b>", // html body

@@ -5,8 +5,8 @@ async function postUser(req, res) {
         
        
         console.log(req.body)
-        const { name, identification, email, images, numPhone, address, password } = req.body;
-        if (!name || !identification || !email || !images || !numPhone || !address || !password ) {
+        const { name, identification, email, images, numPhone, address, country, password } = req.body;
+        if (!name || !identification || !email || !images || !numPhone || !address || !country || !password ) {
             return res.status(401).send("Missing Data");
         };
         const image = images;        
@@ -18,6 +18,7 @@ async function postUser(req, res) {
             image,
             numPhone,
             address,
+            country,
             password
            
         });
