@@ -65,7 +65,7 @@ const userMail = useSelector((state) => state.userMail);
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
       <div className={styles.divLogo}>
-        <Link to="/home">
+        <Link to="/">
           <img className="img-fluid" src={logo} alt="img-logo" />
         </Link>
         <Link style={{ textDecoration: "none", color: "#fff" }} to="/home">
