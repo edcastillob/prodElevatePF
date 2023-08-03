@@ -38,6 +38,7 @@ import {
   CREATE_COMMENT,
   CREATE_REPLY,
   UPDATE_CURRENT_USER,
+  GET_USER_EMAIL,
 } from "../actions/types";
 
 const initialState = {
@@ -59,6 +60,7 @@ const initialState = {
   users: [],
   comments: [],
   currentUser: null,
+  userMail: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -358,6 +360,12 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         users: actions.payload,
+      };
+    case GET_USER_EMAIL:
+      // console.log("User mail reducer: ", actions.payload);
+      return {
+        ...state,
+        userMail: actions.payload,
       };
 
     case FILTER_DATA:

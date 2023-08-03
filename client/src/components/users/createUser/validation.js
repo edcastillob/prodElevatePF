@@ -11,7 +11,7 @@ export default function validate(userData){
         errors.name = "A name is required";
     } else if (!RegExpression.test(userData.name)) {
         errors.name = "Numbers or special characters are not allowed";
-    } else if (userData.name.length > 18) {
+    } else if (userData.name.length > 28) {
         errors.name = "The name can't be longer than 18 characters";
     }
     

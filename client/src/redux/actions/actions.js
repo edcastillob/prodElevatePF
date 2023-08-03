@@ -40,12 +40,14 @@ import {
   GET_COMMENTS_BY_PRODUCT,
   CREATE_COMMENT,
   CREATE_REPLY,
-  UPDATE_CURRENT_USER
+  UPDATE_CURRENT_USER,
+  GET_USER_EMAIL,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const showProducts = () => {
   try {
@@ -156,6 +158,23 @@ export const getUserId = (id) => {
         .then((response) => {
           // console.log(response.data);
           dispatch({ type: GET_USER_ID, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching user details.");
+        });
+    });
+  };
+};
+
+export const getUserEmail = (email) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}useremail/${encodeURIComponent(email)}`) 
+        .then((response) => {
+          // console.log('email desde actions: ',response.data);
+          dispatch({ type: GET_USER_EMAIL, payload: response.data });
           resolve();
         })
         .catch((error) => {
@@ -347,9 +366,7 @@ export const addToCart = (product) => {
       type: ADD_TO_CART,
       payload: product,
     });
-    toast.success(`${product.name} add to cart`, {
-      position: "bottom-left",
-    });
+    toast.success(`${product.name} add to cart`);
 
     return {
       type: ADD_TO_CART,
@@ -370,9 +387,7 @@ export const removeToCart = (product) => {
       type: REMOVE_TO_CART,
       payload: product,
     });
-    toast.error(`${product.name} remove from de cart`, {
-      position: "bottom-left",
-    });
+    toast.error(`${product.name} remove from de cart`);
 
     return {
       type: REMOVE_TO_CART,
@@ -387,9 +402,7 @@ export const decrementToCart = (product) => {
       type: DECREMENT_CART,
       payload: product,
     });
-    toast.info(` Decrement ${product.name} cart quantity`, {
-      position: "bottom-left",
-    });
+    
 
     return {
       type: DECREMENT_CART,
@@ -409,9 +422,7 @@ export const clearCart = () => {
     dispatch({
       type: CLEAR_CART,
     });
-    toast.error(`The cart is clear`, {
-      position: "bottom-left",
-    });
+    toast.error(`The cart is clear`);
 
     return {
       type: CLEAR_CART,

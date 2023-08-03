@@ -85,12 +85,12 @@ export const UsersAll = ({ toggleActive }) => {
                       <ion-icon name="create"></ion-icon>
                     </button>
                   </Link>
-                  <button
+                  {/* <button
                     className={styles.delete}
                     onClick={() => handleDeleteUsers(user.id)}
                   >
                     <ion-icon name="trash"></ion-icon>
-                  </button>
+                  </button> */}
                 </th>
               </tr>
             </thead>
