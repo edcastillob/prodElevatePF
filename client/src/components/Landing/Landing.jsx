@@ -41,22 +41,6 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
   };
 
 
-  // useEffect(() => {
-  //   const savedLanguage = localStorage.getItem("selectedLanguage");
-
-  //   if (savedLanguage && (savedLanguage === "es" || savedLanguage === "en")) {
-  //     i18n.changeLanguage(savedLanguage);
-  //   } else {
-  //     i18n.changeLanguage("en");
-  //   }
-  // }, []);
-
-  // const handleLanguageChange = (language) => {
-  //   i18n.changeLanguage(language);
-  //   localStorage.setItem("selectedLanguage", language);
-  //   setIsDropdownOpen(false)
-  // };
-
   return (
     <div className={styles.container}>
       <div className={styles.navbar}>
@@ -96,21 +80,21 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
           </h4>
           <div className={styles.item}>
             {/* <img src={check} alt="check" /> */}
-            <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="cog"></ion-icon></span>
+            <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="radio-button-on"></ion-icon></span>
             <p className={styles.description}>
               {t("landing.line1", { lng: currentLanguage })}
             </p>
           </div>
           <div className={styles.item}>
             {/* <img src={check} alt="check" /> */}
-            <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="cog"></ion-icon></span>
+            <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="radio-button-on"></ion-icon></span>
             <p className={styles.description}>
               {t("landing.line2", { lng: currentLanguage })}
             </p>
           </div>
           <div className={styles.item}>
             {/* <img src={check} alt="check" /> */}
-            <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="cog"></ion-icon></span>
+            <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="radio-button-on"></ion-icon></span>
             <p className={styles.description} style={{ marginTop: "1rem" }}>
               {t("landing.line3", { lng: currentLanguage })}
             </p>

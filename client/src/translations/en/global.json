@@ -16,5 +16,16 @@
         "privacy-policy": "Privacy Policy",
         "terms-and-conditions": "Terms & Conditions",
         "contact-us":"Contact Us"
+    },
+    "navbar":{
+        "profile": "Profile",
+        "logout": "Logout",
+        "dashboard": "Dashboard"
+    },
+    "login":{
+        "login":"Login",
+        "forgot": "Forgot your password",
+        "not-account": "Don't have an account?",
+        "sign-up": "Sign Up"
     }
 }

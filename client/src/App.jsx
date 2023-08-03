@@ -126,12 +126,17 @@ function App() {
           user={currentUser}
           userLocal={currentUserLocal}
           handleSignIn={handleSignIn}
+          currentLanguage={currentLanguage} 
+          handleLanguageChange={handleLanguageChange}
         />
       )}
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
         <Routes>
-          <Route exact path="/" element={<Landing handleLanguageChange={handleLanguageChange} currentLanguage={currentLanguage}/>} />
+          <Route exact path="/" element={<Landing 
+          handleLanguageChange={handleLanguageChange} 
+          currentLanguage={currentLanguage}
+          />} />
           <Route exact path="/about" element={<AboutUs />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
@@ -142,7 +147,7 @@ function App() {
           <Route exact path="/home" element={<Home user={currentUser}
           userLocal={currentUserLocal}
           handleSignIn={handleSignIn}/>} />
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/login" element={<Login currentLanguage={currentLanguage}/>} />
           <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
           <Route exact path="/productid/:id" element={<ProductDetail />} />
           <Route exact path="/productidedit/:id" element={<EditProduct />} />
