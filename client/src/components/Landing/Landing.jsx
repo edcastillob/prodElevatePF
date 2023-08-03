@@ -47,14 +47,14 @@ export const Landing = () => {
             {/* <img src={check} alt="check" /> */}
             <span style={{ color: "white" }}>&#8680;</span>
             <p className={styles.description}>
-              Take full control of your business
+              Take full control of your business.
             </p>
           </div>
           <div className={styles.item}>
             {/* <img src={check} alt="check" /> */}
             <span style={{ color: "white" }}>&#8680;</span>
             <p className={styles.description}>
-              Control and manage your finances and inventory
+              Control and manage your finances and inventory.
             </p>
           </div>
           <div className={styles.item}>
@@ -62,7 +62,7 @@ export const Landing = () => {
             <span style={{ color: "white" }}>&#8680;</span>
             <p className={styles.description} style={{ marginTop: "1rem" }}>
               Increase your sales and accelerate your business growth with our
-              powerful management tool
+              powerful management tool.
             </p>
           </div>
           <Link to="/home" className={styles.button}>
