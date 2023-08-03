@@ -37,7 +37,7 @@ import { TermsConditions } from "./components/TermsConditions/TermsConditions";
 import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
 import { useDispatch, useSelector } from "react-redux";
-import { checkEmailAndRegister, getUsers } from "./redux/actions/actions";
+import { checkEmailAndRegister, getUserSystemLog, getUsers } from "./redux/actions/actions";
 import { ChangePassword } from "./components/users/changePassword/ChangePassword";
 
 // LANGUAGE SETTINGS
@@ -118,13 +118,20 @@ function App() {
       navigate("/login");
     }
   };
-  console.log('currentUserLocal: ', currentUserLocal)
+  // console.log('currentUserLocal_: ', currentUserLocal.email)
   
   
-  // useEffect(() => {dispatch(getUsers())}, []);
-  // const allUsers = useSelector((state) => state.users);
+  useEffect(() => {
+    if(currentUserLocal){
+      dispatch(getUserSystemLog(currentUserLocal.email))
+    }
+
+    }, []);
+  const userActive = useSelector((state) => state.userLog);
   
-  // console.log('allUsers: ', allUsers)
+  console.log('userActive: ', userActive)
+  console.log('rol de user: ', userActive.roleId)
+
   return (
     <>
     <I18nextProvider i18n={i18next}>
@@ -133,12 +140,17 @@ function App() {
           user={currentUser}
           userLocal={currentUserLocal}
           handleSignIn={handleSignIn}
+          currentLanguage={currentLanguage} 
+          handleLanguageChange={handleLanguageChange}
         />
       )}
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
         <Routes>
-          <Route exact path="/" element={<Landing handleLanguageChange={handleLanguageChange} currentLanguage={currentLanguage}/>} />
+          <Route exact path="/" element={<Landing 
+          handleLanguageChange={handleLanguageChange} 
+          currentLanguage={currentLanguage}
+          />} />
           <Route exact path="/about" element={<AboutUs />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
@@ -149,7 +161,7 @@ function App() {
           <Route exact path="/home" element={<Home user={currentUser}
           userLocal={currentUserLocal}
           handleSignIn={handleSignIn}/>} />
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/login" element={<Login currentLanguage={currentLanguage}/>} />
           <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
           <Route exact path="/productid/:id" element={<ProductDetail />} />
           <Route exact path="/productidedit/:id" element={<EditProduct />} />
@@ -165,7 +177,11 @@ function App() {
           <Route exact path="/thankyoupage" element={<ThankYouPage />} />
           {/* <Route exact path="/chat/" element={<Chat />} /> */}
           <Route path="/dashboard" element={<Panel />} />
-
+           
+          {userActive.roleId === 1 
+          ? <Route path="/settings" element={<Configuration />} />
+          : null          
+          }
           {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )}

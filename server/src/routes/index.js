@@ -106,6 +106,7 @@ router.get("/role", getAllRole);
 router.get("/user", getAllUsers);
 router.get("/user/:id", getUserId);
 router.get("/useremail/:email", getUserByEmail);
+router.get("/userlog/:email", getUserByEmail);
 router.post("/user", postUser);
 router.put("/user/:id", putUser);
 router.delete("/user/:id", deleteUser);

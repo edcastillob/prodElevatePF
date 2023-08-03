@@ -8,12 +8,16 @@ import google from "../../../assets/google.png"
 import validateForm from './validation';
 import { toast } from 'react-toastify';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useTranslation } from 'react-i18next';
 
-export const Login = () => {
+export const Login = ({ currentLanguage }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [currentUser, setCurrentUser] = useState(null);
+  const { t } = useTranslation('global');
+
+
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -70,7 +74,7 @@ export const Login = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-        <h4 style={{ fontFamily: "Poppins", fontWeight: "600" }}>Login</h4>
+        <h4 style={{ fontFamily: "Poppins", fontWeight: "600" }}>{t("login.login", { lng: currentLanguage })}</h4>
 
         <div className="mb-2 p-2">
           <input
@@ -99,18 +103,18 @@ export const Login = () => {
           />
         </div>
         <a href="/forgot-password" className={styles.link}>
-          Forgot your password
+        {t("login.forgot", { lng: currentLanguage })}
         </a>
 
         <div className={styles.options}>
           <button type="submit" className={styles.submitButton}>
-            Login
+          {t("login.login", { lng: currentLanguage })}
           </button>
 
           <span className={styles.link}>
-            Don't have an account?{" "}
+          {t("login.not-account", { lng: currentLanguage })}{" "}
             <a href="/usuario" className={styles.link}>
-              Sign Up
+            {t("login.sign-up", { lng: currentLanguage })}
             </a>
           </span>
         </div>
