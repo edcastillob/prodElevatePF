@@ -22,10 +22,7 @@ export const ContactUs = () => {
 
   return (
     <div className={styles.container}>
-        <div className={styles.h2Contact}>
-          <h2>Contact <b style={{color: "green" }}>The Team</b> of prodElevate</h2>
-        </div>
-        
+          <h2>Contact <b style={{color: "green" }}>The Team</b> of prodElevate</h2>        
         <div className={styles.contactContainer}>
 
           <div className={styles.sideColumns}>
