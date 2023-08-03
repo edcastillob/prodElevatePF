@@ -219,4 +219,48 @@
       transform: translateY(0);
       opacity: 1;
     }
+}
+
+/*En pruebas*/
+@media (max-width: 1200px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .divLeft {
+      width: 80%;
+    }
+  
+    .reel {
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      height: 80vh;
+    }
+  
+    .divLeft {
+      width: 90%;
+    }
+  
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .item img {
+      width: 10%;
+    }
+  
+    .button {
+      width: 40%;
+    }
+  
+    .reel {
+      width: 90%;
+      margin-top: 1.5rem;
+    }
   }

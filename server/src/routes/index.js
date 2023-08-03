@@ -40,6 +40,7 @@ const router = Router();
 
 const mailerRoutes = require("./mailerRoutes");
 const { postFilterData } = require("../controllers/POST/postFilterData");
+const { getAllRole } = require("../controllers/GET/getAllRole");
 
 router.use("/notification", mailerRoutes);
 
@@ -98,8 +99,9 @@ router.get("/profile", isAuthenticated, (req, res) => {
 router.post('/check-email', checkEmail);
 
 router.post("/role", postRole);
+router.get("/role", getAllRole);
 
-router.post("/role", postRole);
+
 
 router.get("/user", getAllUsers);
 router.get("/user/:id", getUserId);
