@@ -102,7 +102,8 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
         <NavLink
         title="Detail Product"
         to={`/productid/${id}`}
-        className={styles.link}
+        style={{textDecoration:'none'}}
+        // className={styles.link}
       ><h6 className={styles.title}>{name}</h6></NavLink>        
         <h6 className={styles.category}> {category}</h6>
         <span className={styles.priceLabel}>Brand</span>
