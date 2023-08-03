@@ -40,7 +40,6 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-
   return (
     <div className={styles.container}>
       <div className={styles.navbar}>
@@ -81,6 +80,7 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
           <div className={styles.item}>
             {/* <img src={check} alt="check" /> */}
             <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="radio-button-on"></ion-icon></span>
+
             <p className={styles.description}>
               {t("landing.line1", { lng: currentLanguage })}
             </p>
@@ -94,6 +94,7 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
           </div>
           <div className={styles.item}>
             {/* <img src={check} alt="check" /> */}
+
             <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="radio-button-on"></ion-icon></span>
             <p className={styles.description} style={{ marginTop: "1rem" }}>
               {t("landing.line3", { lng: currentLanguage })}
