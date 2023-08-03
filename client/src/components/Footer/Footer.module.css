@@ -13,19 +13,24 @@
 .divLeft{
     /* border: 1px solid white; */
     width: 30%;
-    
+    font-family: 'Poppins';
+    font-size: 15px;
 }
 
 .divRight{
     /* border: 1px solid white; */
-    width: 40%;
+    width: 50%;
     gap: 1.5rem;
     display: flex;
+    position: relative;
+    right: 50px;
 }
 
 .info p{
     color: #fff;
     transition: .3s;
+    font-size: 15px;
+    font-family: "Poppins";
     &:hover{
         opacity: 0.7;
         transition: .5s;

@@ -450,6 +450,5 @@ export const EditProduct = () => {
           </button>
         </form>
       </div>
-
   );
 };

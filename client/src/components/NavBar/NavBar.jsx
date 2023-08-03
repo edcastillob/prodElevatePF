@@ -8,10 +8,14 @@ import { addFav, getUserEmail, logout, getRole, getUsers } from "../../redux/act
 import userImg from "../.././assets/user.png";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import countriesData from "../Country/db.json";
+import { useTranslation } from 'react-i18next';
+import en from "../.././assets/estados-unidos.png";
+import es from "../.././assets/espana.png";
 
-export const NavBar = ({ user, userLocal, handleSignIn }) => {
+export const NavBar = ({ user, userLocal, handleSignIn, currentLanguage, handleLanguageChange }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation('global');
 
  useEffect(() => { 
   dispatch(getRole());
@@ -126,6 +130,21 @@ console.log(usersAll)
       </div>
       <div className={styles.divSearch}></div>
       <div className={styles.items}>
+        {/* LANGUAGE */}
+        {currentLanguage === "en" ? (
+          <>
+          <img src={en} width={30} height={30} 
+          onClick={() => handleLanguageChange("es")} 
+          className={styles.language} />
+          </>
+        ) : (
+          <>
+          <img src={es} width={30} height={30} 
+          onClick={() => handleLanguageChange("en")}
+          className={styles.language} />
+          </>
+        ) }
+
         {user || userLocal ? (
           <Link
             className={styles.icon}
@@ -194,7 +213,7 @@ console.log(usersAll)
                     }}
                   >
                     <h6 style={{display:'flex', gap:'5px'}}>
-                      <ion-icon name="compass"></ion-icon> Dashboard
+                      <ion-icon name="compass"></ion-icon> {t("navbar.dashboard", { lng: currentLanguage })}
                     </h6>
                   </Link>
                 </li>
@@ -209,9 +228,11 @@ console.log(usersAll)
                     }}
                     onClick={toggle} 
                   >
-                    <ion-icon name="person"></ion-icon> Profile
+                    <ion-icon name="person"></ion-icon> {t("navbar.profile", { lng: currentLanguage })}
                   </h6>
                 </li>
+
+               
 
                 <li>
                   {userLocal ? (
@@ -223,7 +244,7 @@ console.log(usersAll)
                       }}
                       onClick={handleLogoutClick}
                     >
-                      <ion-icon name="power"></ion-icon> Logout
+                      <ion-icon name="power"></ion-icon> {t("navbar.logout", { lng: currentLanguage })}
                     </h6>
                   ) : null}
                 </li>
@@ -259,7 +280,7 @@ console.log(usersAll)
                     }}
                   >
                     <h6>
-                      <ion-icon name="compass"></ion-icon> Dashboard
+                      <ion-icon name="compass"></ion-icon> {t("navbar.dashboard", { lng: currentLanguage })}
                     </h6>
                   </Link>
                 </li>
@@ -275,26 +296,10 @@ console.log(usersAll)
                     }}
                     onClick={toggle} 
                   >
-                    <ion-icon name="person"></ion-icon> Profile
+                    <ion-icon name="person"></ion-icon> {t("navbar.profile", { lng: currentLanguage })}
                   </h6>
                 </li> 
                 
-                {/* <li>
-                  <Link
-                    className={styles.icon}
-                    to="/settings"
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      fontFamily: "Poppins",
-                      textAlign: "start",
-                    }}
-                  >
-                    <h6>
-                      <ion-icon name="settings"></ion-icon> Settings
-                    </h6>
-                  </Link>
-                </li> */}
 
                 <li>
                   {user ? (
@@ -306,7 +311,7 @@ console.log(usersAll)
                       }}
                       onClick={handleLogoutClick}
                     >
-                      <ion-icon name="power"></ion-icon> Logout
+                      <ion-icon name="power"></ion-icon> {t("navbar.logout", { lng: currentLanguage })}
                     </h6>
                   ) : null}
                 </li>
