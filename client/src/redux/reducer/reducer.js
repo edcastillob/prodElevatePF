@@ -34,6 +34,7 @@ import {
   FILTER_DATA,
   FILTER_NAME,
   GET_USER_EMAIL,
+  GET_ROLE,
 } from "../actions/types";
 
 const initialState = {
@@ -365,6 +366,11 @@ function reducer(state = initialState, actions) {
         ...state,
         products: actions.payload,
       };
+      case GET_ROLE:
+        return {
+          ...state,
+          role: actions.payload,
+        };
 
     default:
       return state;

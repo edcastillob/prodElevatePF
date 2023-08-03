@@ -17,6 +17,7 @@ const checkEmail = async (req, res) => {
       const image = [photoURL];
       const numPhone = phoneNumber || '000-0000'; 
       const address = 'Update Address';
+      const country = 'Update Country';
       const password = '123456';
 
       const newUser = await User.create({
@@ -26,6 +27,7 @@ const checkEmail = async (req, res) => {
         image,
         numPhone,
         address,
+        country,
         password,
       });
 
