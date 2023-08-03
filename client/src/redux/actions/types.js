@@ -24,7 +24,6 @@ export const DELETE_PROVIDER = "DELETE_PROVIDER";
 //User
 export const LOGIN = "LOGIN";
 export const ADD_USER = "ADD_USER";
-export const ADD_ROLE = "ADD_ROLE";
 export const VALIDATION_USER = "VALIDATION_USER";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const DELETE_USERS = "DELETE_USERS";
@@ -59,3 +58,9 @@ export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const GET_COMMENTS_BY_PRODUCT = "GET_COMMENTS_BY_PRODUCT";
 export const CREATE_REPLY = "CREATE_REPLY"
 export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER";
+
+
+//Role
+
+export const ADD_ROLE = "ADD_ROLE";
+export const GET_ROLE = "GET_ROLE";

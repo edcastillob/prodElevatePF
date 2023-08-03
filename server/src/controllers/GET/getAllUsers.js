@@ -11,8 +11,8 @@ async function getAllUsers(req, res) {
                 'image', 
                 'numPhone',
                 'address',
-                'isActive',
-                'rol'
+                'country',
+                'isActive'
             ],
         });
         

@@ -1,5 +1,5 @@
 import styles from "../../Dashboard/Dashboard.module.css";
-import { MdMenu } from "react-icons/md";
+import { MdMenu, MdSearch } from "react-icons/md";
 import { useState } from "react"; // Importa useState
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,54 +64,60 @@ export const UsersAll = ({ toggleActive }) => {
             <h2 style={{fontFamily:'Poppins'}}>Users</h2>
           </div>
 
-      <input
-        type="text"
-        className="form-control w-25 h-50"
-        placeholder="Search user"
-        value={searchUsers}
-        onChange={(event) => setSearchUsers(event.target.value)}
-      />
+          {/* input search */}
+          <div className={styles.search}>
+            <label>
+              <input
+                type="text"
+                placeholder="Search user"
+                value={searchUsers}
+                onChange={(event) => setSearchUsers(event.target.value)}
+              />
+                <MdSearch size="2em" className={styles.icon} />
+            </label>
+          </div>
+
           <div className={styles.userContainer}>
-        {filteredUsers?.map((user) => (
-          <table key={user.id} className={styles.table}>
-            <thead>
-              <tr>
-                <th>User</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>
-                  <Link title="Edit user" to={`/userEdit/${user.id}`}>
-                    <button className={styles.edit}>
-                      <ion-icon name="create"></ion-icon>
-                    </button>
-                  </Link>
-                  {/* <button
-                    className={styles.delete}
-                    onClick={() => handleDeleteUsers(user.id)}
-                  >
-                    <ion-icon name="trash"></ion-icon>
-                  </button> */}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div className={styles.divImg}>
-                    <img
-                      className={styles.img}
-                      src={user.image}
-                      alt={user.name}
-                    />
-                  </div>
-                </td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{null}</td>
-              </tr>
-            </tbody>
-          </table>
-        ))}
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredUsers?.map((user) => (
+                  <tr key={user.id}>
+                    <td>
+                      <div className={styles.divImg}>
+                        <img
+                          className={styles.img}
+                          src={user.image}
+                          alt={user.name}
+                        />
+                      </div>
+                    </td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      <Link title="Edit user" to={`/userEdit/${user.id}`}>
+                        <button className={styles.edit}>
+                          <ion-icon name="create"></ion-icon>
+                        </button>
+                      </Link>
+                      <button
+                        className={styles.delete}
+                        onClick={() => handleDeleteUsers(user.id)}
+                      >
+                        <ion-icon name="trash"></ion-icon>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
       </div>
         </div>
         

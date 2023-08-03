@@ -52,15 +52,6 @@ const Panel = () => {
     }
   };
 
-  // const options = {
-  //   responsive: true,
-  //   scales: {
-  //     y: {
-  //       beginAtZero: true,
-  //     },
-  //   },
-  // };
-
   return (
     <>
       <div>

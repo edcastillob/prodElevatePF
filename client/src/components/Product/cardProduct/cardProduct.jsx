@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import styles from "./cardProduct.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -82,10 +82,11 @@ export const CardProduct = ({ product }) => {
   console.log("Product ID:", id); // Agregamos esta línea para verificar el valor de id
 
   const productWithUser = {
+    
     ...product,
     user: currentUser
       ? currentUser.uid
-      : "6a9fb616-ee00-4d42-bb0e-c320673a2b50",
+      : "ed047b85-67d9-4a90-a461-b4ad1e2036e3",
   };
   return (
     <div className={styles.cardContainer}>
@@ -108,7 +109,12 @@ export const CardProduct = ({ product }) => {
             </h3>
           </button>
         )}
-        <h6 className={styles.title}>{name} </h6>
+        <NavLink
+        title="Detail Product"
+        to={`/productid/${id}`}
+        style={{textDecoration:'none'}}
+        // className={styles.link}
+      ><h6 className={styles.title}>{name}</h6></NavLink>        
         <h6 className={styles.category}> {category}</h6>
         <span className={styles.priceLabel}>Brand</span>
         <h6 className={styles.price}>{brand}</h6>

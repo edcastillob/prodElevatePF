@@ -39,6 +39,7 @@ import {
   CREATE_REPLY,
 
   GET_USER_EMAIL,
+  GET_ROLE,
 } from "../actions/types";
 
 const initialState = {
@@ -402,6 +403,12 @@ function reducer(state = initialState, actions) {
           };
         
       
+      case GET_ROLE:
+        return {
+          ...state,
+          role: actions.payload,
+        };
+
     default:
       return state;
   }

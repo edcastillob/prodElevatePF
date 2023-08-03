@@ -1,5 +1,5 @@
 import styles from "../../../Dashboard/Dashboard.module.css";
-import { MdMenu } from "react-icons/md";
+import { MdMenu, MdSearch } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory, getCategory } from "../../../../redux/actions/actions";
@@ -58,47 +58,53 @@ export const ShowCategory = ({ toggleActive }) => {
             <h2 style={{fontFamily:'Poppins'}}>Categories</h2>
           </div>
 
-      <input
-        type="text"
-        className="form-control w-25 h-50"
-        placeholder="Search category"
-        value={searchCategory}
-        onChange={(event) => setSearchCategory(event.target.value)}
-      />
+          {/* input search */}
+          <div className={styles.search}>
+            <label>
+              <input
+                type="text"
+                placeholder="Search category"
+                value={searchCategory}
+                onChange={(event) => setSearchCategory(event.target.value)}
+              />
+                <MdSearch size="2em" className={styles.icon} />
+            </label>
+          </div>
+
           <div className={styles.categoryContainer}>
-        {filteredCategory?.map((category) => (
-          <table key={category.id} className={styles.table}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>
-                  <Link
-                    title="Edit Category"
-                    to={`/categoryedit/${category.id}`}
-                  >
-                    <button className={styles.edit}>
-                      <ion-icon name="create"></ion-icon>
-                    </button>
-                  </Link>
-                  <button
-                    className={styles.delete}
-                    onClick={() => handleDeleteCategory(category.id)}
-                  >
-                    <ion-icon name="trash"></ion-icon>
-                  </button>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{category.name}</td>
-                <td>{category.description}</td>
-                <td>{null}</td>
-              </tr>
-            </tbody>
-          </table>
-        ))}
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCategory?.map((category) => (
+                  <tr key={category.id}>
+                    <td style={{ padding: '1.5rem' }}>{category.name}</td>
+                    <td style={{ padding: '1.5rem' }}>{category.description}</td>
+                    <td style={{ padding: '1.5rem' }}>
+                      <Link
+                        title="Edit Category"
+                        to={`/categoryedit/${category.id}`}
+                      >
+                        <button className={styles.edit}>
+                          <ion-icon name="create"></ion-icon>
+                        </button>
+                      </Link>
+                      <button
+                        className={styles.delete}
+                        onClick={() => handleDeleteCategory(category.id)}
+                      >
+                        <ion-icon name="trash"></ion-icon>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
       </div>
         </div>
       </div>

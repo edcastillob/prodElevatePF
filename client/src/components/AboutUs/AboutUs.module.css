@@ -87,9 +87,49 @@
 
 .ourContainer h2 {
     color: #01691b;
+    font-size: 28px;
 }
 
 .ourContainer p {
     font-size: 20px;
     text-indent: 50px;
 }
+
+@media (max-width: 1200px) {
+    .cardsContainer {
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  
+    .aboutContainer, .imagesContainer {
+      width: 90%;
+      margin: 0;
+    }
+  
+    .logoContainer {
+      width: 200px;
+      height: 118px;
+    }
+  
+    .infoContainer {
+      padding: 10px;
+    }
+
+    .ourContainer h2 {
+      font-size: 23px;
+    }
+    .ourContainer p {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .h2Container h2 {
+      font-size: 1.5rem;
+    }
+  
+    .ourContainer h2 {
+      font-size: 23px;
+    }
+  }

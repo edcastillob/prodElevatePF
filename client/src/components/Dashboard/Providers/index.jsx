@@ -1,5 +1,5 @@
 import styles from "../Dashboard.module.css";
-import { MdMenu } from "react-icons/md";
+import { MdMenu, MdSearch } from "react-icons/md";
 import { useState } from "react"; // Importa useState
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,52 +61,57 @@ const Providers = ({ toggleActive }) => {
             <h2 style={{fontFamily:'Poppins'}}>Providers</h2>
           </div>
 
-      <input
-        type="text"
-        className="form-control h-50 w-25"
-        style={{height:'50px'}}
-        placeholder="Search provider"
-        value={searchProvider}
-        onChange={(event) => setSearchProvider(event.target.value)}
-      />
+          {/* input search */}
+          <div className={styles.search}>
+            <label>
+              <input
+                 type="text"
+                 placeholder="Search provider"
+                 value={searchProvider}
+                 onChange={(event) => setSearchProvider(event.target.value)}
+              />
+                <MdSearch size="2em" className={styles.icon} />
+            </label>
+          </div>
+
           <div className={styles.tablesContainer}>
-          {filteredProvider?.map((provider) => (
-              <table key={provider.id} className={styles.table}>
+            <table className={styles.table}>
               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Document N°</th>
                   <th>Email</th>
                   <th>Phone N°</th>
-                  <th>
-                    <Link
-                      title="Edit provider"
-                      to={`/proveedoredit/${provider.id}`}
-                    >
-                      <button className={styles.edit}>
-                        <ion-icon name="create"></ion-icon>
-                      </button>
-                    </Link>
-                    <button
-                      className={styles.delete}
-                      onClick={() => handleDeleteProvider(provider.id)}
-                    >
-                      <ion-icon name="trash"></ion-icon>
-                    </button>
-                  </th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{provider.name}</td>
-                  <td>{provider.identification}</td>
-                  <td>{provider.email}</td>
-                  <td>{provider.numPhone}</td>
-                  <td>{null}</td>
-                </tr>
+                {filteredProvider?.map((provider) => (
+                  <tr key={provider.id} >
+                    <td style={{ padding: '1.5rem' }}>{provider.name}</td>
+                    <td style={{ padding: '1.5rem' }}>{provider.identification}</td>
+                    <td style={{ padding: '1.5rem' }}>{provider.email}</td>
+                    <td style={{ padding: '1.5rem' }}>{provider.numPhone}</td>
+                    <td>
+                      <Link
+                        title="Edit provider"
+                        to={`/proveedoredit/${provider.id}`}
+                      >
+                        <button className={styles.edit}>
+                          <ion-icon name="create"></ion-icon>
+                        </button>
+                      </Link>
+                      <button
+                        className={styles.delete}
+                        onClick={() => handleDeleteProvider(provider.id)}
+                      >
+                        <ion-icon name="trash"></ion-icon>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
-          ))}
           </div>
         </div>
       </div>

@@ -4,16 +4,22 @@ import logo from "../../assets/logo_2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../users/Firebase/logout.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addFav, getUserEmail, logout } from "../../redux/actions/actions";
+import { addFav, getUserEmail, logout, getRole, getUsers } from "../../redux/actions/actions";
 import userImg from "../.././assets/user.png";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import countriesData from "../Country/db.json";
+import { useTranslation } from 'react-i18next';
+import en from "../.././assets/estados-unidos.png";
+import es from "../.././assets/espana.png";
 
-
-export const NavBar = ({ user, userLocal, handleSignIn }) => {
+export const NavBar = ({ user, userLocal, handleSignIn, currentLanguage, handleLanguageChange }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation('global');
 
  useEffect(() => { 
+  dispatch(getRole());
+  dispatch(getUsers());
   if (userLocal) {
     dispatch(getUserEmail(userLocal.email)) 
   } else if(user){
@@ -24,7 +30,10 @@ export const NavBar = ({ user, userLocal, handleSignIn }) => {
 
 }, [user, userLocal])
 
+
+
 const userMail = useSelector((state) => state.userMail);
+const roles = useSelector((state) => state.role);
 
  
   const [modal, setModal] = useState(false);
@@ -58,14 +67,59 @@ const userMail = useSelector((state) => state.userMail);
       // navigate('/changepass')
       navigate('/changepass', { state: { userMail } });
   }
+  // console.log("userLocal.roleId:", userLocal);
 
-// userLocal ? console.log('UserLocal' ,userLocal.email) : console.log('Local Vacio');
-// user ? console.log('UserGoogle' ,user.email) : console.log('Google Vacio');
+  // Encontrar el objeto de rol que coincide con userLocal.roleId
+  const userRole = roles.find((rol) => rol.id === userMail.roleId);
+  const userRoleg = roles.find((rol) => rol.id === userMail?.roleId);
+
+userLocal ? console.log('UserLocal' ,userLocal) : console.log('Local Vacio');
+user ? console.log('UserGoogle' ,user) : console.log('Google Vacio');
 // console.log('userData: ', userMail)
+// console.log('roles: ', roles)
+// console.log('rol del user', userRole)
+
+const [userCountry, setUserCountry] = useState("");
+const [userFlag, setUserFlag] = useState("");
+const usersAll = useSelector((state) => state.users);
+useEffect(() => {
+  const country = getUserCountry();
+  setUserCountry(country);
+  if (country) {
+    const countryObject = countriesData.countries.find(
+      (countryData) => countryData.name.common === country
+    );
+    if (countryObject && countryObject.flags) {
+      setUserFlag(countryObject.flags);
+    } else {
+      setUserFlag("");   
+    }
+  }
+}, [userLocal, usersAll]);
+
+const getUserCountry = () => {
+  if (userLocal && usersAll) {
+    const userWithEmail = usersAll.find((user) => user.email === userLocal.email);
+    if (userWithEmail) {
+      return userWithEmail.country;
+    }
+  } else if (user && usersAll) {
+    const userWithEmail = usersAll.find((userb) => userb.email === user.email);
+
+    if (userWithEmail) {
+      return userWithEmail.country;
+    }
+  }
+  return "";
+};
+
+
+console.log(usersAll)
+// console.log(user.email)
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
       <div className={styles.divLogo}>
-        <Link to="/home">
+        <Link to="/">
           <img className="img-fluid" src={logo} alt="img-logo" />
         </Link>
         <Link style={{ textDecoration: "none", color: "#fff" }} to="/home">
@@ -76,6 +130,21 @@ const userMail = useSelector((state) => state.userMail);
       </div>
       <div className={styles.divSearch}></div>
       <div className={styles.items}>
+        {/* LANGUAGE */}
+        {currentLanguage === "en" ? (
+          <>
+          <img src={en} width={30} height={30} 
+          onClick={() => handleLanguageChange("es")} 
+          className={styles.language} />
+          </>
+        ) : (
+          <>
+          <img src={es} width={30} height={30} 
+          onClick={() => handleLanguageChange("en")}
+          className={styles.language} />
+          </>
+        ) }
+
         {user || userLocal ? (
           <Link
             className={styles.icon}
@@ -144,7 +213,7 @@ const userMail = useSelector((state) => state.userMail);
                     }}
                   >
                     <h6 style={{display:'flex', gap:'5px'}}>
-                      <ion-icon name="compass"></ion-icon> Dashboard
+                      <ion-icon name="compass"></ion-icon> {t("navbar.dashboard", { lng: currentLanguage })}
                     </h6>
                   </Link>
                 </li>
@@ -159,9 +228,11 @@ const userMail = useSelector((state) => state.userMail);
                     }}
                     onClick={toggle} 
                   >
-                    <ion-icon name="person"></ion-icon> Profile
+                    <ion-icon name="person"></ion-icon> {t("navbar.profile", { lng: currentLanguage })}
                   </h6>
                 </li>
+
+               
 
                 <li>
                   {userLocal ? (
@@ -173,7 +244,7 @@ const userMail = useSelector((state) => state.userMail);
                       }}
                       onClick={handleLogoutClick}
                     >
-                      <ion-icon name="power"></ion-icon> Logout
+                      <ion-icon name="power"></ion-icon> {t("navbar.logout", { lng: currentLanguage })}
                     </h6>
                   ) : null}
                 </li>
@@ -209,7 +280,7 @@ const userMail = useSelector((state) => state.userMail);
                     }}
                   >
                     <h6>
-                      <ion-icon name="compass"></ion-icon> Dashboard
+                      <ion-icon name="compass"></ion-icon> {t("navbar.dashboard", { lng: currentLanguage })}
                     </h6>
                   </Link>
                 </li>
@@ -225,26 +296,10 @@ const userMail = useSelector((state) => state.userMail);
                     }}
                     onClick={toggle} 
                   >
-                    <ion-icon name="person"></ion-icon> Profile
+                    <ion-icon name="person"></ion-icon> {t("navbar.profile", { lng: currentLanguage })}
                   </h6>
                 </li> 
                 
-                {/* <li>
-                  <Link
-                    className={styles.icon}
-                    to="/settings"
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      fontFamily: "Poppins",
-                      textAlign: "start",
-                    }}
-                  >
-                    <h6>
-                      <ion-icon name="settings"></ion-icon> Settings
-                    </h6>
-                  </Link>
-                </li> */}
 
                 <li>
                   {user ? (
@@ -256,7 +311,7 @@ const userMail = useSelector((state) => state.userMail);
                       }}
                       onClick={handleLogoutClick}
                     >
-                      <ion-icon name="power"></ion-icon> Logout
+                      <ion-icon name="power"></ion-icon> {t("navbar.logout", { lng: currentLanguage })}
                     </h6>
                   ) : null}
                 </li>
@@ -265,8 +320,15 @@ const userMail = useSelector((state) => state.userMail);
           </div>
         ) : null}
 
-        <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>user prodElevate</ModalHeader>
+        <Modal isOpen={modal} toggle={toggle}> 
+          <ModalHeader toggle={toggle}>
+          {userFlag && <img src={userFlag.png} alt="Flag" style={{ 
+            width: "45px", 
+            height: "45px",
+            boxShadow: 'box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;' 
+            }}/>}
+            &nbsp; Profile prodElevate 
+            </ModalHeader>
           <ModalBody>
             {user ? (
               <>
@@ -278,7 +340,10 @@ const userMail = useSelector((state) => state.userMail);
                 />
                 <br />
                 <br />
-                <h6>{user.email}</h6>
+                <h5>{user.email}</h5>
+                <h5>User</h5>
+                {userRoleg && <h5>{userRoleg.name}</h5>}
+
               </>
             ) : null}
 
@@ -292,17 +357,16 @@ const userMail = useSelector((state) => state.userMail);
                 />
                 <br />
                 <br />
-                <h6>{userLocal.email}</h6>
+                <h5>{userLocal.email}</h5>
+                <h5>User</h5>
+                {userRole && <h5>{userRole.name}</h5>}
               </>
             ) : null}
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter>            
             <Button className={styles.buttonProfile} onClick={handleChangePass}>
               update profile
-            </Button>{" "}
-            <Button className={styles.buttonProfile} onClick={toggle}>
-              ok
-            </Button>
+            </Button>{" "}          
           </ModalFooter>
         </Modal>
       </div>
