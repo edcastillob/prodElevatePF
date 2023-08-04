@@ -75,12 +75,12 @@ export const SettingsProduct = () => {
                       <ion-icon name="create"></ion-icon>
                     </button>
                   </Link>
-                  <button
+                  {/* <button
                     className={styles.delete}
                     onClick={() => handleDeleteProduct(provider.id)}
                   >
                     <ion-icon name="trash"></ion-icon>
-                  </button>
+                  </button> */}
                 </th>
               </tr>
             </thead>

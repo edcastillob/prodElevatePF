@@ -10,7 +10,8 @@ async function postUser(req, res) {
         if (!name || !identification || !email || !images || !numPhone || !address || !country || !password ) {
             return res.status(401).send("Missing Data");
         };
-        const image = images;        
+        const image = images; 
+        const roleId = '2';       
 
         const newUser = await User.create({
             name,
@@ -20,6 +21,7 @@ async function postUser(req, res) {
             numPhone,
             address,
             country,
+            roleId,
             password
            
         });

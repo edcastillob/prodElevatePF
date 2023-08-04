@@ -19,6 +19,7 @@ const checkEmail = async (req, res) => {
       const address = 'Update Address';
       const country = 'Update Country';
       const password = '123456';
+      const roleId = '2';
 
       const newUser = await User.create({
         name,
@@ -28,6 +29,7 @@ const checkEmail = async (req, res) => {
         numPhone,
         address,
         country,
+        roleId,
         password,
       });
 

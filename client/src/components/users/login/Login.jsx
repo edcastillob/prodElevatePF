@@ -48,14 +48,13 @@ export const Login = ({ currentLanguage }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      // console.log("desde submit: ", userData);
       const errors = validateForm(
         userData.username, 
       );
       setErrors(errors);
 
       if (Object.keys(errors).length === 0) {
-        dispatch(login(userData)); // Esperar a que la acción termine antes de redirigir
+        dispatch(login(userData));
         navigate("/home");
         setUserData({
           username: '',
