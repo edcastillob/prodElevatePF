@@ -19,9 +19,14 @@ import FilterModal from "../Filter/FilterModal";
 export const Home = ({ user, userLocal, handleSignIn }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const currentPage = useSelector((state) => state.currentPage);
+  const totalPages = useSelector((state) => state.totalPages);
+
   useEffect(() => {
-    dispatch(showProducts());
+    dispatch(showProducts(currentPage));
   }, []);
+
   const products = useSelector((state) => state.products);
   const productsFiltered = useSelector((state) => state.productsFiltered);
 
@@ -65,7 +70,7 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
   };
 
   const handleAllProdutcs = () => {
-    dispatch(showProducts());
+    dispatch(showProducts(currentPage));
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -79,8 +84,27 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
   };
 
   const handleFilter = (filters) => {
-    dispatch(filterData(filters));
+    dispatch(filterData(filters, currentPage));
+    setSelectedFilters(filters);
+    console.log("filter Home", currentPage);
     setShowModal(false);
+  };
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    minPrice: "",
+    maxPrice: "",
+    category: "",
+    brand: "",
+    condition: "",
+  });
+
+  const handleNextPage = () => {
+    if (productsFiltered.length > 0) {
+      dispatch(filterData(selectedFilters, currentPage + 1));
+      console.log(selectedFilters);
+    } else {
+      dispatch(showProducts(currentPage + 1));
+    }
   };
 
   const filteredProducts = optionProducts.filter((product) =>
@@ -136,27 +160,46 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
       </div>
 
       <div className={styles.cards}>
-        {productsFiltered.length ? (
-          <div>
-            <NavLink
-              style={{ textDecoration: "none" }}
-              onClick={() => {
-                navigate.push("/home");
-                dispatch(showProducts());
-              }}
-            >
-              {" "}
-              <h3>&#8592;</h3>{" "}
-            </NavLink>
-          </div>
-        ) : (
-          ""
-        )}
-
         {/* optionProducts */}
+
         {filteredProducts?.map((product) => (
           <CardProduct key={product.id} product={product} />
         ))}
+      </div>
+
+      {productsFiltered.length ? (
+        <div>
+          <h2>El producto no existe</h2>
+          <NavLink
+            style={{ textDecoration: "none" }}
+            onClick={() => {
+              navigate.push("/home");
+              dispatch(showProducts());
+            }}
+          >
+            {" "}
+            <h3>&#8592;</h3>{" "}
+          </NavLink>
+        </div>
+      ) : (
+        ""
+      )}
+      <div>
+        <div>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => dispatch(showProducts(currentPage - 1))}
+          >
+            Anterior
+          </button>
+          <span>Página {currentPage}</span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
     </div>
   );

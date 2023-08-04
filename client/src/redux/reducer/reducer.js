@@ -45,6 +45,8 @@ const initialState = {
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
+  currentPage: 1,
+  totalPages: 1,
   products: [],
   productsFiltered: [],
   productDetail: [],
@@ -61,8 +63,11 @@ function reducer(state = initialState, actions) {
     case SHOW_PRODUCTS:
       return {
         ...state,
-        products: actions.payload,
-        productDetail: [...actions.payload],
+        products: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        productsFiltered: [],
+        //productDetail: [...actions.payload.data],
       };
 
     case GET_PRODUCT_NAME:
@@ -363,7 +368,9 @@ function reducer(state = initialState, actions) {
     case FILTER_DATA:
       return {
         ...state,
-        products: actions.payload,
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
       };
 
     default:

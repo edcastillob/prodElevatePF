@@ -58,6 +58,8 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        const userEmail = user.email;
+        console.log(userEmail);
         setCurrentUser(user);
       } else {
         setCurrentUser(null);
@@ -68,7 +70,7 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
   const productWithUser = {
     ...product,
     user: currentUser
-      ? currentUser.uid
+      ? currentUser.email
       : "fae675fe-350a-4795-a844-574b5aa4f604",
   };
 

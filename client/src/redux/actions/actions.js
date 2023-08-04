@@ -42,11 +42,20 @@ import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const showProducts = () => {
+export const showProducts = (page) => {
   try {
     return async (dispatch) => {
-      const { data } = await axios.get(`${ENDPOINT}product`);
-      return dispatch({ type: SHOW_PRODUCTS, payload: data });
+      const { data } = await axios.get(`${ENDPOINT}product?page=${page}`);
+
+      console.log(data.data);
+      return dispatch({
+        type: SHOW_PRODUCTS,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
     };
   } catch (error) {
     throw new Error(error.message);
@@ -164,7 +173,7 @@ export const getUserEmail = (email) => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       axios
-        .get(`${ENDPOINT}useremail/${encodeURIComponent(email)}`) 
+        .get(`${ENDPOINT}useremail/${encodeURIComponent(email)}`)
         .then((response) => {
           // console.log('email desde actions: ',response.data);
           dispatch({ type: GET_USER_EMAIL, payload: response.data });
@@ -480,15 +489,22 @@ export const filterNameAsc = () => {
   };
 };
 
-export const filterData = (filters) => {
+export const filterData = (filters, page) => {
   const endpoint = `${ENDPOINT}filter/data`;
+  console.log("actions filter", page);
 
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(endpoint, filters);
+      const { data } = await axios.post(endpoint, filters, {
+        params: { page },
+      });
       return dispatch({
         type: FILTER_DATA,
-        payload: data,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
       });
     } catch (error) {
       window.alert(error);

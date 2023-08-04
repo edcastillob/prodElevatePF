@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 79d2b497c2f07eac240aaaa9f245afc48f284a33
-import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
-
-const FilterModal = ({ show, handleClose, handleFilter }) => {
-<<<<<<< HEAD
-=======
-=======
-
->>>>>>> 79d2b497c2f07eac240aaaa9f245afc48f284a33
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,12 +10,6 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
   }, []);
   const category = useSelector((state) => state.category);
 
-<<<<<<< HEAD
->>>>>>> 09d1b4b3c44c0666360e21af19ad6287e4ab4213
-=======
-
-
->>>>>>> 79d2b497c2f07eac240aaaa9f245afc48f284a33
   const [filters, setFilters] = useState({
     minPrice: "",
     maxPrice: "",
@@ -52,14 +32,8 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
 
   const conditionOptions = ["Brand New", "Used", "Like New"];
 
-<<<<<<< HEAD
-=======
+  //console.log(filters);
 
-
- console.log(filters)
-
-
->>>>>>> 79d2b497c2f07eac240aaaa9f245afc48f284a33
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -88,27 +62,6 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <Form.Group controlId="formCategory">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="introduce la categoria"
-                name="category"
-                value={filters.category}
-                onChange={handleInputChange}
-              ></Form.Control>
-            </Form.Group>
-=======
-
-=======
-
-            <Form.Group controlId="formCategory">
-
-
-             
->>>>>>> 79d2b497c2f07eac240aaaa9f245afc48f284a33
             <Form.Group controlId="formCategory">
               <Form.Label>Category</Form.Label>
               <Form.Control
@@ -124,14 +77,8 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                   </option>
                 ))}
               </Form.Control>
-<<<<<<< HEAD
             </Form.Group>
 
->>>>>>> 09d1b4b3c44c0666360e21af19ad6287e4ab4213
-=======
-              </Form.Group>            
-
->>>>>>> 79d2b497c2f07eac240aaaa9f245afc48f284a33
             <Form.Group controlId="formBrand">
               <Form.Label>Brand</Form.Label>
               <Form.Control
