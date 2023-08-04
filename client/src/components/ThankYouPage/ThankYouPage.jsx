@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./ThankYouPage.module.css";
-import thanku from '../../assets/thanku.png'
+import thanku from '../../assets/thanku2.png'
 import { FaStar } from 'react-icons/fa';
 import AddReviewForm from "../Reviews/addReview"; // Importar el formulario de reseña
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Backdrop } from "@mui/material";

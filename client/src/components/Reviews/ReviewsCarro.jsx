@@ -1,27 +1,23 @@
 import React from "react";
-import Slider from "react-slick";
+import Carousel from "react-material-ui-carousel";
 import ReviewCard from "./ReviewCard";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 
 const ReviewCarousel = ({ reviews }) => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
   return (
-    <Slider {...settings}>
+    <Carousel
+      autoPlay={false}
+      animation="slide"
+      indicators={false}
+      navButtonsAlwaysVisible
+      PrevIcon={<ArrowBack style={{ fontSize: 20, color: "red" }} />}
+      NextIcon={<ArrowForward style={{ fontSize: 20, color: "green" }} />}
+      slidesToShow={1} // Mostrar solo un elemento a la vez
+    >
       {reviews.map((review) => (
-        <div key={review.id}>
-          <ReviewCard review={review} />
-        </div>
+        <ReviewCard key={review.id} review={review} />
       ))}
-    </Slider>
+    </Carousel>
   );
 };
 

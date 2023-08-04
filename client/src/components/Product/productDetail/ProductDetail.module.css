@@ -205,3 +205,10 @@
   padding: 10px;
   border-radius: 8px;
 }
+.Cardcita{
+   margin-bottom: "3rem";
+   background-color: "#f1f1f1";
+   width: 90%;
+   position:relative;
+   left: 30px;
+}

@@ -44,3 +44,19 @@
   color: #fdd835; 
   margin-left: 8px;
 }
+.custom-prev-arrow,
+.custom-next-arrow {
+  background-color: red; /* Cambia el color de fondo aquí */
+  color: white; /* Cambia el color del texto aquí */
+  border-radius: 50%; /* Da forma circular a las flechas */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.custom-next-arrow {
+  background-color: green; /* Cambia el color de fondo aquí */
+}

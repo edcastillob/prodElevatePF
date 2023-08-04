@@ -116,32 +116,32 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
 
   return (
     <Box py={2}>
-    <Typography variant="h6">Preguntas sobre el Producto</Typography>
-    {currentComments.map((comment, index) => (
-      <Box
-        key={comment.id}
-        sx={{
-          borderRadius: '8px',
-          border: '1px solid #ddd',
-          padding: '10px',
-          marginBottom: '10px',
-          backgroundColor: '#fff',
-        }}
-      >
+      <Typography variant="h6">Preguntas sobre el Producto</Typography>
+      {currentComments.map((comment, index) => (
+        <Box
+          key={comment.id}
+          sx={{
+            borderRadius: '8px',
+            border: '1px solid #ddd',
+            padding: '10px',
+            marginBottom: '10px',
+            backgroundColor: '#fff',
+          }}
+        >
         <Box display="flex" alignItems="center">
           <Avatar src={comment.user?.image} alt="User" />
           <Typography variant="body2" className="comment-user" sx={{ marginLeft: '10px' }}>
             {comment.user?.name}
           </Typography>
-        </Box>
-        <Typography className="comment-text" variant="body1">
-          {comment.text}
-        </Typography>
-        {comment.respuestas && comment.respuestas.length > 0 && (
-          <CardContent style={{ background: '#f1f1f1', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
-            {comment.respuestas.map((reply) => (
-              <div key={reply.id} style={{ background: '#f1f1f1', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
-                <div className="comment-info">
+          </Box>
+          <Typography className="comment-text" variant="body1">
+            {comment.text}
+          </Typography>
+          {comment.respuestas && comment.respuestas.length > 0 && (
+            <CardContent style={{ background: '#f1f1f1', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
+              {comment.respuestas.map((reply) => (
+                <div key={reply.id} style={{ background: '#f1f1f1', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
+                 <div className="comment-info">
                   <Avatar src={reply.replyUser?.image} alt="User" />
                   <Typography variant="body2" className="comment-user">
                     {reply.replyUser?.name}

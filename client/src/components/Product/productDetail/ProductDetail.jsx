@@ -122,32 +122,31 @@ export const ProductDetail = () => {
                   </div>
                 </div>
               </Grid>
-              
-              {/* Sección de comentarios y reseñas */}
-              <Grid item xs={12}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              {/* Comentarios */}
-              <Card sx={{ width: "49%", display: "flex", flexDirection: "column", padding: "1rem" }}>
-                <MostrarComentarios productId={id} userEmail={currentUser?.email} userRole={userRoleLocal} />
-                {currentUser && (
-                  <CrearComentario productId={id} userEmail={currentUser.email} userRole={userRoleLocal} />
-                )}
-              </Card>
-              
-              {/* Reseñas */}
-              <div style={{ width: "49%", padding: "1rem", backgroundColor: "#f0f2f5", borderRadius: "8px" }}>
-                {productReviews && productReviews.length > 0 ? (
-                  <>
-                    <Typography variant="h5">Reseñas de los usuarios:</Typography>
-                    {/* Mostrar las reseñas */}
-                    <ReviewCarousel reviews={productReviews} />
-                  </>
-                ) : (
-                  <Typography variant="body1">No hay reseñas disponibles.</Typography>
-                )}
+            
+        
+          {/* Sección de comentarios y reseñas */}
+                <Grid item xs={12} sx = {{border:"none"}}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "stretch" }}>
+                <div className={styles.Cardcita}>
+                  {productReviews && productReviews.length > 0 ? (
+                    <>
+                      <Typography variant="label" style={{ padding: "1rem" }}>Reseñas de los usuarios:</Typography>
+                      {/* Mostrar las reseñas */}
+                      <ReviewCarousel reviews={productReviews} />
+                    </>
+                  ) : (
+                    <Typography variant="body1" style={{ padding: "1rem" }}>No hay reseñas disponibles.</Typography>
+                  )}
+                </div>
+                
+                <Card sx={{ padding: "3rem", backgroundColor: "#f1f1f1", border: "none" }}>
+                  <MostrarComentarios productId={id} userEmail={currentUser?.email} userRole={userRoleLocal} />
+                  {currentUser && (
+                    <CrearComentario productId={id} userEmail={currentUser.email} userRole={userRoleLocal} />
+                  )}
+                </Card>
               </div>
-            </div>
-          </Grid>
+            </Grid >
         </Grid>
       )}
     </Box>
