@@ -1,11 +1,13 @@
 // Products
 export const SHOW_PRODUCTS = "SHOW_PRODUCTS";
+export const SHOW_PRODUCTS_INACTIVE = "SHOW_PRODUCTS_INACTIVE";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const GET_PRODUCT_NAME = "GET_PRODUCT_NAME";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const ACTIVE_PRODUCT = "ACTIVE_PRODUCT";
 
 // Category
 export const ADD_CATEGORY = "ADD_CATEGORY";

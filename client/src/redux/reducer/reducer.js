@@ -36,6 +36,7 @@ import {
   GET_USER_EMAIL,
   GET_ROLE,
   GET_USER_SYSTEM_LOG,
+  SHOW_PRODUCTS_INACTIVE,
 } from "../actions/types";
 
 const initialState = {
@@ -48,6 +49,7 @@ const initialState = {
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
   products: [],
+  productsInactive: [],
   productsFiltered: [],
   productDetail: [],
   category: [],
@@ -66,6 +68,11 @@ function reducer(state = initialState, actions) {
         ...state,
         products: actions.payload,
         productDetail: [...actions.payload],
+      };
+    case SHOW_PRODUCTS_INACTIVE:
+      return {
+        ...state,
+        productsInactive: actions.payload,
       };
 
     case GET_PRODUCT_NAME:

@@ -21,9 +21,8 @@ async function putProduct(req, res) {
   if (typeof newData.minStock === "string") {
     newData.minStock = parseInt(newData.minStock);
   }
-  if (typeof newData.category === "string") {
-    newData.category = parseInt(newData.category);
-  }
+  newData.categoryId = newData.category;
+  delete newData.category;
 
   try {
     const product = await Product.findOne({
@@ -34,6 +33,7 @@ async function putProduct(req, res) {
       return res.status(404).json({ error: "Product not Found" });
     }
 
+    // Actualizar todos los campos, incluyendo categoryId
     await Product.update(newData, {
       where: { id: productId },
     });

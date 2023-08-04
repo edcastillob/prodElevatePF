@@ -41,6 +41,8 @@ const router = Router();
 const mailerRoutes = require("./mailerRoutes");
 const { postFilterData } = require("../controllers/POST/postFilterData");
 const { getAllRole } = require("../controllers/GET/getAllRole");
+const { getAllProductsInactive } = require("../controllers/GET/getAllProductsInactive");
+const { putProductActive } = require("../controllers/PUT/putProductActive");
 
 router.use("/notification", mailerRoutes);
 
@@ -112,6 +114,8 @@ router.put("/user/:id", putUser);
 router.delete("/user/:id", deleteUser);
 
 router.get("/product", getAllProducts);
+router.get("/productinactive", getAllProductsInactive);
+router.put("/productactive/:id", putProductActive);
 router.get("/productid/:id", getProductId);
 
 router.post("/product", postProduct);

@@ -37,6 +37,8 @@ import {
   GET_USER_EMAIL,
   GET_ROLE,
   GET_USER_SYSTEM_LOG,
+  SHOW_PRODUCTS_INACTIVE,
+  ACTIVE_PRODUCT,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -54,9 +56,24 @@ export const showProducts = () => {
     throw new Error(error.message);
   }
 };
-
-export const getProductName = (name) => {
-  return { type: GET_PRODUCT_NAME, payload: name };
+export const showProductsInactive = () => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(`${ENDPOINT}productinactive`);
+      return dispatch({ type: SHOW_PRODUCTS_INACTIVE, payload: data });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+export const activeProduct = (productId) => async (dispatch) => {
+  console.log('productId: ', productId)
+  try {
+    const response = await axios.put(`${ENDPOINT}productactive/${productId}`);
+    console.log('Respuesta del backend:', response.data);
+  } catch (error) {
+    console.error('Error al activar el producto:', error);
+  }
 };
 
 export const getProductDetail = (id) => {

@@ -3,7 +3,7 @@ const { Product, Provider } = require("../../db");
 
 async function postProduct(req, res) {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const { name, category, description, images, provider, brand, condition } =
       req.body;
     let { purchasePrice, salePrice, stock, minimumStock } = req.body;

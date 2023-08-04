@@ -62,7 +62,8 @@ const sendMailer = async (product) => {
 
     await transporter.sendMail(message);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    // return res.status(400).json({ error: error.message });
+    return console.log({ error: error.message });
   }
 }
 
