@@ -1,24 +1,30 @@
+const { Sequelize } = require('sequelize');
+const { conn: sequelize  } = require("../../db");
+// const { sequelize } = require('../../models/User.js'); 
+const UserModel = sequelize.models.User;
+
 const nodemailer = require('nodemailer');
 const Mailgen = require('mailgen');
 
 /**  Notificacion de stock minimo  **/
 const sendMailer = async (product) => {
   try {
-     const { email } = req.params;
+    //  const { email } = req.params;
+    //  console.log('desde nodemailer: ', email)
     
     const transporter = nodemailer.createTransport({
       // port: 465 - true, 567 - false
       service: 'gmail',
       auth: {       
-        user: 'mendozaveralucia@gmail.com',
-        pass: 'pgazpnjfbfvbkpxe'
+        user: 'prodelevatepf@gmail.com',
+        pass: 'znykqbnouxqdrrjf'
       }
     });
 
     const MailGenerator = new Mailgen({
       theme: 'cerberus',
       product: {
-        name: "Aviso de Stock Minimo",
+        name: "Alerta!! Creación de Nuevo producto",
         link: 'http://localhost:5173/dashboard',
         copyright: 'Copyright © 2023 ProdElevate. All rights reserved.'
       }
@@ -29,20 +35,20 @@ const sendMailer = async (product) => {
         greeting: 'Estimado,',
         signature: 'Atte',
         name: 'Administrador',
-        intro: `El siguiente producto ha sido creado en Base de datos prodElevate:`,
+        intro: `El siguiente producto ha sido creado en Base de datos prodElevate: 
+        debes dirigirte al panel administrativo para la configuración de Stock`,
         table : {
           data: [
             {
               Producto: `${product.dataValues.name}`,
-              Descripción: `${product.dataValues.description}`,
-              Min_Stock: `${product.dataValues.minStock} und.`
+              Descripción: `${product.dataValues.description}`              
             }
           ]
         },
         action: {
           instructions: 'Puedes revisar el estatus del producto y más en el Dashboard Administrativo:',
           button: {
-              color: '#22BC66', // Optional action button color
+              color: '#000924', 
               text: 'Go to Dashboard',
               link: 'http://localhost:5173/dashboard'
           }
@@ -50,22 +56,23 @@ const sendMailer = async (product) => {
         // outro: 'Revisa el inventario del producto'   
       }
     }
-
     const mail = MailGenerator.generate(response);
 
-    const message = {
-      from: "prodelevatepf@gmail.com", // sender address
-      to: 'mendozaveralucia@gmail.com', // list of receivers
-      subject: "Notificación de Stock Mínimo", // Subject line
+    
+   const message = {
+      from: "prodelevatepf@gmail.com", 
+      to: 'edwar.castillo@gmail.com', 
+      subject: "Registro de nuevo producto", 
       html: mail
     };
 
     await transporter.sendMail(message);
   } catch (error) {
-    // return res.status(400).json({ error: error.message });
     return console.log({ error: error.message });
   }
 }
+
+
 
 /**  Notificacion de nuevo usuario  **/
 const sendMailNewUser = async (user) => {
@@ -74,8 +81,8 @@ const sendMailNewUser = async (user) => {
       // port: 465 - true, 567 - false
       service: 'gmail',
       auth: {
-        user: 'mendozaveralucia@gmail.com',
-        pass: 'pgazpnjfbfvbkpxe'
+        user: 'prodelevatepf@gmail.com',
+        pass: 'znykqbnouxqdrrjf'
       }
     });
 
@@ -96,7 +103,7 @@ const sendMailNewUser = async (user) => {
         action: {
           instructions: 'Para comenzar con ProdElevate, por favor haga click aqui:',
           button: {
-              color: '#22BC66', // Optional action button color
+              color: '#000924', // Optional action button color
               text: 'Confirm your account',
               link: 'http://localhost:5173/login'
           }
@@ -108,18 +115,18 @@ const sendMailNewUser = async (user) => {
     const mail = MailGenerator.generate(response);
 
     const message = {
-      from: process.env.EMAIL, // sender address
-      to: user.email, // list of receivers,
-      cc: 'mendozaveralucia@gmail.com', // cc admin fyi
-      subject: "ProdElevate | Registro de usuario", // Subject line
+      from: process.env.EMAIL,
+      to: user.email, 
+      cc: 'edwar.castillo@gmail.com', 
+      subject: "ProdElevate | Registro de usuario", 
       html: mail
     }
 
     await transporter.sendMail(message);
 
   } catch (error) {
-    // return res.status(400).json({ error: error.message });
-    throw error;
+    //  return res.status(400).json({ error: error.message });
+     throw error;
   }
 }
 
