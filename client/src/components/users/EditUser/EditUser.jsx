@@ -8,7 +8,7 @@ import ReactQuill from "react-quill";
 // import loadingImg from "../../../assets/loading.png";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { editUser, getUserId } from "../../../redux/actions/actions";
+import { editUser, getRole, getUserId } from "../../../redux/actions/actions";
 
 export const EditUser = () => {
   const dispatch = useDispatch();
@@ -17,8 +17,10 @@ export const EditUser = () => {
   const { id } = params;
   useEffect(() => {
     dispatch(getUserId(id));
+    dispatch(getRole());
   }, [dispatch, id]);
   const users = useSelector((state) => state.users);
+  const roles = useSelector((state) => state.role);
   if (users && !users.isActive) {
     users.isActive = "f";
   }
@@ -32,6 +34,7 @@ export const EditUser = () => {
     // password: "",
     image: [],
     isActive: "",
+    roleId: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -44,6 +47,7 @@ export const EditUser = () => {
       users.numPhone &&
       users.address &&
       users.isActive &&
+      users.roleId &&
       //   users.password &&
       users.image
     ) {
@@ -54,6 +58,7 @@ export const EditUser = () => {
         numPhone: users.numPhone,
         address: users.address,
         isActive: users.isActive,
+        roleId: users.roleId,
         // password: users.password,
         image: users.image,
       });
@@ -65,6 +70,7 @@ export const EditUser = () => {
     users.numPhone,
     users.address,
     users.isActive,
+    users.roleId,
     //   users.password,
     users.image,
   ]);
@@ -98,11 +104,44 @@ export const EditUser = () => {
       image: [...(imgProduct.image || []), ...imageUrls],
     }));
   };
+  // console.log("el usuario: ",users)
+  // console.log("el change: ",changeUser.roleId)
+  // console.log("el rol: ",roles)
 
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <h4 style={{ fontFamily: "Poppins" }}>Edit User</h4>
+
+        {/* _____________Status________________ */}
+        <label>Status:</label>
+        <select
+          className="form-control mb-3 w-75"
+          name="isActive"
+          value={changeUser.isActive}
+          defaultValue={users.isActive}
+          onChange={handleChange}
+        >
+          <option value="t">Activo</option>
+          <option value="f">Inactivo</option>
+        </select>
+
+        {/* _____________Role________________ */}
+        <label>Role:</label>
+        <select
+          className="form-control mb-3 w-75"
+          name="roleId"
+          value={changeUser.roleId} // Usamos directamente el roleId del estado local
+          onChange={handleChange}
+          aria-readonly
+        >
+          {roles.map((rol) => (
+            <option key={rol.id} value={rol.id}>
+              {rol.name}
+            </option>
+          ))}
+        </select>
+
         {/* _____________NAME________________ */}
         <label>Name:</label>
         <input
@@ -128,9 +167,10 @@ export const EditUser = () => {
         {/* {errors.email && (
             <div className="invalid-feedback">{errors.email}</div>
           )} */}
+        {/* Estado del usuario */}
 
         {/* _____________ID________________ */}
-        <label>Identification:</label>
+        {/* <label>Identification:</label>
         <input
           type="text"
           name="identification"
@@ -140,13 +180,13 @@ export const EditUser = () => {
           }`}
           onChange={handleChange}
           value={changeUser.identification}
-        />
+        /> */}
         {/* {errors.identification && (
             <div className="invalid-feedback">{errors.identification}</div>
           )} */}
 
         {/* _____________PHONE NUMBER________________ */}
-        <label>Phone:</label>
+        {/* <label>Phone:</label>
         <input
           type="text"
           name="numPhone"
@@ -156,7 +196,7 @@ export const EditUser = () => {
           }`}
           onChange={handleChange}
           value={changeUser.numPhone}
-        />
+        /> */}
         {/* {errors.numPhone && (
             <div className="invalid-feedback">{errors.numPhone}</div>
           )} */}
@@ -175,18 +215,6 @@ export const EditUser = () => {
             <div className="invalid-feedback">{errors.address}</div>
           )} */}
 
-        {/* Estado del usuario */}
-        <label>Status:</label>
-        <select
-          className="form-control mb-3 w-75"
-          name="isActive"
-          value={changeUser.isActive}
-          // onChange={handleChange}
-          aria-readonly
-        >
-          <option value="t">Activo</option>
-          <option value="f">Inactivo</option>
-        </select>
         <br />
 
         <div className="d-flex align-items-center">

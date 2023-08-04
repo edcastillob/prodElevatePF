@@ -11,36 +11,61 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../../redux/actions/actions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import countriesData from "../../Country/db.json";
 
 export const CreateUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [userData, setUserData] = useState({
     name: "",
     identification: "",
     email: "",
     numPhone: "",
     address: "",
+    country: "",
     password: "",
     images: [],
   });
 
   const [errors, setErrors] = useState({});
 
+  const compareCountries = (a, b) => {
+    if (a.name.common < b.name.common) {
+      return -1;
+    }
+    if (a.name.common > b.name.common) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const sortedCountries = countriesData.countries.sort(compareCountries);
+
+  const handleCountrySelect = (event) => { 
+    event.preventDefault();
+    const countryValue = event.target.value; // Obtener el valor seleccionado del evento
+    setSelectedCountry(countryValue); // Actualizar el estado de selectedCountry
+    setUserData((userData) => ({
+      ...userData,
+      country: countryValue, // Usar el valor actual de selectedCountry
+    }));
+  }
+  
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value,     
     }));
-    setErrors(
-      validate({
-        ...userData,
-        [name]: value,
-      })
-    );
+    // setErrors(
+    //   validate({
+    //     ...userData,
+    //     [name]: value,
+    //   })
+    // );
   };
 
   const handleSubmit = (event) => {
@@ -62,7 +87,8 @@ export const CreateUser = () => {
       images: imageUrl,
     }));
   };
-
+  console.log(userData)
+  console.log(selectedCountry)
   return (
     <div className={styles.container}>
       <div className={styles.divLeft}>
@@ -156,6 +182,23 @@ export const CreateUser = () => {
                   <div className="invalid-feedback">{errors.address}</div>
                 )}
               </div>
+
+              {/* _____________country________________ */}
+              <div className={`${styles.field} ${styles["input-field"]}`}>
+                <select
+                  className="form-control"
+                  name="country"
+                  onChange={handleCountrySelect}
+                >
+                  <option value="">Select a country</option>
+                  {sortedCountries.map((country) => (
+                    <option key={country.cca3} value={country.name.common}>
+                      {country.name.common}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {/* _____________PASSWORD________________ */}
               <div className={`${styles.field} ${styles["input-field"]}`}>
                 <input
@@ -186,25 +229,28 @@ export const CreateUser = () => {
                   </div>
                 )}
               </div>
-                <div className={styles.uploadImg}>
-              <UploadImg 
-              onImageUpload={handleImageUpload}
-              uploadedImages={userData.images}
-              />
-                </div>
+              <div className={styles.uploadImg}>
+                <UploadImg
+                  onImageUpload={handleImageUpload}
+                  uploadedImages={userData.images}
+                />
+              </div>
               <br />
               <div className={`${styles.field} ${styles["button-field"]}`}>
-                <button className={styles.create} type="submit">Create</button>
+                <button className={styles.create} type="submit">
+                  Create
+                </button>
               </div>
             </form>
             <div className={styles["form-link"]}>
               <span>
                 Already have an account?{" "}
-                <Link to='/login'
+                <Link
+                  to="/login"
                   className={`${styles.link} ${styles["login-link"]}`}
-                > 
+                >
                   Login
-                  </Link>
+                </Link>
               </span>
             </div>
           </div>

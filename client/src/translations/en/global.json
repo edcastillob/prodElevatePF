@@ -1,0 +1,32 @@
+{
+    "landing":{
+        "welcome-to-prodelevate": "Welcome to ProdElevate",
+        "language": "Language",
+        "sign-up": "Sign Up",
+        "its-time-to": "It's time to...",
+        "line1": "Take full control of your business", 
+        "line2": "Control and manage your finances and inventory",
+        "line3": "Increase your sales and accelerate your business growth with our powerful management tool",
+        "get-started": "Get Started",
+        "companies": "This companies trust us"
+    },
+    "footer":{
+        "all-rights-reserved": "ProdElevate. All Rights Reserved.",
+        "about-us": "About Us",
+        "privacy-policy": "Privacy Policy",
+        "terms-and-conditions": "Terms & Conditions",
+        "contact-us":"Contact Us"
+    },
+    "navbar":{
+        "profile": "Profile",
+        "logout": "Logout",
+        "dashboard": "Dashboard"
+    },
+    "login":{
+        "login":"Login",
+        "forgot": "Forgot your password",
+        "not-account": "Don't have an account?",
+        "sign-up": "Sign Up"
+
+    }
+}

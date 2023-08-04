@@ -24,7 +24,6 @@ export const DELETE_PROVIDER = "DELETE_PROVIDER";
 //User
 export const LOGIN = "LOGIN";
 export const ADD_USER = "ADD_USER";
-export const ADD_ROLE = "ADD_ROLE";
 export const VALIDATION_USER = "VALIDATION_USER";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const DELETE_USERS = "DELETE_USERS";
@@ -49,3 +48,9 @@ export const PRICE_HIGHER_LOWER = "PRICE_HIGHER_LOWER";
 export const PRICE_LOWER_HIGHER = "PRICE_LOWER_HIGHER";
 export const FILTER_NAME = "FILTER_NAME";
 export const FILTER_DATA = "FILTER_DATA";
+
+
+//Role
+
+export const ADD_ROLE = "ADD_ROLE";
+export const GET_ROLE = "GET_ROLE";
