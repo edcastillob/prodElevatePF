@@ -42,6 +42,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "slick-carousel": "^1.8.1",
+    "sweetalert": "^2.1.2",
     "typeit-react": "^2.6.4"
   },
   "devDependencies": {

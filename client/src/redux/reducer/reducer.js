@@ -40,6 +40,8 @@ import {
 
   GET_USER_EMAIL,
   GET_ROLE,
+  GET_USER_SYSTEM_LOG,
+  SHOW_PRODUCTS_INACTIVE,
 } from "../actions/types";
 
 const initialState = {
@@ -52,6 +54,7 @@ const initialState = {
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
   products: [],
+  productsInactive: [],
   productsFiltered: [],
   productDetail: [],
   category: [],
@@ -62,6 +65,7 @@ const initialState = {
   comments: [], // Aquí se inicializa como un arreglo vacío
   userMail: [],
   productReviews: [],
+  userLog:[],
 };
 
 function reducer(state = initialState, actions) {
@@ -71,6 +75,11 @@ function reducer(state = initialState, actions) {
         ...state,
         products: actions.payload,
         productDetail: [...actions.payload],
+      };
+    case SHOW_PRODUCTS_INACTIVE:
+      return {
+        ...state,
+        productsInactive: actions.payload,
       };
 
     case GET_PRODUCT_NAME:
@@ -408,7 +417,11 @@ function reducer(state = initialState, actions) {
           ...state,
           role: actions.payload,
         };
-
+        case GET_USER_SYSTEM_LOG:
+          return {
+            ...state,
+            userLog: actions.payload,
+          };
     default:
       return state;
   }

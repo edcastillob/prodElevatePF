@@ -3,6 +3,8 @@ const { User } = require("../../db");
 async function putUser(req, res) {
     const userId = req.params.id;
     const newData = req.body;
+    console.log('el id: ', userId)
+    console.log('la data: ', newData)
 
     try {
         const user = await User.findOne({

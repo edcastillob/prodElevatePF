@@ -4,39 +4,50 @@ import logo from "../../assets/logo_2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../users/Firebase/logout.js";
 import { useDispatch, useSelector } from "react-redux";
-import { addFav, getUserEmail, logout, getRole, getUsers } from "../../redux/actions/actions";
+import {
+  addFav,
+  getUserEmail,
+  logout,
+  getRole,
+  getUsers,
+  getUserSystemLog,
+} from "../../redux/actions/actions";
 import userImg from "../.././assets/user.png";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import countriesData from "../Country/db.json";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import en from "../.././assets/estados-unidos.png";
 import es from "../.././assets/espana.png";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export const NavBar = ({ user, userLocal, handleSignIn, currentLanguage, handleLanguageChange }) => {
+export const NavBar = ({
+  user,
+  userLocal,
+  handleSignIn,
+  currentLanguage,
+  handleLanguageChange,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation('global');
-
- useEffect(() => { 
-  dispatch(getRole());
-  dispatch(getUsers());
-  if (userLocal) {
-    dispatch(getUserEmail(userLocal.email)) 
-  } else if(user){
-    dispatch(getUserEmail(user.email)) 
-  } else {
-
-  }
-
-}, [user, userLocal])
-
-
-
-const userMail = useSelector((state) => state.userMail);
-const roles = useSelector((state) => state.role);
-
- 
   const [modal, setModal] = useState(false);
+  const { t } = useTranslation("global");
+
+  useEffect(() => {
+    dispatch(getRole());
+    dispatch(getUsers());
+    if (userLocal) {
+      dispatch(getUserEmail(userLocal.email));
+      dispatch(getUserSystemLog(userLocal.email));
+    } else if (user) {
+      dispatch(getUserEmail(user.email));
+      dispatch(getUserSystemLog(user.email));
+    } else {
+    }
+  }, [user, userLocal, modal]);
+
+  const userMail = useSelector((state) => state.userMail);
+  const roles = useSelector((state) => state.role);
 
   const toggle = () => setModal(!modal);
   //Lógica Dropdown
@@ -44,17 +55,16 @@ const roles = useSelector((state) => state.role);
 
   let userLogin = useSelector((state) => state.user);
 
-
   const handleLogoutClick = () => {
     if (userLocal) {
       dispatch(logout());
+      navigate('/home');
     } else {
       logoutUser();
+      navigate('/home');
     }
-    window.location.reload(); 
+    window.location.reload();
   };
-
- 
 
   //Handle Dropdown
   const handleDropdownToggle = () => {
@@ -62,60 +72,94 @@ const roles = useSelector((state) => state.role);
   };
 
   const handleChangePass = (event) => {
-      event.preventDefault();
-      toggle();
-      // navigate('/changepass')
-      navigate('/changepass', { state: { userMail } });
-  }
+    event.preventDefault();
+    toggle();
+    // navigate('/changepass')
+    navigate("/changepass", { state: { userMail } });
+  };
   // console.log("userLocal.roleId:", userLocal);
 
   // Encontrar el objeto de rol que coincide con userLocal.roleId
   const userRole = roles.find((rol) => rol.id === userMail.roleId);
   const userRoleg = roles.find((rol) => rol.id === userMail?.roleId);
 
-userLocal ? console.log('UserLocal' ,userLocal) : console.log('Local Vacio');
-user ? console.log('UserGoogle' ,user) : console.log('Google Vacio');
-// console.log('userData: ', userMail)
-// console.log('roles: ', roles)
-// console.log('rol del user', userRole)
+  // userLocal ? console.log('UserLocal' ,userLocal) : console.log('Local Vacio');
+  // user ? console.log('UserGoogle' ,user) : console.log('Google Vacio');
+  // console.log('userData: ', userMail)
+  // console.log('roles: ', roles)
+  // console.log('rol del user', userRole)
 
-const [userCountry, setUserCountry] = useState("");
-const [userFlag, setUserFlag] = useState("");
-const usersAll = useSelector((state) => state.users);
-useEffect(() => {
-  const country = getUserCountry();
-  setUserCountry(country);
-  if (country) {
-    const countryObject = countriesData.countries.find(
-      (countryData) => countryData.name.common === country
-    );
-    if (countryObject && countryObject.flags) {
-      setUserFlag(countryObject.flags);
-    } else {
-      setUserFlag("");   
+  const [userCountry, setUserCountry] = useState("");
+  const [userFlag, setUserFlag] = useState("");
+  const usersAll = useSelector((state) => state.users) || [];
+  useEffect(() => {
+    const country = getUserCountry();
+    setUserCountry(country);
+    if (country) {
+      const countryObject = countriesData.countries.find(
+        (countryData) => countryData.name.common === country
+      );
+      if (countryObject && countryObject.flags) {
+        setUserFlag(countryObject.flags);
+      } else {
+        setUserFlag("");
+      }
     }
-  }
-}, [userLocal, usersAll]);
+  }, [userLocal, usersAll]);
 
-const getUserCountry = () => {
-  if (userLocal && usersAll) {
-    const userWithEmail = usersAll.find((user) => user.email === userLocal.email);
-    if (userWithEmail) {
-      return userWithEmail.country;
+  const getUserCountry = () => {
+    let usersArray = Array.isArray(usersAll)
+      ? usersAll
+      : usersAll
+      ? [usersAll]
+      : [];
+
+    if (userLocal && usersArray.length) {
+      const userWithEmail = usersArray.find(
+        (user) => user.email === userLocal.email
+      );
+      if (userWithEmail) {
+        return userWithEmail.country;
+      }
+    } else if (user && usersArray.length) {
+      const userWithEmail = usersArray.find(
+        (userb) => userb.email === user.email
+      );
+      if (userWithEmail) {
+        return userWithEmail.country;
+      }
     }
-  } else if (user && usersAll) {
-    const userWithEmail = usersAll.find((userb) => userb.email === user.email);
 
-    if (userWithEmail) {
-      return userWithEmail.country;
+    return "";
+  };
+  const userActive = useSelector((state) => state.userLog);
+
+  useEffect(() => {
+    if (userActive.isActive === false) {
+      toast.warning(
+        `${userActive.name}, your email: ${userActive.email}
+      is inactive. Contact the administrator to prodElevate`,
+        {
+          autoClose: 5000,
+        }
+      );
+      const timeoutId = setTimeout(() => {
+        handleLogoutClick();
+      }, 5000);
+      return () => clearTimeout(timeoutId);
     }
-  }
-  return "";
-};
+  }, [
+    userActive.isActive,
+    userActive.name,
+    userActive.email,
+    handleLogoutClick,
+  ]);
 
+  // console.log(usersAll)
+  // console.log(user.email)
 
-console.log(usersAll)
-// console.log(user.email)
+  // console.log('userActive: ', userActive)
+  // console.log('rol de user: ', userActive.roleId)
   return (
     <div className={`p-0 m-0 ${styles.navContainer}`}>
       <div className={styles.divLogo}>
@@ -133,17 +177,25 @@ console.log(usersAll)
         {/* LANGUAGE */}
         {currentLanguage === "en" ? (
           <>
-          <img src={en} width={30} height={30} 
-          onClick={() => handleLanguageChange("es")} 
-          className={styles.language} />
+            <img
+              src={en}
+              width={30}
+              height={30}
+              onClick={() => handleLanguageChange("es")}
+              className={styles.language}
+            />
           </>
         ) : (
           <>
-          <img src={es} width={30} height={30} 
-          onClick={() => handleLanguageChange("en")}
-          className={styles.language} />
+            <img
+              src={es}
+              width={30}
+              height={30}
+              onClick={() => handleLanguageChange("en")}
+              className={styles.language}
+            />
           </>
-        ) }
+        )}
 
         {user || userLocal ? (
           <Link
@@ -201,22 +253,25 @@ console.log(usersAll)
             {/* Dropdown de opciones */}
             {isDropdownOpen && (
               <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
-                <li>
-                <Link
-                    to="/dashboard"
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      fontFamily: "Poppins",
-                      textAlign: "start",
-                      display:'flex'
-                    }}
-                  >
-                    <h6 style={{display:'flex', gap:'5px'}}>
-                      <ion-icon name="compass"></ion-icon> {t("navbar.dashboard", { lng: currentLanguage })}
-                    </h6>
-                  </Link>
-                </li>
+                {userActive.roleId !== 1000 && (
+                  <li>
+                    <Link
+                      to="/dashboard"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        fontFamily: "Poppins",
+                        textAlign: "start",
+                        display: "flex",
+                      }}
+                    >
+                      <h6 style={{ display: "flex", gap: "5px" }}>
+                        <ion-icon name="compass"></ion-icon>{" "}
+                        {t("navbar.dashboard", { lng: currentLanguage })}
+                      </h6>
+                    </Link>
+                  </li>
+                )}
 
                 <li>
                   <h6
@@ -224,15 +279,14 @@ console.log(usersAll)
                       color: "black",
                       fontFamily: "Poppins",
                       textAlign: "start",
-                      cursor: "pointer", 
+                      cursor: "pointer",
                     }}
-                    onClick={toggle} 
+                    onClick={toggle}
                   >
-                    <ion-icon name="person"></ion-icon> {t("navbar.profile", { lng: currentLanguage })}
+                    <ion-icon name="person"></ion-icon>{" "}
+                    {t("navbar.profile", { lng: currentLanguage })}
                   </h6>
                 </li>
-
-               
 
                 <li>
                   {userLocal ? (
@@ -244,7 +298,8 @@ console.log(usersAll)
                       }}
                       onClick={handleLogoutClick}
                     >
-                      <ion-icon name="power"></ion-icon> {t("navbar.logout", { lng: currentLanguage })}
+                      <ion-icon name="power"></ion-icon>{" "}
+                      {t("navbar.logout", { lng: currentLanguage })}
                     </h6>
                   ) : null}
                 </li>
@@ -268,38 +323,40 @@ console.log(usersAll)
             {/* Dropdown de opciones */}
             {isDropdownOpen && (
               <ul className={styles.dropdownOptions} style={{ zIndex: 10 }}>
-                <li>
-                  <Link
-                    className={styles.icon}
-                    to="/dashboard"
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      fontFamily: "Poppins",
-                      textAlign: "start",
-                    }}
-                  >
-                    <h6>
-                      <ion-icon name="compass"></ion-icon> {t("navbar.dashboard", { lng: currentLanguage })}
-                    </h6>
-                  </Link>
-                </li>
+                {userActive.roleId !== 1000 && (
+                  <li>
+                    <Link
+                      to="/dashboard"
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        fontFamily: "Poppins",
+                        textAlign: "start",
+                        display: "flex",
+                      }}
+                    >
+                      <h6 style={{ display: "flex", gap: "5px" }}>
+                        <ion-icon name="compass"></ion-icon>{" "}
+                        {t("navbar.dashboard", { lng: currentLanguage })}
+                      </h6>
+                    </Link>
+                  </li>
+                )}
 
-                
                 <li>
                   <h6
                     style={{
                       color: "black",
                       fontFamily: "Poppins",
                       textAlign: "start",
-                      cursor: "pointer", 
+                      cursor: "pointer",
                     }}
-                    onClick={toggle} 
+                    onClick={toggle}
                   >
-                    <ion-icon name="person"></ion-icon> {t("navbar.profile", { lng: currentLanguage })}
+                    <ion-icon name="person"></ion-icon>{" "}
+                    {t("navbar.profile", { lng: currentLanguage })}
                   </h6>
-                </li> 
-                
+                </li>
 
                 <li>
                   {user ? (
@@ -311,7 +368,8 @@ console.log(usersAll)
                       }}
                       onClick={handleLogoutClick}
                     >
-                      <ion-icon name="power"></ion-icon> {t("navbar.logout", { lng: currentLanguage })}
+                      <ion-icon name="power"></ion-icon>{" "}
+                      {t("navbar.logout", { lng: currentLanguage })}
                     </h6>
                   ) : null}
                 </li>
@@ -320,15 +378,22 @@ console.log(usersAll)
           </div>
         ) : null}
 
-        <Modal isOpen={modal} toggle={toggle}> 
+        <Modal isOpen={modal} toggle={toggle}>
           <ModalHeader toggle={toggle}>
-          {userFlag && <img src={userFlag.png} alt="Flag" style={{ 
-            width: "45px", 
-            height: "45px",
-            boxShadow: 'box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;' 
-            }}/>}
-            &nbsp; Profile prodElevate 
-            </ModalHeader>
+            {userFlag && (
+              <img
+                src={userFlag.png}
+                alt="Flag"
+                style={{
+                  width: "45px",
+                  height: "45px",
+                  boxShadow:
+                    "box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;",
+                }}
+              />
+            )}
+            &nbsp; Profile prodElevate
+          </ModalHeader>
           <ModalBody>
             {user ? (
               <>
@@ -343,7 +408,6 @@ console.log(usersAll)
                 <h5>{user.email}</h5>
                 <h5>User</h5>
                 {userRoleg && <h5>{userRoleg.name}</h5>}
-
               </>
             ) : null}
 
@@ -363,10 +427,10 @@ console.log(usersAll)
               </>
             ) : null}
           </ModalBody>
-          <ModalFooter>            
+          <ModalFooter>
             <Button className={styles.buttonProfile} onClick={handleChangePass}>
               update profile
-            </Button>{" "}          
+            </Button>{" "}
           </ModalFooter>
         </Modal>
       </div>
