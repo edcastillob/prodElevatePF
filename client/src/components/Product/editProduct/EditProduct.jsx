@@ -36,7 +36,7 @@ export const EditProduct = () => {
   const [changeProduct, setChangeProduct] = useState({
     category: productDetail.categoryId,
     name: productDetail.name,
-    name: productDetail.isActive,
+    isActive: productDetail.isActive,
     brand: productDetail.brand,
     condition: productDetail.condition,
     description: productDetail.description,
