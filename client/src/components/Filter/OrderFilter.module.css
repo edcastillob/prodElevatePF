@@ -1,6 +1,6 @@
 .orderFlex {
   display: flex;
-  margin-left: 5rem;
+  margin-left: 1.5rem;
 }
 
 .orderTitle {
@@ -24,4 +24,70 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .btns {
+    font-size: 15px;
+  }
+
+  .orderTitle {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 649px) {
+  .btns {
+    font-size: 13px;
+  }
+
+  .orderTitle {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 610px) {
+  .orderFlex {
+    margin-left: 1rem;
+  }
+
+  .orderTitle {
+    margin-left: 3px;
+  }
+}
+
+@media (max-width: 431px) {
+  .orderFlex {
+    margin-left: 0;
+    justify-content: space-between;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .orderTitle {
+    margin-left: 0;
+    font-size: 15px;
+  }
+  .btns {
+    padding: 5px 10px;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 354px) {
+  .btns {
+    padding: 5px 5px;
+  }
+}
+
+@media (max-width: 314px) {
+  .btns {
+    padding: 5px 4px;
+  }
+}
+
+@media (max-width: 306px) {
+  .btns {
+    padding: 5px 2px;
+  }
 }

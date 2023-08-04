@@ -178,12 +178,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: rgba(21, 255, 21, 0.3); /*#002eb946*/
+    background-color: #cacaca56; /*rgba(21, 255, 21, 0.3);*/ /*#002eb946*/
     border-radius: 50px;
 }
 
 .titleReel{
-    color: #cacaca;
+    color: black;
     font-family: 'Poppins';
 }
 

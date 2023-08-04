@@ -93,7 +93,7 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
       <div className={styles.welcome}>
         <Marquee className={styles.message}>
           Welcome to ProdElevate - The place for the exponential growth of your
-          business
+          business&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </Marquee>
       </div>
       <div className={styles.divSearch}>

@@ -67,3 +67,32 @@ h3 {
   background: none;
   border: none;
 }
+
+@media (max-width: 700px) {
+  .titleFilter {
+    font-size: 15px;
+  }
+
+  .message {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 649px) {
+  .titleFilter {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 476px) {
+  .oderFilters {
+    flex-direction: column;
+  }
+  .titleFilter {
+    font-size: 15px;
+  }
+}
