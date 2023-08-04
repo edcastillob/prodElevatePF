@@ -189,7 +189,8 @@ function App({ user, userLocal}) {
           
            {/* <Route path="/settings" element={<Configuration />} /> */}
                    {/* Protege la ruta del dashboard */}
-        <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel /> }/>
+        {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel /> }/> */}
+        <Route path="/dashboard" element={ <Panel /> }/>
          
           {/* {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
