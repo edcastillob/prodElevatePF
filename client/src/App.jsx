@@ -138,7 +138,7 @@ function App() {
           currentLanguage={currentLanguage}
           />} />
           <Route exact path="/about" element={<AboutUs />} />
-          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/cart" element={<Cart currentLanguage={currentLanguage} />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/contact" element={<ContactUs />} />
           <Route exact path="/changepass" element={<ChangePassword />} />
@@ -146,7 +146,9 @@ function App() {
           <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/home" element={<Home user={currentUser}
           userLocal={currentUserLocal}
-          handleSignIn={handleSignIn}/>} />
+          handleSignIn={handleSignIn}
+          currentLanguage={currentLanguage}
+          />} />
           <Route exact path="/login" element={<Login currentLanguage={currentLanguage}/>} />
           <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
           <Route exact path="/productid/:id" element={<ProductDetail />} />

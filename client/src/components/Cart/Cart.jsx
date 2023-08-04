@@ -15,12 +15,14 @@ import {
   removeToCart,
 } from "../../redux/actions/actions";
 import StripeButton from "../StripeButton/StripeButton";
+import { useTranslation } from 'react-i18next';
 
 // import { ToastContainer } from "react-toastify";
 
-const Cart = () => {
+const Cart = ({ currentLanguage }) => {
   const cartItems = useSelector((state) => state.cartItems);
   const cartTotalAmount = useSelector((state) => state.cartTotalAmount);
+  const { t } = useTranslation('global');
     // MODAL STATE
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -59,10 +61,10 @@ const Cart = () => {
 
   return (
     <div className={styles.cartContainer}>
-      <h3>Shoping Cart</h3>
+      <h3>{t("shopping-cart.shopping", { lng: currentLanguage })}</h3>
       {cartItems.length === 0 ? (
         <div className={styles.cartEmpty}>
-          <p>Your Cart is empty</p>
+          <p>{t("shopping-cart.is-empty", { lng: currentLanguage })}</p>
           <div className={styles.startShoping}>
             <Link to="/home">
               <svg
@@ -78,7 +80,7 @@ const Cart = () => {
                   d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                 />
               </svg>
-              <span>Start Shoping</span>
+              <span>{t("shopping-cart.start-shopping", { lng: currentLanguage })}</span>
             </Link>
           </div>
         </div>
@@ -99,13 +101,13 @@ const Cart = () => {
                   d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                 />
               </svg>
-              <span>Continue Shoping</span>
+              <span>{t("shopping-cart.continue-shopping", { lng: currentLanguage })}</span>
             </Link>
           </div>
           <div className={styles.titles}>
-            <h4 className={styles.productTitle}>Product</h4>
-            <h4 className={styles.price}>Price</h4>
-            <h4 className={styles.quantity}>Quantity</h4>
+            <h4 className={styles.productTitle}>{t("shopping-cart.product", { lng: currentLanguage })}</h4>
+            <h4 className={styles.price}>{t("shopping-cart.price", { lng: currentLanguage })}</h4>
+            <h4 className={styles.quantity}>{t("shopping-cart.quantity", { lng: currentLanguage })}</h4>
             <h4 className={styles.total}>Total</h4>
           </div>
           <div className={styles.cartItems}>
@@ -141,14 +143,14 @@ const Cart = () => {
           </div>
           <div className={styles.cartSummary}>
             <button className={styles.clearCart} onClick={() => setIsModalOpen(true)}>
-              Clear Cart
+            {t("shopping-cart.clear-cart", { lng: currentLanguage })}
             </button>
             <div className={styles.cartCheckout}>
               <div className={styles.subtotal}>
                 <span>Subtotal</span>
                 <span className={styles.amount}>${cartTotalAmount}</span>
               </div>
-              <p>Taxes and Shiping</p>
+              <p>{t("shopping-cart.taxes", { lng: currentLanguage })}</p>
               <StripeButton cartItems={cartItems} className={styles.create} />
             </div>
           </div>
@@ -157,16 +159,16 @@ const Cart = () => {
 
       {/* MODAL */}
       <Modal isOpen={isModalOpen} toggle={() => setIsModalOpen(false)} centered>
-        <ModalHeader style={{fontFamily:'Poppins'}} toggle={() => setIsModalOpen(false)}>Confirm</ModalHeader>
+        <ModalHeader style={{fontFamily:'Poppins'}} toggle={() => setIsModalOpen(false)}>{t("shopping-cart.confirm", { lng: currentLanguage })}</ModalHeader>
         <ModalBody style={{fontFamily:'Poppins'}}>
-          Are you sure you want to clear the cart?
+        {t("shopping-cart.are-you-sure", { lng: currentLanguage })}
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={() => setIsModalOpen(false)} style={{fontFamily:'Poppins'}}>
-            Cancel
+          {t("shopping-cart.cancel", { lng: currentLanguage })}
           </Button>
           <Button color="danger" onClick={handleConfirmClear} style={{fontFamily:'Poppins'}}>
-            Clear
+          {t("shopping-cart.clear", { lng: currentLanguage })}
           </Button>
         </ModalFooter>
         </Modal>

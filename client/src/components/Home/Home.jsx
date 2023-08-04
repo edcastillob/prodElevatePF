@@ -16,7 +16,7 @@ import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
 
-export const Home = ( { user, userLocal, handleSignIn  } ) => {
+export const Home = ( { user, userLocal, handleSignIn, currentLanguage  } ) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -100,8 +100,9 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
         {/* search */}
         <input
           type="text"
-          placeholder="search product"
+          placeholder="Search product"
           value={searchProductNav}
+          className={`${styles.search}`}
           onChange={(event) => setSearchProductNav(event.target.value)}
         />
       </div>
@@ -156,7 +157,11 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
 
         {/* optionProducts */}
         {filteredProducts?.map((product) => (
-          <CardProduct key={product.id} product={product} />
+          <CardProduct 
+          key={product.id} 
+          product={product} 
+          currentLanguage={currentLanguage}
+          />
         ))}
       </div>
     </div>

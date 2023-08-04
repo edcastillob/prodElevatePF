@@ -27,5 +27,26 @@
         "forgot": "Forgot your password",
         "not-account": "Don't have an account?",
         "sign-up": "Sign Up"
+    },
+    "cardProduct":{
+        "brand": "Brand",
+        "condition": "Condition",
+        "price": "Price",
+        "add-to-cart": "Add to Cart"
+    },
+    "shopping-cart":{
+        "shopping": "Shoping Cart",
+        "is-empty": "Your Cart is empty",
+        "start-shopping": "Start Shoping",
+        "continue-shopping": "Continue Shoping",
+        "product": "Product",
+        "price": "Price",
+        "quantity": "Quantity",
+        "clear-cart": "Clear Cart",
+        "taxes": "Taxes and Shiping",
+        "confirm": "Confirm",
+        "are-you-sure": "Are you sure you want to clear the cart?",
+        "cancel": "Cancel",
+        "clear": "Clear"
     }
 }

@@ -27,6 +27,27 @@
         "forgot": "Olvidé mi contraseña",
         "not-account": "No tienes una cuenta?",
         "sign-up": "Regístrate"
+    },
+    "cardProduct":{
+        "brand": "Marca",
+        "condition": "Condición",
+        "price": "Precio",
+        "add-to-cart": "Añadir al carrito"
+    },
+    "shopping-cart":{
+        "shopping": "Carrito de compras",
+        "is-empty": "Tu carrito está vacío",
+        "start-shopping": "Ir a comprar",
+        "continue-shopping": "Continuar comprando",
+        "product": "Producto",
+        "price": "Precio",
+        "quantity": "Cantidad",
+        "clear-cart": "Vaciar carrito",
+        "taxes": "Tasas y Envío",
+        "confirm": "Confirmación",
+        "are-you-sure": "Estás seguro que quieres vaciar el carrito?",
+        "cancel": "Cancelar",
+        "clear": "Confirmar"
     }
 }
 
