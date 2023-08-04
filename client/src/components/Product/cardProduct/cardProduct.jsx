@@ -11,6 +11,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Reviews from "../../Reviews/Review";
 import axios from "axios";
+import { ENDPOINT } from "../../endpoint/ENDPOINT";
 export const CardProduct = ({ product }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isFav, setIsFav] = useState(false);
@@ -68,7 +69,7 @@ export const CardProduct = ({ product }) => {
     // Fetch reviews for the current product using Axios
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/reviews/product/${id}`);
+        const response = await axios.get(`${ENDPOINT}reviews/product/${id}`);
         const data = response.data;
         setProductReviews(data);
       } catch (error) {

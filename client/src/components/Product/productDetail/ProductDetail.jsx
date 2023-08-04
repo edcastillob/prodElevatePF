@@ -16,7 +16,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ReviewCard from "../../Reviews/ReviewCard";
 import ReviewCarousel from "../../Reviews/ReviewsCarro";
 import axios from "axios";
-
+import { ENDPOINT } from "../../endpoint/ENDPOINT";
 export const ProductDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ export const ProductDetail = () => {
 
         
         axios
-          .get("http://localhost:3001/useremail/" + user.email)
+          .get(`${ENDPOINT}useremail/` + user.email)
           .then((response) => {
             const data = response.data.rol;
             setUserRoleLocal(data); 

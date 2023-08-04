@@ -9,7 +9,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Pagination from '@mui/material/Pagination';
 import { Box } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
-
+import { ENDPOINT } from '../endpoint/ENDPOINT';
 const CommentSkeleton = () => {
   return (
     <Box
@@ -77,7 +77,7 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
         setCurrentUser(user);
 
         try {
-          const response = await axios.get('http://localhost:3001/useremail/' + user.email);
+          const response = await axios.get(`${ENDPOINT}useremail/` + user.email);
           const data = response.data.rol;
           setUserRoleLocal(data);
         } catch (error) {
