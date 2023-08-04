@@ -1,10 +1,10 @@
 const { Product } = require("../../db");
 
-async function getAllProducts(req, res) {
+async function getAllProductsInactive(req, res) {
   try {
     const products = await Product.findAll({
       where: {
-        isActive: true,
+        isActive: false,
       },
       attributes: [
         "id",
@@ -27,5 +27,5 @@ async function getAllProducts(req, res) {
 }
 
 module.exports = {
-  getAllProducts,
+  getAllProductsInactive,
 };

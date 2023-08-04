@@ -36,6 +36,7 @@ export const EditProduct = () => {
   const [changeProduct, setChangeProduct] = useState({
     category: productDetail.categoryId,
     name: productDetail.name,
+    name: productDetail.isActive,
     brand: productDetail.brand,
     condition: productDetail.condition,
     description: productDetail.description,
@@ -58,6 +59,7 @@ export const EditProduct = () => {
     if (
       productDetail.categoryId &&
       productDetail.name &&
+      productDetail.isActive &&
       productDetail.brand &&
       productDetail.condition &&
       productDetail.description &&
@@ -71,6 +73,7 @@ export const EditProduct = () => {
       setChangeProduct({
         category: productDetail.categoryId,
         name: productDetail.name,
+        isActive: productDetail.isActive,
         brand: productDetail.brand,
         condition: productDetail.condition,
         description: productDetail.description,
@@ -85,6 +88,7 @@ export const EditProduct = () => {
   }, [
     productDetail.categoryId,
     productDetail.name,
+    productDetail.isActive,
     productDetail.brand,
     productDetail.condition,
     productDetail.description,
@@ -152,21 +156,6 @@ export const EditProduct = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Datos enviados: ", changeProduct);
-    const errors = validateForm (
-      changeProduct.category,
-      changeProduct.name,
-      changeProduct.brand,
-      changeProduct.condition,
-      changeProduct.description,
-      changeProduct.purchasePrice,
-      changeProduct.salePrice,
-      changeProduct.minStock,
-      changeProduct.provider,
-      changeProduct.stock,
-      changeProduct.images,
-    );
-    setErrors(errors);
     
     if (Object.keys(errors).length === 0) {
       dispatch(editProduct(id, changeProduct));
@@ -194,6 +183,19 @@ export const EditProduct = () => {
         <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
             Edit Product
           </h4>
+
+          {/* _____________Status________________ */}
+        <label>Status:</label>
+        <select
+          className="form-control mb-3 w-75"
+          name="isActive"
+          value={changeProduct.isActive}
+          defaultValue={changeProduct.isActive}
+          onChange={handleChange}
+        >
+          <option value="t">Activo</option>
+          <option value="f">Inactivo</option>
+        </select>
           {/* Categoria de Producto */}
           <div className="d-flex justify-content-around">
             <select

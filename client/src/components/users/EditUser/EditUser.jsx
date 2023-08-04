@@ -26,15 +26,15 @@ export const EditUser = () => {
   }
 
   const [changeUser, setChangeUser] = useState({
-    name: "",
-    identification: "",
-    email: "",
-    numPhone: "",
-    address: "",
-    // password: "",
-    image: [],
+    name: users.name,
+    email: users.email,
     isActive: "",
     roleId: "",
+    // identification: "",
+    // numPhone: "",
+    // address: "",
+    // password: "",
+    // image: [],
   });
 
   const [errors, setErrors] = useState({});
@@ -42,37 +42,37 @@ export const EditUser = () => {
   useEffect(() => {
     if (
       users.name &&
-      users.identification &&
       users.email &&
-      users.numPhone &&
-      users.address &&
       users.isActive &&
-      users.roleId &&
-      //   users.password &&
-      users.image
+      users.roleId 
+      // users.identification &&
+      // users.numPhone &&
+      // users.address &&
+      // users.password &&
+      // users.image
     ) {
       setChangeUser({
-        name: users.name,
-        identification: users.identification,
-        email: users.email,
-        numPhone: users.numPhone,
-        address: users.address,
         isActive: users.isActive,
         roleId: users.roleId,
+        name: users.name,
+        email: users.email,
+        // identification: users.identification,
+        // numPhone: users.numPhone,
+        // address: users.address,
         // password: users.password,
-        image: users.image,
+        // image: users.image,
       });
     }
   }, [
     users.name,
-    users.identification,
     users.email,
-    users.numPhone,
-    users.address,
-    users.isActive,
     users.roleId,
-    //   users.password,
-    users.image,
+    users.isActive,
+    // users.identification,
+    // users.numPhone,
+    // users.address,
+    // users.password,
+    // users.image,
   ]);
 
   const handleChange = (event) => {
@@ -104,10 +104,10 @@ export const EditUser = () => {
       image: [...(imgProduct.image || []), ...imageUrls],
     }));
   };
-  // console.log("el usuario: ",users)
-  // console.log("el change: ",changeUser.roleId)
+  console.log("el usuario: ",users)
+  console.log("el change: ",changeUser)
   // console.log("el rol: ",roles)
-
+  console.log(users)
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
@@ -202,7 +202,7 @@ export const EditUser = () => {
           )} */}
 
         {/* _____________ADDRESS________________ */}
-        <label>Address:</label>
+        {/* <label>Address:</label>
         <input
           type="text"
           name="address"
@@ -210,14 +210,14 @@ export const EditUser = () => {
           className={`form-control mb-3 w-75 ${errors.address && "is-invalid"}`}
           onChange={handleChange}
           value={changeUser.address}
-        />
+        /> */}
         {/* {errors.address && (
             <div className="invalid-feedback">{errors.address}</div>
           )} */}
 
         <br />
 
-        <div className="d-flex align-items-center">
+        {/* <div className="d-flex align-items-center">
           <div>
             {changeUser.image ? (
               <div>
@@ -270,13 +270,14 @@ export const EditUser = () => {
                     }))
                   }
                 />
+              
               </div>
             )}
           </div>
         </div>
 
         <br />
-        <br />
+        <br /> */}
 
         <button type="submit" className={styles.create}>
           Update User
