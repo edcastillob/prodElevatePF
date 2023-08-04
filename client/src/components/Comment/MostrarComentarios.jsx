@@ -8,6 +8,33 @@ import { Avatar, Button, Card, CardContent, Grid, TextField, Typography } from '
 import SendIcon from '@mui/icons-material/Send';
 import Pagination from '@mui/material/Pagination';
 import { Box } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
+
+const CommentSkeleton = () => {
+  return (
+    <Box
+      sx={{
+        width: 'max(400px, 60%)',
+        borderRadius: 0,
+        border: '1px solid #ddd',
+        padding: '10px',
+        backgroundColor: '#fff',
+        marginBottom: '10px',
+      }}
+    >
+      <Box display="flex" alignItems="center">
+        <Skeleton variant="circular" width={44} height={44} />
+        <div style={{ marginLeft: '10px' }}>
+          <Skeleton variant="text" width={100} />
+          <Skeleton variant="text" width={200} />
+        </div>
+      </Box>
+      <Skeleton variant="text" width="92%" height={20} />
+      <Skeleton variant="text" width="99%" height={20} />
+      <Skeleton variant="text" width="96%" height={20} />
+    </Box>
+  );
+};
 
 const MostrarComentarios = ({ productId, userEmail, userRole }) => {
   const dispatch = useDispatch();
@@ -89,85 +116,85 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
 
   return (
     <Box py={2}>
-      <Typography variant="h6">Preguntas sobre el Producto</Typography>
-      {currentComments.map((comment, index) => (
-        <Card key={comment.id} style={{ marginBottom: '10px', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)' }}>
-          <CardContent style={{ background: '#f7dede' }}>
-            {/* Mostrar el comentario principal */}
-            <div className="comment-info">
-              <Avatar src={comment.user?.image} alt="User" />
-              <Typography variant="body2" className="comment-user">
-                {comment.user?.name}
-              </Typography>
-            </div>
-            <Typography className="comment-text" variant="body1">
-              {comment.text}
-            </Typography>
-          </CardContent>
-
-          {/* Mostrar las respuestas a este comentario */}
-          {comment.respuestas && comment.respuestas.length > 0 && (
-            <CardContent style={{ background: '#f1f1f1', marginBottom: '5px', padding: '5px' }}>
-              {comment.respuestas.map((reply) => (
-                <div key={reply.id} style={{ background: '#f9f9f9', marginBottom: '5px', padding: '5px' }}>
-                  <div className="comment-info">
-                    <Avatar src={reply.replyUser?.image} alt="User" />
-                    <Typography variant="body2" className="comment-user">
-                      {reply.replyUser?.name}
-                    </Typography>
-                  </div>
-                  <Typography className="comment-text" variant="body1">
-                    {reply.text}
+    <Typography variant="h6">Preguntas sobre el Producto</Typography>
+    {currentComments.map((comment, index) => (
+      <Box
+        key={comment.id}
+        sx={{
+          borderRadius: '8px',
+          border: '1px solid #ddd',
+          padding: '10px',
+          marginBottom: '10px',
+          backgroundColor: '#fff',
+        }}
+      >
+        <Box display="flex" alignItems="center">
+          <Avatar src={comment.user?.image} alt="User" />
+          <Typography variant="body2" className="comment-user" sx={{ marginLeft: '10px' }}>
+            {comment.user?.name}
+          </Typography>
+        </Box>
+        <Typography className="comment-text" variant="body1">
+          {comment.text}
+        </Typography>
+        {comment.respuestas && comment.respuestas.length > 0 && (
+          <CardContent style={{ background: '#f1f1f1', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
+            {comment.respuestas.map((reply) => (
+              <div key={reply.id} style={{ background: '#f9f9f9', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
+                <div className="comment-info">
+                  <Avatar src={reply.replyUser?.image} alt="User" />
+                  <Typography variant="body2" className="comment-user">
+                    {reply.replyUser?.name}
                   </Typography>
                 </div>
-              ))}
-            </CardContent>
-          )}
-
-          {/* Botón para mostrar/ocultar el formulario de respuesta */}
-          {!repliedComments.has(comment.id) && userRole === 'Provider' && (
-            <CardContent style={{ background: '#F9F9F9' }}>
-              <Button variant="outlined" onClick={() => handleToggleReplyForm(comment.id)}>
-                Responder
-              </Button>
-            </CardContent>
-          )}
-
-          {/* Formulario de respuesta */}
-          {repliedComments.has(comment.id) && userRole === 'Provider' && (
-            <CardContent style={{ background: '#F9F9F9' }}>
-              <form onSubmit={(e) => handleReply(e, comment.id)}>
-                <TextField
-                  multiline
-                  rows={4}
-                  variant="outlined"
-                  label="Escribe tu respuesta aquí"
-                  value={replyText}
-                  onChange={(e) => setReplyText(e.target.value)}
-                  required
-                />
-                <Box marginTop={2}>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    endIcon={<SendIcon />}
-                  >
-                    Enviar Respuesta
-                  </Button>
-                </Box>
-              </form>
-            </CardContent>
-          )}
-        </Card>
-      ))}
-      <Pagination
-        count={Math.ceil(comments.length / commentsPerPage)}
-        page={currentPage}
-        onChange={handlePageChange}
-        color="primary"
-      />
-    </Box>
-  );
+                <Typography className="comment-text" variant="body1">
+                  {reply.text}
+                </Typography>
+              </div>
+            ))}
+          </CardContent>
+        )}
+        {!repliedComments.has(comment.id) && userRole === 'Provider' && (
+          <CardContent style={{ background: '#F9F9F9', borderRadius: '8px' }}>
+            <Button variant="outlined" onClick={() => handleToggleReplyForm(comment.id)}>
+              Responder
+            </Button>
+          </CardContent>
+        )}
+        {repliedComments.has(comment.id) && userRole === 'Provider' && (
+          <CardContent style={{ background: '#F9F9F9', borderRadius: '8px' }}>
+            <form onSubmit={(e) => handleReply(e, comment.id)}>
+              <TextField
+                multiline
+                rows={4}
+                variant="outlined"
+                label="Escribe tu respuesta aquí"
+                value={replyText}
+                onChange={(e) => setReplyText(e.target.value)}
+                required
+              />
+              <Box marginTop={2}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  endIcon={<SendIcon />}
+                >
+                  Enviar Respuesta
+                </Button>
+              </Box>
+            </form>
+          </CardContent>
+        )}
+      </Box>
+    ))}
+    <Pagination
+      count={Math.ceil(comments.length / commentsPerPage)}
+      page={currentPage}
+      onChange={handlePageChange}
+      color="primary"
+    />
+  </Box>
+);
 };
 
 export default MostrarComentarios;

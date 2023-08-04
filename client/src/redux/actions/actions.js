@@ -521,28 +521,7 @@ export const filterData = (filters) => {
 export const postReview = (reviewData) => {
   return async function (dispatch) {
     try {
-      const auth = getAuth();
-      const user = auth.currentUser;
-
-     
-      if (!user) {
-        console.error('Usuario no autenticado');
-        throw new Error('Usuario no autenticado'); 
-      }
-
-    
-      const token = await user.getIdToken();
-
-      
-      const userId = user.uid; 
-
-      
-      const response = await axios.post(`${ENDPOINT}reviews/Create`, reviewData, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
+      const response = await axios.post(`${ENDPOINT}reviews/create`, reviewData);
       return response.data;
     } catch (error) {
       console.error('Error en la acción postReview:', error);

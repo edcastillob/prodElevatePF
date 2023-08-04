@@ -70,7 +70,11 @@ Review.belongsTo(Product);
 Comment.belongsTo(Product); 
 Product.hasMany(Comment);   
 
-
+Review.belongsTo(User,{
+    foreignKey: "userMail",
+    targetKey: "email",
+      as : "user"
+})
 Comment.belongsTo(User, {
   foreignKey: "userEmail", 
   targetKey: "email", 

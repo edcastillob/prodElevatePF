@@ -11,10 +11,12 @@ import Reviews from "../../Reviews/Review";
 import AddReviewForm from "../../Reviews/addReview";
 import CrearComentario from "../../Comment/CrearComentario"; 
 import MostrarComentarios from "../../Comment/MostrarComentarios"; 
-import { Card, styled, Button } from "@mui/material";
+import { Card, Button, Box, Typography, Grid } from "@mui/material";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { Box, Grid } from "@mui/material";
+import ReviewCard from "../../Reviews/ReviewCard";
+import ReviewCarousel from "../../Reviews/ReviewsCarro";
 import axios from "axios";
+
 export const ProductDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -77,71 +79,79 @@ export const ProductDetail = () => {
 
   const category =
     selectedCategory.find((cat) => cat.id === categoryId)?.name || "Unknown Category";
-
-  const StyledCard = styled(Card)({
-    width: "600px",
-    margin: "auto",
-    padding: "5rem",
-  });
-
-  return (
-    
+    return (
       <div style={{ padding: "4rem" }}>
         <Box bgcolor="#f1f1f1" p={2} borderRadius={8} boxShadow={3}>
-        {loading ? (
-          <div>
-            <img src={loadingImg} alt="Loading" />
-          </div>
-        ) : (
-          <div className={styles.container}>
-            <div className={styles.back}>
-              <Link to="/home">
-                <div className={styles.backButton}>
-                  <p>
-                    <ion-icon name="arrow-round-back"></ion-icon>
-                    <ion-icon name="home"></ion-icon>
-                  </p>
+          {loading ? (
+            <div>
+              <img src={loadingImg} alt="Loading" />
+            </div>
+          ) : (
+            <Grid container spacing={2}>
+              {/* Detalle del producto */}
+              <Grid item xs={12}>
+                <div className={styles.container}>
+                  <div className={styles.back}>
+                    <Link to="/home">
+                      <div className={styles.backButton}>
+                        <p>
+                          <ion-icon name="arrow-round-back"></ion-icon>
+                          <ion-icon name="home"></ion-icon>
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className={styles.divImg}>
+                    <img src={images} alt={name} />
+                  </div>
+                  <div className={styles.description}>
+                    <h4 style={{ fontFamily: "Poppins" }}>{name}</h4>
+                    <div
+                      className={styles.descriptionItem}
+                      dangerouslySetInnerHTML={{ __html: description }}
+                    ></div>
+                    <h6>Category: {category} </h6>
+                    <h4>Price ${salePrice} </h4>
+                    <button
+                      className={styles.buttonCart}
+                      onClick={() => handledAddToCart(productDetail)}
+                    >
+                      Add to Cart
+                    </button>
+                    <Reviews reviews={productReviews} />
+                  </div>
                 </div>
-              </Link>
+              </Grid>
+              
+              {/* Sección de comentarios y reseñas */}
+              <Grid item xs={12}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              {/* Comentarios */}
+              <Card sx={{ width: "49%", display: "flex", flexDirection: "column", padding: "1rem" }}>
+                <MostrarComentarios productId={id} userEmail={currentUser?.email} userRole={userRoleLocal} />
+                {currentUser && (
+                  <CrearComentario productId={id} userEmail={currentUser.email} userRole={userRoleLocal} />
+                )}
+              </Card>
+              
+              {/* Reseñas */}
+              <div style={{ width: "49%", padding: "1rem", backgroundColor: "#f0f2f5", borderRadius: "8px" }}>
+                {productReviews && productReviews.length > 0 ? (
+                  <>
+                    <Typography variant="h5">Reseñas de los usuarios:</Typography>
+                    {/* Mostrar las reseñas */}
+                    <ReviewCarousel reviews={productReviews} />
+                  </>
+                ) : (
+                  <Typography variant="body1">No hay reseñas disponibles.</Typography>
+                )}
+              </div>
             </div>
-            <div className={styles.divImg}>
-              <img src={images} alt={name} />
-            </div>
-            <div className={styles.description}>
-              <h4 style={{ fontFamily: "Poppins" }}>{name}</h4>
-              <div
-                className={styles.descriptionItem}
-                dangerouslySetInnerHTML={{ __html: description }}
-              ></div>
-              <h6>Category: {category} </h6>
-              <h4>Price ${salePrice} </h4>
-              <button
-                className={styles.buttonCart}
-                onClick={() => handledAddToCart(productDetail)}
-              >
-                Add to Cart
-              </button>
-              <Reviews reviews={productReviews} />
-            </div>
-          </div>
-        )}
-        
-        {currentUser && (
-          <CrearComentario
-            productId={id}
-            userEmail={currentUser.email}
-            userRole={userRoleLocal} 
-          />
-        )}
-
-        
-        <MostrarComentarios
-          productId={id}
-          userEmail={currentUser?.email}
-          userRole={userRoleLocal} 
-        />
-        </Box>
-      </div>
+          </Grid>
+        </Grid>
+      )}
+    </Box>
+  </div>
+    );
     
-  );
-};
+                  }
