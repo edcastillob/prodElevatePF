@@ -4,7 +4,7 @@ import styles from "./CreateUser.module.css";
 import prueba from "../../../assets/prueba.jpg";
 import logo from "../../../assets/logo_2.png";
 import google from "../../../assets/google.png";
-import validate from "./validation";
+// import validate from "./validation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";

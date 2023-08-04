@@ -15,9 +15,9 @@ const checkEmail = async (req, res) => {
       const name = displayName;
       const identification = uid;
       const image = [photoURL];
-      const numPhone = phoneNumber || '0000000'; 
-      const address = 'Default';
-      const password = '000000';
+      const numPhone = phoneNumber || '000-0000'; 
+      const address = 'Update Address';
+      const password = '123456';
 
       const newUser = await User.create({
         name,

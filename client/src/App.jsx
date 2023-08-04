@@ -30,7 +30,6 @@ import { EditProvider } from "./components/Product/provider/EditProvider/EditPro
 import { SettingsProduct } from "./components/Product/SettingsProduct/SettingProduct";
 // import Chat from './components/Chat/Chat';
 import Panel from "./components/Dashboard";
-
 import { UsersAll } from "./components/users/UsersAll/UsersAll";
 import { EditUser } from "./components/users/EditUser/EditUser";
 import { AboutUs } from "./components/AboutUs/AboutUs";
@@ -40,6 +39,7 @@ import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
 import { useDispatch } from "react-redux";
 import { checkEmailAndRegister } from "./redux/actions/actions";
+import { ChangePassword } from "./components/users/changePassword/ChangePassword";
 
 function App() {
   const location = useLocation();
@@ -60,7 +60,7 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log(user);
+        // console.log(user)
         setCurrentUser(user);
         dispatch(checkEmailAndRegister(user));
       } else {
@@ -104,6 +104,7 @@ function App() {
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/contact" element={<ContactUs />} />
+          <Route exact path="/changepass" element={<ChangePassword />} />
           <Route exact path="/dashboard" element={<Panel />} />
           <Route exact path="/favorites" element={<Favorites />} />
           <Route
