@@ -140,7 +140,7 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
         {comment.respuestas && comment.respuestas.length > 0 && (
           <CardContent style={{ background: '#f1f1f1', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
             {comment.respuestas.map((reply) => (
-              <div key={reply.id} style={{ background: '#f9f9f9', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
+              <div key={reply.id} style={{ background: '#f1f1f1', marginBottom: '5px', padding: '5px', borderRadius: '8px' }}>
                 <div className="comment-info">
                   <Avatar src={reply.replyUser?.image} alt="User" />
                   <Typography variant="body2" className="comment-user">
@@ -155,14 +155,14 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
           </CardContent>
         )}
         {!repliedComments.has(comment.id) && userRole === 'Provider' && (
-          <CardContent style={{ background: '#F9F9F9', borderRadius: '8px' }}>
+          <CardContent style={{ background: '#f1f1f1', borderRadius: '8px' }}>
             <Button variant="outlined" onClick={() => handleToggleReplyForm(comment.id)}>
               Responder
             </Button>
           </CardContent>
         )}
         {repliedComments.has(comment.id) && userRole === 'Provider' && (
-          <CardContent style={{ background: '#F9F9F9', borderRadius: '8px' }}>
+          <CardContent style={{ background: '#f1f1f1', borderRadius: '8px' }}>
             <form onSubmit={(e) => handleReply(e, comment.id)}>
               <TextField
                 multiline

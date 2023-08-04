@@ -11,25 +11,21 @@ const Reviews = ({ reviews }) => {
   };
 
   return (
-    <div>
-      {reviews && reviews.length > 0 ? ( 
+    <div style={{ textAlign: "left" }}>
+      {reviews && reviews.length > 0 ? (
         <>
-          <div style={{ marginLeft: "10px", display: "inline-block", width: "20%" }}>
-            
-          </div>
-          <div style={{ marginLeft: "30px", display: "inline-block", flexDirection: "column", width: "25%", flexWrap: "wrap", textAlign: "left", justifyContent: "center" }}>
+          <div style={{ marginBottom: "10px" }}>
             <Rating name="read-only" value={calculateAverageScore()} readOnly />
           </div>
+          {reviews.map((review) => (
+            <div key={review.id} style={{ marginBottom: "5px", paddingLeft: "10px" }}>
+              <p style={{ fontSize: "12px" }}>{review.review}</p>
+            </div>
+          ))}
         </>
       ) : (
         <p>No hay reseñas disponibles.</p>
       )}
-
-      {reviews && reviews.map((review) => (
-        <div key={review.id} style={{ marginLeft: "10px", display: "inline-block", padding: "5px", wordWrap: "break-word", width: "100%", justifyContent: "center", alignItems: "center" }}>
-          <p>{review.review}</p>
-        </div>
-      ))}
     </div>
   );
 };

@@ -1,82 +1,130 @@
-.cartContainer {
-  padding: 2rem 4rem;
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f0f0;
+}
 
-  min-height: 80vh;
+/* Estilos para el contenedor principal */
+.cartContainer1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border: 1px solid #e9e9e9;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Estilos para el agradecimiento y la imagen */
+.thankyou {
+  width: 50%;
+  font-size: 2rem;
+  font-weight: 200;
+  margin-bottom: 2rem;
+}
+
+.thankyou img {
+  width: 40%;
+}
+
+/* Estilos para el contenedor de detalles */
+.cartContainer2 {
   width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-bottom: 7%;
+  background-color: rgb(132, 165, 137);
+  border: 1px solid #e9e9e9;
+  border-radius: 10px;
 }
 
-.cartContainer h2 {
-  font-weight: 400;
-  font-size: 40px;
-  text-align: center;
+/* Estilos para los títulos */
+.cartContainer2 h2 {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  color: #000924;
 }
 
-.cartContainer .titles {
-  margin: 2rem 0 1rem 0;
+.cartContainer2 p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  color: #000924;
 }
 
-.carContainer .titles h3 {
-  font-size: 14px;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
+/* Estilos para los elementos del carrito */
 .cartItem,
 .cartContainer .titles {
   display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: center;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
-  column-gap: 0.5rem;
-  text-align: left;
-}
-
-.cartItem {
-  border-top: 1px solid rgb(187, 187, 187);
+  justify-content: center;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #000924;
+  border-bottom: 1px solid rgb(187, 187, 187);
   padding: 1rem 0;
+  margin-bottom: 1rem;
 }
 
 .cartItem .cartProduct {
   display: flex;
+  align-items: center;
+  text-align: left;
 }
 
 .cartItem .cartProduct img {
   width: 100px;
-  height: 100%;
+  height: 100px;
+  object-fit: cover;
   margin-right: 1rem;
 }
 
 .cartItem .cartProduct h3 {
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .cartItem .cartProduct button {
   border: none;
-  outline: none;
-  margin-top: 0.7rem;
-  cursor: pointer;
   background: none;
-  color: gray;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgb(28, 28, 28);
+  cursor: pointer;
+  transition: 0.2s;
+  background-color: #000924;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
 }
 
 .cartItem .cartProduct button:hover {
   color: black;
 }
 
-.create{
-  border: 1px solid #cacaca;
-  width: 20%;
-  padding: 0.7rem;
-  border-radius: 10px;
-  font-family: 'Poppins';
+/* Estilos para el botón de continuar comprando */
+.create {
+  height: 40px;
+  width: 80%;
+  color: #ffffff;
   background-color: #000924;
-  color: #cacaca;
-  transition: .2s;
-  margin-bottom: 2rem;
-  &:hover{
-      transform: scale(0.97);
-      color: #fff;
-      transition: .3s;
-  }
-  
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 10px;
+  padding: 0 1rem;
+  margin-top: 1rem;
+}
 
+.create:hover {
+  background-color: #01103c;
 }

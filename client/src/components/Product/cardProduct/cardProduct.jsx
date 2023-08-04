@@ -89,14 +89,19 @@ export const CardProduct = ({ product }) => {
       : "ed047b85-67d9-4a90-a461-b4ad1e2036e3",
   };
   return (
-    <div className={styles.cardContainer}>
-      <Link title="Detail Product" to={`/productid/${id}`} className={styles.link}>
+<div className={styles.cardContainer}>
+      <Link
+        title="Detail Product"
+        to={`/productid/${id}`}
+        className={styles.link}
+      >
+
         <div className={styles.divImg}>
           <img className={styles.img} src={images} alt="product" />
         </div>
       </Link>
       <div className={styles.description}>
-        {isFav ? (
+      {isFav ? (
           <button className={styles.favButton} onClick={handleFavorite}>
             <h3 style={{ color: "#000924" }}>
               <ion-icon name="heart"></ion-icon>
@@ -121,10 +126,8 @@ export const CardProduct = ({ product }) => {
         <span className={styles.priceLabel}>Condition</span>
         <h6 className={styles.price}>{condition}</h6>
         <span className={styles.priceLabel}>Price</span>
-        <h6 className={styles.priceLabel}>${salePrice}</h6>
-        <h6 className={styles.reviewTitle}>
+        <h6 className={styles.price}>${salePrice}</h6>
           <Reviews reviews={productReviews} />
-        </h6>
         <button
           className={styles.buttonCart}
           onClick={() => handledAddToCart(product)}
@@ -135,3 +138,4 @@ export const CardProduct = ({ product }) => {
     </div>
   );
 };
+ 
