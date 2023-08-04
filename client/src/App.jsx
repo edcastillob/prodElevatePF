@@ -161,7 +161,7 @@ function App() {
           <Route exact path="/settings_product" element={<SettingsProduct />} />
           <Route exact path="/terms_&_conditions"  element={<TermsConditions />} />
           <Route exact path="/useredit/:id" element={<EditUser />} />
-          <Route exact path="/usuario" element={<CreateUser />} />
+          <Route exact path="/usuario" element={<CreateUser currentLanguage={currentLanguage}/>} />
           <Route exact path="/thankyoupage" element={<ThankYouPage />} />
           {/* <Route exact path="/chat/" element={<Chat />} /> */}
           <Route path="/dashboard" element={<Panel />} />

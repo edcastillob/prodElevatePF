@@ -15,8 +15,12 @@ import Marquee from "react-fast-marquee";
 import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
+import { useTranslation } from 'react-i18next';
 
-export const Home = ( { user, userLocal, handleSignIn, currentLanguage  } ) => {
+
+export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
+  const { t } = useTranslation('global');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -100,24 +104,25 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage  } ) => {
         {/* search */}
         <input
           type="text"
-          placeholder="Search product"
+          placeholder={t("home.search", { lng: currentLanguage })}
           value={searchProductNav}
           className={`${styles.search}`}
           onChange={(event) => setSearchProductNav(event.target.value)}
         />
       </div>
-      <div className={styles.oderFilters}>
+      <div className={styles.orderFilters}>
         <div>
           <OrderFilter
             handlePriceHigher={handlePriceHigher}
             handlePriceLower={handlePriceLower}
             handleSortName={handleSortName}
             handleAllProdutcs={handleAllProdutcs}
+            currentLanguage={currentLanguage}
           />
         </div>
         <div>
           <button onClick={handleOpenModal} className={styles.titleFilter}>
-            Filter
+          {t("home.filter", { lng: currentLanguage })}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="34"
@@ -133,6 +138,7 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage  } ) => {
             show={showModal}
             handleClose={handleCloseModal}
             handleFilter={handleFilter}
+            currentLanguage={currentLanguage}
           />
         </div>
       </div>

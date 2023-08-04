@@ -49,6 +49,51 @@
         "are-you-sure": "Estás seguro que quieres vaciar el carrito?",
         "cancel": "Cancelar",
         "clear": "Confirmar"
+    },
+    "create-user":{
+        "prodelevate": "Sistema de Administración y Ventas Online",
+        "the-best-tool": "La mejor herramienta para ver tu negocio crecer",
+        "create-user": "Crear Usuario",
+        "select-country": "Selecciona un país",
+        "create": "Crear",
+        "already-have-account": "Ya tienes una cuenta?",
+        "login": "Iniciar sesión",
+        "continue-with-google": "Continuar con Google",
+        "fullname": "Nombre completo",
+        "document": "N° Documento",
+        "phone": "N° Teléfono",
+        "address": "Dirección",
+        "password": "Crear contraseña",
+        "confirm-password": "Confirmar contraseña",
+        "toast-success": "¡Usuario creado exitosamnte!",
+        "toast-error": "Asegurate de completar correctamente los campos antes de enviar la información"
+    },
+    "home":{
+        "search": "Buscar producto",
+        "filter": "Filtros"
+    },
+    "filter-modal":{
+        "brand-new": "Nuevo",
+        "used": "Usado",
+        "like-new": "Como nuevo",
+        "filters": "Filtros",
+        "min-price": "Precio Mínimo",
+        "min-price-ph": "Precio mínimo",
+        "max-price": "Precio Máximo",
+        "max-price-ph": "Precio máximo",
+        "category": "Categoria",
+        "select-option": "Selecciona una opción",
+        "brand": "Marca",
+        "condition": "Condición",
+        "close": "Cerrar",
+        "filter": "Filtrar"
+    },
+    "order-filter":{
+        "order": "Orden",
+        "all-products": "Todos los productos",
+        "name": "Nombre",
+        "highest-price": "Mayor Precio",
+        "lowest-price": "Menor Precio"
     }
 }
 

@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "../../redux/actions/actions";
+import styles from "./FilterModal.module.css";
+import { useTranslation } from 'react-i18next';
 
-const FilterModal = ({ show, handleClose, handleFilter }) => {
+const FilterModal = ({ show, handleClose, handleFilter, currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategory());
@@ -30,46 +33,53 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
     handleFilter(filters);
   };
 
-  const conditionOptions = ["Brand New", "Used", "Like New"];
+  const conditionOptions = [
+    t("filter-modal.brand-new", { lng: currentLanguage }),
+    t("filter-modal.used", { lng: currentLanguage }),
+    t("filter-modal.like-new", { lng: currentLanguage })
+  ];
 
   return (
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Filtrar Datos</Modal.Title>
+          <Modal.Title>{t("filter-modal.filters", { lng:currentLanguage })}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form>
+          <form className={styles.form}>
             <Form.Group controlId="formMinPrecio">
-              <Form.Label>Precio Minimo</Form.Label>
+              <Form.Label>{t("filter-modal.min-price", { lng:currentLanguage })}</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="introduce el precio minimo"
+                placeholder={t("filter-modal.min-price-ph", { lng:currentLanguage })}
                 name="minPrice"
+                className={styles.input}
                 value={filters.minPrice}
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId="formMaxPrecio">
-              <Form.Label>Precio Maximo</Form.Label>
+              <Form.Label>{t("filter-modal.max-price", { lng:currentLanguage })}</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="introduce el precio maximo"
+                placeholder={t("filter-modal.max-price-ph", { lng:currentLanguage })}
                 name="maxPrice"
                 value={filters.maxPrice}
+                className={styles.input}
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
 
             <Form.Group controlId="formCategory">
-              <Form.Label>Category</Form.Label>
+              <Form.Label>{t("filter-modal.category", { lng:currentLanguage })}</Form.Label>
               <Form.Control
                 as="select"
                 name="category"
                 value={filters.category}
+                className={styles.input}
                 onChange={handleInputChange}
               >
-                <option value="">Selecciona una opción</option>
+                <option value="">{t("filter-modal.select-option", { lng:currentLanguage })}</option>
                 {category.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
@@ -79,24 +89,26 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
             </Form.Group>
 
             <Form.Group controlId="formBrand">
-              <Form.Label>Brand</Form.Label>
+              <Form.Label>{t("filter-modal.brand", { lng:currentLanguage })}</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="introduce la marca"
+                placeholder={t("filter-modal.brand", { lng:currentLanguage })}
                 name="brand"
                 value={filters.brand}
+                className={styles.input}
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId="formCondition">
-              <Form.Label>Condición</Form.Label>
+              <Form.Label>{t("filter-modal.condition", { lng:currentLanguage })}</Form.Label>
               <Form.Control
                 as="select"
                 name="condition"
                 value={filters.condition}
+                className={styles.input}
                 onChange={handleInputChange}
               >
-                <option value="">Selecciona una opción</option>
+                <option value="">{t("filter-modal.select-option", { lng:currentLanguage })}</option>
                 {conditionOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
@@ -108,10 +120,10 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Cerrar
+          {t("filter-modal.close", { lng:currentLanguage })}
           </Button>
           <Button variant="primary" onClick={handleApplyFilter}>
-            Filtrar
+          {t("filter-modal.filter", { lng:currentLanguage })}
           </Button>
         </Modal.Footer>
       </Modal>

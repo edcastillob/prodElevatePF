@@ -48,5 +48,51 @@
         "are-you-sure": "Are you sure you want to clear the cart?",
         "cancel": "Cancel",
         "clear": "Clear"
+    },
+    "create-user":{
+        "prodelevate": "Online Sales And Administration System",
+        "the-best-tool": "The best tool to see your business grow",
+        "create-user": "Create User",
+        "select-country": "Select a country",
+        "create": "Create",
+        "already-have-account": "Already have an account?",
+        "login": "Login",
+        "continue-with-google": "Continue with Google",
+        "fullname": "Fullname",
+        "document": "Document ID",
+        "phone": "Phone N°",
+        "address": "Address",
+        "password": "Create password",
+        "confirm-password": "Confirm password",
+        "toast-success": "¡User created successfully!",
+        "toast-error": "Fill in the fields correctly before sending the information"
+    },
+    "home":{
+        "search": "Search product",
+        "filter": "Filter"
+    },
+    "filter-modal":{
+        "brand-new": "Brand New",
+        "used": "Used",
+        "like-new": "Like New",
+        "filters": "Filters",
+        "min-price": "Min Price",
+        "min-price-ph": "Min price",
+        "max-price": "Max Price",
+        "max-price-ph": "Max price",
+        "category": "Category",
+        "select-option": "Select option",
+        "brand": "Brand",
+        "condition": "Condition",
+        "close": "Close",
+        "filter": "Filter"
+    },
+    "order-filter":{
+        "order": "Order",
+        "all-products": "All Products",
+        "name": "Name",
+        "highest-price": "Highest Price",
+        "lowest-price": "Lowest Price"
     }
+    
 }

@@ -12,10 +12,12 @@ import { addUser } from "../../../redux/actions/actions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import countriesData from "../../Country/db.json";
+import { useTranslation } from 'react-i18next';
 
-export const CreateUser = () => {
+export const CreateUser = ({ currentLanguage }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation('global');
 
   const [selectedCountry, setSelectedCountry] = useState("");
   const [userData, setUserData] = useState({
@@ -72,12 +74,12 @@ export const CreateUser = () => {
     event.preventDefault();
     if (Object.keys(errors).length > 0) {
       toast.error(
-        "Fill in the fields correctly before sending the information."
+        t("create-user.toast-error", { lng: currentLanguage })
       );
       return;
     }
     dispatch(addUser(userData));
-    toast.success("¡User created successfully!");
+    toast.success(t("create-user.toast-success", { lng: currentLanguage }));
     navigate("/login");
   };
 
@@ -95,10 +97,10 @@ export const CreateUser = () => {
         <div className={styles.divContent}>
           <img src={logo} alt="logo" />
           <h3 className={styles.title}>
-            Online Sales And Administration System
+            {t("create-user.prodelevate", { lng: currentLanguage })}
           </h3>
           <h4 className={styles.subtitle}>
-            The best tool to see your business grow
+          {t("create-user.the-best-tool", { lng: currentLanguage })}
           </h4>
         </div>
         <div className={styles.divImg}>
@@ -111,14 +113,14 @@ export const CreateUser = () => {
       <div className={styles.divRight}>
         <div className={`${styles.form} ${styles.signup}`}>
           <div className={styles["form-content"]}>
-            <h4>Create User</h4>
+            <h4 style={{fontFamily:'Poppins'}} >{t("create-user.create-user", { lng: currentLanguage })}</h4>
             <form onSubmit={handleSubmit}>
               {/* _____________NAME________________ */}
               <div className={`${styles.field} ${styles["input-field"]}`}>
                 <input
                   type="text"
                   name="name"
-                  placeholder="Fullname"
+                  placeholder={t("create-user.fullname", { lng: currentLanguage })}
                   className={`form-control ${errors.name && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
@@ -144,7 +146,7 @@ export const CreateUser = () => {
                 <input
                   type="text"
                   name="identification"
-                  placeholder="Document ID"
+                  placeholder={t("create-user.document", { lng: currentLanguage })}
                   className={`form-control ${
                     errors.identification && "is-invalid"
                   }`}
@@ -161,7 +163,7 @@ export const CreateUser = () => {
                 <input
                   type="text"
                   name="numPhone"
-                  placeholder="Phone N°"
+                  placeholder={t("create-user.phone", { lng: currentLanguage })}
                   className={`form-control ${errors.numPhone && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
@@ -174,7 +176,7 @@ export const CreateUser = () => {
                 <input
                   type="text"
                   name="address"
-                  placeholder="Address"
+                  placeholder={t("create-user.address", { lng: currentLanguage })}
                   className={`form-control ${errors.address && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
@@ -190,7 +192,7 @@ export const CreateUser = () => {
                   name="country"
                   onChange={handleCountrySelect}
                 >
-                  <option value="">Select a country</option>
+                  <option value="">{t("create-user.select-country", { lng: currentLanguage })}</option>
                   {sortedCountries.map((country) => (
                     <option key={country.cca3} value={country.name.common}>
                       {country.name.common}
@@ -204,7 +206,7 @@ export const CreateUser = () => {
                 <input
                   type="password"
                   name="password"
-                  placeholder="Create password"
+                  placeholder={t("create-user.password", { lng: currentLanguage })}
                   className={`form-control ${errors.password && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
@@ -217,7 +219,7 @@ export const CreateUser = () => {
                 <input
                   type="password"
                   name="confirmPassword"
-                  placeholder="Confirm password"
+                  placeholder={t("create-user.confirm-password", { lng: currentLanguage })}
                   className={`form-control ${
                     errors.confirmPassword && "is-invalid"
                   }`}
@@ -238,18 +240,18 @@ export const CreateUser = () => {
               <br />
               <div className={`${styles.field} ${styles["button-field"]}`}>
                 <button className={styles.create} type="submit">
-                  Create
+                {t("create-user.create", { lng: currentLanguage })}
                 </button>
               </div>
             </form>
             <div className={styles["form-link"]}>
               <span>
-                Already have an account?{" "}
+              {t("create-user.already-have-account", { lng: currentLanguage })}{" "}
                 <Link
                   to="/login"
                   className={`${styles.link} ${styles["login-link"]}`}
                 >
-                  Login
+                  {t("create-user.login", { lng: currentLanguage })}
                 </Link>
               </span>
             </div>
@@ -266,7 +268,7 @@ export const CreateUser = () => {
               }}
             >
               <img src={google} alt="Google" />
-              <span>Continue with Google</span>
+              <span>{t("create-user.continue-with-google", { lng: currentLanguage })}</span>
             </a>
           </div>
         </div>

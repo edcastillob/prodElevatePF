@@ -60,7 +60,7 @@ h3 {
   text-decoration: none;
 }
 
-.oderFilters {
+.orderFilters {
   width: 100%;
   display: flex;
   align-items: center;
@@ -74,4 +74,13 @@ h3 {
   background-color: none;
   background: none;
   border: none;
+}
+
+
+.filterModal{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: aqua;
 }
