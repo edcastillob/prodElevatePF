@@ -25,7 +25,7 @@ const CrearComentario = ({ productId, userEmail, userRole }) => {
 
   return (
     <div>
-      {userRole === 2 && (
+      {userRole === 'User' && (
         <form onSubmit={handleSubmit}>
           <TextField
             multiline
