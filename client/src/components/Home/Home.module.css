@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+  min-height: 80vh;
 }
 
 Link {
@@ -37,6 +38,14 @@ Link {
   align-items: center;
 }
 
+.search{
+  border-radius: 10px;
+  border: 1px solid #cacaca;
+  box-shadow: 0 0 2px #aeadad;
+  padding: 10px;
+  font-family: 'Poppins';
+}
+
 .cards {
   /* border: 1px solid black; */
   width: 100%;
@@ -54,7 +63,7 @@ h3 {
   text-decoration: none;
 }
 
-.oderFilters {
+.orderFilters {
   width: 100%;
   display: flex;
   align-items: center;
@@ -71,14 +80,13 @@ h3 {
 }
 
 .btnSearch {
+  position: relative;
+  right: 32px;
   background: none;
   border: none;
   border-radius: 0 5px 5px 0;
 }
-/*
-h3 = calc(1.3rem + .6vw) (font-size)
-h4 = calc(1.275rem + .3vw) (font-size)
-*/
+
 @media (max-width: 700px) {
   .titleFilter {
     font-size: 15px;
@@ -87,14 +95,7 @@ h4 = calc(1.275rem + .3vw) (font-size)
   .message {
     font-size: 1rem;
   }
-  
-  .loading h3 {
-    font-size: 1.3rem;
-  }
 
-  .loading h4 {
-    font-size: 1.275rem;
-  }
 }
 
 @media (max-width: 649px) {
@@ -105,14 +106,6 @@ h4 = calc(1.275rem + .3vw) (font-size)
   .message {
     font-size: 0.9rem;
   }
-
-  .loading h3 {
-    font-size: 1.1rem;
-  }
-
-  .loading h4 {
-    font-size: 1rem;
-  }
 }
 
 @media (max-width: 476px) {
@@ -122,14 +115,28 @@ h4 = calc(1.275rem + .3vw) (font-size)
   .titleFilter {
     font-size: 15px;
   }
-
-  .loading h3 {
-    font-size: .9rem;
-  }
-
-  .loading h4 {
-    font-size: .8rem;
-  }
+}
+.pages{
+  /* border: 1px solid black; */
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
-
+.create{
+  border: 1px solid #cacaca;
+  width: 3%;
+  height: auto;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-family: 'Poppins';
+  background-color: #000924;
+  color: #cacaca;
+  transition: .2s;
+  cursor: pointer;
+  &:hover{
+      transform: scale(0.97);
+      color: #fff;
+      transition: .3s;
+  }
+}

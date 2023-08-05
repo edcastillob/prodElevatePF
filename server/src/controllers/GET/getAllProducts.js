@@ -17,6 +17,7 @@ async function getAllProducts(req, res) {
         where: {
           isActive: true,
           name: { [Op.iLike]: `%${name}%` },
+          stock: { [Op.gt]: 0 },
         },
         attributes: [
           "id",
@@ -43,6 +44,7 @@ async function getAllProducts(req, res) {
     const products = await Product.findAll({
       where: {
         isActive: true,
+        stock: { [Op.gt]: 0 },
       },
       attributes: [
         "id",
@@ -81,6 +83,7 @@ async function getAllProductsByName(req, res) {
     const products = await Product.findAll({
       where: {
         isActive: true,
+        stock: { [Op.gt]: 0 },
       },
       attributes: [
         "id",
@@ -119,6 +122,7 @@ async function getAllProductsHighestPrice(req, res) {
     const products = await Product.findAll({
       where: {
         isActive: true,
+        stock: { [Op.gt]: 0 },
       },
       attributes: [
         "id",
@@ -157,6 +161,7 @@ async function getAllProductsLowestPrice(req, res) {
     const products = await Product.findAll({
       where: {
         isActive: true,
+        stock: { [Op.gt]: 0 },
       },
       attributes: [
         "id",

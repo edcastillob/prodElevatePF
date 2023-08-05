@@ -20,6 +20,8 @@ import en from "../.././assets/estados-unidos.png";
 import es from "../.././assets/espana.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import swal from "sweetalert";
+
 
 export const NavBar = ({
   user,
@@ -136,18 +138,20 @@ export const NavBar = ({
 
   useEffect(() => {
     if (userActive.isActive === false) {
-      toast.warning(
-        `${userActive.name}, your email: ${userActive.email}
-      is inactive. Contact the administrator to prodElevate`,
-        {
-          autoClose: 5000,
+
+      swal({
+        title: "Inactive User",
+        text: `${userActive.name}, your email ${userActive.email}
+        is inactive.`,
+        icon: "error",
+        buttons: "ok",
+      }).then((res) => {
+        if (res) {
+          handleLogoutClick();
         }
-      );
-      const timeoutId = setTimeout(() => {
-        handleLogoutClick();
-      }, 5000);
-      return () => clearTimeout(timeoutId);
+      });     
     }
+  
   }, [
     userActive.isActive,
     userActive.name,

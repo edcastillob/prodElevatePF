@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addRole } from '../../../redux/actions/actions'; 
+import styles from './Role.module.css'
 
 export const Role = () => {
   const dispatch = useDispatch();
@@ -30,36 +31,45 @@ export const Role = () => {
   return (
     <div>
         
-        <div className='container-sm'>
+        <div className={styles.container}>
 
-        <h1>role</h1>      
         <hr />
-        <form onSubmit={ handleSubmit }>
+        <form onSubmit={ handleSubmit } className={styles.formContainer}>
+        <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
+          New Role
+        </h4>      
         
         {/* Nombre de rol */}
-        <label htmlFor="name">Name: </label>        
+              
         <input
-        className='form-control'
+        className="form-control mb-3 w-75"
         type="text"
         name="name"
-        placeholder=" enter name "
+        placeholder="Role name"
         value={role.name}
         onChange={handleChange}
       />
 
        {/* Descripcion de rol */}
-       <label htmlFor="name">Description: </label>             
-        <input
-        className='form-control'
-        type="textarea"
-        name="description"
-        value={role.description}
-        onChange={handleChange}
-      />
+                  
+      <textarea
+            type="textarea"
+            name="description"
+            className="form-control"
+            style={{
+              resize: "none",
+              width: "75%",
+              height: "30%",
+              fontFamily: "Poppins",
+            }}
+            placeholder="Enter Role Description..."
+            value={role.description}
+            onChange={handleChange}
+          />
         <br />
 
         
-        <button className='btn btn-primary'>submit</button> 
+        <button className={styles.create}>Create</button> 
         </form>
     </div>
     </div>
