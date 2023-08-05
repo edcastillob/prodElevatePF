@@ -1,4 +1,6 @@
 .container {
+  width: 100%;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
@@ -73,7 +75,10 @@ h3 {
   border: none;
   border-radius: 0 5px 5px 0;
 }
-
+/*
+h3 = calc(1.3rem + .6vw) (font-size)
+h4 = calc(1.275rem + .3vw) (font-size)
+*/
 @media (max-width: 700px) {
   .titleFilter {
     font-size: 15px;
@@ -81,6 +86,14 @@ h3 {
 
   .message {
     font-size: 1rem;
+  }
+  
+  .loading h3 {
+    font-size: 1.3rem;
+  }
+
+  .loading h4 {
+    font-size: 1.275rem;
   }
 }
 
@@ -92,6 +105,14 @@ h3 {
   .message {
     font-size: 0.9rem;
   }
+
+  .loading h3 {
+    font-size: 1.1rem;
+  }
+
+  .loading h4 {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 476px) {
@@ -100,6 +121,14 @@ h3 {
   }
   .titleFilter {
     font-size: 15px;
+  }
+
+  .loading h3 {
+    font-size: .9rem;
+  }
+
+  .loading h4 {
+    font-size: .8rem;
   }
 }
 

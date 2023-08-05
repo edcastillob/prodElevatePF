@@ -189,7 +189,7 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
         {/* optionProducts */}
 
         {optionProducts.length === 0 ? (
-          <div>
+          <div className={styles.loading}>
             <img src={loading} alt="loading" />
             <h2>Upsss</h2>
             <h3>
