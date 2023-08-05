@@ -45,11 +45,11 @@ export const CreateUser = () => {
 
   const handleCountrySelect = (event) => { 
     event.preventDefault();
-    const countryValue = event.target.value; // Obtener el valor seleccionado del evento
-    setSelectedCountry(countryValue); // Actualizar el estado de selectedCountry
+    const countryValue = event.target.value; 
+    setSelectedCountry(countryValue); 
     setUserData((userData) => ({
       ...userData,
-      country: countryValue, // Usar el valor actual de selectedCountry
+      country: countryValue, 
     }));
   }
   

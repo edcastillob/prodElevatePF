@@ -61,7 +61,7 @@ const sendMailer = async (product) => {
     
    const message = {
       from: "prodelevatepf@gmail.com", 
-      to: 'edwar.castillo@gmail.com', 
+      to: 'luisnaveda10@gmail.com', 
       subject: "Registro de nuevo producto", 
       html: mail
     };
@@ -117,7 +117,7 @@ const sendMailNewUser = async (user) => {
     const message = {
       from: process.env.EMAIL,
       to: user.email, 
-      cc: 'edwar.castillo@gmail.com', 
+      cc: 'luisnaveda10@gmail.com', 
       subject: "ProdElevate | Registro de usuario", 
       html: mail
     }
