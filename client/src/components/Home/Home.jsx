@@ -219,6 +219,13 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
         )}
       </div>
 
+        {/* optionProducts */}
+        {productsFiltered?.map((product) => (
+          <CardProduct 
+           key={product.id}
+          product={product}
+          />
+        ))}
       <div>
         <div>
           <button
@@ -235,13 +242,6 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
             Siguiente
           </button>
         </div>
-        {/* optionProducts */}
-        {filteredProducts?.map((product) => (
-          <CardProduct 
-           key={product.id}
-          product={product}
-          />
-        ))}
       </div>
     </div>
   );

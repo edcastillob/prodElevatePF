@@ -57,7 +57,7 @@ export const ProductDetail = () => {
         axios
           .get(`${ENDPOINT}useremail/` + user.email)
           .then((response) => {
-            const data = response.data.rol;
+            const data = response.data.roleId;
             setUserRoleLocal(data); 
           })
           .catch((error) => {

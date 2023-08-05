@@ -154,14 +154,14 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
             ))}
           </CardContent>
         )}
-        {!repliedComments.has(comment.id) && userRole === 'Provider' && (
+        {!repliedComments.has(comment.id) && userRole === 1 && (
           <CardContent style={{ background: '#f1f1f1', borderRadius: '8px' }}>
             <Button variant="outlined" onClick={() => handleToggleReplyForm(comment.id)}>
               Responder
             </Button>
           </CardContent>
         )}
-        {repliedComments.has(comment.id) && userRole === 'Provider' && (
+        {repliedComments.has(comment.id) && userRole === 1 && (
           <CardContent style={{ background: '#f1f1f1', borderRadius: '8px' }}>
             <form onSubmit={(e) => handleReply(e, comment.id)}>
               <TextField
