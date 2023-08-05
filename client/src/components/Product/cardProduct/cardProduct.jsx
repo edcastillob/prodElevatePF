@@ -31,6 +31,8 @@ export const CardProduct = ({ product }) => {
     navigate("/cart");
   };
 
+  const userActive = useSelector((state) => state.userLog);
+
   const handleFavorite = (event) => {
     if (isFav) {
       setIsFav(false);
@@ -58,6 +60,8 @@ export const CardProduct = ({ product }) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        const userEmail = user.email;
+        console.log(userEmail);
         setCurrentUser(user);
       } else {
         setCurrentUser(null);
@@ -83,11 +87,8 @@ export const CardProduct = ({ product }) => {
   console.log("Product ID:", id); // Agregamos esta línea para verificar el valor de id
 
   const productWithUser = {
-    
     ...product,
-    user: currentUser
-      ? currentUser.uid
-      : "ed047b85-67d9-4a90-a461-b4ad1e2036e3",
+    user: currentUser ? currentUser.email : null,
   };
   return (
 <div className={styles.cardContainer}>
@@ -96,31 +97,36 @@ export const CardProduct = ({ product }) => {
         to={`/productid/${id}`}
         className={styles.link}
       >
-
         <div className={styles.divImg}>
           <img className={styles.img} src={images} alt="product" />
         </div>
       </Link>
       <div className={styles.description}>
-      {isFav ? (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3 style={{ color: "#000924" }}>
-              <ion-icon name="heart"></ion-icon>
-            </h3>
-          </button>
-        ) : (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3>
-              <ion-icon name="heart-empty"></ion-icon>
-            </h3>
-          </button>
-        )}
+        {userActive.isActive === true ? (
+          <div>
+            {isFav ? (
+              <button className={styles.favButton} onClick={handleFavorite}>
+                <h3 style={{ color: "#000924" }}>
+                  <ion-icon name="heart"></ion-icon>
+                </h3>
+              </button>
+            ) : (
+              <button className={styles.favButton} onClick={handleFavorite}>
+                <h3>
+                  <ion-icon name="heart-empty"></ion-icon>
+                </h3>
+              </button>
+            )}
+          </div>
+        ) : null}
         <NavLink
-        title="Detail Product"
-        to={`/productid/${id}`}
-        style={{textDecoration:'none'}}
-        // className={styles.link}
-      ><h6 className={styles.title}>{name}</h6></NavLink>        
+          title="Detail Product"
+          to={`/productid/${id}`}
+          style={{ textDecoration: "none" }}
+          // className={styles.link}
+        >
+          <h6 className={styles.title}>{name}</h6>
+        </NavLink>
         <h6 className={styles.category}> {category}</h6>
         <span className={styles.priceLabel}>Brand</span>
         <h6 className={styles.price}>{brand}</h6>

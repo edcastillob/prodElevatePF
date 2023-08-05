@@ -111,20 +111,19 @@ body {
   color: black;
 }
 
-/* Estilos para el botón de continuar comprando */
 .create {
-  height: 40px;
-  width: 80%;
-  color: #ffffff;
-  background-color: #000924;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 400;
+  border: 1px solid #cacaca;
+  width: 20%;
+  padding: 0.7rem;
   border-radius: 10px;
-  padding: 0 1rem;
-  margin-top: 1rem;
-}
-
-.create:hover {
-  background-color: #01103c;
+  font-family: "Poppins";
+  background-color: #000924;
+  color: #cacaca;
+  transition: 0.2s;
+  margin-bottom: 2rem;
+  &:hover {
+    transform: scale(0.97);
+    color: #fff;
+    transition: 0.3s;
+  }
 }

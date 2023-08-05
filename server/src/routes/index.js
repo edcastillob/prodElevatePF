@@ -1,7 +1,12 @@
 // const passport = require("passport")
 const { Router } = require("express");
 const { isAuthenticated } = require("../middleware/isAuthenticated");
-const { getAllProducts } = require("../controllers/GET/getAllProducts");
+const {
+  getAllProducts,
+  getAllProductsByName,
+  getAllProductsHighestPrice,
+  getAllProductsLowestPrice,
+} = require("../controllers/GET/getAllProducts");
 const { getProductId } = require("../controllers/GET/getProductId");
 
 const { postProduct } = require("../controllers/POST/postProduct");
@@ -34,15 +39,14 @@ const { getUserId} = require("../controllers/GET/getUserId");
 const { getUserByEmail } = require("../controllers/GET/getUserByEmail");
 const { checkEmail } = require("../controllers/authGoogle");
 
-
-
-
 const router = Router();
 
 const mailerRoutes = require("./mailerRoutes");
 const { postFilterData } = require("../controllers/POST/postFilterData");
 const { getAllRole } = require("../controllers/GET/getAllRole");
-const { getAllProductsInactive } = require("../controllers/GET/getAllProductsInactive");
+const {
+  getAllProductsInactive,
+} = require("../controllers/GET/getAllProductsInactive");
 const { putProductActive } = require("../controllers/PUT/putProductActive");
 
 router.use("/notification", mailerRoutes);
@@ -100,12 +104,10 @@ router.get("/profile", isAuthenticated, (req, res) => {
   });
 });
 
-router.post('/check-email', checkEmail);
+router.post("/check-email", checkEmail);
 
 router.post("/role", postRole);
 router.get("/role", getAllRole);
-
-
 
 router.get("/user", getAllUsers);
 router.get("/user/:id", getUserId);
@@ -116,6 +118,9 @@ router.put("/user/:id", putUser);
 router.delete("/user/:id", deleteUser);
 
 router.get("/product", getAllProducts);
+router.get("/product/name", getAllProductsByName);
+router.get("/product/highest-price", getAllProductsHighestPrice);
+router.get("/product/lowest-price", getAllProductsLowestPrice);
 router.get("/productinactive", getAllProductsInactive);
 router.put("/productactive/:id", putProductActive);
 router.get("/productid/:id", getProductId);

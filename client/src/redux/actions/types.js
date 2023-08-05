@@ -62,7 +62,6 @@ export const GET_COMMENTS_BY_PRODUCT = "GET_COMMENTS_BY_PRODUCT";
 export const CREATE_REPLY = "CREATE_REPLY"
 export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER";
 
-
 //Role
 
 export const ADD_ROLE = "ADD_ROLE";
