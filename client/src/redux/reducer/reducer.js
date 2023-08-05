@@ -48,6 +48,8 @@ const initialState = {
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
+  currentPage: 1,
+  totalPages: 1,
   products: [],
   productsInactive: [],
   productsFiltered: [],
@@ -58,7 +60,7 @@ const initialState = {
   role: [],
   users: [],
   userMail: [],
-  userLog:[],
+  userLog: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -66,8 +68,11 @@ function reducer(state = initialState, actions) {
     case SHOW_PRODUCTS:
       return {
         ...state,
-        products: actions.payload,
-        productDetail: [...actions.payload],
+        products: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        productsFiltered: [],
+        //productDetail: [...actions.payload.data],
       };
     case SHOW_PRODUCTS_INACTIVE:
       return {
@@ -76,14 +81,12 @@ function reducer(state = initialState, actions) {
       };
 
     case GET_PRODUCT_NAME:
-      const filterProd = [...state.products];
-      const searchNotCsensitive = actions.payload.toLowerCase();
-      const filteredProducts = filterProd.filter((prod) =>
-        prod.name.toLowerCase().includes(searchNotCsensitive)
-      );
       return {
         ...state,
-        productsFiltered: filteredProducts,
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
 
     case GET_PRODUCT_DETAIL:
@@ -292,13 +295,19 @@ function reducer(state = initialState, actions) {
     case PRICE_HIGHER_LOWER:
       return {
         ...state,
-        products: [...state.products.sort((a, b) => b.salePrice - a.salePrice)],
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
 
     case PRICE_LOWER_HIGHER:
       return {
         ...state,
-        products: [...state.products.sort((a, b) => a.salePrice - b.salePrice)],
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
 
     // Filter Name
@@ -306,9 +315,10 @@ function reducer(state = initialState, actions) {
     case FILTER_NAME:
       return {
         ...state,
-        products: [
-          ...state.products.sort((a, b) => a.name.localeCompare(b.name)),
-        ],
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
 
     case DELETE_PRODUCT:
@@ -373,18 +383,21 @@ function reducer(state = initialState, actions) {
     case FILTER_DATA:
       return {
         ...state,
-        products: actions.payload,
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
-      case GET_ROLE:
-        return {
-          ...state,
-          role: actions.payload,
-        };
-        case GET_USER_SYSTEM_LOG:
-          return {
-            ...state,
-            userLog: actions.payload,
-          };
+    case GET_ROLE:
+      return {
+        ...state,
+        role: actions.payload,
+      };
+    case GET_USER_SYSTEM_LOG:
+      return {
+        ...state,
+        userLog: actions.payload,
+      };
     default:
       return state;
   }

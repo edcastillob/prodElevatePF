@@ -52,7 +52,6 @@ export const PRICE_LOWER_HIGHER = "PRICE_LOWER_HIGHER";
 export const FILTER_NAME = "FILTER_NAME";
 export const FILTER_DATA = "FILTER_DATA";
 
-
 //Role
 
 export const ADD_ROLE = "ADD_ROLE";

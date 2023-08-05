@@ -7,16 +7,20 @@ const ThankYouPage = () => {
   return (
     <>
       <div className={styles.cartContainer}>
-        <h2 style={{fontFamily:'Poppins'}}>Thank You for Your Purchase!</h2>
-        <p style={{fontFamily:'Poppins'}}>We are thrilled that you chose to shop with us.</p>
-        <p style={{fontFamily:'Poppins'}}>Your order has been successfully processed.</p>
+        <h2 style={{ fontFamily: "Poppins" }}>Thank You for Your Purchase!</h2>
+        <p style={{ fontFamily: "Poppins" }}>
+          We are thrilled that you chose to shop with us.
+        </p>
+        <p style={{ fontFamily: "Poppins" }}>
+          Your order has been successfully processed.
+        </p>
         <div className={styles.cartItems}>
           {cartItems?.map((cartItem) => (
             <div className={styles.cartItem} key={cartItem.id}>
               <div className={styles.cartProduct}>
                 <img src={cartItem.images} alt={cartItem.name} />
                 <div>
-                  <h3 style={{fontFamily:'Poppins'}}>{cartItem.name}</h3>
+                  <h3 style={{ fontFamily: "Poppins" }}>{cartItem.name}</h3>
                   {/* <div
                     className={styles.descriptionItem}
                     dangerouslySetInnerHTML={{ __html: cartItem.description }}
@@ -36,8 +40,12 @@ const ThankYouPage = () => {
             </div>
           ))}
         </div>
-        <p style={{fontFamily:'Poppins'}}>You will receive an email with your order details shortly.</p>
-        <p style={{fontFamily:'Poppins'}}>Thank you again for your business!</p>
+        <p style={{ fontFamily: "Poppins" }}>
+          You will receive an email with your order details shortly.
+        </p>
+        <p style={{ fontFamily: "Poppins" }}>
+          Thank you again for your business!
+        </p>
       </div>
 
       <Link to={"/home"}>

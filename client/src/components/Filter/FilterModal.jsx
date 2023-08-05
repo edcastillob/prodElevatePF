@@ -32,6 +32,8 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
 
   const conditionOptions = ["Brand New", "Used", "Like New"];
 
+  //console.log(filters);
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -60,7 +62,6 @@ const FilterModal = ({ show, handleClose, handleFilter }) => {
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
-
             <Form.Group controlId="formCategory">
               <Form.Label>Category</Form.Label>
               <Form.Control
