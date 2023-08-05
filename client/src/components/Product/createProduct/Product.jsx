@@ -20,8 +20,6 @@ export const Product = () => {
     dispatch(getProvider());
   }, []);
 
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const category = useSelector((state) => state.category);
@@ -104,59 +102,58 @@ export const Product = () => {
     // setErrors(errors);
 
     // if (Object.keys(product).length === 0) {
-      dispatch(addProduct(product));
-      toast.success("¡Product created successfully!");
-      setProduct({
-        category: "",
-        name: "",
-        brand: "",
-        condition: "",
-        description: "",
-        purchasePrice: "",
-        salePrice: "",
-        minimumStock: "",
-        provider: [],
-        images: [],
-      });
-      // setErrors({});
-      // Reiniciar isImageUploaded a false después de enviar el formulario
-      setIsImageUploaded(false);
+    dispatch(addProduct(product));
+    toast.success("¡Product created successfully!");
+    setProduct({
+      category: "",
+      name: "",
+      brand: "",
+      condition: "",
+      description: "",
+      purchasePrice: "",
+      salePrice: "",
+      minimumStock: "",
+      provider: [],
+      images: [],
+    });
+    // setErrors({});
+    // Reiniciar isImageUploaded a false después de enviar el formulario
+    setIsImageUploaded(false);
     // } else {
     //   toast.error("Data is Incompleted. All fields must be filled Correctly");
     // }
   };
   // console.log("provider: ", provider);
-  console.log(product)
+  console.log(product);
   return (
     <div className={styles.container}>
-      
-        <hr />
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
-            New product
-          </h5>
-          {/* Categoria de Producto */}
-          <div className="d-flex justify-content-around">
-            <select
-              className="form-select form-select-sm mb-3 w-50 d-start"
-              name="category"
-              id="category"
-              value={product.category}
-              onChange={handleChange}
-            >
-              <option value="" style={{ fontFamily: "Poppins" }}>
-                -- Category --
+      <hr />
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
+          New product
+        </h5>
+        {/* Categoria de Producto */}
+        <div className="d-flex justify-content-around">
+          <select
+            className="form-select form-select-sm mb-3 w-50 d-start"
+            name="category"
+            id="category"
+            value={product.category}
+            onChange={handleChange}
+          >
+            <option value="" style={{ fontFamily: "Poppins" }}>
+              -- Category --
+            </option>
+            {sortedCategories.map((catg) => (
+              <option key={catg.id} value={catg.id}>
+                {catg.name}
               </option>
-              {sortedCategories.map((catg) => (
-                <option key={catg.id} value={catg.id}>
-                  {catg.name}
-                </option>
-              ))}
-            </select>
-            {/* {errors.category && (
+            ))}
+          </select>
+          {/* {errors.category && (
                   <p className={styles.error}>{errors.category}</p>
             )} */}
-            {/* Nombre de Producto */}
+          {/* Nombre de Producto */}
 
           <input
             className="form-control mb-3 w-50 d-end"
@@ -166,7 +163,7 @@ export const Product = () => {
             value={product.name}
             onChange={handleChange}
           />
-            {/* {errors.name && (
+          {/* {errors.name && (
                   <p className={styles.error}>{errors.name}</p>
             )} */}
         </div>
@@ -184,19 +181,19 @@ export const Product = () => {
               <p className={styles.error}>{errors.brand}</p>
           )} */}
           <select
-  className="form-control mb-3 w-50 d-end"
-  name="condition"
-  value={product.condition}
-  onChange={handleChange}
->
-  <option value="">Select condition</option>
-  <option value="Brand New">Brand New</option>
-  <option value="Used">Used</option>
-  <option value="Like New">Like New</option>
-</select>
-{errors.condition && (
-    <p className={styles.error}>{errors.condition}</p>
-)}
+            className="form-control mb-3 w-50 d-end"
+            name="condition"
+            value={product.condition}
+            onChange={handleChange}
+          >
+            <option value="">Select condition</option>
+            <option value="Brand New">Brand New</option>
+            <option value="Used">Used</option>
+            <option value="Like New">Like New</option>
+          </select>
+          {errors.condition && (
+            <p className={styles.error}>{errors.condition}</p>
+          )}
         </div>
 
         {/* Descripcion de Producto */}
@@ -231,9 +228,9 @@ export const Product = () => {
             fontFamily: "Poppins",
           }}
         />
-          {errors.description && (
-              <p className={styles.error}>{errors.description}</p>
-          )}
+        {errors.description && (
+          <p className={styles.error}>{errors.description}</p>
+        )}
         {/* precio de compra de Producto */}
         <div className="d-flex g-3">
           <div className="input-group">
@@ -248,9 +245,9 @@ export const Product = () => {
             <span className="input-group-text mb-3">$</span>
             {/* <span className="input-group-text mb-3">0.00</span> */}
           </div>
-            {errors.purchasePrice && (
-                  <p className={styles.error}>{errors.purchasePrice}</p>
-            )}
+          {errors.purchasePrice && (
+            <p className={styles.error}>{errors.purchasePrice}</p>
+          )}
           {/* precio de venta de Producto */}
 
           <div className="input-group">
@@ -265,9 +262,9 @@ export const Product = () => {
             <span className="input-group-text mb-3">$</span>
             {/* <span className="input-group-text mb-3">0.00</span> */}
           </div>
-            {errors.salePrice && (
-                <p className={styles.error}>{errors.salePrice}</p>
-            )}
+          {errors.salePrice && (
+            <p className={styles.error}>{errors.salePrice}</p>
+          )}
         </div>
 
         {/* stock minimo de Producto */}
@@ -279,9 +276,9 @@ export const Product = () => {
           value={product.minimumStock}
           onChange={handleChange}
         />
-          {errors.minimumStock && (
-              <p className={styles.error}>{errors.minimumStock}</p>
-          )}
+        {errors.minimumStock && (
+          <p className={styles.error}>{errors.minimumStock}</p>
+        )}
 
         {/* Proveedor */}
         <div className="container-m">
@@ -304,7 +301,7 @@ export const Product = () => {
             {product.provider?.map((provId) => {
               const selectedProvider = provider.find(
                 (prov) => prov.id === provId
-              )
+              );
               return (
                 <ul className="list-group d-flex" key={`provider_${provId}`}>
                   <li
@@ -314,27 +311,27 @@ export const Product = () => {
                     {selectedProvider.name}
                   </li>
                 </ul>
-              )
+              );
             })}
           </div>
           {/* ... */}
         </div>
-          {/* {errors.provider && (
+        {/* {errors.provider && (
               <p className={styles.error}>{errors.provider}</p>
           )} */}
         <br />
 
-          {/* <UploadImg onImageUpload={handleImageUpload} /> */}
-          <h6
-            style={{
-              fontFamily: "Poppins",
-              textAlign: "start",
-              marginTop: "-1rem",
-            }}
-          >
-            Image:
-          </h6>
-          <div className={styles.uploadImg}>
+        {/* <UploadImg onImageUpload={handleImageUpload} /> */}
+        <h6
+          style={{
+            fontFamily: "Poppins",
+            textAlign: "start",
+            marginTop: "-1rem",
+          }}
+        >
+          Image:
+        </h6>
+        <div className={styles.uploadImg}>
           <UploadImg
             onImageUpload={handleImageUpload}
             uploadedImages={product.images}
@@ -342,14 +339,13 @@ export const Product = () => {
               setProduct((product) => ({ ...product, images: [] }))
             }
           />
-          </div>
-          {/* {errors.images && (
+        </div>
+        {/* {errors.images && (
              <p className={styles.error}>{errors.images}</p>
           )} */}
-          <br />
-          <button className={styles.create}>Create</button>
-        </form>
-      </div>
-
+        <br />
+        <button className={styles.create}>Create</button>
+      </form>
+    </div>
   );
 };

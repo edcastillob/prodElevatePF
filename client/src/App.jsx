@@ -21,6 +21,7 @@ import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin";
 import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import Favorites from "./components/Favorites/Favorites";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
@@ -37,7 +38,11 @@ import { TermsConditions } from "./components/TermsConditions/TermsConditions";
 import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
 import { useDispatch, useSelector } from "react-redux";
-import { checkEmailAndRegister, getUserSystemLog, getUsers } from "./redux/actions/actions";
+import {
+  checkEmailAndRegister,
+  getUserSystemLog,
+  getUsers,
+} from "./redux/actions/actions";
 import { ChangePassword } from "./components/users/changePassword/ChangePassword";
 
 // LANGUAGE SETTINGS
@@ -59,9 +64,7 @@ i18next.init({
   },
 });
 
-
-
-function App({ user, userLocal}) {
+function App({ user, userLocal }) {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -70,15 +73,13 @@ function App({ user, userLocal}) {
   const [currentUserLocal, setCurrentUserLocal] = useState(null);
   // LANGUAGE STATE & HANDLE
   const [currentLanguage, setCurrentLanguage] = useState(
-    localStorage.getItem("selectedLanguage") || "en" 
+    localStorage.getItem("selectedLanguage") || "en"
   );
 
   const handleLanguageChange = (language) => {
     setCurrentLanguage(language);
-    localStorage.setItem("selectedLanguage", language); 
+    localStorage.setItem("selectedLanguage", language);
   };
-
-
 
   useEffect(() => {
     setShowNavBar(
@@ -89,11 +90,11 @@ function App({ user, userLocal}) {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      if (user) {        
+      if (user) {
         const uid = user.uid;
         // console.log(user)
         setCurrentUser(user);
-        dispatch(checkEmailAndRegister(user))
+        dispatch(checkEmailAndRegister(user));
       } else {
         // console.log("Usuario no logueado");
         setCurrentUser(null);
@@ -110,16 +111,16 @@ function App({ user, userLocal}) {
     }
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (userLocal) {
-        dispatch(getUserSystemLog(userLocal.email))
-  
-    } else if(user){
-          dispatch(getUserSystemLog(user.email))
-    } else {  
-    }}, [user, userLocal])
-    const userActive = useSelector((state) => state.userLog);
-  
+      dispatch(getUserSystemLog(userLocal.email));
+    } else if (user) {
+      dispatch(getUserSystemLog(user.email));
+    } else {
+    }
+  }, [user, userLocal]);
+  const userActive = useSelector((state) => state.userLog);
+
   const handleSignIn = async () => {
     try {
       const user = await handleGoogleSignIn();
@@ -129,17 +130,16 @@ function App({ user, userLocal}) {
     }
   };
   // console.log('currentUserLocal_: ', currentUserLocal.email)
-  
-  
+
   // useEffect(() => {
   //   if(currentUserLocal){
   //     dispatch(getUserSystemLog(currentUserLocal.email))
   //   }
 
   //   }, []);
-  
+
   // console.log('userActive: ', userActive)
-  console.log('rol de user: ', userActive.roleId)
+  console.log("rol de user: ", userActive.roleId);
 
   return (
     <>
@@ -195,22 +195,24 @@ function App({ user, userLocal}) {
           {/* {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )} */}
-
-        </Routes>
-        <ToastContainer
-          position="top-center"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          closeButton={false}
-          theme="dark"
-        />
-        {showNavBar}
-        <Footer currentLanguage={currentLanguage} handleLanguageChange={handleLanguageChange} />
-      </div>
+          </Routes>
+          <ToastContainer
+            position="top-center"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            closeButton={false}
+            theme="dark"
+          />
+          {showNavBar}
+          <Footer
+            currentLanguage={currentLanguage}
+            handleLanguageChange={handleLanguageChange}
+          />
+        </div>
       </I18nextProvider>
     </>
   );

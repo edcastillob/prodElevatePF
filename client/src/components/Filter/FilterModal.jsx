@@ -39,6 +39,8 @@ const FilterModal = ({ show, handleClose, handleFilter, currentLanguage }) => {
     t("filter-modal.like-new", { lng: currentLanguage })
   ];
 
+  //console.log(filters);
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -69,7 +71,6 @@ const FilterModal = ({ show, handleClose, handleFilter, currentLanguage }) => {
                 onChange={handleInputChange}
               ></Form.Control>
             </Form.Group>
-
             <Form.Group controlId="formCategory">
               <Form.Label>{t("filter-modal.category", { lng:currentLanguage })}</Form.Label>
               <Form.Control
