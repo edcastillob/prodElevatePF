@@ -131,18 +131,18 @@ export const CardProduct = ({ product, currentLanguage }) => {
           <h6 className={styles.title}>{name}</h6>
         </NavLink>
         <h6 className={styles.category}> {category}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.brand", { lng: currentLanguage })}</span>
+        <span className={styles.priceLabel}>Brand</span>
         <h6 className={styles.price}>{brand}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.condition", { lng: currentLanguage })}</span>
+        <span className={styles.priceLabel}>Condition</span>
         <h6 className={styles.price}>{condition}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.price", { lng: currentLanguage })}</span>
+        <span className={styles.priceLabel}>Price</span>
         <h6 className={styles.price}>${salePrice}</h6>
           <Reviews reviews={productReviews} />
         <button
           className={styles.buttonCart}
           onClick={() => handledAddToCart(product)}
         >
-          {t("cardProduct.add-to-cart", { lng: currentLanguage })}
+          Add to Cart
         </button>
       </div>
     </div>

@@ -28,14 +28,14 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
 
   const currentPage = useSelector((state) => state.currentPage);
   const totalPages = useSelector((state) => state.totalPages);
-
+  const [selectedReviewFilter, setSelectedReviewFilter] = useState("");
   useEffect(() => {
     dispatch(showProducts(currentPage));
   }, []);
 
   const products = useSelector((state) => state.products);
   const productsFiltered = useSelector((state) => state.productsFiltered);
-  const productReviews = useSelector((state) => state.productReviews);
+
   const [optionProducts, setOptionProducts] = useState([]);
   const [searchProductNav, setSearchProductNav] = useState("");
 
@@ -106,6 +106,9 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
     console.log("filter Home", currentPage);
     setShowModal(false);
   };
+  const handleReviewFilter = (reviewFilter) => {
+    setSelectedReviewFilter(reviewFilter); // Actualiza el estado del filtro de reseñas
+  };
 
   const [selectedFilters, setSelectedFilters] = useState({
     minPrice: "",
@@ -113,6 +116,7 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
     category: "",
     brand: "",
     condition: "",
+    reviewFilter: "",
   });
 
   const handleNextPage = () => {
@@ -217,20 +221,13 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
           </div>
         ) : (
           <div className={styles.cards}>
-            {optionProducts?.map((product) => (
+            {productsFiltered?.map((product) => (
               <CardProduct key={product.id} product={product} currentLanguage={currentLanguage} />
             ))}
           </div>
         )}
       </div>
 
-        {/* optionProducts */}
-        {productsFiltered?.map((product) => (
-          <CardProduct 
-           key={product.id}
-          product={product}
-          />
-        ))}
       <div>
         <div className={styles.pages}>
           <button

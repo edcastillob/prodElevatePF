@@ -42,6 +42,7 @@ import {
   GET_ROLE,
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
+  FILTER_REVIEWS,
 } from "../actions/types";
 
 const initialState = {
@@ -68,6 +69,7 @@ const initialState = {
   userMail: [],
   productReviews: [],
   userLog: [],
+  filteredReviews: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -406,6 +408,44 @@ function reducer(state = initialState, actions) {
             ...state,
             userLog: actions.payload,
           };
+          case GET_ALL_REVIEWS :
+            return {
+                ...state,
+                productReviews: actions.payload
+            }
+            case CREATE_COMMENT:
+          // Agregar el nuevo comentario al estado
+          return {
+            ...state,
+            comments: [...state.comments, actions.payload],
+          };
+        case GET_COMMENTS_BY_PRODUCT:
+          // Obtener los comentarios del producto del estado
+          return {
+            ...state,
+            comments: actions.payload,
+          };
+        case CREATE_REPLY:
+          // Agregar la respuesta al comentario en el estado
+          const { reply, commentId } = actions.payload;
+          const updatedComments = state.comments.map((comment) => {
+            if (comment.id === commentId) {
+              return {
+                ...comment,
+                replies: [...(comment.replies || []), reply],
+              };
+            }
+            return comment;
+          });
+          return {
+            ...state,
+            comments: updatedComments,
+          };
+          case FILTER_REVIEWS:
+      return {
+        ...state,
+        filteredReviews: actions.payload,
+      };
     default:
       return state;
   }

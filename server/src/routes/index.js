@@ -38,7 +38,7 @@ const {createComment, createReply} = require("../controllers/POST/postComment")
 const { getUserId} = require("../controllers/GET/getUserId");
 const { getUserByEmail } = require("../controllers/GET/getUserByEmail");
 const { checkEmail } = require("../controllers/authGoogle");
-
+const  {getProductReviewsWithFilters}  = require("../controllers/Reviews/GET/filterReviews");
 const router = Router();
 
 const mailerRoutes = require("./mailerRoutes");
@@ -156,7 +156,7 @@ router.get("/products/:productId/comments", getCommentsByProduct);
 
 // Ruta para responder a un comentario
 router.put("/comments/:commentId/reply", createReply);
-
+router.get("/:productId/reviewsfilter", getProductReviewsWithFilters);
 
 
 

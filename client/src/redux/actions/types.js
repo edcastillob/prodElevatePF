@@ -51,6 +51,7 @@ export const PRICE_HIGHER_LOWER = "PRICE_HIGHER_LOWER";
 export const PRICE_LOWER_HIGHER = "PRICE_LOWER_HIGHER";
 export const FILTER_NAME = "FILTER_NAME";
 export const FILTER_DATA = "FILTER_DATA";
+export const FILTER_REVIEWS = "FILTER_REVIEWS";
 ///////Reviews
 
 export const GET_ALL_REVIEWS  = 'GET_ALL_REVIEWS';

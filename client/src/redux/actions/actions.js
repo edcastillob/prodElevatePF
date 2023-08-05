@@ -46,6 +46,7 @@ import {
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   ACTIVE_PRODUCT,
+  FILTER_REVIEWS
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -707,4 +708,16 @@ export const getProductsByName = (page, name) => {
   } catch (error) {
     throw new Error(error.message);
   }
+};
+
+export const filterReviews = (productId, filters) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ENDPOINT}${productId}/reviewsfilter`, { params: filters });
+      const filteredReviews = response.data;
+      dispatch({ type: FILTER_REVIEWS, payload: filteredReviews });
+    } catch (error) {
+      console.error("Error al filtrar reseñas:", error);
+    }
+  };
 };

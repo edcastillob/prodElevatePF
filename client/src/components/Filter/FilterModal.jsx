@@ -19,6 +19,7 @@ const FilterModal = ({ show, handleClose, handleFilter, currentLanguage }) => {
     category: "",
     brand: "",
     condition: "",
+    reviewFilter: "",
   });
 
   const handleInputChange = (event) => {
@@ -116,6 +117,14 @@ const FilterModal = ({ show, handleClose, handleFilter, currentLanguage }) => {
                   </option>
                 ))}
               </Form.Control>
+              <Form.Control
+              type="text"
+              placeholder={t("filter-modal.review-filter", { lng: currentLanguage })}
+              name="reviewFilter"
+              value={filters.reviewFilter}
+              className={styles.input}
+              onChange={handleInputChange}
+            />
             </Form.Group>
           </form>
         </Modal.Body>
