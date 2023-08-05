@@ -10,14 +10,6 @@ const Mailgen = require("mailgen");
 
 
 
-  
-   
-
-   
- 
-  
- 
-
 
 
 /**  Notificacion de Creacion de producto  **/
