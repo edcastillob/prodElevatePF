@@ -68,6 +68,12 @@ h3 {
   border: none;
 }
 
+.btnSearch {
+  background: none;
+  border: none;
+  border-radius: 0 5px 5px 0;
+}
+
 @media (max-width: 700px) {
   .titleFilter {
     font-size: 15px;
@@ -96,3 +102,5 @@ h3 {
     font-size: 15px;
   }
 }
+
+

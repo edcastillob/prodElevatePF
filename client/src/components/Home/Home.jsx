@@ -4,6 +4,7 @@ import { CardProduct } from "../Product/cardProduct/cardProduct";
 import {
   filterData,
   filterNameAsc,
+  getProductsByName,
   priceHigherLower,
   priceLowerHigher,
   showProducts,
@@ -15,18 +16,35 @@ import Marquee from "react-fast-marquee";
 import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
+import loading from "../../assets/loading.png";
 
-export const Home = ( { user, userLocal, handleSignIn  } ) => {
+export const Home = ({ user, userLocal, handleSignIn }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const currentPage = useSelector((state) => state.currentPage);
+  const totalPages = useSelector((state) => state.totalPages);
+
   useEffect(() => {
-    dispatch(showProducts());
+    dispatch(showProducts(currentPage));
   }, []);
+
   const products = useSelector((state) => state.products);
   const productsFiltered = useSelector((state) => state.productsFiltered);
 
   const [optionProducts, setOptionProducts] = useState([]);
   const [searchProductNav, setSearchProductNav] = useState("");
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    event.preventDefault();
+    setSearchProductNav(value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(getProductsByName(currentPage, searchProductNav));
+  };
 
   useEffect(() => {
     setOptionProducts(productsFiltered.length ? productsFiltered : products);
@@ -52,21 +70,20 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
     };
   }, [dispatch]);
 
- 
   const handlePriceHigher = () => {
-    dispatch(priceHigherLower());
+    dispatch(priceHigherLower(currentPage));
   };
 
   const handlePriceLower = () => {
-    dispatch(priceLowerHigher());
+    dispatch(priceLowerHigher(currentPage));
   };
 
   const handleSortName = () => {
-    dispatch(filterNameAsc("az"));
+    dispatch(filterNameAsc(currentPage));
   };
 
   const handleAllProdutcs = () => {
-    dispatch(showProducts());
+    dispatch(showProducts(currentPage));
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -80,13 +97,32 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
   };
 
   const handleFilter = (filters) => {
-    dispatch(filterData(filters));
+    dispatch(filterData(filters, currentPage));
+    setSelectedFilters(filters);
+    console.log("filter Home", currentPage);
     setShowModal(false);
   };
 
-  const filteredProducts = optionProducts.filter((product) =>
-    product.name.toLowerCase().includes(searchProductNav.toLowerCase())
-  );
+  const [selectedFilters, setSelectedFilters] = useState({
+    minPrice: "",
+    maxPrice: "",
+    category: "",
+    brand: "",
+    condition: "",
+  });
+
+  const handleNextPage = () => {
+    if (productsFiltered.length > 0) {
+      dispatch(filterData(selectedFilters, currentPage + 1));
+      console.log(selectedFilters);
+    } else {
+      dispatch(showProducts(currentPage + 1));
+    }
+  };
+
+  // const filteredProducts = optionProducts.filter((product) =>
+  //   product.name.toLowerCase().includes(searchProductNav.toLowerCase())
+  // );
 
   return (
     <div className={styles.container}>
@@ -98,12 +134,25 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
       </div>
       <div className={styles.divSearch}>
         {/* search */}
-        <input
-          type="text"
-          placeholder="search product"
-          value={searchProductNav}
-          onChange={(event) => setSearchProductNav(event.target.value)}
-        />
+        <form onChange={handleChange}>
+          <input type="search" placeholder="search product" />
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className={styles.btnSearch}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-search"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </button>
+        </form>
       </div>
       <div className={styles.oderFilters}>
         <div>
@@ -136,9 +185,20 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
         </div>
       </div>
 
-      <div className={styles.cards}>
-        {productsFiltered.length ? (
+      <div>
+        {/* optionProducts */}
+
+        {optionProducts.length === 0 ? (
           <div>
+            <img src={loading} alt="loading" />
+            <h2>Upsss</h2>
+            <h3>
+              The product you are trying to search or filter does not exist.
+            </h3>
+            <h4>
+              Please try another search or click on all products to get all
+              products
+            </h4>
             <NavLink
               style={{ textDecoration: "none" }}
               onClick={() => {
@@ -151,16 +211,31 @@ export const Home = ( { user, userLocal, handleSignIn  } ) => {
             </NavLink>
           </div>
         ) : (
-          ""
+          <div className={styles.cards}>
+            {optionProducts?.map((product) => (
+              <CardProduct key={product.id} product={product} />
+            ))}
+          </div>
         )}
+      </div>
 
-        {/* optionProducts */}
-        {filteredProducts?.map((product) => (
-          <CardProduct key={product.id} product={product} />
-        ))}
+      <div>
+        <div>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => dispatch(showProducts(currentPage - 1))}
+          >
+            Anterior
+          </button>
+          <span>Página {currentPage}</span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
     </div>
   );
 };
-
-
