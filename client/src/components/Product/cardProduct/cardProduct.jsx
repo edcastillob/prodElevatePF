@@ -9,12 +9,15 @@ import {
 } from "../../../redux/actions/actions";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 
-export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
+
+export const CardProduct = ({ product, user, userLocal, handleSignIn, currentLanguage }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isFav, setIsFav] = useState(false);
   const { id, name, images, salePrice, brand, condition, categoryId } = product;
   const selectedCategory = useSelector((state) => state.category);
+  const { t } = useTranslation('global');
   const category =
     selectedCategory.find((cat) => cat.id === categoryId)?.name ||
     "Unknown Category";
@@ -112,17 +115,17 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
           <h6 className={styles.title}>{name}</h6>
         </NavLink>
         <h6 className={styles.category}> {category}</h6>
-        <span className={styles.priceLabel}>Brand</span>
+        <span className={styles.priceLabel}>{t("cardProduct.brand", { lng: currentLanguage })}</span>
         <h6 className={styles.price}>{brand}</h6>
-        <span className={styles.priceLabel}>Condition</span>
+        <span className={styles.priceLabel}>{t("cardProduct.condition", { lng: currentLanguage })}</span>
         <h6 className={styles.price}>{condition}</h6>
-        <span className={styles.priceLabel}>Price</span>
+        <span className={styles.priceLabel}>{t("cardProduct.price", { lng: currentLanguage })}</span>
         <h6 className={styles.price}>${salePrice}</h6>
         <button
           className={styles.buttonCart}
           onClick={() => handledAddToCart(product)}
         >
-          Add to Cart
+          {t("cardProduct.add-to-cart", { lng: currentLanguage })}
         </button>
       </div>
     </div>

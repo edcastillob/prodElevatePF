@@ -161,14 +161,16 @@ function App({ user, userLocal }) {
           currentLanguage={currentLanguage}
           />} />
           <Route exact path="/about" element={<AboutUs />} />
-          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/cart" element={<Cart currentLanguage={currentLanguage} />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/contact" element={<ContactUs />} />
           <Route exact path="/changepass" element={<ChangePassword />} />
           <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/home" element={<Home user={currentUser}
           userLocal={currentUserLocal}
-          handleSignIn={handleSignIn}/>} />
+          handleSignIn={handleSignIn}
+          currentLanguage={currentLanguage}
+          />} />
           <Route exact path="/login" element={<Login currentLanguage={currentLanguage}/>} />
           <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
           <Route exact path="/productid/:id" element={<ProductDetail />} />
@@ -181,7 +183,7 @@ function App({ user, userLocal }) {
           <Route exact path="/settings_product" element={<SettingsProduct />} />
           <Route exact path="/terms_&_conditions"  element={<TermsConditions />} />
           <Route exact path="/useredit/:id" element={<EditUser />} />
-          <Route exact path="/usuario" element={<CreateUser />} />
+          <Route exact path="/usuario" element={<CreateUser currentLanguage={currentLanguage}/>} />
           <Route exact path="/thankyoupage" element={<ThankYouPage />} />
           {/* <Route exact path="/chat/" element={<Chat />} /> */}
           

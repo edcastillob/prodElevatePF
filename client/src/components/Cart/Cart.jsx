@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import swal from "sweetalert";
 
 // import "react-toastify/dist/ReactToastify.css";
 //import StripeButton from "../StripeCart/StripeButton";
@@ -15,15 +16,14 @@ import {
   removeToCart,
 } from "../../redux/actions/actions";
 import StripeButton from "../StripeButton/StripeButton";
+import { useTranslation } from 'react-i18next';
 
 // import { ToastContainer } from "react-toastify";
 
-const Cart = () => {
+const Cart = ({ currentLanguage }) => {
   const cartItems = useSelector((state) => state.cartItems);
   const cartTotalAmount = useSelector((state) => state.cartTotalAmount);
-    // MODAL STATE
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { t } = useTranslation('global');
 
   const dispatch = useDispatch();
   console.log(cartItems);
@@ -48,21 +48,32 @@ const Cart = () => {
   };
 
   const handledClear = () => {
-    setIsModalOpen(true);
-    // dispatch(clearCart());
+    event.preventDefault();
+    swal({
+      title: t("shopping-cart.atention", { lng: currentLanguage }),
+      text: t("shopping-cart.are-you-sure", { lng: currentLanguage }),
+      icon: "warning",
+      buttons: ["No", t("shopping-cart.yes", { lng: currentLanguage })],
+    }).then((res) => {
+      if (res) {
+        dispatch(clearCart());
+        swal({
+          text: t("shopping-cart.is-empty", { lng: currentLanguage }),
+          icon: "success",
+        });
+      }
+    });
+
   };
 
-  const handleConfirmClear = () => {
-    dispatch(clearCart());
-    setIsModalOpen(false); // Close the modal after clearing the cart
-  };
+ 
 
   return (
     <div className={styles.cartContainer}>
-      <h3>Shoping Cart</h3>
+      <h3>{t("shopping-cart.shopping", { lng: currentLanguage })}</h3>
       {cartItems.length === 0 ? (
         <div className={styles.cartEmpty}>
-          <p>Your Cart is empty</p>
+          <p>{t("shopping-cart.is-empty", { lng: currentLanguage })}</p>
           <div className={styles.startShoping}>
             <Link to="/home">
               <svg
@@ -78,7 +89,7 @@ const Cart = () => {
                   d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                 />
               </svg>
-              <span>Start Shoping</span>
+              <span>{t("shopping-cart.start-shopping", { lng: currentLanguage })}</span>
             </Link>
           </div>
         </div>
@@ -99,13 +110,13 @@ const Cart = () => {
                   d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                 />
               </svg>
-              <span>Continue Shoping</span>
+              <span>{t("shopping-cart.continue-shopping", { lng: currentLanguage })}</span>
             </Link>
           </div>
           <div className={styles.titles}>
-            <h4 className={styles.productTitle}>Product</h4>
-            <h4 className={styles.price}>Price</h4>
-            <h4 className={styles.quantity}>Quantity</h4>
+            <h4 className={styles.productTitle}>{t("shopping-cart.product", { lng: currentLanguage })}</h4>
+            <h4 className={styles.price}>{t("shopping-cart.price", { lng: currentLanguage })}</h4>
+            <h4 className={styles.quantity}>{t("shopping-cart.quantity", { lng: currentLanguage })}</h4>
             <h4 className={styles.total}>Total</h4>
           </div>
           <div className={styles.cartItems}>
@@ -140,36 +151,20 @@ const Cart = () => {
             ))}
           </div>
           <div className={styles.cartSummary}>
-            <button className={styles.clearCart} onClick={() => setIsModalOpen(true)}>
-              Clear Cart
+            <button className={styles.clearCart} onClick={handledClear}>
+            {t("shopping-cart.clear-cart", { lng: currentLanguage })}
             </button>
             <div className={styles.cartCheckout}>
               <div className={styles.subtotal}>
                 <span>Subtotal</span>
                 <span className={styles.amount}>${cartTotalAmount}</span>
               </div>
-              <p>Taxes and Shiping</p>
+              <p>{t("shopping-cart.taxes", { lng: currentLanguage })}</p>
               <StripeButton cartItems={cartItems} className={styles.create} />
             </div>
           </div>
         </div>
       )}
-
-      {/* MODAL */}
-      <Modal isOpen={isModalOpen} toggle={() => setIsModalOpen(false)} centered>
-        <ModalHeader style={{fontFamily:'Poppins'}} toggle={() => setIsModalOpen(false)}>Confirm</ModalHeader>
-        <ModalBody style={{fontFamily:'Poppins'}}>
-          Are you sure you want to clear the cart?
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={() => setIsModalOpen(false)} style={{fontFamily:'Poppins'}}>
-            Cancel
-          </Button>
-          <Button color="danger" onClick={handleConfirmClear} style={{fontFamily:'Poppins'}}>
-            Clear
-          </Button>
-        </ModalFooter>
-        </Modal>
     </div>
   );
 };

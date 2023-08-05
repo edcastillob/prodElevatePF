@@ -16,9 +16,13 @@ import Marquee from "react-fast-marquee";
 import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
-import loading from "../../assets/loading.png";
+import { useTranslation } from 'react-i18next';
+import loading from "../../assets/loading.png"
 
-export const Home = ({ user, userLocal, handleSignIn }) => {
+
+export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
+  const { t } = useTranslation('global');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -135,7 +139,7 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
       <div className={styles.divSearch}>
         {/* search */}
         <form onChange={handleChange}>
-          <input type="search" placeholder="search product" />
+          <input type="text" className={`${styles.search}`} placeholder={t("home.search", { lng: currentLanguage })}/>
           <button
             type="submit"
             onClick={handleSubmit}
@@ -154,18 +158,19 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
           </button>
         </form>
       </div>
-      <div className={styles.oderFilters}>
+      <div className={styles.orderFilters}>
         <div>
           <OrderFilter
             handlePriceHigher={handlePriceHigher}
             handlePriceLower={handlePriceLower}
             handleSortName={handleSortName}
             handleAllProdutcs={handleAllProdutcs}
+            currentLanguage={currentLanguage}
           />
         </div>
         <div>
           <button onClick={handleOpenModal} className={styles.titleFilter}>
-            Filter
+          {t("home.filter", { lng: currentLanguage })}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="34"
@@ -181,6 +186,7 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
             show={showModal}
             handleClose={handleCloseModal}
             handleFilter={handleFilter}
+            currentLanguage={currentLanguage}
           />
         </div>
       </div>
@@ -190,15 +196,14 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
 
         {optionProducts.length === 0 ? (
           <div>
-            <img src={loading} alt="loading" />
-            <h2>Upsss</h2>
-            <h3>
-              The product you are trying to search or filter does not exist.
-            </h3>
-            <h4>
-              Please try another search or click on all products to get all
-              products
-            </h4>
+            <img src={loading} width={80} height={80} alt="loading" />
+            <h3>Upsss</h3>
+            <h5>
+            {t("home.product-not-found", { lng: currentLanguage })}
+            </h5>
+            <h6>
+            {t("home.please-try", { lng: currentLanguage })}
+            </h6>
             <NavLink
               style={{ textDecoration: "none" }}
               onClick={() => {
@@ -213,26 +218,28 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
         ) : (
           <div className={styles.cards}>
             {optionProducts?.map((product) => (
-              <CardProduct key={product.id} product={product} />
+              <CardProduct key={product.id} product={product} currentLanguage={currentLanguage} />
             ))}
           </div>
         )}
       </div>
 
       <div>
-        <div>
+        <div className={styles.pages}>
           <button
             disabled={currentPage === 1}
             onClick={() => dispatch(showProducts(currentPage - 1))}
+            className={styles.create}
           >
-            Anterior
+            <ion-icon name="arrow-round-back"></ion-icon>
           </button>
-          <span>Página {currentPage}</span>
+          <span style={{marginLeft:'1rem', marginRight:'1rem'}}>{t("home.page", { lng: currentLanguage })} {currentPage}</span>
           <button
             disabled={currentPage === totalPages}
             onClick={handleNextPage}
+            className={styles.create}
           >
-            Siguiente
+            <ion-icon name="arrow-round-forward"></ion-icon>
           </button>
         </div>
       </div>
