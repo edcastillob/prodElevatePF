@@ -47,7 +47,9 @@
         "confirm": "Confirm",
         "are-you-sure": "Are you sure you want to clear the cart?",
         "cancel": "Cancel",
-        "clear": "Clear"
+        "clear": "Clear",
+        "atention":"Atention!",
+        "yes": "Yes"
     },
     "create-user":{
         "prodelevate": "Online Sales And Administration System",
@@ -69,7 +71,12 @@
     },
     "home":{
         "search": "Search product",
-        "filter": "Filter"
+        "filter": "Filter",
+        "product-not-found": "The product you are trying to search or filter does not exist",
+        "please-try": "Please try another search or click on all products to get all products",
+        "next": "Next",
+        "previous": "Previous",
+        "page": "Page"
     },
     "filter-modal":{
         "brand-new": "Brand New",
@@ -94,5 +101,5 @@
         "highest-price": "Highest Price",
         "lowest-price": "Lowest Price"
     }
-    
+ 
 }

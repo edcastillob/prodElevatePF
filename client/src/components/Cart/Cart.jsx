@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import swal from "sweetalert";
 
 // import "react-toastify/dist/ReactToastify.css";
 //import StripeButton from "../StripeCart/StripeButton";
@@ -23,9 +24,6 @@ const Cart = ({ currentLanguage }) => {
   const cartItems = useSelector((state) => state.cartItems);
   const cartTotalAmount = useSelector((state) => state.cartTotalAmount);
   const { t } = useTranslation('global');
-    // MODAL STATE
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
 
   const dispatch = useDispatch();
   console.log(cartItems);
@@ -50,14 +48,25 @@ const Cart = ({ currentLanguage }) => {
   };
 
   const handledClear = () => {
-    setIsModalOpen(true);
-    // dispatch(clearCart());
+    event.preventDefault();
+    swal({
+      title: t("shopping-cart.atention", { lng: currentLanguage }),
+      text: t("shopping-cart.are-you-sure", { lng: currentLanguage }),
+      icon: "warning",
+      buttons: ["No", t("shopping-cart.yes", { lng: currentLanguage })],
+    }).then((res) => {
+      if (res) {
+        dispatch(clearCart());
+        swal({
+          text: t("shopping-cart.is-empty", { lng: currentLanguage }),
+          icon: "success",
+        });
+      }
+    });
+
   };
 
-  const handleConfirmClear = () => {
-    dispatch(clearCart());
-    setIsModalOpen(false); // Close the modal after clearing the cart
-  };
+ 
 
   return (
     <div className={styles.cartContainer}>
@@ -142,7 +151,7 @@ const Cart = ({ currentLanguage }) => {
             ))}
           </div>
           <div className={styles.cartSummary}>
-            <button className={styles.clearCart} onClick={() => setIsModalOpen(true)}>
+            <button className={styles.clearCart} onClick={handledClear}>
             {t("shopping-cart.clear-cart", { lng: currentLanguage })}
             </button>
             <div className={styles.cartCheckout}>
@@ -156,22 +165,6 @@ const Cart = ({ currentLanguage }) => {
           </div>
         </div>
       )}
-
-      {/* MODAL */}
-      <Modal isOpen={isModalOpen} toggle={() => setIsModalOpen(false)} centered>
-        <ModalHeader style={{fontFamily:'Poppins'}} toggle={() => setIsModalOpen(false)}>{t("shopping-cart.confirm", { lng: currentLanguage })}</ModalHeader>
-        <ModalBody style={{fontFamily:'Poppins'}}>
-        {t("shopping-cart.are-you-sure", { lng: currentLanguage })}
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={() => setIsModalOpen(false)} style={{fontFamily:'Poppins'}}>
-          {t("shopping-cart.cancel", { lng: currentLanguage })}
-          </Button>
-          <Button color="danger" onClick={handleConfirmClear} style={{fontFamily:'Poppins'}}>
-          {t("shopping-cart.clear", { lng: currentLanguage })}
-          </Button>
-        </ModalFooter>
-        </Modal>
     </div>
   );
 };

@@ -17,6 +17,7 @@ import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
 import { useTranslation } from 'react-i18next';
+import loading from "../../assets/loading.png"
 
 
 export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
@@ -137,15 +138,8 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
       </div>
       <div className={styles.divSearch}>
         {/* search */}
-        <input
-          type="text"
-          placeholder={t("home.search", { lng: currentLanguage })}
-          value={searchProductNav}
-          className={`${styles.search}`}
-          onChange={(event) => setSearchProductNav(event.target.value)}
-        />
         <form onChange={handleChange}>
-          <input type="search" placeholder="search product" />
+          <input type="text" className={`${styles.search}`} placeholder={t("home.search", { lng: currentLanguage })}/>
           <button
             type="submit"
             onClick={handleSubmit}
@@ -202,15 +196,14 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
 
         {optionProducts.length === 0 ? (
           <div>
-            <img src={loading} alt="loading" />
-            <h2>Upsss</h2>
-            <h3>
-              The product you are trying to search or filter does not exist.
-            </h3>
-            <h4>
-              Please try another search or click on all products to get all
-              products
-            </h4>
+            <img src={loading} width={80} height={80} alt="loading" />
+            <h3>Upsss</h3>
+            <h5>
+            {t("home.product-not-found", { lng: currentLanguage })}
+            </h5>
+            <h6>
+            {t("home.please-try", { lng: currentLanguage })}
+            </h6>
             <NavLink
               style={{ textDecoration: "none" }}
               onClick={() => {
@@ -225,34 +218,28 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
         ) : (
           <div className={styles.cards}>
             {optionProducts?.map((product) => (
-              <CardProduct key={product.id} product={product} />
+              <CardProduct key={product.id} product={product} currentLanguage={currentLanguage} />
             ))}
           </div>
         )}
       </div>
 
-        {/* optionProducts */}
-        {filteredProducts?.map((product) => (
-          <CardProduct 
-          key={product.id} 
-          product={product} 
-          currentLanguage={currentLanguage}
-          />
-        ))}
       <div>
-        <div>
+        <div className={styles.pages}>
           <button
             disabled={currentPage === 1}
             onClick={() => dispatch(showProducts(currentPage - 1))}
+            className={styles.create}
           >
-            Anterior
+            <ion-icon name="arrow-round-back"></ion-icon>
           </button>
-          <span>Página {currentPage}</span>
+          <span style={{marginLeft:'1rem', marginRight:'1rem'}}>{t("home.page", { lng: currentLanguage })} {currentPage}</span>
           <button
             disabled={currentPage === totalPages}
             onClick={handleNextPage}
+            className={styles.create}
           >
-            Siguiente
+            <ion-icon name="arrow-round-forward"></ion-icon>
           </button>
         </div>
       </div>

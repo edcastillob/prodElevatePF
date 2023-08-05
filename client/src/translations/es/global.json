@@ -48,7 +48,9 @@
         "confirm": "Confirmación",
         "are-you-sure": "Estás seguro que quieres vaciar el carrito?",
         "cancel": "Cancelar",
-        "clear": "Confirmar"
+        "clear": "Confirmar",
+        "atention":"Atención!",
+        "yes": "Si"
     },
     "create-user":{
         "prodelevate": "Sistema de Administración y Ventas Online",
@@ -70,7 +72,12 @@
     },
     "home":{
         "search": "Buscar producto",
-        "filter": "Filtros"
+        "filter": "Filtros",
+        "product-not-found": "El producto que estás buscando o filtrando no existe",
+        "please-try": "Por favor intenta otra búsqueda o haz clic en 'Todos los productos' para traerte todos los productos ",
+        "next": "Siguiente",
+        "previous": "Anterior",
+        "page": "Página"
     },
     "filter-modal":{
         "brand-new": "Nuevo",
