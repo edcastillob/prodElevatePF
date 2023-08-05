@@ -72,7 +72,7 @@ const Products = ({ toggleActive }) => {
           text: "the product has been activated successfully!",
           icon: "success",
         });
-      }     
+      }
     });
   };
 
@@ -179,58 +179,56 @@ const Products = ({ toggleActive }) => {
         </Modal.Footer>
       </Modal> */}
       <div>
-      <Modal isOpen={modal} toggle={toggle}>
-  <ModalHeader toggle={toggle}>Inactive product</ModalHeader>
-  <ModalBody>
-    {/* table products */}
-    <div className={styles.productContainer} style={{ width: "100%" }}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Active</th>
-            <th>Name</th>
-            <th>Product</th>
-          </tr>
-        </thead>
-        <tbody>
-          {productsInactive?.map((product) => (
-            <tr key={product.id}>
-              <td >
-                <button
-                  onClick={(event) => activateProduct(event, product.id)}
-                  style={{
-                    background: "none",
-                    backgroundColor: "none",
-                    border: "none",
-                    padding: 0,
-                  }}
-                >
-                  <img
-                    src={yes}
-                    alt="Imagen Clickeable"
-                    style={{ width: "32px", height: "32px" }}
-                  />
-                </button>
-              </td>
-              <td  colSpan={2}>
-                {product.name}
-              </td>
-              <td >
-                <img
-                  src={product.images}
-                  alt={product.name}
-                  className={styles.img}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </ModalBody>
-</Modal>
-
-
+        <Modal isOpen={modal} toggle={toggle}>
+          <ModalHeader toggle={toggle}>Inactive product</ModalHeader>
+          <ModalBody>
+            {/* table products */}
+            <div className={styles.productContainer} style={{ width: "100%" }}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Active</th>
+                    <th>Name</th>
+                    <th>Product</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {productsInactive?.map((product) => (
+                    <tr key={product.id}>
+                      <td>
+                        <button
+                          onClick={(event) =>
+                            activateProduct(event, product.id)
+                          }
+                          style={{
+                            background: "none",
+                            backgroundColor: "none",
+                            border: "none",
+                            padding: 0,
+                          }}
+                        >
+                          <img
+                            src={yes}
+                            alt="Imagen Clickeable"
+                            style={{ width: "32px", height: "32px" }}
+                          />
+                        </button>
+                      </td>
+                      <td colSpan={2}>{product.name}</td>
+                      <td>
+                        <img
+                          src={product.images}
+                          alt={product.name}
+                          className={styles.img}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </ModalBody>
+        </Modal>
       </div>
     </div>
   );
