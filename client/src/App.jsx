@@ -37,8 +37,12 @@ import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { TermsConditions } from "./components/TermsConditions/TermsConditions";
 import { ContactUs } from "./components/ContactUs.jsx/ContactUs";
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
-import { useDispatch } from "react-redux";
-import { checkEmailAndRegister } from "./redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  checkEmailAndRegister,
+  getUserSystemLog,
+  getUsers,
+} from "./redux/actions/actions";
 import { ChangePassword } from "./components/users/changePassword/ChangePassword";
 
 // LANGUAGE SETTINGS
@@ -60,7 +64,7 @@ i18next.init({
   },
 });
 
-function App() {
+function App({ user, userLocal }) {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -107,6 +111,16 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (userLocal) {
+      dispatch(getUserSystemLog(userLocal.email));
+    } else if (user) {
+      dispatch(getUserSystemLog(user.email));
+    } else {
+    }
+  }, [user, userLocal]);
+  const userActive = useSelector((state) => state.userLog);
+
   const handleSignIn = async () => {
     try {
       const user = await handleGoogleSignIn();
@@ -115,6 +129,18 @@ function App() {
       navigate("/login");
     }
   };
+  // console.log('currentUserLocal_: ', currentUserLocal.email)
+
+  // useEffect(() => {
+  //   if(currentUserLocal){
+  //     dispatch(getUserSystemLog(currentUserLocal.email))
+  //   }
+
+  //   }, []);
+
+  // console.log('userActive: ', userActive)
+  console.log("rol de user: ", userActive.roleId);
+
   return (
     <>
       <I18nextProvider i18n={i18next}>
@@ -145,7 +171,6 @@ function App() {
             <Route exact path="/categoria" element={<ShowCategory />} />
             <Route exact path="/contact" element={<ContactUs />} />
             <Route exact path="/changepass" element={<ChangePassword />} />
-            <Route exact path="/dashboard" element={<Panel />} />
             <Route exact path="/favorites" element={<Favorites />} />
             <Route
               exact
@@ -185,11 +210,17 @@ function App() {
             <Route exact path="/usuario" element={<CreateUser />} />
             <Route exact path="/thankyoupage" element={<ThankYouPage />} />
             {/* <Route exact path="/chat/" element={<Chat />} /> */}
-            <Route path="/dashboard" element={<Panel />} />
 
-            {(currentUser || currentUserLocal) && (
-              <Route path="/settings" element={<Configuration />} />
-            )}
+            {/* <Route path="/settings" element={<Configuration />} /> */}
+            {/* Protege la ruta del dashboard */}
+            <Route
+              path="/dashboard"
+              element={userActive?.roleId === 1 && <Panel />}
+            />
+
+            {/* {(currentUser || currentUserLocal) && (
+            <Route path="/settings" element={<Configuration />} />
+          )} */}
           </Routes>
           <ToastContainer
             position="top-center"

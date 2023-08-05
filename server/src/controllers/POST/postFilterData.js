@@ -20,7 +20,7 @@ async function postFilterData(req, res) {
     }
 
     if (category) filter.categoryId = category;
-    if (brand) filter.brand = brand;
+    if (brand) filter.brand = { [Op.iLike]: `%${brand}%` };
     if (condition) filter.condition = condition;
 
     const filterData = await Product.findAll({

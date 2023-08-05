@@ -36,6 +36,9 @@ import {
   FILTER_NAME,
   GET_USER_EMAIL,
   GET_ROLE,
+  GET_USER_SYSTEM_LOG,
+  SHOW_PRODUCTS_INACTIVE,
+  ACTIVE_PRODUCT,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -62,9 +65,24 @@ export const showProducts = (page) => {
     throw new Error(error.message);
   }
 };
-
-export const getProductName = (name) => {
-  return { type: GET_PRODUCT_NAME, payload: name };
+export const showProductsInactive = () => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(`${ENDPOINT}productinactive`);
+      return dispatch({ type: SHOW_PRODUCTS_INACTIVE, payload: data });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+export const activeProduct = (productId) => async (dispatch) => {
+  console.log("productId: ", productId);
+  try {
+    const response = await axios.put(`${ENDPOINT}productactive/${productId}`);
+    console.log("Respuesta del backend:", response.data);
+  } catch (error) {
+    console.error("Error al activar el producto:", error);
+  }
 };
 
 export const getProductDetail = (id) => {
@@ -130,6 +148,7 @@ export const getUsers = () => {
     throw new Error(error.message);
   }
 };
+
 export const deleteUsers = (userId) => async (dispatch) => {
   try {
     await axios.delete(`${ENDPOINT}user/${userId}`);
@@ -140,6 +159,7 @@ export const deleteUsers = (userId) => async (dispatch) => {
   }
 };
 export const editUser = (userId, changeUser) => {
+  console.log("aqui va el change desde actions: ", changeUser);
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}user/${userId}`, changeUser);
@@ -178,6 +198,22 @@ export const getUserEmail = (email) => {
         .then((response) => {
           // console.log('email desde actions: ',response.data);
           dispatch({ type: GET_USER_EMAIL, payload: response.data });
+          resolve();
+        })
+        .catch((error) => {
+          throw new Error("Error fetching user details.");
+        });
+    });
+  };
+};
+export const getUserSystemLog = (email) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${ENDPOINT}userlog/${encodeURIComponent(email)}`)
+        .then((response) => {
+          // console.log('email desde actions: ',response.data);
+          dispatch({ type: GET_USER_SYSTEM_LOG, payload: response.data });
           resolve();
         })
         .catch((error) => {
@@ -314,7 +350,7 @@ export const getRole = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${ENDPOINT}role`);
-      const roleData = response.data; 
+      const roleData = response.data;
       return dispatch({ type: GET_ROLE, payload: roleData });
     } catch (error) {
       return error.message;
@@ -477,28 +513,62 @@ export const removeFav = (id) => {
 
 //Filter
 
-export const priceHigherLower = () => {
-  return async (dispatch) => {
-    return dispatch({
-      type: PRICE_HIGHER_LOWER,
-    });
-  };
+export const priceHigherLower = (page) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(
+        `${ENDPOINT}product/highest-price?page=${page}`
+      );
+      return dispatch({
+        type: PRICE_HIGHER_LOWER,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
-export const priceLowerHigher = () => {
-  return async (dispatch) => {
-    return dispatch({
-      type: PRICE_LOWER_HIGHER,
-    });
-  };
+export const priceLowerHigher = (page) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(
+        `${ENDPOINT}product/lowest-price?page=${page}`
+      );
+      return dispatch({
+        type: PRICE_LOWER_HIGHER,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
-export const filterNameAsc = () => {
-  return async (dispatch) => {
-    return dispatch({
-      type: FILTER_NAME,
-    });
-  };
+export const filterNameAsc = (page) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(`${ENDPOINT}product/name?page=${page}`);
+      return dispatch({
+        type: FILTER_NAME,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 export const filterData = (filters, page) => {
@@ -532,4 +602,26 @@ export const checkEmailAndRegister = (userData) => {
       console.error("Error checking email:", error);
     }
   };
+};
+
+export const getProductsByName = (page, name) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(
+        `${ENDPOINT}product?page=${page}&name=${name}`
+      );
+
+      console.log(data.data);
+      return dispatch({
+        type: GET_PRODUCT_NAME,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };

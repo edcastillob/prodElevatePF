@@ -31,6 +31,8 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
     navigate("/cart");
   };
 
+  const userActive = useSelector((state) => state.userLog);
+
   const handleFavorite = (event) => {
     if (isFav) {
       setIsFav(false);
@@ -69,9 +71,7 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
 
   const productWithUser = {
     ...product,
-    user: currentUser
-      ? currentUser.email
-      : "fae675fe-350a-4795-a844-574b5aa4f604",
+    user: currentUser ? currentUser.email : null,
   };
 
   return (
@@ -86,19 +86,23 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
         </div>
       </Link>
       <div className={styles.description}>
-        {isFav ? (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3 style={{ color: "#000924" }}>
-              <ion-icon name="heart"></ion-icon>
-            </h3>
-          </button>
-        ) : (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3>
-              <ion-icon name="heart-empty"></ion-icon>
-            </h3>
-          </button>
-        )}
+        {userActive.isActive === true ? (
+          <div>
+            {isFav ? (
+              <button className={styles.favButton} onClick={handleFavorite}>
+                <h3 style={{ color: "#000924" }}>
+                  <ion-icon name="heart"></ion-icon>
+                </h3>
+              </button>
+            ) : (
+              <button className={styles.favButton} onClick={handleFavorite}>
+                <h3>
+                  <ion-icon name="heart-empty"></ion-icon>
+                </h3>
+              </button>
+            )}
+          </div>
+        ) : null}
         <NavLink
           title="Detail Product"
           to={`/productid/${id}`}

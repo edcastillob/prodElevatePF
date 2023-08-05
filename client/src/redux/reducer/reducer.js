@@ -35,6 +35,8 @@ import {
   FILTER_NAME,
   GET_USER_EMAIL,
   GET_ROLE,
+  GET_USER_SYSTEM_LOG,
+  SHOW_PRODUCTS_INACTIVE,
 } from "../actions/types";
 
 const initialState = {
@@ -49,6 +51,7 @@ const initialState = {
   currentPage: 1,
   totalPages: 1,
   products: [],
+  productsInactive: [],
   productsFiltered: [],
   productDetail: [],
   category: [],
@@ -57,6 +60,7 @@ const initialState = {
   role: [],
   users: [],
   userMail: [],
+  userLog: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -70,16 +74,19 @@ function reducer(state = initialState, actions) {
         productsFiltered: [],
         //productDetail: [...actions.payload.data],
       };
-
-    case GET_PRODUCT_NAME:
-      const filterProd = [...state.products];
-      const searchNotCsensitive = actions.payload.toLowerCase();
-      const filteredProducts = filterProd.filter((prod) =>
-        prod.name.toLowerCase().includes(searchNotCsensitive)
-      );
+    case SHOW_PRODUCTS_INACTIVE:
       return {
         ...state,
-        productsFiltered: filteredProducts,
+        productsInactive: actions.payload,
+      };
+
+    case GET_PRODUCT_NAME:
+      return {
+        ...state,
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
 
     case GET_PRODUCT_DETAIL:
@@ -288,13 +295,19 @@ function reducer(state = initialState, actions) {
     case PRICE_HIGHER_LOWER:
       return {
         ...state,
-        products: [...state.products.sort((a, b) => b.salePrice - a.salePrice)],
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
 
     case PRICE_LOWER_HIGHER:
       return {
         ...state,
-        products: [...state.products.sort((a, b) => a.salePrice - b.salePrice)],
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
 
     // Filter Name
@@ -302,9 +315,10 @@ function reducer(state = initialState, actions) {
     case FILTER_NAME:
       return {
         ...state,
-        products: [
-          ...state.products.sort((a, b) => a.name.localeCompare(b.name)),
-        ],
+        productsFiltered: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        products: [],
       };
 
     case DELETE_PRODUCT:
@@ -372,13 +386,18 @@ function reducer(state = initialState, actions) {
         productsFiltered: actions.payload.data,
         currentPage: actions.payload.currentPage,
         totalPages: actions.payload.totalPages,
+        products: [],
       };
-      case GET_ROLE:
-        return {
-          ...state,
-          role: actions.payload,
-        };
-
+    case GET_ROLE:
+      return {
+        ...state,
+        role: actions.payload,
+      };
+    case GET_USER_SYSTEM_LOG:
+      return {
+        ...state,
+        userLog: actions.payload,
+      };
     default:
       return state;
   }

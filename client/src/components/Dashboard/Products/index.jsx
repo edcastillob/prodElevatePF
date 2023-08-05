@@ -4,20 +4,31 @@ import { useState } from "react"; // Importa useState
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteProduct, showProducts } from "../../../redux/actions/actions";
-import { Modal, Button } from 'react-bootstrap';
-
+import {
+  deleteProduct,
+  showProducts,
+  showProductsInactive,
+  activeProduct,
+} from "../../../redux/actions/actions";
+// import { Modal, Button } from 'react-bootstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import swal from "sweetalert";
+import yes from "../../../assets/yes.png";
 
 const Products = ({ toggleActive }) => {
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(showProducts());
+    dispatch(showProductsInactive());
   }, []);
 
   const products = useSelector((state) => state.products);
+  const productsInactive = useSelector((state) => state.productsInactive);
   const [searchProducts, setSearchProducts] = useState("");
 
   if (!products || products.length === 0) return <div>Loading...</div>;
@@ -32,17 +43,40 @@ const Products = ({ toggleActive }) => {
   );
 
   const handleDeleteProduct = (productId) => {
-    setProductIdToDelete(productId); 
-    setShowConfirmation(true); 
+    setProductIdToDelete(productId);
+    setShowConfirmation(true);
   };
 
   const handleConfirmDelete = () => {
-    dispatch(deleteProduct(productIdToDelete)); 
-    setProductIdToDelete(null); 
-    setShowConfirmation(false); 
+    dispatch(deleteProduct(productIdToDelete));
+    setProductIdToDelete(null);
+    setShowConfirmation(false);
+  };
+  // const activateProduct = async (event, productId) => {
+  //   event.preventDefault();
+  //   dispatch(activeProduct(productId));
+  //   toggle();
+  // };
+  const activateProduct = (event, productId) => {
+    event.preventDefault();
+    swal({
+      title: "Active product",
+      text: "are you sure to activate this product?",
+      icon: "warning",
+      buttons: ["no", "yes"],
+    }).then((res) => {
+      if (res) {
+        dispatch(activeProduct(productId));
+        toggle();
+        swal({
+          text: "the product has been activated successfully!",
+          icon: "success",
+        });
+      }
+    });
   };
 
-
+  // console.log(productsInactive);
   return (
     <div>
       {/* TOPBAR */}
@@ -51,11 +85,10 @@ const Products = ({ toggleActive }) => {
           <MdMenu />
         </div>
       </div>
-
       <div className={styles.customers}>
         <div className={styles.wrapper}>
           <div className={styles.customersHeader}>
-            <h2 style={{fontFamily:'Poppins'}}>Products</h2>
+            <h2 style={{ fontFamily: "Poppins" }}>Products</h2>
           </div>
           {/* input search */}
           <div className={styles.search}>
@@ -66,9 +99,19 @@ const Products = ({ toggleActive }) => {
                 value={searchProducts}
                 onChange={(event) => setSearchProducts(event.target.value)}
               />
-                <MdSearch size="2em" className={styles.icon} />
+              <MdSearch size="2em" className={styles.icon} />
             </label>
           </div>
+          <br />
+          <Button
+            onClick={toggle}
+            style={{
+              color: "#FFFFFF",
+              backgroundColor: "#000924",
+            }}
+          >
+            inactive products
+          </Button>
 
           {/* table products */}
           <div className={styles.productContainer}>
@@ -101,25 +144,24 @@ const Products = ({ toggleActive }) => {
                           <ion-icon name="create"></ion-icon>
                         </button>
                       </Link>
-                      <button
+                      {/* <button
                         className={styles.delete}
                         onClick={() => handleDeleteProduct(product.id)}
                       >
                         <ion-icon name="trash"></ion-icon>
-                      </button>
+                      </button> */}
                     </td>
                   </tr>
                 ))}
-                
               </tbody>
             </table>
-          {/* {filteredProducts?.map((product) => (
+            {/* {filteredProducts?.map((product) => (
               
           ))} */}
           </div>
         </div>
       </div>
-      <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)} centered>
+      {/* <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title> <h4 style={{fontFamily:'Poppins'}}>Confirmation</h4>
            </Modal.Title>
@@ -135,7 +177,59 @@ const Products = ({ toggleActive }) => {
             Delete
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
+      <div>
+        <Modal isOpen={modal} toggle={toggle}>
+          <ModalHeader toggle={toggle}>Inactive product</ModalHeader>
+          <ModalBody>
+            {/* table products */}
+            <div className={styles.productContainer} style={{ width: "100%" }}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Active</th>
+                    <th>Name</th>
+                    <th>Product</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {productsInactive?.map((product) => (
+                    <tr key={product.id}>
+                      <td>
+                        <button
+                          onClick={(event) =>
+                            activateProduct(event, product.id)
+                          }
+                          style={{
+                            background: "none",
+                            backgroundColor: "none",
+                            border: "none",
+                            padding: 0,
+                          }}
+                        >
+                          <img
+                            src={yes}
+                            alt="Imagen Clickeable"
+                            style={{ width: "32px", height: "32px" }}
+                          />
+                        </button>
+                      </td>
+                      <td colSpan={2}>{product.name}</td>
+                      <td>
+                        <img
+                          src={product.images}
+                          alt={product.name}
+                          className={styles.img}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </ModalBody>
+        </Modal>
+      </div>
     </div>
   );
 };
