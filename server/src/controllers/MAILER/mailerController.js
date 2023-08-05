@@ -1,3 +1,4 @@
+const { User, Role } = require("../../db");
 const { Sequelize } = require('sequelize');
 const { conn: sequelize  } = require("../../db");
 // const { sequelize } = require('../../models/User.js'); 
@@ -6,8 +7,40 @@ const UserModel = sequelize.models.User;
 const nodemailer = require('nodemailer');
 const Mailgen = require('mailgen');
 
-/**  Notificacion de stock minimo  **/
+
+
+
+  
+   
+
+   
+ 
+  
+ 
+
+
+
+/**  Notificacion de Creacion de producto  **/
 const sendMailer = async (product) => {
+
+  const usersAdmin = await User.findAll({ 
+    where: { roleId: 1 },
+    include: [{
+      model: Role, 
+      attributes: ['id']
+    }]
+  });
+
+  if (!usersAdmin || usersAdmin.length === 0) {
+    return res.status(404).json({ message: "No se encontraron usuarios con roleId 1" });
+  }
+
+  const emails = usersAdmin.map((user) => user.email);
+
+  console.log(emails)
+
+
+
   try {
     //  const { email } = req.params;
     //  console.log('desde nodemailer: ', email)
@@ -61,7 +94,7 @@ const sendMailer = async (product) => {
     
    const message = {
       from: "prodelevatepf@gmail.com", 
-      to: 'luisnaveda10@gmail.com', 
+      to: emails, 
       subject: "Registro de nuevo producto", 
       html: mail
     };
@@ -76,6 +109,25 @@ const sendMailer = async (product) => {
 
 /**  Notificacion de nuevo usuario  **/
 const sendMailNewUser = async (user) => {
+
+
+  const usersAdmin = await User.findAll({ 
+    where: { roleId: 1 },
+    include: [{
+      model: Role, 
+      attributes: ['id']
+    }]
+  });
+
+  if (!usersAdmin || usersAdmin.length === 0) {
+    return res.status(404).json({ message: "No se encontraron usuarios con roleId 1" });
+  }
+
+  const emails = usersAdmin.map((user) => user.email);
+
+  console.log(emails)
+
+
   try {
     const transporter = nodemailer.createTransport({
       // port: 465 - true, 567 - false
@@ -113,11 +165,12 @@ const sendMailNewUser = async (user) => {
     }
 
     const mail = MailGenerator.generate(response);
+    const emailRecipients = [user.email, ...emails];
 
     const message = {
       from: process.env.EMAIL,
       to: user.email, 
-      cc: 'luisnaveda10@gmail.com', 
+      cc: emailRecipients.join(','), 
       subject: "ProdElevate | Registro de usuario", 
       html: mail
     }
