@@ -20,9 +20,9 @@ const postFavorite = async (req, res) => {
       stock,
       isActive,
     });
-
     await favorite.addUser(searchUser.id);
 
+    console.log(searchUser)
     const allFav = await Favorite.findAll();
     return res.status(201).json(allFav);
   } catch (error) {

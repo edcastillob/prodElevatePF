@@ -478,7 +478,6 @@ export const clearCart = () => {
     dispatch({
       type: CLEAR_CART,
     });
-    toast.error(`The cart is clear`);
 
     return {
       type: CLEAR_CART,
