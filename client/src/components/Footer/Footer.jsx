@@ -13,10 +13,10 @@ export const Footer = ({ currentLanguage }) => {
             <p>© {new Date().getFullYear()}{t("footer.all-rights-reserved", { lng: currentLanguage})}</p>
         </div>
         <div className={styles.divRight}>
-            <div className={styles.info}><Link to='/about' style={{textDecoration: "none"}}><p><Info /> About Us</p></Link></div>
-            <div className={styles.info}><Link to='/privacy_policy' style={{textDecoration: "none"}}><p><Policy /> Privacy Policy</p></Link></div>
-            <div className={styles.info}><Link to='/terms_&_conditions' style={{textDecoration: "none"}}><p><Gavel /> Terms & Conditions</p></Link></div>
-            <div className={styles.info}><Link to='/contact' style={{textDecoration: "none"}}><p><ContactMail /> Contact Us</p></Link></div>
+            <div className={styles.info}><Link to='/about' style={{textDecoration: "none"}}><p><Info />{t("footer.about-us", { lng: currentLanguage })}</p></Link></div>
+            <div className={styles.info}><Link to='/privacy_policy' style={{textDecoration: "none"}}><p><Policy />{t("footer.privacy-policy", {lng: currentLanguage})}</p></Link></div>
+            <div className={styles.info}><Link to='/terms_&_conditions' style={{textDecoration: "none"}}><p><Gavel />{t("footer.terms-and-conditions", {lng: currentLanguage})}</p></Link></div>
+            <div className={styles.info}><Link to='/contact' style={{textDecoration: "none"}}><p><ContactMail />{t("footer.contact-us", {lng: currentLanguage})}</p></Link></div>
         </div>
     </footer>
   );

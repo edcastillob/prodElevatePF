@@ -46,7 +46,7 @@ import {
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   ACTIVE_PRODUCT,
-  FILTER_REVIEWS
+  FILTER_REVIEWS,
   POST_VERIFY_USER,
 } from "./types";
 import axios from "axios";
