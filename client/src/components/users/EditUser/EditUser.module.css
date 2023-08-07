@@ -13,14 +13,27 @@
   border: 1px solid #cacaca;
   box-shadow: 0 2px 0 #acaaaa;
   width: 40%;
-  display: flex;
   border-radius: 10px;
-  padding: 2rem 0;
+  padding: 2rem;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: start;
+  /* justify-content: center; */
 }
 
+.divTitle{
+  /* border: 1px solid black; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.divBtn{
+  /* border: 1px solid black; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
   
   /* @media screen and (max-width: 400px) {
