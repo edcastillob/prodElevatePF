@@ -156,6 +156,7 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         user: actions.payload,
+        favorites: [],
       };
 
     //Cart
@@ -398,6 +399,7 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         userLog: actions.payload,
+        favorites: [],
       };
     case POST_VERIFY_USER:
       return {
