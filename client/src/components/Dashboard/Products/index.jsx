@@ -76,7 +76,8 @@ const Products = ({ toggleActive }) => {
     });
   };
 
-  // console.log(productsInactive);
+  console.log('productsInactive: ', productsInactive);
+  console.log('products: ', products);
   return (
     <div>
       {/* TOPBAR */}
@@ -235,3 +236,4 @@ const Products = ({ toggleActive }) => {
 };
 
 export default Products;
+
