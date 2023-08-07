@@ -65,6 +65,9 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
 
 
 
+          <Link to="/login" className={styles.signUp}>
+            <p>{t("landing.login", { lng: currentLanguage })}</p>
+          </Link>
           <Link to="/usuario" className={styles.signUp}>
             <p>{t("landing.sign-up", { lng: currentLanguage })}</p>
           </Link>
