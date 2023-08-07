@@ -9,8 +9,10 @@ import { Product } from "../Product/createProduct/Product";
 import logo from "../../assets/logo_2.png";
 import { MdMenu } from "react-icons/md";
 import { Role } from "../users/role/Role";
+import { useTranslation } from 'react-i18next';
 
-export const Configuration = ({ toggleActive }) => {
+export const Configuration = ({ toggleActive, currentLanguage }) => {
+  const { t } = useTranslation('global');
   // Dropdown states
   const [isProviderDropdownOpen, setIsProviderDropdownOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
@@ -123,7 +125,7 @@ export const Configuration = ({ toggleActive }) => {
               <span style={{ fontSize: "2.4rem", marginRight: "0.5rem" }}>
                 <ion-icon name="basket"></ion-icon>
               </span>
-              Create Product
+              {t("settings.create-product", { lng: currentLanguage })}
             </div>
           </div>
 
@@ -136,7 +138,7 @@ export const Configuration = ({ toggleActive }) => {
               <span style={{ fontSize: "2.4rem", marginRight: "0.5rem" }}>
                 <ion-icon name="contacts"></ion-icon>
               </span>
-              Create Provider
+              {t("settings.create-provider", { lng: currentLanguage })}
             </div>
           </div>
 
@@ -149,7 +151,7 @@ export const Configuration = ({ toggleActive }) => {
               <span style={{ fontSize: "2.4rem", marginRight: "0.5rem" }}>
                 <ion-icon name="apps"></ion-icon>
               </span>
-              Create Category
+              {t("settings.create-category", { lng: currentLanguage })}
             </div>
           </div>
 
@@ -162,7 +164,7 @@ export const Configuration = ({ toggleActive }) => {
               <span style={{ fontSize: "2.4rem", marginRight: "0.5rem" }}>
                 <ion-icon name="contact"></ion-icon>
               </span>
-              Create Role
+              {t("settings.create-role", { lng: currentLanguage })}
             </div>
           </div>
           {/* USER */}
@@ -194,16 +196,16 @@ export const Configuration = ({ toggleActive }) => {
           {componentSelected ? (
             <>
               {/* PRODUCT COMPONENTS */}
-              {selectedProductComponent === "Create Product" && <Product />}
+              {selectedProductComponent === "Create Product" && <Product currentLanguage={currentLanguage} />}
 
               {/* PROVIDER COMPONENTS */}
-              {selectedProviderComponent === "Create Provider" && <Provider />}
+              {selectedProviderComponent === "Create Provider" && <Provider currentLanguage={currentLanguage} />}
 
               {/* CATEGORY COMPONENTS */}
-              {selectedCategoryComponent === "Create Category" && <Category />}
+              {selectedCategoryComponent === "Create Category" && <Category currentLanguage={currentLanguage} />}
 
               {/* ROLE COMPONENTS */}
-              {selectedRoleComponent === "Create Role" && <Role />}
+              {selectedRoleComponent === "Create Role" && <Role currentLanguage={currentLanguage} />}
 
               {/* USER COMPONENTS */}
               {/* {selectedUserComponent === "Create User" && <CreateUser />} */}
@@ -225,7 +227,7 @@ export const Configuration = ({ toggleActive }) => {
                   fontWeight: "700",
                 }}
               >
-                ONLINE SALES AND ADMINISTRATION SYSTEM
+                {t("settings.prodelevate", { lng: currentLanguage })}
               </h3>
             </div>
           )}

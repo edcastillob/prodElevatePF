@@ -5,8 +5,10 @@ import styles from "./Provider.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import validateForm from "./validation";
+import { useTranslation } from 'react-i18next';
 
-export const Provider = () => {
+export const Provider = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const [provider, setProvider] = useState({
     name: "",
@@ -33,7 +35,7 @@ export const Provider = () => {
 
    
       dispatch(addProvider(provider));
-      toast.success("¡Provider created successfully!");
+      toast.success(t("provider.successfully", { lng: currentLanguage }));
       setProvider({
         name: "",
         email: "",
@@ -49,7 +51,7 @@ export const Provider = () => {
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
-          New Provider
+        {t("provider.new-provider", { lng: currentLanguage })}
         </h4>
         {/* Nombre de proveedor */}
 
@@ -57,7 +59,7 @@ export const Provider = () => {
           className="form-control mb-3 w-75"
           type="text"
           name="name"
-          placeholder="Fullname"
+          placeholder={t("provider.fullname", { lng: currentLanguage })}
           value={provider.name}
           onChange={handleChange}
         />
@@ -70,7 +72,7 @@ export const Provider = () => {
           className="form-control mb-3 w-75"
           type="text"
           name="identification"
-          placeholder="DNI/RIF/Document ID"
+          placeholder={t("provider.document", { lng: currentLanguage })}
           value={provider.identification}
           onChange={handleChange}
         />
@@ -96,7 +98,7 @@ export const Provider = () => {
           className="form-control mb-3 w-75"
           type="textarea"
           name="country"
-          placeholder="Country"
+          placeholder={t("provider.country", { lng: currentLanguage })}
           value={provider.country}
           onChange={handleChange}
         />
@@ -109,7 +111,7 @@ export const Provider = () => {
           className="form-control mb-3 w-75"
           type="textarea"
           name="address"
-          placeholder="Address"
+          placeholder={t("provider.address", { lng: currentLanguage })}
           value={provider.address}
           onChange={handleChange}
         />
@@ -122,7 +124,7 @@ export const Provider = () => {
             className="form-control mb-3 w-75"
             type="text"
             name="numPhone"
-            placeholder="Phone N°"
+            placeholder={t("provider.phone", { lng: currentLanguage })}
             value={provider.numPhone}
             onChange={handleChange}
           />
@@ -140,7 +142,7 @@ export const Provider = () => {
           /> */}
         <br />
 
-        <button className={styles.create}>Create</button>
+        <button className={styles.create}>{t("provider.create", { lng: currentLanguage })}</button>
       </form>
     </div>
   );

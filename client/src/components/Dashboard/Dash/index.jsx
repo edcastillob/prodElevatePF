@@ -11,8 +11,10 @@ import { getUsers, showProducts } from "../../../redux/actions/actions";
 
 import BarChart from "../Charts/BarModel";
 import PieChart from "../Charts/PieModel";
+import { useTranslation } from 'react-i18next';
 
-const Panel = ({ toggleActive }) => {
+const Panel = ({ toggleActive, currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   
   /** Show Users */ 
@@ -54,7 +56,7 @@ const Panel = ({ toggleActive }) => {
         <div className={styles.card}>
           <div>
             <div className={styles.numbers}>{products.length}</div>
-            <div className={styles.cardName}>Products</div>
+            <div className={styles.cardName}>{t("dashboard.products", { lng: currentLanguage })}</div>
           </div>
           <div className={styles.iconBx}>
             <AiOutlineShoppingCart />
@@ -64,7 +66,7 @@ const Panel = ({ toggleActive }) => {
         <div className={styles.card}>
           <div>
             <div className={styles.numbers}>{users.length}</div>
-            <div className={styles.cardName}>Users</div>
+            <div className={styles.cardName}>{t("dashboard.users", { lng: currentLanguage })}</div>
           </div>
           <div className={styles.iconBx}>
             <BsPeople />
@@ -74,7 +76,7 @@ const Panel = ({ toggleActive }) => {
         <div className={styles.card}>
           <div>
             <div className={styles.numbers}>20</div>
-            <div className={styles.cardName}>Reviews</div>
+            <div className={styles.cardName}>{t("dashboard.reviews", { lng: currentLanguage })}</div>
           </div>
           <div className={styles.iconBx}>
             <AiOutlineComment />
@@ -85,12 +87,12 @@ const Panel = ({ toggleActive }) => {
       {/* Add Charts */}
       <div className={styles.graphBox}>
         <div className={styles.box}>
-          <h2>Products By Condition</h2>
-          <BarChart/>
+          <h2>{t("dashboard.by-condition", { lng: currentLanguage })}</h2>
+          <BarChart currentLanguage={currentLanguage} />
         </div>
         <div className={styles.box}>
-          <span>Most selled products</span>
-          <PieChart/>
+          <span>{t("dashboard.most-selled-products", { lng: currentLanguage })}</span>
+          <PieChart currentLanguage={currentLanguage}/>
         </div>
       </div>
 
@@ -98,7 +100,7 @@ const Panel = ({ toggleActive }) => {
         {/* products list */}
         <div className={styles.recentOrders}>
           <div className={styles.cardHeader}>
-            <h2>Products by Sale Price</h2>
+            <h2>{t("dashboard.by-price", { lng: currentLanguage })}</h2>
             {/* <a href="#" className={styles.btn}>
               View All
             </a> */}
@@ -106,9 +108,9 @@ const Panel = ({ toggleActive }) => {
           <table>
             <thead>
               <tr>
-                <td>NAME</td>
-                <td>PRICE</td>
-                <td>CONDITION</td>
+                <td>{t("dashboard.name", { lng: currentLanguage })}</td>
+                <td>{t("dashboard.price", { lng: currentLanguage })}</td>
+                <td>{t("dashboard.condition", { lng: currentLanguage })}</td>
                 <td>REF.</td>
                 </tr>
             </thead>
@@ -132,7 +134,7 @@ const Panel = ({ toggleActive }) => {
         {/* Users Table */}
         <div className={styles.recentCustomers}>
           <div className={styles.cardHeader}>
-            <h2>Recent Users</h2>
+            <h2>{t("dashboard.recent-users", { lng: currentLanguage })}</h2>
           </div>
           {
             sortedUsers.map(user => (
