@@ -16,8 +16,7 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
   const { id, name, images, salePrice, brand, condition, categoryId } = product;
   const selectedCategory = useSelector((state) => state.category);
   const category =
-    selectedCategory.find((cat) => cat.id === categoryId)?.name ||
-    "Unknown Category";
+    selectedCategory.find((cat) => cat.id === categoryId)?.name || "";
 
   useEffect(() => {
     dispatch(getCategory());
@@ -73,6 +72,8 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
     ...product,
     user: currentUser ? currentUser.email : null,
   };
+
+  console.log(productWithUser);
 
   return (
     <div className={styles.cardContainer}>
