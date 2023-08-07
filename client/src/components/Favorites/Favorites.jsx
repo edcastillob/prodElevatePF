@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { CardProduct } from "../Product/cardProduct/cardProduct";
+import { useTranslation } from 'react-i18next';
 
-const Favorites = () => {
+const Favorites = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const [currentUser, setCurrentUser] = useState(null);
 
   const favorites = useSelector((state) => state.favorites);
@@ -25,10 +27,10 @@ const Favorites = () => {
 
   return (
     <div className={styles.favoriteContainer}>
-      <h2>Favorites</h2>
+      <h2 style={{fontFamily:'Poppins'}}>{t("favorites.favorites", { lng: currentLanguage })}</h2>
       {favorites.length === 0 ? (
         <div className={styles.cartEmpty}>
-          <p>You have no added favorites</p>
+          <p>{t("favorites.no-favorites", { lng: currentLanguage })}</p>
           <div className={styles.startShoping}>
             <Link to="/home">
               <svg
@@ -44,14 +46,14 @@ const Favorites = () => {
                   d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                 />
               </svg>
-              <span>Add Favorites</span>
+              <span>{t("favorites.add", { lng: currentLanguage })}</span>
             </Link>
           </div>
         </div>
       ) : (
         <div className={styles.cards}>
           {favorites?.map((favorite) => (
-            <CardProduct key={favorite.id} product={favorite} />
+            <CardProduct key={favorite.id} product={favorite} currentLanguage={currentLanguage} />
           ))}
         </div>
       )}

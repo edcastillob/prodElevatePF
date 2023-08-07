@@ -257,6 +257,11 @@
         "name": "Nombre Completo:",
         "fullname": "Nombre Completo",
         "update": "Actualizar"
+    },
+    "favorites":{
+        "favorites": "Favoritos",
+        "no-favorites": "Aún no has agregado favoritos",
+        "add": "Agregar Favoritos"
     }
 }
 

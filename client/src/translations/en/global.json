@@ -257,5 +257,10 @@
         "name": "Fullname:",
         "fullname": "Fullname",
         "update": "Update"
+    },
+    "favorites":{
+        "favorites": "Favorites",
+        "no-favorites": "You have no added favorites",
+        "add": "Add Favorites"
     }
 }
