@@ -109,7 +109,7 @@ h3 {
 }
 
 @media (max-width: 476px) {
-  .oderFilters {
+  .orderFilters {
     flex-direction: column;
   }
   .titleFilter {
@@ -125,9 +125,9 @@ h3 {
 
 .create{
   border: 1px solid #cacaca;
-  width: 3%;
+  width: 30px;
   height: auto;
-  padding: 0.5rem;
+  padding-top: 0.4rem;
   border-radius: 10px;
   font-family: 'Poppins';
   background-color: #000924;

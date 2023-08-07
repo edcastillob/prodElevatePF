@@ -187,7 +187,103 @@
     width: 22px;
   }
 
+  @media (max-width: 1110px) {
+    .title {
+      font-size: calc(1.3rem + .2vw)
+    }
+    .subtitle {
+      font-size: 1.275rem;
+    }
+  }
   
+  @media (max-width: 960px) {
+    .divContent h3 {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+    .divContent h4 {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+  }
+
+  @media (max-width: 796px) {
+    .social {
+      width: 160px;
+    }
+  }
+
+  @media (max-width: 735px) {
+    .create {
+      width: 140px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .form h4 {
+      font-size: 1.275rem;
+    }
+    .field input {
+      font-size: 13px;
+    }
+    .field select {
+      font-size: 13px;
+    }
+    .uploadImg input {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 609px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .divLeft {
+      width: 100%;
+    }
+    .divContent img {
+      margin-left: 35%;
+    }
+    .divImg {
+      height: 100%;
+      margin-bottom: 10px;
+    }
+    .divRight {
+      width: 100%;
+    }
+    .form {
+      margin-top: 1.5rem;
+      padding: 0;
+    }
+    .form h4 {
+      font-size: calc(1.275rem + .3vw);
+    }
+    .field input {
+      font-size: 16px;
+      width: 100%;
+    }
+    .field select {
+      font-size: 1rem;
+    }
+    .uploadImg input {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 429px) {
+    .field input {
+      width: 200px;
+    }
+    .field select {
+      width: 200px;
+    }
+    .uploadImg input {
+      width: 200px;
+    }
+  }
+
   @media screen and (max-width: 400px) {
     .form {
       padding: 20px 10px;
