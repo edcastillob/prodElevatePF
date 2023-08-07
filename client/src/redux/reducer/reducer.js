@@ -319,12 +319,13 @@ function reducer(state = initialState, actions) {
         category: updatedCateg,
       };
     case DELETE_PROVIDER:
-      const updateProv = state.provider.filter(
-        (cat) => cat.id !== actions.payload
-      );
+      // const updateProv = state.provider.filter(
+      //   (cat) => cat.id !== actions.payload
+      // );
+      // console.log(updateProv,'update')
       return {
         ...state,
-        provider: updateProv,
+        provider: actions.payload,
       };
     case GET_ALL_USERS:
       return {

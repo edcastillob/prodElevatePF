@@ -5,8 +5,8 @@ import { BsPeople } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
 import { BiCategory } from "react-icons/bi";
 import { MdOutlineReviews } from "react-icons/md";
-import { TbTruckDelivery, TbReportMoney } from "react-icons/tb";
-import { AiOutlineSetting, AiOutlineShoppingCart } from "react-icons/ai";
+import { TbTruckDelivery } from "react-icons/tb";
+import { AiOutlineSetting, AiOutlineShoppingCart, AiOutlineDashboard } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Customers from "./Customers";
@@ -68,7 +68,7 @@ const Panel = () => {
             <li>
               <a href="#" onClick={() => setView("panel")}>
                 <span className={styles.icon}>
-                  <VscHome size="1.6em" />
+                  <AiOutlineDashboard size="1.6em" />
                 </span>
                 <span className={styles.titles}>Dashboard</span>
               </a>
@@ -147,6 +147,14 @@ const Panel = () => {
               </a>
             </li>
           </ul>
+          
+
+          <a href="/home" className={styles.back}>
+            <span className={styles.icon}>
+              <VscHome size="1.6em" />
+            </span>
+            <span className={styles.titles}>Back to Home</span>
+          </a>
         </div>
         <div className={`${styles.main} ${isActive ? styles.active : ""}`}>
           {renderView()}

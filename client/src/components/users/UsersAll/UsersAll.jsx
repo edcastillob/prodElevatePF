@@ -81,6 +81,12 @@ export const UsersAll = ({ toggleActive }) => {
             <table className={styles.table}>
               <thead>
                 <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      name="ch1"
+                    />
+                  </th>
                   <th>User</th>
                   <th>Name</th>
                   <th>Email</th>
@@ -90,6 +96,12 @@ export const UsersAll = ({ toggleActive }) => {
               <tbody>
                 {filteredUsers?.map((user) => (
                   <tr key={user.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name={user.id}
+                      />
+                    </td>
                     <td>
                       <div className={styles.divImg}>
                         <img

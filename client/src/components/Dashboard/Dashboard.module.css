@@ -553,3 +553,19 @@
 .tableUsers{
   width: 90%;
 }
+
+.back {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 4rem;
+  text-decoration: none;
+  padding: 15px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  font-family: 'Poppins';
+}

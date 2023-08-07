@@ -252,8 +252,9 @@ export const addProvider = (provider) => {
 };
 export const deleteProvider = (providerId) => async (dispatch) => {
   try {
-    await axios.delete(`${ENDPOINT}provider/${providerId}`);
-    dispatch({ type: DELETE_PROVIDER, payload: providerId });
+    const foo = await axios.delete(`${ENDPOINT}provider/${providerId}`);
+    dispatch({ type: DELETE_PROVIDER, payload: foo.data });
+    console.log(foo, 'actons')
   } catch (error) {
     console.error("Error deleting provider:", error);
     return error.message;

@@ -89,7 +89,6 @@ const Panel = ({ toggleActive }) => {
           <BarChart/>
         </div>
         <div className={styles.box}>
-          <span>Most selled products</span>
           <PieChart/>
         </div>
       </div>
@@ -132,7 +131,7 @@ const Panel = ({ toggleActive }) => {
         {/* Users Table */}
         <div className={styles.recentCustomers}>
           <div className={styles.cardHeader}>
-            <h2>Recent Users</h2>
+            <h2>Last Users Register</h2>
           </div>
           {
             sortedUsers.map(user => (

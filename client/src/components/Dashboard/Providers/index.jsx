@@ -1,7 +1,6 @@
 import styles from "../Dashboard.module.css";
 import { MdMenu, MdSearch } from "react-icons/md";
-import { useState } from "react"; // Importa useState
-import { useEffect } from "react";
+import { useState, useEffect } from "react"; // Importa useState
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProvider, getProvider } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
@@ -14,13 +13,20 @@ const Providers = ({ toggleActive }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [providerIdToDelete, setProviderIdToDelete] = useState(null);
 
+  const provider = useSelector((state) => state.provider);
+  const [searchProvider, setSearchProvider] = useState("");
+
+  const [foo, setFoo] = useState([])
+  const [allSelectCheck, setAllSelectCheck] = useState(false)
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProvider());
   }, []);
 
-  const provider = useSelector((state) => state.provider);
-  const [searchProvider, setSearchProvider] = useState("");
+  useEffect(() => {
+    setFoo(provider)
+  }, [])
 
   if (!provider || provider.length === 0) return <div>Loading...</div>;
   if (!Array.isArray(provider)) return <div>Loading...</div>;
@@ -35,15 +41,48 @@ const Providers = ({ toggleActive }) => {
 
 
   const handleDeleteProvider = (providerId) => {
+    console.log(providerId, 'all ids')
     setProviderIdToDelete(providerId); 
     setShowConfirmation(true); 
   };
 
   const handleConfirmDelete = () => {
-    dispatch(deleteProduct(providerIdToDelete)); 
+    dispatch(deleteProvider(providerIdToDelete)); 
     setProviderIdToDelete(null); 
     setShowConfirmation(false); 
   };
+
+  const defineAllCheckedState = (items) => {
+    const result = items.filter((item) => !item.isChecked )
+    if (result.length >= 1) {
+      return false
+    } else {
+      return true  
+    }
+  }
+  console.log(foo, 'lopl')
+  const handleChangeCheckBox = (event) => {
+    const { name, checked } = event.target;
+      if (name === 'allSelect') {
+        setAllSelectCheck(checked)
+          let tempProviders = foo.map((i) =>{
+            return { ...i, isChecked: checked }
+          });
+          setFoo(tempProviders)
+      } else {
+        let tempProviders = foo.map((provider) => {
+          if (provider.id === parseInt(name)) {
+            return { ...provider, isChecked: checked }
+          } else { 
+            return provider
+          }
+          // provider.id === parseInt(name) ? { ...provider, isChecked: checked } : provider
+        });
+
+        setFoo(tempProviders)
+        setAllSelectCheck(defineAllCheckedState(tempProviders))
+      }
+  }
 
 
   return (
@@ -78,20 +117,38 @@ const Providers = ({ toggleActive }) => {
             <table className={styles.table}>
               <thead>
                 <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      name='allSelect'
+                      checked={allSelectCheck}
+                      onChange={handleChangeCheckBox}
+                    />
+                  </th>
                   <th>Name</th>
                   <th>Document N°</th>
                   <th>Email</th>
                   <th>Phone N°</th>
+                  {/* <th>Country</th> */}
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredProvider?.map((provider) => (
+                {foo?.map((provider) => (
                   <tr key={provider.id} >
+                    <td>
+                      <input
+                        type="checkbox"
+                        name={provider.id}
+                        checked={provider?.isChecked || false}
+                        onChange={handleChangeCheckBox}
+                      />
+                    </td>
                     <td style={{ padding: '1.5rem' }}>{provider.name}</td>
                     <td style={{ padding: '1.5rem' }}>{provider.identification}</td>
                     <td style={{ padding: '1.5rem' }}>{provider.email}</td>
                     <td style={{ padding: '1.5rem' }}>{provider.numPhone}</td>
+                    {/* <td style={{ padding: '1.5rem', textTransform: 'capitalize' }}>{provider.country}</td> */}
                     <td>
                       <Link
                         title="Edit provider"
@@ -103,6 +160,7 @@ const Providers = ({ toggleActive }) => {
                       </Link>
                       <button
                         className={styles.delete}
+                        style={{ display: !provider.isChecked ||  allSelectCheck === true ? 'none' : null }}
                         onClick={() => handleDeleteProvider(provider.id)}
                       >
                         <ion-icon name="trash"></ion-icon>
@@ -110,6 +168,22 @@ const Providers = ({ toggleActive }) => {
                     </td>
                   </tr>
                 ))}
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <button
+                      className={styles.delete}
+                      style={{ display: !allSelectCheck ? 'none' : null }}
+                      onClick={() => handleDeleteProvider(provider.map(prov => prov.id))}
+                    >
+                      Dellete All
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
