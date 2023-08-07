@@ -28,7 +28,7 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
 
   const currentPage = useSelector((state) => state.currentPage);
   const totalPages = useSelector((state) => state.totalPages);
-  const [selectedReviewFilter, setSelectedReviewFilter] = useState("");
+
   useEffect(() => {
     dispatch(showProducts(currentPage));
   }, []);
@@ -106,9 +106,6 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
     console.log("filter Home", currentPage);
     setShowModal(false);
   };
-  const handleReviewFilter = (reviewFilter) => {
-    setSelectedReviewFilter(reviewFilter); // Actualiza el estado del filtro de reseñas
-  };
 
   const [selectedFilters, setSelectedFilters] = useState({
     minPrice: "",
@@ -116,7 +113,6 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
     category: "",
     brand: "",
     condition: "",
-    reviewFilter: "",
   });
 
   const handleNextPage = () => {
@@ -137,7 +133,7 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
       <div className={styles.welcome}>
         <Marquee className={styles.message}>
           Welcome to ProdElevate - The place for the exponential growth of your
-          business
+          business&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </Marquee>
       </div>
       <div className={styles.divSearch}>
@@ -199,7 +195,7 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
         {/* optionProducts */}
 
         {optionProducts.length === 0 ? (
-          <div>
+          <div className={styles.loading}>
             <img src={loading} width={80} height={80} alt="loading" />
             <h3>Upsss</h3>
             <h5>
@@ -221,7 +217,7 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
           </div>
         ) : (
           <div className={styles.cards}>
-            {productsFiltered?.map((product) => (
+            {optionProducts?.map((product) => (
               <CardProduct key={product.id} product={product} currentLanguage={currentLanguage} />
             ))}
           </div>
