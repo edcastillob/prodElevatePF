@@ -50,7 +50,9 @@
         "cancel": "Cancelar",
         "clear": "Confirmar",
         "atention":"Atención!",
-        "yes": "Si"
+        "yes": "Si",
+        "added": "añadido al carrito",
+        "remove-cart": "eliminado del carrito"
     },
     "create-user":{
         "prodelevate": "Sistema de Administración y Ventas Online",
@@ -101,6 +103,158 @@
         "name": "Nombre",
         "highest-price": "Mayor Precio",
         "lowest-price": "Menor Precio"
+    },
+    "dashboard":{
+        "products": "Productos",
+        "users": "Usuarios",
+        "reviews": "Reseñas",
+        "by-condition": "Productos por condición",
+        "most-selled-products": "Productos más vendidos",
+        "by-price": "Productos por precio",
+        "name": "NOMBRE",
+        "price": "PRECIO",
+        "condition": "CONDICIÓN",
+        "recent-users": "Registros recientes",
+        "dashboard": "Panel",
+        "categories": "Categorias",
+        "providers": "Proveedores",
+        "settings": "Ajustes",
+        "admin": "ADMINISTRADOR"
+    },
+    "user-all":{
+        "loading": "Cargando...",
+        "users": "Usuarios",
+        "search": "Buscar usuario",
+        "user": "Usuario",
+        "name": "Nombre",
+        "email": "Email",
+        "actions": "Acciones"
+    },
+    "products":{
+        "active-product": "Activar producto",
+        "are-you-sure": "Estás seguro que quieres activar este producto?",
+        "yes": "Si",
+        "successfully": "El producto ha sido activado satisfactoriamente!",
+        "products": "Productos",
+        "search": "Buscar producto",
+        "product": "Producto",
+        "name": "Nombre",
+        "actions": "Acciones",
+        "inactive": "Productos inactivos",
+        "active": "Activo"
+    },
+    "providers-all":{
+        "providers": "Proveedores",
+        "search": "Buscar proveedor",
+        "name": "Nombre",
+        "document": "N° Documento",
+        "phone": "N° Teléfono",
+        "actions": "Acciones"
+    },
+    "settings":{
+        "create-product": "Crear Producto",
+        "create-provider": "Crear Proveedor",
+        "create-category": "Crear Categoria",
+        "create-role": "Crear Rol",
+        "prodelevate": "SISTEMA DE ADMINISTRACIÓN Y VENTAS ONLINE"
+    },
+    "barchart":{
+        "brand-new": "NUEVO",
+        "used": "USADO",
+        "like-new": "COMO NUEVO",
+        "count-products": "PRODUCTOS CONTADOS (#)",
+        "sales": "VENTAS ($)"
+    },
+    "product":{
+        "successfully": "¡Producto creado exitosamente!",
+        "new-product": "Nuevo Producto",
+        "category": "-- Categoria --",
+        "product-name": "Nombre del producto",
+        "product-brand": "Marca el producto",
+        "select-condition": "Selecciona la condición",
+        "brand-new": "Nuevo",
+        "used": "Usado",
+        "like-new":"Como nuevo",
+        "product-description": "Ingresa la descipción del producto...",
+        "purchase-price": "-- Precio de compra --",
+        "sale-price": "-- Precio de venta --",
+        "min-stock": "-- Stock mínimo --",
+        "select-provider": "-- Selecciona proveedor --",
+        "create": "Crear",
+        "image": "Imágen:"
+    },
+    "provider":{
+        "successfully": "¡Proveedor creado exitosamente!",
+        "new-provider": "Nuevo Proveedor",
+        "fullname": "Nombre completo",
+        "document": "DNI/RIF/Documento",
+        "country": "País",
+        "address": "Dirección",
+        "phone": "N° Teléfono",
+        "create": "Crear"
+    },
+    "edit-provider":{
+        "successfully": "¡Proveedor actualizado exitosamente!",
+        "edit-provider": "Editar Proveedor",
+        "fullname": "Nombre completo",
+        "document": "DNI/RIF/Documento",
+        "country": "País",
+        "address": "Dirección",
+        "phone": "N° Teléfono",
+        "update": "Actualizar"
+    },
+    "category":{
+        "successfully": "¡Categoria creada exitosamente!",
+        "incompleted": "Datos incompletos. Todos los campos deben ser llenados correctamente",
+        "new-category": "Nueva Categoria",
+        "category-name": "Nombre de la categoria",
+        "category-description": "Ingresa la descripción de la categoria...",
+        "create": "Crear"
+    },
+    "edit-category":{
+        "successfully": "¡Categoria actualizada exitosamente!",
+        "incompleted": "Datos incompletos. Todos los campos deben ser llenados correctamente",
+        "edit-category": "Editar Categoria",
+        "category-name": "Nombre de la categoria",
+        "category-description": "Ingresa la descripción de la categoria...",
+        "update": "Actualizar"
+    },
+    "role":{
+        "successfully": "¡Rol creado exitosamente!",
+        "new-role": "Nuevo Rol",
+        "role-name": "Nombre del rol",
+        "role-description": "Ingresa la desripción del rol...",
+        "create": "Crear"
+    },
+    "show-category":{
+        "categories": "Categorias",
+        "search": "Buscar categoria",
+        "name": "Nombre",
+        "description": "Descripción",
+        "actions": "Acciones"
+    },
+    "edit-product":{
+        "successfully": "¡Producto actualizado exitosamente!",
+        "error": "Los datos necesitan ser llenados correctamente",
+        "edit-product": "Editar Producto",
+        "status": "Estado:",
+        "active": "Activo",
+        "inactive": "Inactivo",
+        "category": "-- Categoria --",
+        "product-name": "Nombre del producto",
+        "product-brand": "Marca el producto",
+        "update": "Actualizar"
+    },
+    "edit-user":{
+        "successfully": "¡Usuario actualizado exitosamente!",
+        "edit-user": "Editar Usuario",
+        "status": "Estado:",
+        "active": "Activo",
+        "inactive": "Inactivo",
+        "role": "Rol:",
+        "name": "Nombre Completo:",
+        "fullname": "Nombre Completo",
+        "update": "Actualizar"
     }
 }
 

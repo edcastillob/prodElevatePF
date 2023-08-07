@@ -471,6 +471,7 @@ export const clearCart = () => {
     dispatch({
       type: CLEAR_CART,
     });
+    
 
     return {
       type: CLEAR_CART,
