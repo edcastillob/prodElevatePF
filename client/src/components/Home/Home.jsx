@@ -112,11 +112,15 @@ export const Home = ({ user, userLocal, handleSignIn }) => {
   });
 
   const handleNextPage = () => {
-    if (productsFiltered.length > 0) {
-      dispatch(filterData(selectedFilters, currentPage + 1));
-      console.log(selectedFilters);
-    } else {
-      dispatch(showProducts(currentPage + 1));
+    const nextPage = currentPage + 1;
+
+    if (nextPage <= totalPages) {
+      if (productsFiltered.length > 0) {
+        dispatch(filterData(selectedFilters, nextPage));
+        console.log(selectedFilters);
+      } else {
+        dispatch(showProducts(nextPage));
+      }
     }
   };
 

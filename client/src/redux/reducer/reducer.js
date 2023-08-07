@@ -72,12 +72,19 @@ function reducer(state = initialState, actions) {
         currentPage: actions.payload.currentPage,
         totalPages: actions.payload.totalPages,
         productsFiltered: [],
+
         //productDetail: [...actions.payload.data],
       };
     case SHOW_PRODUCTS_INACTIVE:
       return {
         ...state,
-        productsInactive: actions.payload,
+        productsInactive: actions.payload.data,
+        productDetail: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        productsFiltered: [],
+        products: [],
+        //productDetail: [...actions.payload.data],
       };
 
     case GET_PRODUCT_NAME:

@@ -2,8 +2,18 @@ const { Favorite, User } = require("../../db");
 
 const postFavorite = async (req, res) => {
   //console.log(req.body);
-  const { id, name, description, salePrice, images, stock, isActive, user } =
-    req.body;
+  const {
+    id,
+    name,
+    brand,
+    condition,
+    description,
+    salePrice,
+    images,
+    stock,
+    isActive,
+    user,
+  } = req.body;
   if (!name || !description || !salePrice || !images || !stock || !isActive) {
     return res.status(401).send("Faltan datos");
   }
@@ -14,6 +24,8 @@ const postFavorite = async (req, res) => {
     const favorite = await Favorite.create({
       id,
       name,
+      brand,
+      condition,
       description,
       salePrice,
       images,

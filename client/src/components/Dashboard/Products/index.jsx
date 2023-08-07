@@ -9,11 +9,16 @@ import {
   showProducts,
   showProductsInactive,
   activeProduct,
+  filterNameAsc,
+  filterData,
 } from "../../../redux/actions/actions";
 // import { Modal, Button } from 'react-bootstrap';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import swal from "sweetalert";
 import yes from "../../../assets/yes.png";
+import OrderFilter from "../../Filter/OrderFilter";
+import DashOrderFilter from "../DashFilter/DashOrderFilter";
+import FilterModal from "../../Filter/FilterModal";
 
 const Products = ({ toggleActive }) => {
   const [modal, setModal] = useState(false);
@@ -24,23 +29,49 @@ const Products = ({ toggleActive }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(showProducts());
-    dispatch(showProductsInactive());
+    //dispatch(showProductsInactive());
   }, []);
 
   const products = useSelector((state) => state.products);
+  const productsFiltered = useSelector((state) => state.productsFiltered);
   const productsInactive = useSelector((state) => state.productsInactive);
+  const currentPage = useSelector((state) => state.currentPage);
+  const totalPages = useSelector((state) => state.totalPages);
   const [searchProducts, setSearchProducts] = useState("");
 
-  if (!products || products.length === 0) return <div>Loading...</div>;
-  if (!Array.isArray(products)) return <div>Loading...</div>;
+  const [optionProducts, setOptionProducts] = useState([]);
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    minPrice: "",
+    maxPrice: "",
+    category: "",
+    brand: "",
+    condition: "",
+  });
+
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    setOptionProducts(
+      productsFiltered.length
+        ? productsFiltered
+        : products.length
+        ? products
+        : productsInactive
+    );
+  }, [productsFiltered, products, productsInactive]);
+
+  if (!optionProducts || optionProducts.length === 0)
+    return <div>Loading...</div>;
+  if (!Array.isArray(optionProducts)) return <div>Loading...</div>;
 
   const sortedProducts = products
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  const filteredProducts = sortedProducts.filter((products) =>
-    products.name.toLowerCase().includes(searchProducts.toLowerCase())
-  );
+  // const filteredProducts = sortedProducts.filter((products) =>
+  //   products.name.toLowerCase().includes(searchProducts.toLowerCase())
+  // );
 
   const handleDeleteProduct = (productId) => {
     setProductIdToDelete(productId);
@@ -67,13 +98,53 @@ const Products = ({ toggleActive }) => {
     }).then((res) => {
       if (res) {
         dispatch(activeProduct(productId));
-        toggle();
+
         swal({
           text: "the product has been activated successfully!",
           icon: "success",
         });
       }
     });
+  };
+
+  const handleInactiveProducts = () => {
+    dispatch(showProductsInactive(currentPage));
+  };
+
+  const handleSortName = () => {
+    dispatch(filterNameAsc(currentPage));
+  };
+
+  const handleActiveProducts = () => {
+    dispatch(showProducts(currentPage));
+  };
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleFilter = (filters) => {
+    dispatch(filterData(filters, currentPage));
+    setSelectedFilters(filters);
+    console.log("filter Home", currentPage);
+    setShowModal(false);
+  };
+
+  const handleNextPage = () => {
+    const nextPage = currentPage + 1;
+
+    if (nextPage <= totalPages) {
+      if (productsFiltered.length > 0) {
+        dispatch(filterData(selectedFilters, nextPage));
+        console.log(selectedFilters);
+      } else {
+        dispatch(showProducts(nextPage));
+      }
+    }
   };
 
   // console.log(productsInactive);
@@ -112,6 +183,33 @@ const Products = ({ toggleActive }) => {
           >
             inactive products
           </Button>
+          <div>
+            <DashOrderFilter
+              handleActiveProducts={handleActiveProducts}
+              handleSortName={handleSortName}
+              handleInactiveProducts={handleInactiveProducts}
+            />
+          </div>
+          <div>
+            <button onClick={handleOpenModal} className={styles.titleFilter}>
+              Filter
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="34"
+                fill="currentColor"
+                className="bi bi-funnel"
+                viewBox="0 0 16 16"
+              >
+                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z" />
+              </svg>
+            </button>
+            <FilterModal
+              show={showModal}
+              handleClose={handleCloseModal}
+              handleFilter={handleFilter}
+            />
+          </div>
 
           {/* table products */}
           <div className={styles.productContainer}>
@@ -120,11 +218,12 @@ const Products = ({ toggleActive }) => {
                 <tr>
                   <th>Product</th>
                   <th>Name</th>
+                  <th>State</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredProducts?.map((product) => (
+                {optionProducts?.map((product) => (
                   <tr key={product.id}>
                     <td>
                       <img
@@ -136,14 +235,38 @@ const Products = ({ toggleActive }) => {
                     <td>{product.name}</td>
                     {/* <td>{null}</td> */}
                     <td>
+                      {product.isActive ? <p>Active</p> : <p>Inactive</p>}
+                    </td>
+                    <td>
                       <Link
                         title="Edit product"
                         to={`/productidedit/${product.id}`}
                       >
-                        <button className={styles.edit}>
-                          <ion-icon name="create"></ion-icon>
-                        </button>
+                        {product.isActive ? (
+                          <button className={styles.edit}>
+                            <ion-icon name="create"></ion-icon>
+                          </button>
+                        ) : (
+                          <button
+                            onClick={(event) =>
+                              activateProduct(event, product.id)
+                            }
+                            style={{
+                              background: "none",
+                              backgroundColor: "none",
+                              border: "none",
+                              padding: 0,
+                            }}
+                          >
+                            <img
+                              src={yes}
+                              alt="Imagen Clickeable"
+                              style={{ width: "32px", height: "32px" }}
+                            />
+                          </button>
+                        )}
                       </Link>
+
                       {/* <button
                         className={styles.delete}
                         onClick={() => handleDeleteProduct(product.id)}
@@ -229,6 +352,23 @@ const Products = ({ toggleActive }) => {
             </div>
           </ModalBody>
         </Modal>
+      </div>
+      <div>
+        <div>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => dispatch(showProducts(currentPage - 1))}
+          >
+            Anterior
+          </button>
+          <span>Página {currentPage}</span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
     </div>
   );

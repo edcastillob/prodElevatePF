@@ -65,11 +65,20 @@ export const showProducts = (page) => {
     throw new Error(error.message);
   }
 };
-export const showProductsInactive = () => {
+export const showProductsInactive = (page) => {
   try {
     return async (dispatch) => {
-      const { data } = await axios.get(`${ENDPOINT}productinactive`);
-      return dispatch({ type: SHOW_PRODUCTS_INACTIVE, payload: data });
+      const { data } = await axios.get(
+        `${ENDPOINT}productinactive?page=${page}`
+      );
+      return dispatch({
+        type: SHOW_PRODUCTS_INACTIVE,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
     };
   } catch (error) {
     throw new Error(error.message);
