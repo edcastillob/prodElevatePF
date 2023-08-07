@@ -6,8 +6,11 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import validateForm from './validation';
+import { useTranslation } from 'react-i18next';
 
-export const EditCategory = () => {
+
+export const EditCategory = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -53,11 +56,11 @@ export const EditCategory = () => {
 
     // if (Object.keys(errors).length === 0) {
       dispatch(categoryEdit(id, editCategory));
-      toast.success("¡Updated successfully!"); 
+      toast.success(t("edit-category.successfully", { lng: currentLanguage })); 
       // setErrors({});
       navigate("/dashboard");
     // } else {
-    //   toast.error("Data must be filled Correctly");
+    //   toast.error(t("edit-category.incompleted", { lng: currentLanguage }));
     // }
 
 
@@ -71,7 +74,7 @@ export const EditCategory = () => {
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.formContainer}>
           <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
-            Edit Category
+          {t("edit-category.edit-category", { lng: currentLanguage })}
           </h4>
           {/* <label htmlFor="isActive">active</label>
         <input
@@ -89,7 +92,7 @@ export const EditCategory = () => {
             className="form-control mb-3 w-75"
             type="text"
             name="name"
-            placeholder="Category Name"
+            placeholder={t("edit-category.category-name", { lng: currentLanguage })}
             value={editCategory.name}
             onChange={handleChange}
           />
@@ -107,7 +110,7 @@ export const EditCategory = () => {
               height: "30%",
               fontFamily: "Poppins",
             }}
-            placeholder="Enter Category Description..."
+            placeholder={t("edit-category.category-description", { lng: currentLanguage })}
             value={editCategory.description}
             onChange={handleChange}
           />
@@ -115,7 +118,7 @@ export const EditCategory = () => {
         <p className={styles.error}>{errors.description}</p>
       )} */}
         <br />
-          <button className={styles.create}>Update Category</button>
+          <button className={styles.create}>{t("edit-category.update", { lng: currentLanguage })}</button>
         </form>
       </div>
     </div>

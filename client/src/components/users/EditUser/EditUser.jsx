@@ -9,8 +9,10 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { editUser, getRole, getUserId } from "../../../redux/actions/actions";
+import { useTranslation } from 'react-i18next';
 
-export const EditUser = () => {
+export const EditUser = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -87,7 +89,7 @@ export const EditUser = () => {
     event.preventDefault();
     // console.log("Datos enviados: ", changeUser);
     dispatch(editUser(id, changeUser));
-    toast.success("¡Edit user successfully!");
+    toast.success(t("edit-user.successfully", { lng: currentLanguage }));
     navigate("/dashboard");
   };
 
@@ -111,25 +113,26 @@ export const EditUser = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-        <h4 style={{ fontFamily: "Poppins" }}>Edit User</h4>
-
+        <div className={styles.divTitle}>
+        <h4 style={{ fontFamily: "Poppins" }}>{t("edit-user.edit-user", { lng: currentLanguage })}</h4>
+        </div>
         {/* _____________Status________________ */}
-        <label>Status:</label>
+        <label>{t("edit-user.status", { lng: currentLanguage })}</label>
         <select
-          className="form-control mb-3 w-75"
+          className="form-control mb-3 w-100"
           name="isActive"
           value={changeUser.isActive}
           defaultValue={users.isActive}
           onChange={handleChange}
         >
-          <option value="t">Activo</option>
-          <option value="f">Inactivo</option>
+          <option value="t">{t("edit-user.active", { lng: currentLanguage })}</option>
+          <option value="f">{t("edit-user.inactive", { lng: currentLanguage })}</option>
         </select>
 
         {/* _____________Role________________ */}
-        <label>Role:</label>
+        <label>{t("edit-user.role", { lng: currentLanguage })}</label>
         <select
-          className="form-control mb-3 w-75"
+          className="form-control mb-3 w-100"
           name="roleId"
           value={changeUser.roleId} // Usamos directamente el roleId del estado local
           onChange={handleChange}
@@ -143,12 +146,12 @@ export const EditUser = () => {
         </select>
 
         {/* _____________NAME________________ */}
-        <label>Name:</label>
+        <label>{t("edit-user.name", { lng: currentLanguage })}</label>
         <input
           type="text"
           name="name"
-          placeholder="Fullname"
-          className={`form-control mb-3 w-75 ${errors.name && "is-invalid"}`}
+          placeholder={t("edit-user.fullname", { lng: currentLanguage })}
+          className={`form-control mb-3 w-100 ${errors.name && "is-invalid"}`}
           onChange={handleChange}
           value={changeUser.name}
         />
@@ -160,7 +163,7 @@ export const EditUser = () => {
           type="email"
           name="email"
           placeholder="Email"
-          className={`form-control mb-3 w-75 ${errors.email && "is-invalid"}`}
+          className={`form-control mb-3 w-100 ${errors.email && "is-invalid"}`}
           onChange={handleChange}
           value={changeUser.email}
         />
@@ -278,10 +281,11 @@ export const EditUser = () => {
 
         <br />
         <br /> */}
-
+        <div className={styles.divBtn}>
         <button type="submit" className={styles.create}>
-          Update User
+          {t("edit-user.update", { lng: currentLanguage })}
         </button>
+        </div>
       </form>
     </div>
   );
