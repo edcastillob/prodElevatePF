@@ -33,6 +33,7 @@ export const EDIT_USERS = "EDIT_USERS";
 export const GET_USER_ID = "GET_USER_ID";
 export const GET_USER_EMAIL = "GET_USER_EMAIL";
 export const GET_USER_SYSTEM_LOG = "GET_USER_SYSTEM_LOG";
+export const POST_VERIFY_USER = "POST_VERIFY_USER";
 
 //Cart
 export const ADD_TO_CART = "ADD_TO_CART";

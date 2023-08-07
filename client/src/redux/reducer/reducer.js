@@ -37,6 +37,7 @@ import {
   GET_ROLE,
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
+  POST_VERIFY_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -397,6 +398,11 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         userLog: actions.payload,
+      };
+    case POST_VERIFY_USER:
+      return {
+        ...state,
+        users: actions.payload,
       };
     default:
       return state;

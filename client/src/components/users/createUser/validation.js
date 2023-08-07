@@ -1,9 +1,12 @@
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function validate(userData){
     let errors = {};
     let RegExpression = /^[a-zA-Z\s]*$/;  
     let emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let identificationRegEx = /^\d{7,10}$/;
-    let passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+    let passwordRegEx = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$/;
+    // let passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
     
     
     //NAME 
@@ -43,7 +46,8 @@ export default function validate(userData){
 
     //PASSWORD
     if(!passwordRegEx.test(userData.password)){
-        errors.password = "Requires uppercase, lowercase, special symbol, and number"
+        errors.password = "Requires uppercase, lowercase and number"
+        
     }
 
     // CONFIRM PASSWORD

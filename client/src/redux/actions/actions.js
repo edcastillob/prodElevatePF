@@ -39,6 +39,7 @@ import {
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   ACTIVE_PRODUCT,
+  POST_VERIFY_USER,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -625,3 +626,25 @@ export const getProductsByName = (page, name) => {
     throw new Error(error.message);
   }
 };
+
+
+export const verifyUser = (userData) => {
+  console.log("dates: ", userData)
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${ENDPOINT}verifyUser`, userData);
+
+      dispatch({
+        type: POST_VERIFY_USER,
+        payload: {
+          data: response.data,
+        },
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+};
+
+
+      
