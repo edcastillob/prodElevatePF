@@ -50,6 +50,7 @@ import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
 import global_es from "./translations/es/global.json";
 import global_en from "./translations/en/global.json";
+import { Forgot } from "./components/users/login/Forgot";
 
 i18next.init({
   interpolation: { escapeValue: false },
@@ -185,6 +186,7 @@ function App({ user, userLocal }) {
           <Route exact path="/useredit/:id" element={<EditUser />} />
           <Route exact path="/usuario" element={<CreateUser currentLanguage={currentLanguage}/>} />
           <Route exact path="/thankyoupage" element={<ThankYouPage />} />
+          <Route exact path="/forgot" element={<Forgot currentLanguage={currentLanguage} />} />
           {/* <Route exact path="/chat/" element={<Chat />} /> */}
           
            {/* <Route path="/settings" element={<Configuration />} /> */}
