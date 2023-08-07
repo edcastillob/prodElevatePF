@@ -23,7 +23,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
 }
 
 .logo img{
@@ -107,6 +106,7 @@
     width: 100%;
     height: 60vh;
     display: flex;
+    overflow-y: auto;
 }
 
 .divLeft{
@@ -171,16 +171,19 @@
 
 .reel{
     /* border: 1px solid red; */
-    width: 50%;
-    height: 100%;
+    width: 49.5%;
+    height: 90%;
     padding: 1rem;
+    margin-top: 17.5px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    background-color: #cacaca56; /*rgba(21, 255, 21, 0.3);*/ /*#002eb946*/
+    border-radius: 50px;
 }
 
 .titleReel{
-    color: #cacaca;
+    color: black;
     font-family: 'Poppins';
 }
 
@@ -220,47 +223,216 @@
       opacity: 1;
     }
 }
+/*En Pruebas*/
+@media (width: 1280px) {
+  .reel {
+    margin-top: 30px;
+  }
+}
 
-/*En pruebas*/
 @media (max-width: 1200px) {
     .content {
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
     }
   
     .divLeft {
-      width: 80%;
+      width: 50%;
     }
   
     .reel {
-      width: 80%;
+      width: 50%;
     }
   }
 
-  @media (max-width: 768px) {
-    .content {
-      height: 80vh;
+  @media (max-width: 1025px) {
+    .title {
+      font-size: calc(1.375rem + 0.5vw);
     }
+
+    .item p {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 969px) {
+    .item p {
+      font-size: 13px;
+    }
+
+    .reel {
+      height: 80%;
+    }
+  }
+
+  @media (max-width: 850px) {
+    .button {
+      width: 65%;
+    }
+  }
+
+  @media (max-width: 801px) {
+    .options {
+      width: 35%;
+    }
+    .navbar {
+      justify-content:space-around;
+    }
+
+  }
+
+  @media (max-width: 768px) {
   
     .divLeft {
-      width: 90%;
+      width: 50%;
     }
   
     .title {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
   
     .item img {
       width: 10%;
     }
   
-    .button {
-      width: 40%;
+    .reel {
+      width: 50%;
+      margin-top: 1.5rem;
+    }
+  }
+
+  @media (max-width: 670px) {
+    .item p {
+      font-size: 12px;
+    }
+
+    .logo {
+      width: 20%;
+    }
+
+    .reel {
+      height: 70%;
+    }
+  }
+
+  @media (max-width: 653px) {
+    .item p {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+    .divLeft {
+      width: 90%;
+      margin-top: 220px;
     }
   
     .reel {
       width: 90%;
-      margin-top: 1.5rem;
+      padding-bottom: 50px;
+    }
+
+    .item p {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 465px) {
+    .options {
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 387px) {
+    .item p {
+      font-size: 11.5px;
+    }
+  }
+
+  @media (max-width: 330px) {
+    .options {
+      width: 60%;
+    }
+  }
+
+  @media (max-width: 290px) {
+    .item p {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 280px) {
+    .item p {
+      font-size: 10px;
+    }
+  }
+
+  @media (height: 1368px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .divLeft {
+      width: 80%;
+    }
+
+    .reel {
+      width: 80%;
+      height: 85%;
+    }
+
+    .item p {
+      font-size: 20px;
+    }
+  }
+
+  @media (height: 1180px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .divLeft {
+      width: 80%;
+    }
+
+    .reel {
+      width: 80%;
+      height: 85%;
+      padding-bottom: 50px;
+    }
+
+    .item p {
+      font-size: 20px;
+    }
+  }
+
+  @media (height: 1024px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .divLeft {
+      width: 80%;
+      margin-top: 140px;
+    }
+
+    .reel {
+      width: 80%;
+      height: 85%;
+      padding-bottom: 60px;
+    }
+
+    .item p {
+      font-size: 20px;
     }
   }

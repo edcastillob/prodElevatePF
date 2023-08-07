@@ -128,10 +128,10 @@ const Cart = ({ currentLanguage }) => {
               <div className={styles.cartItem} key={cartItem.id}>
                 <div className={styles.cartProduct}>
                   <img src={cartItem.images} alt={cartItem.name} />
-                  <div>
+                  <div className={styles.descriptionItem}>
                     <h4>{cartItem.name}</h4>
                     <div
-                      className={styles.descriptionItem}
+                      
                       dangerouslySetInnerHTML={{ __html: cartItem.description }}
                     ></div>
                     <button onClick={() => handledRemoveFromCart(cartItem)}>
