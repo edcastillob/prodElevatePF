@@ -8,8 +8,10 @@ import google from "../../../assets/google.png";
 import validateForm from "./validation";
 import { toast } from "react-toastify";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useTranslation } from "react-i18next";
 
-export const Login = () => {
+export const Login = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
@@ -67,7 +69,7 @@ export const Login = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-        <h4 style={{ fontFamily: "Poppins", fontWeight: "600" }}>Login</h4>
+        <h4 style={{ fontFamily: "Poppins", fontWeight: "600" }}>{t("login.login", { lng: currentLanguage })}</h4>
 
         <div className="mb-2 p-2">
           <input
@@ -88,21 +90,21 @@ export const Login = () => {
             className="form-control"
             id="password"
             name="password"
-            placeholder="Password"
+            placeholder={t("login.password", { lng: currentLanguage })}
             value={userData.password}
             onChange={handleInputChange}
           />
         </div>
 
-        <Link to="/forgot">Forgot your password</Link>
+        <Link style={{textDecoration:'none'}} to="/forgot">{t("login.forgot", { lng: currentLanguage })}</Link>
 
         <div className={styles.options}>
           <button type="submit" className={styles.submitButton}>
-            Login
+          {t("login.login", { lng: currentLanguage })}
           </button>
 
           <span className={styles.link}>
-            Don't have an account? <Link to="/usuario">Sign Up</Link>
+          {t("login.not-account", { lng: currentLanguage })} <Link style={{textDecoration:'none'}} to="/usuario">{t("login.sign-up", { lng: currentLanguage })}</Link>
           </span>
         </div>
         <div className={styles.google}>
