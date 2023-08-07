@@ -22,7 +22,7 @@ async function postProduct(req, res) {
       ? (purchasePrice = parseFloat(purchasePrice))
       : (purchasePrice = 0);
     salePrice ? (salePrice = parseFloat(salePrice)) : (salePrice = 0);
-    stock ? (stock = parseInt(stock)) : (stock = 0);
+    stock ? (stock = parseInt(stock)) : (stock = 1);
     minimumStock ? (minimumStock = parseInt(minimumStock)) : (minimumStock = 0);
 
     let minStock = minimumStock;

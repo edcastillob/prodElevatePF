@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+  min-height: 80vh;
 }
 
 Link {
@@ -35,6 +36,14 @@ Link {
   align-items: center;
 }
 
+.search {
+  border-radius: 10px;
+  border: 1px solid #cacaca;
+  box-shadow: 0 0 2px #aeadad;
+  padding: 10px;
+  font-family: "Poppins";
+}
+
 .cards {
   /* border: 1px solid black; */
   width: 100%;
@@ -52,7 +61,7 @@ h3 {
   text-decoration: none;
 }
 
-.oderFilters {
+.orderFilters {
   width: 100%;
   display: flex;
   align-items: center;
@@ -69,7 +78,34 @@ h3 {
 }
 
 .btnSearch {
+  position: relative;
+  right: 32px;
   background: none;
   border: none;
   border-radius: 0 5px 5px 0;
+}
+
+.pages {
+  /* border: 1px solid black; */
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.create {
+  border: 1px solid #cacaca;
+  width: 3%;
+  height: auto;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-family: "Poppins";
+  background-color: #000924;
+  color: #cacaca;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(0.97);
+    color: #fff;
+    transition: 0.3s;
+  }
 }

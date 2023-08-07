@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addRole } from '../../../redux/actions/actions'; 
+import styles from './Role.module.css';
+import { useTranslation } from 'react-i18next';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export const Role = () => {
+export const Role = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
     const [role, setRole] = useState({        
         name: '',
@@ -21,7 +26,7 @@ export const Role = () => {
       event.preventDefault();  
       console.log(role) 
       dispatch(addRole(role));
-      alert("Exito");
+      toast.success(t("role.successfully", { lng: currentLanguage }));
       setRole({
         name: '',
         description:'',
@@ -30,36 +35,45 @@ export const Role = () => {
   return (
     <div>
         
-        <div className='container-sm'>
+        <div className={styles.container}>
 
-        <h1>role</h1>      
         <hr />
-        <form onSubmit={ handleSubmit }>
+        <form onSubmit={ handleSubmit } className={styles.formContainer}>
+        <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
+        {t("role.new-role", { lng: currentLanguage })}
+        </h4>      
         
         {/* Nombre de rol */}
-        <label htmlFor="name">Name: </label>        
+              
         <input
-        className='form-control'
+        className="form-control mb-3 w-75"
         type="text"
         name="name"
-        placeholder=" enter name "
+        placeholder={t("role.role-name", { lng: currentLanguage })}
         value={role.name}
         onChange={handleChange}
       />
 
        {/* Descripcion de rol */}
-       <label htmlFor="name">Description: </label>             
-        <input
-        className='form-control'
-        type="textarea"
-        name="description"
-        value={role.description}
-        onChange={handleChange}
-      />
+                  
+      <textarea
+            type="textarea"
+            name="description"
+            className="form-control"
+            style={{
+              resize: "none",
+              width: "75%",
+              height: "30%",
+              fontFamily: "Poppins",
+            }}
+            placeholder={t("role.role-description", { lng: currentLanguage })}
+            value={role.description}
+            onChange={handleChange}
+          />
         <br />
 
         
-        <button className='btn btn-primary'>submit</button> 
+        <button className={styles.create}>{t("role.create", { lng: currentLanguage })}</button> 
         </form>
     </div>
     </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 import { Bar } from "react-chartjs-2";
 import {
@@ -32,7 +33,8 @@ const options = {
   },
 }
 
-const BarChart = () => {
+const BarChart = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
     /** Show Prodcuts */ 
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products);
@@ -62,13 +64,13 @@ const BarChart = () => {
   // Data Products By Condition //
   const dataSales = {
     labels: [
-      "BRAND NEW",
-      "USED",
-      "LIKE NEW",
+      t("barchart.brand-new", { lng: currentLanguage }),
+      t("barchart.used", { lng: currentLanguage }),
+      t("barchart.like-new", { lng: currentLanguage }),
     ],
     datasets: [
       {
-        label: "COUNT PRODUCTS (#)",
+        label: t("barchart.count-products", { lng: currentLanguage }),
         data: [ condition.BrandNew.length, condition.Used.length, condition.LikeNew.length],
         borderWidth: 1,
         backgroundColor: "rgb(75, 192, 141)",

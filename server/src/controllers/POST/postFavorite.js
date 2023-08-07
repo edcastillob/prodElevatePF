@@ -32,6 +32,7 @@ const postFavorite = async (req, res) => {
       stock,
       isActive,
     });
+    await favorite.addUser(searchUser.id);
 
     await favorite.addUser(searchUser.id);
 

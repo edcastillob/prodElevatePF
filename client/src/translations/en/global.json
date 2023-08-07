@@ -27,6 +27,232 @@
         "forgot": "Forgot your password",
         "not-account": "Don't have an account?",
         "sign-up": "Sign Up"
-
+    },
+    "cardProduct":{
+        "brand": "Brand",
+        "condition": "Condition",
+        "price": "Price",
+        "add-to-cart": "Add to Cart"
+    },
+    "shopping-cart":{
+        "shopping": "Shoping Cart",
+        "is-empty": "Your Cart is empty",
+        "start-shopping": "Start Shoping",
+        "continue-shopping": "Continue Shoping",
+        "product": "Product",
+        "price": "Price",
+        "quantity": "Quantity",
+        "clear-cart": "Clear Cart",
+        "taxes": "Taxes and Shiping",
+        "confirm": "Confirm",
+        "are-you-sure": "Are you sure you want to clear the cart?",
+        "cancel": "Cancel",
+        "clear": "Clear",
+        "atention":"Atention!",
+        "yes": "Yes",
+        "added": "add to cart",
+        "remove-cart": "remove from de cart"
+    },
+    "create-user":{
+        "prodelevate": "Online Sales And Administration System",
+        "the-best-tool": "The best tool to see your business grow",
+        "create-user": "Create User",
+        "select-country": "Select a country",
+        "create": "Create",
+        "already-have-account": "Already have an account?",
+        "login": "Login",
+        "continue-with-google": "Continue with Google",
+        "fullname": "Fullname",
+        "document": "Document ID",
+        "phone": "Phone N°",
+        "address": "Address",
+        "password": "Create password",
+        "confirm-password": "Confirm password",
+        "toast-success": "¡User created successfully!",
+        "toast-error": "Fill in the fields correctly before sending the information"
+    },
+    "home":{
+        "search": "Search product",
+        "filter": "Filter",
+        "product-not-found": "The product you are trying to search or filter does not exist",
+        "please-try": "Please try another search or click on all products to get all products",
+        "next": "Next",
+        "previous": "Previous",
+        "page": "Page"
+    },
+    "filter-modal":{
+        "brand-new": "Brand New",
+        "used": "Used",
+        "like-new": "Like New",
+        "filters": "Filters",
+        "min-price": "Min Price",
+        "min-price-ph": "Min price",
+        "max-price": "Max Price",
+        "max-price-ph": "Max price",
+        "category": "Category",
+        "select-option": "Select option",
+        "brand": "Brand",
+        "condition": "Condition",
+        "close": "Close",
+        "filter": "Filter"
+    },
+    "order-filter":{
+        "order": "Order",
+        "all-products": "All Products",
+        "name": "Name",
+        "highest-price": "Highest Price",
+        "lowest-price": "Lowest Price"
+    },
+    "dashboard":{
+        "products": "Products",
+        "users": "Users",
+        "reviews": "Reviews",
+        "by-condition": "Products By Condition",
+        "most-selled-products": "Most selled products",
+        "by-price": "Products by Sale Price",
+        "name": "NAME",
+        "price": "PRICE",
+        "condition": "CONDITION",
+        "recent-users": "Recent Users registered",
+        "dashboard": "Dashboard",
+        "categories": "Categories",
+        "providers": "Providers",
+        "settings": "Settings",
+        "admin": "ADMIN"
+    },
+    "user-all":{
+        "loading": "Loading...",
+        "users": "Users",
+        "search": "Search user",
+        "user": "User",
+        "name": "Name",
+        "email": "Email",
+        "actions": "Actions"
+    },
+    "products":{
+        "active-product": "Active product",
+        "are-you-sure": "Are you sure to activate this product?",
+        "yes": "Yes",
+        "successfully": "The product has been activated successfully!",
+        "products": "Products",
+        "search": "Search product",
+        "product": "Product",
+        "name": "Name",
+        "actions": "Actions",
+        "inactive": "Inactive products",
+        "active": "Active"
+    },
+    "providers-all":{
+        "providers": "Providers",
+        "search": "Search provider",
+        "name": "Name",
+        "document": "Document N°",
+        "phone": "Phone N°",
+        "actions": "Actions"
+    },
+    "settings":{
+        "create-product": "Create Product",
+        "create-provider": "Create Provider",
+        "create-category": "Create Category",
+        "create-role": "Create Role",
+        "prodelevate": "ONLINE SALES AND ADMINISTRATION SYSTEM"
+    },
+    "barchart":{
+        "brand-new": "BRAND NEW",
+        "used": "USED",
+        "like-new": "LIKE NEW",
+        "count-products": "COUNT PRODUCTS (#)",
+        "sales": "SALES ($)"
+    },
+    "product":{
+        "successfully": "¡Product created successfully!",
+        "new-product": "New Product",
+        "category": "-- Category --",
+        "product-name": "Product Name",
+        "product-brand": "Product brand",
+        "select-condition": "Select condition",
+        "brand-new": "Brand New",
+        "used": "Used",
+        "like-new":"Like New",
+        "product-description": "Enter product description...",
+        "purchase-price": "-- Purchase price --",
+        "sale-price": "-- Sale price --",
+        "min-stock": "-- Minimum stock --",
+        "select-provider": "-- Select provider --",
+        "create": "Create",
+        "image": "Image:"
+    },
+    "provider":{
+        "successfully": "¡Provider created successfully!",
+        "new-provider": "New Provider",
+        "fullname": "Fullname",
+        "document": "DNI/RIF/Document ID",
+        "country": "Country",
+        "address": "Address",
+        "phone": "Phone N°",
+        "create": "Create"
+    },
+    "edit-provider":{
+        "successfully": "¡Proveedor updated successfully!",
+        "edit-provider": "Edit Provider",
+        "fullname": "Fullname",
+        "document": "DNI/RIF/Document ID",
+        "country": "Country",
+        "address": "Address",
+        "phone": "Phone N°",
+        "update": "Update"
+    },
+    "category":{
+        "successfully": "¡Category created successfully!",
+        "incompleted": "Data is Incompleted. All fields must be filled Correctly",
+        "new-category": "New Category",
+        "category-name": "Category Name",
+        "category-description": "Enter Category Description...",
+        "create": "Create"
+    },
+    "edit-category":{
+        "successfully": "¡Category updated successfully!",
+        "incompleted": "Data is Incompleted. All fields must be filled Correctly",
+        "edit-category": "Edit Category",
+        "category-name": "Category Name",
+        "category-description": "Enter Category Description...",
+        "update": "Update"
+    },
+    "role":{
+        "successfully": "¡Role created successfully!",
+        "new-role": "New Role",
+        "role-name": "Role name",
+        "role-description": "Enter Role Description...",
+        "create": "Create"
+    },
+    "show-category":{
+        "categories": "Categories",
+        "search": "Search category",
+        "name": "Name",
+        "description": "Description",
+        "actions": "Actions"
+    },
+    "edit-product":{
+        "successfully": "¡Product updated successfully!",
+        "error": "Data must be filled correctly",
+        "edit-product": "Edit Product",
+        "status": "Status:",
+        "active": "Active",
+        "inactive": "Inactive",
+        "category": "-- Category --",
+        "product-name": "Product Name",
+        "product-brand": "Product brand",
+        "update": "Update"
+    },
+    "edit-user":{
+        "successfully": "¡Edit user successfully!",
+        "edit-user": "Edit User",
+        "status": "Status:",
+        "active": "Active",
+        "inactive": "Inactive",
+        "role": "Role:",
+        "name": "Fullname:",
+        "fullname": "Fullname",
+        "update": "Update"
     }
 }

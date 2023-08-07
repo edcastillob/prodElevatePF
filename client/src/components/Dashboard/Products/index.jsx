@@ -19,12 +19,14 @@ import yes from "../../../assets/yes.png";
 import OrderFilter from "../../Filter/OrderFilter";
 import DashOrderFilter from "../DashFilter/DashOrderFilter";
 import FilterModal from "../../Filter/FilterModal";
+import { useTranslation } from "react-i18next";
 
-const Products = ({ toggleActive }) => {
+const Products = ({ toggleActive, currentLanguage }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
+  const { t } = useTranslation("global");
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -91,16 +93,16 @@ const Products = ({ toggleActive }) => {
   const activateProduct = (event, productId) => {
     event.preventDefault();
     swal({
-      title: "Active product",
-      text: "are you sure to activate this product?",
+      title: t("products.active-product", { lng: currentLanguage }),
+      text: t("products.are-you-sure", { lng: currentLanguage }),
       icon: "warning",
-      buttons: ["no", "yes"],
+      buttons: ["No", t("products.yes", { lng: currentLanguage })],
     }).then((res) => {
       if (res) {
         dispatch(activeProduct(productId));
 
         swal({
-          text: "the product has been activated successfully!",
+          text: t("products.successfully", { lng: currentLanguage }),
           icon: "success",
         });
       }
@@ -159,14 +161,16 @@ const Products = ({ toggleActive }) => {
       <div className={styles.customers}>
         <div className={styles.wrapper}>
           <div className={styles.customersHeader}>
-            <h2 style={{ fontFamily: "Poppins" }}>Products</h2>
+            <h2 style={{ fontFamily: "Poppins" }}>
+              {t("products.products", { lng: currentLanguage })}
+            </h2>
           </div>
           {/* input search */}
           <div className={styles.search}>
             <label>
               <input
                 type="text"
-                placeholder="Search product"
+                placeholder={t("products.search", { lng: currentLanguage })}
                 value={searchProducts}
                 onChange={(event) => setSearchProducts(event.target.value)}
               />
@@ -174,15 +178,15 @@ const Products = ({ toggleActive }) => {
             </label>
           </div>
           <br />
-          <Button
+          {/* <Button
             onClick={toggle}
             style={{
               color: "#FFFFFF",
               backgroundColor: "#000924",
             }}
           >
-            inactive products
-          </Button>
+            {t("products.inactive", { lng: currentLanguage })}
+          </Button> */}
           <div>
             <DashOrderFilter
               handleActiveProducts={handleActiveProducts}
@@ -216,10 +220,10 @@ const Products = ({ toggleActive }) => {
             <table className={styles.table}>
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Name</th>
-                  <th>State</th>
-                  <th>Actions</th>
+                  <th>{t("products.product", { lng: currentLanguage })}</th>
+                  <th>{t("products.name", { lng: currentLanguage })}</th>
+                  <th>{t("products.State", { lng: currentLanguage })}</th>
+                  <th>{t("products.actions", { lng: currentLanguage })}</th>
                 </tr>
               </thead>
               <tbody>
@@ -303,16 +307,18 @@ const Products = ({ toggleActive }) => {
       </Modal> */}
       <div>
         <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Inactive product</ModalHeader>
+          <ModalHeader toggle={toggle}>
+            {t("products.inactive", { lng: currentLanguage })}
+          </ModalHeader>
           <ModalBody>
             {/* table products */}
             <div className={styles.productContainer} style={{ width: "100%" }}>
               <table className={styles.table}>
                 <thead>
                   <tr>
-                    <th>Active</th>
-                    <th>Name</th>
-                    <th>Product</th>
+                    <th>{t("products.active", { lng: currentLanguage })}</th>
+                    <th>{t("products.name", { lng: currentLanguage })}</th>
+                    <th>{t("products.product", { lng: currentLanguage })}</th>
                   </tr>
                 </thead>
                 <tbody>

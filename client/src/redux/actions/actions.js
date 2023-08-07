@@ -39,6 +39,7 @@ import {
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   ACTIVE_PRODUCT,
+  POST_VERIFY_USER,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -480,7 +481,6 @@ export const clearCart = () => {
     dispatch({
       type: CLEAR_CART,
     });
-    toast.error(`The cart is clear`);
 
     return {
       type: CLEAR_CART,
@@ -633,4 +633,22 @@ export const getProductsByName = (page, name) => {
   } catch (error) {
     throw new Error(error.message);
   }
+};
+
+export const verifyUser = (userData) => {
+  console.log("dates: ", userData);
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${ENDPOINT}verifyUser`, userData);
+
+      dispatch({
+        type: POST_VERIFY_USER,
+        payload: {
+          data: response.data,
+        },
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
 };
