@@ -43,6 +43,7 @@ import {
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   FILTER_REVIEWS,
+  POST_VERIFY_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -164,6 +165,7 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         user: actions.payload,
+        favorites: [],
       };
 
     //Cart
@@ -407,7 +409,13 @@ function reducer(state = initialState, actions) {
           return {
             ...state,
             userLog: actions.payload,
-          };
+            favorites: [],
+      };
+    case POST_VERIFY_USER:
+      return {
+        ...state,
+        users: actions.payload,
+      };
           case GET_ALL_REVIEWS :
             return {
                 ...state,

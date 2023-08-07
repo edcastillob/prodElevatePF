@@ -187,7 +187,7 @@ export const  ChangePassword = () => {
                    {/* _____________country________________ */}
                    <div >
                 <select
-                  className="form-control"
+                  className={`form-control mb-3 w-75 ${styles.input} ${styles.select}`}
                   name="country"
                   onChange={handleCountrySelect}
                   defaultValue={userMail.country}

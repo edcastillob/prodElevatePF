@@ -65,6 +65,9 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
 
 
 
+          <Link to="/login" className={styles.signUp}>
+            <p>{t("landing.login", { lng: currentLanguage })}</p>
+          </Link>
           <Link to="/usuario" className={styles.signUp}>
             <p>{t("landing.sign-up", { lng: currentLanguage })}</p>
           </Link>
@@ -82,14 +85,14 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
             <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="radio-button-on"></ion-icon></span>
 
             <p className={styles.description}>
-              {t("landing.line1", { lng: currentLanguage })}
+              {t("landing.line1", { lng: currentLanguage })}.
             </p>
           </div>
           <div className={styles.item}>
             {/* <img src={check} alt="check" /> */}
             <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="radio-button-on"></ion-icon></span>
             <p className={styles.description}>
-              {t("landing.line2", { lng: currentLanguage })}
+              {t("landing.line2", { lng: currentLanguage })}.
             </p>
           </div>
           <div className={styles.item}>
@@ -97,7 +100,7 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
 
             <span style={{ color: "white", fontSize:'20px' }}><ion-icon name="radio-button-on"></ion-icon></span>
             <p className={styles.description} style={{ marginTop: "1rem" }}>
-              {t("landing.line3", { lng: currentLanguage })}
+              {t("landing.line3", { lng: currentLanguage })}.
             </p>
           </div>
           <Link to="/home" className={styles.button}>

@@ -10,9 +10,12 @@ import "react-quill/dist/quill.snow.css";
 import {  useNavigate,useParams } from "react-router-dom";
 import { editProvider, getProviderId } from "../../../../redux/actions/actions";
 import validateForm from "./validation";
+import { useTranslation } from "react-i18next";
 
 
-export const EditProvider = () => {
+export const EditProvider = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
+
   const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate()
@@ -91,7 +94,7 @@ export const EditProvider = () => {
 
     // if (Object.keys(errors).length === 0) {
       dispatch(editProvider(id, changeProvider));
-      toast.success("¡Edit Provider successfully!");
+      toast.success(t("edit-provider.successfully", { lng: currentLanguage }));
       
       // setChangeProvider({
         //   address: "",
@@ -115,7 +118,7 @@ export const EditProvider = () => {
     <div className={styles.container}>
       
         <form onSubmit={handleSubmit} className={styles.formContainer}>
-          <h4 style={{ fontFamily: "Poppins" }}>Edit Provider</h4>
+          <h4 style={{ fontFamily: "Poppins" }}>{t("edit-provider.edit-provider", { lng: currentLanguage })}</h4>
 
           {/* Nombre de proveedor */}
 
@@ -123,7 +126,7 @@ export const EditProvider = () => {
             className="form-control mb-3 w-75"
             type="text"
             name="name"
-            placeholder="Fullname"
+            placeholder={t("edit-provider.fullname", { lng: currentLanguage })}
             value={changeProvider.name}
             onChange={handleChange}
           />
@@ -136,7 +139,7 @@ export const EditProvider = () => {
             className="form-control mb-3 w-75"
             type="text"
             name="identification"
-            placeholder="DNI/RIF/Document ID"
+            placeholder={t("edit-provider.document", { lng: currentLanguage })}
             value={changeProvider.identification}
             onChange={handleChange}
           />
@@ -162,7 +165,7 @@ export const EditProvider = () => {
             className="form-control mb-3 w-75"
             type="textarea"
             name="address"
-            placeholder="Address"
+            placeholder={t("edit-provider.address", { lng: currentLanguage })}
             value={changeProvider.address}
             onChange={handleChange}
           />
@@ -175,7 +178,7 @@ export const EditProvider = () => {
             className="form-control mb-3 w-75"
             type="text"
             name="numPhone"
-            placeholder="Phone N°"
+            placeholder={t("edit-provider.phone", { lng: currentLanguage })}
             value={changeProvider.numPhone}
             onChange={handleChange}
           />
@@ -187,7 +190,7 @@ export const EditProvider = () => {
             className="form-control mb-3 w-75"
             type="text"
             name="country"
-            placeholder="country"
+            placeholder={t("edit-provider.country", { lng: currentLanguage })}
             value={changeProvider.country}
             onChange={handleChange}
           />
@@ -202,8 +205,8 @@ export const EditProvider = () => {
             value={changeProvider.isActive}
             onChange={handleChange}
           >
-            <option value="t">Activo</option>
-            <option value="f">Inactivo</option>
+            <option value="t">{t("edit-product.active", { lng: currentLanguage })}</option>
+            <option value="f">{t("edit-product.inactive", { lng: currentLanguage })}</option>
           </select>
 {/* {errors.isActive && (
   <p className={styles.error}>{errors.isActive}</p>
@@ -211,7 +214,7 @@ export const EditProvider = () => {
 
           <br />
 
-          <button className={styles.create}>Update Provider</button>
+          <button className={styles.create}>{t("edit-provider.update", { lng: currentLanguage })}</button>
         </form>
       </div>
     

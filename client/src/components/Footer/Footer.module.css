@@ -23,10 +23,9 @@
     gap: 1.5rem;
     display: flex;
     position: relative;
-    right: 50px;
 }
 
-.divRight p{
+.info p{
     color: #fff;
     transition: .3s;
     font-size: 15px;
@@ -50,10 +49,10 @@
   
     .divRight {
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-around;
     }
   
-    .divRight p {
+    .info p {
       margin: 0.5rem;
       font-size: 15px;
     }

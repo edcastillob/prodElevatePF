@@ -47,6 +47,7 @@ import {
   SHOW_PRODUCTS_INACTIVE,
   ACTIVE_PRODUCT,
   FILTER_REVIEWS
+  POST_VERIFY_USER,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -410,6 +411,7 @@ export const logout = () => {
   try {
     return async (dispatch) => {
       localStorage.removeItem("user");
+      localStorage.removeItem("favorites");
       return dispatch({ type: LOGIN, payload: null });
     };
   } catch (error) {
@@ -479,6 +481,7 @@ export const clearCart = () => {
     dispatch({
       type: CLEAR_CART,
     });
+    
 
     return {
       type: CLEAR_CART,
@@ -721,3 +724,25 @@ export const filterReviews = (productId, filters) => {
     }
   };
 };
+
+
+export const verifyUser = (userData) => {
+  console.log("dates: ", userData)
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${ENDPOINT}verifyUser`, userData);
+
+      dispatch({
+        type: POST_VERIFY_USER,
+        payload: {
+          data: response.data,
+        },
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+};
+
+
+      

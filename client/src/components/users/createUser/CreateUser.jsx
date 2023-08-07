@@ -4,7 +4,7 @@ import styles from "./CreateUser.module.css";
 import prueba from "../../../assets/prueba.jpg";
 import logo from "../../../assets/logo_2.png";
 import google from "../../../assets/google.png";
-// import validate from "./validation";
+import validate from "./validation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
@@ -62,12 +62,12 @@ export const CreateUser = ({ currentLanguage }) => {
       ...prevData,
       [name]: value,     
     }));
-    // setErrors(
-    //   validate({
-    //     ...userData,
-    //     [name]: value,
-    //   })
-    // );
+    setErrors(
+      validate({
+        ...userData,
+        [name]: value,
+      })
+    );
   };
 
   const handleSubmit = (event) => {
@@ -124,9 +124,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   className={`form-control ${errors.name && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
-                {errors.name && (
-                  <div className="invalid-feedback">{errors.name}</div>
-                )}
+                {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
               </div>
               {/* _____________EMAIL________________ */}
               <div className={`${styles.field} ${styles["input-field"]}`}>
@@ -137,10 +135,8 @@ export const CreateUser = ({ currentLanguage }) => {
                   className={`form-control ${errors.email && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
-                {errors.email && (
-                  <div className="invalid-feedback">{errors.email}</div>
-                )}
-              </div>
+                {errors.email && (<div className="invalid-feedback">{errors.email}</div>)} 
+                </div>
               {/* _____________ID________________ */}
               <div className={`${styles.field} ${styles["input-field"]}`}>
                 <input
@@ -152,11 +148,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   }`}
                   onChange={handleInputChange}
                 />
-                {errors.identification && (
-                  <div className="invalid-feedback">
-                    {errors.identification}
-                  </div>
-                )}
+                {errors.identification && (<div className="invalid-feedback">{errors.identification}</div>)}
               </div>
               {/* _____________PHONE NUMBER________________ */}
               <div className={`${styles.field} ${styles["input-field"]}`}>
@@ -167,9 +159,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   className={`form-control ${errors.numPhone && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
-                {errors.numPhone && (
-                  <div className="invalid-feedback">{errors.numPhone}</div>
-                )}
+                {errors.numPhone && (<div className="invalid-feedback">{errors.numPhone}</div>)}
               </div>
               {/* _____________ADDRESS________________ */}
               <div className={`${styles.field} ${styles["input-field"]}`}>
@@ -180,11 +170,8 @@ export const CreateUser = ({ currentLanguage }) => {
                   className={`form-control ${errors.address && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
-                {errors.address && (
-                  <div className="invalid-feedback">{errors.address}</div>
-                )}
+                {errors.address && (<div className="invalid-feedback">{errors.address}</div>)}
               </div>
-
               {/* _____________country________________ */}
               <div className={`${styles.field} ${styles["input-field"]}`}>
                 <select
@@ -210,9 +197,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   className={`form-control ${errors.password && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
-                {errors.password && (
-                  <div className="invalid-feedback">{errors.password}</div>
-                )}
+                {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
               </div>
               {/* _____________CONFIRM PASSWORD________________ */}
               <div className={`${styles.field} ${styles["input-field"]} mb-4`}>
@@ -225,11 +210,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   }`}
                   onChange={handleInputChange}
                 />
-                {errors.confirmPassword && (
-                  <div className="invalid-feedback">
-                    {errors.confirmPassword}
-                  </div>
-                )}
+                {errors.confirmPassword && (<div className="invalid-feedback">{errors.confirmPassword}</div>)}
               </div>
               <div className={styles.uploadImg}>
                 <UploadImg
@@ -237,8 +218,8 @@ export const CreateUser = ({ currentLanguage }) => {
                   uploadedImages={userData.images}
                 />
               </div>
-              <br />
-              <div className={`${styles.field} ${styles["button-field"]}`}>
+              {/* <br /> */}
+              <div >
                 <button className={styles.create} type="submit">
                 {t("create-user.create", { lng: currentLanguage })}
                 </button>

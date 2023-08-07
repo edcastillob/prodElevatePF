@@ -50,6 +50,7 @@ import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
 import global_es from "./translations/es/global.json";
 import global_en from "./translations/en/global.json";
+import { Forgot } from "./components/users/login/Forgot";
 
 i18next.init({
   interpolation: { escapeValue: false },
@@ -160,37 +161,38 @@ function App({ user, userLocal }) {
           handleLanguageChange={handleLanguageChange} 
           currentLanguage={currentLanguage}
           />} />
-          <Route exact path="/about" element={<AboutUs />} />
+          <Route exact path="/about" element={<AboutUs currentLanguage={currentLanguage}/>} />
           <Route exact path="/cart" element={<Cart currentLanguage={currentLanguage} />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
-          <Route exact path="/contact" element={<ContactUs />} />
-          <Route exact path="/changepass" element={<ChangePassword />} />
-          <Route exact path="/favorites" element={<Favorites />} />
+          <Route exact path="/contact" element={<ContactUs currentLanguage={currentLanguage}/>} />
+          <Route exact path="/changepass" element={<ChangePassword currentLanguage={currentLanguage}/>} />
+          <Route exact path="/favorites" element={<Favorites currentLanguage={currentLanguage}/>} />
           <Route exact path="/home" element={<Home user={currentUser}
           userLocal={currentUserLocal}
           handleSignIn={handleSignIn}
           currentLanguage={currentLanguage}
           />} />
           <Route exact path="/login" element={<Login currentLanguage={currentLanguage}/>} />
-          <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
-          <Route exact path="/productid/:id" element={<ProductDetail />} />
-          <Route exact path="/productidedit/:id" element={<EditProduct />} />
-          <Route exact path="/producto" element={<Product />} />
+          <Route exact path="/privacy_policy" element={<PrivacyPolicy currentLanguage={currentLanguage}/>} />
+          <Route exact path="/productid/:id" element={<ProductDetail currentLanguage={currentLanguage}/>} />
+          <Route exact path="/productidedit/:id" element={<EditProduct currentLanguage={currentLanguage} />} />
+          <Route exact path="/producto" element={<Product currentLanguage={currentLanguage} />} />
           <Route exact path="/proveedor" element={<ProvidersAll />} />
-          <Route exact path="/proveedoredit/:id" element={<EditProvider />} />
+          <Route exact path="/proveedoredit/:id" element={<EditProvider currentLanguage={currentLanguage}/>} />
           <Route exact path="/rol" element={<Role />} />
-          <Route exact path="/categoryedit/:id" element={<EditCategory />} />
+          <Route exact path="/categoryedit/:id" element={<EditCategory currentLanguage={currentLanguage} />} />
           <Route exact path="/settings_product" element={<SettingsProduct />} />
           <Route exact path="/terms_&_conditions"  element={<TermsConditions />} />
-          <Route exact path="/useredit/:id" element={<EditUser />} />
+          <Route exact path="/useredit/:id" element={<EditUser currentLanguage={currentLanguage}/>} />
           <Route exact path="/usuario" element={<CreateUser currentLanguage={currentLanguage}/>} />
-          <Route exact path="/thankyoupage" element={<ThankYouPage />} />
+          <Route exact path="/thankyoupage" element={<ThankYouPage currentLanguage={currentLanguage}/>} />
+          <Route exact path="/forgot" element={<Forgot currentLanguage={currentLanguage} />} />
           {/* <Route exact path="/chat/" element={<Chat />} /> */}
           
            {/* <Route path="/settings" element={<Configuration />} /> */}
                    {/* Protege la ruta del dashboard */}
-        <Route path="/dashboard" element={ <Panel /> }/>
-        {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel /> }/> */}
+        <Route path="/dashboard" element={ <Panel currentLanguage={currentLanguage}/> }/>
+        {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel currentLanguage={currentLanguage} /> }/> */}
          
           {/* {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />

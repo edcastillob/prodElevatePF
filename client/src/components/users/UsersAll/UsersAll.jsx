@@ -7,16 +7,16 @@ import { deleteUsers, getUsers } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import { BsTabletFill } from "react-icons/bs";
 import { Modal, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 
 
 
 
-
-export const UsersAll = ({ toggleActive }) => {
+export const UsersAll = ({ toggleActive, currentLanguage }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
-
+  const { t } = useTranslation('global');
 
 
   const dispatch = useDispatch();
@@ -27,8 +27,8 @@ export const UsersAll = ({ toggleActive }) => {
   const users = useSelector((state) => state.users);
   const [searchUsers, setSearchUsers] = useState("");
 
-  if (!users || users.length === 0) return <div>Loading...</div>;
-  if (!Array.isArray(users)) return <div>Loading...</div>;
+  if (!users || users.length === 0) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
+  if (!Array.isArray(users)) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
 
   const sortedUsers = users
     .slice()
@@ -61,7 +61,7 @@ export const UsersAll = ({ toggleActive }) => {
       <div className={styles.customers}>
         <div className={styles.wrapper}>
           <div className={styles.customersHeader}>
-            <h2 style={{fontFamily:'Poppins'}}>Users</h2>
+            <h2 style={{fontFamily:'Poppins'}}>{t("user-all.users", { lng: currentLanguage })}</h2>
           </div>
 
           {/* input search */}
@@ -69,7 +69,7 @@ export const UsersAll = ({ toggleActive }) => {
             <label>
               <input
                 type="text"
-                placeholder="Search user"
+                placeholder={t("user-all.search", { lng: currentLanguage })}
                 value={searchUsers}
                 onChange={(event) => setSearchUsers(event.target.value)}
               />
@@ -81,10 +81,10 @@ export const UsersAll = ({ toggleActive }) => {
             <table className={styles.table}>
               <thead>
                 <tr>
-                  <th>User</th>
-                  <th>Name</th>
+                  <th>{t("user-all.user", { lng: currentLanguage })}</th>
+                  <th>{t("user-all.name", { lng: currentLanguage })}</th>
                   <th>Email</th>
-                  <th>Actions</th>
+                  <th>{t("user-all.actions", { lng: currentLanguage })}</th>
                 </tr>
               </thead>
               <tbody>

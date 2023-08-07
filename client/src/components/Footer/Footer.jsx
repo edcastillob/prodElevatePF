@@ -13,10 +13,10 @@ export const Footer = ({ currentLanguage }) => {
             <p>© {new Date().getFullYear()}{t("footer.all-rights-reserved", { lng: currentLanguage})}</p>
         </div>
         <div className={styles.divRight}>
-            <Link to='/about' style={{textDecoration: "none"}}><p><Info /> About Us</p></Link>
-            <Link to='/privacy_policy' style={{textDecoration: "none"}}><p><Policy /> Privacy Policy</p></Link>
-            <Link to='/terms_&_conditions' style={{textDecoration: "none"}}><p><Gavel /> Terms & Conditions</p></Link>
-            <Link to='/contact' style={{textDecoration: "none"}}><p><ContactMail /> Contact Us</p></Link>
+            <div className={styles.info}><Link to='/about' style={{textDecoration: "none"}}><p><Info /> About Us</p></Link></div>
+            <div className={styles.info}><Link to='/privacy_policy' style={{textDecoration: "none"}}><p><Policy /> Privacy Policy</p></Link></div>
+            <div className={styles.info}><Link to='/terms_&_conditions' style={{textDecoration: "none"}}><p><Gavel /> Terms & Conditions</p></Link></div>
+            <div className={styles.info}><Link to='/contact' style={{textDecoration: "none"}}><p><ContactMail /> Contact Us</p></Link></div>
         </div>
     </footer>
   );

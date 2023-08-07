@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import swal from "sweetalert";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // import "react-toastify/dist/ReactToastify.css";
 //import StripeButton from "../StripeCart/StripeButton";
@@ -36,7 +38,8 @@ const Cart = ({ currentLanguage }) => {
   }, [cartItems]);
 
   const handledRemoveFromCart = (cartItem) => {
-    dispatch(removeToCart(cartItem));
+    dispatch(removeToCart(cartItem))
+    ;
   };
 
   const handledDecrement = (cartItem) => {
@@ -45,6 +48,7 @@ const Cart = ({ currentLanguage }) => {
 
   const handledIncrement = (cartItem) => {
     dispatch(addToCart(cartItem));
+    toast.success(`${product.name} add to cart`);
   };
 
   const handledClear = () => {
@@ -124,10 +128,10 @@ const Cart = ({ currentLanguage }) => {
               <div className={styles.cartItem} key={cartItem.id}>
                 <div className={styles.cartProduct}>
                   <img src={cartItem.images} alt={cartItem.name} />
-                  <div>
+                  <div className={styles.descriptionItem}>
                     <h4>{cartItem.name}</h4>
                     <div
-                      className={styles.descriptionItem}
+                      
                       dangerouslySetInnerHTML={{ __html: cartItem.description }}
                     ></div>
                     <button onClick={() => handledRemoveFromCart(cartItem)}>

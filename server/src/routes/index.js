@@ -48,6 +48,7 @@ const {
   getAllProductsInactive,
 } = require("../controllers/GET/getAllProductsInactive");
 const { putProductActive } = require("../controllers/PUT/putProductActive");
+const { verifyUser } = require("../controllers/POST/postVerifyUser");
 
 router.use("/notification", mailerRoutes);
 
@@ -114,6 +115,7 @@ router.get("/user/:id", getUserId);
 router.get("/useremail/:email", getUserByEmail);
 router.get("/userlog/:email", getUserByEmail);
 router.post("/user", postUser);
+router.post("/verifyUser", verifyUser);
 router.put("/user/:id", putUser);
 router.delete("/user/:id", deleteUser);
 
