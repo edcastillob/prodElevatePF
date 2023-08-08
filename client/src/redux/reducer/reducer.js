@@ -66,15 +66,20 @@ const initialState = {
 
 function reducer(state = initialState, actions) {
   switch (actions.type) {
-    case SHOW_PRODUCTS:
+    case SHOW_PRODUCTS: {
+      const sortedProducts = actions.payload.data
+      .slice()
+      .sort((a, b) => a.name.localeCompare(b.name));
+
       return {
         ...state,
-        products: actions.payload.data,
+        products: sortedProducts,
         currentPage: actions.payload.currentPage,
         totalPages: actions.payload.totalPages,
         productsFiltered: [],
         //productDetail: [...actions.payload.data],
       };
+    }
     case SHOW_PRODUCTS_INACTIVE:
       return {
         ...state,
@@ -116,12 +121,16 @@ function reducer(state = initialState, actions) {
         ...state,
         category: actions.payload,
       };
-    case GET_CATEGORY:
+    case GET_CATEGORY: {
+      const sortedCategory = actions.payload
+        .slice()
+        .sort((a, b) => a.name.localeCompare(b.name));
+
       return {
         ...state,
-        category: actions.payload,
+        category: sortedCategory,
       };
-
+    }
     case ADD_PROVIDER:
       return {
         ...state,
@@ -134,11 +143,16 @@ function reducer(state = initialState, actions) {
         provider: actions.payload,
       };
 
-    case GET_PROVIDER:
+    case GET_PROVIDER: {
+      const sortedProvider = actions.payload
+        .slice()
+        .sort((a, b) => a.name.localeCompare(b.name));
+  
       return {
         ...state,
-        provider: actions.payload,
-      };
+        provider: sortedProvider,
+      }
+    }
     case ADD_ROLE:
       return {
         ...state,
@@ -324,21 +338,21 @@ function reducer(state = initialState, actions) {
       };
 
     case DELETE_PRODUCT:
-      const updatedProducts = state.products.filter(
-        (product) => product.id !== actions.payload
-      );
+      // const updatedProducts = state.products.filter(
+      //   (product) => product.id !== actions.payload
+      // );
       return {
         ...state,
-        products: updatedProducts,
+        products: actions.payload,
       };
 
     case DELETE_CATEGORY:
-      const updatedCateg = state.category.filter(
-        (cat) => cat.id !== actions.payload
-      );
+      // const updatedCateg = state.category.filter(
+      //   (cat) => cat.id !== actions.payload
+      // );
       return {
         ...state,
-        category: updatedCateg,
+        category: actions.payload,
       };
     case DELETE_PROVIDER:
       // const updateProv = state.provider.filter(
@@ -349,18 +363,23 @@ function reducer(state = initialState, actions) {
         ...state,
         provider: actions.payload,
       };
-    case GET_ALL_USERS:
+    case GET_ALL_USERS: {
+      const sortedUsers = actions.payload
+      .slice()
+      .sort((a, b) => a.email.localeCompare(b.email));
+
+      return {
+        ...state,
+        users: sortedUsers,
+      };
+    }
+    case DELETE_USERS:
+      // const updateUsers = state.users.filter(
+      //   (user) => user.id !== actions.payload
+      // );
       return {
         ...state,
         users: actions.payload,
-      };
-    case DELETE_USERS:
-      const updateUsers = state.users.filter(
-        (user) => user.id !== actions.payload
-      );
-      return {
-        ...state,
-        users: updateUsers,
       };
     case EDIT_USERS:
       const { userId, updateUser } = actions.payload;

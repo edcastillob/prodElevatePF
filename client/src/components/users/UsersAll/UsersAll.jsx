@@ -18,25 +18,31 @@ export const UsersAll = ({ toggleActive, currentLanguage }) => {
   const [userIdToDelete, setUserIdToDelete] = useState(null);
   const { t } = useTranslation('global');
 
+  const users = useSelector((state) => state.users);
+  const [searchUsers, setSearchUsers] = useState("");
+
+  const [showUsers, setShowUsers] = useState([]);
+  const [allSelectCheck, setAllSelectCheck] = useState(false);
+
+  const filteredUsers = users.filter((users) =>
+  users.email.toLowerCase().includes(searchUsers.toLowerCase())
+  );
+
+  useEffect(() => {
+    setShowUsers(users)
+  }, [users])
+
+  useEffect(() => {
+    setShowUsers(filteredUsers)
+  }, [searchUsers])
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
   }, []);
 
-  const users = useSelector((state) => state.users);
-  const [searchUsers, setSearchUsers] = useState("");
-  console.log(users)
   if (!users || users.length === 0) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
   if (!Array.isArray(users)) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
-
-  const sortedUsers = users
-    .slice()
-    .sort((a, b) => a.email.localeCompare(b.email));
-
-  const filteredUsers = sortedUsers.filter((users) =>
-    users.email.toLowerCase().includes(searchUsers.toLowerCase())
-  );
 
   const handleDeleteUsers = (UsersId) => {
     setUserIdToDelete(UsersId); 
@@ -47,6 +53,38 @@ export const UsersAll = ({ toggleActive, currentLanguage }) => {
     dispatch(deleteUsers(userIdToDelete)); 
     setUserIdToDelete(null); 
     setShowConfirmation(false); 
+  };
+
+  // Check all 
+  const defineAllCheckedState = (items) => {
+    const result = items.filter((item) => !item.isChecked )
+    if (result.length >= 1) {
+      return false
+    } else {
+      return true  
+    }
+  };
+  
+  const handleChangeCheckBox = (event) => {
+    const { name, checked } = event.target;
+      if (name === 'allSelect') {
+        setAllSelectCheck(checked)
+          let tempUsers = showUsers.map((i) =>{
+            return { ...i, isChecked: checked }
+          });
+          setShowUsers(tempUsers)
+      } else {
+        let tempUsers = showUsers.map((user) => {
+          if (user.id === name) {
+            return { ...user, isChecked: checked }
+          } else { 
+            return user
+          }
+        });
+
+        setShowUsers(tempUsers);
+        setAllSelectCheck(defineAllCheckedState(tempUsers));
+      }
   };
 
   return (
@@ -81,6 +119,14 @@ export const UsersAll = ({ toggleActive, currentLanguage }) => {
             <table className={styles.table}>
               <thead>
                 <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      name='allSelect'
+                      checked={allSelectCheck}
+                      onChange={handleChangeCheckBox}
+                    />
+                  </th>
                   <th>{t("user-all.user", { lng: currentLanguage })}</th>
                   <th>{t("user-all.name", { lng: currentLanguage })}</th>
                   <th>Email</th>
@@ -88,8 +134,16 @@ export const UsersAll = ({ toggleActive, currentLanguage }) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredUsers?.map((user) => (
+                {showUsers.map((user) => (
                   <tr key={user.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name={user.id}
+                        checked={user?.isChecked || false}
+                        onChange={handleChangeCheckBox}
+                      />
+                    </td>
                     <td>
                       <div className={styles.divImg}>
                         <img
@@ -112,6 +166,7 @@ export const UsersAll = ({ toggleActive, currentLanguage }) => {
                       </Link>
                       <button
                         className={styles.delete}
+                        style={{ display: !user.isChecked ||  allSelectCheck === true ? 'none' : null }}
                         onClick={() => handleDeleteUsers(user.id)}
                       >
                         <ion-icon name="trash"></ion-icon>
@@ -119,6 +174,21 @@ export const UsersAll = ({ toggleActive, currentLanguage }) => {
                     </td>
                   </tr>
                 ))}
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <button
+                      className={styles.delete}
+                      style={{ display: !allSelectCheck ? 'none' : null }}
+                      onClick={() => handleDeleteUsers(users.map(user => user.id))}
+                    >
+                      Dellete All
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
       </div>

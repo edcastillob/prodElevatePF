@@ -13,25 +13,31 @@ export const ShowCategory = ({ toggleActive, currentLanguage }) => {
   const [categoryIdToDelete, setCategoryIdToDelete] = useState(null);
   const { t } = useTranslation('global');
 
+  const category = useSelector((state) => state.category);
+  const [searchCategory, setSearchCategory] = useState("");
+
+  const [showCategories, setShowCategories] = useState([])
+  const [allSelectCheck, setAllSelectCheck] = useState(false);
+
+  const filteredCategory = category.filter((category) =>
+    category.name.toLowerCase().includes(searchCategory.toLowerCase())
+  );
+  
+  useEffect(() => {
+    setShowCategories(category)
+  }, [category])
+
+  useEffect(() => {
+    setShowCategories(filteredCategory)
+  }, [searchCategory])
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategory());
   }, []);
 
-  const category = useSelector((state) => state.category);
-  const [searchCategory, setSearchCategory] = useState("");
-
   if (!category || category.length === 0) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
   if (!Array.isArray(category)) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
-
-  const sortedCategory = category
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  const filteredCategory = sortedCategory.filter((category) =>
-    category.name.toLowerCase().includes(searchCategory.toLowerCase())
-  );
-
 
   const handleDeleteCategory = (categoryId) => {
     setCategoryIdToDelete(categoryId); 
@@ -39,9 +45,41 @@ export const ShowCategory = ({ toggleActive, currentLanguage }) => {
   };
 
   const handleConfirmDelete = () => {
-    dispatch(deleteProduct(categoryIdToDelete)); 
+    dispatch(deleteCategory(categoryIdToDelete)); 
     setCategoryIdToDelete(null); 
     setShowConfirmation(false); 
+  };
+
+  // Check all 
+  const defineAllCheckedState = (items) => {
+    const result = items.filter((item) => !item.isChecked )
+    if (result.length >= 1) {
+      return false
+    } else {
+      return true  
+    }
+  };
+  
+  const handleChangeCheckBox = (event) => {
+    const { name, checked } = event.target;
+      if (name === 'allSelect') {
+        setAllSelectCheck(checked)
+          let tempUsers = showCategories.map((i) =>{
+            return { ...i, isChecked: checked }
+          });
+          setShowCategories(tempUsers)
+      } else {
+        let tempUsers = showCategories.map((categ) => {
+          if (categ.id === parseInt(name)) {
+            return { ...categ, isChecked: checked }
+          } else { 
+            return categ
+          }
+        });
+
+        setShowCategories(tempUsers);
+        setAllSelectCheck(defineAllCheckedState(tempUsers));
+      }
   };
 
 
@@ -77,14 +115,30 @@ export const ShowCategory = ({ toggleActive, currentLanguage }) => {
             <table className={styles.table}>
               <thead>
                 <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      name='allSelect'
+                      checked={allSelectCheck}
+                      onChange={handleChangeCheckBox}
+                    />
+                  </th>
                   <th>{t("show-category.name", { lng: currentLanguage })}</th>
                   <th>{t("show-category.description", { lng: currentLanguage })}</th>
                   <th>{t("show-category.actions", { lng: currentLanguage })}</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredCategory?.map((category) => (
+                {showCategories?.map((category) => (
                   <tr key={category.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name={category.id}
+                        checked={category?.isChecked || false}
+                        onChange={handleChangeCheckBox}
+                      />
+                    </td>
                     <td style={{ padding: '1.5rem' }}>{category.name}</td>
                     <td style={{ padding: '1.5rem' }}>{category.description}</td>
                     <td style={{ padding: '1.5rem' }}>
@@ -96,15 +150,30 @@ export const ShowCategory = ({ toggleActive, currentLanguage }) => {
                           <ion-icon name="create"></ion-icon>
                         </button>
                       </Link>
-                      {/* <button
+                      <button
                         className={styles.delete}
+                        style={{ display: !category.isChecked ||  allSelectCheck === true ? 'none' : null }}
                         onClick={() => handleDeleteCategory(category.id)}
                       >
                         <ion-icon name="trash"></ion-icon>
-                      </button> */}
+                      </button>
                     </td>
                   </tr>
                 ))}
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <button
+                      className={styles.delete}
+                      style={{ display: !allSelectCheck ? 'none' : null }}
+                      onClick={() => handleDeleteCategory(category.map(categ => categ.id))}
+                    >
+                      Dellete All
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
       </div>

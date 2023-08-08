@@ -1,7 +1,6 @@
 import styles from "../Dashboard.module.css";
 import { MdMenu, MdSearch } from "react-icons/md";
-import { useState } from "react"; // Importa useState
-import { useEffect } from "react";
+import { useState, useEffect } from "react"; // Importa useState
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -19,9 +18,33 @@ import { useTranslation } from 'react-i18next';
 const Products = ({ toggleActive, currentLanguage }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
+
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
   const { t } = useTranslation('global');
+
+  const products = useSelector((state) => state.products);
+  const productsInactive = useSelector((state) => state.productsInactive);
+  const [searchProducts, setSearchProducts] = useState("");
+
+  const [showAllProducts, setShowAllProducts] = useState([]);
+  const [allSelectCheck, setAllSelectCheck] = useState(false);
+
+  const sortedProducts = products
+  .slice()
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+  const filteredProducts = sortedProducts.filter((products) =>
+    products.name.toLowerCase().includes(searchProducts.toLowerCase())
+  );
+
+  useEffect(() => {
+    setShowAllProducts(products)
+  }, [products])
+
+  useEffect(() => {
+    setShowAllProducts(filteredProducts)
+  }, [searchProducts])
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,22 +52,11 @@ const Products = ({ toggleActive, currentLanguage }) => {
     dispatch(showProductsInactive());
   }, []);
 
-  const products = useSelector((state) => state.products);
-  const productsInactive = useSelector((state) => state.productsInactive);
-  const [searchProducts, setSearchProducts] = useState("");
-
   if (!products || products.length === 0) return <div>Loading...</div>;
   if (!Array.isArray(products)) return <div>Loading...</div>;
 
-  const sortedProducts = products
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  const filteredProducts = sortedProducts.filter((products) =>
-    products.name.toLowerCase().includes(searchProducts.toLowerCase())
-  );
-
   const handleDeleteProduct = (productId) => {
+    console.log('deletees')
     setProductIdToDelete(productId);
     setShowConfirmation(true);
   };
@@ -80,6 +92,38 @@ const Products = ({ toggleActive, currentLanguage }) => {
 
   console.log('productsInactive: ', productsInactive);
   console.log('products: ', products);
+
+  // Check all 
+  const defineAllCheckedState = (items) => {
+    const result = items.filter((item) => !item.isChecked )
+    if (result.length >= 1) {
+      return false
+    } else {
+      return true  
+    }
+  };
+  
+  const handleChangeCheckBox = (event) => {
+    const { name, checked } = event.target;
+      if (name === 'allSelect') {
+        setAllSelectCheck(checked)
+          let tempUsers = showAllProducts.map((i) =>{
+            return { ...i, isChecked: checked }
+          });
+          setShowAllProducts(tempUsers)
+      } else {
+        let tempUsers = showAllProducts.map((product) => {
+          if (product.id === name) {
+            return { ...product, isChecked: checked }
+          } else { 
+            return product
+          }
+        });
+
+        setShowAllProducts(tempUsers);
+        setAllSelectCheck(defineAllCheckedState(tempUsers));
+      }
+  };
   return (
     <div>
       {/* TOPBAR */}
@@ -121,14 +165,30 @@ const Products = ({ toggleActive, currentLanguage }) => {
             <table className={styles.table}>
               <thead>
                 <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      name='allSelect'
+                      checked={allSelectCheck}
+                      onChange={handleChangeCheckBox}
+                    />
+                  </th>
                   <th>{t("products.product", { lng: currentLanguage })}</th>
                   <th>{t("products.name", { lng: currentLanguage })}</th>
                   <th>{t("products.actions", { lng: currentLanguage })}</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredProducts?.map((product) => (
+                {showAllProducts.map((product) => (
                   <tr key={product.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        name={product.id}
+                        checked={product?.isChecked || false}
+                        onChange={handleChangeCheckBox}
+                      />
+                    </td>
                     <td>
                       <img
                         src={product.images}
@@ -147,20 +207,32 @@ const Products = ({ toggleActive, currentLanguage }) => {
                           <ion-icon name="create"></ion-icon>
                         </button>
                       </Link>
-                      {/* <button
+                      <button
                         className={styles.delete}
+                        style={{ display: !product.isChecked ||  allSelectCheck === true ? 'none' : null }}
                         onClick={() => handleDeleteProduct(product.id)}
                       >
                         <ion-icon name="trash"></ion-icon>
-                      </button> */}
+                      </button>
                     </td>
                   </tr>
                 ))}
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <button
+                      className={styles.delete}
+                      style={{ display: !allSelectCheck ? 'none' : null }}
+                      onClick={() => handleDeleteProduct(products.map(product => product.id))}
+                    >
+                      Dellete All
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
-            {/* {filteredProducts?.map((product) => (
-              
-          ))} */}
           </div>
         </div>
       </div>

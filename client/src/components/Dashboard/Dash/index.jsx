@@ -92,7 +92,7 @@ const Panel = ({ toggleActive, currentLanguage }) => {
           <BarChart currentLanguage={currentLanguage} />
         </div>
         <div className={styles.box}>
-          <span>{t("dashboard.most-selled-products", { lng: currentLanguage })}</span>
+          {/* <span>{t("dashboard.most-selled-products", { lng: currentLanguage })}</span> */}
           <PieChart currentLanguage={currentLanguage}/>
         </div>
       </div>

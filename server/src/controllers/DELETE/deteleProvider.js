@@ -7,11 +7,6 @@ async function deleteProvider(req, res) {
     // const ids = req.params.id.split(',').map(Number);
     
     // ========== //
-    // const ids = req.params.id.includes(",") 
-    //   ? req.params.id.split(',').map(Number)  // Array de IDs
-    //   : [Number(req.params.id)];  // Un solo ID
-
-    // =============== //
     const idsParam = req.params.id;
     let ids;
 
@@ -20,8 +15,6 @@ async function deleteProvider(req, res) {
     } else {
       ids = [Number(idsParam)];
     }
-    
-    console.log(idsParam, 'id prov')
   
     try {
       await Provider.destroy({ 

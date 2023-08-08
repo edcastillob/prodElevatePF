@@ -21,24 +21,26 @@ const Providers = ({ toggleActive, currentLanguage }) => {
   const [allSelectCheck, setAllSelectCheck] = useState(false)
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getProvider());
   }, []);
 
+  const filteredProvider = provider.filter((provider) =>
+    provider.name.toLowerCase().includes(searchProvider.toLowerCase())
+  );
+
   useEffect(() => {
     setFoo(provider)
-  }, [])
+  }, [provider])
+
+  useEffect(() => {
+    setFoo(filteredProvider)
+  }, [searchProvider])
+
 
   if (!provider || provider.length === 0) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
   if (!Array.isArray(provider)) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
-
-  const sortedProvider = provider
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  const filteredProvider = sortedProvider.filter((provider) =>
-    provider.name.toLowerCase().includes(searchProvider.toLowerCase())
-  );
 
 
   const handleDeleteProvider = (providerId) => {
@@ -61,7 +63,7 @@ const Providers = ({ toggleActive, currentLanguage }) => {
       return true  
     }
   }
-  console.log(foo, 'lopl')
+
   const handleChangeCheckBox = (event) => {
     const { name, checked } = event.target;
       if (name === 'allSelect') {
@@ -84,7 +86,7 @@ const Providers = ({ toggleActive, currentLanguage }) => {
         setAllSelectCheck(defineAllCheckedState(tempProviders))
       }
   }
-
+  console.log(foo, 'providers')
 
   return (
     <div>
@@ -134,7 +136,7 @@ const Providers = ({ toggleActive, currentLanguage }) => {
                 </tr>
               </thead>
               <tbody>
-                {foo?.map((provider) => (
+                {foo.map((provider) => (
                   <tr key={provider.id} >
                     <td>
                       <input
@@ -160,7 +162,7 @@ const Providers = ({ toggleActive, currentLanguage }) => {
                       </Link>
                       <button
                         className={styles.delete}
-                        style={{ display: !provider.isChecked ||  allSelectCheck === true ? 'none' : null }}
+                        style={{ display: !provider.isChecked ? 'none' : null }}
                         onClick={() => handleDeleteProvider(provider.id)}
                       >
                         <ion-icon name="trash"></ion-icon>

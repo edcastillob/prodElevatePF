@@ -52,7 +52,6 @@ export const showProducts = (page) => {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}product?page=${page}`);
 
-      console.log(data.data);
       return dispatch({
         type: SHOW_PRODUCTS,
         payload: {
@@ -116,8 +115,8 @@ export const addProduct = (product) => {
 
 export const deleteProduct = (productId) => async (dispatch) => {
   try {
-    await axios.delete(`${ENDPOINT}product/${productId}`);
-    dispatch({ type: DELETE_PRODUCT, payload: productId });
+    const productDeleted = await axios.delete(`${ENDPOINT}product/${productId}`);
+    dispatch({ type: DELETE_PRODUCT, payload: productDeleted.data });
   } catch (error) {
     console.error("Error deleting product:", error);
     return error.message;
@@ -152,8 +151,8 @@ export const getUsers = () => {
 
 export const deleteUsers = (userId) => async (dispatch) => {
   try {
-    await axios.delete(`${ENDPOINT}user/${userId}`);
-    dispatch({ type: DELETE_USERS, payload: userId });
+    const foo = await axios.delete(`${ENDPOINT}user/${userId}`);
+    dispatch({ type: DELETE_USERS, payload: foo.data });
   } catch (error) {
     console.error("Error deleting user:", error);
     return error.message;
@@ -236,8 +235,8 @@ export const addCategory = (category) => {
 };
 export const deleteCategory = (categoryId) => async (dispatch) => {
   try {
-    await axios.delete(`${ENDPOINT}category/${categoryId}`);
-    dispatch({ type: DELETE_CATEGORY, payload: categoryId });
+    const deleted = await axios.delete(`${ENDPOINT}category/${categoryId}`);
+    dispatch({ type: DELETE_CATEGORY, payload: deleted.data });
   } catch (error) {
     console.error("Error deleting category:", error);
     return error.message;
@@ -301,7 +300,6 @@ export const deleteProvider = (providerId) => async (dispatch) => {
   try {
     const foo = await axios.delete(`${ENDPOINT}provider/${providerId}`);
     dispatch({ type: DELETE_PROVIDER, payload: foo.data });
-    console.log(foo, 'actons')
   } catch (error) {
     console.error("Error deleting provider:", error);
     return error.message;
