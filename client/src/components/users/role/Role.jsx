@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addRole } from '../../../redux/actions/actions'; 
 import styles from './Role.module.css';
+import validateForm from './validationRole';
 import { useTranslation } from 'react-i18next';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,6 +14,7 @@ export const Role = ({ currentLanguage }) => {
         name: '',
         description:'',
     });    
+    const [errors, setErrors] = useState({});
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -24,14 +26,25 @@ export const Role = ({ currentLanguage }) => {
 
     const handleSubmit = (event) => {
       event.preventDefault();  
-      console.log(role) 
-      dispatch(addRole(role));
-      toast.success(t("role.successfully", { lng: currentLanguage }));
-      setRole({
-        name: '',
-        description:'',
-      });
-    }
+      // console.log(role) 
+      const errors = validateForm(
+        role.name,
+        role.description
+      );
+      setErrors(errors);
+
+      if (Object.keys(errors).length === 0) {
+        dispatch(addRole(role));
+        toast.success(t("role.successfully", { lng: currentLanguage }));
+        setRole({
+          name: '',
+          description:'',
+        });
+        setErrors({});
+      } else {
+        toast.error("Data is Incompleted. All fields must be filled Correctly");
+      }
+    };
   return (
     <div>
         
@@ -53,6 +66,9 @@ export const Role = ({ currentLanguage }) => {
         value={role.name}
         onChange={handleChange}
       />
+      {errors.name && (
+        <p className={styles.error}>{errors.name}</p>
+      )}
 
        {/* Descripcion de rol */}
                   
@@ -70,6 +86,9 @@ export const Role = ({ currentLanguage }) => {
             value={role.description}
             onChange={handleChange}
           />
+          {errors.description && (
+            <p className={styles.error}>{errors.description}</p>
+          )}
         <br />
 
         

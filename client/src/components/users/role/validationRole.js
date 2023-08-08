@@ -1,6 +1,6 @@
 export default function validateForm(
-    name, 
-    description,
+    name,
+    description
 ) {
     let errors = {};
     let RegExpression = /^[a-zA-Z\s]*$/;
