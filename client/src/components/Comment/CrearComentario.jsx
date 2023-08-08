@@ -38,7 +38,7 @@ const CrearComentario = ({ productId, userEmail, userRole }) => {
           />
           <Box marginTop={2}>
             <Button variant="contained" type="submit">
-              Enviar Comentario
+              Send Commentary
             </Button>
           </Box>
         </form>

@@ -24,7 +24,7 @@ const Reviews = ({ reviews }) => {
           ))}
         </>
       ) : (
-        <p>No hay reseñas disponibles.</p>
+        <p>No reviews available.</p>
       )}
     </div>
   );

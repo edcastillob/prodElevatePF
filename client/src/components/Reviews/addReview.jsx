@@ -6,9 +6,10 @@ import Rating from "@mui/material/Rating";
 import TextField from "@mui/material/TextField";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const AddReviewForm = ({ productId }) => {
+
+const AddReviewForm = ({ productId, user }) => {
   const [input, setInput] = useState({
-    userMail: "",
+    userMail: user.email,
     productId: productId,
     score: 0,
     title: "",
@@ -19,6 +20,7 @@ const AddReviewForm = ({ productId }) => {
   const [showThankYou, setShowThankYou] = useState(false);
 
   const dispatch = useDispatch();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setInput((prevInput) => ({
@@ -29,13 +31,9 @@ const AddReviewForm = ({ productId }) => {
 
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser(user.email);
-        setInput((prevInput) => ({
-          ...prevInput,
-          userMail: user.email,
-        }));
+        setCurrentUser(user);
       } else {
         setCurrentUser(null);
       }
@@ -44,7 +42,8 @@ const AddReviewForm = ({ productId }) => {
     return () => unsubscribe();
   }, []);
 
-  const handleReviewSubmit = async () => {
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
     try {
       if (!currentUser) {
         console.error("Usuario no autenticado");
@@ -56,27 +55,26 @@ const AddReviewForm = ({ productId }) => {
         score: input.score,
         title: input.title,
         text: input.text,
-        userName: currentUser.displayName, // Agregamos el nombre del usuario a reviewData
-        userImage: currentUser.photoURL, // Agregamos la imagen del usuario a reviewData
+        userMail: input.userMail,
+        userName: currentUser.displayName,
+        userImage: currentUser.photoURL,
       };
 
       dispatch(postReview(reviewData));
-
       setShowThankYou(true);
     } catch (error) {
       console.error("Error al enviar la reseña:", error);
     }
   };
-
   return (
     <div>
       {showThankYou ? (
         <div style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}>
           <div style={{ backgroundColor: "#fff", width: 300, padding: 20, borderRadius: 10, margin: "auto", marginTop: 100 }}>
-            <h2>¡Gracias por dejar una reseña!</h2>
-            <p>Tu opinión es muy valiosa para nosotros.</p>
+            <h2>¡Thank you for your Review!</h2>
+            <p>Your opinion is very valuable to us.</p>
             <Button variant="contained" color="primary" onClick={() => setShowThankYou(false)}>
-              Cerrar
+              Close
             </Button>
           </div>
         </div>
@@ -122,7 +120,7 @@ const AddReviewForm = ({ productId }) => {
             </Grid>
             <Grid item xs={12}>
               <Button type="submit" variant="contained" color="primary">
-                Agregar Reseña
+                Add Review
               </Button>
             </Grid>
           </Grid>

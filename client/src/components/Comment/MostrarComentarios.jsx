@@ -94,7 +94,7 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
   }, [dispatch, productId]);
 
   if (!comments || comments.length === 0) {
-    return <p>Cargando comentarios...</p>;
+    return <p>Loading...</p>;
   }
 
   const indexOfLastComment = currentPage * commentsPerPage;
@@ -116,7 +116,7 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
 
   return (
     <Box py={2}>
-      <Typography variant="h6">Preguntas sobre el Producto</Typography>
+      <Typography variant="h6">About the Product</Typography>
       {currentComments.map((comment, index) => (
         <Box
           key={comment.id}
@@ -157,7 +157,7 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
         {!repliedComments.has(comment.id) && userRole === 1 && (
           <CardContent style={{ background: '#f1f1f1', borderRadius: '8px' }}>
             <Button variant="outlined" onClick={() => handleToggleReplyForm(comment.id)}>
-              Responder
+              Reply
             </Button>
           </CardContent>
         )}
@@ -179,7 +179,7 @@ const MostrarComentarios = ({ productId, userEmail, userRole }) => {
                   type="submit"
                   endIcon={<SendIcon />}
                 >
-                  Enviar Respuesta
+                  Send Reply
                 </Button>
               </Box>
             </form>
