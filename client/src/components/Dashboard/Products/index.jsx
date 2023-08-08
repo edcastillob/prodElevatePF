@@ -14,14 +14,15 @@ import {
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import swal from "sweetalert";
 import yes from "../../../assets/yes.png";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const Products = ({ toggleActive, currentLanguage }) => {
+  const userActive = useSelector((state) => state.userLog);
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
-  const { t } = useTranslation('global');
+  const { t } = useTranslation("global");
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -45,12 +46,12 @@ const Products = ({ toggleActive, currentLanguage }) => {
   );
 
   const handleDeleteProduct = (productId) => {
+    console.log(productId)
     setProductIdToDelete(productId);
-    setShowConfirmation(true);
+    dispatch(deleteProduct(productId));
   };
 
-  const handleConfirmDelete = () => {
-    dispatch(deleteProduct(productIdToDelete));
+  const handleConfirmDelete = (productId) => {
     setProductIdToDelete(null);
     setShowConfirmation(false);
   };
@@ -78,8 +79,9 @@ const Products = ({ toggleActive, currentLanguage }) => {
     });
   };
 
-  console.log('productsInactive: ', productsInactive);
-  console.log('products: ', products);
+  // console.log('productsInactive: ', productsInactive);
+  // console.log('products: ', products);
+  // console.log('user: ', userActive);
   return (
     <div>
       {/* TOPBAR */}
@@ -91,7 +93,9 @@ const Products = ({ toggleActive, currentLanguage }) => {
       <div className={styles.customers}>
         <div className={styles.wrapper}>
           <div className={styles.customersHeader}>
-            <h2 style={{ fontFamily: "Poppins" }}>{t("products.products", { lng: currentLanguage })}</h2>
+            <h2 style={{ fontFamily: "Poppins" }}>
+              {t("products.products", { lng: currentLanguage })}
+            </h2>
           </div>
           {/* input search */}
           <div className={styles.search}>
@@ -147,12 +151,14 @@ const Products = ({ toggleActive, currentLanguage }) => {
                           <ion-icon name="create"></ion-icon>
                         </button>
                       </Link>
-                      {/* <button
-                        className={styles.delete}
-                        onClick={() => handleDeleteProduct(product.id)}
-                      >
-                        <ion-icon name="trash"></ion-icon>
-                      </button> */}
+                      {userActive.email === "edwar.castillo@gmail.com" && (
+                        <button
+                          className={styles.delete}
+                          onClick={() => handleDeleteProduct(product.id)}
+                        >
+                          <ion-icon name="trash"></ion-icon>
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -183,7 +189,9 @@ const Products = ({ toggleActive, currentLanguage }) => {
       </Modal> */}
       <div>
         <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>{t("products.inactive", { lng: currentLanguage })}</ModalHeader>
+          <ModalHeader toggle={toggle}>
+            {t("products.inactive", { lng: currentLanguage })}
+          </ModalHeader>
           <ModalBody>
             {/* table products */}
             <div className={styles.productContainer} style={{ width: "100%" }}>
@@ -238,4 +246,3 @@ const Products = ({ toggleActive, currentLanguage }) => {
 };
 
 export default Products;
-
