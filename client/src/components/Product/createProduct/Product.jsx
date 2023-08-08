@@ -90,22 +90,22 @@ export const Product = ({ currentLanguage }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(product);
-    // const errors = validateForm (
-    //   product.category,
-    //   product.name,
-    //   product.brand,
-    //   product.condition,
-    //   product.description,
-    //   product.purchasePrice,
-    //   product.salePrice,
-    //   product.minimumStock,
-    //   product.provider,
-    //   product.images
-    // );
-    // setErrors(errors);
+    console.log(product);
+    const errors = validateForm (
+      product.category,
+      product.name,
+      product.brand,
+      product.condition,
+      product.description,
+      product.purchasePrice,
+      product.salePrice,
+      product.minimumStock,
+      product.provider,
+      product.images
+    );
+    setErrors(errors);
 
-    // if (Object.keys(product).length === 0) {
+    if (Object.keys(product).length === 0) {
     dispatch(addProduct(product));
     toast.success(t("product.successfully", { lng: currentLanguage }));
     setProduct({
@@ -120,12 +120,12 @@ export const Product = ({ currentLanguage }) => {
       provider: [],
       images: [],
     });
-    // setErrors({});
+    setErrors({});
     // Reiniciar isImageUploaded a false después de enviar el formulario
     setIsImageUploaded(false);
-    // } else {
-    //   toast.error("Data is Incompleted. All fields must be filled Correctly");
-    // }
+    } else {
+       toast.error("Data is Incompleted. All fields must be filled Correctly");
+    }
   };
   // console.log("provider: ", provider);
   console.log(product);
@@ -154,9 +154,9 @@ export const Product = ({ currentLanguage }) => {
               </option>
             ))}
           </select>
-          {/* {errors.category && (
+          {errors.category && (
                   <p className={styles.error}>{errors.category}</p>
-            )} */}
+          )}
           {/* Nombre de Producto */}
 
           <input
@@ -167,9 +167,9 @@ export const Product = ({ currentLanguage }) => {
             value={product.name}
             onChange={handleChange}
           />
-          {/* {errors.name && (
+          {errors.name && (
                   <p className={styles.error}>{errors.name}</p>
-            )} */}
+          )}
         </div>
         <div className="d-flex justify-content-around">
           {/* brand de Producto */}
@@ -181,9 +181,9 @@ export const Product = ({ currentLanguage }) => {
             value={product.brand}
             onChange={handleChange}
           />
-          {/* {errors.brand && (
+          {errors.brand && (
               <p className={styles.error}>{errors.brand}</p>
-          )} */}
+          )}
           <select
             className="form-control mb-3 w-50 d-end"
             name="condition"
@@ -320,9 +320,9 @@ export const Product = ({ currentLanguage }) => {
           </div>
           {/* ... */}
         </div>
-        {/* {errors.provider && (
+        {errors.provider && (
               <p className={styles.error}>{errors.provider}</p>
-          )} */}
+        )}
         <br />
 
         {/* <UploadImg onImageUpload={handleImageUpload} /> */}
@@ -344,9 +344,9 @@ export const Product = ({ currentLanguage }) => {
             }
           />
         </div>
-        {/* {errors.images && (
+        {errors.images && (
              <p className={styles.error}>{errors.images}</p>
-          )} */}
+        )}
         <br />
         <button className={styles.create}>{t("product.create", { lng: currentLanguage })}</button>
       </form>
