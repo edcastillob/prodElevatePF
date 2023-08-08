@@ -176,6 +176,16 @@
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
+.language{
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+  transition: .2s;
+  &:hover{
+    transform: scale(0.98);
+    transition: .3s;
+  }
+}
+
 
     /* ANIMATION */
 
@@ -189,3 +199,86 @@
           opacity: 1;
         }
       }
+
+@media (max-width: 510px) {
+  .name {
+    font-size: 13px;
+  }
+  .homeButton {
+    font-size: 13px;
+  }
+  .divLogo {
+    padding-left: 0.5rem;
+  }
+}
+
+@media (max-width: 470px) {
+  .divLogo {
+    padding-left: 0.1rem;
+  }
+}
+
+@media (max-width: 431px) {
+  .divLogo {
+    padding-left: 0;
+  }
+  .items {
+    padding-right: 0.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .name {
+    font-size: 11px;
+  }
+  .homeButton {
+    font-size: 11px;
+  }
+  .avatar{
+    width: 33px;
+    height: auto; 
+  }
+  .language {
+    width: 25px;
+    height: auto;
+  }
+  .items {
+    gap: 0.5rem;
+  }
+  .userInfo {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 319px) {
+  .divLogo img {
+    width: 80%;
+    height: 60px;
+  }
+}
+
+@media (max-width: 311px) {
+  .name {
+    font-size: 10px;
+  }
+  .homeButton {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 304px) {
+  .avatar{
+    width: 28px;
+    height: auto; 
+  }
+  .language {
+    width: 20px;
+    height: auto;
+  }
+  .items {
+    gap: 0.3rem;
+  }
+  .userInfo {
+    gap: 0.2rem;
+  }
+}

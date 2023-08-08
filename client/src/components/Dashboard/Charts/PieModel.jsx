@@ -1,3 +1,6 @@
+// import { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -20,7 +23,8 @@ const options = {
   },
 }
 
-const PieChart = () => {
+const PieChart = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const providers = useSelector((state) => state.provider);
 
@@ -42,7 +46,7 @@ const PieChart = () => {
     labels: countries,
     datasets: [
       {
-        label: "Count Providers",
+        label: t("barchart.countProviders", { lng: currentLanguage }),
         data: countries.map(country => countByCountry[country]),
         borderWidth: 1,
         backgroundColor: ["rgba(15, 92, 192, 2)", "rgba(9, 324, 148, 22)", "rgba(95, 132, 364, 622)"],

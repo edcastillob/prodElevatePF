@@ -13,14 +13,16 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import validateForm from "./validation";
+import { useTranslation } from 'react-i18next';
 
-export const Product = () => {
+
+export const Product = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
+
   useEffect(() => {
     dispatch(getCategory());
     dispatch(getProvider());
   }, []);
-
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -104,68 +106,68 @@ export const Product = () => {
     // setErrors(errors);
 
     // if (Object.keys(product).length === 0) {
-      dispatch(addProduct(product));
-      toast.success("¡Product created successfully!");
-      setProduct({
-        category: "",
-        name: "",
-        brand: "",
-        condition: "",
-        description: "",
-        purchasePrice: "",
-        salePrice: "",
-        minimumStock: "",
-        provider: [],
-        images: [],
-      });
-      // setErrors({});
-      // Reiniciar isImageUploaded a false después de enviar el formulario
-      setIsImageUploaded(false);
+    dispatch(addProduct(product));
+    toast.success(t("product.successfully", { lng: currentLanguage }));
+    setProduct({
+      category: "",
+      name: "",
+      brand: "",
+      condition: "",
+      description: "",
+      purchasePrice: "",
+      salePrice: "",
+      minimumStock: "",
+      provider: [],
+      images: [],
+    });
+    // setErrors({});
+    // Reiniciar isImageUploaded a false después de enviar el formulario
+    setIsImageUploaded(false);
     // } else {
     //   toast.error("Data is Incompleted. All fields must be filled Correctly");
     // }
   };
   // console.log("provider: ", provider);
+  console.log(product);
   return (
     <div className={styles.container}>
-      
-        <hr />
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
-            New product
-          </h5>
-          {/* Categoria de Producto */}
-          <div className="d-flex justify-content-around">
-            <select
-              className="form-select form-select-sm mb-3 w-50 d-start"
-              name="category"
-              id="category"
-              value={product.category}
-              onChange={handleChange}
-            >
-              <option value="" style={{ fontFamily: "Poppins" }}>
-                -- Category --
+      <hr />
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
+         {t("product.new-product", { lng: currentLanguage })}
+        </h5>
+        {/* Categoria de Producto */}
+        <div className="d-flex justify-content-around">
+          <select
+            className="form-select form-select-sm mb-3 w-50 d-start"
+            name="category"
+            id="category"
+            value={product.category}
+            onChange={handleChange}
+          >
+            <option value="" style={{ fontFamily: "Poppins" }}>
+            {t("product.category", { lng: currentLanguage })}
+            </option>
+            {sortedCategories.map((catg) => (
+              <option key={catg.id} value={catg.id}>
+                {catg.name}
               </option>
-              {sortedCategories.map((catg) => (
-                <option key={catg.id} value={catg.id}>
-                  {catg.name}
-                </option>
-              ))}
-            </select>
-            {/* {errors.category && (
+            ))}
+          </select>
+          {/* {errors.category && (
                   <p className={styles.error}>{errors.category}</p>
             )} */}
-            {/* Nombre de Producto */}
+          {/* Nombre de Producto */}
 
           <input
             className="form-control mb-3 w-50 d-end"
             type="text"
             name="name"
-            placeholder="Product Name"
+            placeholder={t("product.product-name", { lng: currentLanguage })}
             value={product.name}
             onChange={handleChange}
           />
-            {/* {errors.name && (
+          {/* {errors.name && (
                   <p className={styles.error}>{errors.name}</p>
             )} */}
         </div>
@@ -175,7 +177,7 @@ export const Product = () => {
             className="form-control mb-3 w-50 d-end"
             type="text"
             name="brand"
-            placeholder="Product brand"
+            placeholder={t("product.product-brand", { lng: currentLanguage })}
             value={product.brand}
             onChange={handleChange}
           />
@@ -183,19 +185,19 @@ export const Product = () => {
               <p className={styles.error}>{errors.brand}</p>
           )} */}
           <select
-  className="form-control mb-3 w-50 d-end"
-  name="condition"
-  value={product.condition}
-  onChange={handleChange}
->
-  <option value="">Select condition</option>
-  <option value="Brand New">Brand New</option>
-  <option value="Used">Used</option>
-  <option value="Like New">Like New</option>
-</select>
-{errors.condition && (
-    <p className={styles.error}>{errors.condition}</p>
-)}
+            className="form-control mb-3 w-50 d-end"
+            name="condition"
+            value={product.condition}
+            onChange={handleChange}
+          >
+            <option value="">{t("product.select-condition", { lng: currentLanguage })}</option>
+            <option value="Brand New">{t("product.brand-new", { lng: currentLanguage })}</option>
+            <option value="Used">{t("product.used", { lng: currentLanguage })}</option>
+            <option value="Like New">{t("product.like-new", { lng: currentLanguage })}</option>
+          </select>
+          {errors.condition && (
+            <p className={styles.error}>{errors.condition}</p>
+          )}
         </div>
 
         {/* Descripcion de Producto */}
@@ -223,16 +225,16 @@ export const Product = () => {
             "link",
             "image",
           ]}
-          placeholder="Enter product description..."
+          placeholder={t("product.product-description", { lng: currentLanguage })}
           style={{
             height: "130px",
             marginBottom: "4rem",
             fontFamily: "Poppins",
           }}
         />
-          {errors.description && (
-              <p className={styles.error}>{errors.description}</p>
-          )}
+        {errors.description && (
+          <p className={styles.error}>{errors.description}</p>
+        )}
         {/* precio de compra de Producto */}
         <div className="d-flex g-3">
           <div className="input-group">
@@ -240,16 +242,16 @@ export const Product = () => {
               className="form-control mb-3 w-25"
               type="text"
               name="purchasePrice"
-              placeholder="-- Purchase price --"
+              placeholder={t("product.purchase-price", { lng: currentLanguage })}
               value={product.purchasePrice}
               onChange={handleChange}
             />
             <span className="input-group-text mb-3">$</span>
             {/* <span className="input-group-text mb-3">0.00</span> */}
           </div>
-            {errors.purchasePrice && (
-                  <p className={styles.error}>{errors.purchasePrice}</p>
-            )}
+          {errors.purchasePrice && (
+            <p className={styles.error}>{errors.purchasePrice}</p>
+          )}
           {/* precio de venta de Producto */}
 
           <div className="input-group">
@@ -257,16 +259,16 @@ export const Product = () => {
               className="form-control mb-3 w-25"
               type="text"
               name="salePrice"
-              placeholder="-- Sale price --"
+              placeholder={t("product.sale-price", { lng: currentLanguage })}
               value={product.salePrice}
               onChange={handleChange}
             />
             <span className="input-group-text mb-3">$</span>
             {/* <span className="input-group-text mb-3">0.00</span> */}
           </div>
-            {errors.salePrice && (
-                <p className={styles.error}>{errors.salePrice}</p>
-            )}
+          {errors.salePrice && (
+            <p className={styles.error}>{errors.salePrice}</p>
+          )}
         </div>
 
         {/* stock minimo de Producto */}
@@ -274,13 +276,13 @@ export const Product = () => {
           className="form-control mb-3"
           type="minimumStock"
           name="minimumStock"
-          placeholder="-- Minimum stock --"
+          placeholder={t("product.min-stock", { lng: currentLanguage })}
           value={product.minimumStock}
           onChange={handleChange}
         />
-          {errors.minimumStock && (
-              <p className={styles.error}>{errors.minimumStock}</p>
-          )}
+        {errors.minimumStock && (
+          <p className={styles.error}>{errors.minimumStock}</p>
+        )}
 
         {/* Proveedor */}
         <div className="container-m">
@@ -291,7 +293,7 @@ export const Product = () => {
             value=""
             onChange={handleProviderSelect}
           >
-            <option value="">-- Select provider --</option>
+            <option value="">{t("product.select-provider", { lng: currentLanguage })}</option>
             {sortedproviders?.map((prov) => (
               <option key={prov.id} value={prov.id}>
                 {prov.name}
@@ -303,7 +305,7 @@ export const Product = () => {
             {product.provider?.map((provId) => {
               const selectedProvider = provider.find(
                 (prov) => prov.id === provId
-              )
+              );
               return (
                 <ul className="list-group d-flex" key={`provider_${provId}`}>
                   <li
@@ -313,27 +315,27 @@ export const Product = () => {
                     {selectedProvider.name}
                   </li>
                 </ul>
-              )
+              );
             })}
           </div>
           {/* ... */}
         </div>
-          {/* {errors.provider && (
+        {/* {errors.provider && (
               <p className={styles.error}>{errors.provider}</p>
           )} */}
         <br />
 
-          {/* <UploadImg onImageUpload={handleImageUpload} /> */}
-          <h6
-            style={{
-              fontFamily: "Poppins",
-              textAlign: "start",
-              marginTop: "-1rem",
-            }}
-          >
-            Image:
-          </h6>
-          <div className={styles.uploadImg}>
+        {/* <UploadImg onImageUpload={handleImageUpload} /> */}
+        <h6
+          style={{
+            fontFamily: "Poppins",
+            textAlign: "start",
+            marginTop: "-1rem",
+          }}
+        >
+          {t("product.image", { lng: currentLanguage })}
+        </h6>
+        <div className={styles.uploadImg}>
           <UploadImg
             onImageUpload={handleImageUpload}
             uploadedImages={product.images}
@@ -341,14 +343,13 @@ export const Product = () => {
               setProduct((product) => ({ ...product, images: [] }))
             }
           />
-          </div>
-          {/* {errors.images && (
+        </div>
+        {/* {errors.images && (
              <p className={styles.error}>{errors.images}</p>
           )} */}
-          <br />
-          <button className={styles.create}>Create</button>
-        </form>
-      </div>
-
+        <br />
+        <button className={styles.create}>{t("product.create", { lng: currentLanguage })}</button>
+      </form>
+    </div>
   );
 };

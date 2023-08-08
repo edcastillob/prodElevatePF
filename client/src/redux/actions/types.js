@@ -1,11 +1,13 @@
 // Products
 export const SHOW_PRODUCTS = "SHOW_PRODUCTS";
+export const SHOW_PRODUCTS_INACTIVE = "SHOW_PRODUCTS_INACTIVE";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const GET_PRODUCT_NAME = "GET_PRODUCT_NAME";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const ACTIVE_PRODUCT = "ACTIVE_PRODUCT";
 
 // Category
 export const ADD_CATEGORY = "ADD_CATEGORY";
@@ -24,13 +26,14 @@ export const DELETE_PROVIDER = "DELETE_PROVIDER";
 //User
 export const LOGIN = "LOGIN";
 export const ADD_USER = "ADD_USER";
-export const ADD_ROLE = "ADD_ROLE";
 export const VALIDATION_USER = "VALIDATION_USER";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const DELETE_USERS = "DELETE_USERS";
 export const EDIT_USERS = "EDIT_USERS";
 export const GET_USER_ID = "GET_USER_ID";
 export const GET_USER_EMAIL = "GET_USER_EMAIL";
+export const GET_USER_SYSTEM_LOG = "GET_USER_SYSTEM_LOG";
+export const POST_VERIFY_USER = "POST_VERIFY_USER";
 
 //Cart
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -49,3 +52,8 @@ export const PRICE_HIGHER_LOWER = "PRICE_HIGHER_LOWER";
 export const PRICE_LOWER_HIGHER = "PRICE_LOWER_HIGHER";
 export const FILTER_NAME = "FILTER_NAME";
 export const FILTER_DATA = "FILTER_DATA";
+
+//Role
+
+export const ADD_ROLE = "ADD_ROLE";
+export const GET_ROLE = "GET_ROLE";

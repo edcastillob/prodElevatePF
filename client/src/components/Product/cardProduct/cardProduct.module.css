@@ -35,7 +35,6 @@
     border: none;
     background-color: none;
     background: none;
-
     
 
 }
@@ -130,5 +129,11 @@
         transform: scale(0.97);
         transition: .3s;
 
+    }
+}
+
+@media (max-width: 1400px) {
+    .cardContainer {
+        width: 265px;
     }
 }

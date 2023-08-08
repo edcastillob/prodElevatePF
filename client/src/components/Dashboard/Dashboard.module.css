@@ -494,7 +494,7 @@
 
 .img{
   width: 90px;
-  height: auto;
+  height: 90px;
 }
 
 
@@ -568,4 +568,15 @@
   justify-content: flex-start;
   gap: 0.5rem;
   font-family: 'Poppins';
+}
+.divYes{
+  /* border: 1px solid white; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* right: 130px; */
+  padding-left: 1rem;
+  
+  
 }

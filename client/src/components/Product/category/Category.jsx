@@ -5,8 +5,10 @@ import styles from "./Category.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import validateForm from './validation';
+import { useTranslation } from 'react-i18next';
 
-export const Category = () => {
+export const Category = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const [category, setCategory] = useState({
     name: "",
@@ -38,14 +40,14 @@ export const Category = () => {
 
     if (Object.keys(errors).length === 0) {
       dispatch(addCategory(category));
-      toast.success("¡Category created successfully!");
+      toast.success(t("category.successfully", { lng: currentLanguage }));
       setCategory({
         name: "",
         description: "",
       });
       serErrors({});
     } else {
-      alert("Data is Incompleted. All fields must be filled Correctly");
+      alert(t("category.incompleted", { lng: currentLanguage }));
     }
   };
   return (
@@ -53,7 +55,7 @@ export const Category = () => {
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.formContainer}>
           <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
-            New Category
+          {t("category.new-category", { lng: currentLanguage })}
           </h4>
           {/* <label htmlFor="isActive">active</label>
         <input
@@ -71,7 +73,7 @@ export const Category = () => {
             className="form-control mb-3 w-75"
             type="text"
             name="name"
-            placeholder="Category Name"
+            placeholder={t("category.category-name", { lng: currentLanguage })}
             value={category.name}
             onChange={handleChange}
           />
@@ -90,7 +92,7 @@ export const Category = () => {
               height: "30%",
               fontFamily: "Poppins",
             }}
-            placeholder="Enter Category Description..."
+            placeholder={t("category.category-description", { lng: currentLanguage })}
             value={category.description}
             onChange={handleChange}
           />
@@ -98,7 +100,7 @@ export const Category = () => {
         <p className={styles.error}>{errors.description}</p>
       )}
         <br />
-          <button className={styles.create}>Create</button>
+          <button className={styles.create}>{t("category.create", { lng: currentLanguage })}</button>
         </form>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import styles from "./cardProduct.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,12 +9,15 @@ import {
 } from "../../../redux/actions/actions";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 
-export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
+
+export const CardProduct = ({ product, user, userLocal, handleSignIn, currentLanguage }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isFav, setIsFav] = useState(false);
   const { id, name, images, salePrice, brand, condition, categoryId } = product;
   const selectedCategory = useSelector((state) => state.category);
+  const { t } = useTranslation('global');
   const category =
     selectedCategory.find((cat) => cat.id === categoryId)?.name ||
     "Unknown Category";
@@ -30,6 +33,8 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
     dispatch(addToCart(product));
     navigate("/cart");
   };
+
+  const userActive = useSelector((state) => state.userLog);
 
   const handleFavorite = (event) => {
     if (isFav) {
@@ -58,6 +63,8 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        const userEmail = user.email;
+        console.log("desde useEffect: ",userEmail);
         setCurrentUser(user);
       } else {
         setCurrentUser(null);
@@ -67,11 +74,9 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
 
   const productWithUser = {
     ...product,
-    user: currentUser
-      ? currentUser.uid
-      : "691e3625-97aa-403e-9ec2-57b400b09ffa",
+    user:  userActive.email,
   };
-
+  console.log('userActive', userActive.email)
   return (
     <div className={styles.cardContainer}>
       <Link
@@ -79,38 +84,48 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn }) => {
         to={`/productid/${id}`}
         className={styles.link}
       >
-
         <div className={styles.divImg}>
           <img className={styles.img} src={images} alt="product" />
         </div>
       </Link>
       <div className={styles.description}>
-      {isFav ? (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3 style={{ color: "#000924" }}>
-              <ion-icon name="heart"></ion-icon>
-            </h3>
-          </button>
-        ) : (
-          <button className={styles.favButton} onClick={handleFavorite}>
-            <h3>
-              <ion-icon name="heart-empty"></ion-icon>
-            </h3>
-          </button>
-        )}
-        <h6 className={styles.title}>{name}</h6>
+        {userActive.isActive === true ? (
+          <div>
+            {isFav ? (
+              <button className={styles.favButton} onClick={handleFavorite}>
+                <h3 style={{ color: "#000924" }}>
+                  <ion-icon name="heart"></ion-icon>
+                </h3>
+              </button>
+            ) : (
+              <button className={styles.favButton} onClick={handleFavorite}>
+                <h3>
+                  <ion-icon name="heart-empty"></ion-icon>
+                </h3>
+              </button>
+            )}
+          </div>
+        ) : null}
+        <NavLink
+          title="Detail Product"
+          to={`/productid/${id}`}
+          style={{ textDecoration: "none" }}
+          // className={styles.link}
+        >
+          <h6 className={styles.title}>{name}</h6>
+        </NavLink>
         <h6 className={styles.category}> {category}</h6>
-        <span className={styles.priceLabel}>Brand</span>
+        <span className={styles.priceLabel}>{t("cardProduct.brand", { lng: currentLanguage })}</span>
         <h6 className={styles.price}>{brand}</h6>
-        <span className={styles.priceLabel}>Condition</span>
+        <span className={styles.priceLabel}>{t("cardProduct.condition", { lng: currentLanguage })}</span>
         <h6 className={styles.price}>{condition}</h6>
-        <span className={styles.priceLabel}>Price</span>
+        <span className={styles.priceLabel}>{t("cardProduct.price", { lng: currentLanguage })}</span>
         <h6 className={styles.price}>${salePrice}</h6>
         <button
           className={styles.buttonCart}
           onClick={() => handledAddToCart(product)}
         >
-          Add to Cart
+          {t("cardProduct.add-to-cart", { lng: currentLanguage })}
         </button>
       </div>
     </div>

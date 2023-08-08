@@ -13,21 +13,47 @@
 .divLeft{
     /* border: 1px solid white; */
     width: 30%;
-    
+    font-family: 'Poppins';
+    font-size: 15px;
 }
 
 .divRight{
     /* border: 1px solid white; */
-    width: 40%;
+    width: 50%;
     gap: 1.5rem;
     display: flex;
+    position: relative;
 }
 
-.divRight p{
+.info p{
     color: #fff;
     transition: .3s;
+    font-size: 15px;
+    font-family: "Poppins";
     &:hover{
         opacity: 0.7;
         transition: .5s;
     }
 }
+
+@media (max-width: 768px) {
+    .footerContainer {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .divLeft,
+    .divRight {
+      width: 100%;
+    }
+  
+    .divRight {
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  
+    .info p {
+      margin: 0.5rem;
+      font-size: 15px;
+    }
+  }

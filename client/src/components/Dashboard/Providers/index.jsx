@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteProvider, getProvider } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import { Modal, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 
 
-
-const Providers = ({ toggleActive }) => {
+const Providers = ({ toggleActive, currentLanguage }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [providerIdToDelete, setProviderIdToDelete] = useState(null);
+  const { t } = useTranslation('global');
 
   const provider = useSelector((state) => state.provider);
   const [searchProvider, setSearchProvider] = useState("");
@@ -28,8 +29,8 @@ const Providers = ({ toggleActive }) => {
     setFoo(provider)
   }, [])
 
-  if (!provider || provider.length === 0) return <div>Loading...</div>;
-  if (!Array.isArray(provider)) return <div>Loading...</div>;
+  if (!provider || provider.length === 0) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
+  if (!Array.isArray(provider)) return <div>{t("user-all.loading", { lng: currentLanguage })}</div>;
 
   const sortedProvider = provider
     .slice()
@@ -97,7 +98,7 @@ const Providers = ({ toggleActive }) => {
       <div className={styles.customers}>
         <div className={styles.wrapper}>
           <div className={styles.customersHeader}>
-            <h2 style={{fontFamily:'Poppins'}}>Providers</h2>
+            <h2 style={{fontFamily:'Poppins'}}>{t("providers-all.providers", { lng: currentLanguage })}</h2>
           </div>
 
           {/* input search */}
@@ -105,7 +106,7 @@ const Providers = ({ toggleActive }) => {
             <label>
               <input
                  type="text"
-                 placeholder="Search provider"
+                 placeholder={t("providers-all.search", { lng: currentLanguage })}
                  value={searchProvider}
                  onChange={(event) => setSearchProvider(event.target.value)}
               />
@@ -125,12 +126,11 @@ const Providers = ({ toggleActive }) => {
                       onChange={handleChangeCheckBox}
                     />
                   </th>
-                  <th>Name</th>
-                  <th>Document N°</th>
+                  <th>{t("providers-all.name", { lng: currentLanguage })}</th>
+                  <th>{t("providers-all.document", { lng: currentLanguage })}</th>
                   <th>Email</th>
-                  <th>Phone N°</th>
-                  {/* <th>Country</th> */}
-                  <th>Actions</th>
+                  <th>{t("providers-all.phone", { lng: currentLanguage })}</th>
+                  <th>{t("providers-all.actions", { lng: currentLanguage })}</th>
                 </tr>
               </thead>
               <tbody>

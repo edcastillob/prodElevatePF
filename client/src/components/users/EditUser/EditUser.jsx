@@ -8,30 +8,35 @@ import ReactQuill from "react-quill";
 // import loadingImg from "../../../assets/loading.png";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { editUser, getUserId } from "../../../redux/actions/actions";
+import { editUser, getRole, getUserId } from "../../../redux/actions/actions";
+import { useTranslation } from 'react-i18next';
 
-export const EditUser = () => {
+export const EditUser = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   useEffect(() => {
     dispatch(getUserId(id));
+    dispatch(getRole());
   }, [dispatch, id]);
   const users = useSelector((state) => state.users);
+  const roles = useSelector((state) => state.role);
   if (users && !users.isActive) {
     users.isActive = "f";
   }
 
   const [changeUser, setChangeUser] = useState({
-    name: "",
-    identification: "",
-    email: "",
-    numPhone: "",
-    address: "",
-    // password: "",
-    image: [],
+    name: users.name,
+    email: users.email,
     isActive: "",
+    roleId: "",
+    // identification: "",
+    // numPhone: "",
+    // address: "",
+    // password: "",
+    // image: [],
   });
 
   const [errors, setErrors] = useState({});
@@ -39,34 +44,37 @@ export const EditUser = () => {
   useEffect(() => {
     if (
       users.name &&
-      users.identification &&
       users.email &&
-      users.numPhone &&
-      users.address &&
       users.isActive &&
-      //   users.password &&
-      users.image
+      users.roleId 
+      // users.identification &&
+      // users.numPhone &&
+      // users.address &&
+      // users.password &&
+      // users.image
     ) {
       setChangeUser({
-        name: users.name,
-        identification: users.identification,
-        email: users.email,
-        numPhone: users.numPhone,
-        address: users.address,
         isActive: users.isActive,
+        roleId: users.roleId,
+        name: users.name,
+        email: users.email,
+        // identification: users.identification,
+        // numPhone: users.numPhone,
+        // address: users.address,
         // password: users.password,
-        image: users.image,
+        // image: users.image,
       });
     }
   }, [
     users.name,
-    users.identification,
     users.email,
-    users.numPhone,
-    users.address,
+    users.roleId,
     users.isActive,
-    //   users.password,
-    users.image,
+    // users.identification,
+    // users.numPhone,
+    // users.address,
+    // users.password,
+    // users.image,
   ]);
 
   const handleChange = (event) => {
@@ -81,7 +89,7 @@ export const EditUser = () => {
     event.preventDefault();
     // console.log("Datos enviados: ", changeUser);
     dispatch(editUser(id, changeUser));
-    toast.success("¡Edit user successfully!");
+    toast.success(t("edit-user.successfully", { lng: currentLanguage }));
     navigate("/dashboard");
   };
 
@@ -98,18 +106,52 @@ export const EditUser = () => {
       image: [...(imgProduct.image || []), ...imageUrls],
     }));
   };
-
+  console.log("el usuario: ",users)
+  console.log("el change: ",changeUser)
+  // console.log("el rol: ",roles)
+  console.log(users)
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-        <h4 style={{ fontFamily: "Poppins" }}>Edit User</h4>
+        <div className={styles.divTitle}>
+        <h4 style={{ fontFamily: "Poppins" }}>{t("edit-user.edit-user", { lng: currentLanguage })}</h4>
+        </div>
+        {/* _____________Status________________ */}
+        <label>{t("edit-user.status", { lng: currentLanguage })}</label>
+        <select
+          className="form-control mb-3 w-100"
+          name="isActive"
+          value={changeUser.isActive}
+          defaultValue={users.isActive}
+          onChange={handleChange}
+        >
+          <option value="t">{t("edit-user.active", { lng: currentLanguage })}</option>
+          <option value="f">{t("edit-user.inactive", { lng: currentLanguage })}</option>
+        </select>
+
+        {/* _____________Role________________ */}
+        <label>{t("edit-user.role", { lng: currentLanguage })}</label>
+        <select
+          className="form-control mb-3 w-100"
+          name="roleId"
+          value={changeUser.roleId} // Usamos directamente el roleId del estado local
+          onChange={handleChange}
+          aria-readonly
+        >
+          {roles.map((rol) => (
+            <option key={rol.id} value={rol.id}>
+              {rol.name}
+            </option>
+          ))}
+        </select>
+
         {/* _____________NAME________________ */}
-        <label>Name:</label>
+        <label>{t("edit-user.name", { lng: currentLanguage })}</label>
         <input
           type="text"
           name="name"
-          placeholder="Fullname"
-          className={`form-control mb-3 w-75 ${errors.name && "is-invalid"}`}
+          placeholder={t("edit-user.fullname", { lng: currentLanguage })}
+          className={`form-control mb-3 w-100 ${errors.name && "is-invalid"}`}
           onChange={handleChange}
           value={changeUser.name}
         />
@@ -121,16 +163,17 @@ export const EditUser = () => {
           type="email"
           name="email"
           placeholder="Email"
-          className={`form-control mb-3 w-75 ${errors.email && "is-invalid"}`}
+          className={`form-control mb-3 w-100 ${errors.email && "is-invalid"}`}
           onChange={handleChange}
           value={changeUser.email}
         />
         {/* {errors.email && (
             <div className="invalid-feedback">{errors.email}</div>
           )} */}
+        {/* Estado del usuario */}
 
         {/* _____________ID________________ */}
-        <label>Identification:</label>
+        {/* <label>Identification:</label>
         <input
           type="text"
           name="identification"
@@ -140,13 +183,13 @@ export const EditUser = () => {
           }`}
           onChange={handleChange}
           value={changeUser.identification}
-        />
+        /> */}
         {/* {errors.identification && (
             <div className="invalid-feedback">{errors.identification}</div>
           )} */}
 
         {/* _____________PHONE NUMBER________________ */}
-        <label>Phone:</label>
+        {/* <label>Phone:</label>
         <input
           type="text"
           name="numPhone"
@@ -156,13 +199,13 @@ export const EditUser = () => {
           }`}
           onChange={handleChange}
           value={changeUser.numPhone}
-        />
+        /> */}
         {/* {errors.numPhone && (
             <div className="invalid-feedback">{errors.numPhone}</div>
           )} */}
 
         {/* _____________ADDRESS________________ */}
-        <label>Address:</label>
+        {/* <label>Address:</label>
         <input
           type="text"
           name="address"
@@ -170,26 +213,14 @@ export const EditUser = () => {
           className={`form-control mb-3 w-75 ${errors.address && "is-invalid"}`}
           onChange={handleChange}
           value={changeUser.address}
-        />
+        /> */}
         {/* {errors.address && (
             <div className="invalid-feedback">{errors.address}</div>
           )} */}
 
-        {/* Estado del usuario */}
-        <label>Status:</label>
-        <select
-          className="form-control mb-3 w-75"
-          name="isActive"
-          value={changeUser.isActive}
-          // onChange={handleChange}
-          aria-readonly
-        >
-          <option value="t">Activo</option>
-          <option value="f">Inactivo</option>
-        </select>
         <br />
 
-        <div className="d-flex align-items-center">
+        {/* <div className="d-flex align-items-center">
           <div>
             {changeUser.image ? (
               <div>
@@ -242,17 +273,19 @@ export const EditUser = () => {
                     }))
                   }
                 />
+              
               </div>
             )}
           </div>
         </div>
 
         <br />
-        <br />
-
+        <br /> */}
+        <div className={styles.divBtn}>
         <button type="submit" className={styles.create}>
-          Update User
+          {t("edit-user.update", { lng: currentLanguage })}
         </button>
+        </div>
       </form>
     </div>
   );

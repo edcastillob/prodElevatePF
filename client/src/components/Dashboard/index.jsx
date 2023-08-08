@@ -18,10 +18,12 @@ import Orders from "./Orders";
 import { Configuration } from "../Configuration/Configuration";
 import { ShowCategory } from "../Product/category/ShowCategory/ShowCategory";
 import { UsersAll } from "../users/UsersAll/UsersAll";
+import { useTranslation } from 'react-i18next';
 
-const Panel = () => {
+const Panel = ({ currentLanguage }) => {
   const [isActive, setIsActive] = useState(false);
   const [view, setView] = useState("panel");
+  const { t } = useTranslation('global');
 
   const toggleActive = () => {
     setIsActive(!isActive);
@@ -30,25 +32,25 @@ const Panel = () => {
   const renderView = () => {
     switch (view) {
       case "panel":
-        return <Dash toggleActive={toggleActive} />;
+        return <Dash toggleActive={toggleActive} currentLanguage={currentLanguage} />;
       case "users":
-        return <UsersAll toggleActive={toggleActive} />;
+        return <UsersAll toggleActive={toggleActive} currentLanguage={currentLanguage} />;
       case "customers":
-        return <Customers toggleActive={toggleActive} />;
+        return <Customers toggleActive={toggleActive} currentLanguage={currentLanguage} />;
       case "reviews":
         return <Reviews />;
       case "products":
-        return <Products toggleActive={toggleActive} />;
+        return <Products toggleActive={toggleActive} currentLanguage={currentLanguage}/>;
       case "providers":
-        return <Providers toggleActive={toggleActive}/>;
+        return <Providers toggleActive={toggleActive} currentLanguage={currentLanguage}/>;
       case "orders":
         return <Orders />;
       case "settings":
-        return <Configuration toggleActive={toggleActive} />;
+        return <Configuration toggleActive={toggleActive} currentLanguage={currentLanguage}/>;
       case "category":
-        return <ShowCategory toggleActive={toggleActive} />;
+        return <ShowCategory toggleActive={toggleActive} currentLanguage={currentLanguage}/>;
       default:
-        return <Dash toggleActive={toggleActive} />;
+        return <Dash toggleActive={toggleActive} currentLanguage={currentLanguage}/>;
     }
   };
 
@@ -64,13 +66,13 @@ const Panel = () => {
                 <img src={logo} alt="logo" width={70} height={70} />
             </li>
             </Link>
-                <span style={{fontWeight:'700', color:'#fff'}} className={styles.titles}>ADMIN</span>
+                <span style={{fontWeight:'700', color:'#fff'}} className={styles.titles}>{t("dashboard.admin", { lng: currentLanguage })}</span>
             <li>
               <a href="#" onClick={() => setView("panel")}>
                 <span className={styles.icon}>
                   <AiOutlineDashboard size="1.6em" />
                 </span>
-                <span className={styles.titles}>Dashboard</span>
+                <span className={styles.titles}>{t("dashboard.dashboard", { lng: currentLanguage })}</span>
               </a>
             </li>
 
@@ -79,7 +81,7 @@ const Panel = () => {
                 <span className={styles.icon}>
                   <BiUser size="1.6em" />
                 </span>
-                <span className={styles.titles}>Users</span>
+                <span className={styles.titles}>{t("dashboard.users", { lng: currentLanguage })}</span>
               </a>
             </li>
 
@@ -88,7 +90,7 @@ const Panel = () => {
                 <span className={styles.icon}>
                   <AiOutlineShoppingCart size="1.6em" />
                 </span>
-                <span className={styles.titles}>Products</span>
+                <span className={styles.titles}>{t("dashboard.products", { lng: currentLanguage })}</span>
               </a>
             </li>
             
@@ -97,7 +99,7 @@ const Panel = () => {
                 <span className={styles.icon}>
                   <BiCategory size="1.6em" />
                 </span>
-                <span className={styles.titles}>Categories</span>
+                <span className={styles.titles}>{t("dashboard.categories", { lng: currentLanguage })}</span>
               </a>
             </li>
 
@@ -106,7 +108,7 @@ const Panel = () => {
                 <span className={styles.icon}>
                   <TbTruckDelivery size="1.6em" />
                 </span>
-                <span className={styles.titles}>Providers</span>
+                <span className={styles.titles}>{t("dashboard.providers", { lng: currentLanguage })}</span>
               </a>
             </li>
             
@@ -143,7 +145,7 @@ const Panel = () => {
                 <span className={styles.icon}>
                   <AiOutlineSetting size="1.6em" />
                 </span>
-                <span className={styles.titles}>Settings</span>
+                <span className={styles.titles}>{t("dashboard.settings", { lng: currentLanguage })}</span>
               </a>
             </li>
           </ul>
