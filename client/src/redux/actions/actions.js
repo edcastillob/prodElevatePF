@@ -40,6 +40,8 @@ import {
   SHOW_PRODUCTS_INACTIVE,
   ACTIVE_PRODUCT,
   POST_VERIFY_USER,
+  ADD_REVIEW,
+  SHOW_REVIEWS_ID,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -647,5 +649,30 @@ export const verifyUser = (userData) => {
   };
 };
 
+export const addComment = (reviewData) => {
+  return async () => {
+    try {
+      console.log("Desde actions : ", reviewData)
+      await axios.post(`${ENDPOINT}comment`, reviewData);
+      dispatch({
+        type: ADD_REVIEW,
+        payload: {
+          data: response.data,
+        },
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+};
 
-      
+export const showReviewsId = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ENDPOINT}comment/${id}`);
+      dispatch({ type: SHOW_REVIEWS_ID, payload: response.data });
+    } catch (error) {
+      throw new Error("Error fetching review.");
+    }
+  };
+};

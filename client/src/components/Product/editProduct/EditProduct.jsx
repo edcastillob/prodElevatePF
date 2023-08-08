@@ -144,7 +144,7 @@ export const EditProduct = ({ currentLanguage }) => {
   const handleRemoveImage = () => {
     setChangeProduct((prevProduct) => ({
       ...prevProduct,
-      images: "",
+      images: [],
     }));
   };
 
@@ -389,44 +389,46 @@ export const EditProduct = ({ currentLanguage }) => {
           <div>
             <div className="d-flex align-items-center">
               <div>
-                {changeProduct.images ? (
-                  <div>
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-sm"
-                      onClick={handleRemoveImage}
-                    >
-                      X
-                    </button>
-                    <img
-                      src={changeProduct.images}
-                      alt=""
-                      style={{ width: "200px", height: "auto" }}
-                    />
-                  </div>
-                ) : (
-                  <div>
-                    <h6
-                      style={{
-                        fontFamily: "Poppins",
-                        textAlign: "start",
-                        marginTop: "-1rem",
-                      }}
-                    >
-                      {t("product.image", { lng: currentLanguage })}
-                    </h6>
-                    <UploadImg
-                      onImageUpload={handleImageUpload}
-                      uploadedImages={changeProduct.images}
-                      clearUploadedImages={() =>
-                        setChangeProduct((product) => ({
-                          ...product,
-                          images: [],
-                        }))
-                      }
-                    />
-                  </div>
-                )}
+              <div>
+  {changeProduct.images.length === 0 ? (
+    <div>
+      <h6
+        style={{
+          fontFamily: "Poppins",
+          textAlign: "start",
+          marginTop: "-1rem",
+        }}
+      >
+        {t("product.image", { lng: currentLanguage })}
+      </h6>
+      <UploadImg
+        onImageUpload={handleImageUpload}
+        uploadedImages={changeProduct.images}
+        clearUploadedImages={() =>
+          setChangeProduct((product) => ({
+            ...product,
+            images: [],
+          }))
+        }
+      />
+    </div>
+  ) : (
+    <div>
+      <button
+        type="button"
+        className="btn btn-danger btn-sm"
+        onClick={handleRemoveImage}
+      >
+        X
+      </button>
+      <img
+        src={changeProduct.images}
+        alt=""
+        style={{ width: "200px", height: "auto" }}
+      />
+    </div>
+  )}
+</div>
                 <br />
               </div>
             </div>
