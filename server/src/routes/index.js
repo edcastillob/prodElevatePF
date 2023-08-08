@@ -26,18 +26,19 @@ const express = require("express");
 const passport = require("passport");
 const authController = require("../controllers/authController");
 const { postStripe } = require("../controllers/POST/postStripe");
-const { postFavorite } = require("../controllers/POST/postFavorite");
+const  postFavorite  = require("../controllers/POST/postFavorite");
 const { deleteUser } = require("../controllers/DELETE/deleteUser");
 const { deleteProduct } = require("../controllers/DELETE/deleteProduct");
 const { deleteProvider } = require("../controllers/DELETE/deteleProvider");
 const { deleteCategory } = require("../controllers/DELETE/deleteCategory");
 const { getProviderId } = require("../controllers/GET/getProviderId");
 const { deleteFavorite } = require("../controllers/DELETE/deleteFavorite");
-
-const { getUserId } = require("../controllers/GET/getUserId");
+const getCommentsByProduct = require("../controllers/GET/getComment");
+const {createComment, createReply} = require("../controllers/POST/postComment")
+const { getUserId} = require("../controllers/GET/getUserId");
 const { getUserByEmail } = require("../controllers/GET/getUserByEmail");
 const { checkEmail } = require("../controllers/authGoogle");
-
+const  {getProductReviewsWithFilters}  = require("../controllers/Reviews/GET/filterReviews");
 const router = Router();
 
 const mailerRoutes = require("./mailerRoutes");
@@ -63,6 +64,7 @@ router.get("/", function (req, res) {
 router.post("/login", passport.authenticate("local"), (req, res) => {
   const { name, identification, numPhone, address, image, email } =
     req.user.dataValues;
+    console.log("Usuario autenticado:", req.user);
   res.setHeader("Access-Control-Allow-Credentials", "true"); // Habilitar las credenciales
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Define aquí la URL de tu frontend
   res.send({
@@ -147,5 +149,17 @@ router.post("/favorite", postFavorite);
 router.delete("/favorite/:id", deleteFavorite);
 
 router.post("/filter/data", postFilterData);
+//////// Comentarios
+// Ruta para crear un nuevo comentario
+router.post("/comments", createComment);
+
+// Ruta para obtener los comentarios de un producto
+router.get("/products/:productId/comments", getCommentsByProduct);
+
+// Ruta para responder a un comentario
+router.put("/comments/:commentId/reply", createReply);
+router.get("/:productId/reviewsfilter", getProductReviewsWithFilters);
+
+
 
 module.exports = router;

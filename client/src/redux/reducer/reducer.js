@@ -33,10 +33,16 @@ import {
   GET_USER_ID,
   FILTER_DATA,
   FILTER_NAME,
+  GET_ALL_REVIEWS,
+  GET_COMMENTS_BY_PRODUCT,
+  CREATE_COMMENT,
+  CREATE_REPLY,
+
   GET_USER_EMAIL,
   GET_ROLE,
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
+  FILTER_REVIEWS,
   POST_VERIFY_USER,
 } from "../actions/types";
 
@@ -60,8 +66,11 @@ const initialState = {
   user: null,
   role: [],
   users: [],
+  comments: [], // Aquí se inicializa como un arreglo vacío
   userMail: [],
+  productReviews: [],
   userLog: [],
+  filteredReviews: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -287,6 +296,7 @@ function reducer(state = initialState, actions) {
 
     //Favorite
 
+
     case ADD_FAV:
       return { ...state, favorites: actions.payload };
     case REMOVE_FAV:
@@ -370,13 +380,13 @@ function reducer(state = initialState, actions) {
         ),
       };
     case GET_USER_ID:
-      // console.log("User id: ", actions.payload);
+      
       return {
         ...state,
         users: actions.payload,
       };
     case GET_USER_EMAIL:
-      // console.log("User mail reducer: ", actions.payload);
+     
       return {
         ...state,
         userMail: actions.payload,
@@ -390,21 +400,59 @@ function reducer(state = initialState, actions) {
         totalPages: actions.payload.totalPages,
         products: [],
       };
-    case GET_ROLE:
-      return {
-        ...state,
-        role: actions.payload,
-      };
-    case GET_USER_SYSTEM_LOG:
-      return {
-        ...state,
-        userLog: actions.payload,
-        favorites: [],
+      case GET_ROLE:
+        return {
+          ...state,
+          role: actions.payload,
+        };
+        case GET_USER_SYSTEM_LOG:
+          return {
+            ...state,
+            userLog: actions.payload,
+            favorites: [],
       };
     case POST_VERIFY_USER:
       return {
         ...state,
         users: actions.payload,
+      };
+          case GET_ALL_REVIEWS :
+            return {
+                ...state,
+                productReviews: actions.payload
+            }
+            case CREATE_COMMENT:
+          // Agregar el nuevo comentario al estado
+          return {
+            ...state,
+            comments: [...state.comments, actions.payload],
+          };
+        case GET_COMMENTS_BY_PRODUCT:
+          // Obtener los comentarios del producto del estado
+          return {
+            ...state,
+            comments: actions.payload,
+          };
+        case CREATE_REPLY:
+          // Agregar la respuesta al comentario en el estado
+          const { reply, commentId } = actions.payload;
+          const updatedComments = state.comments.map((comment) => {
+            if (comment.id === commentId) {
+              return {
+                ...comment,
+                replies: [...(comment.replies || []), reply],
+              };
+            }
+            return comment;
+          });
+          return {
+            ...state,
+            comments: updatedComments,
+          };
+          case FILTER_REVIEWS:
+      return {
+        ...state,
+        filteredReviews: actions.payload,
       };
     default:
       return state;
