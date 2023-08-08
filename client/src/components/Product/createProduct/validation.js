@@ -6,7 +6,7 @@ export default function validateForm(
     description,
     purchasePrice,
     salePrice,
-    minimunStock,
+    minimumStock,
     provider,
     images
 ) {
@@ -27,33 +27,30 @@ export default function validateForm(
     }; 
 
     if (!condition) {
-        errors.description = "Condition is required";
+        errors.condition = "Condition is required";
     }; 
 
     if (!description) {
         errors.description = "Description is required";
     } 
 
-    let purchase = parseFloat(purchasePrice)
     if (!purchasePrice) {
         errors.purchasePrice = "Purchase Price is required";
-    } else if (typeof purchase !== "number") {
+    } else if (!parseFloat(purchasePrice)) {
         errors.purchasePrice = "Purchase Price must be a number";
     };
 
-    let sale = parseFloat(salePrice)
     if (!salePrice) {
         errors.salePrice = "Sale Price is required";
-    } else if (typeof sale !== "number") {
+    } else if (!parseFloat(salePrice)) {
         errors.salePrice = "Sale Price must be a number";
     };
 
-    let minStock = parseInt(minimunStock); 
-    if (minimunStock) {
-        if (typeof minStock !== "number") {
-            errors.minimunStock = "Minimun stock must be a number";
-        }
-    };
+    if (!minimumStock) {
+        errors.minimumStock = "Minimun stock is required";
+    } else if (!parseInt(minimumStock)) {
+        errors.minimumStock = "Minimun stock must be a number";
+    }
 
     if (provider.length === 0) {
         errors.provider = "Provider is required";
