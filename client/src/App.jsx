@@ -64,7 +64,8 @@ i18next.init({
     },
   },
 });
-
+import { ThemeProvider } from '@mui/material/styles';
+import { lightTheme, darkTheme }from './theme'; 
 function App({ user, userLocal }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -141,9 +142,13 @@ function App({ user, userLocal }) {
 
   // console.log('userActive: ', userActive)
   console.log("rol de user: ", userActive.roleId);
-
+  const [currentMode,setCurrentMode] = useState();
+  const toggleDarkMode = () => {
+    setCurrentMode(currentMode === 'light' ? 'dark' : 'light');
+  };
   return (
     <>
+     <ThemeProvider theme={currentMode === 'light' ? lightTheme : darkTheme}>
     <I18nextProvider i18n={i18next}>
       {showNavBar && (
         <NavBar
@@ -156,6 +161,9 @@ function App({ user, userLocal }) {
       )}
       {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
       <div>
+      <button onClick={toggleDarkMode}>
+  {currentMode === 'light' ? 'Dark Mode' : 'Light Mode'}
+</button>
         <Routes>
           <Route exact path="/" element={<Landing 
           handleLanguageChange={handleLanguageChange} 
@@ -214,8 +222,10 @@ function App({ user, userLocal }) {
             currentLanguage={currentLanguage}
             handleLanguageChange={handleLanguageChange}
           />
+         
         </div>
       </I18nextProvider>
+      </ThemeProvider>
     </>
   );
 }

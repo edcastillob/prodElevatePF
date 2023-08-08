@@ -16,12 +16,13 @@ import Marquee from "react-fast-marquee";
 import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
-import { useTranslation } from 'react-i18next';
-import loading from "../../assets/loading.png"
+import { useTranslation } from "react-i18next";
+import loading from "../../assets/loading.png";
+import { css } from "@mui/system";
+import { useTheme } from "@mui/material/styles";
 
-
-export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
-  const { t } = useTranslation('global');
+export const Home = ({ user, userLocal, handleSignIn, currentLanguage }) => {
+  const { t } = useTranslation("global");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -124,22 +125,46 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
     }
   };
 
-  // const filteredProducts = optionProducts.filter((product) =>
-  //   product.name.toLowerCase().includes(searchProductNav.toLowerCase())
-  // );
+  const theme = useTheme();
+
+  // Establece estilos condicionales basados en el tema actual
+  const containerStyles = {
+    backgroundColor: theme.palette.background.default,
+    // Otros estilos según el tema...
+  };
+
+  const messageStyles = {
+    fontFamily: "Poppins",
+    fontSize: "1.3rem",
+    backgroundColor: "#e9e9e9",
+    padding: "0.2rem",
+  };
+
+  const titleFilterStyles = {
+    marginBottom: "20px",
+    marginTop: "20px",
+    fontSize: "20px",
+    backgroundColor: "none",
+    background: "none",
+    border: "none",
+  };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={containerStyles}>
       <div className={styles.welcome}>
-        <Marquee className={styles.message}>
-          Welcome to ProdElevate - The place for the exponential growth of your
-          business&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Marquee className={styles.message} style={messageStyles}>
+          Welcome to ProdElevate - The place for the exponential growth of
+          your business&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </Marquee>
       </div>
       <div className={styles.divSearch}>
         {/* search */}
         <form onChange={handleChange}>
-          <input type="text" className={`${styles.search}`} placeholder={t("home.search", { lng: currentLanguage })}/>
+          <input
+            type="text"
+            className={`${styles.search}`}
+            placeholder={t("home.search", { lng: currentLanguage })}
+          />
           <button
             type="submit"
             onClick={handleSubmit}
@@ -153,7 +178,9 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
               className="bi bi-search"
               viewBox="0 0 16 16"
             >
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+              />
             </svg>
           </button>
         </form>
@@ -169,8 +196,12 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
           />
         </div>
         <div>
-          <button onClick={handleOpenModal} className={styles.titleFilter}>
-          {t("home.filter", { lng: currentLanguage })}
+          <button
+            onClick={handleOpenModal}
+            className={styles.titleFilter}
+            style={titleFilterStyles}
+          >
+            {t("home.filter", { lng: currentLanguage })}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="34"
@@ -179,7 +210,9 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
               className="bi bi-funnel"
               viewBox="0 0 16 16"
             >
-              <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z" />
+              <path
+                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5"
+              />
             </svg>
           </button>
           <FilterModal
@@ -193,16 +226,15 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
 
       <div>
         {/* optionProducts */}
-
         {optionProducts.length === 0 ? (
           <div className={styles.loading}>
             <img src={loading} width={80} height={80} alt="loading" />
             <h3>Upsss</h3>
             <h5>
-            {t("home.product-not-found", { lng: currentLanguage })}
+              {t("home.product-not-found", { lng: currentLanguage })}
             </h5>
             <h6>
-            {t("home.please-try", { lng: currentLanguage })}
+              {t("home.please-try", { lng: currentLanguage })}
             </h6>
             <NavLink
               style={{ textDecoration: "none" }}
@@ -218,7 +250,11 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
         ) : (
           <div className={styles.cards}>
             {optionProducts?.map((product) => (
-              <CardProduct key={product.id} product={product} currentLanguage={currentLanguage} />
+              <CardProduct
+                key={product.id}
+                product={product}
+                currentLanguage={currentLanguage}
+              />
             ))}
           </div>
         )}
@@ -233,7 +269,9 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
           >
             <ion-icon name="arrow-round-back"></ion-icon>
           </button>
-          <span style={{marginLeft:'1rem', marginRight:'1rem'}}>{t("home.page", { lng: currentLanguage })} {currentPage}</span>
+          <span style={{ marginLeft: "1rem", marginRight: "1rem" }}>
+            {t("home.page", { lng: currentLanguage })} {currentPage}
+          </span>
           <button
             disabled={currentPage === totalPages}
             onClick={handleNextPage}
@@ -246,3 +284,4 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
     </div>
   );
 };
+
