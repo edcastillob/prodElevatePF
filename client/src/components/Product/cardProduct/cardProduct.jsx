@@ -9,25 +9,25 @@ import {
 } from "../../../redux/actions/actions";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next';
+import Reviews from "../../Reviews/Review";
+import axios from "axios";
+import { ENDPOINT } from "../../endpoint/ENDPOINT";import { useTranslation } from 'react-i18next';
 
 
-export const CardProduct = ({ product, user, userLocal, handleSignIn, currentLanguage }) => {
+export const CardProduct = ({ product, currentLanguage }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isFav, setIsFav] = useState(false);
   const { id, name, images, salePrice, brand, condition, categoryId } = product;
   const selectedCategory = useSelector((state) => state.category);
   const { t } = useTranslation('global');
   const category =
-    selectedCategory.find((cat) => cat.id === categoryId)?.name ||
-    "Unknown Category";
+    selectedCategory.find((cat) => cat.id === categoryId)?.name || "Unknown Category";
 
-  useEffect(() => {
-    dispatch(getCategory());
-  }, []);
-  const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const favorites = useSelector((state) => state.favorites);
+
+  const [productReviews, setProductReviews] = useState([]);
 
   const handledAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -72,13 +72,30 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn, currentLan
     });
   }, []);
 
+  useEffect(() => {
+    // Fetch reviews for the current product using Axios
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(`${ENDPOINT}reviews/product/${id}`);
+        const data = response.data;
+        setProductReviews(data);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+
+    fetchReviews();
+  }, [id]);
+
+  console.log("Product ID:", id); // Agregamos esta línea para verificar el valor de id
+
   const productWithUser = {
     ...product,
     user:  userActive.email,
   };
   console.log('userActive', userActive.email)
   return (
-    <div className={styles.cardContainer}>
+<div className={styles.cardContainer}>
       <Link
         title="Detail Product"
         to={`/productid/${id}`}
@@ -115,19 +132,21 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn, currentLan
           <h6 className={styles.title}>{name}</h6>
         </NavLink>
         <h6 className={styles.category}> {category}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.brand", { lng: currentLanguage })}</span>
+        <span className={styles.priceLabel}>Brand</span>
         <h6 className={styles.price}>{brand}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.condition", { lng: currentLanguage })}</span>
+        <span className={styles.priceLabel}>Condition</span>
         <h6 className={styles.price}>{condition}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.price", { lng: currentLanguage })}</span>
+        <span className={styles.priceLabel}>Price</span>
         <h6 className={styles.price}>${salePrice}</h6>
+          <Reviews reviews={productReviews} />
         <button
           className={styles.buttonCart}
           onClick={() => handledAddToCart(product)}
         >
-          {t("cardProduct.add-to-cart", { lng: currentLanguage })}
+          Add to Cart
         </button>
       </div>
     </div>
   );
 };
+ 

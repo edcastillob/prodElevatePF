@@ -34,16 +34,24 @@ import {
   GET_USER_ID,
   FILTER_DATA,
   FILTER_NAME,
+  GET_USER_REVIEWS,
+  GET_ALL_REVIEWS,
+  ADD_REVIEW,
+  GET_COMMENTS_BY_PRODUCT,
+  CREATE_COMMENT,
+  CREATE_REPLY,
+
   GET_USER_EMAIL,
   GET_ROLE,
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   ACTIVE_PRODUCT,
+  FILTER_REVIEWS,
   POST_VERIFY_USER,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -595,6 +603,83 @@ export const filterData = (filters, page) => {
     }
   };
 };
+//Reviews
+export const postReview = (reviewData) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`${ENDPOINT}reviews/create`, reviewData);
+      return response.data;
+    } catch (error) {
+      console.error('Error en la acción postReview:', error);
+      throw new Error('Error al crear la reseña');
+    }
+  };
+};
+export const getProductReviews = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`${ENDPOINT}reviews/product/${id}`);
+      return dispatch({ type: GET_ALL_REVIEWS, payload: response.data });
+    } catch (error) {
+      console.error('Error al obtener las reseñas del producto:', error);
+      
+    }
+  };
+};
+/////////// Comentarios
+export const createComment = (commentData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${ENDPOINT}comments`, commentData);
+      dispatch({
+        type: CREATE_COMMENT,
+        payload: response.data,
+      });
+      return response.data; 
+    } catch (error) {
+      console.error("Error al crear el comentario:", error);
+    }
+  };
+};
+
+// Acción para responder a un comentario
+export const createReply = (replyData) => {
+  return async (dispatch) => {
+    try {
+      const { commentId, text, userEmail } = replyData;
+      const response = await axios.put(`${ENDPOINT}comments/${commentId}/reply`, { text, userEmail });
+
+      if (response.status === 201) {
+        dispatch({
+          type: CREATE_REPLY,
+          payload: { reply: response.data, commentId: commentId },
+        });
+      } else {
+        console.error("Error creating reply");
+      }
+    } catch (error) {
+      console.error("Error al responder al comentario:", error);
+    }
+  };
+};
+
+// Acción para obtener los comentarios de un producto
+export const getCommentsByProduct = (productId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ENDPOINT}products/${productId}/comments`);
+      dispatch({
+        type: GET_COMMENTS_BY_PRODUCT,
+        payload: response.data,
+      });
+      
+    } catch (error) {
+      console.error("Error al obtener los comentarios:", error);
+    }
+  };
+};
+
+
 
 export const checkEmailAndRegister = (userData) => {
   return async (dispatch) => {
@@ -626,6 +711,18 @@ export const getProductsByName = (page, name) => {
   } catch (error) {
     throw new Error(error.message);
   }
+};
+
+export const filterReviews = (productId, filters) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ENDPOINT}${productId}/reviewsfilter`, { params: filters });
+      const filteredReviews = response.data;
+      dispatch({ type: FILTER_REVIEWS, payload: filteredReviews });
+    } catch (error) {
+      console.error("Error al filtrar reseñas:", error);
+    }
+  };
 };
 
 

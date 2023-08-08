@@ -131,6 +131,14 @@
 
     }
 }
+.reviewTitle {
+    flex-flow: column wrap;
+    width: 25%;
+    text-align: left;
+    justify-content: center;
+    display: inline-block;
+    
+  }
 
 @media (max-width: 1400px) {
     .cardContainer {

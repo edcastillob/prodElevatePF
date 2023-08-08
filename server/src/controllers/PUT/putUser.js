@@ -25,6 +25,7 @@ async function putUser(req, res) {
 
         return res.status(200).json(updatedUser);
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: error.message });
     }
 };
