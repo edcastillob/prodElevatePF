@@ -1,42 +1,24 @@
 .container {
     width: 100%;
-    height: 80vh;
-    margin: 0 auto;
-    padding: 0px;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-image: linear-gradient(to right, white, #f5f1f1);
-    
+    align-items: center;
 }
 
-.h2Contact {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.h2Contact h2 {
-    font-size: 60px;
-    margin-bottom: 40px;
+.container h2 {
+    font-style: italic;
+    margin-top: 10px;
 }
 
 .contactContainer {
-    height: 400px;
+    height: 415px;
     display: flex;
-    justify-content: space-between;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-
-.header {
-    text-align: left;
-    margin-top: -150px;
-    padding: 20px;
-  }
-  
-.h1 {
-    font-size: 25px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: auto;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .sideColumns {
@@ -51,6 +33,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .person {
@@ -58,13 +42,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    min-width: 280px;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 10px;
-    background-color: white;
-    width: 400px;
-    height: 120px;
-    margin-bottom: 20px;
-    padding: 20px;
 }
 
 .info {
@@ -75,7 +55,6 @@
     padding-right: 3px;
     text-align: left;
 }
-
 .info h6 {
     text-align: center;
 }
@@ -95,13 +74,30 @@
     color: green;
     cursor: pointer;
 }
-.hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s;
+
+@media (max-width: 1200px) {
+    .person {
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
   }
-  
-  .visible {
-    opacity: 1;
-    transform: translateY(0);
+
+ @media (max-width: 1115px) {
+    .contactContainer {
+        width: 55%;
+        height: auto;
+    }
+ }
+
+  @media (max-width: 708px) {
+    .contactContainer {
+        width: 90%;
+        height: auto;
+    }
+    .container h2 {
+        font-size: 23px;
+    }
+    .info li {
+        font-size: 15px;
+    }
   }

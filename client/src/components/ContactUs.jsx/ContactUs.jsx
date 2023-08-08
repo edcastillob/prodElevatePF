@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import photo from "../../assets/user.png";
 import yona from "../../assets/Yonathan.jpg";
 import vera from "../../assets/Veralucia.jpg";
@@ -9,17 +9,9 @@ import claudio from "../../assets/Claudio.jpg";
 import david from "../../assets/David.jpg";
 import styles from "./ContactUs.module.css";
 import { Link } from "react-router-dom";
-import { useSpring, animated } from "react-spring";
-
 
 export const ContactUs = () => {
- 
-  const fadeProps = useSpring({
-    opacity: 1,
-    transform: "translateY(0)",
-    from: { opacity: 0, transform: "translateY(20px)" },
-    config: { tension: 280, friction: 200 },
-  });
+
   const handleOpenInNewTab = (url) => {
     const newWindow = window.open(url, "_blank");
     if (newWindow) {
@@ -27,15 +19,12 @@ export const ContactUs = () => {
       newWindow.location = url;
     }
   };
+
   return (
-    <animated.div style={fadeProps} className={styles.container}>
-      
-        <div className={styles.h2Contact}>
-          <h2>Contact <b style={{color: "green" }}>The Team</b> of prodElevate</h2>
-        </div>
-        
+    <div className={styles.container}>
+          <h2>Contact <b style={{color: "green" }}>The Team</b> of prodElevate</h2>        
         <div className={styles.contactContainer}>
-        
+
           <div className={styles.sideColumns}>
             <div className={styles.person}>
               <div className={styles.info}>
@@ -204,16 +193,14 @@ export const ContactUs = () => {
                   </li>
                 </ul>
               </div>
-              
               <div className={styles.photo}>
                 <img src={claudio} alt="photo"></img>
               </div>
             </div>
-            
           </div>
-         
+
         </div>
 
-        </animated.div>
+    </div>
   );
 };

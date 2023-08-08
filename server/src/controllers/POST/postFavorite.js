@@ -12,7 +12,7 @@ const postFavorite = async (req, res) => {
     const searchUser = await User.findOne({ where: { email: user } });
 
     const favorite = await Favorite.create({
-      id : id,
+      id,
       name,
       description,
       salePrice,
@@ -26,9 +26,8 @@ const postFavorite = async (req, res) => {
     const allFav = await Favorite.findAll();
     return res.status(201).json(allFav);
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ err: error.message });
   }
 };
 
-module.exports =  postFavorite ;
+module.exports = { postFavorite };

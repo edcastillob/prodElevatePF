@@ -1,6 +1,7 @@
 const Stripe = require("stripe");
 require("dotenv").config();
 
+const { STRIPE_KEY, YOUR_DOMAIN } = process.env;
 
 //const stripe = Stripe(STRIPE_KEY);
 
@@ -9,7 +10,7 @@ require("dotenv").config();
 const stripe = Stripe(
   "sk_test_51NSJ3mCTMUVMB2lNSo9Zfos5FW7qJEqXjlfvb0P81YjC8pWe7nhyGY4yr44sYJrkZ0J2c1V98t0j2LsMKpIbGbmR00aq1MWGRZ"
 );
-YOUR_DOMAIN = "http://localhost:5173"
+
 async function postStripe(req, res) {
   try {
     //console.log(req.body.cartItems);

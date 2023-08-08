@@ -65,8 +65,8 @@ export default function validateForm(
     };
 
     let Stock = parseInt(stock);
-    let hasDot = stock.toString().includes(".");
-    let hasComa = stock.toString().includes(",");
+    let hasDot = stock.toString().include(".");
+    let hasComa = stock.toString().include(",");
     if (!stock) {
         errors.stock = "Stock is required";
     } else if (typeof Stock !== "number") {

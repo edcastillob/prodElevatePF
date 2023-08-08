@@ -13,6 +13,5 @@ async function getUserId(req, res) {
 }
 
 module.exports = {
-  getUserId
-
+  getUserId,
 };

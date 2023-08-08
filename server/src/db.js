@@ -39,7 +39,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Role, Sale, Provider, Category, Product, Favorite, Review, Comment} =
+const { User, Role, Sale, Provider, Category, Product, Favorite, Reviews } =
   sequelize.models;
 
 Role.hasMany(User);
@@ -48,7 +48,8 @@ User.belongsTo(Role);
 User.hasMany(Sale);
 Sale.belongsTo(User);
 
-
+User.belongsToMany(Product, { through: "Reviews" });
+Product.belongsToMany(User, { through: "Reviews" });
 
 Sale.belongsToMany(Product, { through: "DetailSale" });
 Product.belongsToMany(Sale, { through: "DetailSale" });
@@ -61,35 +62,6 @@ Product.belongsTo(Category);
 
 Favorite.belongsToMany(User, { through: "FavUser" });
 User.belongsToMany(Favorite, { through: "FavUser" });
-
-/* RELACIÓN ENTRE PRODUCTO Y REVIEW */
-Product.hasMany(Review);
-Review.belongsTo(Product);
-/* RELACIÓN ENTRE USUARIO Y REVIEW */
-
-Comment.belongsTo(Product); 
-Product.hasMany(Comment);   
-
-Review.belongsTo(User,{
-    foreignKey: "userMail",
-    targetKey: "email",
-      as : "user"
-})
-Comment.belongsTo(User, {
-  foreignKey: "userEmail", 
-  targetKey: "email", 
-  as: "user", 
-});
-Comment.belongsTo(User, {
-  foreignKey: "userEmail", 
-  targetKey: "email", 
-  as: "replyUser", 
-});
-Comment.hasMany(Comment, {
-  as: "respuestas",
-  foreignKey: "parentId",
- 
-});
 
 module.exports = {
   ...sequelize.models,

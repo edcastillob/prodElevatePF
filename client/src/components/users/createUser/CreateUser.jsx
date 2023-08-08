@@ -71,7 +71,7 @@ export const CreateUser = ({ currentLanguage }) => {
   };
 
   const handleSubmit = (event) => {
-    
+    event.preventDefault();
     if (Object.keys(errors).length > 0) {
       toast.error(
         t("create-user.toast-error", { lng: currentLanguage })
