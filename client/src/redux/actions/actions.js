@@ -403,6 +403,7 @@ export const logout = () => {
   try {
     return async (dispatch) => {
       localStorage.removeItem("user");
+      localStorage.removeItem("favorites");
       return dispatch({ type: LOGIN, payload: null });
     };
   } catch (error) {
