@@ -157,18 +157,31 @@ export const EditProduct = ({ currentLanguage }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    const errors = validateForm(
+      changeProduct.category,
+      changeProduct.name,
+      changeProduct.brand,
+      changeProduct.condition,
+      changeProduct.description,
+      changeProduct.purchasePrice,
+      changeProduct.salePrice,
+      changeProduct.minStock,
+      changeProduct.provider,
+      changeProduct.stock,
+      changeProduct.images
+    )
+    setErrors(errors);
     if (Object.keys(errors).length === 0) {
       dispatch(editProduct(id, changeProduct));
       toast.success(t("edit-product.successfully", { lng: currentLanguage }));
       setErrors({});
+      navigate("/dashboard");
     } else {
       toast.error(t("edit-product.error", { lng: currentLanguage }));
     }
 
     // console.log("Datos enviados: ", changeProduct);
     // toast.success("¡Edit Product successfully!");
-    navigate("/dashboard");
   };
 
   // console.log("productDetail: ", productDetail);
@@ -189,7 +202,7 @@ export const EditProduct = ({ currentLanguage }) => {
           {t("edit-product.status", { lng: currentLanguage })}
         </label>
         <select
-          className="form-control mb-3 w-75"
+          className="form-control mb-3 "
           name="isActive"
           value={changeProduct.isActive}
           defaultValue={changeProduct.isActive}
@@ -205,7 +218,7 @@ export const EditProduct = ({ currentLanguage }) => {
         {/* Categoria de Producto */}
         <div>
           <select
-            className="form-select mb-3 w-75"
+            className="form-select mb-3 "
             name="category"
             id="category"
             value={changeProduct.category}
@@ -225,7 +238,7 @@ export const EditProduct = ({ currentLanguage }) => {
         {/* Nombre de Producto */}
 
         <input
-          className="form-control mb-3 w-75 d-end"
+          className="form-control mb-3  d-end"
           type="text"
           name="name"
           placeholder={t("product.product-name", { lng: currentLanguage })}
@@ -234,10 +247,10 @@ export const EditProduct = ({ currentLanguage }) => {
           defaultValue={productDetail.name}
         />
         {errors.name && <p className={styles.error}>{errors.name}</p>}
-        <div className="d-flex justify-content-around">
+        <div className={styles.brands}>
           {/* brand de Producto */}
           <input
-            className="form-control mb-3 w-50 d-end"
+            className="form-control mb-3  d-end"
             type="text"
             name="brand"
             placeholder={t("product.product-brand", { lng: currentLanguage })}
@@ -246,7 +259,7 @@ export const EditProduct = ({ currentLanguage }) => {
           />
           {errors.brand && <p className={styles.error}>{errors.brand}</p>}
           <select
-            className="form-control mb-3 w-50 d-end"
+            className="form-control mb-3  d-end"
             name="condition"
             value={changeProduct.condition}
             onChange={handleChange}
@@ -292,16 +305,15 @@ export const EditProduct = ({ currentLanguage }) => {
             "link",
             "image",
           ]}
-          placeholder={t("product.product-description", {
-            lng: currentLanguage,
-          })}
-          style={{ height: "130px", marginBottom: "4rem" }}
+          placeholder={t("product.product-description", { lng: currentLanguage })}
+          style={{ marginBottom: "17px" }}
+
         />
         {errors.description && (
           <p className={styles.error}>{errors.description}</p>
         )}
         {/* precio de compra de Producto */}
-        <div className="d-flex g-3">
+        <div className={styles.prices}>
           <div className="input-group">
             <input
               className="form-control mb-3 w-25"
@@ -351,7 +363,7 @@ export const EditProduct = ({ currentLanguage }) => {
         {/* Proveedor */}
         <div>
           <select
-            className="form-select mb-3 w-75 d-flex"
+            className="form-select mb-3  d-flex"
             name="provider"
             id="provider"
             value=""
@@ -413,7 +425,7 @@ export const EditProduct = ({ currentLanguage }) => {
               <div>
               <div>
     {changeProduct.images && changeProduct.images.length === 0 ? (
-    <div>
+    <div className={styles.imgDiv}>
       <h6
         style={{
           fontFamily: "Poppins",

@@ -224,6 +224,17 @@ export const editUser = (userId, changeUser) => {
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}user/${userId}`, changeUser);
+      const userData = JSON.parse(localStorage.getItem("user"));
+      if (changeUser.identification) {
+        if (userData) {
+          userData.name = changeUser.name;
+          userData.identification = changeUser.identification;
+          userData.numPhone = changeUser.numPhone;
+          userData.image = changeUser.image;
+          localStorage.setItem('user', JSON.stringify(userData));
+          window.location.reload();
+        }
+      }
       return dispatch({
         type: EDIT_USERS,
         payload: { userId, changeUser },
@@ -338,6 +349,7 @@ export const categoryEdit = (categoryId, editCategory) => {
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}category/${categoryId}`, editCategory);
+      window.location.reload();
       return dispatch({
         type: EDIT_CATEGORY,
         payload: { categoryId, editCategory },
@@ -387,6 +399,7 @@ export const editProvider = (providerId, editProvider) => {
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}provider/${providerId}`, editProvider);
+      window.location.reload();
       return dispatch({
         type: EDIT_PROVIDER,
         payload: { providerId, editProvider },

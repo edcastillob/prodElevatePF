@@ -3,9 +3,7 @@ export default function validateForm(
     email,
     identification,
     address,
-    isActive,
-    numPhone,
-    country
+    numPhone
 ) {
     let errors = {};
     let RegExpression = /^[a-zA-Z\s]*$/;
@@ -16,14 +14,12 @@ export default function validateForm(
     } else if (!RegExpression.test(name)) {
         errors.name = "Numbers or special characters are not allowed";
     } else if (name.length > 15) {
-        errors.name = "The name can't be longer than 40 characters";
+        errors.name = "The name can't be longer than 15 characters";
     }; 
 
-    if (!email) {
-        errors.email = "Email is required";
-    } else if (!emailRegEx.test(email)) {
+    if(!emailRegEx.test(email)){
         errors.email = "This Email is not valid"
-    };
+    }
 
     if (!address) {
         errors.address = "Address is required";
@@ -47,14 +43,6 @@ export default function validateForm(
       ) {
         errors.identification = "Document ID must contain 7-10 digits";
       }
-
-    if (!isActive) {
-        errors.isActive = "Status of Provider is required"
-    }
-
-    if (!country) {
-        errors.country = "Country is required"
-    }
 
     return errors
 }
