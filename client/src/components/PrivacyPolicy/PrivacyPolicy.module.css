@@ -1,3 +1,7 @@
+body{
+    font-family: 'Poppins';
+}
+
 .container {
     width: 100%;
     min-height: 80vh;
@@ -5,34 +9,36 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
 }
 
-.container h1 {
-    padding-top: 10px;
-    margin-bottom: 0px;
-    color: green;
-    font-style: italic;
+.subtitle{
+    /* border: 1px solid black; */
+    width: 60%;
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
-.infoContainer {
+.infoCards{
+    border: 1px solid #cacaca;
     display: flex;
-    width: 700px;
-    height: 400px;
-    padding: 10px;
-    padding-left: 15px;
-    padding-top: 15px;
-    flex-direction: column;
-    overflow-y: auto;
-    text-align: justify;
-    box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 5px 5px;
-    margin: auto;
+    box-shadow: -2px 3px #a9a7a7;
 }
-.infoContainer h4 {
-    color: green;
+
+.card{
+    border: 1px solid #cacaca;
+    width: 20%;
+    padding: 1rem;
 }
-.infoContainer p {
-    text-indent: 45px;
+
+.card h5{
+    margin-bottom: 2rem;
+    font-weight: 700;
 }
+
+
+
 
 @media (max-width: 768px) {
     .infoContainer {

@@ -21,7 +21,7 @@ import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin";
 import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { toast } from "react-toastify";
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import Favorites from "./components/Favorites/Favorites";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
@@ -148,6 +148,7 @@ function App({ user, userLocal }) {
 
   return (
     <>
+
       <StyledApp theme={theme}>
         <I18nextProvider i18n={i18next}>
           {showNavBar && (
@@ -288,6 +289,7 @@ function App({ user, userLocal }) {
               {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel currentLanguage={currentLanguage} /> }/> */}
 
               {/* {(currentUser || currentUserLocal) && (
+
             <Route path="/settings" element={<Configuration />} />
           )} */}
             </Routes>
