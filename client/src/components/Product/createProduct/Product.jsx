@@ -13,12 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import validateForm from "./validation";
-import { useTranslation } from 'react-i18next';
 
-
-export const Product = ({ currentLanguage }) => {
-  const { t } = useTranslation('global');
-
+export const Product = () => {
   useEffect(() => {
     dispatch(getCategory());
     dispatch(getProvider());
@@ -107,7 +103,7 @@ export const Product = ({ currentLanguage }) => {
 
     if (Object.keys(errors).length === 0) {
     dispatch(addProduct(product));
-    toast.success(t("product.successfully", { lng: currentLanguage }));
+    toast.success("¡Product created successfully!");
     setProduct({
       category: "",
       name: "",
@@ -128,13 +124,13 @@ export const Product = ({ currentLanguage }) => {
     }
   };
   // console.log("provider: ", provider);
-  console.log(product);
+  // console.log(product);
   return (
     <div className={styles.container}>
       <hr />
       <form onSubmit={handleSubmit} className={styles.form}>
         <h5 style={{ fontFamily: "Poppins", marginBottom: "2rem" }}>
-         {t("product.new-product", { lng: currentLanguage })}
+          New product
         </h5>
         {/* Categoria de Producto */}
         <div className="d-flex justify-content-around">
@@ -146,7 +142,7 @@ export const Product = ({ currentLanguage }) => {
             onChange={handleChange}
           >
             <option value="" style={{ fontFamily: "Poppins" }}>
-            {t("product.category", { lng: currentLanguage })}
+              -- Category --
             </option>
             {sortedCategories.map((catg) => (
               <option key={catg.id} value={catg.id}>
@@ -163,7 +159,7 @@ export const Product = ({ currentLanguage }) => {
             className="form-control mb-3 w-50 d-end"
             type="text"
             name="name"
-            placeholder={t("product.product-name", { lng: currentLanguage })}
+            placeholder="Product Name"
             value={product.name}
             onChange={handleChange}
           />
@@ -177,7 +173,7 @@ export const Product = ({ currentLanguage }) => {
             className="form-control mb-3 w-50 d-end"
             type="text"
             name="brand"
-            placeholder={t("product.product-brand", { lng: currentLanguage })}
+            placeholder="Product brand"
             value={product.brand}
             onChange={handleChange}
           />
@@ -190,10 +186,10 @@ export const Product = ({ currentLanguage }) => {
             value={product.condition}
             onChange={handleChange}
           >
-            <option value="">{t("product.select-condition", { lng: currentLanguage })}</option>
-            <option value="Brand New">{t("product.brand-new", { lng: currentLanguage })}</option>
-            <option value="Used">{t("product.used", { lng: currentLanguage })}</option>
-            <option value="Like New">{t("product.like-new", { lng: currentLanguage })}</option>
+            <option value="">Select condition</option>
+            <option value="Brand New">Brand New</option>
+            <option value="Used">Used</option>
+            <option value="Like New">Like New</option>
           </select>
           {errors.condition && (
             <p className={styles.error}>{errors.condition}</p>
@@ -225,7 +221,7 @@ export const Product = ({ currentLanguage }) => {
             "link",
             "image",
           ]}
-          placeholder={t("product.product-description", { lng: currentLanguage })}
+          placeholder="Enter product description..."
           style={{
             height: "130px",
             marginBottom: "4rem",
@@ -242,7 +238,7 @@ export const Product = ({ currentLanguage }) => {
               className="form-control mb-3 w-25"
               type="text"
               name="purchasePrice"
-              placeholder={t("product.purchase-price", { lng: currentLanguage })}
+              placeholder="-- Purchase price --"
               value={product.purchasePrice}
               onChange={handleChange}
             />
@@ -259,7 +255,7 @@ export const Product = ({ currentLanguage }) => {
               className="form-control mb-3 w-25"
               type="text"
               name="salePrice"
-              placeholder={t("product.sale-price", { lng: currentLanguage })}
+              placeholder="-- Sale price --"
               value={product.salePrice}
               onChange={handleChange}
             />
@@ -276,7 +272,7 @@ export const Product = ({ currentLanguage }) => {
           className="form-control mb-3"
           type="minimumStock"
           name="minimumStock"
-          placeholder={t("product.min-stock", { lng: currentLanguage })}
+          placeholder="-- Minimum stock --"
           value={product.minimumStock}
           onChange={handleChange}
         />
@@ -293,7 +289,7 @@ export const Product = ({ currentLanguage }) => {
             value=""
             onChange={handleProviderSelect}
           >
-            <option value="">{t("product.select-provider", { lng: currentLanguage })}</option>
+            <option value="">-- Select provider --</option>
             {sortedproviders?.map((prov) => (
               <option key={prov.id} value={prov.id}>
                 {prov.name}
@@ -333,7 +329,7 @@ export const Product = ({ currentLanguage }) => {
             marginTop: "-1rem",
           }}
         >
-          {t("product.image", { lng: currentLanguage })}
+          Image:
         </h6>
         <div className={styles.uploadImg}>
           <UploadImg
@@ -348,7 +344,7 @@ export const Product = ({ currentLanguage }) => {
              <p className={styles.error}>{errors.images}</p>
         )}
         <br />
-        <button className={styles.create}>{t("product.create", { lng: currentLanguage })}</button>
+        <button className={styles.create}>Create</button>
       </form>
     </div>
   );

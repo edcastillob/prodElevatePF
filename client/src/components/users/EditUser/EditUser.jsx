@@ -114,10 +114,10 @@ export const EditUser = ({ currentLanguage }) => {
       image: [...(imgProduct.image || []), ...imageUrls],
     }));
   };
-  console.log("el usuario: ",users)
-  console.log("el change: ",changeUser)
+  // console.log("el usuario: ",users)
+  // console.log("el change: ",changeUser)
   // console.log("el rol: ",roles)
-  console.log(users)
+  // console.log(users)
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formContainer}>

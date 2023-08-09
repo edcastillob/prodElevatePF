@@ -57,3 +57,10 @@ export const FILTER_DATA = "FILTER_DATA";
 
 export const ADD_ROLE = "ADD_ROLE";
 export const GET_ROLE = "GET_ROLE";
+
+//Review
+export const ADD_REVIEW = "ADD_REVIEW";
+export const SHOW_REVIEWS = "SHOW_REVIEWS";
+export const SHOW_REVIEWS_ID = "SHOW_REVIEWS_ID";
+
+

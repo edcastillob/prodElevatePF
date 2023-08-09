@@ -1,6 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { showMessage } from './showMessage.js'
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -10,8 +11,7 @@ export const userCredential = async ({ user, password }) => {
     await createUserWithEmailAndPassword(auth, user, password);
     console.log(user)
 
-    // mensaje al registrarse
-    showMessage("Welcome: " + user, "success")
+     showMessage("Welcome: " + user, "success")
 
 
   } catch (error) {

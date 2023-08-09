@@ -184,9 +184,9 @@ export const EditProduct = ({ currentLanguage }) => {
     // toast.success("¡Edit Product successfully!");
   };
 
-  console.log("productDetail: ", productDetail);
+  // console.log("productDetail: ", productDetail);
   // console.log("stock: ", productDetail.stock);
-  console.log("changeProduct:  ", changeProduct);
+  // console.log("changeProduct:  ", changeProduct);
 
   return (
     <div className={styles.container}>
@@ -402,45 +402,46 @@ export const EditProduct = ({ currentLanguage }) => {
           <div>
             <div className="d-flex align-items-center">
               <div>
-                {changeProduct.images ? (
-                  <div className={styles.imgDiv}>
-                  <h6
-                    style={{
-                      fontFamily: "Poppins",
-                      textAlign: "start",
-                      marginTop: "-1rem",
-                    }}
-                  >
-                    {t("product.image", { lng: currentLanguage })}
-                  </h6>
-                  <UploadImg
-                    onImageUpload={handleImageUpload}
-                    uploadedImages={changeProduct.images}
-                    clearUploadedImages={() =>
-                      setChangeProduct((product) => ({
-                        ...product,
-                        images: [],
-                      }))
-                    }
-                  />
-                </div>
-                ) : (
-                  <div>
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-sm"
-                      onClick={handleRemoveImage}
-                    >
-                      X
-                    </button>
-                    <img
-                      src={changeProduct.images}
-                      alt=""
-                      style={{ width: "200px", height: "auto" }}
-                    />
-                  </div>
-
-                )}
+              <div>
+    {changeProduct.images && changeProduct.images.length === 0 ? (
+    <div className={styles.imgDiv}>
+      <h6
+        style={{
+          fontFamily: "Poppins",
+          textAlign: "start",
+          marginTop: "-1rem",
+        }}
+      >
+        {t("product.image", { lng: currentLanguage })}
+      </h6>
+      <UploadImg
+        onImageUpload={handleImageUpload}
+        uploadedImages={changeProduct.images}
+        clearUploadedImages={() =>
+          setChangeProduct((product) => ({
+            ...product,
+            images: [],
+          }))
+        }
+      />
+    </div>
+  ) : (
+    <div>
+      <button
+        type="button"
+        className="btn btn-danger btn-sm"
+        onClick={handleRemoveImage}
+      >
+        X
+      </button>
+      <img
+        src={changeProduct.images}
+        alt=""
+        style={{ width: "200px", height: "auto" }}
+      />
+    </div>
+  )}
+</div>
                 <br />
               </div>
             </div>

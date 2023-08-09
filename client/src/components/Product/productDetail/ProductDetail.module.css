@@ -23,9 +23,9 @@
     justify-content: center;
     align-items: center;
     padding: 0.1rem;
-    transition: .3s;
+    transition: .2s;
     &:hover{
-        transform: scale(0.97);
+        transform: scale(0.98);
         transition: .3s;
     }
 }
@@ -91,3 +91,99 @@
 
     }
 }
+.headerContent {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .commentHeader {
+    font-weight: bold;
+  }
+  .commentInput {
+    border: none;
+    width: 100%; 
+    padding: 10px;
+    font-size: 14px; 
+  }
+  .buttonCart2{
+    border: 1px solid gray;
+    box-shadow: 1px 2px #e9e9e9;
+    background-color: #063D60;
+    color: #fff;
+    padding: 0.5rem;
+    font-weight: 400;
+    border-radius: 10px;
+    position: relative;
+    left: 0.01rem;
+    margin-bottom: 1rem;
+    transition: .2s;
+    font-family: 'Poppins';
+    &:hover{
+        transform: scale(0.97);
+        transition: .3s;
+
+    }
+}
+
+.starContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+ 
+  .star {
+    font-size: 1rem; 
+    margin-right: 0.01rem; 
+    color: #000924;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .starContainer:hover .star {
+    color: gold;
+  }
+  
+  .reviewsTable {
+    margin-top: 20px;
+  }
+  
+  
+  .star {
+    color: #ffd700; 
+    margin-right: 0.1px; 
+  }
+
+  .avatar {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    margin-right: 10px; 
+  }
+  .reviewsTable {
+    width: 100%;
+    margin-top: 20px; 
+    border: none;
+  }
+  
+ 
+  .reviewsTable table {
+    width: 100%; 
+    border-collapse: collapse; 
+    border: none;
+
+  }
+  
+  
+  .reviewsTable td {
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    border: none;
+
+  }

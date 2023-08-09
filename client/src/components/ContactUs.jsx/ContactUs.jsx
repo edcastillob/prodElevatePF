@@ -1,205 +1,54 @@
-import React from "react";
-import photo from "../../assets/user.png";
-import yona from "../../assets/Yonathan.jpg";
-import vera from "../../assets/Veralucia.jpg";
-import edwar from "../../assets/Edwar.jpg";
-import luis from "../../assets/Luis.jpg";
-import paola from "../../assets/Paola.jpg";
-import claudio from "../../assets/Claudio.jpg";
-import david from "../../assets/David.jpg";
-import styles from "./ContactUs.module.css";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import styles from "./ContactUs.module.css"
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from 'react-i18next';
 
-export const ContactUs = () => {
-
-  const handleOpenInNewTab = (url) => {
-    const newWindow = window.open(url, "_blank");
-    if (newWindow) {
-      newWindow.opener = null;
-      newWindow.location = url;
-    }
-  };
+export const ContactUs = ({ currentLanguage }) => { 
+  const { t } = useTranslation('global');
 
   return (
     <div className={styles.container}>
-          <h2>Contact <b style={{color: "green" }}>The Team</b> of prodElevate</h2>        
-        <div className={styles.contactContainer}>
-
-          <div className={styles.sideColumns}>
-            <div className={styles.person}>
-              <div className={styles.info}>
-                <h6 style={{color: "green"}}>Yonathan Acevedo</h6>
-                <ul>
-                  <li>Dominican Republic</li>
-                  <li>yacevedo170@gmail.com</li>
-                  <li>
-                  <span className={styles.contactSpan}
-                    onClick={() =>
-                      handleOpenInNewTab(
-                        "https://www.linkedin.com/in/yonathan-acevedo-baez-26a453b4"
-                      )
-                    }
-                  >
-                    LinkedIn
-                  </span>
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.photo}>
-                <img src={yona} alt="photo"></img>
-              </div>
+          <form
+            action="https://formspree.io/f/xnqkpnga"
+            method="POST"
+            className={styles.formContainer}
+          >
+            <div className={styles.divTitle}>
+              <h4>{t("contact.contact-us", { lng: currentLanguage })}</h4>
             </div>
 
-            <div className={styles.person}>
-              <div className={styles.info}>
-                <h6 style={{color: "green"}}>Veralucía Mendoza</h6>
-                <ul>
-                  <li>Peru</li>
-                  <li>mendozaveralucia@gmail.com</li>
-                  <li>
-                  <span className={styles.contactSpan}
-                    onClick={() =>
-                      handleOpenInNewTab(
-                        "https://www.linkedin.com/in/veraluciamendozamejia"
-                      )
-                    }
-                  >
-                    LinkedIn
-                  </span>
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.photo}>
-                <img src={vera} alt="photo"></img>
-              </div>
-            </div>
-          </div>
+            <div className={styles.divInput}>
+            <label>
+              
+              <input 
+              type="email" 
+              name="email"
+              placeholder={t("contact.email", { lng: currentLanguage })} 
+              className="form-control mb-4 w-100"/>
+            </label>
+            <label>
+              
+              <textarea 
+              className="form-control mb-4 w-100" 
+              name="message"
+              placeholder={t("contact.message", { lng: currentLanguage })}
+              style={{resize:'none'}}>
 
-          <div className={styles.centerColumn}>
-            <div className={styles.person}>
-              <div className={styles.info}>
-                <h6 style={{color: "green"}}>Edwar Castillo</h6>
-                <ul>
-                  <li>Venezuela</li>
-                  <li>edwar.castillo@gmail.com</li>
-                  <li>
-                  <span className={styles.contactSpan}
-                    onClick={() =>
-                      handleOpenInNewTab(
-                        "https://www.linkedin.com/in/edcastillob"
-                      )
-                    }
-                  >
-                    LinkedIn
-                  </span>
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.photo}>
-                <img src={edwar} alt="photo"></img>
-              </div>
-            </div>
+              </textarea>
+            </label>
 
-            <div className={styles.person}>
-              <div className={styles.info}>
-                <h6 style={{color: "green"}}>Luis Naveda</h6>
-                <ul>
-                  <li>Argentina</li>
-                  <li>luisnaveda10@gmail.com</li>
-                  <li>
-                  <span className={styles.contactSpan}
-                    onClick={() =>
-                      handleOpenInNewTab(
-                        "https://www.linkedin.com/in/luisnavedag"
-                      )
-                    }
-                  >
-                    LinkedIn
-                  </span>
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.photo}>
-                <img src={luis} alt="photo"></img>
-              </div>
             </div>
+            <div className={styles.divBtn}>
+              <button 
+              type="submit"
+              className={styles.create}
+              >{t("contact.send", { lng: currentLanguage })}
+              </button>
 
-            <div className={styles.person}>
-              <div className={styles.info}>
-                <h6 style={{color: "green"}}>David Olivo</h6>
-                <ul>
-                  <li>Argentina</li>
-                  <li>davidoar15@gmail.com</li>
-                  <li>
-                  <span className={styles.contactSpan}
-                    onClick={() =>
-                      handleOpenInNewTab(
-                        "https://www.linkedin.com/in/david-olivo-rodr%C3%ADguez-401412239/"
-                      )
-                    }
-                  >
-                    LinkedIn
-                  </span>
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.photo}>
-                <img src={david} alt="photo"></img>
-              </div>
             </div>
-          </div>
-
-          <div className={styles.sideColumns}>
-            <div className={styles.person}>
-              <div className={styles.info}>
-                <h6 style={{color: "green"}}>Paola Vargas</h6>
-                <ul>
-                  <li>Argentina</li>
-                  <li>paolan.vargass@gmail.com</li>
-                  <li>
-                  <span className={styles.contactSpan}
-                    onClick={() =>
-                      handleOpenInNewTab(
-                        "https://www.linkedin.com/in/paola-vargas-soria"
-                      )
-                    }
-                  >
-                    LinkedIn
-                  </span>
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.photo}>
-                <img src={paola} alt="photo"></img>
-              </div>
-            </div>
-
-            <div className={styles.person}>
-              <div className={styles.info}>
-                <h6 style={{color: "green"}}>Claudio Casagrande</h6>
-                <ul>
-                  <li>Argentina</li>
-                  <li>claudiodavid339@gmail.com</li>
-                  <li>
-                  <span className={styles.contactSpan}
-                    onClick={() =>
-                      handleOpenInNewTab(
-                        "https://www.linkedin.com/in/claudio-david-casagrande-bethouart-27839524b"
-                      )
-                    }
-                  >
-                    LinkedIn
-                  </span>
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.photo}>
-                <img src={claudio} alt="photo"></img>
-              </div>
-            </div>
-          </div>
-
-        </div>
+          </form>
 
     </div>
   );
