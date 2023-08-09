@@ -2,7 +2,7 @@ const { Op } = require("sequelize");
 const { Product } = require("../../db");
 
 async function postFilterData(req, res) {
-  const { minPrice, maxPrice, category, brand, condition } = req.body;
+  const { minPrice, maxPrice, category, brand, condition, isActive } = req.body;
   const page = parseInt(req.query.page) || 1;
   const pageSize = req.query.pageSize || 8;
 
@@ -25,6 +25,7 @@ async function postFilterData(req, res) {
 
     const filterData = await Product.findAll({
       where: filter,
+      isActive: true,
       offset,
       limit: pageSize,
       order: [["id", "DESC"]],

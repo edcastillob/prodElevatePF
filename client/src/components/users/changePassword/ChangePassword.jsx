@@ -5,6 +5,7 @@ import { UploadImg } from "../../Product/uploadImg/UploadImg";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import styles from "./ChangePassword.module.css";
+import validate from "./validationEditUser";
 import ReactQuill from "react-quill";
 // import loadingImg from "../../../assets/loading.png";
 import "react-quill/dist/quill.snow.css";
@@ -109,15 +110,21 @@ export const  ChangePassword = () => {
 
   const handleSubmit = (event) => {
   event.preventDefault();
+  const errors = validate(changeUser);
+  setErrors(errors);
   if (changeUser.password !== changeUser.confirmpassword) {
-    toast.error("¡Passwords do not match!");
-    toast.info("¡to update confirm or change your password!");
-
+    toast.error("Passwords do not match!");
+    toast.info("To update confirm or change your password!");
     return;
   }
+  if (Object.keys(errors).length === 0) {
     dispatch(editUser(userMail.id, changeUser));
-    toast.success("¡Edit user successfully!");
+    toast.success("Edit user successfully!");
+    setErrors({});
     navigate("/home");
+  } else {
+    toast.error("All fields must be filled Correctly")
+  }
   };
 
   const compareCountries = (a, b) => {
@@ -159,7 +166,9 @@ export const  ChangePassword = () => {
           onChange={handleChange}
           value={changeUser.name}
         />       
- 
+        {errors.name && (
+          <p className={styles.error}>{errors.name}</p>
+        )}
        
       
       {/* _____________ID________________ */}
@@ -172,7 +181,9 @@ export const  ChangePassword = () => {
           onChange={handleChange}
           value={changeUser.identification}
         />
-       
+        {errors.identification && (
+          <p className={styles.error}>{errors.identification}</p>
+        )}
     
       {/* _____________PHONE NUMBER________________ */}
         <label>Phone:</label>
@@ -183,7 +194,10 @@ export const  ChangePassword = () => {
           className={`form-control mb-3 w-75 `}
           onChange={handleChange}
           value={changeUser.numPhone}
-        /> 
+        />
+        {errors.numPhone && (
+          <p className={styles.error}>{errors.numPhone}</p>
+        )} 
                    {/* _____________country________________ */}
                    <div >
                 <select
@@ -200,7 +214,9 @@ export const  ChangePassword = () => {
                   ))}
                 </select>
               </div>
-
+              {/*errors.country && (
+                <p className={styles.error}>{errors.country}</p>
+              )*/}
       {/* _____________password________________ */}
       <label>Password:</label>
         <input
@@ -228,7 +244,8 @@ export const  ChangePassword = () => {
 
       {/* _____________image________________ */}
       <div className="d-flex align-items-center">
-          <div>
+          <div className={styles.imgForm}>
+            <label>Image:</label>
             {changeUser.image && !imageDeleted ? (
               <div>
                 <button
@@ -261,7 +278,7 @@ export const  ChangePassword = () => {
               </div>
             ) : (
               <div>
-                <h6
+                {/*<h6
                   style={{
                     fontFamily: "Poppins",
                     textAlign: "start",
@@ -269,7 +286,7 @@ export const  ChangePassword = () => {
                   }}
                 >
                   Image:
-                </h6>
+                </h6>*/}
                 <UploadImg
                   onImageUpload={handleImageUpload}
                   uploadedImages={changeUser.image}
@@ -284,6 +301,9 @@ export const  ChangePassword = () => {
             )}
           </div>
         </div>
+        {errors.image && (
+          <p className={styles.error}>{errors.image}</p>
+        )}        
 
         <br />
         <br />

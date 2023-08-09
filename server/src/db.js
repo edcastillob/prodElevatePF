@@ -63,6 +63,9 @@ Product.belongsTo(Category);
 Favorite.belongsToMany(User, { through: "FavUser" });
 User.belongsToMany(Favorite, { through: "FavUser" });
 
+// Product.hasMany(Reviews);
+// Reviews.belongsTo(Product);
+
 module.exports = {
   ...sequelize.models,
   conn: sequelize,

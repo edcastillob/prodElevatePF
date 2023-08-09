@@ -15,7 +15,7 @@
     border-radius: 10px;
     padding: 2rem 0;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -39,7 +39,64 @@
 
 .error { 
     color: red;
-    font-size: 15px;
+    font-size: 11px;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+@media (max-width: 875px) {
+    .formContainer {
+        width: 65%;
+    }
+    .create {
+        width: 100px;
+    }
+}
+
+@media (max-width: 700px) {
+    .formContainer {
+        width: 90%;
+    }
+}
+
+@media (max-width: 510px) {
+    .formContainer {
+        width: 95%;
+    }
+    .formContainer h4 {
+        font-size: 1.275rem;
+    }
+    .formContainer input {
+        font-size: 0.8rem;
+    }
+    .formContainer select {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 370px) {
+    .container {
+        padding: 1rem;
+    }
+    .formContainer {
+        width: 98%;
+    }
+}
+
+@media (max-width: 311px) {
+    .container {
+        padding: 0.7rem;
+    }
+    .formContainer {
+        width: 100%;
+    }
+    .formContainer h4 {
+        font-size: 1.1rem;
+    }
+    .formContainer input {
+        font-size: 0.65rem;
+    }
+    .formContainer select {
+        font-size: 0.65rem;
+    }
 }

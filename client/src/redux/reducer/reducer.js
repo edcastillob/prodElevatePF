@@ -38,8 +38,12 @@ import {
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   POST_VERIFY_USER,
+  GET_USER_INACTIVE,
+  GET_USER_BY_NAME,
+  GET_ALL_FAVORITE,
   ADD_REVIEW,
   SHOW_REVIEWS_ID,
+  TOGGLE_THEME,
 } from "../actions/types";
 
 const initialState = {
@@ -64,8 +68,10 @@ const initialState = {
   users: [],
   userMail: [],
   userLog: [],
-  reviews:[],
-  review:[],
+  usersInactive: [],
+  reviews: [],
+  review: [],
+  theme: "light",
 };
 
 function reducer(state = initialState, actions) {
@@ -82,7 +88,13 @@ function reducer(state = initialState, actions) {
     case SHOW_PRODUCTS_INACTIVE:
       return {
         ...state,
-        productsInactive: actions.payload,
+        productsInactive: actions.payload.data,
+        productDetail: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        productsFiltered: [],
+        products: [],
+        //productDetail: [...actions.payload.data],
       };
 
     case GET_PRODUCT_NAME:
@@ -153,6 +165,23 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         user: [...state.user, payload],
+      };
+
+    case GET_USER_INACTIVE:
+      return {
+        ...state,
+        usersInactive: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        users: [],
+      };
+
+    case GET_USER_BY_NAME:
+      return {
+        ...state,
+        users: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
       };
 
     case LOGIN:
@@ -295,6 +324,8 @@ function reducer(state = initialState, actions) {
       return { ...state, favorites: actions.payload };
     case REMOVE_FAV:
       return { ...state, favorites: actions.payload };
+    case GET_ALL_FAVORITE:
+      return { ...state, favorites: actions.payload };
 
     //Filter Price
 
@@ -355,7 +386,9 @@ function reducer(state = initialState, actions) {
     case GET_ALL_USERS:
       return {
         ...state,
-        users: actions.payload,
+        users: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
       };
     case DELETE_USERS:
       const updateUsers = state.users.filter(
@@ -419,6 +452,12 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         reviews: actions.payload,
+      };
+
+    case TOGGLE_THEME:
+      return {
+        ...state,
+        theme: state.theme === "dark" ? "light" : "dark",
       };
     default:
       return state;
