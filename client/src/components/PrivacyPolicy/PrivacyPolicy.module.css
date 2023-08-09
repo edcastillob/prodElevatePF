@@ -21,9 +21,8 @@ body{
 }
 
 .infoCards{
-    border: 1px solid #cacaca;
     display: flex;
-    box-shadow: -2px 3px #a9a7a7;
+    gap: 0.2rem;
 }
 
 .card{
@@ -40,18 +39,38 @@ body{
 
 
 
-@media (max-width: 768px) {
-    .infoContainer {
-      width: 90%;
-      max-height: none;
+@media (max-width: 1165px) {
+    .card h5 {
+        font-size: 1rem;
     }
-  
-    .infoContainer h4 {
-        font-size: 23px;
+    .card p {
+        font-size: 14px;
     }
-
-    .infoContainer p {
-      text-indent: 30px;
-      font-size: 15px;
+    .infoCards {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card {
+        width: 184px;
+        height: 398px;
     }
   }
+
+@media (max-width: 557px) {
+    .subtitle {
+        width: 90%;
+    }
+    .subtitle h6 {
+        font-size: 0.85rem;
+    }
+}
+/*@media (max-width: 986px) {
+    .card h5 {
+        font-size: 0.85rem;
+    }
+    .card p {
+        font-size: 13px;
+    }
+}*/
