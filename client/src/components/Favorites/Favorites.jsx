@@ -1,50 +1,75 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Favorites.module.css";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { CardProduct } from "../Product/cardProduct/cardProduct";
-import { useTranslation } from 'react-i18next';
+import { allFav } from "../../redux/actions/actions";
+import { useTranslation } from "react-i18next";
 
 const Favorites = ({ currentLanguage }) => {
-  const { t } = useTranslation('global');
-  const [currentUser, setCurrentUser] = useState(null);
+  const userActive = useSelector((state) => state.userLog);
+  const { t } = useTranslation("global");
 
+  // const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
-  console.log(favorites);
+  //console.log(favorites);
 
+  // useEffect(() => {
+  //   const auth = getAuth();
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       const uid = user.uid;
+  //       const userEmail = user.email;
+  //       console.log(userEmail);
+  //       setCurrentUser(user);
+  //     } else {
+  //       setCurrentUser(null);
+  //     }
+  //   });
+  // }, []);
   useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        setCurrentUser(user);
-      } else {
-        setCurrentUser(null);
-      }
+    if (userActive.email) {
+      userActiveFunction()
+        .then(() => {
+          dispatch(allFav(userActive.email));
+        })
+        .catch((error) => {
+          console.error("Error in userActive:", error);
+        });
+    }
+  }, [userActive.email]);
+
+  const userActiveFunction = () => {
+    return new Promise((resolve, reject) => {
+      console.log("Favorite", userActive);
+      resolve();
     });
-  }, []);
+  };
 
   return (
     <div className={styles.favoriteContainer}>
       <div className={styles.back}>
-            <Link to="/home">
-              <div className={styles.backButton}>
-                <p>
-                  <ion-icon name="arrow-round-back"></ion-icon>
-                  <ion-icon name="home"></ion-icon>
-                </p>
-              </div>
-            </Link>
+        <Link to="/home">
+          <div className={styles.backButton}>
+            <p>
+              <ion-icon name="arrow-round-back"></ion-icon>
+              <ion-icon name="home"></ion-icon>
+            </p>
+          </div>
+        </Link>
       </div>
       <div className={styles.title}>
-
-      <h3 style={{fontFamily:'Poppins'}}>{t("favorites.favorites", { lng: currentLanguage })}</h3>
-
+        <h3 style={{ fontFamily: "Poppins" }}>
+          {t("favorites.favorites", { lng: currentLanguage })}
+        </h3>
       </div>
       {favorites.length === 0 ? (
         <div className={styles.cartEmpty}>
-          <h1 className={styles.sad}><ion-icon name="sad"></ion-icon></h1>
+          <h1 className={styles.sad}>
+            <ion-icon name="sad"></ion-icon>
+          </h1>
 
           <p>{t("favorites.no-favorites", { lng: currentLanguage })}</p>
           <div className={styles.startShoping}>
@@ -69,7 +94,11 @@ const Favorites = ({ currentLanguage }) => {
       ) : (
         <div className={styles.cards}>
           {favorites?.map((favorite) => (
-            <CardProduct key={favorite.id} product={favorite} currentLanguage={currentLanguage} />
+            <CardProduct
+              key={favorite.id}
+              product={favorite}
+              currentLanguage={currentLanguage}
+            />
           ))}
         </div>
       )}

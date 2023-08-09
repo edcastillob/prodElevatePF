@@ -15,10 +15,10 @@ import loadingImg from "../../../assets/loading.png";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
 import validateForm from "./validation";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export const EditProduct = ({ currentLanguage }) => {
-  const { t } = useTranslation('global');
+  const { t } = useTranslation("global");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -169,7 +169,7 @@ export const EditProduct = ({ currentLanguage }) => {
       changeProduct.provider,
       changeProduct.stock,
       changeProduct.images
-    )
+    );
     setErrors(errors);
     if (Object.keys(errors).length === 0) {
       dispatch(editProduct(id, changeProduct));
@@ -194,11 +194,13 @@ export const EditProduct = ({ currentLanguage }) => {
       {/* Formulario */}
       <form onSubmit={handleSubmit} className={styles.form}>
         <h4 style={{ fontFamily: "Poppins", marginBottom: "1rem" }}>
-         {t("edit-product.edit-product", { lng: currentLanguage })}
+          {t("edit-product.edit-product", { lng: currentLanguage })}
         </h4>
 
         {/* _____________Status________________ */}
-        <label style={{textAlign:'start'}}>{t("edit-product.status", { lng: currentLanguage })}</label>
+        <label style={{ textAlign: "start" }}>
+          {t("edit-product.status", { lng: currentLanguage })}
+        </label>
         <select
           className="form-control mb-3 "
           name="isActive"
@@ -206,8 +208,12 @@ export const EditProduct = ({ currentLanguage }) => {
           defaultValue={changeProduct.isActive}
           onChange={handleChange}
         >
-          <option value="t">{t("edit-product.active", { lng: currentLanguage })}</option>
-          <option value="f">{t("edit-product.inactive", { lng: currentLanguage })}</option>
+          <option value="t">
+            {t("edit-product.active", { lng: currentLanguage })}
+          </option>
+          <option value="f">
+            {t("edit-product.inactive", { lng: currentLanguage })}
+          </option>
         </select>
         {/* Categoria de Producto */}
         <div>
@@ -218,7 +224,9 @@ export const EditProduct = ({ currentLanguage }) => {
             value={changeProduct.category}
             onChange={handleChange}
           >
-            <option value="">{t("product.category", { lng: currentLanguage })}</option>
+            <option value="">
+              {t("product.category", { lng: currentLanguage })}
+            </option>
             {sortedCategories.map((catg) => (
               <option key={catg.id} value={catg.id}>
                 {catg.name}
@@ -256,10 +264,18 @@ export const EditProduct = ({ currentLanguage }) => {
             value={changeProduct.condition}
             onChange={handleChange}
           >
-            <option value="">{t("product.select-condition", { lng: currentLanguage })}</option>
-            <option value="Brand New">{t("product.brand-new", { lng: currentLanguage })}</option>
-            <option value="Used">{t("product.used", { lng: currentLanguage })}</option>
-            <option value="Like New">{t("product.like-new", { lng: currentLanguage })}</option>
+            <option value="">
+              {t("product.select-condition", { lng: currentLanguage })}
+            </option>
+            <option value="Brand New">
+              {t("product.brand-new", { lng: currentLanguage })}
+            </option>
+            <option value="Used">
+              {t("product.used", { lng: currentLanguage })}
+            </option>
+            <option value="Like New">
+              {t("product.like-new", { lng: currentLanguage })}
+            </option>
           </select>
           {errors.condition && (
             <p className={styles.error}>{errors.condition}</p>
@@ -289,7 +305,9 @@ export const EditProduct = ({ currentLanguage }) => {
             "link",
             "image",
           ]}
-          placeholder={t("product.product-description", { lng: currentLanguage })}
+          placeholder={t("product.product-description", {
+            lng: currentLanguage,
+          })}
           style={{ marginBottom: "17px" }}
         />
         {errors.description && (
@@ -302,7 +320,9 @@ export const EditProduct = ({ currentLanguage }) => {
               className="form-control mb-3 w-25"
               type="text"
               name="purchasePrice"
-              placeholder={t("product.purchase-price", { lng: currentLanguage })}
+              placeholder={t("product.purchase-price", {
+                lng: currentLanguage,
+              })}
               value={changeProduct.purchasePrice}
               onChange={handleChange}
             />
@@ -350,7 +370,9 @@ export const EditProduct = ({ currentLanguage }) => {
             value=""
             onChange={handleProviderSelect}
           >
-            <option value="">{t("product.select-provider", { lng: currentLanguage })}</option>
+            <option value="">
+              {t("product.select-provider", { lng: currentLanguage })}
+            </option>
             {sortedproviders?.map((prov) => (
               <option key={prov.id} value={prov.id}>
                 {prov.name}
@@ -402,46 +424,46 @@ export const EditProduct = ({ currentLanguage }) => {
           <div>
             <div className="d-flex align-items-center">
               <div>
-              <div>
-    {changeProduct.images && changeProduct.images.length === 0 ? (
-    <div className={styles.imgDiv}>
-      <h6
-        style={{
-          fontFamily: "Poppins",
-          textAlign: "start",
-          marginTop: "-1rem",
-        }}
-      >
-        {t("product.image", { lng: currentLanguage })}
-      </h6>
-      <UploadImg
-        onImageUpload={handleImageUpload}
-        uploadedImages={changeProduct.images}
-        clearUploadedImages={() =>
-          setChangeProduct((product) => ({
-            ...product,
-            images: [],
-          }))
-        }
-      />
-    </div>
-  ) : (
-    <div>
-      <button
-        type="button"
-        className="btn btn-danger btn-sm"
-        onClick={handleRemoveImage}
-      >
-        X
-      </button>
-      <img
-        src={changeProduct.images}
-        alt=""
-        style={{ width: "200px", height: "auto" }}
-      />
-    </div>
-  )}
-</div>
+                <div>
+                  {changeProduct.images && changeProduct.images.length === 0 ? (
+                    <div className={styles.imgDiv}>
+                      <h6
+                        style={{
+                          fontFamily: "Poppins",
+                          textAlign: "start",
+                          marginTop: "-1rem",
+                        }}
+                      >
+                        {t("product.image", { lng: currentLanguage })}
+                      </h6>
+                      <UploadImg
+                        onImageUpload={handleImageUpload}
+                        uploadedImages={changeProduct.images}
+                        clearUploadedImages={() =>
+                          setChangeProduct((product) => ({
+                            ...product,
+                            images: [],
+                          }))
+                        }
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-sm"
+                        onClick={handleRemoveImage}
+                      >
+                        X
+                      </button>
+                      <img
+                        src={changeProduct.images}
+                        alt=""
+                        style={{ width: "200px", height: "auto" }}
+                      />
+                    </div>
+                  )}
+                </div>
                 <br />
               </div>
             </div>
@@ -449,9 +471,9 @@ export const EditProduct = ({ currentLanguage }) => {
           </div>
         </div>
         <div className={styles.divBtn}>
-        <button type="submit" className={styles.create}>
-          {t("edit-product.update", { lng: currentLanguage })}
-        </button>
+          <button type="submit" className={styles.create}>
+            {t("edit-product.update", { lng: currentLanguage })}
+          </button>
         </div>
       </form>
     </div>

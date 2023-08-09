@@ -1,6 +1,6 @@
 const { User } = require("../../db");
 
-async function getAllUsers(req, res) {
+async function getUserByName(req, res) {
   const page = parseInt(req.query.page) || 1;
   const pageSize = req.query.pageSize || 8;
   try {
@@ -26,16 +26,17 @@ async function getAllUsers(req, res) {
       ],
       offset,
       limit: pageSize,
-      order: [["id", "DESC"]],
+      order: [["name", "ASC"]],
     });
 
-    //data: users, currentPage: page, totalPages: totalPages
-    return res.status(200).json(users);
+    return res
+      .status(200)
+      .json({ data: users, currentPage: page, totalPages: totalPages });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 }
 
 module.exports = {
-  getAllUsers,
+  getUserByName,
 };

@@ -41,6 +41,8 @@ const FilterModal = ({ show, handleClose, handleFilter, currentLanguage }) => {
 
   //console.log(filters);
 
+  //console.log(filters);
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>

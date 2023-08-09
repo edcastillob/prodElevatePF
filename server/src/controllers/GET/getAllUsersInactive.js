@@ -1,6 +1,6 @@
 const { User } = require("../../db");
 
-async function getAllUsers(req, res) {
+async function getAllUsersInactive(req, res) {
   const page = parseInt(req.query.page) || 1;
   const pageSize = req.query.pageSize || 8;
   try {
@@ -11,7 +11,7 @@ async function getAllUsers(req, res) {
 
     const users = await User.findAll({
       where: {
-        isActive: true,
+        isActive: false,
       },
       attributes: [
         "id",
@@ -29,13 +29,15 @@ async function getAllUsers(req, res) {
       order: [["id", "DESC"]],
     });
 
-    //data: users, currentPage: page, totalPages: totalPages
-    return res.status(200).json(users);
+    console.log(users);
+    return res
+      .status(200)
+      .json({ data: users, currentPage: page, totalPages: totalPages });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 }
 
 module.exports = {
-  getAllUsers,
+  getAllUsersInactive,
 };

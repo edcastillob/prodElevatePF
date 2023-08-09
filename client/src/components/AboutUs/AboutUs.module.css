@@ -80,8 +80,8 @@ body{
 
 .person{
   /* border: 1px solid blue; */
-  width: 25%;
-  height: 45%;
+  width: 300px;
+  height: 300px;
 }
 
 .divImg{

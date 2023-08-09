@@ -29,6 +29,14 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
+      brand: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      condition: {
+        type: DataTypes.ENUM("Brand New", "Used", "Like New"),
+        allowNull: false,
+      },
       stock: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
