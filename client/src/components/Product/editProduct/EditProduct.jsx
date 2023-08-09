@@ -308,6 +308,7 @@ export const EditProduct = ({ currentLanguage }) => {
             "link",
             "image",
           ]}
+
           placeholder={t("product.product-description", {
             lng: currentLanguage,
           })}

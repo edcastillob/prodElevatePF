@@ -42,7 +42,7 @@ export const AboutUs = ({ currentLanguage }) => {
 
             </div>
 		</div>
-        <div className={styles.evento}>
+        <div className={styles.eventoM}>
 			<div data-aos="zoom-in" className={styles.content}>
 			    <h3 className={styles.title}>{t("about.our-mission", { lng: currentLanguage })}</h3>
 
