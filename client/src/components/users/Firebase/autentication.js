@@ -9,7 +9,7 @@ export const userCredential = async ({ user, password }) => {
   try {
     const auth = getAuth();
     await createUserWithEmailAndPassword(auth, user, password);
-    console.log(user)
+    // console.log(user)
 
      showMessage("Welcome: " + user, "success")
 

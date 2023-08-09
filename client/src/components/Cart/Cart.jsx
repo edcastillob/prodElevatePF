@@ -28,7 +28,7 @@ const Cart = ({ currentLanguage }) => {
   const { t } = useTranslation('global');
 
   const dispatch = useDispatch();
-  console.log(cartItems);
+  // console.log(cartItems);
   useEffect(() => {
     dispatch(calculateTotals());
   }, [cartItems]);

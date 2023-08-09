@@ -43,7 +43,7 @@ const Favorites = ({ currentLanguage }) => {
 
   const userActiveFunction = () => {
     return new Promise((resolve, reject) => {
-      console.log("Favorite", userActive);
+      // console.log("Favorite", userActive);
       resolve();
     });
   };

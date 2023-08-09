@@ -130,7 +130,7 @@ const Products = ({ toggleActive, currentLanguage }) => {
   const handleFilter = (filters) => {
     dispatch(filterData(filters, currentPage));
     setSelectedFilters(filters);
-    console.log("filter Home", currentPage);
+    // console.log("filter Home", currentPage);
     setShowModal(false);
   };
 
@@ -140,14 +140,14 @@ const Products = ({ toggleActive, currentLanguage }) => {
     if (nextPage <= totalPages) {
       if (productsFiltered.length > 0) {
         dispatch(filterData(selectedFilters, nextPage));
-        console.log(selectedFilters);
+        // console.log(selectedFilters);
       } else {
         dispatch(showProducts(nextPage));
       }
     }
   };
   const handleDeleteProduct = (productId) => {
-    console.log(productId)
+    // console.log(productId)
     setProductIdToDelete(productId);
     dispatch(deleteProduct(productId));
   };

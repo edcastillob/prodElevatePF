@@ -48,7 +48,7 @@ export const Forgot = ({ currentLanguage }) => {
         toast.success(t("create-user.toast-success", { lng: currentLanguage }));
         navigate("/login");
       };
-  console.log(userData)
+  // console.log(userData)
  
   return ( 
     <div className={styles.container}>

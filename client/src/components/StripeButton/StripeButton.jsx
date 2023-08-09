@@ -13,7 +13,7 @@ const StripeButton = ({ cartItems }) => {
         cartItems,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.data.url) {
           window.location.href = response.data.url;
         }

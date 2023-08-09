@@ -29,9 +29,9 @@ export const UsersAll = ({ toggleActive, currentLanguage }) => {
 
   const [optionUsers, setoptionUsers] = useState([]);
   const [searchUsers, setSearchUsers] = useState("");
-  console.log(optionUsers);
-  console.log(currentPage);
-  console.log(totalPages);
+  // console.log(optionUsers);
+  // console.log(currentPage);
+  // console.log(totalPages);
   useEffect(() => {
     dispatch(getUsers(currentPage));
   }, []);

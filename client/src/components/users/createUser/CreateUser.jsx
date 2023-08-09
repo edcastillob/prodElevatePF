@@ -89,8 +89,8 @@ export const CreateUser = ({ currentLanguage }) => {
       images: imageUrl,
     }));
   };
-  console.log(userData)
-  console.log(selectedCountry)
+  // console.log(userData)
+  // console.log(selectedCountry)
   return (
     <div className={styles.container}>
       <div className={styles.divLeft}>
