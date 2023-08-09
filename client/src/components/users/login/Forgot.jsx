@@ -72,7 +72,7 @@ export const Forgot = ({ currentLanguage }) => {
       <div className={styles.divRight}>
         <div className={`${styles.form} ${styles.signup}`}>
           <div className={styles["form-content"]}>
-            <h4 style={{fontFamily:'Poppins'}} >{t("create-user.create-user", { lng: currentLanguage })}</h4>
+            <h4 style={{fontFamily:'Poppins'}} >{t("create-user.forgot", { lng: currentLanguage })}</h4>
             <form onSubmit={handleSubmit}>
               
               {/* _____________EMAIL________________ */}
@@ -119,12 +119,12 @@ export const Forgot = ({ currentLanguage }) => {
             
               <div >
                 <button className={styles.create} type="submit">
-                {t("create-user.create", { lng: currentLanguage })}
+                {t("create-user.confirm", { lng: currentLanguage })}
                 </button>
               </div>
             </form>
             <div className={styles["form-link"]}>
-              <span>
+              {/* <span>
               {t("create-user.already-have-account", { lng: currentLanguage })}{" "}
                 <Link
                   to="/login"
@@ -132,7 +132,7 @@ export const Forgot = ({ currentLanguage }) => {
                 >
                   {t("create-user.login", { lng: currentLanguage })}
                 </Link>
-              </span>
+              </span> */}
             </div>
           </div>     
           

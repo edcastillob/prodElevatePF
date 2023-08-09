@@ -121,7 +121,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   type="text"
                   name="name"
                   placeholder={t("create-user.fullname", { lng: currentLanguage })}
-                  className={`form-control ${errors.name && "is-invalid"}`}
+                  className={`form-control mb-3 ${errors.name && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
                 {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
@@ -132,7 +132,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   type="email"
                   name="email"
                   placeholder="Email"
-                  className={`form-control ${errors.email && "is-invalid"}`}
+                  className={`form-control mb-3 ${errors.email && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
                 {errors.email && (<div className="invalid-feedback">{errors.email}</div>)} 
@@ -143,7 +143,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   type="text"
                   name="identification"
                   placeholder={t("create-user.document", { lng: currentLanguage })}
-                  className={`form-control ${
+                  className={`form-control mb-3 ${
                     errors.identification && "is-invalid"
                   }`}
                   onChange={handleInputChange}
@@ -156,7 +156,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   type="text"
                   name="numPhone"
                   placeholder={t("create-user.phone", { lng: currentLanguage })}
-                  className={`form-control ${errors.numPhone && "is-invalid"}`}
+                  className={`form-control mb-3 ${errors.numPhone && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
                 {errors.numPhone && (<div className="invalid-feedback">{errors.numPhone}</div>)}
@@ -167,7 +167,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   type="text"
                   name="address"
                   placeholder={t("create-user.address", { lng: currentLanguage })}
-                  className={`form-control ${errors.address && "is-invalid"}`}
+                  className={`form-control mb-3 ${errors.address && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
                 {errors.address && (<div className="invalid-feedback">{errors.address}</div>)}
@@ -194,7 +194,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   type="password"
                   name="password"
                   placeholder={t("create-user.password", { lng: currentLanguage })}
-                  className={`form-control ${errors.password && "is-invalid"}`}
+                  className={`form-control mb-3 ${errors.password && "is-invalid"}`}
                   onChange={handleInputChange}
                 />
                 {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
@@ -205,7 +205,7 @@ export const CreateUser = ({ currentLanguage }) => {
                   type="password"
                   name="confirmPassword"
                   placeholder={t("create-user.confirm-password", { lng: currentLanguage })}
-                  className={`form-control ${
+                  className={`form-control mb-3 ${
                     errors.confirmPassword && "is-invalid"
                   }`}
                   onChange={handleInputChange}

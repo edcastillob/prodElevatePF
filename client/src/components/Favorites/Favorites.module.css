@@ -39,7 +39,7 @@
 }
 
 .sad{
-  font-size: 200px;
+  font-size: 150px;
   height: auto;
   color: #000924;
 }
@@ -52,6 +52,7 @@
 .back{
   /* border: 1px solid red; */
   width: 100%;
+  padding-left: 2rem;
 }
 
 .backButton{
