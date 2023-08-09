@@ -171,9 +171,9 @@ export const EditProduct = ({ currentLanguage }) => {
     navigate("/dashboard");
   };
 
-  console.log("productDetail: ", productDetail);
+  // console.log("productDetail: ", productDetail);
   // console.log("stock: ", productDetail.stock);
-  console.log("changeProduct:  ", changeProduct);
+  // console.log("changeProduct:  ", changeProduct);
 
   return (
     <div className={styles.container}>
@@ -390,7 +390,7 @@ export const EditProduct = ({ currentLanguage }) => {
             <div className="d-flex align-items-center">
               <div>
               <div>
-  {changeProduct.images.length === 0 ? (
+    {changeProduct.images && changeProduct.images.length === 0 ? (
     <div>
       <h6
         style={{

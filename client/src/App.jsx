@@ -140,7 +140,7 @@ function App({ user, userLocal }) {
   //   }, []);
 
   // console.log('userActive: ', userActive)
-  console.log("rol de user: ", userActive.roleId);
+  // console.log("rol de user: ", userActive.roleId);
 
   return (
     <>

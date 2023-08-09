@@ -56,7 +56,6 @@ export const ProductDetail = () => {
   const userActive = useSelector((state) => state.userLog);
   const userAll = useSelector((state) => state.users);
 
-
   useEffect(() => {
     Promise.all([dispatch(getProductDetail(id))])
       .then(() => {
@@ -102,15 +101,18 @@ export const ProductDetail = () => {
     dispatch(addComment(review));
     setSelectedStars(0);
     setComment("");
-    setShowModal(false);  
+    setShowModal(false);
     window.location.reload();
   };
   // console.log('comment: ', comment)
   // console.log('review :', review)
-  console.log(commentary)
-  const totalScore = commentary.reduce((total, comment) => total + comment.score, 0);
+  // console.log(commentary);
+  const totalScore = commentary.reduce(
+    (total, comment) => total + comment.score,
+    0
+  );
   const averageScore = Math.round(totalScore / commentary.length);
- console.log('userActive', userActive)
+  // console.log("userActive", userActive);
   return (
     <div style={{ padding: "1rem" }}>
       {loading ? (
@@ -133,20 +135,18 @@ export const ProductDetail = () => {
             <img src={images} alt={name} />
           </div>
 
-
-          
           <div className={styles.description}>
-                 {/* promedio con estrellas */}
-      <div className={styles.starContainer}>
-            {[0, 1, 2, 3, 4].map((index) => (
-              <FontAwesomeIcon
-                key={index}
-                icon={index < averageScore ? solidStar : farStar}
-                className={styles.star}
-              />
-            ))}
-          </div>
-          <br />
+            {/* promedio con estrellas */}
+            <div className={styles.starContainer}>
+              {[0, 1, 2, 3, 4].map((index) => (
+                <FontAwesomeIcon
+                  key={index}
+                  icon={index < averageScore ? solidStar : farStar}
+                  className={styles.star}
+                />
+              ))}
+            </div>
+            <br />
             <h4 style={{ fontFamily: "Poppins" }}>{name}</h4>
             <div
               className={styles.descriptionItem}
@@ -154,29 +154,20 @@ export const ProductDetail = () => {
             ></div>
             <h6>Category: {category} </h6>
 
-
-
-
- 
-      
-
-
-
-            
             <h4>Price ${salePrice} </h4>
 
             <button
-  className={styles.buttonCart}
-  onClick={() => {
-    if (userActive.email) {
-      setShowModal(true);
-    } else {
-      navigate("/login"); 
-    }
-  }}
->
-  Add Comment
-</button>
+              className={styles.buttonCart}
+              onClick={() => {
+                if (userActive.email) {
+                  setShowModal(true);
+                } else {
+                  navigate("/login");
+                }
+              }}
+            >
+              Add Comment
+            </button>
 
             <button
               className={styles.buttonCart}
@@ -198,7 +189,7 @@ export const ProductDetail = () => {
             />
             <span className={styles.commentHeader}>- Comment</span>
           </div>
-
+          <br />
           <div className={styles.starContainer}>
             {[0, 1, 2, 3, 4].map((index) => (
               <FontAwesomeIcon
@@ -209,7 +200,6 @@ export const ProductDetail = () => {
               />
             ))}
           </div>
-          <p>Your selected stars: {selectedStars}</p>
         </ModalHeader>
         <ModalBody>
           <input
@@ -271,7 +261,7 @@ export const ProductDetail = () => {
                           />
                         )}
                       </td>
-                      <td style={{ whiteSpace: 'nowrap' }}>
+                      <td style={{ whiteSpace: "nowrap" }}>
                         {[0, 1, 2, 3, 4].map((index) => (
                           <FontAwesomeIcon
                             key={index}

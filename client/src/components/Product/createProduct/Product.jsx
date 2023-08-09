@@ -124,7 +124,7 @@ export const Product = () => {
     // }
   };
   // console.log("provider: ", provider);
-  console.log(product);
+  // console.log(product);
   return (
     <div className={styles.container}>
       <hr />

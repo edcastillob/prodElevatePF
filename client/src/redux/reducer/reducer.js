@@ -115,7 +115,7 @@ function reducer(state = initialState, actions) {
       };
 
     case GET_CATEGORY_ID:
-      console.log("Category id: ", actions.payload);
+      // console.log("Category id: ", actions.payload);
       return {
         ...state,
         category: actions.payload,
