@@ -16,17 +16,17 @@ import Marquee from "react-fast-marquee";
 import styles from "./Home.module.css";
 import OrderFilter from "../Filter/OrderFilter";
 import FilterModal from "../Filter/FilterModal";
-import { useTranslation } from 'react-i18next';
-import loading from "../../assets/loading.png"
+import { useTranslation } from "react-i18next";
+import loading from "../../assets/loading.png";
 
-
-export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
-  const { t } = useTranslation('global');
+export const Home = ({ user, userLocal, handleSignIn, currentLanguage }) => {
+  const { t } = useTranslation("global");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const currentPage = useSelector((state) => state.currentPage);
+  console.log(currentPage);
   const totalPages = useSelector((state) => state.totalPages);
 
   useEffect(() => {
@@ -116,11 +116,15 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
   });
 
   const handleNextPage = () => {
-    if (productsFiltered.length > 0) {
-      dispatch(filterData(selectedFilters, currentPage + 1));
-      console.log(selectedFilters);
-    } else {
-      dispatch(showProducts(currentPage + 1));
+    const nextPage = currentPage + 1;
+
+    if (nextPage <= totalPages) {
+      if (productsFiltered.length > 0) {
+        dispatch(filterData(selectedFilters, nextPage));
+        console.log(selectedFilters);
+      } else {
+        dispatch(showProducts(nextPage));
+      }
     }
   };
 
@@ -139,7 +143,11 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
       <div className={styles.divSearch}>
         {/* search */}
         <form onChange={handleChange}>
-          <input type="text" className={`${styles.search}`} placeholder={t("home.search", { lng: currentLanguage })}/>
+          <input
+            type="text"
+            className={`${styles.search}`}
+            placeholder={t("home.search", { lng: currentLanguage })}
+          />
           <button
             type="submit"
             onClick={handleSubmit}
@@ -170,7 +178,7 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
         </div>
         <div>
           <button onClick={handleOpenModal} className={styles.titleFilter}>
-          {t("home.filter", { lng: currentLanguage })}
+            {t("home.filter", { lng: currentLanguage })}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="34"
@@ -198,12 +206,8 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
           <div className={styles.loading}>
             <img src={loading} width={80} height={80} alt="loading" />
             <h3>Upsss</h3>
-            <h5>
-            {t("home.product-not-found", { lng: currentLanguage })}
-            </h5>
-            <h6>
-            {t("home.please-try", { lng: currentLanguage })}
-            </h6>
+            <h5>{t("home.product-not-found", { lng: currentLanguage })}</h5>
+            <h6>{t("home.please-try", { lng: currentLanguage })}</h6>
             <NavLink
               style={{ textDecoration: "none" }}
               onClick={() => {
@@ -218,7 +222,11 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
         ) : (
           <div className={styles.cards}>
             {optionProducts?.map((product) => (
-              <CardProduct key={product.id} product={product} currentLanguage={currentLanguage} />
+              <CardProduct
+                key={product.id}
+                product={product}
+                currentLanguage={currentLanguage}
+              />
             ))}
           </div>
         )}
@@ -233,7 +241,9 @@ export const Home = ( { user, userLocal, handleSignIn, currentLanguage } ) => {
           >
             <ion-icon name="arrow-round-back"></ion-icon>
           </button>
-          <span style={{marginLeft:'1rem', marginRight:'1rem'}}>{t("home.page", { lng: currentLanguage })} {currentPage}</span>
+          <span style={{ marginLeft: "1rem", marginRight: "1rem" }}>
+            {t("home.page", { lng: currentLanguage })} {currentPage}
+          </span>
           <button
             disabled={currentPage === totalPages}
             onClick={handleNextPage}
