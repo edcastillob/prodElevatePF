@@ -55,6 +55,7 @@ const { getUserByName } = require("../controllers/GET/getUserByName");
 const { getAllFavorite } = require("../controllers/GET/getAllFavorite");
 const { postReview } = require("../controllers/POST/postReview");
 const { getAllReviewsId } = require("../controllers/GET/getAllReviewsId");
+const { getAllReviews } = require("../controllers/GET/getAllReviews");
 
 router.use("/notification", mailerRoutes);
 
@@ -160,5 +161,6 @@ router.post("/filter/data", postFilterData);
 
 router.post("/comment", postReview);
 router.get("/comment/:id", getAllReviewsId);
+router.get("/comment", getAllReviews);
 
 module.exports = router;

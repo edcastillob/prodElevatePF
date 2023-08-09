@@ -124,7 +124,7 @@ function App({ user, userLocal }) {
   const userActive = useSelector((state) => state.userLog);
   const theme = useSelector((state) => state.theme);
 
-  console.log("user active", userActive);
+  // console.log("user active", userActive);
 
   const handleSignIn = async () => {
     try {

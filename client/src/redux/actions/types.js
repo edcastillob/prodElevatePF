@@ -65,6 +65,7 @@ export const GET_ROLE = "GET_ROLE";
 export const ADD_REVIEW = "ADD_REVIEW";
 export const SHOW_REVIEWS = "SHOW_REVIEWS";
 export const SHOW_REVIEWS_ID = "SHOW_REVIEWS_ID";
+export const GET_ALL_REVIEWS = "GET_ALL_REVIEWS";
 
 //Theme
 export const TOGGLE_THEME = "TOGGLE_THEME";

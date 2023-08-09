@@ -245,7 +245,7 @@ export const ProductDetail = () => {
                 .slice()
                 .reverse()
                 .map((comment) => {
-                  console.log("Comment ID:", comment.id);
+                  // console.log("Comment ID:", comment.id);
                   const user = userAll.find(
                     (user) => user.email === comment.email
                   );

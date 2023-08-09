@@ -7,7 +7,7 @@ import { MdMenu } from "react-icons/md";
 import { AiOutlineComment, AiOutlineShoppingCart } from "react-icons/ai";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, showProducts } from "../../../redux/actions/actions";
+import { getUsers, showProducts, showReviews } from "../../../redux/actions/actions";
 
 import BarChart from "../Charts/BarModel";
 import PieChart from "../Charts/PieModel";
@@ -19,6 +19,9 @@ const Panel = ({ toggleActive, currentLanguage }) => {
   
   /** Show Users */ 
   const users = useSelector((state) => state.users);
+  /** Show reviews */ 
+  const reviews = useSelector((state) => state.reviews);
+  // console.log("___", reviews)
   
   const sortedUsers = users
   .slice()
@@ -35,6 +38,7 @@ const Panel = ({ toggleActive, currentLanguage }) => {
   useEffect(() => {
     dispatch(getUsers());
     dispatch(showProducts());
+    dispatch(showReviews());
   }, []);
 
   return (
@@ -75,7 +79,7 @@ const Panel = ({ toggleActive, currentLanguage }) => {
 
         <div className={styles.card}>
           <div>
-            <div className={styles.numbers}>20</div>
+            <div className={styles.numbers}>{reviews.length}</div>
             <div className={styles.cardName}>{t("dashboard.reviews", { lng: currentLanguage })}</div>
           </div>
           <div className={styles.iconBx}>
