@@ -81,7 +81,8 @@
         "please-try": "Please try another search or click on all products to get all products",
         "next": "Next",
         "previous": "Previous",
-        "page": "Page"
+        "page": "Page",
+        "welcome": "Welcome to ProdElevate - The place for the exponential growth of your business"
     },
     "filter-modal":{
         "brand-new": "Brand New",
@@ -323,11 +324,12 @@
     "product-detail":{
         "category": "Category:",
         "price": "Price",
-        "add": "Add Comment",
+        "add": "Add Review",
         "add-to-cart": "Add to Cart",
         "comment": "Comment",
         "add-your-comment": "Add your comment...",
-        "save": "Save",
-        "cancel": "Cancel"
+        "save": "Send",
+        "cancel": "Cancel",
+        "last-reviews": "Last reviews"
     }
 }

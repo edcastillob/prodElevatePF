@@ -81,7 +81,8 @@
         "please-try": "Por favor intenta otra búsqueda o haz clic en 'Todos los productos' para traerte todos los productos ",
         "next": "Siguiente",
         "previous": "Anterior",
-        "page": "Página"
+        "page": "Página",
+        "welcome": "Bienvenidos a ProdElevate - El lugar para el crecimiento exponencial de tu negocio"
     },
     "filter-modal":{
         "brand-new": "Nuevo",
@@ -323,12 +324,13 @@
     "product-detail":{
         "category": "Categoria:",
         "price": "Precio",
-        "add": "Añadir comentario",
+        "add": "Añadir reseña",
         "add-to-cart": "Agregar al carrito",
         "comment": "Comentario",
         "add-your-comment": "Ingresa tu comentario...",
-        "save": "Guardar",
-        "cancel": "Cancelar"
+        "save": "Enviar",
+        "cancel": "Cancelar",
+        "last-reviews": "Últimas reseñas"
     }
 }
 
