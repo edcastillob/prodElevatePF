@@ -161,7 +161,8 @@ function App({ user, userLocal }) {
           handleLanguageChange={handleLanguageChange} 
           currentLanguage={currentLanguage}
           />} />
-          <Route exact path="/about" element={<AboutUs currentLanguage={currentLanguage}/>} />
+          <Route exact path="/about" element={<AboutUs 
+          currentLanguage={currentLanguage}/>} />
           <Route exact path="/cart" element={<Cart currentLanguage={currentLanguage} />} />
           <Route exact path="/categoria" element={<ShowCategory />} />
           <Route exact path="/contact" element={<ContactUs currentLanguage={currentLanguage}/>} />
