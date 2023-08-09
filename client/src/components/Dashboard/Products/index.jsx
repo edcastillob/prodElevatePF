@@ -77,11 +77,7 @@ const Products = ({ toggleActive, currentLanguage }) => {
   //   products.name.toLowerCase().includes(searchProducts.toLowerCase())
   // );
 
-  const handleDeleteProduct = (productId) => {
-    console.log(productId);
-    setProductIdToDelete(productId);
-    dispatch(deleteProduct(productId));
-  };
+
 
   const handleConfirmDelete = (productId) => {
     setProductIdToDelete(null);
@@ -150,7 +146,11 @@ const Products = ({ toggleActive, currentLanguage }) => {
       }
     }
   };
-
+  const handleDeleteProduct = (productId) => {
+    console.log(productId)
+    setProductIdToDelete(productId);
+    dispatch(deleteProduct(productId));
+  };
   // console.log(productsInactive);
   return (
     <div>
@@ -287,12 +287,14 @@ const Products = ({ toggleActive, currentLanguage }) => {
                           )}
                         </Link>
 
-                        {/* <button
-                        className={styles.delete}
-                        onClick={() => handleDeleteProduct(product.id)}
-                      >
-                        <ion-icon name="trash"></ion-icon>
-                      </button> */}
+                        {userActive.email === "edwar.castillo@gmail.com" && (
+                        <button
+                          className={styles.delete}
+                          onClick={() => handleDeleteProduct(product.id)}
+                        >
+                          <ion-icon name="trash"></ion-icon>
+                        </button>
+                      )}
                       </td>
                     </tr>
                   ))}
