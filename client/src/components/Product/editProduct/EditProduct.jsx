@@ -305,10 +305,14 @@ export const EditProduct = ({ currentLanguage }) => {
             "link",
             "image",
           ]}
+<<<<<<<<< Temporary merge branch 1
+          placeholder={t("product.product-description", { lng: currentLanguage })}
+          style={{ marginBottom: "17px" }}
           placeholder={t("product.product-description", {
             lng: currentLanguage,
           })}
-          style={{ marginBottom: "17px" }}
+          style={{ height: "130px", marginBottom: "4rem" }}
+>>>>>>>>> Temporary merge branch 2
         />
         {errors.description && (
           <p className={styles.error}>{errors.description}</p>
