@@ -36,6 +36,7 @@ export const GET_USER_SYSTEM_LOG = "GET_USER_SYSTEM_LOG";
 export const POST_VERIFY_USER = "POST_VERIFY_USER";
 export const GET_USER_INACTIVE = "GET_USER_INACTIVE";
 export const GET_USER_BY_NAME = "GET_USER_BY_NAME";
+export const GET_USER_SEARCH_NAME = "GET_USER_SEARCH_NAME";
 
 //Cart
 export const ADD_TO_CART = "ADD_TO_CART";

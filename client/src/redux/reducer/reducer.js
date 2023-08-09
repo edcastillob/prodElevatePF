@@ -44,6 +44,7 @@ import {
   ADD_REVIEW,
   SHOW_REVIEWS_ID,
   TOGGLE_THEME,
+  GET_USER_SEARCH_NAME,
 } from "../actions/types";
 
 const initialState = {
@@ -384,6 +385,11 @@ function reducer(state = initialState, actions) {
         provider: updateProv,
       };
     case GET_ALL_USERS:
+      return {
+        ...state,
+        users: actions.payload,
+      };
+    case GET_USER_SEARCH_NAME:
       return {
         ...state,
         users: actions.payload,

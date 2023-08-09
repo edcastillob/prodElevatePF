@@ -46,6 +46,7 @@ import {
   ADD_REVIEW,
   SHOW_REVIEWS_ID,
   TOGGLE_THEME,
+  GET_USER_SEARCH_NAME,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -759,3 +760,21 @@ export const showReviewsId = (id) => {
 export const toggleTheme = () => ({
   type: TOGGLE_THEME,
 });
+
+export const getSearchUsersName = (page, name) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(
+        `${ENDPOINT}user-name?page=${page}&name=${name}`
+      );
+
+      // console.log(data.data);
+      return dispatch({
+        type: GET_USER_SEARCH_NAME,
+        payload: data,
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
