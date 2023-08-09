@@ -26,7 +26,7 @@
 }
 
 .logo img{
-    margin-top: 9%;
+    margin-top: 30px;
     width: 100%;
     height: auto;
 }
@@ -174,16 +174,18 @@
     width: 49.5%;
     height: 90%;
     padding: 1rem;
+    padding-left: 1.5rem;
     margin-top: 17.5px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: #cacaca56; /*rgba(21, 255, 21, 0.3);*/ /*#002eb946*/
+    background-color: #cacaca2c; 
     border-radius: 50px;
 }
 
 .titleReel{
     color: black;
+    font-weight: 600;
     font-family: 'Poppins';
 }
 

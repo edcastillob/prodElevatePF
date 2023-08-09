@@ -5,10 +5,10 @@ import logo from "../../assets/logo_2.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import adidas from "../../assets/adidas.png";
-import puma from "../../assets/puma.png";
 import apple from "../../assets/apple.png";
 import samsung from "../../assets/samsung.png";
+import xiaomi from "../../assets/xiaomi.png";
+import hp from "../../assets/hp.png";
 import es from "../../assets/espana.png";
 import en from "../../assets/estados-unidos.png";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
     arrows: false,
   };
 
-  const companyLogos = [adidas, puma, apple, samsung];
+  const companyLogos = [hp, xiaomi, apple, samsung];
 
   //Handle Dropdown
   const handleDropdownToggle = () => {
@@ -110,7 +110,7 @@ export const Landing = ({ handleLanguageChange, currentLanguage }) => {
           </Link>
         </div>
         <div className={styles.reel}>
-          <h4 className={styles.titleReel}>{t("landing.companies", { lng: currentLanguage })}</h4>
+          <h3 className={styles.titleReel}>{t("landing.companies", { lng: currentLanguage })}</h3>
           <div className={styles.companies}>
             <Slider {...carouselSettings}>
               {companyLogos.map((logo, index) => (
