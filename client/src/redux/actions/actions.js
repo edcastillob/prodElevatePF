@@ -47,6 +47,7 @@ import {
   SHOW_REVIEWS_ID,
   TOGGLE_THEME,
   GET_USER_SEARCH_NAME,
+  GET_ALL_REVIEWS,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -751,6 +752,16 @@ export const showReviewsId = (id) => {
     try {
       const response = await axios.get(`${ENDPOINT}comment/${id}`);
       dispatch({ type: SHOW_REVIEWS_ID, payload: response.data });
+    } catch (error) {
+      throw new Error("Error fetching review.");
+    }
+  };
+};
+export const showReviews = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ENDPOINT}comment`);
+      dispatch({ type: GET_ALL_REVIEWS, payload: response.data });
     } catch (error) {
       throw new Error("Error fetching review.");
     }

@@ -45,6 +45,7 @@ import {
   SHOW_REVIEWS_ID,
   TOGGLE_THEME,
   GET_USER_SEARCH_NAME,
+  GET_ALL_REVIEWS,
 } from "../actions/types";
 
 const initialState = {
@@ -453,6 +454,11 @@ function reducer(state = initialState, actions) {
         review: actions.payload,
       };
     case SHOW_REVIEWS_ID:
+      return {
+        ...state,
+        reviews: actions.payload,
+      };
+    case GET_ALL_REVIEWS:
       return {
         ...state,
         reviews: actions.payload,

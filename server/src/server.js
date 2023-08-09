@@ -9,10 +9,6 @@ const { User } = require("./db");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
 const bodyParser = require("body-parser");
 
-// // Socket Server - P1
-// const http = require('http');
-// const { Server } = require('socket.io');
-
 const server = express();
 server.use(bodyParser.json({ limit: "3mb" }));
 server.use(bodyParser.urlencoded({ limit: "3mb", extended: true }));
@@ -116,26 +112,8 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
-// server.set('views', __dirname + '/views');
-// server.set('view engine', 'ejs');
 
 server.use(router);
 
-// // Configurando el Socket Server - P2
-// const serverNode = http.createServer(server);
-// const io = new Server(serverNode);
-
-// // Conexion socket con frontend
-// io.on('connection', socket => {
-//   console.log(socket.id, 'Client id')
-
-//   socket.on('chat', (body) => {
-//     console.log(body, 'chat')
-//     socket.broadcast.emit('message', {
-//       body,
-//       from: socket.id.slice(6)
-//     })
-//   })
-// })
 
 module.exports = server;

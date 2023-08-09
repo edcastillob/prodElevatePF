@@ -19,8 +19,8 @@ export default function validateForm(
 
     if (!name) {
         errors.name = "Name is required";
-    } else if (name.length > 25) {
-        errors.name = "The name can't be longer than 25 characters";
+    } else if (name.length > 50) {
+        errors.name = "The name can't be longer than 50 characters";
     }; 
 
     if (!brand) {

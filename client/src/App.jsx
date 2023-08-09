@@ -124,7 +124,7 @@ function App({ user, userLocal }) {
   const userActive = useSelector((state) => state.userLog);
   const theme = useSelector((state) => state.theme);
 
-  console.log("user active", userActive);
+  // console.log("user active", userActive);
 
   const handleSignIn = async () => {
     try {
@@ -289,9 +289,12 @@ function App({ user, userLocal }) {
 
               {/* {(currentUser || currentUserLocal) && (
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 42785e8b0fdc2c161282c5fa836a57105f3132b6
+=======
+>>>>>>> 9252aa286d5f3faaa25df596ba5ca3ceaff749ac
             <Route path="/settings" element={<Configuration />} />
           )} */}
             </Routes>

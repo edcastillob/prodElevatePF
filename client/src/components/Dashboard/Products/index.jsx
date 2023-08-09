@@ -78,11 +78,7 @@ const Products = ({ toggleActive, currentLanguage }) => {
   //   products.name.toLowerCase().includes(searchProducts.toLowerCase())
   // );
 
-  const handleDeleteProduct = (productId) => {
-    console.log(productId);
-    setProductIdToDelete(productId);
-    dispatch(deleteProduct(productId));
-  };
+
 
   const handleConfirmDelete = (productId) => {
     setProductIdToDelete(null);
@@ -162,7 +158,11 @@ const Products = ({ toggleActive, currentLanguage }) => {
       }
     }
   };
-
+  const handleDeleteProduct = (productId) => {
+    console.log(productId)
+    setProductIdToDelete(productId);
+    dispatch(deleteProduct(productId));
+  };
   // console.log(productsInactive);
   return (
     <div>
@@ -217,6 +217,7 @@ const Products = ({ toggleActive, currentLanguage }) => {
           >
             {t("products.inactive", { lng: currentLanguage })}
           </Button> */}
+          <div className={styles.filters}>
           <div>
             <DashOrderFilter
               handleActiveProducts={handleActiveProducts}
@@ -224,7 +225,7 @@ const Products = ({ toggleActive, currentLanguage }) => {
               handleInactiveProducts={handleInactiveProducts}
             />
           </div>
-          <div>
+          <div> 
             <button onClick={handleOpenModal} className={styles.titleFilter}>
               Filter
               <svg
@@ -244,6 +245,9 @@ const Products = ({ toggleActive, currentLanguage }) => {
               handleFilter={handleFilter}
             />
           </div>
+
+          </div>
+          
 
           {/* table products */}
           <div className={styles.productContainer}>
@@ -315,12 +319,14 @@ const Products = ({ toggleActive, currentLanguage }) => {
                           )}
                         </Link>
 
-                        {/* <button
-                        className={styles.delete}
-                        onClick={() => handleDeleteProduct(product.id)}
-                      >
-                        <ion-icon name="trash"></ion-icon>
-                      </button> */}
+                        {userActive.email === "edwar.castillo@gmail.com" && (
+                        <button
+                          className={styles.delete}
+                          onClick={() => handleDeleteProduct(product.id)}
+                        >
+                          <ion-icon name="trash"></ion-icon>
+                        </button>
+                      )}
                       </td>
                     </tr>
                   ))}
@@ -402,19 +408,21 @@ const Products = ({ toggleActive, currentLanguage }) => {
         </Modal>
       </div>
       <div>
-        <div>
+        <div className={styles.pages}>
           <button
             disabled={currentPage === 1}
             onClick={() => dispatch(showProducts(currentPage - 1))}
+            className={styles.create}
           >
-            Anterior
+            <ion-icon name="arrow-round-back"></ion-icon>
           </button>
-          <span>Página {currentPage}</span>
+          <span>Page {currentPage}</span>
           <button
             disabled={currentPage === totalPages}
             onClick={handleNextPage}
+            className={styles.create}
           >
-            Siguiente
+            <ion-icon name="arrow-round-forward"></ion-icon>
           </button>
         </div>
       </div>

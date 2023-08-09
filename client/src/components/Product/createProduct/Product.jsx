@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import validateForm from "./validation";
-//import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
 export const Product = () => {
   useEffect(() => {

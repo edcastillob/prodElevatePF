@@ -186,7 +186,8 @@ export const EditProduct = ({ currentLanguage }) => {
 
   // console.log("productDetail: ", productDetail);
   // console.log("stock: ", productDetail.stock);
-  // console.log("changeProduct:  ", changeProduct);
+  // console.log("sortedproviders:  ", sortedproviders);
+  // console.log("provider:  ", provider);
 
   return (
     <div className={styles.container}>
