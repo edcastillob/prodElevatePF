@@ -124,7 +124,7 @@ function App({ user, userLocal }) {
   const userActive = useSelector((state) => state.userLog);
   const theme = useSelector((state) => state.theme);
 
-  console.log("user active", userActive);
+  // console.log("user active", userActive);
 
   const handleSignIn = async () => {
     try {
@@ -148,7 +148,6 @@ function App({ user, userLocal }) {
 
   return (
     <>
-
       <StyledApp theme={theme}>
         <I18nextProvider i18n={i18next}>
           {showNavBar && (
@@ -289,7 +288,6 @@ function App({ user, userLocal }) {
               {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel currentLanguage={currentLanguage} /> }/> */}
 
               {/* {(currentUser || currentUserLocal) && (
-
             <Route path="/settings" element={<Configuration />} />
           )} */}
             </Routes>

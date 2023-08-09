@@ -169,7 +169,7 @@ export const EditProduct = ({ currentLanguage }) => {
       changeProduct.provider,
       changeProduct.stock,
       changeProduct.images
-    )
+    );
     setErrors(errors);
     if (Object.keys(errors).length === 0) {
       dispatch(editProduct(id, changeProduct));
@@ -186,7 +186,10 @@ export const EditProduct = ({ currentLanguage }) => {
 
   // console.log("productDetail: ", productDetail);
   // console.log("stock: ", productDetail.stock);
-  // console.log("changeProduct:  ", changeProduct);
+  // console.log("sortedproviders:  ", sortedproviders);
+  // console.log("provider:  ", provider);
+  
+  
 
   return (
     <div className={styles.container}>
@@ -305,9 +308,10 @@ export const EditProduct = ({ currentLanguage }) => {
             "link",
             "image",
           ]}
-          placeholder={t("product.product-description", { lng: currentLanguage })}
+          placeholder={t("product.product-description", {
+            lng: currentLanguage,
+          })}
           style={{ marginBottom: "17px" }}
-
         />
         {errors.description && (
           <p className={styles.error}>{errors.description}</p>
@@ -423,46 +427,46 @@ export const EditProduct = ({ currentLanguage }) => {
           <div>
             <div className="d-flex align-items-center">
               <div>
-              <div>
-    {changeProduct.images && changeProduct.images.length === 0 ? (
-    <div className={styles.imgDiv}>
-      <h6
-        style={{
-          fontFamily: "Poppins",
-          textAlign: "start",
-          marginTop: "-1rem",
-        }}
-      >
-        {t("product.image", { lng: currentLanguage })}
-      </h6>
-      <UploadImg
-        onImageUpload={handleImageUpload}
-        uploadedImages={changeProduct.images}
-        clearUploadedImages={() =>
-          setChangeProduct((product) => ({
-            ...product,
-            images: [],
-          }))
-        }
-      />
-    </div>
-  ) : (
-    <div>
-      <button
-        type="button"
-        className="btn btn-danger btn-sm"
-        onClick={handleRemoveImage}
-      >
-        X
-      </button>
-      <img
-        src={changeProduct.images}
-        alt=""
-        style={{ width: "200px", height: "auto" }}
-      />
-    </div>
-  )}
-</div>
+                <div>
+                  {changeProduct.images && changeProduct.images.length === 0 ? (
+                    <div className={styles.imgDiv}>
+                      <h6
+                        style={{
+                          fontFamily: "Poppins",
+                          textAlign: "start",
+                          marginTop: "-1rem",
+                        }}
+                      >
+                        {t("product.image", { lng: currentLanguage })}
+                      </h6>
+                      <UploadImg
+                        onImageUpload={handleImageUpload}
+                        uploadedImages={changeProduct.images}
+                        clearUploadedImages={() =>
+                          setChangeProduct((product) => ({
+                            ...product,
+                            images: [],
+                          }))
+                        }
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <button
+                        type="button"
+                        className="btn btn-danger btn-sm"
+                        onClick={handleRemoveImage}
+                      >
+                        X
+                      </button>
+                      <img
+                        src={changeProduct.images}
+                        alt=""
+                        style={{ width: "200px", height: "auto" }}
+                      />
+                    </div>
+                  )}
+                </div>
                 <br />
               </div>
             </div>

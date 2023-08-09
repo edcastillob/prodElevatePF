@@ -44,6 +44,7 @@ import {
   ADD_REVIEW,
   SHOW_REVIEWS_ID,
   TOGGLE_THEME,
+  GET_ALL_REVIEWS,
 } from "../actions/types";
 
 const initialState = {
@@ -386,9 +387,7 @@ function reducer(state = initialState, actions) {
     case GET_ALL_USERS:
       return {
         ...state,
-        users: actions.payload.data,
-        currentPage: actions.payload.currentPage,
-        totalPages: actions.payload.totalPages,
+        users: actions.payload,
       };
     case DELETE_USERS:
       const updateUsers = state.users.filter(
@@ -449,6 +448,11 @@ function reducer(state = initialState, actions) {
         review: actions.payload,
       };
     case SHOW_REVIEWS_ID:
+      return {
+        ...state,
+        reviews: actions.payload,
+      };
+    case GET_ALL_REVIEWS:
       return {
         ...state,
         reviews: actions.payload,

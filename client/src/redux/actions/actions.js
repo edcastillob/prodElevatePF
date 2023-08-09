@@ -46,6 +46,7 @@ import {
   ADD_REVIEW,
   SHOW_REVIEWS_ID,
   TOGGLE_THEME,
+  GET_ALL_REVIEWS,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -158,14 +159,7 @@ export const getUsers = (page) => {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}user?page=${page}`);
       // console.log(data);
-      return dispatch({
-        type: GET_ALL_USERS,
-        payload: {
-          data: data.data,
-          totalPages: data.totalPages,
-          currentPage: page,
-        },
-      });
+      return dispatch({ type: GET_ALL_USERS, payload: data });
     };
   } catch (error) {
     throw new Error(error.message);
@@ -231,7 +225,7 @@ export const editUser = (userId, changeUser) => {
           userData.identification = changeUser.identification;
           userData.numPhone = changeUser.numPhone;
           userData.image = changeUser.image;
-          localStorage.setItem('user', JSON.stringify(userData));
+          localStorage.setItem("user", JSON.stringify(userData));
           window.location.reload();
         }
       }
@@ -757,6 +751,16 @@ export const showReviewsId = (id) => {
     try {
       const response = await axios.get(`${ENDPOINT}comment/${id}`);
       dispatch({ type: SHOW_REVIEWS_ID, payload: response.data });
+    } catch (error) {
+      throw new Error("Error fetching review.");
+    }
+  };
+};
+export const showReviews = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ENDPOINT}comment`);
+      dispatch({ type: GET_ALL_REVIEWS, payload: response.data });
     } catch (error) {
       throw new Error("Error fetching review.");
     }

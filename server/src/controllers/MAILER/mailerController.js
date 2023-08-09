@@ -1,11 +1,12 @@
 const { User, Role } = require("../../db");
-const { Sequelize } = require("sequelize");
-const { conn: sequelize } = require("../../db");
-// const { sequelize } = require('../../models/User.js');
+const { Sequelize } = require('sequelize');
+const { conn: sequelize  } = require("../../db");
 const UserModel = sequelize.models.User;
-
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
+
+const ENDPOINT = 'http://localhost:5173/';
+
 
 /**  Notificacion de Creacion de producto  **/
 const sendMailer = async (product) => {
@@ -25,13 +26,10 @@ const sendMailer = async (product) => {
 
   const emails = usersAdmin.map((user) => user.email);
 
-  console.log(emails);
+  // console.log(emails)
 
   try {
-    //  const { email } = req.params;
-    //  console.log('desde nodemailer: ', email)
-
-    const transporter = nodemailer.createTransport({
+     const transporter = nodemailer.createTransport({
       // port: 465 - true, 567 - false
       service: "gmail",
       auth: {
@@ -44,7 +42,7 @@ const sendMailer = async (product) => {
       theme: "cerberus",
       product: {
         name: "Alerta!! Creación de Nuevo producto",
-        link: "http://localhost:5173/dashboard",
+        link: `${ENDPOINT}dashboard`,
         copyright: "Copyright © 2023 ProdElevate. All rights reserved.",
       },
     });
@@ -70,7 +68,7 @@ const sendMailer = async (product) => {
           button: {
             color: "#000924",
             text: "Go to Dashboard",
-            link: "http://localhost:5173/dashboard",
+            link: `${ENDPOINT}dashboard`,
           },
         },
         // outro: 'Revisa el inventario del producto'
@@ -104,9 +102,8 @@ const sendMailNewUser = async (user) => {
   });
 
   if (!usersAdmin || usersAdmin.length === 0) {
-    return res
-      .status(404)
-      .json({ message: "No se encontraron usuarios con roleId 1" });
+    // return res.status(404).json({ message: "Error Rol Users" });
+    return console.log({ error: error.message });
   }
 
   const emails = usersAdmin.map((user) => user.email);
@@ -127,7 +124,7 @@ const sendMailNewUser = async (user) => {
       theme: "cerberus",
       product: {
         name: "Registro de usuario ProdElevate",
-        link: "http://localhost:5173/usuario",
+        link: `${ENDPOINT}usuario`,
       },
     });
 
@@ -146,7 +143,7 @@ const sendMailNewUser = async (user) => {
           button: {
             color: "#000924", // Optional action button color
             text: "Confirm your account",
-            link: "http://localhost:5173/login",
+            link: `${ENDPOINT}login`,
           },
         },
         outro: [
@@ -170,6 +167,7 @@ const sendMailNewUser = async (user) => {
     await transporter.sendMail(message);
   } catch (error) {
     //  return res.status(400).json({ error: error.message });
+    return console.log({ error: error.message });
     throw error;
   }
 };
