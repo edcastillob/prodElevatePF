@@ -14,7 +14,7 @@ export default function validateForm(
         errors.name = "Name is required";
     } else if (!RegExpression.test(name)) {
         errors.name = "Numbers or special characters are not allowed";
-    } else if (name.length > 15) {
+    } else if (name.length > 50) {
         errors.name = "The name can't be longer than 40 characters";
     }; 
 

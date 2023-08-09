@@ -6,7 +6,7 @@ import { BiUser } from "react-icons/bi";
 import { BiCategory } from "react-icons/bi";
 import { MdOutlineReviews } from "react-icons/md";
 import { TbTruckDelivery, TbReportMoney } from "react-icons/tb";
-import { AiOutlineSetting, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineSetting, AiOutlineShoppingCart, AiOutlineDashboard } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Customers from "./Customers";
@@ -18,6 +18,7 @@ import { Configuration } from "../Configuration/Configuration";
 import { ShowCategory } from "../Product/category/ShowCategory/ShowCategory";
 import { UsersAll } from "../users/UsersAll/UsersAll";
 import { useTranslation } from "react-i18next";
+import { RiDashboard3Line } from "react-icons/ri";
 
 
 const Panel = ({ currentLanguage }) => {
@@ -110,7 +111,7 @@ const Panel = ({ currentLanguage }) => {
             <li>
               <a href="#" onClick={() => setView("panel")}>
                 <span className={styles.icon}>
-                  <VscHome size="1.6em" />
+                  <AiOutlineDashboard size="1.6em" />
                 </span>
                 <span className={styles.titles}>
                   {t("dashboard.dashboard", { lng: currentLanguage })}

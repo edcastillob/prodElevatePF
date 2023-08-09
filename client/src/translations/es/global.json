@@ -72,7 +72,9 @@
         "password": "Crear contraseña",
         "confirm-password": "Confirmar contraseña",
         "toast-success": "¡Usuario creado exitosamnte!",
-        "toast-error": "Asegurate de completar correctamente los campos antes de enviar la información"
+        "toast-error": "Asegurate de completar correctamente los campos antes de enviar la información",
+        "forgot": "Cambiar contraseña",
+        "confirm": "Confirmar"
     },
     "home":{
         "search": "Buscar producto",

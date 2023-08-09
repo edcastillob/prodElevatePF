@@ -72,7 +72,9 @@
         "password": "Create password",
         "confirm-password": "Confirm password",
         "toast-success": "¡User created successfully!",
-        "toast-error": "Fill in the fields correctly before sending the information"
+        "toast-error": "Fill in the fields correctly before sending the information",
+        "forgot": "Change Password",
+        "confirm": "Confirm"
     },
     "home":{
         "search": "Search product",

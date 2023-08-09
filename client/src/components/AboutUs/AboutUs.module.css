@@ -76,12 +76,14 @@ body{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 1rem;
 }
 
 .person{
   /* border: 1px solid blue; */
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 400px;
+  margin-bottom: 2rem;
 }
 
 .divImg{
@@ -94,8 +96,8 @@ body{
 }
 
 .divImg img{
-  width: 60%;
-  height: 85%;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 }
 
