@@ -34,8 +34,6 @@ const postFavorite = async (req, res) => {
     });
     await favorite.addUser(searchUser.id);
 
-    await favorite.addUser(searchUser.id);
-
     const allFav = await Favorite.findAll();
     return res.status(201).json(allFav);
   } catch (error) {

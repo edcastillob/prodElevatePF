@@ -20,6 +20,7 @@ import OrderFilter from "../../Filter/OrderFilter";
 import DashOrderFilter from "../DashFilter/DashOrderFilter";
 import FilterModal from "../../Filter/FilterModal";
 import { useTranslation } from "react-i18next";
+import loading from "../../../assets/loading.png";
 
 const Products = ({ toggleActive, currentLanguage }) => {
   const [modal, setModal] = useState(false);
@@ -30,7 +31,7 @@ const Products = ({ toggleActive, currentLanguage }) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(showProducts());
+    dispatch(showProducts(currentPage));
     //dispatch(showProductsInactive());
   }, []);
 
@@ -63,9 +64,9 @@ const Products = ({ toggleActive, currentLanguage }) => {
     );
   }, [productsFiltered, products, productsInactive]);
 
-  if (!optionProducts || optionProducts.length === 0)
-    return <div>Loading...</div>;
-  if (!Array.isArray(optionProducts)) return <div>Loading...</div>;
+  // if (!optionProducts || optionProducts.length === 0)
+  //   return <div>Loading...</div>;
+  // if (!Array.isArray(optionProducts)) return <div>Loading...</div>;
 
   const sortedProducts = products
     .slice()
@@ -217,74 +218,86 @@ const Products = ({ toggleActive, currentLanguage }) => {
 
           {/* table products */}
           <div className={styles.productContainer}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>{t("products.product", { lng: currentLanguage })}</th>
-                  <th>{t("products.name", { lng: currentLanguage })}</th>
-                  <th>{t("products.State", { lng: currentLanguage })}</th>
-                  <th>{t("products.actions", { lng: currentLanguage })}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {optionProducts?.map((product) => (
-                  <tr key={product.id}>
-                    <td>
-                      <img
-                        src={product.images}
-                        alt={product.name}
-                        className={styles.img}
-                      />
-                    </td>
-                    <td>{product.name}</td>
-                    {/* <td>{null}</td> */}
-                    <td>
-                      {product.isActive ? <p>Active</p> : <p>Inactive</p>}
-                    </td>
-                    <td>
-                      <Link
-                        title="Edit product"
-                        to={`/productidedit/${product.id}`}
-                      >
-                        {product.isActive ? (
-                          <button className={styles.edit}>
-                            <ion-icon name="create"></ion-icon>
-                          </button>
-                        ) : (
-                          <button
-                            onClick={(event) =>
-                              activateProduct(event, product.id)
-                            }
-                            style={{
-                              background: "none",
-                              backgroundColor: "none",
-                              border: "none",
-                              padding: 0,
-                            }}
-                          >
-                            <img
-                              src={yes}
-                              alt="Imagen Clickeable"
-                              style={{ width: "32px", height: "32px" }}
-                            />
-                          </button>
-                        )}
-                      </Link>
+            {optionProducts.length === 0 || productsInactive === 0 ? (
+              <div>
+                <div>
+                  <img src={loading} alt="loading" />
+                  <h2>Upsss</h2>
+                  <h3>You have no inactive products.</h3>
+                  <h4>
+                    Please click on active products to see all your products and
+                    if you want you can deactivate the one you like.
+                  </h4>
+                </div>
+              </div>
+            ) : (
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>{t("products.product", { lng: currentLanguage })}</th>
+                    <th>{t("products.name", { lng: currentLanguage })}</th>
+                    <th>{t("products.State", { lng: currentLanguage })}</th>
+                    <th>{t("products.actions", { lng: currentLanguage })}</th>
+                  </tr>
+                </thead>
 
-                      {/* <button
+                <tbody>
+                  {optionProducts?.map((product) => (
+                    <tr key={product.id}>
+                      <td>
+                        <img
+                          src={product.images}
+                          alt={product.name}
+                          className={styles.img}
+                        />
+                      </td>
+                      <td>{product.name}</td>
+                      {/* <td>{null}</td> */}
+                      <td>
+                        {product.isActive ? <p>Active</p> : <p>Inactive</p>}
+                      </td>
+                      <td>
+                        <Link
+                          title="Edit product"
+                          to={`/productidedit/${product.id}`}
+                        >
+                          {product.isActive ? (
+                            <button className={styles.edit}>
+                              <ion-icon name="create"></ion-icon>
+                            </button>
+                          ) : (
+                            <button
+                              onClick={(event) =>
+                                activateProduct(event, product.id)
+                              }
+                              style={{
+                                background: "none",
+                                backgroundColor: "none",
+                                border: "none",
+                                padding: 0,
+                              }}
+                            >
+                              <img
+                                src={yes}
+                                alt="Imagen Clickeable"
+                                style={{ width: "32px", height: "32px" }}
+                              />
+                            </button>
+                          )}
+                        </Link>
+
+                        {/* <button
                         className={styles.delete}
                         onClick={() => handleDeleteProduct(product.id)}
                       >
                         <ion-icon name="trash"></ion-icon>
                       </button> */}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {/* {filteredProducts?.map((product) => (
-              
-          ))} */}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </div>

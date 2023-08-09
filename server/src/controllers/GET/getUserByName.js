@@ -1,6 +1,6 @@
 const { User } = require("../../db");
 
-async function getAllUsers(req, res) {
+async function getUserByName(req, res) {
   const page = parseInt(req.query.page) || 1;
   const pageSize = req.query.pageSize || 8;
   try {
@@ -26,7 +26,7 @@ async function getAllUsers(req, res) {
       ],
       offset,
       limit: pageSize,
-      order: [["id", "DESC"]],
+      order: [["name", "DESC"]],
     });
 
     return res
@@ -38,5 +38,5 @@ async function getAllUsers(req, res) {
 }
 
 module.exports = {
-  getAllUsers,
+  getUserByName,
 };

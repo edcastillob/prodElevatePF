@@ -40,6 +40,9 @@ import {
   SHOW_PRODUCTS_INACTIVE,
   ACTIVE_PRODUCT,
   POST_VERIFY_USER,
+  GET_USER_INACTIVE,
+  GET_USER_BY_NAME,
+  GET_ALL_FAVORITE,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -147,12 +150,57 @@ export const editProduct = (productId, changeProduct) => {
   };
 };
 
-export const getUsers = () => {
+export const getUsers = (page) => {
   try {
     return async (dispatch) => {
-      const { data } = await axios.get(`${ENDPOINT}user`);
+      const { data } = await axios.get(`${ENDPOINT}user?page=${page}`);
       // console.log(data);
-      return dispatch({ type: GET_ALL_USERS, payload: data });
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const getUsersInactive = (page) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(`${ENDPOINT}user-inactive?page=${page}`);
+      // console.log(data);
+      return dispatch({
+        type: GET_USER_INACTIVE,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
+    };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const getUsersByName = (page) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.get(`${ENDPOINT}user-by-name?page=${page}`);
+      // console.log(data);
+      return dispatch({
+        type: GET_USER_BY_NAME,
+        payload: {
+          data: data.data,
+          totalPages: data.totalPages,
+          currentPage: page,
+        },
+      });
     };
   } catch (error) {
     throw new Error(error.message);
@@ -496,6 +544,22 @@ export const addFav = (product) => {
       const { data } = await axios.post(endpoint, product);
       return dispatch({
         type: ADD_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const allFav = (user) => {
+  const endpoint = `${ENDPOINT}favorite`;
+  return async (dispatch) => {
+    try {
+      // console.log(product);
+      const { data } = await axios.get(endpoint, user);
+      return dispatch({
+        type: GET_ALL_FAVORITE,
         payload: data,
       });
     } catch (error) {

@@ -38,6 +38,9 @@ import {
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   POST_VERIFY_USER,
+  GET_USER_INACTIVE,
+  GET_USER_BY_NAME,
+  GET_ALL_FAVORITE,
 } from "../actions/types";
 
 const initialState = {
@@ -62,6 +65,7 @@ const initialState = {
   users: [],
   userMail: [],
   userLog: [],
+  usersInactive: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -155,6 +159,23 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         user: [...state.user, payload],
+      };
+
+    case GET_USER_INACTIVE:
+      return {
+        ...state,
+        usersInactive: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
+        users: [],
+      };
+
+    case GET_USER_BY_NAME:
+      return {
+        ...state,
+        users: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
       };
 
     case LOGIN:
@@ -296,6 +317,8 @@ function reducer(state = initialState, actions) {
       return { ...state, favorites: actions.payload };
     case REMOVE_FAV:
       return { ...state, favorites: actions.payload };
+    case GET_ALL_FAVORITE:
+      return { ...state, favorites: actions.payload };
 
     //Filter Price
 
@@ -356,7 +379,9 @@ function reducer(state = initialState, actions) {
     case GET_ALL_USERS:
       return {
         ...state,
-        users: actions.payload,
+        users: actions.payload.data,
+        currentPage: actions.payload.currentPage,
+        totalPages: actions.payload.totalPages,
       };
     case DELETE_USERS:
       const updateUsers = state.users.filter(

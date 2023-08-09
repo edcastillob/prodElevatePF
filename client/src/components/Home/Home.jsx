@@ -26,6 +26,7 @@ export const Home = ({ user, userLocal, handleSignIn, currentLanguage }) => {
   const navigate = useNavigate();
 
   const currentPage = useSelector((state) => state.currentPage);
+  console.log(currentPage);
   const totalPages = useSelector((state) => state.totalPages);
 
   useEffect(() => {

@@ -1,26 +1,37 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Favorites.module.css";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { CardProduct } from "../Product/cardProduct/cardProduct";
+import { allFav } from "../../redux/actions/actions";
 
 const Favorites = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-
+  const userActive = useSelector((state) => state.userLog);
+  // const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
-  console.log(favorites);
+  //console.log(favorites);
+
+  // useEffect(() => {
+  //   const auth = getAuth();
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       const uid = user.uid;
+  //       const userEmail = user.email;
+  //       console.log(userEmail);
+  //       setCurrentUser(user);
+  //     } else {
+  //       setCurrentUser(null);
+  //     }
+  //   });
+  // }, []);
+  console.log("Favorite", userActive);
 
   useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        setCurrentUser(user);
-      } else {
-        setCurrentUser(null);
-      }
-    });
+    if (userActive.email) {
+      dispatch(allFav(userActive.email));
+    }
   }, []);
 
   return (

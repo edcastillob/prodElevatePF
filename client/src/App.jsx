@@ -122,6 +122,8 @@ function App({ user, userLocal }) {
   }, [user, userLocal]);
   const userActive = useSelector((state) => state.userLog);
 
+  console.log("user active", userActive);
+
   const handleSignIn = async () => {
     try {
       const user = await handleGoogleSignIn();
