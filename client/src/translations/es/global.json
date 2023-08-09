@@ -72,7 +72,9 @@
         "password": "Crear contraseña",
         "confirm-password": "Confirmar contraseña",
         "toast-success": "¡Usuario creado exitosamnte!",
-        "toast-error": "Asegurate de completar correctamente los campos antes de enviar la información"
+        "toast-error": "Asegurate de completar correctamente los campos antes de enviar la información",
+        "forgot": "Cambiar contraseña",
+        "confirm": "Confirmar"
     },
     "home":{
         "search": "Buscar producto",
@@ -327,7 +329,7 @@
         "price": "Precio",
         "add": "Añadir reseña",
         "add-to-cart": "Agregar al carrito",
-        "comment": "Comentario",
+        "comment": "Reseña",
         "add-your-comment": "Ingresa tu comentario...",
         "save": "Enviar",
         "cancel": "Cancelar",

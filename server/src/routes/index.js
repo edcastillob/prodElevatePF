@@ -55,8 +55,9 @@ const { getUserByName } = require("../controllers/GET/getUserByName");
 const { getAllFavorite } = require("../controllers/GET/getAllFavorite");
 const { postReview } = require("../controllers/POST/postReview");
 const { getAllReviewsId } = require("../controllers/GET/getAllReviewsId");
-const { getAllReviews } = require("../controllers/GET/getAllReviews");
 const { postStripeWebhook } = require("../controllers/POST/postStripeWebhook");
+const { getSearchUsersName } = require("../controllers/GET/getSearchUsersName");
+const { getAllReviews } = require("../controllers/GET/getAllReviews");
 
 router.use("/notification", mailerRoutes);
 
@@ -124,6 +125,7 @@ router.get("/user-by-name", getUserByName);
 router.get("/useremail/:email", getUserByEmail);
 router.get("/userlog/:email", getUserByEmail);
 router.post("/user", postUser);
+router.get("/user-name", getSearchUsersName);
 router.post("/verifyUser", verifyUser);
 router.put("/user/:id", putUser);
 router.delete("/user/:id", deleteUser);
