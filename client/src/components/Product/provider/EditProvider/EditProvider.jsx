@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 
 export const EditProvider = ({ currentLanguage }) => {
   const { t } = useTranslation('global');
-
   const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate()

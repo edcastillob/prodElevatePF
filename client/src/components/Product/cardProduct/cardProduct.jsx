@@ -90,7 +90,7 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn, currentLan
       </Link>
       <div className={styles.description}>
         {userActive.isActive === true ? (
-          <div>
+          <div className={styles.divFav}>
             {isFav ? (
               <button className={styles.favButton} onClick={handleFavorite}>
                 <h3 style={{ color: "#000924" }}>
@@ -106,27 +106,34 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn, currentLan
             )}
           </div>
         ) : null}
+          <div className={styles.divName}>
         <NavLink
           title="Detail Product"
           to={`/productid/${id}`}
           style={{ textDecoration: "none" }}
           // className={styles.link}
-        >
+        > 
           <h6 className={styles.title}>{name}</h6>
+
         </NavLink>
-        <h6 className={styles.category}> {category}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.brand", { lng: currentLanguage })}</span>
-        <h6 className={styles.price}>{brand}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.condition", { lng: currentLanguage })}</span>
-        <h6 className={styles.price}>{condition}</h6>
-        <span className={styles.priceLabel}>{t("cardProduct.price", { lng: currentLanguage })}</span>
-        <h6 className={styles.price}>${salePrice}</h6>
-        <button
-          className={styles.buttonCart}
-          onClick={() => handledAddToCart(product)}
-        >
-          {t("cardProduct.add-to-cart", { lng: currentLanguage })}
-        </button>
+        </div>
+        <div className={styles.info}>
+          <h6 className={styles.category}> {category}</h6>
+          <span className={styles.priceLabel}>{t("cardProduct.brand", { lng: currentLanguage })}</span>
+          <h6 className={styles.price}>{brand}</h6>
+          <span className={styles.priceLabel}>{t("cardProduct.condition", { lng: currentLanguage })}</span>
+          <h6 className={styles.price}>{condition}</h6>
+          <span className={styles.priceLabel}>{t("cardProduct.price", { lng: currentLanguage })}</span>
+          <h6 className={styles.price}>${salePrice}</h6>
+        </div>
+        <div className={styles.divBtn}>
+          <button
+            className={styles.buttonCart}
+            onClick={() => handledAddToCart(product)}
+          >
+            {t("cardProduct.add-to-cart", { lng: currentLanguage })}
+          </button>
+        </div>
       </div>
     </div>
   );

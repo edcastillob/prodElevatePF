@@ -257,6 +257,68 @@
         "name": "Nombre Completo:",
         "fullname": "Nombre Completo",
         "update": "Actualizar"
+    },
+    "favorites":{
+        "favorites": "Favoritos",
+        "no-favorites": "Aún no has agregado nada a favoritos...",
+        "add": "Agregar Favoritos"
+    },
+    "about":{
+        "about-us": "Sobre Nosotros",
+        "who-are-we": "QUIÉNES SOMOS?",
+        "prodelevate": "Prodelevate",
+        "text-1": "Somos un equipo especializado que ofrece soluciones simples pero altamente efectivas. Nuestro enfoque es garantizar la comodidad y seguridad de nuestros clientes. Con una amplia experiencia en el desarrollo de este tipo de productos, vamos más allá de un simple sitio web...",
+        "our-mission": "NUESTRA MISIÓN",
+        "text-2": "es un sistema de gestión de productos y administración de ventas  en línea. El objetivo principal es proporcionar a los usuarios una plataforma donde puedan crear, administrar y vender productos de manera eficiente",
+        "our-goal": "NUESTRO OBJETIVO",
+        "text-3-1": "Nuestro objetivo es brindar un servicio rápido, versátil y seguro para todo tipo de clientes que buscan con",
+        "text-3-2": "lo que necesitan para impulsar y administrar su negocio. Nuestro objetivo final es seguir creciendo junto a nuestros clientes y perfeccionar aún más la plataforma para su comodidad.",
+        "our-team": "Conoce a nuestro equipo",
+        "our-team-phrase": "El equipo que trabajó en la creación de Prodelevate",
+        "dominican": "República Dominicana"
+    },
+    "privacy-policy":{
+        "privacy-policy": "Políticas de Privacidad",
+        "at": "En",
+        "text-1-1": "la privacidad de nuestros usuarios es una prioridad para nosotros. Esta Política de privacidad describe cómo recopilamos, usamos, divulgamos y protegemos la información personal que proporciona cuando usa nuestra plataforma.",
+        "text-1-2": "Al acceder y utilizar nuestro sitio web y nuestros servicios, usted acepta las prácticas descritas en esta Política de privacidad.",
+        "info-1": "1. Recopilación de información:",
+        "info-1-text": "recopilará la información personal proporcionada por usted durante el proceso de registro y mientras utiliza nuestra plataforma. Esto puede incluir, entre otros, su nombre, dirección de correo electrónico, información de contacto y detalles de pago.",
+        "info-2": "2. Uso de la información:",
+        "info-2-text": "Usaremos la información recopilada con el fin de proporcionar nuestros servicios, procesar sus pedidos, enviar notificaciones importantes relacionadas con la cuenta y mejorar la experiencia del usuario en",
+        "info-3": "3. Divulgación a terceros:",
+        "info-3-text": "No compartiremos, venderemos ni alquilaremos su información personal a terceros sin su consentimiento explícito, excepto cuando sea necesario para proporcionar nuestros servicios o cumplir con las leyes aplicables.",
+        "info-4": "4. Información de seguridad",
+        "info-4-text": "Implementamos medidas de seguridad apropiadas para proteger su información personal del acceso no autorizado, divulgación o destrucción",
+        "info-5": "5. Cookies:",
+        "info-5-text": "puede utilizar cookies y tecnologías similares para mejorar su experiencia en nuestro sitio web y recopilar datos con fines de análisis y marketing. Al utilizar nuestro sitio, acepta el uso de cookies de acuerdo con nuestra Política de cookies.",
+        "info-6": "6. Enlaces externos:",
+        "info-6-text": "Nuestro sitio web puede contener enlaces a sitios web de terceros. No somos responsables de las prácticas de privacidad ni del contenido de estos sitios."
+    },
+    "terms":{
+        "terms": "Términos y Condiciones",
+        "text-1": "Bienvenido a ",
+        "text-2": "Al acceder y utilizar nuestra plataforma, usted acepta cumplir con los siguientes términos y condiciones:",
+        "info-1": "1. Uso aceptable:",
+        "info-1-text": "Usted acepta usar ",
+        "info-1-text-2": "exclusivamente para fines lícitos y de conformidad con las leyes y reglamentos aplicables. No está permitido utilizar nuestro sitio web de manera que pueda dañar, deshabilitar, sobrecargar o comprometer su funcionamiento.",
+        "info-2": "2. Propiedad intelectual:",
+        "info-2-text": "Todo el contenido presente en ",
+        "info-2-text-2": "incluidos, entre otros, logotipos, texto, gráficos, imágenes y software, está protegido por derechos de propiedad intelectual y pertenece a ",
+        "info-2-text-3": "Acepta no copiar, distribuir, reproducir ni crear obras derivadas de dicho contenido sin nuestro consentimiento explícito.",
+        "info-3": "3. Responsabilidad:",
+        "info-3-text": "no será responsable de ningún daño directo, indirecto, incidental, consecuente o especial que pueda surgir del uso o la imposibilidad de usar nuestro sitio web o servicios.",
+        "info-4": "4. Modificaciones:",
+        "info-4-text": "Nos reservamos el derecho de modificar, suspender o descontinuar cualquier aspecto de ",
+        "info-4-text-2": "en cualquier momento sin previo aviso.",
+        "info-5": "5. Ley aplicable:",
+        "info-5-text": "Estos términos y condiciones se rigen por las leyes del Estado, y cualquier disputa que surja en relación con estos términos y condiciones estará sujeta a la jurisdicción exclusiva de los tribunales del Estado."
+    },
+    "contact":{
+        "contact-us": "Contáctanos",
+        "email": "Tu Email...",
+        "message": "Ingresa tu mensaje...",
+        "send": "Enviar"    
     }
 }
 

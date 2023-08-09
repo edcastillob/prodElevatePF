@@ -21,3 +21,58 @@
   gap: 30px; /* Espacio entre las cards */
   justify-content: center; /* Centra las cards horizontalmente */
 }
+
+.cartEmpty{
+  /* border: 1px solid black; */
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-content: center;
+}
+
+.cartEmpty p{
+  position: relative;
+  font-size: 30px;
+  bottom: 2rem;
+}
+
+.sad{
+  font-size: 200px;
+  height: auto;
+  color: #000924;
+}
+
+.title{
+  /* border: 1px solid blue; */
+  width: 100%;
+}
+
+.back{
+  /* border: 1px solid red; */
+  width: 100%;
+}
+
+.backButton{
+  border: 1px solid #cacaca;
+  border-radius: 10px;
+  box-shadow: 0 2px 0 #adacac;
+  width: 7%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .2s;
+  color: #000924;
+  &:hover{
+      transform: scale(0.98);
+      transition: .3s;
+  }
+}
+
+.backButton p{
+  color: black;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
