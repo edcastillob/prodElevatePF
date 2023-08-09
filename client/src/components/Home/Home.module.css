@@ -38,12 +38,12 @@ Link {
   align-items: center;
 }
 
-.search{
+.search {
   border-radius: 10px;
   border: 1px solid #cacaca;
   box-shadow: 0 0 2px #aeadad;
   padding: 10px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .cards {
@@ -95,7 +95,6 @@ h3 {
   .message {
     font-size: 1rem;
   }
-
 }
 
 @media (max-width: 649px) {
@@ -116,27 +115,27 @@ h3 {
     font-size: 15px;
   }
 }
-.pages{
+.pages {
   /* border: 1px solid black; */
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
 }
 
-.create{
+.create {
   border: 1px solid #cacaca;
   width: 30px;
   height: auto;
   padding-top: 0.4rem;
   border-radius: 10px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   background-color: #000924;
   color: #cacaca;
-  transition: .2s;
+  transition: 0.2s;
   cursor: pointer;
-  &:hover{
-      transform: scale(0.97);
-      color: #fff;
-      transition: .3s;
+  &:hover {
+    transform: scale(0.97);
+    color: #fff;
+    transition: 0.3s;
   }
 }

@@ -6,8 +6,8 @@ const deleteFavorite = async (req, res) => {
 
   try {
     await Favorite.destroy({ where: { id } });
-    const allFavorites = await Favorite.findAll();
-    return res.status(201).json(allFavorites);
+
+    return res.status(201);
   } catch (error) {
     return res.status(500).json({ err: error.message });
   }
