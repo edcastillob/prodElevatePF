@@ -319,6 +319,16 @@
         "email": "Tu Email...",
         "message": "Ingresa tu mensaje...",
         "send": "Enviar"    
+    },
+    "product-detail":{
+        "category": "Categoria:",
+        "price": "Precio",
+        "add": "Añadir comentario",
+        "add-to-cart": "Agregar al carrito",
+        "comment": "Comentario",
+        "add-your-comment": "Ingresa tu comentario...",
+        "save": "Guardar",
+        "cancel": "Cancelar"
     }
 }
 

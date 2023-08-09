@@ -38,7 +38,7 @@
         "add-to-cart": "Add to Cart"
     },
     "shopping-cart":{
-        "shopping": "Shoping Cart",
+        "shopping": "Shopping Cart",
         "is-empty": "Your Cart is empty",
         "start-shopping": "Start Shoping",
         "continue-shopping": "Continue Shoping",
@@ -319,5 +319,15 @@
         "email": "Your Email...",
         "message": "Enter your message...",
         "send": "Send"    
+    },
+    "product-detail":{
+        "category": "Category:",
+        "price": "Price",
+        "add": "Add Comment",
+        "add-to-cart": "Add to Cart",
+        "comment": "Comment",
+        "add-your-comment": "Add your comment...",
+        "save": "Save",
+        "cancel": "Cancel"
     }
 }

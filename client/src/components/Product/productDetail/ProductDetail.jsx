@@ -10,7 +10,7 @@ import {
 import loadingImg from "../../../assets/loading.png";
 import { getCategory } from "../../../redux/actions/actions";
 import styles from "./ProductDetail.module.css";
-
+import { useTranslation } from "react-i18next";
 import { addToCart } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 // import { addToCart } from "../../../redux/actions/actions";
@@ -22,9 +22,9 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 
-export const ProductDetail = () => {
+export const ProductDetail = ({ currentLanguage }) => {
   const [selectedStars, setSelectedStars] = useState(0);
-
+  const { t } = useTranslation('global');
   const handleStarClick = (starIndex) => {
     setSelectedStars(starIndex + 1);
   };
@@ -152,9 +152,9 @@ export const ProductDetail = () => {
               className={styles.descriptionItem}
               dangerouslySetInnerHTML={{ __html: description }}
             ></div>
-            <h6>Category: {category} </h6>
+            <h6>{t("product-detail.category", { lng: currentLanguage })} {category} </h6>
 
-            <h4>Price ${salePrice} </h4>
+            <h4>{t("product-detail.price", { lng: currentLanguage })} ${salePrice} </h4>
 
             <button
               className={styles.buttonCart}
@@ -166,14 +166,14 @@ export const ProductDetail = () => {
                 }
               }}
             >
-              Add Comment
+              {t("product-detail.add", { lng: currentLanguage })}
             </button>
 
             <button
               className={styles.buttonCart}
               onClick={() => handledAddToCart(productDetail)}
             >
-              Add to Cart
+              {t("product-detail.add-to-cart", { lng: currentLanguage })}
             </button>
           </div>
         </div>
@@ -205,7 +205,7 @@ export const ProductDetail = () => {
           <input
             className={styles.commentInput}
             type="text"
-            placeholder="Add your comment..."
+            placeholder={t("product-detail.add-your-comment", { lng: currentLanguage })}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
