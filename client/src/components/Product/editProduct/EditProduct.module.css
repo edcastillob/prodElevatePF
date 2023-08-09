@@ -21,12 +21,23 @@
         background-color: #fff;
         display: flex;
         flex-direction: column;
+        gap: 0.1rem;
+        justify-content: space-between;
 }
     
+.imgDiv {
+  margin-top: 10px;
+}
 
+.prices {
+  display: flex;
+  flex-direction: column;
+}
 
-
-
+.brands {
+  display: flex;
+  flex-direction: column;
+}
 
 .create{
     border: 1px solid #cacaca;
@@ -64,7 +75,7 @@
 
   .error { 
     color: red;
-    font-size: 15px;
+    font-size: 12px;
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -84,4 +95,67 @@
     }
     
 
+}
+
+@media (max-width: 793px) {
+  .form {
+    width: 80%;
+  }
+}
+
+@media (max-width: 611px) {
+  .form {
+    width: 95%
+  }
+}
+
+@media (max-width: 440px) {
+  .form h4 {
+    font-size: 1.275rem;
+  }
+  .form label {
+    font-size: 0.8rem
+  }
+  .form input {
+    font-size: 0.7rem;
+  }
+  .form select {
+    font-size: 0.7rem;
+  }
+  .create {
+    width: 88px;
+  }
+  .imgDiv h6 {
+    font-size: 0.8rem;
+  }
+  .imgDiv input {
+    font-size: 0.7rem
+  }
+}
+
+@media (max-width: 335px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 307px) {
+  .form h4 {
+    font-size: 1.1rem;
+  }
+  .form label {
+    font-size: 0.7rem
+  }
+  .form input {
+    font-size: 0.65rem;
+  }
+  .form select {
+    font-size: 0.65rem;
+  }
+  .imgDiv h6 {
+    font-size: 0.7rem;
+  }
+  .imgDiv input {
+    font-size: 0.65rem
+  }
 }

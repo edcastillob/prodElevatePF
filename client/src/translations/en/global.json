@@ -257,5 +257,67 @@
         "name": "Fullname:",
         "fullname": "Fullname",
         "update": "Update"
+    },
+    "favorites":{
+        "favorites": "Favorites",
+        "no-favorites": "You have no added favorites yet...",
+        "add": "Add Favorites"
+    },
+    "about":{
+        "about-us": "About Us",
+        "who-are-we": "WHO ARE WE?",
+        "prodelevate": "Prodelevate",
+        "text-1": "We're a specialized Team offering simple yet highly effective solutions. Our focus is on ensuring the comfort and security of our clients. With extensive experience in developing such products, we go beyond just a website...",
+        "our-mission": "OUR MISSION",
+        "text-2": "is a product management and sales administration system for online sales. The main objective is to provide users with a platform where they can efficiently create, manage, and sell products.",
+        "our-goal": "OUR GOAL",
+        "text-3-1": "We aim to provide a fast, versatile, and secure service for all types of clients who find in",
+        "text-3-2": "what they need to boost and manage their business. Our ultimate goal is to continue growing alongside our clients and further refine the platform for their comfort.",
+        "our-team": "Meet our Team",
+        "our-team-phrase": "The team that worked for the creation of Prodelevate",
+        "dominican": "Dominican Republic"
+    },
+    "privacy-policy":{
+        "privacy-policy": "Privacy Policy",
+        "at": "At",
+        "text-1-1": "the privacy of our users is a priority for us. This Privacy Policy describes how we collect, use, disclose, and protect the personal information you provide when using our platform",
+        "text-1-2": "By accessing and using our website and services, you agree to the practices described in this Privacy Policy.",
+        "info-1": "1. Information Collection:",
+        "info-1-text": "will collect personal information provided by you during the registration process and while using our platform. This may include, among others, your name, email address, contact information, and payment details.",
+        "info-2": "2. Use of Information:",
+        "info-2-text": "We will use the collected information for the purpose of providing our services, processing your orders, sending important account-related notifications, and improving the user experience on",
+        "info-3": "3. Disclosure to Third Parties:",
+        "info-3-text": "We will not share, sell, or rent your personal information to third parties without your explicit consent, except when necessary to provide our services or comply with applicable laws.",
+        "info-4": "4. Information Security:",
+        "info-4-text": "We implement appropriate security measures to protect your personal information from unauthorized access, disclosure, or destruction.",
+        "info-5": "5. Cookies:",
+        "info-5-text": "may use cookies and similar technologies to enhance your experience on our website and collect data for analysis and marketing purposes. By using our site, you agree to the use of cookies in accordance with our Cookie Policy.",
+        "info-6": "6. External Links:",
+        "info-6-text": "Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these sites."
+    },
+    "terms":{
+        "terms": "Terms & Conditions",
+        "text-1": "Welcome to",
+        "text-2": "By accessing and using our platform, you agree to comply with the following terms and conditions:",
+        "info-1": "1. Acceptable Use:",
+        "info-1-text": "You agree to use ",
+        "info-1-text-2": "solely for lawful purposes and in accordance with applicable laws and regulations. It is not permitted to use our website in a way that may damage, disable, overload, or compromise its operation.",
+        "info-2": "2. Intellectual Property:",
+        "info-2-text": "All content present on ",
+        "info-2-text-2": "including but not limited to logos, text, graphics, images, and software, is protected by intellectual property rights and belongs to ",
+        "info-2-text-3": "You agree not to copy, distribute, reproduce, or create derivative works from such content without our explicit consent.",
+        "info-3": "3. Liability:",
+        "info-3-text": "shall not be liable for any direct, indirect, incidental, consequential, or special damages that may arise from the use or inability to use our website or services.",
+        "info-4": "4. Modifications:",
+        "info-4-text": "We reserve the right to modify, suspend, or discontinue any aspect of ",
+        "info-4-text-2": "at any time without prior notice.",
+        "info-5": "5. Applicable Law:",
+        "info-5-text": "These terms and conditions are governed by the laws of State, and any dispute arising in connection with these terms and conditions shall be subject to the exclusive jurisdiction of the courts of State."
+    },
+    "contact":{
+        "contact-us": "Contact Us",
+        "email": "Your Email...",
+        "message": "Enter your message...",
+        "send": "Send"    
     }
 }

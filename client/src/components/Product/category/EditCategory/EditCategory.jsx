@@ -48,20 +48,20 @@ export const EditCategory = ({ currentLanguage }) => {
     event.preventDefault();
     // console.log(editCategory);
 
-    // const errors = validateForm (
-    //   editCategory.name,
-    //   editCategory.description
-    // );
-    // setErrors(errors);
+    const errors = validateForm (
+      editCategory.name,
+      editCategory.description
+    );
+    setErrors(errors);
 
-    // if (Object.keys(errors).length === 0) {
+    if (Object.keys(errors).length === 0) {
       dispatch(categoryEdit(id, editCategory));
       toast.success(t("edit-category.successfully", { lng: currentLanguage })); 
-      // setErrors({});
+      setErrors({});
       navigate("/dashboard");
-    // } else {
-    //   toast.error(t("edit-category.incompleted", { lng: currentLanguage }));
-    // }
+    } else {
+       toast.error(t("edit-category.incompleted", { lng: currentLanguage }));
+    }
 
 
     // dispatch(categoryEdit(id, editCategory));
@@ -96,9 +96,9 @@ export const EditCategory = ({ currentLanguage }) => {
             value={editCategory.name}
             onChange={handleChange}
           />
-      {/* {errors.name && (
+      {errors.name && (
         <p className={styles.error}>{errors.name}</p>
-      )} */}
+      )}
           {/* Descripcion de categoria */}
           <textarea
             type="textarea"
@@ -114,9 +114,9 @@ export const EditCategory = ({ currentLanguage }) => {
             value={editCategory.description}
             onChange={handleChange}
           />
-        {/* {errors.description && (
+      {errors.description && (
         <p className={styles.error}>{errors.description}</p>
-      )} */}
+      )}
         <br />
           <button className={styles.create}>{t("edit-category.update", { lng: currentLanguage })}</button>
         </form>

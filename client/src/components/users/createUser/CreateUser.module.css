@@ -86,8 +86,6 @@
     align-items: center;
     justify-content: center;
   }
-
- 
   
   /*----------- BUTTON CREATE -----------*/
   .create {
@@ -139,7 +137,17 @@
   }
   
   /* ------------INPUTS----------- */
-  .input-field select, .input-field input {
+  .input-field select {
+    height: 8vh;
+    width: 25vw;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 6px;
+    outline: none;
+    padding: 0.6rem;
+    border: 1px solid #cacaca;
+  }
+  .input-field input {
     height: 8vh;
     width: 25vw;
     font-size: 16px;
@@ -258,6 +266,9 @@
       margin-bottom: 10px;
     }
     .divRight {
+      width: 100%;
+    }
+    .input-field select {
       width: 100%;
     }
     .form {
