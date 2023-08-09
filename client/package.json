@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@formspree/react": "^2.5.0",
     "@stripe/react-stripe-js": "^2.1.1",
     "@stripe/stripe-js": "^1.54.1",
+    "aos": "^2.3.4",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
+    "boxicons": "^2.1.4",
     "chart.js": "^4.3.2",
     "firebase": "^10.1.0",
     "i18next": "^23.4.1",

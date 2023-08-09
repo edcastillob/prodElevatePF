@@ -27,12 +27,28 @@ const Favorites = ({ currentLanguage }) => {
 
   return (
     <div className={styles.favoriteContainer}>
-      <h2 style={{fontFamily:'Poppins'}}>{t("favorites.favorites", { lng: currentLanguage })}</h2>
+      <div className={styles.back}>
+            <Link to="/home">
+              <div className={styles.backButton}>
+                <p>
+                  <ion-icon name="arrow-round-back"></ion-icon>
+                  <ion-icon name="home"></ion-icon>
+                </p>
+              </div>
+            </Link>
+      </div>
+      <div className={styles.title}>
+
+      <h3 style={{fontFamily:'Poppins'}}>{t("favorites.favorites", { lng: currentLanguage })}</h3>
+
+      </div>
       {favorites.length === 0 ? (
         <div className={styles.cartEmpty}>
+          <h1 className={styles.sad}><ion-icon name="sad"></ion-icon></h1>
+
           <p>{t("favorites.no-favorites", { lng: currentLanguage })}</p>
           <div className={styles.startShoping}>
-            <Link to="/home">
+            {/* <Link to="/home">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -47,7 +63,7 @@ const Favorites = ({ currentLanguage }) => {
                 />
               </svg>
               <span>{t("favorites.add", { lng: currentLanguage })}</span>
-            </Link>
+            </Link> */}
           </div>
         </div>
       ) : (

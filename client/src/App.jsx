@@ -21,7 +21,7 @@ import { handleGoogleSignIn } from "./components/users/Firebase/GoogleLogin";
 import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { toast } from "react-toastify";
 import { EditProduct } from "./components/Product/editProduct/EditProduct";
 import Favorites from "./components/Favorites/Favorites";
 import { ShowCategory } from "./components/Product/category/ShowCategory/ShowCategory";
@@ -182,7 +182,7 @@ function App({ user, userLocal }) {
           <Route exact path="/rol" element={<Role />} />
           <Route exact path="/categoryedit/:id" element={<EditCategory currentLanguage={currentLanguage} />} />
           <Route exact path="/settings_product" element={<SettingsProduct />} />
-          <Route exact path="/terms_&_conditions"  element={<TermsConditions />} />
+          <Route exact path="/terms_&_conditions"  element={<TermsConditions currentLanguage={currentLanguage} />} />
           <Route exact path="/useredit/:id" element={<EditUser currentLanguage={currentLanguage}/>} />
           <Route exact path="/usuario" element={<CreateUser currentLanguage={currentLanguage}/>} />
           <Route exact path="/thankyoupage" element={<ThankYouPage currentLanguage={currentLanguage}/>} />

@@ -1,135 +1,162 @@
 .container {
-    width: 100%;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
+  /* border: 1px solid black; */
+	width: 100%;
+  min-height: 80vh;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+  padding: 2rem;
+  background-color: #fff;
 }
 
-.h2Container {
-    font-style: italic;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    
-}
-.h2Container h2 {
-    color: green;
+body{
+  font-family: "Poppins";
+  overflow-x: hidden;
 }
 
-.cardsContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
+.content{
+  /* border: 1px solid red; */
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-.aboutContainer {
-    width: 500px;
-    margin-right: 115px;
-    margin-bottom: 23px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+.content h3{
+  font-family: "Poppins";
 }
 
-.infoContainer {
-    box-shadow: rgba(19, 204, 2, 0.3) 10px 10px 10px; 
-    border-radius: 20px;
-    padding-left: 6px;
-    padding-right: 6px;
+.content p{
+  font-family: "Poppins";
 }
 
-.imagesContainer {
-    width: 500px;
-    margin-bottom: 23px;
-    margin-left: 115px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+.evento {
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 500px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 50px;
+	position: relative;
 }
 
-.logoContainer {
-    width: 300px;
-    height: 177px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    border: 5px green inset;
-    border-radius: 100px;    
-    box-shadow: rgba(19, 204, 2, 0.3) 10px 10px 10px;
+.title{
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
-.logoContainer img {
-    max-width: 100%;
-    max-height: 100%;
+.foto {
+  /* border: 1px solid black; */
+	width: 50%;
+	/* border: 10px solid #fff; */
+	position: relative;
+	/* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
 }
 
-.imgContainer {
-    width: 500px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
+
+.foto img {
+	width: 90%;
+  height: 80%;
+	vertical-align: top;
 }
 
-.imgContainer img {
-    max-width: 100%;
-    max-height: 100%;
+.team{
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 140vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.ourContainer {
-    text-align: justify;
-    display: flex;
-    flex-direction: column;
+.person{
+  /* border: 1px solid blue; */
+  width: 25%;
+  height: 45%;
 }
 
-.ourContainer h2 {
-    color: #01691b;
-    font-size: 28px;
+.divImg{
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.ourContainer p {
-    font-size: 20px;
-    text-indent: 50px;
+.divImg img{
+  width: 60%;
+  height: 85%;
+  border-radius: 50%;
 }
 
-@media (max-width: 1200px) {
-    .cardsContainer {
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-  
-    .aboutContainer, .imagesContainer {
-      width: 90%;
-      margin: 0;
-    }
-  
-    .logoContainer {
-      width: 200px;
-      height: 118px;
-    }
-  
-    .infoContainer {
-      padding: 10px;
-    }
+.data{
+  /* border: 2px solid yellow; */
+  width: 100%;
+  height: 40%;
+}
 
-    .ourContainer h2 {
-      font-size: 23px;
-    }
-    .ourContainer p {
-      font-size: 15px;
-    }
+.name{
+  font-weight: 600;
+}
+
+.country{
+  font-size: 15px;
+}
+
+.social{
+  /* border: 1px solid brown; */
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+
+.social a{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: transparent;
+  border: 2px solid #000924;
+  color: #000924;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  text-decoration: none;
+  margin: 0;
+  transition: .2s;
+  &:hover{
+    background-color: #000924;
+    color: #fff;
+    transition: .2s;
   }
+}
 
-  @media (max-width: 768px) {
-    .h2Container h2 {
-      font-size: 1.5rem;
-    }
-  
-    .ourContainer h2 {
-      font-size: 23px;
-    }
-  }
+.email{
+  /* border: 1px solid pink; */
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 2.5rem;
+  margin-top: 1rem;
+}
+
+.email span{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
