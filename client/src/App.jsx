@@ -148,7 +148,6 @@ function App({ user, userLocal }) {
 
   return (
     <>
-
       <StyledApp theme={theme}>
         <I18nextProvider i18n={i18next}>
           {showNavBar && (
@@ -289,7 +288,10 @@ function App({ user, userLocal }) {
               {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel currentLanguage={currentLanguage} /> }/> */}
 
               {/* {(currentUser || currentUserLocal) && (
+<<<<<<< HEAD
+=======
 
+>>>>>>> 42785e8b0fdc2c161282c5fa836a57105f3132b6
             <Route path="/settings" element={<Configuration />} />
           )} */}
             </Routes>

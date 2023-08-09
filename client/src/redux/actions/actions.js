@@ -158,14 +158,7 @@ export const getUsers = (page) => {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}user?page=${page}`);
       // console.log(data);
-      return dispatch({
-        type: GET_ALL_USERS,
-        payload: {
-          data: data.data,
-          totalPages: data.totalPages,
-          currentPage: page,
-        },
-      });
+      return dispatch({ type: GET_ALL_USERS, payload: data });
     };
   } catch (error) {
     throw new Error(error.message);
@@ -231,7 +224,7 @@ export const editUser = (userId, changeUser) => {
           userData.identification = changeUser.identification;
           userData.numPhone = changeUser.numPhone;
           userData.image = changeUser.image;
-          localStorage.setItem('user', JSON.stringify(userData));
+          localStorage.setItem("user", JSON.stringify(userData));
           window.location.reload();
         }
       }
