@@ -105,7 +105,7 @@ export const Product = ({ currentLanguage }) => {
     );
     setErrors(errors);
 
-    if (Object.keys(product).length === 0) {
+    if (Object.keys(errors).length === 0) {
     dispatch(addProduct(product));
     toast.success(t("product.successfully", { lng: currentLanguage }));
     setProduct({
