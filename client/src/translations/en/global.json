@@ -38,7 +38,7 @@
         "add-to-cart": "Add to Cart"
     },
     "shopping-cart":{
-        "shopping": "Shoping Cart",
+        "shopping": "Shopping Cart",
         "is-empty": "Your Cart is empty",
         "start-shopping": "Start Shoping",
         "continue-shopping": "Continue Shoping",
@@ -81,7 +81,8 @@
         "please-try": "Please try another search or click on all products to get all products",
         "next": "Next",
         "previous": "Previous",
-        "page": "Page"
+        "page": "Page",
+        "welcome": "Welcome to ProdElevate - The place for the exponential growth of your business"
     },
     "filter-modal":{
         "brand-new": "Brand New",
@@ -320,5 +321,16 @@
         "email": "Your Email...",
         "message": "Enter your message...",
         "send": "Send"    
+    },
+    "product-detail":{
+        "category": "Category:",
+        "price": "Price",
+        "add": "Add Review",
+        "add-to-cart": "Add to Cart",
+        "comment": "Comment",
+        "add-your-comment": "Add your comment...",
+        "save": "Send",
+        "cancel": "Cancel",
+        "last-reviews": "Last reviews"
     }
 }

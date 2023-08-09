@@ -10,7 +10,7 @@ import {
 import loadingImg from "../../../assets/loading.png";
 import { getCategory } from "../../../redux/actions/actions";
 import styles from "./ProductDetail.module.css";
-
+import { useTranslation } from "react-i18next";
 import { addToCart } from "../../../redux/actions/actions";
 import { Link } from "react-router-dom";
 // import { addToCart } from "../../../redux/actions/actions";
@@ -21,10 +21,13 @@ import {
   faStar as fasStar,
 } from "@fortawesome/free-regular-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-export const ProductDetail = () => {
+export const ProductDetail = ({ currentLanguage }) => {
   const [selectedStars, setSelectedStars] = useState(0);
-
+  const { t } = useTranslation('global');
   const handleStarClick = (starIndex) => {
     setSelectedStars(starIndex + 1);
   };
@@ -113,6 +116,19 @@ export const ProductDetail = () => {
   );
   const averageScore = Math.round(totalScore / commentary.length);
   // console.log("userActive", userActive);
+
+  
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+  };
+
+  
+
   return (
     <div style={{ padding: "1rem" }}>
       {loading ? (
@@ -147,34 +163,30 @@ export const ProductDetail = () => {
               ))}
             </div>
             <br />
-            <h4 style={{ fontFamily: "Poppins" }}>{name}</h4>
+
+            <div className={styles.divName}>
+              <h4 style={{ fontFamily: "Poppins" }}>{name}</h4>
+
+
+            </div>
             <div
               className={styles.descriptionItem}
               dangerouslySetInnerHTML={{ __html: description }}
             ></div>
-            <h6>Category: {category} </h6>
+            <h6>{t("product-detail.category", { lng: currentLanguage })} {category} </h6>
 
-            <h4>Price ${salePrice} </h4>
+            <h4>{t("product-detail.price", { lng: currentLanguage })} ${salePrice} </h4>
 
-            <button
-              className={styles.buttonCart}
-              onClick={() => {
-                if (userActive.email) {
-                  setShowModal(true);
-                } else {
-                  navigate("/login");
-                }
-              }}
-            >
-              Add Comment
-            </button>
+            
 
-            <button
-              className={styles.buttonCart}
-              onClick={() => handledAddToCart(productDetail)}
-            >
-              Add to Cart
-            </button>
+            <div className={styles.divBtn}>
+              <button
+                className={styles.buttonCart}
+                onClick={() => handledAddToCart(productDetail)}
+              >
+                {t("product-detail.add-to-cart", { lng: currentLanguage })}
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -187,7 +199,7 @@ export const ProductDetail = () => {
               alt="User Avatar"
               className={styles.avatar}
             />
-            <span className={styles.commentHeader}>- Comment</span>
+            <span className={styles.commentHeader}>{t("product-detail.comment", { lng: currentLanguage })}</span>
           </div>
           <br />
           <div className={styles.starContainer}>
@@ -205,81 +217,84 @@ export const ProductDetail = () => {
           <input
             className={styles.commentInput}
             type="text"
-            placeholder="Add your comment..."
+            placeholder={t("product-detail.add-your-comment", { lng: currentLanguage })}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
         </ModalBody>
         <ModalFooter>
           <Button
-            className={styles.buttonCart}
-            onClick={() => handledAddComment()}
-          >
-            Save
-          </Button>
-          <Button
-            className={styles.buttonCart2}
+            className={styles.cancel}
             onClick={() => setShowModal(false)}
           >
-            Cancel
+            {t("product-detail.cancel", { lng: currentLanguage })}
+          </Button>
+          <Button
+            className={styles.addBtn}
+            onClick={() => handledAddComment()}
+          >
+           {t("product-detail.save", { lng: currentLanguage })}
           </Button>
         </ModalFooter>
       </Modal>
+      <h4>{t("product-detail.last-reviews", { lng: currentLanguage })}</h4>
+      <div className={styles.reviewsContainer}>
+      
+      <Slider {...sliderSettings} className={styles.sliderContainer}>
+        {commentary
+          .slice()
+          .reverse()
+          .map((comment) => {
+            const user = userAll.find((user) => user.email === comment.email);
 
-      <div className={styles.reviewsTable}></div>
-      {commentary && commentary.length > 0 && (
-        <div className={styles.reviewsTable}>
-          <table className="table table-borderless">
-            <thead>
-              <tr>
-                <th>User</th>
-                <th>Stars</th>
-                <th>Comment</th>
-                <th>Date</th>
-                <th>Email</th>
-              </tr>
-            </thead>
+            return (
+              <div key={comment.id} className={styles.card}>
+                <div className={styles.divInfo}>
+              {user && user.image && (
+                <img
+                  src={user.image[0]}
+                  alt="User Avatar"
+                  className={styles.avatar}
+                />
+              )}
+              <span className={styles.userName}>{user && user.name}</span>
+            </div>
+            <div className={styles.divStars}>
+              {[0, 1, 2, 3, 4].map((index) => (
+                <FontAwesomeIcon
+                  key={index}
+                  icon={index < comment.score ? solidStar : farStar}
+                  className={styles.star}
+                />
+              ))}
+            </div>
+            <div className={styles.divComment}>{comment.comment}</div>
+          
+              </div>
+            );
+          })}
+      </Slider>       
 
-            <tbody className="table table-borderless">
-              {commentary
-                .slice()
-                .reverse()
-                .map((comment) => {
-                  // console.log("Comment ID:", comment.id);
-                  const user = userAll.find(
-                    (user) => user.email === comment.email
-                  );
+      </div>
+      <div className={styles.addReview}>      
+          <button
+              className={styles.buttonCart}
+              onClick={() => {
+                if (userActive.email) {
+                  setShowModal(true);
+                } else {
+                  navigate("/login");
+                }
+              }}
+            >
+              {t("product-detail.add", { lng: currentLanguage })}
+            </button>
+            </div>
+      
 
-                  return (
-                    <tr key={comment.id}>
-                      <td>
-                        {user && user.image && (
-                          <img
-                            src={user.image[0]}
-                            alt="User Avatar"
-                            className={styles.avatar}
-                          />
-                        )}
-                      </td>
-                      <td style={{ whiteSpace: "nowrap" }}>
-                        {[0, 1, 2, 3, 4].map((index) => (
-                          <FontAwesomeIcon
-                            key={index}
-                            icon={index < comment.score ? solidStar : farStar}
-                            className={styles.star}
-                          />
-                        ))}
-                      </td>
-                      <td>{comment.comment}</td>
-                      <td>{comment.date}</td>
-                      <td>{comment.email}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </div>
-      )}
+
     </div>
+    
+    
   );
 };
