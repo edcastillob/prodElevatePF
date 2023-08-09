@@ -29,9 +29,8 @@ async function getAllUsers(req, res) {
       order: [["id", "DESC"]],
     });
 
-    return res
-      .status(200)
-      .json({ data: users, currentPage: page, totalPages: totalPages });
+    //data: users, currentPage: page, totalPages: totalPages
+    return res.status(200).json(users);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
