@@ -158,14 +158,7 @@ export const getUsers = (page) => {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}user?page=${page}`);
       // console.log(data);
-      return dispatch({
-        type: GET_ALL_USERS,
-        payload: {
-          data: data.data,
-          totalPages: data.totalPages,
-          currentPage: page,
-        },
-      });
+      return dispatch({ type: GET_ALL_USERS, payload: data });
     };
   } catch (error) {
     throw new Error(error.message);
