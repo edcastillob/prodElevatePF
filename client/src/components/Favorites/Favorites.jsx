@@ -8,6 +8,7 @@ import { allFav } from "../../redux/actions/actions";
 
 const Favorites = () => {
   const userActive = useSelector((state) => state.userLog);
+
   // const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
@@ -26,13 +27,24 @@ const Favorites = () => {
   //     }
   //   });
   // }, []);
-  console.log("Favorite", userActive);
-
   useEffect(() => {
     if (userActive.email) {
-      dispatch(allFav(userActive.email));
+      userActiveFunction()
+        .then(() => {
+          dispatch(allFav(userActive.email));
+        })
+        .catch((error) => {
+          console.error("Error in userActive:", error);
+        });
     }
-  }, []);
+  }, [userActive.email]);
+
+  const userActiveFunction = () => {
+    return new Promise((resolve, reject) => {
+      console.log("Favorite", userActive);
+      resolve();
+    });
+  };
 
   return (
     <div className={styles.favoriteContainer}>

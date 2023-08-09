@@ -48,7 +48,7 @@
     border-radius: 10px;
     position: relative;
     left: 0.01rem;
-    width: 40%;
+    width: 50%;
     margin-bottom: 1rem;
     transition: .2s;
     &:hover{
@@ -107,6 +107,13 @@
     font-size: 14px;
     color: #000;
     left: 2%;
+    background-color: #fefbfb;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.97);
+        transition: .3s;
+
+    }
   }
 
   .googleButton img{
@@ -121,3 +128,33 @@
     margin-top: 0;
     margin-bottom: 0;
   }
+
+@media (max-width: 490px) {
+  .formContainer{
+    width: 400px;
+  }
+}
+
+@media (max-width: 440px) {
+  .googleButton {
+    width: 55%;
+  }
+}
+
+@media (max-width: 425px) {
+  .formContainer{
+    width: 350px;
+  }
+}
+
+@media (max-width: 375px) {
+  .formContainer{
+    width: 275px;
+  }
+}
+
+@media (max-width: 325px) {
+  .formContainer{
+    width: 250px;
+  }
+}

@@ -199,3 +199,86 @@
           opacity: 1;
         }
       }
+
+@media (max-width: 510px) {
+  .name {
+    font-size: 13px;
+  }
+  .homeButton {
+    font-size: 13px;
+  }
+  .divLogo {
+    padding-left: 0.5rem;
+  }
+}
+
+@media (max-width: 470px) {
+  .divLogo {
+    padding-left: 0.1rem;
+  }
+}
+
+@media (max-width: 431px) {
+  .divLogo {
+    padding-left: 0;
+  }
+  .items {
+    padding-right: 0.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .name {
+    font-size: 11px;
+  }
+  .homeButton {
+    font-size: 11px;
+  }
+  .avatar{
+    width: 33px;
+    height: auto; 
+  }
+  .language {
+    width: 25px;
+    height: auto;
+  }
+  .items {
+    gap: 0.5rem;
+  }
+  .userInfo {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 319px) {
+  .divLogo img {
+    width: 80%;
+    height: 60px;
+  }
+}
+
+@media (max-width: 311px) {
+  .name {
+    font-size: 10px;
+  }
+  .homeButton {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 304px) {
+  .avatar{
+    width: 28px;
+    height: auto; 
+  }
+  .language {
+    width: 20px;
+    height: auto;
+  }
+  .items {
+    gap: 0.3rem;
+  }
+  .userInfo {
+    gap: 0.2rem;
+  }
+}

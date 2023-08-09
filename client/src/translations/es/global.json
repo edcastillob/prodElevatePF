@@ -3,6 +3,7 @@
         "welcome-to-prodelevate": "Bienvenidos a ProdElevate",
         "language": "Idioma",
         "sign-up": "Regístrate",
+        "login": "Iniciar sesión",
         "its-time-to": "Es hora de...",
         "line1": "Tomar el control total de tu negocio",
         "line2": "Controlar y administrar tus finanzas e inventario",
@@ -27,7 +28,8 @@
         "login":"Iniciar sesión",
         "forgot": "Olvidé mi contraseña",
         "not-account": "No tienes una cuenta?",
-        "sign-up": "Regístrate"
+        "sign-up": "Regístrate",
+        "password": "Contraseña"
     },
     "cardProduct":{
         "brand": "Marca",

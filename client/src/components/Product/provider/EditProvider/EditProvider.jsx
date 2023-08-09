@@ -10,9 +10,12 @@ import "react-quill/dist/quill.snow.css";
 import {  useNavigate,useParams } from "react-router-dom";
 import { editProvider, getProviderId } from "../../../../redux/actions/actions";
 import validateForm from "./validation";
+import { useTranslation } from "react-i18next";
 
 
 export const EditProvider = ({ currentLanguage }) => {
+  const { t } = useTranslation('global');
+
   const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate()

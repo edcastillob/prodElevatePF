@@ -43,6 +43,9 @@ import {
   GET_USER_INACTIVE,
   GET_USER_BY_NAME,
   GET_ALL_FAVORITE,
+  ADD_REVIEW,
+  SHOW_REVIEWS_ID,
+  TOGGLE_THEME,
 } from "./types";
 import axios from "axios";
 import { ENDPOINT } from "../../components/endpoint/ENDPOINT";
@@ -55,7 +58,7 @@ export const showProducts = (page) => {
     return async (dispatch) => {
       const { data } = await axios.get(`${ENDPOINT}product?page=${page}`);
 
-      console.log(data.data);
+      // console.log(data.data);
       return dispatch({
         type: SHOW_PRODUCTS,
         payload: {
@@ -89,10 +92,10 @@ export const showProductsInactive = (page) => {
   }
 };
 export const activeProduct = (productId) => async (dispatch) => {
-  console.log("productId: ", productId);
+  // console.log("productId: ", productId);
   try {
     const response = await axios.put(`${ENDPOINT}productactive/${productId}`);
-    console.log("Respuesta del backend:", response.data);
+    // console.log("Respuesta del backend:", response.data);
   } catch (error) {
     console.error("Error al activar el producto:", error);
   }
@@ -217,7 +220,7 @@ export const deleteUsers = (userId) => async (dispatch) => {
   }
 };
 export const editUser = (userId, changeUser) => {
-  console.log("aqui va el change desde actions: ", changeUser);
+  // console.log("aqui va el change desde actions: ", changeUser);
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}user/${userId}`, changeUser);
@@ -460,6 +463,7 @@ export const logout = () => {
   try {
     return async (dispatch) => {
       localStorage.removeItem("user");
+      localStorage.removeItem("favorites");
       return dispatch({ type: LOGIN, payload: null });
     };
   } catch (error) {
@@ -553,11 +557,12 @@ export const addFav = (product) => {
 };
 
 export const allFav = (user) => {
-  const endpoint = `${ENDPOINT}favorite`;
+  const endpoint = `${ENDPOINT}favorite-all`;
   return async (dispatch) => {
     try {
       // console.log(product);
-      const { data } = await axios.get(endpoint, user);
+      const { data } = await axios.get(`${endpoint}?user=${user}`);
+      console.log("accion", user);
       return dispatch({
         type: GET_ALL_FAVORITE,
         payload: data,
@@ -646,7 +651,7 @@ export const filterNameAsc = (page) => {
 
 export const filterData = (filters, page) => {
   const endpoint = `${ENDPOINT}filter/data`;
-  console.log("actions filter", page);
+  // console.log("actions filter", page);
 
   return async (dispatch) => {
     try {
@@ -684,7 +689,7 @@ export const getProductsByName = (page, name) => {
         `${ENDPOINT}product?page=${page}&name=${name}`
       );
 
-      console.log(data.data);
+      // console.log(data.data);
       return dispatch({
         type: GET_PRODUCT_NAME,
         payload: {
@@ -700,7 +705,7 @@ export const getProductsByName = (page, name) => {
 };
 
 export const verifyUser = (userData) => {
-  console.log("dates: ", userData);
+  // console.log("dates: ", userData)
   return async (dispatch) => {
     try {
       const response = await axios.post(`${ENDPOINT}verifyUser`, userData);
@@ -716,3 +721,35 @@ export const verifyUser = (userData) => {
     }
   };
 };
+
+export const addComment = (reviewData) => {
+  return async () => {
+    try {
+      // console.log("Desde actions : ", reviewData)
+      await axios.post(`${ENDPOINT}comment`, reviewData);
+      dispatch({
+        type: ADD_REVIEW,
+        payload: {
+          data: response.data,
+        },
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+};
+
+export const showReviewsId = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ENDPOINT}comment/${id}`);
+      dispatch({ type: SHOW_REVIEWS_ID, payload: response.data });
+    } catch (error) {
+      throw new Error("Error fetching review.");
+    }
+  };
+};
+
+export const toggleTheme = () => ({
+  type: TOGGLE_THEME,
+});

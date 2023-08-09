@@ -41,6 +41,9 @@ import {
   GET_USER_INACTIVE,
   GET_USER_BY_NAME,
   GET_ALL_FAVORITE,
+  ADD_REVIEW,
+  SHOW_REVIEWS_ID,
+  TOGGLE_THEME,
 } from "../actions/types";
 
 const initialState = {
@@ -66,6 +69,9 @@ const initialState = {
   userMail: [],
   userLog: [],
   usersInactive: [],
+  reviews: [],
+  review: [],
+  theme: "light",
 };
 
 function reducer(state = initialState, actions) {
@@ -121,7 +127,7 @@ function reducer(state = initialState, actions) {
       };
 
     case GET_CATEGORY_ID:
-      console.log("Category id: ", actions.payload);
+      // console.log("Category id: ", actions.payload);
       return {
         ...state,
         category: actions.payload,
@@ -183,6 +189,7 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         user: actions.payload,
+        favorites: [],
       };
 
     //Cart
@@ -429,11 +436,28 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         userLog: actions.payload,
+        favorites: [],
       };
     case POST_VERIFY_USER:
       return {
         ...state,
         users: actions.payload,
+      };
+    case ADD_REVIEW:
+      return {
+        ...state,
+        review: actions.payload,
+      };
+    case SHOW_REVIEWS_ID:
+      return {
+        ...state,
+        reviews: actions.payload,
+      };
+
+    case TOGGLE_THEME:
+      return {
+        ...state,
+        theme: state.theme === "dark" ? "light" : "dark",
       };
     default:
       return state;

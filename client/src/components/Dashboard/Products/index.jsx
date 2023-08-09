@@ -16,13 +16,14 @@ import {
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import swal from "sweetalert";
 import yes from "../../../assets/yes.png";
-import OrderFilter from "../../Filter/OrderFilter";
 import DashOrderFilter from "../DashFilter/DashOrderFilter";
 import FilterModal from "../../Filter/FilterModal";
 import { useTranslation } from "react-i18next";
 import loading from "../../../assets/loading.png";
+//import { useTranslation } from "react-i18next";
 
 const Products = ({ toggleActive, currentLanguage }) => {
+  const userActive = useSelector((state) => state.userLog);
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -77,12 +78,12 @@ const Products = ({ toggleActive, currentLanguage }) => {
   // );
 
   const handleDeleteProduct = (productId) => {
+    console.log(productId);
     setProductIdToDelete(productId);
-    setShowConfirmation(true);
+    dispatch(deleteProduct(productId));
   };
 
-  const handleConfirmDelete = () => {
-    dispatch(deleteProduct(productIdToDelete));
+  const handleConfirmDelete = (productId) => {
     setProductIdToDelete(null);
     setShowConfirmation(false);
   };

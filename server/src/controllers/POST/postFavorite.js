@@ -1,7 +1,7 @@
 const { Favorite, User } = require("../../db");
 
 const postFavorite = async (req, res) => {
-  //console.log(req.body);
+  console.log(req.body);
   const {
     id,
     name,
@@ -34,8 +34,7 @@ const postFavorite = async (req, res) => {
     });
     await favorite.addUser(searchUser.id);
 
-    const allFav = await Favorite.findAll();
-    return res.status(201).json(allFav);
+    return res.status(201);
   } catch (error) {
     return res.status(500).json({ err: error.message });
   }

@@ -26,7 +26,7 @@ async function getUserByName(req, res) {
       ],
       offset,
       limit: pageSize,
-      order: [["name", "DESC"]],
+      order: [["name", "ASC"]],
     });
 
     return res

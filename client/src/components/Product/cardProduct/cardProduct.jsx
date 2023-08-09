@@ -19,7 +19,6 @@ export const CardProduct = ({
   currentLanguage,
 }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  console.log(currentUser);
   const [isFav, setIsFav] = useState(false);
   const { id, name, images, salePrice, brand, condition, categoryId } = product;
   const selectedCategory = useSelector((state) => state.category);
@@ -69,7 +68,7 @@ export const CardProduct = ({
       if (user) {
         const uid = user.uid;
         const userEmail = user.email;
-        console.log(userEmail);
+        // console.log("desde useEffect: ",userEmail);
         setCurrentUser(user);
       } else {
         setCurrentUser(null);
@@ -79,11 +78,9 @@ export const CardProduct = ({
 
   const productWithUser = {
     ...product,
-    user: currentUser ? currentUser.email : null,
+    user: userActive.email,
   };
-
-  console.log(productWithUser);
-
+  // console.log('userActive', userActive.email)
   return (
     <div className={styles.cardContainer}>
       <Link

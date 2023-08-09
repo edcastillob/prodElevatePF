@@ -1,30 +1,32 @@
-const { Favorite, User } = require("../../db");
+const { User, Favorite } = require("../../db");
 
 const getAllFavorite = async (req, res) => {
-  const { user } = req.body;
-
-  console.log(user);
-
-  if (!user) {
+  const userEmail = req.query.user;
+  console.log(userEmail);
+  if (!userEmail) {
     return res.status(401).send("Faltan datos");
   }
 
   try {
-    const searchUser = await User.findOne({ where: { email: user } });
-    const user = await User.findByPk(searchUser.id, {
-      include: {
-        model: Favorite,
-        through: { attributes: [] },
-      },
+    const searchUser = await User.findOne({ where: { email: userEmail } });
+
+    console.log(searchUser.id);
+
+    const userWithFavorites = await User.findByPk(searchUser.id, {
+      include: [{ model: Favorite }],
     });
 
-    if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+    if (!userWithFavorites) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-    return res.status(201).json(user.Favorites);
+    const favorites = userWithFavorites.favorites;
+
+    return res.status(200).json(favorites);
   } catch (error) {
-    res.status(500).json({ message: "Error en el servidor" });
+    res
+      .status(500)
+      .json({ error: "Error en el servidor", details: error.message });
   }
 };
 

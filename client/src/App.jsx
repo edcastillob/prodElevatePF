@@ -51,6 +51,7 @@ import i18next from "i18next";
 import global_es from "./translations/es/global.json";
 import global_en from "./translations/en/global.json";
 import { Forgot } from "./components/users/login/Forgot";
+import { StyledApp } from "./StyledComponents.js/StyledComponents";
 
 i18next.init({
   interpolation: { escapeValue: false },
@@ -121,6 +122,7 @@ function App({ user, userLocal }) {
     }
   }, [user, userLocal]);
   const userActive = useSelector((state) => state.userLog);
+  const theme = useSelector((state) => state.theme);
 
   console.log("user active", userActive);
 
@@ -142,170 +144,172 @@ function App({ user, userLocal }) {
   //   }, []);
 
   // console.log('userActive: ', userActive)
-  console.log("rol de user: ", userActive.roleId);
+  // console.log("rol de user: ", userActive.roleId);
 
   return (
     <>
-      <I18nextProvider i18n={i18next}>
-        {showNavBar && (
-          <NavBar
-            user={currentUser}
-            userLocal={currentUserLocal}
-            handleSignIn={handleSignIn}
-            currentLanguage={currentLanguage}
-            handleLanguageChange={handleLanguageChange}
-          />
-        )}
-        {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
-        <div>
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <Landing
-                  handleLanguageChange={handleLanguageChange}
-                  currentLanguage={currentLanguage}
-                />
-              }
+      <StyledApp theme={theme}>
+        <I18nextProvider i18n={i18next}>
+          {showNavBar && (
+            <NavBar
+              user={currentUser}
+              userLocal={currentUserLocal}
+              handleSignIn={handleSignIn}
+              currentLanguage={currentLanguage}
+              handleLanguageChange={handleLanguageChange}
             />
-            <Route
-              exact
-              path="/about"
-              element={<AboutUs currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/cart"
-              element={<Cart currentLanguage={currentLanguage} />}
-            />
-            <Route exact path="/categoria" element={<ShowCategory />} />
-            <Route
-              exact
-              path="/contact"
-              element={<ContactUs currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/changepass"
-              element={<ChangePassword currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/favorites"
-              element={<Favorites currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/home"
-              element={
-                <Home
-                  user={currentUser}
-                  userLocal={currentUserLocal}
-                  handleSignIn={handleSignIn}
-                  currentLanguage={currentLanguage}
-                />
-              }
-            />
-            <Route
-              exact
-              path="/login"
-              element={<Login currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/privacy_policy"
-              element={<PrivacyPolicy currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/productid/:id"
-              element={<ProductDetail currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/productidedit/:id"
-              element={<EditProduct currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/producto"
-              element={<Product currentLanguage={currentLanguage} />}
-            />
-            <Route exact path="/proveedor" element={<ProvidersAll />} />
-            <Route
-              exact
-              path="/proveedoredit/:id"
-              element={<EditProvider currentLanguage={currentLanguage} />}
-            />
-            <Route exact path="/rol" element={<Role />} />
-            <Route
-              exact
-              path="/categoryedit/:id"
-              element={<EditCategory currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/settings_product"
-              element={<SettingsProduct />}
-            />
-            <Route
-              exact
-              path="/terms_&_conditions"
-              element={<TermsConditions />}
-            />
-            <Route
-              exact
-              path="/useredit/:id"
-              element={<EditUser currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/usuario"
-              element={<CreateUser currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/thankyoupage"
-              element={<ThankYouPage currentLanguage={currentLanguage} />}
-            />
-            <Route
-              exact
-              path="/forgot"
-              element={<Forgot currentLanguage={currentLanguage} />}
-            />
-            {/* <Route exact path="/chat/" element={<Chat />} /> */}
+          )}
+          {/* {showNavBar && <NavBar user={currentUser} userLocal={currentUserLocal} handleSignIn={handleSignIn} />} */}
+          <div>
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={
+                  <Landing
+                    handleLanguageChange={handleLanguageChange}
+                    currentLanguage={currentLanguage}
+                  />
+                }
+              />
+              <Route
+                exact
+                path="/about"
+                element={<AboutUs currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/cart"
+                element={<Cart currentLanguage={currentLanguage} />}
+              />
+              <Route exact path="/categoria" element={<ShowCategory />} />
+              <Route
+                exact
+                path="/contact"
+                element={<ContactUs currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/changepass"
+                element={<ChangePassword currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/favorites"
+                element={<Favorites currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/home"
+                element={
+                  <Home
+                    user={currentUser}
+                    userLocal={currentUserLocal}
+                    handleSignIn={handleSignIn}
+                    currentLanguage={currentLanguage}
+                  />
+                }
+              />
+              <Route
+                exact
+                path="/login"
+                element={<Login currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/privacy_policy"
+                element={<PrivacyPolicy currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/productid/:id"
+                element={<ProductDetail currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/productidedit/:id"
+                element={<EditProduct currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/producto"
+                element={<Product currentLanguage={currentLanguage} />}
+              />
+              <Route exact path="/proveedor" element={<ProvidersAll />} />
+              <Route
+                exact
+                path="/proveedoredit/:id"
+                element={<EditProvider currentLanguage={currentLanguage} />}
+              />
+              <Route exact path="/rol" element={<Role />} />
+              <Route
+                exact
+                path="/categoryedit/:id"
+                element={<EditCategory currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/settings_product"
+                element={<SettingsProduct />}
+              />
+              <Route
+                exact
+                path="/terms_&_conditions"
+                element={<TermsConditions />}
+              />
+              <Route
+                exact
+                path="/useredit/:id"
+                element={<EditUser currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/usuario"
+                element={<CreateUser currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/thankyoupage"
+                element={<ThankYouPage currentLanguage={currentLanguage} />}
+              />
+              <Route
+                exact
+                path="/forgot"
+                element={<Forgot currentLanguage={currentLanguage} />}
+              />
+              {/* <Route exact path="/chat/" element={<Chat />} /> */}
 
-            {/* <Route path="/settings" element={<Configuration />} /> */}
-            {/* Protege la ruta del dashboard */}
-            <Route
-              path="/dashboard"
-              element={<Panel currentLanguage={currentLanguage} />}
-            />
-            {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel /> }/> */}
+              {/* <Route path="/settings" element={<Configuration />} /> */}
+              {/* Protege la ruta del dashboard */}
+              <Route
+                path="/dashboard"
+                element={<Panel currentLanguage={currentLanguage} />}
+              />
+              {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel currentLanguage={currentLanguage} /> }/> */}
 
-            {/* {(currentUser || currentUserLocal) && (
+              {/* {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />
           )} */}
-          </Routes>
-          <ToastContainer
-            position="top-center"
-            autoClose={4000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            closeButton={false}
-            theme="dark"
-          />
-          {showNavBar}
-          <Footer
-            currentLanguage={currentLanguage}
-            handleLanguageChange={handleLanguageChange}
-          />
-        </div>
-      </I18nextProvider>
+            </Routes>
+            <ToastContainer
+              position="top-center"
+              autoClose={4000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              closeButton={false}
+              theme="dark"
+            />
+            {showNavBar}
+            <Footer
+              currentLanguage={currentLanguage}
+              handleLanguageChange={handleLanguageChange}
+            />
+          </div>
+        </I18nextProvider>
+      </StyledApp>
     </>
   );
 }

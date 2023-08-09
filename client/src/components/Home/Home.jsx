@@ -137,7 +137,7 @@ export const Home = ({ user, userLocal, handleSignIn, currentLanguage }) => {
       <div className={styles.welcome}>
         <Marquee className={styles.message}>
           Welcome to ProdElevate - The place for the exponential growth of your
-          business
+          business&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </Marquee>
       </div>
       <div className={styles.divSearch}>
@@ -203,7 +203,7 @@ export const Home = ({ user, userLocal, handleSignIn, currentLanguage }) => {
         {/* optionProducts */}
 
         {optionProducts.length === 0 ? (
-          <div>
+          <div className={styles.loading}>
             <img src={loading} width={80} height={80} alt="loading" />
             <h3>Upsss</h3>
             <h5>{t("home.product-not-found", { lng: currentLanguage })}</h5>
