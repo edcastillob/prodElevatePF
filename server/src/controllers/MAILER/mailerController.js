@@ -24,7 +24,7 @@ const sendMailer = async (product) => {
   });
 
   if (!usersAdmin || usersAdmin.length === 0) {
-    return res.status(404).json({ message: "No se encontraron usuarios con roleId 1" });
+    return console.log(error)
   }
 
   const emails = usersAdmin.map((user) => user.email);

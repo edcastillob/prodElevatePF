@@ -47,7 +47,7 @@ export const Category = ({ currentLanguage }) => {
       });
       serErrors({});
     } else {
-      alert(t("category.incompleted", { lng: currentLanguage }));
+      toast.error(t("category.incompleted", { lng: currentLanguage }));
     }
   };
   return (

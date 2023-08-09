@@ -48,6 +48,8 @@ const {
 } = require("../controllers/GET/getAllProductsInactive");
 const { putProductActive } = require("../controllers/PUT/putProductActive");
 const { verifyUser } = require("../controllers/POST/postVerifyUser");
+const { postReview } = require("../controllers/POST/postReview");
+const { getAllReviewsId } = require("../controllers/GET/getAllReviewsId");
 
 router.use("/notification", mailerRoutes);
 
@@ -147,5 +149,9 @@ router.post("/favorite", postFavorite);
 router.delete("/favorite/:id", deleteFavorite);
 
 router.post("/filter/data", postFilterData);
+
+router.post("/comment", postReview);
+router.get("/comment/:id", getAllReviewsId);
+
 
 module.exports = router;

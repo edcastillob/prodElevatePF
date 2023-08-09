@@ -38,6 +38,8 @@ import {
   GET_USER_SYSTEM_LOG,
   SHOW_PRODUCTS_INACTIVE,
   POST_VERIFY_USER,
+  ADD_REVIEW,
+  SHOW_REVIEWS_ID,
 } from "../actions/types";
 
 const initialState = {
@@ -62,6 +64,8 @@ const initialState = {
   users: [],
   userMail: [],
   userLog: [],
+  reviews:[],
+  review:[],
 };
 
 function reducer(state = initialState, actions) {
@@ -111,7 +115,7 @@ function reducer(state = initialState, actions) {
       };
 
     case GET_CATEGORY_ID:
-      console.log("Category id: ", actions.payload);
+      // console.log("Category id: ", actions.payload);
       return {
         ...state,
         category: actions.payload,
@@ -156,6 +160,7 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         user: actions.payload,
+        favorites: [],
       };
 
     //Cart
@@ -398,11 +403,22 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         userLog: actions.payload,
+        favorites: [],
       };
     case POST_VERIFY_USER:
       return {
         ...state,
         users: actions.payload,
+      };
+    case ADD_REVIEW:
+      return {
+        ...state,
+        review: actions.payload,
+      };
+    case SHOW_REVIEWS_ID:
+      return {
+        ...state,
+        reviews: actions.payload,
       };
     default:
       return state;

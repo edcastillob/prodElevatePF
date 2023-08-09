@@ -140,7 +140,7 @@ function App({ user, userLocal }) {
   //   }, []);
 
   // console.log('userActive: ', userActive)
-  console.log("rol de user: ", userActive.roleId);
+  // console.log("rol de user: ", userActive.roleId);
 
   return (
     <>
@@ -192,7 +192,7 @@ function App({ user, userLocal }) {
            {/* <Route path="/settings" element={<Configuration />} /> */}
                    {/* Protege la ruta del dashboard */}
         <Route path="/dashboard" element={ <Panel currentLanguage={currentLanguage}/> }/>
-        {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel /> }/> */}
+        {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel currentLanguage={currentLanguage} /> }/> */}
          
           {/* {(currentUser || currentUserLocal) && (
             <Route path="/settings" element={<Configuration />} />

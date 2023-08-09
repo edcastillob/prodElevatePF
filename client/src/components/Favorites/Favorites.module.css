@@ -1,6 +1,6 @@
 .favoriteContainer {
-  padding: 2rem 4rem;
-
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   min-height: 80vh;
   width: 100%;
 }

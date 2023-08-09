@@ -159,3 +159,9 @@
 
     }
 }
+
+@media (max-width: 1400px) {
+    .cardContainer {
+        width: 265px;
+    }
+}

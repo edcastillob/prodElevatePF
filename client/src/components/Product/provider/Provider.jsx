@@ -31,9 +31,17 @@ export const Provider = ({ currentLanguage }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log(provider);
-   
+    const errors = validateForm(
+      provider.name,
+      provider.email,
+      provider.address,
+      provider.numPhone,
+      provider.identification,
+      provider.country
+    );
+    setErrors(errors);
 
-   
+    if (Object.keys(errors).length === 0) {
       dispatch(addProvider(provider));
       toast.success(t("provider.successfully", { lng: currentLanguage }));
       setProvider({
@@ -44,6 +52,10 @@ export const Provider = ({ currentLanguage }) => {
         identification: "",
         country: "",
       });
+      setErrors({});
+    } else {
+      toast.error("Data is Incompleted. All fields must be filled Correctly")
+    }
     
   
   };
@@ -63,9 +75,9 @@ export const Provider = ({ currentLanguage }) => {
           value={provider.name}
           onChange={handleChange}
         />
-          {/* {errors.name && (
+        {errors.name && (
             <p className={styles.error}>{errors.name}</p>
-          )} */}
+        )}
 
         {/* identificacion DNI RIF  de proveedor */}
         <input
@@ -76,9 +88,9 @@ export const Provider = ({ currentLanguage }) => {
           value={provider.identification}
           onChange={handleChange}
         />
-          {/* {errors.identification && (
+        {errors.identification && (
             <p className={styles.error}>{errors.identification}</p>
-          )} */}
+        )}
 
         {/* email  de proveedor */}
         <input
@@ -89,9 +101,9 @@ export const Provider = ({ currentLanguage }) => {
           value={provider.email}
           onChange={handleChange}
         />
-          {/* {errors.email && (
+        {errors.email && (
             <p className={styles.error}>{errors.email}</p>
-          )} */}
+        )}
 
         {/* Pais de proveedor */}
         <input
@@ -102,9 +114,9 @@ export const Provider = ({ currentLanguage }) => {
           value={provider.country}
           onChange={handleChange}
         />
-          {/* {errors.country && (
+        {errors.country && (
             <p className={styles.error}>{errors.country}</p>
-          )} */}
+        )}
 
         {/* direccion de proveedor */}
         <input
@@ -115,9 +127,9 @@ export const Provider = ({ currentLanguage }) => {
           value={provider.address}
           onChange={handleChange}
         />
-          {/* {errors.address && (
+        {errors.address && (
             <p className={styles.error}>{errors.address}</p>
-          )} */}
+        )}
 
           {/* numero telef de proveedor */}
           <input
@@ -128,9 +140,9 @@ export const Provider = ({ currentLanguage }) => {
             value={provider.numPhone}
             onChange={handleChange}
           />
-          {/* {errors.numPhone && (
+          {errors.numPhone && (
             <p className={styles.error}>{errors.numPhone}</p>
-          )} */}
+          )}
           {/* country  de proveedor */}
           {/*<label htmlFor="name">country: </label>
           <input

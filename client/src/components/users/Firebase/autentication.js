@@ -11,9 +11,7 @@ export const userCredential = async ({ user, password }) => {
     await createUserWithEmailAndPassword(auth, user, password);
     console.log(user)
 
-    // mensaje al registrarse
-    // showMessage("Welcome: " + user, "success")
-    // toast.info("Welcome " + user.name);
+     showMessage("Welcome: " + user, "success")
 
 
   } catch (error) {

@@ -64,7 +64,7 @@ export const CardProduct = ({ product, user, userLocal, handleSignIn, currentLan
       if (user) {
         const uid = user.uid;
         const userEmail = user.email;
-        console.log(userEmail);
+        // console.log("desde useEffect: ",userEmail);
         setCurrentUser(user);
       } else {
         setCurrentUser(null);
