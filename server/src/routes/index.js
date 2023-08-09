@@ -56,6 +56,7 @@ const { getAllFavorite } = require("../controllers/GET/getAllFavorite");
 const { postReview } = require("../controllers/POST/postReview");
 const { getAllReviewsId } = require("../controllers/GET/getAllReviewsId");
 const { getAllReviews } = require("../controllers/GET/getAllReviews");
+const { postStripeWebhook } = require("../controllers/POST/postStripeWebhook");
 
 router.use("/notification", mailerRoutes);
 
@@ -152,6 +153,7 @@ router.put("/provider/:id", putProvider);
 router.delete("/provider/:id", deleteProvider);
 
 router.post("/stripe", postStripe);
+router.post("/webhook", postStripeWebhook);
 
 router.post("/favorite", postFavorite);
 router.get("/favorite-all", getAllFavorite);

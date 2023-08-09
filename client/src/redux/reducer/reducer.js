@@ -387,9 +387,7 @@ function reducer(state = initialState, actions) {
     case GET_ALL_USERS:
       return {
         ...state,
-        users: actions.payload.data,
-        currentPage: actions.payload.currentPage,
-        totalPages: actions.payload.totalPages,
+        users: actions.payload,
       };
     case DELETE_USERS:
       const updateUsers = state.users.filter(
