@@ -281,22 +281,13 @@ function App({ user, userLocal }) {
 
               {/* <Route path="/settings" element={<Configuration />} /> */}
               {/* Protege la ruta del dashboard */}
-              <Route
+              {/* <Route
                 path="/dashboard"
                 element={<Panel currentLanguage={currentLanguage} />}
-              />
-              {/* <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel currentLanguage={currentLanguage} /> }/> */}
+              /> */}
+              <Route path="/dashboard" element={userActive?.roleId === 1 && <Panel currentLanguage={currentLanguage} /> }/>
 
-              {/* {(currentUser || currentUserLocal) && (
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 42785e8b0fdc2c161282c5fa836a57105f3132b6
-=======
->>>>>>> 9252aa286d5f3faaa25df596ba5ca3ceaff749ac
-            <Route path="/settings" element={<Configuration />} />
-          )} */}
             </Routes>
             <ToastContainer
               position="top-center"

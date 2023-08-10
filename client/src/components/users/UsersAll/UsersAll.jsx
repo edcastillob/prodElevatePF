@@ -265,19 +265,21 @@ export const UsersAll = ({ toggleActive, currentLanguage }) => {
         </Modal.Footer>
       </Modal>
       <div>
-        <div>
+      <div className={styles.pages}>
           <button
             disabled={currentPage === 1}
-            onClick={() => dispatch(getUsers(currentPage - 1))}
+            onClick={() => dispatch(showProducts(currentPage - 1))}
+            className={styles.create}
           >
-            Anterior
+            <ion-icon name="arrow-round-back"></ion-icon>
           </button>
-          <span>Página {currentPage}</span>
+          <span>Page {currentPage}</span>
           <button
             disabled={currentPage === totalPages}
             onClick={handleNextPage}
+            className={styles.create}
           >
-            Siguiente
+            <ion-icon name="arrow-round-forward"></ion-icon>
           </button>
         </div>
       </div>
