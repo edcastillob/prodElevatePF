@@ -103,7 +103,7 @@ export const Home = ({ user, userLocal, handleSignIn, currentLanguage }) => {
   const handleFilter = (filters) => {
     dispatch(filterData(filters, currentPage));
     setSelectedFilters(filters);
-    console.log("filter Home", currentPage);
+    // console.log("filter Home", currentPage);
     setShowModal(false);
   };
 
@@ -121,7 +121,7 @@ export const Home = ({ user, userLocal, handleSignIn, currentLanguage }) => {
     if (nextPage <= totalPages) {
       if (productsFiltered.length > 0) {
         dispatch(filterData(selectedFilters, nextPage));
-        console.log(selectedFilters);
+        // console.log(selectedFilters);
       } else {
         dispatch(showProducts(nextPage));
       }

@@ -12,7 +12,7 @@ export const handleFacebookSignIn = async () => {
       const credential = FacebookAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;    
       const user = result.user;
-      console.log("Usuario autenticado con Facebook:", result.user);
+      // console.log("Usuario autenticado con Facebook:", result.user);
   
      
         toast.info('Welcome ' + result.user.displayName, {
@@ -34,7 +34,7 @@ export const handleFacebookSignIn = async () => {
       
       const credential = FacebookAuthProvider.credentialFromError(error);
      
-      console.log("Error al autenticar con Facebook:", error);
+      // console.log("Error al autenticar con Facebook:", error);
     }
   };
   

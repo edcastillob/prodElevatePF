@@ -26,7 +26,7 @@ export const CardProduct = ({
   const theme = useSelector((state) => state.theme);
   const { t } = useTranslation("global");
   const category =
-    selectedCategory.find((cat) => cat.id === categoryId)?.name || "";
+    selectedCategory.find((cat) => cat.id === categoryId)?.name ||  "";
 
   useEffect(() => {
     dispatch(getCategory());
@@ -85,34 +85,35 @@ export const CardProduct = ({
   // console.log('userActive', userActive.email)
   return (
     <StyledApp theme={theme}>
-      <div className={styles.cardContainer}>
-        <Link
-          title="Detail Product"
-          to={`/productid/${id}`}
-          className={styles.link}
-        >
-          <div className={styles.divImg}>
-            <img className={styles.img} src={images} alt="product" />
+    <div className={styles.cardContainer}>
+      <Link
+        title="Detail Product"
+        to={`/productid/${id}`}
+        className={styles.link}
+      >
+        <div className={styles.divImg}>
+          <img className={styles.img} src={images} alt="product" />
+        </div>
+      </Link>
+      <div className={styles.description}>
+        {userActive.isActive === true ? (
+          <div className={styles.divFav}>
+            {isFav ? (
+              <button className={styles.favButton} onClick={handleFavorite}>
+                <h3 style={{ color: "#000924" }}>
+                  <ion-icon name="heart"></ion-icon>
+                </h3>
+              </button>
+            ) : (
+              <button className={styles.favButton} onClick={handleFavorite}>
+                <h3>
+                  <ion-icon name="heart-empty"></ion-icon>
+                </h3>
+              </button>
+            )}
           </div>
-        </Link>
-        <div className={styles.description}>
-          {userActive.isActive === true ? (
-            <div>
-              {isFav ? (
-                <button className={styles.favButton} onClick={handleFavorite}>
-                  <h3 style={{ color: "#000924" }}>
-                    <ion-icon name="heart"></ion-icon>
-                  </h3>
-                </button>
-              ) : (
-                <button className={styles.favButton} onClick={handleFavorite}>
-                  <h3>
-                    <ion-icon name="heart-empty"></ion-icon>
-                  </h3>
-                </button>
-              )}
-            </div>
-          ) : null}
+        ) : null}
+        <div className={styles.divName}>
           <NavLink
             title="Detail Product"
             to={`/productid/${id}`}
@@ -121,6 +122,8 @@ export const CardProduct = ({
           >
             <h6 className={styles.title}>{name}</h6>
           </NavLink>
+        </div>
+        <div className={styles.info}>
           <h6 className={styles.category}> {category}</h6>
           <span className={styles.priceLabel}>
             {t("cardProduct.brand", { lng: currentLanguage })}
@@ -134,6 +137,8 @@ export const CardProduct = ({
             {t("cardProduct.price", { lng: currentLanguage })}
           </span>
           <h6 className={styles.price}>${salePrice}</h6>
+        </div>
+        <div className={styles.divBtn}>
           <button
             className={styles.buttonCart}
             onClick={() => handledAddToCart(product)}
@@ -142,6 +147,7 @@ export const CardProduct = ({
           </button>
         </div>
       </div>
-    </StyledApp>
+    </div>
+     </StyledApp>
   );
 };

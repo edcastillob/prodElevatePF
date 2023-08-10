@@ -32,7 +32,7 @@ export const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      console.log("desde submit: ", userData);
+      // console.log("desde submit: ", userData);
       dispatch(login(userData)); // Esperar a que la acción termine antes de redirigir
       window.location.reload(); // Forzar el refresco de la página
       navigate("/home");

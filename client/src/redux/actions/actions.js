@@ -570,7 +570,7 @@ export const allFav = (user) => {
     try {
       // console.log(product);
       const { data } = await axios.get(`${endpoint}?user=${user}`);
-      console.log("accion", user);
+      // console.log("accion", user);
       return dispatch({
         type: GET_ALL_FAVORITE,
         payload: data,
