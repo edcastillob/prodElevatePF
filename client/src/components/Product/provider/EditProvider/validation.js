@@ -13,7 +13,7 @@ export default function validateForm(
         errors.name = "Name is required";
     } else if (!RegExpression.test(name)) {
         errors.name = "Numbers or special characters are not allowed";
-    } else if (name.length > 15) {
+    } else if (name.length > 50) {
         errors.name = "The name can't be longer than 15 characters";
     }; 
 
@@ -29,19 +29,19 @@ export default function validateForm(
         !numPhone ||
         typeof numPhone !== "string" ||
         numPhone.length < 7 ||
-        numPhone.length > 15
+        numPhone.length > 30
       ) {
-        errors.numPhone = "Phone Number must be between 7 and 15 digits";
+        errors.numPhone = "Phone Number must be between 7 and 30 digits";
       }
 
       if (
         !identification ||
         typeof identification !== "string" ||
         identification.length < 7 ||
-        identification.length > 10 ||
+        identification.length > 20 ||
         !/^\d+$/.test(identification)
       ) {
-        errors.identification = "Document ID must contain 7-10 digits";
+        errors.identification = "Document ID must contain 7-20 digits";
       }
 
     return errors

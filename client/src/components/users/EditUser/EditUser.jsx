@@ -115,7 +115,7 @@ export const EditUser = ({ currentLanguage }) => {
     }));
   };
   // console.log("el usuario: ",users)
-  // console.log("el change: ",changeUser)
+  console.log("el change: ",changeUser)
   // console.log("el rol: ",roles)
   // console.log(users)
   return (

@@ -227,7 +227,7 @@ export const editUser = (userId, changeUser) => {
           userData.numPhone = changeUser.numPhone;
           userData.image = changeUser.image;
           localStorage.setItem("user", JSON.stringify(userData));
-          window.location.reload();
+          
         }
       }
       return dispatch({
@@ -344,7 +344,7 @@ export const categoryEdit = (categoryId, editCategory) => {
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}category/${categoryId}`, editCategory);
-      window.location.reload();
+      
       return dispatch({
         type: EDIT_CATEGORY,
         payload: { categoryId, editCategory },
@@ -394,7 +394,7 @@ export const editProvider = (providerId, editProvider) => {
   return async (dispatch) => {
     try {
       await axios.put(`${ENDPOINT}provider/${providerId}`, editProvider);
-      window.location.reload();
+      
       return dispatch({
         type: EDIT_PROVIDER,
         payload: { providerId, editProvider },
@@ -457,7 +457,7 @@ export const login = (userData) => {
       if (response.data) {
         const user = response.data.User;
         localStorage.setItem("user", JSON.stringify(user));
-        window.location.reload();
+        
         return dispatch({ type: LOGIN, payload: user });
       }
       throw new Error("Credenciales inválidas");
