@@ -39,17 +39,16 @@ Notificaciones:
 
 Equipo de Desarrollo:
 Frontend:
-- Veralucia Mendoza
 - Edwar Castillo
 - Luis Naveda
+- Veralucia Mendoza
 
 Backend:
 - David Olivo
 - Yonathan Acevedo
-- Paola Vargas
 
 Distribución de Funcionalidades y Roles:
-Auten􀆟cación, Creación de Productos, Categorías, Inventarios:
+Autenticación, Creación de Productos, Categorías, Inventarios:
 Frontend: Edwar Castillo
 Backend: David Olivo
 
@@ -59,29 +58,8 @@ Backend: Yonathan Acevedo
 
 Administración, Notificaciones, Gastos:
 Frontend: Veralucia Mendoza
-Backend: Paola Vargas
 
 UI/UX:
 Equipo Frontend
 
-User Stories:
-Auten􀆟cación y Autorización Local y de Terceros:
-- Como Usuario, quiero iniciar sesión utilizando mi correo y contraseña para acceder a la aplicación en mi rol asignado.
 
-Creación de Categorías de Productos:
-- Como Vendedor, quiero crear categorías para definir y agrupar de manera eficiente mis productos.
-
-Creación de Productos y Gestión de Inventarios:
-- Como Vendedor, quiero crear nuevos productos con sus atributos para aumentar mi catálogo.
-- Como Vendedor, quiero editar y dar de baja productos para mantener mi catálogo actualizado.
-
-Carrito de Compras y Pasarela de Pagos:
-- Como Comprador, quiero agregar y gestionar productos en mi carrito para realizar una compra eficiente y ajustar cantidades si es necesario.
-- Como Comprador, quiero utilizar una pasarela de pago segura para completar mi compra.
-
-Dashboard de Administración y Notificaciones:
-- Como Administrador, quiero acceder a un panel de administración con estadísticas en tiempo real para tener una visión completa de las transacciones y ventas.
-- Como Administrador, quiero recibir notificaciones por correo electrónico sobre eventos importantes en el sistema.
-
-Roles de Usuario:
-- Como Administrador, quiero manejar eficientemente los permisos de la aplicación para controlar el acceso por roles de usuarios.
