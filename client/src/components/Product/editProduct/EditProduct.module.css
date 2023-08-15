@@ -1,0 +1,161 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    background-color: #f0f4f7;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+
+
+.form{
+        border: 1px solid #fff;
+        box-shadow: 0 2px 0 #acaaaa;
+        width: 60%;
+        border: 1px solid #cacaca;
+        padding: 2rem;
+        border-radius: 10px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+        justify-content: space-between;
+}
+    
+.imgDiv {
+  margin-top: 10px;
+}
+
+.prices {
+  display: flex;
+  flex-direction: column;
+}
+
+.brands {
+  display: flex;
+  flex-direction: column;
+}
+
+.create{
+    border: 1px solid #cacaca;
+    width: 30%;
+    padding: 0.7rem;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    background-color: #000924;
+    color: #cacaca;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.97);
+        color: #fff;
+        transition: .3s;
+    }
+    
+}
+
+
+
+.slider-container {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #011248;
+  }
+  
+  .slider-container img {
+    height: 200px;
+    width: 200px;
+  }
+
+  .error { 
+    color: red;
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .create{
+    border: 1px solid #cacaca;
+    width: 30%;
+    padding: 0.7rem;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    background-color: #000924;
+    color: #cacaca;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.97);
+        color: #fff;
+        transition: .3s;
+    }
+    
+
+}
+
+@media (max-width: 793px) {
+  .form {
+    width: 80%;
+  }
+}
+
+@media (max-width: 611px) {
+  .form {
+    width: 95%
+  }
+}
+
+@media (max-width: 440px) {
+  .form h4 {
+    font-size: 1.275rem;
+  }
+  .form label {
+    font-size: 0.8rem
+  }
+  .form input {
+    font-size: 0.7rem;
+  }
+  .form select {
+    font-size: 0.7rem;
+  }
+  .create {
+    width: 88px;
+  }
+  .imgDiv h6 {
+    font-size: 0.8rem;
+  }
+  .imgDiv input {
+    font-size: 0.7rem
+  }
+}
+
+@media (max-width: 335px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 307px) {
+  .form h4 {
+    font-size: 1.1rem;
+  }
+  .form label {
+    font-size: 0.7rem
+  }
+  .form input {
+    font-size: 0.65rem;
+  }
+  .form select {
+    font-size: 0.65rem;
+  }
+  .imgDiv h6 {
+    font-size: 0.7rem;
+  }
+  .imgDiv input {
+    font-size: 0.65rem
+  }
+}

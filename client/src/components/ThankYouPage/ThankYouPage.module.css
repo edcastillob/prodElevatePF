@@ -1,0 +1,138 @@
+.cartContainer {
+  padding: 2rem 4rem;
+
+  min-height: 80vh;
+  width: 100%;
+}
+
+.cartContainer h2 {
+  font-weight: 400;
+  font-size: 40px;
+  text-align: center;
+}
+
+.cartContainer .titles {
+  margin: 2rem 0 1rem 0;
+}
+
+.carContainer .titles h3 {
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.cartItems {
+  margin-bottom: 15px;
+}
+
+.cartItem,
+.cartContainer .titles {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  column-gap: 0.5rem;
+  text-align: left;
+}
+
+.cartItem {
+  border-top: 1px solid rgb(187, 187, 187);
+  padding: 1rem 0;
+}
+
+.cartItem .cartProduct {
+  display: flex;
+}
+
+.cartItem .cartProduct img {
+  width: 100px;
+  height: 100%;
+  margin-right: 1rem;
+}
+
+.cartItem .cartProduct h3 {
+  font-weight: 400;
+}
+
+.cartItem .cartProduct button {
+  border: none;
+  outline: none;
+  margin-top: 0.7rem;
+  cursor: pointer;
+  background: none;
+  color: gray;
+}
+
+.cartItem .cartProduct button:hover {
+  color: black;
+}
+
+.create {
+  border: 1px solid #cacaca;
+  width: 20%;
+  padding: 0.7rem;
+  border-radius: 10px;
+  font-family: "Poppins";
+  background-color: #000924;
+  color: #cacaca;
+  transition: 0.2s;
+  margin-bottom: 2rem;
+  &:hover {
+    transform: scale(0.97);
+    color: #fff;
+    transition: 0.3s;
+  }
+}
+
+@media (max-width: 1055px) {
+  .cartProduct h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 850px) {
+  .cartContainer h2 {
+    font-size: 30px;
+  }
+  .cartProduct h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .cartItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 540px) {
+  .create {
+    width: 108px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 482px) {
+  .cartProduct {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cartContainer {
+    padding: 1rem;
+  }
+  .cartProduct h3 {
+    font-size: 0.9rem;
+  }
+  .cartContainer h2 {
+    font-size: 25px;
+  }
+  .cartContainer p {
+    font-size: 15px;
+  }
+}

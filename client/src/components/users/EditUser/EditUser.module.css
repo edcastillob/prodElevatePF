@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300&display=swap');
+
+.container{
+  border: 1px solid black;
+  display: flex;
+  width: 100%;
+  min-height: 80vh;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.formContainer{
+  border: 1px solid #cacaca;
+  box-shadow: 0 2px 0 #acaaaa;
+  width: 40%;
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  justify-content: space-around;
+}
+
+.divTitle{
+  /* border: 1px solid black; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.divBtn{
+  /* border: 1px solid black; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+  
+  /* @media screen and (max-width: 400px) {
+    .form {
+      padding: 20px 10px;
+    }
+  } */
+
+  .create{
+    border: 1px solid #cacaca;
+    width: 30%;
+    padding: 0.7rem;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    background-color: #000924;
+    color: #cacaca;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.97);
+        color: #fff;
+        transition: .3s;
+    }
+    
+}
+
+.error {
+  color: red;
+  font-size: 11px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (max-width: 935px) {
+  .create {
+    width: 83px;
+  }
+  .formContainer {
+    width: 50%;
+  }
+}  
+
+@media (max-width: 800px) {
+  .formContainer {
+    width: 65%;
+  }
+}
+
+@media (max-width: 620px) {
+  .formContainer {
+    width: 80%;
+  }
+}
+
+@media (max-width: 510px) {
+  .formContainer {
+      width: 90%;
+  }
+  .formContainer h4 {
+      font-size: 1.275rem;
+  }
+  .formContainer label {
+    font-size: 15px;
+  }
+  .formContainer input {
+      font-size: 0.8rem;
+  }
+  .formContainer select {
+      font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 370px) {
+  .container {
+      padding: 1rem;
+  }
+  .formContainer {
+      width: 95%;
+  }
+}
+
+@media (max-width: 325px) {
+  .container {
+      padding: 0.7rem;
+  }
+  .formContainer {
+      width: 100%;
+  }
+  .formContainer h4 {
+      font-size: 1.1rem;
+  }
+  .formContainer label {
+    font-size: 12px;
+  }
+  .formContainer input {
+      font-size: 0.65rem;
+  }
+  .formContainer select {
+      font-size: 0.65rem;
+  }
+}

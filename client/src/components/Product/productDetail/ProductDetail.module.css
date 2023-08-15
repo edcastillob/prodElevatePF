@@ -1,0 +1,254 @@
+.container{
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+}
+
+.back{
+  /* border: 1px solid black; */
+  width: 10%;
+  height: 10%;
+  margin-right: -2rem;
+}
+
+.backButton{
+  border: 1px solid #cacaca;
+  border-radius: 10px;
+  box-shadow: 0 2px 0 #adacac;
+  width: 70%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.1rem;
+  transition: .2s;
+  &:hover{
+      transform: scale(0.98);
+      transition: .3s;
+  }
+}
+
+.backButton p{
+  color: black;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.divImg{
+  border-bottom: 1px solid #e9e9e9;
+  background-color: #e9e9e9;
+  width: 55%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divImg img{
+  width: 60%;
+  max-height: 65vh;
+  filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.3));
+
+}
+
+.description{
+  border: 1px solid #e9e9e9;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border-radius: 10px;
+  width: 25%;
+  min-height: 70vh;
+  text-align: left;
+  font-family: 'Poppins';
+}
+
+.divName{
+/* border: 1px solid red; */
+width: 100%;
+height: 60px;
+}
+
+.descriptionItem{
+  /* border: 1px solid green; */
+  width: 100%;
+  height: 70%;
+  color: gray;
+  font-family: 'Poppins';
+}
+
+.divBtn{
+/* border: 1px solid yellow; */
+width: 100%;
+display: flex;
+justify-content: end;
+height: fit-content;
+}
+
+.buttonCart{
+  border: 1px solid gray;
+  box-shadow: 1px 2px #e9e9e9;
+  background-color: #000924;
+  color: #fff;
+  padding: 0.5rem;
+  font-weight: 400;
+  border-radius: 10px;
+  position: relative;
+  left: 0.01rem;
+  transition: .2s;
+  font-family: 'Poppins';
+  &:hover{
+      transform: scale(0.98);
+      transition: .3s;
+
+  }
+}
+
+.addReview{
+/* border: 1px solid black; */
+margin-bottom: 2rem;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.commentHeader {
+  font-weight: bold;
+}
+.commentInput {
+  border: none;
+  width: 100%; 
+  padding: 10px;
+  font-size: 14px; 
+}
+.buttonCart2{
+  border: 1px solid gray;
+  box-shadow: 1px 2px #9f9e9e;
+  background-color: #063D60;
+  color: #fff;
+  padding: 0.5rem;
+  font-weight: 400;
+  border-radius: 10px;
+  position: relative;
+  left: 0.01rem;
+  margin-bottom: 1rem;
+  transition: .2s;
+  font-family: 'Poppins';
+  &:hover{
+      transform: scale(0.98);
+      transition: .3s;
+
+  }
+}
+
+.addBtn{
+background-color: #000924;
+}
+
+.cancel{
+background-color: rgb(247, 83, 83);
+}
+
+.starContainer{
+/* border: 1px solid black; */
+width: 100%;
+height: fit-content;
+}
+
+.starContainer:hover .star {
+  color: gold;
+}
+
+
+.star {
+  color: #ffd700; 
+  margin-right: 0.1px; 
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.avatar {
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+  margin-right: 10px; 
+}
+
+
+.reviewsContainer{
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #cacaca;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+}
+
+.sliderContainer{
+  /* border: 1px solid black; */
+  width: 60%;
+  height: auto;
+  display: flex;
+  padding: 1.5rem;
+  justify-content: start;
+  align-items: start;
+  gap: 20px;
+}
+
+.card{
+  border: 1px solid #cacaca;
+  width: 90%;
+  height: 200px;
+  background-color: #fff;
+}
+
+.divInfo{
+  /* border: 1px solid blue; */
+  width: 100%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.userName{
+  font-weight: 600;
+  color: #000924;
+}
+
+.divStars{
+  /* border: 1px solid gold; */
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.divComment{
+  /* border: 2px solid red; */
+  width: 100%;
+  height: 55%;
+  display: flex;
+  align-items: start;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+}

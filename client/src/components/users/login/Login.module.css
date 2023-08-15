@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300&display=swap');
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    min-height: 90vh;
+    background-image: url('../../../assets/login_background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.formContainer{
+    border: 1px solid #cacaca;
+    box-shadow: 00 0 2px 0 #cacaca;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 450px;
+    height: 550px;
+    padding: 2rem;
+}
+
+
+.options{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 0;
+    width: 100%;
+    height: 35%;
+    
+}
+
+.submitButton{
+  border: 1px solid gray;
+    box-shadow: 1px 2px #e9e9e9;
+    background-color: #000924;
+    color: #fff;
+    padding:  0.5rem;
+    font-weight: 400;
+    font-family: 'Poppins';
+    border-radius: 10px;
+    position: relative;
+    left: 0.01rem;
+    width: 50%;
+    margin-bottom: 1rem;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.97);
+        transition: .3s;
+
+    }
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+
+}
+
+.link{
+    font-size: 13px;
+    font-family:'Poppins', sans-serif;
+}
+
+.google{
+    /* border: 1px solid black; */
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.line {
+    position: relative;
+    height: 1px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #d4d4d4;
+  }
+  
+  .line::before {
+    content: 'Or';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    color: #8b8b8b;
+    padding: 0 15px;
+  }
+
+  .googleButton{
+    border: 1px solid #cccc;
+    width: 20vw;
+    height: 8vh;
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 1px #cccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #000;
+    left: 2%;
+    background-color: #fefbfb;
+    transition: .2s;
+    &:hover{
+        transform: scale(0.97);
+        transition: .3s;
+
+    }
+  }
+
+  .googleButton img{
+    height: 22px;
+    width: 22px;
+    
+  }
+
+  .error {
+    color: red;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+@media (max-width: 490px) {
+  .formContainer{
+    width: 400px;
+  }
+}
+
+@media (max-width: 440px) {
+  .googleButton {
+    width: 55%;
+  }
+}
+
+@media (max-width: 425px) {
+  .formContainer{
+    width: 350px;
+  }
+}
+
+@media (max-width: 375px) {
+  .formContainer{
+    width: 275px;
+  }
+}
+
+@media (max-width: 325px) {
+  .formContainer{
+    width: 250px;
+  }
+}
