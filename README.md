@@ -15,7 +15,7 @@ Tecnologías:
 
 Funcionalidades Destacadas:
 
-Auten􀆟cación y Autorización:
+Autenticación y Autorización:
 - Implementación de autenticación local y de terceros (Google, Facebook).
 - Definición de roles (administrador, vendedor, cliente) y permisos.
 
